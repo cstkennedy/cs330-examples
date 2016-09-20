@@ -1,0 +1,12 @@
+# General Ignore Rules
+**/documentation/
+**.o
+**.exe
+**.zip
+**.class
+**.jar
+
+# Binary Specific Ignore rules
+**/ll2
+**leak.out*
+**storage

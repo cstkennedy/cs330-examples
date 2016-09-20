@@ -1,0 +1,2 @@
+rm leak.out
+./storage $3/itemList-01.txt $3/inventoryList-01.txt > test$2.out

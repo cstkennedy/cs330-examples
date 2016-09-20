@@ -1,0 +1,4 @@
+storage.o: storage.cpp Inventory.h ItemStack.h Item.h
+Item.o: Item.cpp Item.h
+ItemStack.o: ItemStack.cpp ItemStack.h Item.h
+Inventory.o: Inventory.cpp Inventory.h ItemStack.h Item.h
