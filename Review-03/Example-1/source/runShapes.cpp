@@ -41,18 +41,18 @@ int main()
     //Shape shape;                   // Declare an instance of Shape
     //Shape shapes[4];               // Declare an Array of Shapes
     
-    //Shape *shapes = new Shape()[4] // Define an array of Shapes
+    //Shape* shapes = new Shape[4] // Define an array of Shapes
 
     // --Corrected Variable Declarations--
-    Shape *shape      = nullptr;
-    Shape **shapes    = nullptr;
+    Shape*    shape   = nullptr;
+    Shape**   shapes  = nullptr;
 
-    Triangle *tri     = nullptr;
-    RhtTri   *rhtTri  = nullptr;
-    EqlTri   *eqlTri  = nullptr;
+    Triangle* tri     = nullptr;
+    RhtTri*   rhtTri  = nullptr;
+    EqlTri*   eqlTri  = nullptr;
 
     // ShapeFactory Discussion
-    int num_shapes    = 0; // Number of shapes
+    int numShapes    = 0; // Number of shapes
     int size          = 0;
 
     // Set formatting
@@ -224,27 +224,27 @@ int main()
     shapes[4] = ShapeFactory::createShape( "Circle" );
     shapes[5] = ShapeFactory::createShape( "1337 Haxor" );
 
-    num_shapes = pruneNullPtr( shapes, size );
+    numShapes = pruneNullPtr( shapes, size );
 
-    // num_shapes is the size of the array after removal of nullptrs
+    // numShapes is the size of the array after removal of nullptrs
     // size is the original size of the array
 
     printHeading( cout, "Shapes That Exist", 38 );
-    cout << left << setw( 24 ) << "Original Size"  << ": " << left << setw( 4 ) << size                  << "\n"
-         << left << setw( 24 ) << "Invalid Shapes" << ": " << left << setw( 4 ) << ( size - num_shapes ) << "\n"
-         << left << setw( 24 ) << "New Size"       << ": " << left << setw( 4 ) << num_shapes            << "\n";
+    cout << left << setw( 24 ) << "Original Size"  << ": " << left << setw( 4 ) << size                 << "\n"
+         << left << setw( 24 ) << "Invalid Shapes" << ": " << left << setw( 4 ) << ( size - numShapes ) << "\n"
+         << left << setw( 24 ) << "New Size"       << ": " << left << setw( 4 ) << numShapes            << "\n";
 
     cout << "\n";
 
     // Print all the shapes
     printHeading( cout, "Display All Shapes", 38 );
 
-    for( int i = 0; i < num_shapes; i++ ){
+    for( int i = 0; i < numShapes; i++ ){
         cout << *shapes[i] << "\n";
     }
 
     // Cleanup
-    for( int i = 0; i < num_shapes; i++ ){
+    for( int i = 0; i < numShapes; i++ ){
         delete shapes[i];
     }
 

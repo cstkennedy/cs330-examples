@@ -54,7 +54,7 @@ double Triangle::area() const
 
     return (
         sqrt( 
-            s *( s - sideA() ) * ( s - sideB() ) * ( s - sideC() )
+            s * ( s - sideA() ) * ( s - sideB() ) * ( s - sideC() )
         )
     );
 }
@@ -66,9 +66,25 @@ void Triangle::display( std::ostream &outs ) const
 {
     Shape::display( outs );
 
-    outs << std::left << std::setw( WIDTH_LABEL ) << "Side A"    << ": " << std::right << std::setw( WIDTH_VALUE ) << sideA()     << "\n"
-         << std::left << std::setw( WIDTH_LABEL ) << "Side B"    << ": " << std::right << std::setw( WIDTH_VALUE ) << sideB()     << "\n"
-         << std::left << std::setw( WIDTH_LABEL ) << "Side C"    << ": " << std::right << std::setw( WIDTH_VALUE ) << sideC()     << "\n"
-         << std::left << std::setw( WIDTH_LABEL ) << "Perimeter" << ": " << std::right << std::setw( WIDTH_VALUE ) << perimeter() << "\n"
-         << std::left << std::setw( WIDTH_LABEL ) << "Area"      << ": " << std::right << std::setw( WIDTH_VALUE ) << area()      << "\n";
+    outs << std::left  << std::setw( WIDTH_LABEL ) 
+                       << "Side A"    << ": " 
+         << std::right << std::setw( WIDTH_VALUE ) 
+                       << sideA() << "\n"
+         << std::left  << std::setw( WIDTH_LABEL ) 
+                       << "Side B"    << ": " 
+         << std::right << std::setw( WIDTH_VALUE ) 
+                       << sideB() << "\n"
+         << std::left  << std::setw( WIDTH_LABEL ) 
+                       << "Side C" << ": " 
+         << std::right << std::setw( WIDTH_VALUE ) 
+                       << sideC() << "\n"
+         << std::left  << std::setw( WIDTH_LABEL ) 
+                       << "Perimeter" << ": " 
+         << std::right << std::setw( WIDTH_VALUE ) 
+                       << perimeter() << "\n"
+         << std::left  << std::setw( WIDTH_LABEL ) 
+                       << "Area" << ": " 
+         << std::right << std::setw( WIDTH_VALUE ) 
+                       << area()
+         << "\n";
 }

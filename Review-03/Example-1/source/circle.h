@@ -91,7 +91,8 @@ class Circle: public Shape{
 /**
  *  
  */
-inline double Circle::radius() const
+inline
+double Circle::radius() const
 {
     return _radius;
 }
