@@ -1,0 +1,10 @@
+0 Air
+1 HP Potion
+2 MP Potion
+5 Iron Ore
+3 Bow Tie
+4 Dirt
+6 Diamond Ore
+7 Iron Ingot
+8 Diamond
+9 Diamond Block

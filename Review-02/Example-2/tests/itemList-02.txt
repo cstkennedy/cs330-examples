@@ -1,0 +1,20 @@
+0 Air
+1 Stone
+2 Grass
+3 Dirt
+4 Cobblestone
+13 Gravel
+14 Gold Ore
+15 Iron Ore
+16 Coal Ore
+17 Oak Wood
+19 Sponge
+33 Piston
+41 Gold Block
+42 Iron Block
+49 Obsidian
+50 Torch
+56 Diamond Ore
+57 Diamond Block
+73 Redstone Ore
+264 Diamond
