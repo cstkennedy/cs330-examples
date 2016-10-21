@@ -16,11 +16,10 @@ using namespace utilities;
 
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
-    "Thomas Kennedy",
-    "Spring 2016",
+    "Thomas Kennedy"
 }; ///< Program Title 
 
-const int HEADING_LINES = 3; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
 typedef RightTriangle       RhtTri; ///< Convenient shorthand for RightTriangle
 typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTriangle
