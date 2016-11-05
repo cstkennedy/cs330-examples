@@ -1,0 +1,15 @@
+processinglog:
+(s)shovel
+(s)pickaxe
+playerstoragesummary:
+-used50%of4slots
+nme:shovel
+dur:20
+spd:3
+mtl:gold
+mdr:unbreaking(lvl2)
+nme:pickaxe
+dur:10
+spd:3
+mtl:stone
+mdr:efficiency(lvl2)

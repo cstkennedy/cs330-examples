@@ -1,0 +1,33 @@
+#! /bin/sh
+
+# Test that Item::name was set from within Consumable::read
+
+cat <<EOF > test011.cpp
+
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+
+#include "Consumable.h"
+
+using std::cout;
+using std::istringstream;
+
+int main(){
+    Item *consumable = new Consumable(); 
+
+    istringstream ins( "TestConsumable" );
+
+    consumable->read( ins );
+
+    cout << consumable->getName()       << "\n";
+    cout << consumable->Item::getName() << "\n";   
+
+    return 0;
+}
+EOF
+
+g++ -c test011.cpp 
+g++ -o test011 test011.o Consumable.o Item.o
+
+./test011

@@ -1,0 +1,76 @@
+Processing Log:
+ (S) Pickaxe
+ (S) PotatoCamera
+ (S) Shovel
+ (S) Pickaxe
+ (S) Speed-II-Potion
+ (S) Tomato
+ (S) PotatoCamera
+ (S) Axe
+ (S) Boots
+ (S) Boots
+ (S) ChestPlate
+ (S) Speed-II-Potion
+
+Player Storage Summary:
+ -Used  91% of 11 slots
+  Nme: Pickaxe
+  Dur: 100
+  Spd: 1
+  Mtl: Diamond
+  Mdr: Fortune (Lvl 5)
+
+  Nme: PotatoCamera
+  Eft: ImageQuality-97%
+  Use: 5
+  Qty: 2
+
+  Nme: Shovel
+  Dur: 20
+  Spd: 3
+  Mtl: Gold
+  Mdr: Unbreaking (Lvl 2)
+
+  Nme: Pickaxe
+  Dur: 100
+  Spd: 1
+  Mtl: Diamond
+  Mdr: Fortune (Lvl 5)
+
+  Nme: Speed-II-Potion
+  Eft: Spd*2
+  Use: 1
+  Qty: 2
+
+  Nme: Tomato
+  Eft: Hunger-10
+  Use: 2
+  Qty: 1
+
+  Nme: Axe
+  Dur: 10
+  Spd: 2
+  Mtl: Stone
+  Mdr: Unbreaking (Lvl 2)
+
+  Nme: Boots
+  Dur: 100
+  Def: 10
+  Mtl: Diamond
+  Mdr: Protection (Lvl 3)
+  Emt: lightning
+
+  Nme: Boots
+  Dur: 100
+  Def: 10
+  Mtl: Diamond
+  Mdr: FeatherFalling (Lvl 4)
+  Emt: lightning
+
+  Nme: ChestPlate
+  Dur: 100
+  Def: 10
+  Mtl: Diamond
+  Mdr: Defense (Lvl 9)
+  Emt: light
+

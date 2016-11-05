@@ -1,0 +1,13 @@
+Tool Pickaxe Diamond 100 1 Fortune 5
+LOLNOTAVALIDITEM potato 7
+Disposable PotatoCamera ImageQuality-97% 5
+Tool Shovel Gold 20 3 Unbreaking 2
+Tool Pickaxe Diamond 100 1 Fortune 5
+Potion Speed-II-Potion Spd*2 1
+Food Tomato Hunger-10 2
+Disposable PotatoCamera ImageQuality-97% 5
+Tool Axe Stone 10 2 Unbreaking 2
+Armour Boots Diamond 100 10 Protection 3 lightning
+Armor Boots Diamond 100 10 FeatherFalling 4 lightning
+Armour ChestPlate Diamond 100 10 Defense 9 light
+Potion Speed-II-Potion Spd*2 1

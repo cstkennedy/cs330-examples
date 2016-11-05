@@ -1,0 +1,33 @@
+#! /bin/sh
+
+# Test that Item::name was set from within Armour::read
+
+cat <<EOF > test006.cpp
+
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+
+#include "Armour.h"
+
+using std::cout;
+using std::istringstream;
+
+int main(){
+    Item *armour = new Armour(); 
+
+    istringstream ins( "TestArmour" );
+
+    armour->read( ins );
+
+    cout << armour->getName()       << "\n";
+    cout << armour->Item::getName() << "\n";   
+
+    return 0;
+}
+EOF
+
+g++ -c test006.cpp 
+g++ -o test006 test006.o Armour.o Item.o
+
+./test006
