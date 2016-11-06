@@ -96,6 +96,6 @@ Inventory createInventory( std::istream &ins, int size ){
  *
  */
 void printInventorySummary( std::ostream &outs, const Inventory &inv ){
-    cout << "Player Storage Summary:" << "\n"
+    outs << "Player Storage Summary:" << "\n"
          << inv;
 }

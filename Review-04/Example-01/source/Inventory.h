@@ -51,7 +51,8 @@ class Inventory{
 /**
  * Print the Inventory through use of the display member function
  */
-inline std::ostream& operator<<( std::ostream &outs, const Inventory &prt ){
+inline
+std::ostream& operator<<( std::ostream &outs, const Inventory &prt ){
     prt.display( outs );
     return outs;
 }

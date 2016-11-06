@@ -58,7 +58,7 @@ bool ItemStack::operator=( const ItemStack &rhs ){
  *
  */
 std::ostream& operator<<( std::ostream &outs, const ItemStack &prt ){
-    prt.getItem()->display( outs );
+    (prt.getItem())->display( outs );
 
     if( prt.permitsStacking() ){
         outs << "  Qty: " << prt.size() << "\n";

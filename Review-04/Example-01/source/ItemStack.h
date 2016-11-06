@@ -10,8 +10,8 @@
  */
 class ItemStack{
     private:
-        Item *item;   ///< Item out of which the stack is composed
-        int quantity; ///< Number of items in the stack
+        Item* item;     ///< Item out of which the stack is composed
+        int   quantity; ///< Number of items in the stack
 
     public:
         /**

@@ -4,13 +4,13 @@
  *
  */
 Tool::Tool()
-    :Item( std::string(), false )
+    :Item("???", false)
 {
     this->durability    = 0;      
     this->speed         = 0;
     this->material      = std::string();  
     this->modifier      = std::string();   
-    this->modifer_level = 1;     
+    this->modifer_level = 1;    
 }
 
 /**

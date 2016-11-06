@@ -18,7 +18,7 @@ class ItemFactory{
          */
         struct ItemPair{            
             std::string _type; ///< Name of the item to clone
-            Item      *_model; ///< Model of the item to clone
+            Item*       _model; ///< Model of the item to clone
 
             /**
              * Default Constructor - Used as sentinel

@@ -14,11 +14,11 @@ class Tool : public Item{
     private:
 
     protected:
-        double durability;      ///< decreases each time the tool is used
-        double speed;           ///< base harvest/mine speed
-        std::string material;   ///< material out of which the tool is composed 
-        std::string modifier;   ///< one of efficiency, fortune, or unbreaking
-        int modifer_level;      ///< modifier level in the range 1 to 5
+        double      durability;    ///< decreases each time the tool is used
+        double      speed;         ///< base harvest/mine speed
+        std::string material;      ///< material out of which the tool is composed 
+        std::string modifier;      ///< one of efficiency, fortune, or unbreaking
+        int         modifer_level; ///< modifier level in the range 1 to 5
 
     public:
         /**

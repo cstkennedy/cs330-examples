@@ -96,42 +96,48 @@ std::ostream& operator<<( std::ostream &outs, const Item &prt );
 /**
  * 
  */
-inline std::string Item::getName() const{
+inline
+std::string Item::getName() const{
     return this->name;
 }
 
 /**
  * 
  */
-inline void Item::setName( std::string n ){
+inline
+void Item::setName( std::string n ){
     this->name = n;
 }
 
 /**
  *
  */
-inline bool Item::isStackable() const{
+inline
+bool Item::isStackable() const{
     return this->stackable;
 }
 
 /**
  *
  */
-inline bool Item::operator==( const Item &rhs ) const{
+inline
+bool Item::operator==( const Item &rhs ) const{
     return this->name == rhs.name;
 }
 
 /**
  *
  */
-inline bool Item::operator<( const Item &rhs ) const{
+inline
+bool Item::operator<( const Item &rhs ) const{
     return this->name < rhs.name;
 }
 
 /**
  *
  */
-inline std::ostream& operator<<( std::ostream &outs, const Item &prt ){
+inline
+std::ostream& operator<<( std::ostream &outs, const Item &prt ){
     prt.display( outs );
 
     return outs;

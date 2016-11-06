@@ -36,7 +36,7 @@ ItemFactory::ItemPair::~ItemPair(){
 Item* ItemFactory::createItem( std::string type ){
     for( int i = 0; _known_items[i]._model != nullptr; i++ ){
         if( _known_items[i]._type == type ){
-            return _known_items[i]._model->clone();
+            return (_known_items[i]._model)->clone();
         }
     }
 
@@ -52,14 +52,17 @@ std::istream& operator>>( std::istream &ins, Item *&rd ){
     
     // Read the item type and
     // retrieve a template Item from the ItemFactory
+
+    // Food Tomato Hunger-10 2
     ins >> type;
-    rd = ItemFactory::createItem( type );
+    rd = ItemFactory::createItem( type ); // Pass in Food as keyword
 
     // If the item type is recognized,
     // read the item.
     // otherwise discard the remainder 
     // of the line
     if( rd != nullptr ){
+        // Tomato Hunger-10 2
         rd->read( ins );
     }
     else{
