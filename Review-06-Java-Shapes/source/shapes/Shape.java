@@ -86,8 +86,14 @@ public abstract class Shape implements Cloneable {
     public String toString()
     {
         return (
-            String.format( getFormat( "s\n" ), "Name", this._name )
+            String.format( 
+                getFormat( "s\n" ), 
+                "Name", 
+                this._name 
+            )
         );
+
+        //return "Name: " + this_.name;
     }
 }
 

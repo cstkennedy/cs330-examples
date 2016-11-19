@@ -66,8 +66,8 @@ public class ShapeFactory {
     public static Shape createShape( String name )
     {
         for( ShapePair pair : _known_shapes ){
-            if( pair._name.equals(name) ){
-                return pair._model.clone();
+            if( (pair._name).equals(name) ){
+                return (pair._model).clone();
             }
         }
 
@@ -82,7 +82,7 @@ public class ShapeFactory {
     public static boolean isKnown( String name )
     {
         for( ShapePair pair : _known_shapes ){
-            if( pair._name.equals(name) ){
+            if( (pair._name).equals(name) ){
                 return true;
             }
         }
