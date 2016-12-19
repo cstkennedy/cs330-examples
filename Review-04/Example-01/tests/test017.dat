@@ -1,6 +1,0 @@
-#! /bin/sh
-
-# Test entire program with input set 02
-# disregard formatting (spaces, newlines, and letter case)
-
-./storage items-02.txt 11 | sed 's/[ ]//g' | grep -vE "^$" | tr '[:upper:]' '[:lower:]'

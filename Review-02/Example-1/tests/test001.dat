@@ -1,2 +1,0 @@
-#! /bin/tcsh
-/home/zeil/src/LeakTracer/leak-analyze storage |& egrep 'Leak|Gathered' | wc -l >! test$2.out

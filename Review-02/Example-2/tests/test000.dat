@@ -1,3 +1,0 @@
-/bin/rm leak.out
-echo $1 : $2 : $3 
-./storage $3/itemList-00.txt $3/inventoryList-00.txt > test$2.out

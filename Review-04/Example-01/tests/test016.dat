@@ -1,6 +1,0 @@
-#! /bin/sh
-
-# Test entire program with input set 01
-# consider formatting (spaces, newlines, and letter case)
-
-./storage items-01.txt 6

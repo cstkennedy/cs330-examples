@@ -1,6 +1,0 @@
-#! /bin/sh
-
-# Repeat test003 with attention to formatting
-
-# Consider all whitespace and letter-case (upper/lower)
-./storage test003.in 4 
