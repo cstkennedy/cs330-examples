@@ -19,11 +19,10 @@ using namespace utilities;
 
 const string PROGRAM_HEADING[] = {
     "Linked List Review",
-    "Thomas Kennedy",
-    "Fall 2016",
+    "Thomas Kennedy"
 }; ///< Program Title 
 
-const int HEADING_LINES = 3; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
 const int MIN = -10; ///< Lower bound for number generation
 const int MAX = 10;  ///< Upper bound for number generation
