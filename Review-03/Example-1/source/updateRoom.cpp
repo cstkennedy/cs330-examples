@@ -1,5 +1,4 @@
 // Thomas Kennedy
-// CS 330 Spring 2016
 // Review Example: Room Update
 
 #include <iostream>
