@@ -1,5 +1,4 @@
 // Thomas Kennedy
-// CS 330 Spring 2016
 // Review Example: Room Update
 
 #include <iostream>
@@ -34,8 +33,8 @@ int main()
     //Room room("Laundry Room", DimensionSet(8, 4), 1.95, "Laminate");
     //Room kitchen("Kitchen", DimensionSet(20,12), 3.87, "Tile");
 
-    Room room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate");
-    Room kitchen("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile");
+    Room  room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate");
+    Room  kitchen("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile");
 
     House house;
 

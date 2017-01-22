@@ -19,6 +19,8 @@ class House{
          * A standard C++ STL style iterator.
          * <p>
          * Recall the rules on Class naming and the STL.
+         * <p>
+         * Should I have added the Big-3 to this example?
          */
          typedef Room*       iterator;
 
@@ -37,7 +39,9 @@ class House{
         std::string      name;
 
         /**
-         * Container of Rooms
+         * Container of Rooms (dynamic array)
+         * <p>
+         * Should I have added the Big-3 to this example?
          */
         Room*            rooms;
 

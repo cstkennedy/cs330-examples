@@ -1,5 +1,4 @@
 // Thomas Kennedy
-// CS 330 Spring 2016
 // Review Example: Room Update
 
 #include <iostream>
@@ -26,7 +25,6 @@ using namespace std;
  */
 int main()
 {
-    
     // Why are these lines invalid?
     //Room room("Laundry Room", 8, 4, 1.95, "Laminate");
     //Room kitchen("Kitchen", 20,12, 3.87, "Tile");

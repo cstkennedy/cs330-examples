@@ -5,7 +5,8 @@ using namespace std;
 /**
  *
  */
-double promptForDouble( std::string msg ) {
+double promptForDouble( std::string msg )
+{
     double value = 0;
 
     cout << msg << ": ";
@@ -17,7 +18,8 @@ double promptForDouble( std::string msg ) {
 /**
  *
  */
-bool promptForYesNo( std::string msg ) {
+bool promptForYesNo( std::string msg )
+{
     // Prompt the user for Y/N
     char yn_response = 'n';
 

@@ -26,7 +26,7 @@ House::House(std::string name)
 void House::addRoom(Room toAdd)
 {
     if (currentSize == 0) {
-        rooms       = new Room[1];
+        rooms       = new Room[2];
         currentSize = 1;
 
         rooms[0]    = toAdd;
@@ -36,8 +36,8 @@ void House::addRoom(Room toAdd)
     }
 
     // Create the new array
-    //Room *newRooms = new Room[currentSize + 1];
-    Room *newRooms = new Room[currentSize + 2];
+    Room *newRooms = new Room[currentSize + 1];
+    //Room *newRooms = new Room[currentSize + 2];
     
     // Copy from the old array to the new array
     for (int i = 0; i < currentSize; i++) {

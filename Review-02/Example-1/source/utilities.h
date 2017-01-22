@@ -13,7 +13,9 @@
  * Print a blank line - we will discuss the meaning of *inline*
  * in a future Review Session
  */
-inline void println( std::ostream& outs=std::cout ) {
+inline
+void println( std::ostream& outs=std::cout )
+{
     outs << "\n";
 }
 

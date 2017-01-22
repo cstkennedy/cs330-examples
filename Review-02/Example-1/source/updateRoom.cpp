@@ -1,5 +1,4 @@
 // Thomas Kennedy
-// CS 330 Spring 2016
 // Review Example: Room Update
 
 #include <iostream>
@@ -72,6 +71,8 @@ int main()
         cout << "room >= kitchen";
     }
 
+    // I missed Java, so I invented this function
+    println();
 
     return 0;   
 }
