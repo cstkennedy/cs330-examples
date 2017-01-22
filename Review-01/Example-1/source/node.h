@@ -13,8 +13,8 @@
  * templates--will be utilized.
  */
 struct Node {
-    int data;    ///< Stored information
-    Node *next;  ///< Link to the next Node
+    int   data;  ///< Stored information
+    Node* next;  ///< Link to the next Node
 
     /**
      * Construct an empty Node with data set to zero.

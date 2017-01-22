@@ -3,11 +3,11 @@
 /**
  * 
  */
- Node::Node()
- {
-    this->data = 0;
-    this->next = nullptr;
- }
+Node::Node()
+{
+   this->data = 0;
+   this->next = nullptr;
+}
 
 /**
  * 

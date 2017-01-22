@@ -75,7 +75,7 @@ int main(int argc, char** argv)
     }
 
     // Print the LL
-    cout << *random_ints;
+    cout << (*random_ints);
 
     printHorizontalLine( cout, '*', W_WIDTH );
 
