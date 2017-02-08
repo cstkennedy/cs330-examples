@@ -1,0 +1,4 @@
+register.o: register.cpp Course.h Student.h Schedule.h
+Course.o: Course.cpp Course.h
+Student.o: Student.cpp Student.h Course.h Schedule.h
+Schedule.o: Schedule.cpp Schedule.h Course.h

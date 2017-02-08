@@ -1,0 +1,17 @@
+Jon Snow; CS330 12345 3
+Jon Snow; CS330 12345 3
+Jon Snow; CS300 34567 3
+John Smith; CS355 45678 3
+John Smith; CS330 12345 3
+John Smith; CS330 23456 3
+John Smith; CS300 34567 3
+Bob Jones; CS300 34567 3
+Bob Jones; CS355 45678 3
+Bob Jones; CS330 12345 3
+Bob Jones; CS300 34567 3
+Bob Jones; CS361 34569 3
+Bob Jones; IT310 78192 3
+Bob Jones; Stat330 78195 3
+David Jones; CS330 12345 3
+Tom Smith; CS330 12345 3
+Tommy Oliver; CS665 56789 3

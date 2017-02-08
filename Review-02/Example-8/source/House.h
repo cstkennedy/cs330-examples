@@ -38,7 +38,7 @@ class House{
          * within class declarations.
          * <p>
          * These are rudimentary iterators. There are a number
-         * of additions needed before we can require this complete--e.g.,
+         * of additions needed before we can declare this complete--e.g.,
          * operator-> and iterator traits. The latter is beyond the scope
          * of this course.
          */
