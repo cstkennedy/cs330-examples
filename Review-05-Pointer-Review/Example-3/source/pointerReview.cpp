@@ -9,7 +9,7 @@ using namespace std;
 /**
  * Array of table widths
  */
-const int COL_WIDTHS[] = {12, 18, 10, 10};
+const int COL_WIDTHS[] = {12, 18, 16, 16};
 
 /**
  * Main Function - Basics of Pointers & References
@@ -29,16 +29,7 @@ int main(int argc, char** argv)
     // Dereferencing a pointer & using offsets
     cout << "*powersOfTwo   = " << *powersOfTwo   << "\n";
     cout << "powersOfTwo[0] = " << powersOfTwo[0] << "\n";
-
-    /*
-    cout << "\n";
-    cout << "Using a range based for loop" << "\n";
-
-    for(const int& i : powersOfTwo) {
-        cout << i << "\n";
-    }
-    */
-
+  
     cout << "\n";
     cout << "Using a traditional for loop" << "\n";
 
@@ -85,13 +76,6 @@ int main(int argc, char** argv)
              << "\n"; 
     }
 
-    // Range based for loop
-    /*
-    for (const int i : numPowers) {
-        cout << i << "\n";
-    }
-    */
-
     int sizeInBytes = 0;
     int sizeInBits  = 0;
 
@@ -117,19 +101,28 @@ int main(int argc, char** argv)
                              << sizeInBits  << " (bits)"  
          << "\n";
 
-    sizeInBytes = sizeof(sizeof(powersOfTwo));
+    sizeInBytes = sizeof(powersOfTwo);
     sizeInBits  = sizeInBytes << 3;
 
+    // Set formatting flags
+    cout.setf(ios::right);
+
     cout << "\n";
-    cout << "sizeof(powersOfTwo): " << sizeInBytes << " (bytes) / "
-                                    << sizeInBits  << " (bits)"  
+    cout << "sizeof(powersOfTwo): " 
+         << setw(4) << sizeInBytes 
+         << " (bytes) / "
+         << setw(4) << sizeInBits  
+         << " (bits)"  
          << "\n";
 
     sizeInBytes = (sizeof(int) * numPowers);
     sizeInBits  = sizeInBytes << 3;
 
-    cout << "data size:           " << sizeInBytes << " (bytes) / "
-                                    << sizeInBits  << " (bits)"  
+    cout << "data size:           " 
+         << setw(4) << sizeInBytes 
+         << " (bytes) / "
+         << setw(4) << sizeInBits  
+         << " (bits)"  
          << "\n";
 
     return 0;

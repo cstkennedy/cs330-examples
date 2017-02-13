@@ -8,7 +8,7 @@ using namespace std;
 /**
  * Array of table widths
  */
-const int COL_WIDTHS[4] = {12, 18, 10, 10};
+const int COL_WIDTHS[4] = {12, 18, 16, 16};
 
 /**
  * Main Function - Basics of Pointers & References

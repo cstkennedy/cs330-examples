@@ -27,7 +27,7 @@ class Course {
         /**
          * Number of credit hours
          */
-         int        credits;
+        int        credits;
 
     public:
         /**
