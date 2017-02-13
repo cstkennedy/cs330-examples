@@ -32,7 +32,6 @@ int main(int argc, char** argv)
   
     cout << "\n";
     cout << "Using a traditional for loop" << "\n";
-
     for(int i = 0; i < 1; i++) {
         cout << powersOfTwo[i] << "\n";
     }
