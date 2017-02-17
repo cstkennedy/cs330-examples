@@ -33,6 +33,10 @@ typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTri
  */
 int pruneNullPtr( Shape** &shapes, int count );
 
+/**
+ * This program does not accept command line
+ * arguments
+ */
 int main()
 {
     // --Erroneous Variable Declarations--
