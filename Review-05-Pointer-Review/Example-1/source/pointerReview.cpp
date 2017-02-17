@@ -15,7 +15,7 @@ const int COL_WIDTHS[4] = {12, 18, 16, 16};
  */
 int main(int argc, char** argv)
 {
-    // Declarations & Defintions 
+    // Declarations & Definitions 
     int        x               = 9001;
     int*       xPointer        = nullptr;
     int&       xReference      = x;
