@@ -14,7 +14,7 @@ class ShapeCollection {
     public:
         // Iterators (non-const and const)
         typedef std::vector<Shape*>::iterator iterator;
-        typedef std::vector<Shape*>::const_iterator const_iterator;
+        typedef std::vector<Shape*>::iterator const_iterator;
 
     private:
         /**
