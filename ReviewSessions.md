@@ -2,9 +2,8 @@ Title: Review Sessions
 Author: Thomas Kennedy
 TOC: yes
 
-%define <\ExampleDir> <ex> {[here](https://www.cs.odu.edu/~tkennedy/cs330/@sem@-supplemental/Protected/)}
-%define <\ExampleZip> <zipFile> {[zipFile](https://www.cs.odu.edu/~tkennedy/cs330/@sem@-supplemental/Protected/zipFile)}
-
+%define <\ExampleDir> <ex> {[here](../ReviewExampleCode)}
+%define <\ExampleZip> <zipFile> {[zipFile](../ReviewExampleCode/zipFile)}
 
 
 # Review Session 1: Linked Lists
@@ -15,7 +14,7 @@ TOC: yes
     * I briefly discussed command line arguments during this example.
     * The Linked List destructor was introduced in this example.
 
-  * Example 2 was a simliar implementaion, but with the Node struct moved within the scope of
+  * Example 2 was a similar implementation, but with the Node struct moved within the scope of
     the Inventory class.
 
   * Example 3 included a discussion of the Big-3. 
@@ -37,7 +36,7 @@ TOC: yes
      container interface as a case study.
     - Examples 1 through 7 were the focus.
     - Example 8 served to motivate the need for the Big-3 and, based on the data-structure, a formal
-      iterator implemention. This will be the focal point for Review 03.
+      iterator implementation. This will be the focal point for Review 03.
 
 
   The recording of the Review Session is available [here](https://youtu.be/KyNKnNI53rI).
@@ -62,23 +61,36 @@ TOC: yes
   The recording of the Review Session is available [here](https://youtu.be/YYdsnny1KB4).
 
 
+# Review Session 5: Pointer Mechanics
 
-%if _ignore
+  This set of examples reviews the mechanics of pointers..
+
+  **There is no corresponding recording.**
+
+  All source code is available in \ExampleZip{Review-05-Pointer-Review.zip} under the [Example Code](../ReviewExampleCode) section of the course site.
 
 
 # Review Session 6: Inheritance 
 
-  During this Review Session, we discussed the C++ mechanics used when implementing inheritance. This includes:
+  During this Review Session, we discussed the C++ mechanics used when implementing inheritance. 
+
+  Example 1 focuses on:
 
   * Virtual Functions
   * Pure Virtual Functions
   * Dynamic Binding
 
-  The Shapes Example demonstrates virtual functions **and** pure virtual functions. I briefly discussed the Factory Model and presented a basic implementaion.
+  Example 2 introduces the Factory Model. 
 
-  The recording of the Review Session is available [here](https://www.youtube.com/watch?v=sdxpQ5LXPN0).
-  All source code is available in Review-03.zip under the [Example Code](../ReviewExampleCode) section of the course site.
+  Examples 3 through 6 add a 
+  `ShapeCollection` container and discuss extensions 
+  to the `Shape` and `ShapeFactory` interfaces.
 
+  Part 1 of the review (Examples 1-2) is available [here](https://youtu.be/IOYXiufiI0o), and Part 2 (Examples 3-6) is available [here](https://youtu.be/pBZRJIgS3HI)
+
+  All source code is available in \ExampleZip{Review-06-CPP-Shapes.zip} the [Example Code](../ReviewExampleCode) section of the course site.
+
+%if _ignoreForNow
 
 # Review Session 4: Assignment 3 Postmortem
 
