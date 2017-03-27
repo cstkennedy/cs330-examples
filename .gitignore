@@ -15,3 +15,6 @@
 **updateRoom
 **registration
 **pointerReview
+
+**/build/
+**/.gradle/
