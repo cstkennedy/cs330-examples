@@ -16,8 +16,8 @@ public class RunShapes {
     {
         // --Erroneous C++ Variable Declarations--
         // --Valid Java Variable Declarations--
-        Shape   shape  = null; // Declare an "instance" of Shape
-        Shape[] shapes = null; // Declare an Array of Shapes
+        Shape               shape   = null; // Declare an "instance" of Shape
+        Shape[]             shapes  = null; // Declare an Array of Shapes
         
         Triangle            tri     = null;
         RightTriangle       rhtTri  = null;
@@ -29,7 +29,7 @@ public class RunShapes {
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-       );        
+        );        
         
         // Create one RightTriangle
         rhtTri  = new RightTriangle(1, 2);
@@ -68,8 +68,8 @@ public class RunShapes {
         // Create one Equilateral Triangle
         eqlTri = new EquilateralTriangle(8); 
         
-        tri   = eqlTri; // Point tri to rhtTri    
-        shape = eqlTri; // Point shape to rhtTri
+        tri    = eqlTri; // Point tri to rhtTri    
+        shape  = eqlTri; // Point shape to rhtTri
 
         System.out.println(
             Utilities.seperatedHeading("Display an Eql. Triangle (eqlTri)", 38, '-')
