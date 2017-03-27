@@ -1,6 +1,6 @@
 // Thomas Kennedy
-// CS 330 Fall 2016
-// Review Example 2: Fibonacci Sequence
+// CS 330
+// Review Example: Fibonacci Sequence
 
 #include <iostream>
 #include <iomanip>

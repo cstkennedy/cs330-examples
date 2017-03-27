@@ -5,6 +5,7 @@
 **.zip
 **.class
 **.jar
+**.pyc
 
 # Binary Specific Ignore rules
 **/ll2

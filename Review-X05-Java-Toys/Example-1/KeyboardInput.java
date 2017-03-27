@@ -3,18 +3,21 @@ import java.util.Scanner;
 /**
  * A basic keyboard Input Stream example
  */
-class KeyboardInput{    
+class KeyboardInput {    
     /**
+     * Java main function.
      *
+     * @param argv command line arguments. By convention
+     *     this is usually "args" in Java.
      */
     public static void main(String[] argv)
     {
-        Scanner inputStream = new Scanner(System.in);
+        Scanner inputStream          = new Scanner(System.in);
 
-        int     inputInt     = 0;
-        double  inputDouble  = 0;
-        char    inputChar    = '\0';
-        boolean inputBoolean = false;
+        int     inputInt             = 0;
+        double  inputDouble          = 0;
+        char    inputChar            = '\0';
+        boolean inputBoolean         = false;
 
         String  inputStringNoSpaces  = null;
         String  inputStringWholeLine = null;
