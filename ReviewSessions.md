@@ -90,6 +90,40 @@ TOC: yes
 
   All source code is available in \ExampleZip{Review-06-CPP-Shapes.zip} the [Example Code](../ReviewExampleCode) section of the course site.
 
+# Assignment 3 Postmortem
+
+  This Review Session was a Postmortem for Assignment 3. My solution is available on the Submission page and under the Example Code Section of the site.
+
+  The recording of the Review Session is available [here](https://youtu.be/-wrLXiNYWSo).
+
+  All source code is available in \ExampleZip{Review-Assignment-3.zip} the [Example Code](../ReviewExampleCode) section of the course site.
+
+
+# Review 7: Java Inheritance
+
+  In this Review Session we discussed a Java implementation of the shapes example--i.e., Example 10 from Review Session 5. This example--available as ReviewExample11.zip--presents the same
+  concepts demonstrated by Example 10. This serves both as a transition into Java and a comparison of C++ and Java.
+
+  **Note** that Example 11 is not written in [idiomatic](http://www.merriam-webster.com/dictionary/idiomatic) Java. It is Java code written as a transition into Java from C++. Emphasis is placed
+  on the mechanics of Java--as they differ from C++ and resemble C++.
+
+  The recording of the Review Session is available [here](https://youtu.be/sCF7HRAym7g).
+
+  All source code is available in \ExampleZip{Review-07-Java-Shapes.zip} the [Example Code](../ReviewExampleCode) section of the course site.
+
+# Review 8: Switching to Java
+
+  This Review Session was a discussion of 2 examples:
+
+  * Example 1 - An example of reading keyboard input using the Java `Scanner` class.
+  * Example 2 - An example in which the Fibonacci Sequence is computed. This example includes
+    C++ and Java examples. Note the Python 3 example is included for comparison. You will not 
+    be tested on Python.
+
+  All source code is available in \ExampleZip{Review-08-Java-Toys.zip} the [Example Code](../ReviewExampleCode) section of the course site.
+
+  There is currently no recording for these examples.
+
 %if _ignoreForNow
 
 # Review Session 4: Assignment 3 Postmortem

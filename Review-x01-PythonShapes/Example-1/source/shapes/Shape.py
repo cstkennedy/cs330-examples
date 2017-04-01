@@ -1,13 +1,9 @@
-// Thomas Kennedy
-// CS 330 Fall 2014
 
-package shapes;
 
-/**
- * Shape in a 2-D Cartesian Plane
- */
-public abstract class Shape implements Cloneable {
-
+class Shape(Object):
+    """
+    Shape in a 2-D Cartesian Plane
+    """
     protected static final int WIDTH_LABEL = 12; ///< Label Output Width
     protected static final int WIDTH_VALUE = 24; ///< Value Output Width
     
@@ -24,13 +20,13 @@ public abstract class Shape implements Cloneable {
 
     protected String _name; ///< Geometric Name of the 2-D Figure
 
-    /**
-     * Default Shape Constructor
-     */
-    public Shape()
-    {
-        this._name = "Shape";
-    }
+    def __init__():  
+        """ 
+        Default Shape Constructor 
+        """
+
+        self._name = "Shape";
+    
 
     /**
      * Shape Constructor
@@ -54,12 +50,11 @@ public abstract class Shape implements Cloneable {
      * Modify the name
      *
      * @param _name new Shape name
-     * @return shape name
      */
-    protected void name( String _name )
-    {
-        this._name = _name;
-    }
+    def name(_name):
+    
+        self._name = _name;
+    
 
     /**
      * Compute the area

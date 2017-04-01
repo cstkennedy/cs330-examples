@@ -1,0 +1,13 @@
+sphere 1
+cylinder 2 1
+sphere 4
+cylinder 2 3
+composite 3
+    sphere 3
+    sphere 5
+    sphere 7
+
+composite 2
+    cylinder 1 2
+    sphere 5
+sphere 3

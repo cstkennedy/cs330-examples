@@ -3,7 +3,7 @@
 import utilities.Utilities;
 import shapes.*;
 
-public class RunShapes{
+public class RunShapes {
     static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
         "Thomas Kennedy"

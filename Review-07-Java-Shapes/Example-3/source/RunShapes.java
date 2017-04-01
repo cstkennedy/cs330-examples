@@ -109,6 +109,7 @@ public class RunShapes {
         while (it.hasNext()) {
             Shape s = it.next();
             System.out.println(s);
+            //System.out.println(it.next());
         }
     }
 
