@@ -23,10 +23,10 @@ public class BruteForce {
      */
     public BruteForce()
     {
-        primes  = new ArrayList< Integer >();
+        primes  = new ArrayList<Integer>();
         
-        primes.add( new Integer(2) );
-        primes.add( new Integer(3) );
+        primes.add(new Integer(2));
+        primes.add(new Integer(3));
     }
 
     /**
@@ -37,9 +37,7 @@ public class BruteForce {
     public int next()
     {
         // prime from which to start calculations
-        int next_prime = primes.get( 
-            primes.size() - 1
-        ).intValue();             
+        int next_prime = primes.get(primes.size() - 1).intValue();             
         
         // true once a prime number has been identified
         boolean prime = false;         
@@ -48,7 +46,7 @@ public class BruteForce {
         // halt when a prime number has been identified
         while( !prime ){
             // Start at the beginning of the primes list
-            ListIterator< Integer > li = primes.listIterator();
+            ListIterator<Integer> li = primes.listIterator();
 
             // Guess the next prime
             // Assume the number is not prime
@@ -69,7 +67,7 @@ public class BruteForce {
         }
 
         // record the new prime number
-        primes.add( new Integer( next_prime ));
+        primes.add(new Integer(next_prime));
 
         return next_prime;
     }
@@ -80,9 +78,9 @@ public class BruteForce {
      * @return List of all generated prime numbers
      *
      */
-    public final ArrayList< Integer > getPrimes()
+    public final ArrayList<Integer> getPrimes()
     {
-        return new ArrayList< Integer >( primes );
+        return new ArrayList<Integer>(primes);
     }
 
     /**

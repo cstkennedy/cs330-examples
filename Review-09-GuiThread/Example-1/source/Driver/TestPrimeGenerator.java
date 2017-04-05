@@ -11,10 +11,10 @@ public class TestPrimeGenerator {
     
     public static void main(String args[])
     {
-        BruteForce gen = new BruteForce(); // Prime number generator instance
-        ArrayList< Integer > primes;       // List of generated primes
+        BruteForce         gen = new BruteForce(); // Prime number generator instance
+        ArrayList<Integer> primes;                 // List of generated primes
 
-        int num_primes = 0;                // Number of primes to generate
+        int                num_primes = 0;         // Number of primes to generate
 
         // Parse command line argument 1
         try {
