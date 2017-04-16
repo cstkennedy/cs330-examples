@@ -136,7 +136,7 @@ public class PrimeGuiThread extends JFrame {
             logArea,
             JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
-       );
+        );
         
         // Set Panel Layouts
         inputPanel.setLayout(new FlowLayout());
@@ -180,7 +180,7 @@ public class PrimeGuiThread extends JFrame {
                     //toggleButtons();
                 }
             }
-       );
+        );
         
         // Add stop button Listener
         stopButton.addActionListener(

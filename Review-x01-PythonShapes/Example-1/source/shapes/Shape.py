@@ -1,95 +1,85 @@
+import copy
 
-
-class Shape(Object):
+class Shape(object):
     """
     Shape in a 2-D Cartesian Plane
     """
-    protected static final int WIDTH_LABEL = 12; ///< Label Output Width
-    protected static final int WIDTH_VALUE = 24; ///< Value Output Width
-    
-    /**
-     * Generate the format string for a label-value pair
-     * 
-     * @param value_format trailing portion of a format String
-     * @return complete label-value format String
-     */
-    protected static String getFormat( String value_format )
-    {
-        return "%-" + WIDTH_LABEL +"s: %" + WIDTH_VALUE + value_format;
-    }
+    WIDTH_LABEL = 12  # Label Output Width
+    WIDTH_VALUE = 24  # Value Output Width
 
-    protected String _name; ///< Geometric Name of the 2-D Figure
+    #@classmethod for static
 
-    def __init__():  
+    def __init__(self, name="Shape"):
         """ 
-        Default Shape Constructor 
+        Shape Constructor 
+        :param: name the desired Shape name
         """
 
-        self._name = "Shape";
-    
+        self._name = name
 
-    /**
-     * Shape Constructor
-     * 
-     * @param name the desired Shape name
-     */
-    public Shape( String name )
-    {
-        this._name = name;
-    }
+    @property
+    def name(self):
+        return self._name
 
-    /**
-     * Return the name
-     */
-    public String name()
-    {
-        return this._name;
-    }
+    @name.setter
+    def name(self, _name):
+        """
+        Modify the name
 
-    /**
-     * Modify the name
-     *
-     * @param _name new Shape name
-     */
-    def name(_name):
-    
-        self._name = _name;
-    
+        :param: _name new Shape name
+        """
 
-    /**
-     * Compute the area
-     *
-     * @return area
-     */
-    public abstract double area();
+        self._name = _name
 
-    /**
-     * Compute the perimeter
-     *
-     * @return perimeter
-     */
-    public abstract double perimeter();
+    def area(self):
+        """
+        Compute the area
 
-    /**
-     * Return a new duplicate Shape
-     */
-    public abstract Shape clone();
+        :return: area
+        """
 
-    /**
-     * Print the shape
-     */
-    public String toString()
-    {
+        raise NotImplementedError()
+
+    def perimeter(self):
+        """
+        Compute the perimeter
+
+        :return: perimeter
+        """
+
+        raise NotImplementedError()
+
+    def __deepcopy__(self):
+        """
+        Return a new duplicate Shape
+        """
+
+        raise NotImplementedError()
+
+    def __str__(self):
+        """
+        Print the shape
+        """
+
         return (
-            String.format( 
-                getFormat( "s\n" ), 
-                "Name", 
-                this._name 
-            )
-        );
+            "{:<" +
+            str(Shape.WIDTH_LABEL) +
+            "}:{:>" +
+            str(Shape.WIDTH_VALUE) +
+            "}\n"
+        ).format(
+            "Name",
+            self._name
+        )
 
-        //return "Name: " + this_.name;
-    }
-}
 
+if __name__ == "__main__":
+    s1 = Shape()
+    s2 = Shape("TestShape")
 
+    print(s1)
+    print(s2)
+
+    s1.name = "Test Set/Get name"
+    print(s1.name)
+    print(s1)

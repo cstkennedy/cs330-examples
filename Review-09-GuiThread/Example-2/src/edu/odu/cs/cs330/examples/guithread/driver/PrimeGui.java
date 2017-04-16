@@ -170,7 +170,7 @@ public class PrimeGui extends JFrame {
                     toggleButtons();
                 }
             }
-       );
+        );
         
         // Add stop button Listener
         stopButton.addActionListener(
@@ -184,7 +184,7 @@ public class PrimeGui extends JFrame {
                     toggleButtons();
                 }
             }
-       );     
+        );     
         
         // Setup and add to the Main Container         
         cp.setLayout(new BorderLayout());

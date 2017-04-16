@@ -59,7 +59,7 @@ task jarGui(type: Jar) {
 
     manifest {
         attributes(
-          'Main-Class': 'edu.odu.cs.cs330.examples.guithread.driver.TestPrimeGenerator'
+          'Main-Class': 'edu.odu.cs.cs330.examples.guithread.driver.PrimeGui'
         )
     }
 }
@@ -76,7 +76,7 @@ task jarThd(type: Jar) {
 
     manifest {
         attributes(
-          'Main-Class': 'edu.odu.cs.cs330.examples.guithread.driver.TestPrimeGenerator'
+          'Main-Class': 'edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread'
         )
     }
 }
