@@ -35,67 +35,6 @@ def main():
 
     print("-" * 80)
 
-    """
-        # --Erroneous C++ Variable Declarations--
-        # --Valid Java Variable Declarations--
-        Shape               shape   = null; # Declare an "instance" of Shape
-        Shape[]             shapes  = null; # Declare an Array of Shapes
-        
-        Triangle            tri     = null;
-        RightTriangle       rhtTri  = null;
-        EquilateralTriangle eqlTri  = null;
-
-        # ShapeFactory Discussion
-        int size = 0;
-    """
-
-    # Create one RightTriangle
-    rhtTri = RightTriangle(1, 2)
-
-    tri = rhtTri  # Point tri to rhtTri
-    shape = rhtTri  # Point shape to rhtTri
-
-    # Is this a valid assignment?
-    eqlTri = rhtTri
-    # Yes, because Python is loosely typed.
-
-    print("{:^38}".format("Display a Right Triangle (rhtTri)"))
-    print("-" * 38)
-    print(rhtTri)
-
-    print("{:^38}".format("Display a Right Triangle (tri)"))
-    print("-" * 38)
-    print(tri)
-
-    print("{:^38}".format("Display a Right Triangle (shape)"))
-    print("-" * 38)
-    print(shape)
-
-    print('~' * 80)
-
-    # Create one Equilateral Triangle
-    eqlTri = EquilateralTriangle(8)
-
-    tri = eqlTri  # Point tri to rhtTri
-    shape = eqlTri  # Point shape to rhtTri
-
-    print("{:^38}".format("Display an Eql. Triangle (rhtTri)"))
-    print("-" * 38)
-    print(eqlTri)
-
-    print("{:^38}".format("Display an Eql. Triangle (tri)"))
-    print("-" * 38)
-    print(tri)
-
-    print("{:^38}".format("Display an Eql. Triangle (shape)"))
-    print("-" * 38)
-    print(shape)
-
-    print('~' * 80)
-
-    # Divide Output - Separate ShapeFactory Output
-    print('~' * 80)
-
     # What happens when the number of shapes is non-trivial?
     #
     # Suppose we were to expand our Shape hierarchy to include
