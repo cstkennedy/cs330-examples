@@ -1,118 +1,84 @@
-// Thomas Kennedy
-// CS 330 Fall 2014
+import math
 
-package shapes;
+from shapes.Shape import Shape
+from shapes.Triangle import Triangle
 
-/**
- * A Triangle with all sides set to the same length
- */
-public class EquilateralTriangle extends Triangle {   
-    private static final double ROOT_3_DIV_4 = Math.sqrt( 3 ) / 4; ///< @f$ \frac{\sqrt{3}}{4} @f$
-    
-    /**
-     * Construct an EquilateralTriangle
-     * with all sides set to 1.
-     */
-    public EquilateralTriangle()
-    {
-        this._name = "Equilateral Triangle";
-        
-        this.side( 1 );
-    }
 
-    /**
-     * Construct an EquilateralTriangle
-     *
-     * @param side the desired side length
-     */
-    public EquilateralTriangle( double side )
-    {
-        this._name = "Equilateral Triangle";
-        
-        this.side( side );
-    }
+class EquilateralTriangle(Triangle):
+    """
+    A Triangle with all sides set to the same length
+    """
 
-    /**
-     * Construct an EquilateralTriangle
-     *
-     * @param src the EquilateralTriangle to copy       
-     */ 
-    public EquilateralTriangle( EquilateralTriangle src )
-    {
-        this._name = src._name;
+    ROOT_3_DIV_4 = math.sqrt(3) / 4  # @f$ \frac{\sqrt{3}}{4} @f$
 
-        this.side( src.side() );
-    }
+    def __init__(self, side=1):
+        """
+        Construct an EquilateralTriangle
+        with all sides set to 1 by default.
+        """
+        self.name = "Equilateral Triangle"
+        self.side = side
 
-    /**
-     * Compute the height using
-     * @f$ height = \frac{5}{4}side @f$
-     *
-     * @return height
-     */
-    public double height()
-    {
-        return Math.sqrt( 
-              1.25 * ( side() * side() )
-        );
-    }
+    @property
+    def height(self):
+        """
+        Compute the height using
+        @f$ height = \frac{5}{4}side @f$
 
-    /**
-     * Return the length of one side
-     *
-     * @return the length of one side
-     */
-    public double side()
-    {
-        return _side_a;
-    }
 
-    /**
-     * Modify the side length
-     *
-     * @param s the desired side length
-     */
-    public void side( double s )
-    {
-        _side_a = s;
-        _side_b = s;
-        _side_c = s;
-    }
+        :return: height
+        """
 
-    /**
-     * Compute the area using 
-     * @f$ Area=\frac{\sqrt{3}}{4}side^2 @f$
-     *
-     * @return the area
-     */
-    public double area(){
-        return ROOT_3_DIV_4 * side() * side();
-    }
+        return math.sqrt(
+            1.25 * (self.side ** 2)
+        )
 
-    /**
-     * Return a new duplicate EquilateralTriangle
-     */
-    public Shape clone()
-    {
-        return new EquilateralTriangle( this );
-    }
+    @property
+    def side(self):
+        return self.side_a
 
-    /**
-     * Print the EquilateralTriangle
-     */
-    public String toString()
-    {
+    @side.setter
+    def side(self, s):
+
+        self.side_a = s
+        self.side_b = s
+        self.side_c = s
+
+    def area(self):
+        """
+        Compute the area using 
+        @f$ Area=\frac{\sqrt{3}}{4}side^2 @f$
+
+        :return: the area
+        """
+
+        return (EquilateralTriangle.ROOT_3_DIV_4
+                * self.side
+                * self.side
+                )
+
+    def __deepcopy__(self):
+        """
+        Return a new duplicate Shape
+        """
+
+        return EqualateralTriangle(
+            copy.deepcopy(self.side)
+        )
+
+    def __str__(self):
+        formatStr = (
+            "{:<" +
+            str(Shape.WIDTH_LABEL) +
+            "}:{:>" +
+            str(Shape.WIDTH_VALUE) +
+            ".4f}\n"
+        )
+
         return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Side",      this._side_a     ) +
-            String.format( getFormat( ".4f\n" ), "Height",    this.height()    ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );
-    }
-}
-
-
-
-
-
+            super(Triangle, self).__str__() +
+            formatStr.format("Side", self.side) +
+            formatStr.format("Height", self.height) +
+            formatStr.format("Perimeter", Triangle.perimeter(self)) +
+            formatStr.format("Area", self.area())
+        )

@@ -47,11 +47,6 @@ def main():
 
         // ShapeFactory Discussion
         int size = 0;
-        
-        // Print main program heading
-        System.out.println(
-            Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-        );
     """
 
     # Create one RightTriangle
@@ -62,11 +57,11 @@ def main():
 
     # Is this a valid assignment?
     eqlTri = rhtTri
-    # Yes, because Pyhton is loosely typed.
+    # Yes, because Python is loosely typed.
 
     print("{:^38}".format("Display a Right Triangle (rhtTri)"))
     print("-" * 38)
-    print(tri)
+    print(rhtTri)
 
     print("{:^38}".format("Display a Right Triangle (tri)"))
     print("-" * 38)
@@ -77,22 +72,28 @@ def main():
     print(shape)
 
     print('~' * 80)
-    """  
-
-    // Divide Output - Separate Right Triangle from Eql. Triangle
-    System.out.println(
-        Utilities.horizontalLine('~', Utilities.W_WIDTH)
-    );
-    System.out.println();
-
-    rhtTri = null;
-
-    // Create one Equilateral Triangle
-    eqlTri = new EquilateralTriangle(8); 
+     
+    # Create one Equilateral Triangle
+    eqlTri = EquilateralTriangle(8); 
     
-    tri    = eqlTri; // Point tri to rhtTri    
-    shape  = eqlTri; // Point shape to rhtTri
+    tri    = eqlTri; # Point tri to rhtTri    
+    shape  = eqlTri; # Point shape to rhtTri
 
+    print("{:^38}".format("Display an Eql. Triangle (rhtTri)"))
+    print("-" * 38)
+    print(eqlTri)
+
+    print("{:^38}".format("Display an Eql. Triangle (tri)"))
+    print("-" * 38)
+    print(tri)
+
+    print("{:^38}".format("Display an Eql. Triangle (shape)"))
+    print("-" * 38)
+    print(shape)
+
+    print('~' * 80)
+
+    """
     System.out.println(
         Utilities.seperatedHeading("Display an Eql. Triangle (eqlTri)", 38, '-')
     );
