@@ -1,4 +1,5 @@
 import math
+import copy
 
 from shapes.Shape import Shape
 from shapes.Triangle import Triangle
@@ -57,12 +58,12 @@ class EquilateralTriangle(Triangle):
                 * self.side
                 )
 
-    def __deepcopy__(self):
+    def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """
 
-        return EqualateralTriangle(
+        return EquilateralTriangle(
             copy.deepcopy(self.side)
         )
 

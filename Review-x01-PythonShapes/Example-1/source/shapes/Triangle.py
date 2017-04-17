@@ -1,3 +1,5 @@
+import copy
+
 from shapes.Shape import Shape
 
 
@@ -63,7 +65,7 @@ class Triangle(Shape):
 
         return (self.side_a + self.side_b + self.side_c)
 
-    def __deepcopy__(self):
+    def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """

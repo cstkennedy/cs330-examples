@@ -1,4 +1,5 @@
 import math
+import copy
 
 from shapes.Shape import Shape
 from shapes.Triangle import Triangle
@@ -85,14 +86,14 @@ class RightTriangle(Triangle):
                 * self.side_b
                 )
 
-    def __deepcopy__(self):
+    def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """
 
         return RightTriangle(
-            copy.deepcopy(self.base),
-            copy.deepcopy(self.height),
+            copy.deepcopy(self.side_a),
+            copy.deepcopy(self.side_b),
         )
 
     def __str__(self):

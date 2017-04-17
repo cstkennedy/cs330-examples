@@ -49,7 +49,7 @@ class Shape(object):
 
         raise NotImplementedError()
 
-    def __deepcopy__(self):
+    def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """

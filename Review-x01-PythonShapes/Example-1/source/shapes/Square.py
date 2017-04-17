@@ -1,4 +1,7 @@
+import copy
+
 from shapes.Shape import Shape
+
 
 class Square(Shape):
     """
@@ -27,7 +30,7 @@ class Square(Shape):
 
         :return: area
         """
-        return _side ** 2.0
+        return self._side ** 2.0
 
     def perimeter(self):
         """
@@ -38,7 +41,7 @@ class Square(Shape):
 
         return 4 * self._side
 
-    def __deepcopy__(self):
+    def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """
@@ -52,7 +55,7 @@ class Square(Shape):
 
         formatStr = (
             "{:<" +
-            str(Shape.WIDTH_VALUE) +
+            str(Shape.WIDTH_LABEL) +
             "}:{:>" +
             str(Shape.WIDTH_VALUE) +
             ".4f}\n"
@@ -60,7 +63,9 @@ class Square(Shape):
 
         return (
             super(Square, self).__str__() +
-            formatStr.format("Side", self.side)
+            formatStr.format("Side", self.side) +
+            formatStr.format("Perimeter", self.perimeter()) +
+            formatStr.format("Area", self.area())
         )
 
 

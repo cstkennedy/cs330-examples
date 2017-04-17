@@ -1,4 +1,5 @@
 import math
+import copy
 
 from shapes.Shape import Shape
 
@@ -47,7 +48,7 @@ class Circle(Shape):
 
         return Circle.TAU * self._radius
 
-    def __deepcopy__(self):
+    def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """
@@ -61,7 +62,7 @@ class Circle(Shape):
 
         formatStr = (
             "{:<" +
-            str(Shape.WIDTH_VALUE) +
+            str(Shape.WIDTH_LABEL) +
             "}:{:>" +
             str(Shape.WIDTH_VALUE) +
             ".4f}\n"
