@@ -1,0 +1,6 @@
+Triangle; {"a": 4, "b": 4, "c": 4}
+Right Triangle; {"base": 4, "height": 5}
+Equilateral Triangle; {"side": 3}
+Square; {"side": 9}
+Circle; {"radius": 5}
+1337 Haxor; {"rofl" : "1 lol i broke it"}
