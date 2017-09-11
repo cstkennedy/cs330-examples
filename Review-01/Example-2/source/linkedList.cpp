@@ -3,11 +3,11 @@
 /**
  * 
  */
- LinkedList::Node::Node()
- {
+LinkedList::Node::Node()
+{
     this->data = 0;
     this->next = nullptr;
- }
+}
 
 /**
  * 

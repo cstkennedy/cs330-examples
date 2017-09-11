@@ -177,34 +177,21 @@ void House::display(std::ostream& outs) const
 /**
  *
  */
-House& House::operator=(const House& rhs)
+House& House::operator=(House rhs)
 {
-    if (this != &rhs) {
-        // Deallocate the Linked List
-        Node* it = this->head;
-
-        while (it != nullptr) {
-            Node* prev = it;
-
-            it = it->next;
-            delete prev;
-        }
-        it = nullptr;
-
-        this->head = nullptr;
-        this->tail = nullptr;
-        // End Linked List Deallocation
-
-        this->name = rhs.name;
-
-        // Reuse it
-        it = rhs.head;
-
-        while (it != nullptr) {
-            this->addRoom(it->data);
-            it = it->next;
-        }
-    }
+    std::swap(*this, rhs);
 
     return *this;
+}
+
+/**
+ *
+ */
+void swap(House& lhs, House& rhs)
+{
+    using std::swap;
+
+    swap(lhs.head, rhs.head);
+    swap(lhs.tail, rhs.tail);
+    swap(lhs.currentSize, rhs.currentSize);
 }

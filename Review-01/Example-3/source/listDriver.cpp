@@ -77,6 +77,7 @@ int main(int argc, char** argv)
     printHorizontalLine( cout, '*', W_WIDTH );
 
     LinkedList randomCopy = randomInts;
+
     randomCopy.appendNode(337);
 
     cout << randomCopy;
