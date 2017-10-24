@@ -191,6 +191,7 @@ void swap(House& lhs, House& rhs)
 {
     using std::swap;
 
+    swap(lhs.name, rhs.name);
     swap(lhs.head, rhs.head);
     swap(lhs.tail, rhs.tail);
     swap(lhs.currentSize, rhs.currentSize);
