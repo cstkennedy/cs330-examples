@@ -110,7 +110,8 @@ class RightTriangle: public Triangle{
 /**
  *
  */
-inline double RightTriangle::computeHypotenuse(double base, double height )
+inline
+double RightTriangle::computeHypotenuse(double base, double height )
 {
     return sqrt(
         ( base * base ) + ( height * height )

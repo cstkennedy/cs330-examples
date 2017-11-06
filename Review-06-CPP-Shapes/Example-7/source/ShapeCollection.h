@@ -63,7 +63,6 @@ class ShapeCollection {
         iterator begin(); 
 
         /**
-        /**
          * Allow access to the _beginning_ of the
          * `ShapeCollection` via an
          * const_iterator.

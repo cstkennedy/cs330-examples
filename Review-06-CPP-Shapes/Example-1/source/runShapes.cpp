@@ -143,7 +143,7 @@ int main()
     cout << "\n";
 
     // Pointer Review
-    delete rhtTri; // Deallocate the RightTriangle Instance
+    delete eqlTri; // Deallocate the EquilateralTriangle Instance
     //delete tri;   // Why can tri not be deleted?
     //delete shape; // Why can shape not be deleted?
 

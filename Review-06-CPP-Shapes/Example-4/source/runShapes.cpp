@@ -92,7 +92,7 @@ ShapeCollection readShapes(std::istream& ins)
 
     ins >> ws;
 
-    while(getline(ins,name)) {
+    while(getline(ins, name)) {
         Shape* s = ShapeFactory::createShape(name);
 
         if (s != nullptr) {

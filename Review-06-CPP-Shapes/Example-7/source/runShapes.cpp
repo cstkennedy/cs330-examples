@@ -109,6 +109,7 @@ int main(int argc, char** argv)
 
     //cout << largestShape << "\n"; // oops again
     cout << *largestShape << "\n";
+    //cout << *(*it) << "\n"; // skip the temporary Shape*
 
     return 0;
 }

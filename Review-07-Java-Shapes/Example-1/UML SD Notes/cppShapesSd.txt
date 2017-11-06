@@ -1,0 +1,31 @@
+#![CPP RunShapes Main Function]
+rs:RunShapes[a]
+sf:ShapeFactory[a]
+#
+rs:sf.listKnown(std::cout)
+rs:sf.numberKnown()
+rs:shapes=rs.readShapes(shapesFile)[refer to the "read" sequence diagram]&
+rs:rs.printShapes(std::cout, shapes)&
+rs:rs.printShapeNames(std::cout, shapes)&
+rs:it=rs.findLargestShapeByArea(shapes)
+
+#![CPP RunShapes "read" Function]
+rs:RunShapes[a]
+sf:ShapeFactory[a]
+/collection:ShapeCollection
+/s:Shape
+#
+rs:collection.new()
+[c:loop while input has more shapes]
+rs:sf.operator>>(ins,s)
+sf:s=sf.createShape(name)&
+[c:alt s is not null]
+sf:s.new()
+sf:s.read(ins)&
+--else
+sf:getline(ins,name)[discard the rest of the line]
+[/c]
+[c:opt s not null]
+rs:collection.addShape(s)
+[/c]
+[/c]
