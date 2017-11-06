@@ -1,0 +1,49 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'org.ysb33r.gradle:doxygen:0.2'
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.ysb33r.doxygen'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+}
+
+jar {
+    baseName = 'RunShapes'
+
+    manifest {
+        attributes(
+          'Main-Class': 'RunShapes'
+        )
+    }
+}
+
+test {
+    reports {
+        html.enabled = true
+    }               
+}
+
+doxygen {
+    generate_html true
+
+    template 'documentation.config'
+
+    source new File(projectDir,'src/main/java')
+    //source new File(projectDir,'src/test/java')
+    outputDir new File(buildDir,'docs')
+}
