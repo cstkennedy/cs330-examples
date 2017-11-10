@@ -29,7 +29,7 @@ public class RunShapes{
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-        );        
+        );  
         
         // Create one RightTriangle
         rhtTri  = new RightTriangle(1, 2);

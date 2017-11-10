@@ -28,4 +28,4 @@ do
 done
 
 echo "Creating $zipFile"
-zip -r -9 "$zipFile" * -x */makefile -x deploy.sh > /dev/null
+zip -r -9 "$zipFile" * -x deploy.sh > /dev/null

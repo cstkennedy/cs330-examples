@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     cout << right << " 1: " << setw(10) << fm2 << "\n"
                   << " 2: " << setw(10) << fm1 << "\n";
 
-    // Fhe first 2 numbers were already output
+    // The first 2 numbers were already output
     for(int i = 3; i <= index; i++) {
         f   = fm1 + fm2;
         fm2 = fm1;

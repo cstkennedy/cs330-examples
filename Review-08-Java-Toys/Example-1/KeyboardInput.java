@@ -29,7 +29,7 @@ class KeyboardInput {
         inputDouble = inputStream.nextDouble();
 
         System.out.print("Enter a Character: ");
-        inputChar = inputStream.next().charAt(0);
+        inputChar = (inputStream.next()).charAt(0);
 
         System.out.print("Enter a Boolean: ");
         inputBoolean = inputStream.nextBoolean();

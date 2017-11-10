@@ -20,7 +20,22 @@ public class RunShapes {
      *
      */
     public static void main(String args[])
-    {       
+    {
+        BufferedReader shapesFile = null;
+        try {
+            // index is zero because java does command line arguments
+            // the wrong way
+            shapesFile = new BufferedReader(new FileReader(args[0]));
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            System.out.println("Usage: java -jar {jarfile} {inputTextFile}");
+            System.exit(1);
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("File (" + args[0] + ") could not be opened.");
+            System.exit(1);
+        }
+
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
@@ -77,16 +92,6 @@ public class RunShapes {
         // Create 5 "Random" Shapes
         int              size   = 0; // original size of shapes container
 
-        BufferedReader shapesFile = null;
-        try {
-            // index is zero because java does command line arguments
-            // the wrong way
-            shapesFile = new BufferedReader(new FileReader(args[0]));
-        }
-        catch(FileNotFoundException e) {
-            System.exit(1);
-        }
-
         Scanner scanner = new Scanner(shapesFile);
 
         ArrayList<Shape> shapes = readShapes(scanner);
@@ -136,7 +141,7 @@ public class RunShapes {
 
             //String name = inLineScanner.next();
             int    sIndex = line.indexOf(';', 0);
-            String name   = line.substring(0, sIndex);
+            String name   = line.substring(0, sIndex); // [0, sIndex)
 
             Scanner lineScanner = new Scanner(
                 line.substring(sIndex + 1, line.length())
@@ -182,7 +187,7 @@ public class RunShapes {
         // C++ Container<Shape*>::iterator it = shapes.begin()
         Iterator<Shape> it = toPrint.iterator(); 
 
-        // C++ while (it != shapes.end())
+        // C++ while (it != toPrint.end())
         while (it.hasNext()) {
             Shape s = it.next();
             System.out.println(s.name());

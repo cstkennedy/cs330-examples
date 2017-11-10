@@ -50,7 +50,7 @@ public class Fibonacci {
         System.out.printf("%2d: %10d\n", 1, fm2);
         System.out.printf("%2d: %10d\n", 2, fm1);
 
-        // Fhe first 2 numbers were already output
+        // The first 2 numbers were already output
         for(int i = 3; i <= index; i++) {
             f   = fm1 + fm2;
             fm2 = fm1;
