@@ -11,7 +11,7 @@ public class ButtonExample extends JFrame {
     /**
      * Control - start generation
      */
-    private JButton click_button; 
+    private JButton clickButton; 
     
     /**
      * Constructor
@@ -27,7 +27,7 @@ public class ButtonExample extends JFrame {
         Container cp = getContentPane();
         
         // Create a button
-        click_button = new JButton("Click Me");
+        clickButton = new JButton("Click Me!");
                      
         /* Add click button Listener
          * This binds an action to the
@@ -38,7 +38,7 @@ public class ButtonExample extends JFrame {
          * I am specializing (defining) class and 
          * instantiating an object.
          */
-        click_button.addActionListener(
+        clickButton.addActionListener(
             new ActionListener() {
                 public void actionPerformed(ActionEvent e)
                 {
@@ -50,7 +50,7 @@ public class ButtonExample extends JFrame {
         // Setup and add to the Main Container         
         cp.setLayout( new BorderLayout() );      
 
-        cp.add(click_button, BorderLayout.CENTER);
+        cp.add(clickButton, BorderLayout.CENTER);
         
         // Package Everything
         pack();  
