@@ -79,7 +79,7 @@ def main():
     tri = eqlTri  # Point tri to rhtTri
     shape = eqlTri  # Point shape to rhtTri
 
-    print("{:^38}".format("Display an Eql. Triangle (rhtTri)"))
+    print("{:^38}".format("Display an Eql. Triangle (eqlTri)"))
     print("-" * 38)
     print(eqlTri)
 
@@ -159,6 +159,13 @@ def main():
     # Remove all `None` entries with a list comprehension
     shapes = [s for s in shapes if s]
 
+    # tempList = list()
+    # for s in shapes:
+    #     #if s not None:
+    #     if s:
+    #         tempList.append(s)
+    # shapes = tempList
+
     print("*" * 38)
     print("{:^38}".format("Shapes That Exist"))
     print("*" * 38)
@@ -173,6 +180,7 @@ def main():
     print("{:^38}".format("Display All Shapes"))
     print("*" * 38)
 
+    #for (Shape s : shapes)
     for s in shapes:
         print(s)
 

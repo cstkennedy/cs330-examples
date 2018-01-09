@@ -18,7 +18,7 @@ using namespace std;
 /**
  * Build our example house
  */
-void buildHouse(House &house);
+void buildHouse(House& house);
 
 /**
  * Take a room and change the flooring
@@ -67,7 +67,7 @@ int main()
 /**
  *
  */
-void buildHouse(House &house)
+void buildHouse(House& house)
 {
     // Add the Laundry Room
     house.addRoom(

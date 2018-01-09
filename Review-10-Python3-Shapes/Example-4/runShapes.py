@@ -64,6 +64,7 @@ def main():
     # The list needs to be intialzed outside the "with" closure
     shapes = list()
 
+    # shapesIn = open(shapesFilename, "r")
     with open(shapesFilename, "r") as shapesIn:
         for line in shapesIn:
 

@@ -177,7 +177,7 @@ void House::display(std::ostream& outs) const
 /**
  *
  */
-House& House::operator=(const House &rhs)
+House& House::operator=(const House& rhs)
 {
     if (this != &rhs) {
         // Deallocate the Linked List

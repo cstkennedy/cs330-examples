@@ -27,7 +27,7 @@ int main()
     Room room("Laundry Room", 8, 4, 1.95);
     Room kitchen("Kitchen", 20,12, 3.87);
 
-    Room *roomPointer = &room;
+    Room* roomPointer = &room;
     
     room.setFlooring("Tile", 2.50);
 
@@ -39,7 +39,7 @@ int main()
     cout << "----------------------------------------------------------------"
          << "\n";
 
-    cout << *roomPointer;
+    cout << (*roomPointer);
 
     cout << "----------------------------------------------------------------"
          << "\n";

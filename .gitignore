@@ -19,3 +19,6 @@
 
 **/build/
 **/.gradle/
+
+# Assignment Ignore Rules
+**Assignment-0*

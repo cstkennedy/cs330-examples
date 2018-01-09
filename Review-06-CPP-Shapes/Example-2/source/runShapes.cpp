@@ -133,7 +133,7 @@ int main()
          << left << setw( 4 )  << ( size - numShapes )
          << "\n"
          << left << setw( 24 ) << "New Size"       << ": " 
-         << left << setw( 4 )  << numShapes            << "\n";
+         << left << setw( 4 )  << numShapes        << "\n";
 
     cout << "\n";
 
@@ -141,7 +141,7 @@ int main()
     printHeading( cout, "Display All Shapes", 38, '~' );
 
     for( int i = 0; i < numShapes; i++ ){
-        cout << *shapes[i] << "\n";
+        cout << *(shapes[i]) << "\n";
     }
 
     // Cleanup
