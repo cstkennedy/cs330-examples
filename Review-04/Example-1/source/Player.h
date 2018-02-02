@@ -43,6 +43,10 @@ class Player {
          * In this discussion, always no :(
          */
         bool isComputer() const;
+
+        char getSymbol() const;
+
+        char setSymbol(char newSymbol);
 }
 
 #endif
