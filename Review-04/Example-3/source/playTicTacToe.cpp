@@ -49,7 +49,8 @@ int main()
 
         Game game(tom, jay);
 
-        while(!(game.getBoard().isFull())) {
+        //while(!(game.getBoard().isFull())) {
+        while(game.isNotOver()) {
             game.playRound();
         }
     }

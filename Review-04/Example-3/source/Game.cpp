@@ -42,21 +42,21 @@ int Game::Referee::checkForHorizontalWin() const
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); 
     }
 
     triple = boardRef.get3Cells(4, 5, 6);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); 
     }
 
     triple = boardRef.get3Cells(7, 8, 9);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); 
     }
 
     return 0;
@@ -71,21 +71,21 @@ int Game::Referee::checkForVerticalWin() const
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); // Oops mistake
     }
 
     triple = boardRef.get3Cells(2, 5, 8);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); 
     }
 
     triple = boardRef.get3Cells(3, 6, 9);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); 
     }
 
     return 0;
@@ -100,14 +100,14 @@ int Game::Referee::checkForDiagonalWin() const
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); 
     }
 
     triple = boardRef.get3Cells(7, 5, 3);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return triple[0].second; 
+        return playerNumFromSymbol(triple[0].second); 
     }
 
     return 0;
@@ -129,6 +129,21 @@ bool Game::Referee::allThreeMatch(const Board::CellTriple& triple) const
     }
 
     return (numMatches == 3);
+}
+
+/**
+ *
+ */
+int Game::Referee::playerNumFromSymbol(char sym) const
+{
+    /*
+    if (sym == 'X') {
+        return 1;
+    }
+    return 2;
+    */
+
+    return (sym == 'X' ? 1 : 2);
 }
 
 //------------------------------------------------------------
@@ -156,6 +171,8 @@ bool Game::playRound()
         return true;
     }
 
+    int winnerId = 0;
+
     std::cout << board << "\n";
     roundTurn(player1);
 
@@ -165,11 +182,25 @@ bool Game::playRound()
         return true;
     }
 
+    winnerId = ref.checkForWin();
+
+    if (winnerId == 1) {
+        winner = &player1;
+        return true;
+    }
+
     std::cout << board << "\n";
     roundTurn(player2);
 
     // Final board
     std::cout << board << "\n";
+
+    winnerId = ref.checkForWin();
+    
+    if (winnerId == 2) {
+        winner = &player2;
+        return true;
+    }
 
     return false;
 }
@@ -193,6 +224,11 @@ bool Game::endedWithStalemate() const
 bool Game::isOver() const
 {
     return (endedWithWin() || endedWithStalemate());
+}
+
+bool Game::isNotOver() const
+{
+    return !isOver();
 }
 
 /**

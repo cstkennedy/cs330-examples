@@ -20,7 +20,6 @@ class Game {
             public:
                 Referee() = delete;
 
-
                 /**
                  * Create the referee and allow access
                  * to a board through a constant reference variable
@@ -44,6 +43,11 @@ class Game {
                 int checkForDiagonalWin() const;
 
                 bool allThreeMatch(const Board::CellTriple& triple) const;
+
+                /**
+                 * @pre sym == 'X' or 'O'
+                 */
+                int playerNumFromSymbol(char sym) const;
         };
 
         Board board;
@@ -86,6 +90,8 @@ class Game {
         bool endedWithStalemate() const;
 
         bool isOver() const;
+
+        bool isNotOver() const;
 
         const Board& getBoard() const;
 
