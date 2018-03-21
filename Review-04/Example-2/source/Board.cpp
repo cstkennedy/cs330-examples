@@ -31,7 +31,7 @@ Board::CellValue Board::getCell(int id) const
  */
 void Board::setCell(int id, CellValue newValue)
 {
-     assert(id > 0 && id < 10);
+    assert(id > 0 && id < 10);
 
     theBoard[id - 1] = newValue; // Testing caught the missing -1
 }
@@ -71,7 +71,7 @@ bool Board::isFull() const
         }
     }
 
-    //return (emptyCells == 9); // OOPs... go thing I tested with fake unit tests
+    //return (emptyCells == 9); // OOPs... good thing I tested with fake unit tests
     return (emptyCells == 0);
 }
 

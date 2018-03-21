@@ -31,6 +31,8 @@ int Game::Referee::checkForWin() const
     if (winner != 0) {
         return winner;
     }
+
+    return 0;
 }
 
 /**
