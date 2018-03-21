@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.ysb33r.gradle:doxygen:0.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+//apply plugin: 'org.ysb33r.doxygen'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
+}
+
+jar {
+    baseName = 'EnrollStudents'
+    manifest {
+        attributes(
+          'Main-Class': 'edu.odu.cs.cs330.examples.EnrollStudents'
+        )
+    }
+}
+
+test {
+    reports {
+        html.enabled = true
+    }           
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+/*
+doxygen {
+    generate_html true
+
+    template 'src/documentation.config'
+
+    source new File(projectDir,'src/main/java')
+    //source new File(projectDir,'src/test/java')
+    outputDir new File(buildDir,'docs')
+}
+*/
