@@ -1,15 +1,18 @@
 buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'org.ysb33r.gradle:doxygen:0.2'
-  }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.ysb33r.gradle:doxygen:0.2"
+    }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.ysb33r.doxygen'
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "org.ysb33r.doxygen"
+
+apply plugin: "findbugs"
+apply plugin: "pmd"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -23,11 +26,11 @@ dependencies {
 }
 
 jar {
-    baseName = 'RunShapes'
+    baseName = "RunShapes"
 
     manifest {
         attributes(
-          'Main-Class': 'RunShapes'
+            "Main-Class": "RunShapes"
         )
     }
 }
@@ -41,9 +44,47 @@ test {
 doxygen {
     generate_html true
 
-    template 'documentation.config'
+    template "documentation.config"
 
-    source new File(projectDir,'src/main/java')
-    //source new File(projectDir,'src/test/java')
-    outputDir new File(buildDir,'docs')
+    source new File(projectDir,"src/main/java")
+    //source new File(projectDir,"src/test/java")
+    outputDir new File(buildDir,"docs")
+}
+
+/**
+ * Run code style/error checks
+ */
+tasks.withType(FindBugs) {
+    ignoreFailures true
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "java-basic",
+        "java-braces",
+        "java-clone",
+        "java-codesize",
+        "java-comments",
+        "java-controversial",
+        "java-coupling",
+        //"java-design",
+        "java-empty",
+        //"java-finalizers",
+        "java-imports",
+        "java-junit",
+        "java-naming",
+        "java-optimizations",
+        "java-strictexception",
+        "java-strings",
+        "java-sunsecure",
+        "java-typeresolution",
+        "java-unnecessary",
+        "java-unusedcode"
+    ]
 }

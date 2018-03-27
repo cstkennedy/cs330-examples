@@ -22,7 +22,7 @@ public class ShapeFactory {
          */
         public ShapePair()
         {
-            this._name  = new String();
+            this._name  = "";
             this._model = null;
         }
 
@@ -54,7 +54,7 @@ public class ShapeFactory {
         new ShapePair( "Square",                new Square()              ),
         new ShapePair( "Circle",                new Circle()              )
     }; ///< Listing of known shapes
-    
+
     /**
      *  Create a Shape
      * 

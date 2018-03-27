@@ -85,7 +85,7 @@ public class RunShapes {
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(Utilities.horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());    
+        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());    
 
         System.out.println();
 
@@ -182,7 +182,7 @@ public class RunShapes {
      * Print shape names for all `Shape`s in a `ArrayList<Shape>` to a
      * specified output stream
      */
-    static void printShapeNames(ArrayList<Shape> toPrint)
+    private static void printShapeNames(ArrayList<Shape> toPrint)
     {
         // C++ Container<Shape*>::iterator it = shapes.begin()
         Iterator<Shape> it = toPrint.iterator(); 
@@ -199,7 +199,7 @@ public class RunShapes {
      *
      * @return an iterator at the position of the largest `Shape`
      */
-    static Shape findLargestShapeByArea(ArrayList<Shape> collection)
+    private static Shape findLargestShapeByArea(ArrayList<Shape> collection)
     {
         Iterator<Shape> it = collection.iterator();
 
