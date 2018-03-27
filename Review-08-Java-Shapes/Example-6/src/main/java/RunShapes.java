@@ -7,11 +7,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 
-import utilities.Utilities;
+import edu.odu.cs.tkennedy.utilities.Utilities;
 import shapes.*;
 
+/**
+ * This is the Java version of the previous C++
+ * Shapes INheritance Example
+ *
+ * @author Thomas J Kennedy
+ */
 public class RunShapes {
-    static final String[] PROGRAM_HEADING = {
+    private static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
         "Thomas Kennedy"
     };  ///< Program Title 
@@ -20,6 +26,7 @@ public class RunShapes {
      *
      */
     public static void main(String args[])
+        throws CloneNotSupportedException
     {
         BufferedReader shapesFile = null;
         try {
@@ -90,7 +97,7 @@ public class RunShapes {
         System.out.println();
 
         // Create 5 "Random" Shapes
-        int              size   = 0; // original size of shapes container
+        //int              size   = 0; // original size of shapes container
 
         Scanner scanner = new Scanner(shapesFile);
 
@@ -133,6 +140,7 @@ public class RunShapes {
      * and construct a `ArrayList<Shape>` object
      */
     private static ArrayList<Shape> readShapes(Scanner scanner)
+        throws CloneNotSupportedException
     {
         ArrayList<Shape> collection = new ArrayList<Shape>();
 

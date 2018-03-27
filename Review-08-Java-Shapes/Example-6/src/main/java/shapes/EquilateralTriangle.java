@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * A Triangle with all sides set to the same length
  */
-public class EquilateralTriangle extends Triangle {   
+public class EquilateralTriangle extends Triangle implements Cloneable {   
     private static final double ROOT_3_DIV_4 = Math.sqrt( 3 ) / 4; ///< @f$ \frac{\sqrt{3}}{4} @f$
     
     /**
@@ -95,7 +95,7 @@ public class EquilateralTriangle extends Triangle {
      * Return a new duplicate EquilateralTriangle
      */
     @Override
-    public Shape clone()
+    public Object clone() throws CloneNotSupportedException
     {
         return new EquilateralTriangle( this );
     }

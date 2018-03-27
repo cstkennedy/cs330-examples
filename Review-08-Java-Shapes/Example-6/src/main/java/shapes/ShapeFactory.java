@@ -64,10 +64,11 @@ public class ShapeFactory {
      *      or null if no matching shape is found
      */
     public static Shape createShape( String name )
+        throws CloneNotSupportedException
     {
         for( ShapePair pair : _known_shapes ){
             if( (pair._name).equals(name) ){
-                return (pair._model).clone();
+                return (Shape)(pair._model.clone());
             }
         }
 

@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * An Ellipse with equivlant major and minor axes
  */
-public class Circle extends Shape { 
+public class Circle extends Shape implements Cloneable{ 
     private static final double PI  = Math.PI; ///< \f$ \pi \f$
     private static final double TAU = 2 * PI;  ///< \f$ \tau = 2\pi \f$
 
@@ -101,7 +101,7 @@ public class Circle extends Shape {
      * Return a new duplicate Circle
      */
     @Override
-    public Shape clone()
+    public Object clone() throws CloneNotSupportedException
     {
         return new Circle( this );
     }

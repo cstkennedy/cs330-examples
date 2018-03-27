@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * A Polygon with 3 Sides
  */
-public class Triangle extends Shape {
+public class Triangle extends Shape implements Cloneable {
 
     protected double _side_a; ///< Length of Side A
     protected double _side_b; ///< Length of Side B
@@ -152,7 +152,7 @@ public class Triangle extends Shape {
      * Return a new duplicate Triangle
      */
     @Override
-    public Shape clone()
+    public Object clone() throws CloneNotSupportedException
     {
         return new Triangle( this );
     }

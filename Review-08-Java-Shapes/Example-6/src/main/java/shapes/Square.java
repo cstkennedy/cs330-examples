@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * A Rectangle with 4 Equal Sides
  */
-public class Square extends Shape {  
+public class Square extends Shape implements Cloneable {  
     private double _side; ///< Length of One Side
 
     /**
@@ -84,7 +84,7 @@ public class Square extends Shape {
      * Return a new duplicate Square
      */
     @Override
-    public Shape clone()
+    public Object clone() throws CloneNotSupportedException
     {
         return new Square( this );
     }

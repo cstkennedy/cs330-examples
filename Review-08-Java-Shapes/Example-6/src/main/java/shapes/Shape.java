@@ -76,12 +76,11 @@ public abstract class Shape implements Cloneable {
      * @return perimeter
      */
     public abstract double perimeter();
-
+            
     /**
      * Return a new duplicate Shape
      */
-    @Override
-    public abstract Shape clone();
+    public abstract Object clone() throws CloneNotSupportedException;
 
     /**
      * Read the shape

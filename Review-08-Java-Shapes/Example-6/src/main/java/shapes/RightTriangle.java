@@ -8,7 +8,7 @@ import java.util.Scanner;
 /**
  * A Triangle with all sides set to the same length
  */
-public class RightTriangle extends Triangle {   
+public class RightTriangle extends Triangle implements Cloneable {   
     private static final double ONE_HALF = 1.0/2.0; ///< @f$ \frac{1}{2} @f$
     
     /**
@@ -145,7 +145,7 @@ public class RightTriangle extends Triangle {
      * Return a new duplicate RightTriangle
      */
     @Override
-    public Shape clone()
+    public Object clone() throws CloneNotSupportedException
     {
         return new RightTriangle( this );
     }
