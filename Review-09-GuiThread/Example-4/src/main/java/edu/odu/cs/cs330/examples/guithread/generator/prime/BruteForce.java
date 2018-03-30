@@ -25,8 +25,10 @@ public class BruteForce {
     {
         primes  = new ArrayList<Integer>();
         
-        primes.add(new Integer(2));
-        primes.add(new Integer(3));
+        //primes.add(new Integer(2));
+        //primes.add(new Integer(3));
+        primes.add(Integer.valueOf(2));
+        primes.add(Integer.valueOf(3));
     }
 
     /**
@@ -67,7 +69,8 @@ public class BruteForce {
         }
 
         // record the new prime number
-        primes.add(new Integer(next_prime));
+        //primes.add(new Integer(next_prime));
+        primes.add(Integer.valueOf(next_prime));
 
         return next_prime;
     }

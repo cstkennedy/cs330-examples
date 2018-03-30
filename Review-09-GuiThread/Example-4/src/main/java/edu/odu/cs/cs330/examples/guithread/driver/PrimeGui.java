@@ -222,8 +222,10 @@ public class PrimeGui extends JFrame {
      */
     void clear()
     {
-        logArea.setText(new String());
-        lastField.setText(new String());
+        //logArea.setText(new String());
+        //lastField.setText(new String());
+        logArea.setText("");
+        lastField.setText("");
     }
 
     public static void main(String args[])

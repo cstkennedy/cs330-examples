@@ -12,11 +12,21 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.ysb33r.doxygen'
 
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
     jcenter()
+}
+
+/**
+ * Set wrapper to 4.3.1
+ */
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.3.1'
 }
 
 // Configure Doxygen task
@@ -87,4 +97,15 @@ task deploy(dependsOn: [
             jarThd,
             doxygen,
             javadoc]){
+}
+
+/**
+ * Run code style/error checks
+ */
+tasks.withType(FindBugs) {
+    ignoreFailures true
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
 }

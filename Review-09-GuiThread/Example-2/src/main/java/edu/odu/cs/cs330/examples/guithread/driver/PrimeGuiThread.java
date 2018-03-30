@@ -229,10 +229,8 @@ public class PrimeGuiThread extends JFrame {
      */
     void clear()
     {
-        //logArea.setText(new String());
-        //lastField.setText(new String());
-        logArea.setText("");
-        lastField.setText("");
+        logArea.setText(new String());
+        lastField.setText(new String());
     }
 
     public static void main(String args[])

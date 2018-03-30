@@ -36,7 +36,8 @@ public class TestPrimeGenerator {
         num_primes -= 2;
 
         // Generate num_primes prime numbers
-        System.out.format("Generating %d Prime Numbers\n", num_primes);
+        //System.out.format("Generating %d Prime Numbers\n", num_primes);
+        System.out.format("Generating %d Prime Numbers%n", num_primes);
 
         for(int i = 0; i < num_primes; i++) {
             //System.out.format("%3d: %10d", i, gen.next());
@@ -46,7 +47,9 @@ public class TestPrimeGenerator {
 
         // Print the resulting list of primes
         System.out.println();
-        System.out.format("Prime Numbers Generated: \n", num_primes);
+        //System.out.format("Prime Numbers Generated: \n", num_primes);
+        //System.out.format("Prime Numbers Generated: \n"); // num_primes (typo)
+        System.out.format("Prime Numbers Generated: %n");
 
         // Retrieve the list of generated primes
         primes = gen.getPrimes();
