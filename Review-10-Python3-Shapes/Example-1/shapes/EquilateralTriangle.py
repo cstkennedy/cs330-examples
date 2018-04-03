@@ -47,16 +47,13 @@ class EquilateralTriangle(Triangle):
 
     def area(self):
         """
-        Compute the area using 
+        Compute the area using
         @f$ Area=\frac{\sqrt{3}}{4}side^2 @f$
 
         :return: the area
         """
 
-        return (EquilateralTriangle.ROOT_3_DIV_4
-                * self.side
-                * self.side
-                )
+        return EquilateralTriangle.ROOT_3_DIV_4 * self.side * self.side
 
     def __deepcopy__(self, memo):
         """

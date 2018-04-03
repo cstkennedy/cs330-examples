@@ -6,7 +6,7 @@
 # utilities library that I wrote
 # for the C++ and Java versions
 
-#import utilities.Utilities;
+# import utilities.Utilities;
 
 from shapes import *
 
@@ -19,7 +19,7 @@ PROGRAM_HEADING = [
 
 def main():
     """
-    The main function. In practice I could name this 
+    The main function. In practice I could name this
     anything. The name main was selected purely
     out of familiarity.
 

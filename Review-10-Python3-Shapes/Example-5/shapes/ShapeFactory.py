@@ -65,7 +65,7 @@ class ShapeFactory(object):
 
         :param name: the shape to be created
         :param attributes: dictionary of values corresponding
-            to the data needed to inialize a shape 
+            to the data needed to inialize a shape
 
         :return: A shape with the specified name
            or null if no matching shape is found

@@ -1,5 +1,6 @@
 import copy
 
+
 class Shape(object):
     """
     Shape in a 2-D Cartesian Plane
@@ -7,11 +8,11 @@ class Shape(object):
     WIDTH_LABEL = 12  # Label Output Width
     WIDTH_VALUE = 24  # Value Output Width
 
-    #@classmethod for static
+    # @classmethod for static
 
     def __init__(self, name="Shape"):
-        """ 
-        Shape Constructor 
+        """
+        Shape Constructor
         :param: name the desired Shape name
         """
 

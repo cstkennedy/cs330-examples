@@ -3,6 +3,7 @@ import copy
 
 from shapes.Shape import Shape
 
+
 class Circle(Shape):
     """
     An Ellipse with equivalent major and minor axes

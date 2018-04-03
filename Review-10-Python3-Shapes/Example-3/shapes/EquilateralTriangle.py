@@ -47,7 +47,7 @@ class EquilateralTriangle(Triangle):
 
     def area(self):
         """
-        Compute the area using 
+        Compute the area using
         @f$ Area=\frac{\sqrt{3}}{4}side^2 @f$
 
         :return: the area

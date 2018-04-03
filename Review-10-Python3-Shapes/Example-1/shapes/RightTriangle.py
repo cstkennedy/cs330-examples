@@ -16,7 +16,7 @@ class RightTriangle(Triangle):
     @staticmethod
     def __computeHypotenuse(base, height):
         """
-        Compute the hyptoenuse using: 
+        Compute the hyptoenuse using:
         @f$ hypotenuse = \sqrt{base^2 + height^2} @f$
         :base: the base of a Right Triangle
         :param: height the height of a Right Triangle
@@ -81,10 +81,7 @@ class RightTriangle(Triangle):
         :return: the area
         """
 
-        return (RightTriangle.ONE_HALF
-                * self.side_a
-                * self.side_b
-                )
+        return RightTriangle.ONE_HALF * self.side_a * self.side_b
 
     def __deepcopy__(self, memo):
         """

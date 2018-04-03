@@ -20,23 +20,23 @@ class ShapeFactory(object):
     _known_shapes = {
         "Triangle": (
             Triangle(),
-            lambda a, b, c : Triangle(a, b, c)
+            lambda a, b, c: Triangle(a, b, c)
         ),
         "Right Triangle": (
             RightTriangle(),
-            lambda base, height : RightTriangle(base, height)
+            lambda base, height: RightTriangle(base, height)
         ),
         "Equilateral Triangle": (
             EquilateralTriangle(),
-            lambda side : EquilateralTriangle(side)
+            lambda side: EquilateralTriangle(side)
         ),
         "Square": (
             Square(),
-            lambda side : Square(side)
+            lambda side: Square(side)
         ),
         "Circle": (
             Circle(),
-            lambda radius : Circle(radius)
+            lambda radius: Circle(radius)
         )
     }  # _Dictionary_ of known shapes
 
@@ -65,7 +65,7 @@ class ShapeFactory(object):
 
         :param name: the shape to be created
         :param attributes: dictionary of values corresponding
-            to the data needed to inialize a shape 
+            to the data needed to inialize a shape
 
         :return: A shape with the specified name
            or null if no matching shape is found
