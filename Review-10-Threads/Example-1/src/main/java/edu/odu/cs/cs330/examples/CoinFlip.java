@@ -55,7 +55,7 @@ public class CoinFlip {
 
         // # Trial argument validation
         try {
-            numTrials = Integer.parseInt(args[1]);
+            numTrials = Long.parseLong(args[1]);
         }
         catch (NumberFormatException e) {
             numTrials = DEFAULT_NUM_TRIALS;
