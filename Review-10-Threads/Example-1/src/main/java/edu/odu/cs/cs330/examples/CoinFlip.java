@@ -136,7 +136,7 @@ public class CoinFlip {
         // Add rounding error due to truncation
         trialsLastTask += numTrials - (trialsPerTask * numThreads);
 
-        // Start threads n to n-2
+        // Start threads 0 to n-2
         for (int i = 0; i < numThreads - 1; i++) {
             tasks[i] = new FlipTask(trialsPerTask);
 
