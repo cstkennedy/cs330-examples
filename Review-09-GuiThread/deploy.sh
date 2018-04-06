@@ -19,8 +19,8 @@ do
 
         echo "$exampleDir -> Cleaning *.o, *.class, and binary files"
         make clean &> /dev/null
-        echo "$exampleDir -> Building Doxygen Documentation"
-        make docs &> /dev/null
+        # echo "$exampleDir -> Building Doxygen Documentation"
+        # make docs &> /dev/null
 
         echo
         popd > /dev/null

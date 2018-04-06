@@ -12,7 +12,7 @@ public class RunShapes{
     /**
      *
      */
-    public static void main(String args[])
+    public static void main(String[] arg)
     {
         // --Erroneous C++ Variable Declarations--
         // --Valid Java Variable Declarations--
