@@ -6,6 +6,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import javax.vecmath.Vector3d;
+
 /**
  * A coin flip driver.
  */
@@ -54,7 +56,7 @@ public class BuildMountain {
         double parallelExecTimeInSec = 0;
 
         if (numThreads == 1) {
-            singleThread();
+            //singleThread();
         }
         else {
             try {
@@ -83,95 +85,11 @@ public class BuildMountain {
 
         System.out.println("Overall Time : " + totalExecTimeInSec);
 
-        Triangle tri = new Triangle();
+        Triangle tri = new Triangle(new Vector3d(), new Vector3d(0, 1, 1), new Vector3d(0, 2, 0));
         System.out.println(tri);
-    }
 
-    /**
-     * Single Thread Coin Flip.
-     *
-     * @param numTrials # flips to simulate
-     */
-    public static void singleThread()
-    {
-        /*FlipTask task = new FlipTask(numTrials);
-
-        task.run();
-
-        System.out.println(task);*/
-    }
-
-    /**
-     * Multi-thread Coin Flip using a ThreadPool.
-     *
-     * @param numTrials # flips to simulate
-     * @param numThreads number of threads to use
-     *
-     * @return Completed FlipTasks
-     *
-     * @throws InterruptedException if a thread is stopped prematurely
-     */
-    /*public static FlipTask[] multiThreadPool(long numTrials, int numThreads)
-        throws InterruptedException
-    {
-        ExecutorService threadPool = Executors.newFixedThreadPool(numThreads);
-
-        FlipTask[] tasks   = new FlipTask[numThreads];
-
-        long trialsPerTask  = numTrials / numThreads;
-        long trialsLastTask = trialsPerTask;
-
-        // Add rounding error due to truncation
-        trialsLastTask += numTrials - (trialsPerTask * numThreads);
-
-        // Start threads n to n-2
-        for (int i = 0; i < numThreads - 1; i++) {
-            tasks[i] = new FlipTask(trialsPerTask);
-
-            threadPool.execute(tasks[i]);
+        for(Triangle sTri : tri.split()) {
+            System.out.println(sTri);
         }
-
-        // Start thread n-1
-        tasks[numThreads - 1] = new FlipTask(trialsLastTask);
-        threadPool.execute(tasks[numThreads - 1]);
-
-        threadPool.shutdown();
-        threadPool.awaitTermination(60, TimeUnit.SECONDS);
-
-        return tasks;
-    }*/
-
-    /**
-     * Print overall multiThreaded statistics.
-     *
-     * @param tasks completed Flip Tasks
-     */
-/*    public static void printOverallStatistics(FlipTask[] tasks)
-    {
-        long totalHeads  = 0;
-        long totalTails  = 0;
-        long totalTrials = 0;
-
-        for (int i = 0; i < tasks.length; i++) {
-            System.out.format("Thread %2d -> %s", i, tasks[i]);
-
-            totalTrials += tasks[i].numberTrials();
-            totalHeads  += tasks[i].numberHeads();
-            totalTails  += tasks[i].numberTails();
-        }
-
-        // Divider
-        char[] divider = new char[72];
-        Arrays.fill(divider, '-');
-        System.out.println(new String(divider));
-
-        System.out.format("Overall   -> # Heads: %6d (%6.4f) / # Tails %6d (%6.4f)%n",
-                          totalHeads,
-                          (1.0 * totalHeads / totalTrials),
-                          totalTails,
-                          (1.0 * totalTails / totalTrials));
-
-        System.out.println("Total Trials " + totalTrials);
-    }*/
-
+    }
 }
