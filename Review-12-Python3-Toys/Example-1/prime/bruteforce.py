@@ -16,7 +16,7 @@ def generate_primes(to_generate):
         next_prime = known_primes[-1]
 
         # true once a prime number has been identified
-        prime = False;
+        prime = False
 
         # Iterate of all existing known prime numbers
         # halt when a prime number has been identified
@@ -24,7 +24,7 @@ def generate_primes(to_generate):
             # Guess the next prime
             # Assume the number is not prime
             next_prime += 2
-            prime = True;
+            prime = True
 
             # While the list of primes has not yet been exhausted
             for previous_prime in known_primes:

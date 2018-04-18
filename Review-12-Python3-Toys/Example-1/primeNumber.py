@@ -12,6 +12,7 @@ PROGRAM_HEADING = [
     "Thomas J. Kennedy"
 ]  # Program Title
 
+
 def main():
     """
     The main function. In practice I could name this
