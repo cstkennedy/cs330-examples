@@ -7,7 +7,7 @@ class LinkedList(object):
      - Head pointer
      - Tail pointer
      - Node counter (cardinality)
-    *
+
     Only the head pointer is necessary, the latter three items are
     included for convenience.
     <p>
