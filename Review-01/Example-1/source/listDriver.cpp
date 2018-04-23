@@ -19,7 +19,7 @@ using namespace utilities;
 
 const string PROGRAM_HEADING[] = {
     "Linked List Review",
-    "Thomas Kennedy"
+    "Thomas J. Kennedy"
 }; ///< Program Title 
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading

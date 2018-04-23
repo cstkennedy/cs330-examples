@@ -45,7 +45,7 @@ bool LinkedList::Node::operator!=( const Node &rhs ) const
  */
 LinkedList::LinkedList()
 {
-    //Initialize the public data members (attributes)    
+    //Initialize the private data members (attributes)    
     head  = nullptr;
     tail  = nullptr;
     nodes = 0;

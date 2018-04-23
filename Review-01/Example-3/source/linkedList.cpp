@@ -45,7 +45,7 @@ bool LinkedList::Node::operator!=( const Node &rhs ) const
  */
 LinkedList::LinkedList()
 {
-    //Initialize the public data members (attributes)    
+    //Initialize the private data members (attributes)    
     head  = nullptr;
     tail  = nullptr;
     nodes = 0;
@@ -56,13 +56,14 @@ LinkedList::LinkedList()
  */
 LinkedList::LinkedList(const LinkedList& src)
 {
-    Node* srcIt = src.head;
-
     // Important - every constructor must initialize
     // every private data member (attribute)
     this->head  = nullptr;
     this->tail  = nullptr;
     this->nodes = 0;
+
+    // Start the Copy Operations
+    Node* srcIt = src.head;
 
     while (srcIt != nullptr) {
         this->appendNode(srcIt->data);
@@ -220,6 +221,9 @@ void LinkedList::display(std::ostream& outs) const
  */
 LinkedList& LinkedList::operator=(const LinkedList& rhs)
 {
+    // LinkedList lhs = rhs;
+    // LinkedList x;
+    // x = x;
 
     if (this != &rhs) {
         // Destructor for this

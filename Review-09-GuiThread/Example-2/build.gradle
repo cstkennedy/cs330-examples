@@ -1,0 +1,90 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.ysb33r.gradle:doxygen:0.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.ysb33r.doxygen'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+// Configure Doxygen task
+doxygen {
+    generate_html true
+
+    template 'documentation.config'
+
+    source new File(projectDir,'src/main/java')
+    //source new File(projectDir,'src/test/java')
+    outputDir new File(buildDir,'docs')
+}
+
+/**
+ * Build cmdline jar
+ */
+task jarCmd(type: Jar) {
+    from(sourceSets.main.output) {
+        include '**/*.class'
+    }
+
+    baseName = 'TestPrimeGenerator'
+
+    manifest {
+        attributes(
+          'Main-Class': 'edu.odu.cs.cs330.examples.guithread.driver.TestPrimeGenerator'
+        )
+    }
+}
+
+/**
+ * Build GUI jar
+ */
+task jarGui(type: Jar) {
+    from(sourceSets.main.output) {
+        include '**/*.class'
+    }
+
+    baseName = 'PrimeGui'
+
+    manifest {
+        attributes(
+          'Main-Class': 'edu.odu.cs.cs330.examples.guithread.driver.PrimeGui'
+        )
+    }
+}
+
+/**
+ * Build Gui Thread jar
+ */
+task jarThd(type: Jar) {
+    from(sourceSets.main.output) {
+        include '**/*.class'
+    }
+
+    baseName = 'PrimeGuiThread'
+
+    manifest {
+        attributes(
+          'Main-Class': 'edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread'
+        )
+    }
+}
+
+task deploy(dependsOn: [
+            jarCmd,
+            jarGui,
+            jarThd,
+            doxygen,
+            javadoc]){
+}

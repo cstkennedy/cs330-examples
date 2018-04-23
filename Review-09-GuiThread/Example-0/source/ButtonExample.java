@@ -4,15 +4,14 @@ import javax.swing.*;
 
 /**
  * A GUI Program that extends the JFrame class
- * to generate a Window
+ * to generate a Window.
  */
-public class ButtonExample extends JFrame {       
-    
+public class ButtonExample extends JFrame {
     /**
      * Control - start generation
      */
-    private JButton clickButton; 
-    
+    private JButton clickButton;
+
     /**
      * Constructor
      */
@@ -22,20 +21,20 @@ public class ButtonExample extends JFrame {
         super("Button Example");
 
         // Set action for upper right close button
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container cp = getContentPane();
-        
+
         // Create a button
         clickButton = new JButton("Click Me!");
-                     
+
         /* Add click button Listener
          * This binds an action to the
          * button click event
          * <p>
          * This is an example of an immediate class.
          * <p>
-         * I am specializing (defining) class and 
+         * I am specializing (defining) class and
          * instantiating an object.
          */
         clickButton.addActionListener(
@@ -45,17 +44,17 @@ public class ButtonExample extends JFrame {
                     displayMessage();
                 }
             }
-        );     
-        
-        // Setup and add to the Main Container         
-        cp.setLayout( new BorderLayout() );      
+        );
+
+        // Setup and add to the Main Container
+        cp.setLayout(new BorderLayout());
 
         cp.add(clickButton, BorderLayout.CENTER);
-        
+
         // Package Everything
-        pack();  
-        setLocationRelativeTo(null); 
-    }  
+        pack();
+        setLocationRelativeTo(null);
+    }
 
     /**
      * Display Message
@@ -64,9 +63,9 @@ public class ButtonExample extends JFrame {
     {
         // Generate a message (pop-up)
         // dialog window
-        JOptionPane.showMessageDialog( 
-            null, 
-            "The Game", 
+        JOptionPane.showMessageDialog(
+            null,
+            "The Game",
             "The Game",
             JOptionPane.ERROR_MESSAGE
         );
@@ -75,7 +74,7 @@ public class ButtonExample extends JFrame {
     /**
      * Main function
      */
-    public static void main( String args[] )
+    public static void main(String[] args)
     {
         new ButtonExample().setVisible(true);
     }

@@ -5,7 +5,7 @@
  */
 LinkedList::LinkedList()
 {
-    //Initialize the public data members (attributes)    
+    //Initialize the private data members (attributes)    
     head  = nullptr;
     tail  = nullptr;
     nodes = 0;
@@ -136,8 +136,9 @@ int LinkedList::size() const
  */
 void LinkedList::display(std::ostream& outs) const
 {
-    int index = 0;   // Used to output ids
     Node* it  = this->head;
+
+    int index = 0;
 
     while ( it != nullptr ) {
         outs << "Node # " << std::right << std::setw(4) << index 
@@ -150,4 +151,19 @@ void LinkedList::display(std::ostream& outs) const
         it = it->next;
     }
 }
+
+/**
+ * Standard while loop
+ */
+/*{
+    Node* it  = this->head;
+
+    while ( it != nullptr ) {
+       // operation(s)
+
+        it = it->next;
+    }
+
+    //for(Node* it = this->head; it != nullptr; it = it->next)
+}*/
 
