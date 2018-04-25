@@ -42,19 +42,19 @@ def print_summary(counts):
           counts["Heads"], (float(counts["Heads"]) / total_trials),
           counts["Tails"], (float(counts["Tails"]) / total_trials)))
 
+
 def run_parallel(num_workers, num_trials):
     """
     Run coin flip simulations in parallel using Python
     Processes
     """
 
-
     jobs_per_thread = num_trials // num_workers
     jobs_for_last = jobs_per_thread + (num_trials % num_workers)
 
     futures = list()
 
-    with ProcessPoolExecutor(max_workers = num_workers) as executor:
+    with ProcessPoolExecutor(max_workers=num_workers) as executor:
         for i in [jobs_per_thread] * (num_workers - 1) + [jobs_for_last]:
             futures.append(executor.submit(simulate_flips, jobs_per_thread))
 
@@ -62,7 +62,7 @@ def run_parallel(num_workers, num_trials):
     total_tails = 0
     for idx, future in enumerate(futures):
         result = future.result()
-        print("Worker {:>2d} -> ".format(idx), end = "")
+        print("Worker {:>2d} -> ".format(idx), end="")
         print_summary(result)
 
         total_heads += result["Heads"]
@@ -70,7 +70,7 @@ def run_parallel(num_workers, num_trials):
 
     print("-" * 72)
 
-    print("Overall   -> ", end = "")
+    print("Overall   -> ", end="")
     print_summary({"Heads": total_heads, "Tails": total_tails})
     print("Total Trials %d" % (total_heads + total_tails))
 
