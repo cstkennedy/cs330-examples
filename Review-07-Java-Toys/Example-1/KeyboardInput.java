@@ -1,9 +1,9 @@
 import java.util.Scanner;
 
 /**
- * A basic keyboard Input Stream example
+ * A basic keyboard Input Stream example.
  */
-class KeyboardInput {    
+class KeyboardInput {
     /**
      * Java main function.
      *

@@ -11,12 +11,12 @@ public class Fibonacci {
     /**
      *
      */
-    public static void main(String argv[])
+    public static void main(String[] argv)
     {
-        Scanner input = new Scanner(System.in);        
-        
+        Scanner input = new Scanner(System.in);
+
         int     index = 3; // Desired length of sequence
-        
+
         // Fibonaccci
         int     fm2   = 1; // n-2 (previous previous) fibonacci number
         int     fm1   = 1; // n-1 (previous) fibonacci number
@@ -37,21 +37,21 @@ public class Fibonacci {
         !(index >= 3 && index <= 20)
         !(index >= 3) || !(index <= 20)
         (index < 3 || index > 20)
-        */    
-        if(index < 3 || index > 20){       
+        */
+        if (index < 3 || index > 20) {
             // Error Message
             System.out.printf("%3d is not between 3 and 20\n", index);
-            
+
             // Exit with an error state
             System.exit(1);
-        }        
+        }
 
         // Initial output
         System.out.printf("%2d: %10d\n", 1, fm2);
         System.out.printf("%2d: %10d\n", 2, fm1);
 
         // The first 2 numbers were already output
-        for(int i = 3; i <= index; i++) {
+        for (int i = 3; i <= index; i++) {
             f   = fm1 + fm2;
             fm2 = fm1;
             fm1 = f;
