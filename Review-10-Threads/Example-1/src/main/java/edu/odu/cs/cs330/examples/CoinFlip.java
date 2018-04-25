@@ -221,10 +221,8 @@ public class CoinFlip {
         System.out.println(new String(divider));
 
         System.out.format("Overall   -> # Heads: %6d (%6.4f) / # Tails %6d (%6.4f)%n",
-                          totalHeads,
-                          (1.0 * totalHeads / totalTrials),
-                          totalTails,
-                          (1.0 * totalTails / totalTrials));
+                          totalHeads, (1.0 * totalHeads / totalTrials),
+                          totalTails, (1.0 * totalTails / totalTrials));
 
         System.out.println("Total Trials " + totalTrials);
     }
