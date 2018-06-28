@@ -28,9 +28,7 @@ def getUsername(first, last):
 
     return (first[0] + (last[:7] if len(last) > 7 else last )).lower()
 
-#
-# Main Function
-#
+
 def main():
     user_response = "N";     # Stores the student's response
 
@@ -93,6 +91,7 @@ def main():
     print("*" * W_WIDTH, file=out_file)
 
     out_file.close()
+
 
 if __name__ == "__main__":
      main()

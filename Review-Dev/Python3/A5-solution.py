@@ -10,9 +10,9 @@ import random
 import math
 
 def printHeading(title, outs=sys.stdout):
-    print >> outs, "=" * 40
-    print >> outs,title.center(40)
-    print >> outs,"=" * 40
+    print("=" * 40, file=outs)
+    print(title.center(40), file=outs)
+    print("=" * 40, file=outs)
 
 #
 #
@@ -45,41 +45,41 @@ def printFinalSummary( outs, a, b, c, triangle_perimeter,
                     triangle_area, l, w, rect_perim, rect_area):
     printHeading( "Summary", outs )
 
-    print >> outs, "Rectangle:" 
-    print >> outs, "  {:<16}: {:>10.2f}".format( "Length",    l    )    
-    print >> outs, "  {:<16}: {:>10.2f}\n".format( "Width" ,    w    )  
-    print >> outs, "  {:<16}: {:>10.2f}".format( "Perimeter", rect_perim  )  
-    print >> outs, "  {:<16}: {:>10.2f}".format( "Area",      rect_area )
+    print("Rectangle:", file=outs) 
+    print("  {:<16}: {:>10.2f}".format( "Length",    l    ), file=outs)    
+    print("  {:<16}: {:>10.2f}\n".format( "Width" ,    w    ), file=outs)  
+    print("  {:<16}: {:>10.2f}".format( "Perimeter", rect_perim  ), file=outs)  
+    print("  {:<16}: {:>10.2f}".format( "Area",      rect_area ), file=outs)
 
-    print >> outs, "\nTriangle:" 
-    print >> outs, "  {:<16}: {:>10.2f}".format( "Side A", a    )
-    print >> outs, "  {:<16}: {:>10.2f}".format( "Side B", b   )
-    print >> outs, "  {:<16}: {:>10.2f}\n".format( "Side C", c    )
-    print >> outs, "  {:<16}: {:>10.2f}".format( "Perimeter"  , triangle_perimeter ) 
-    print >> outs, "  {:<16}: {:>10.2f}".format( "Area", triangle_area)
+    print("\nTriangle:", file=outs) 
+    print("  {:<16}: {:>10.2f}".format( "Side A", a    ), file=outs)
+    print("  {:<16}: {:>10.2f}".format( "Side B", b   ), file=outs)
+    print("  {:<16}: {:>10.2f}\n".format( "Side C", c    ), file=outs)
+    print("  {:<16}: {:>10.2f}".format( "Perimeter"  , triangle_perimeter ), file=outs) 
+    print("  {:<16}: {:>10.2f}".format( "Area", triangle_area), file=outs)
 
-    print >> outs, "\nPerimeter:"
+    print("\nPerimeter:", file=outs)
 
     if rect_perim == triangle_perimeter:
-        print >> outs, "  Rectangle Perimeter = Triangle Perimeter"
+        print("  Rectangle Perimeter = Triangle Perimeter", file=outs)
     elif rect_perim < triangle_perimeter:
-        print >> outs, "  Rectangle Perimeter < Triangle Perimeter"
+        print("  Rectangle Perimeter < Triangle Perimeter", file=outs)
     else:
-        print >> outs, "  Rectangle Perimeter > Triangle Perimeter"
+        print("  Rectangle Perimeter > Triangle Perimeter", file=outs)
 
-    print >> outs, "\nArea:"
+    print("\nArea:", file=outs)
 
     if rect_area == triangle_area:
-        print >> outs, "  Rectangle Area = Triangle Area"
+        print("  Rectangle Area = Triangle Area", file=outs)
     elif rect_area < triangle_area:
-        print >> outs, "  Rectangle Area < Triangle Area"
+        print("  Rectangle Area < Triangle Area", file=outs)
     else:
-        print >> outs, "  Rectangle Area > Triangle Area"        
+        print("  Rectangle Area > Triangle Area", file=outs)        
 
 #Main Function
 def main():
     
-    file_name = str( raw_input("Enter input filename: ") )
+    file_name = str( input("Enter input filename: ") )
 
     try:
         #open the output file
@@ -88,7 +88,7 @@ def main():
         #open the input file
         in_file = open( file_name, "r")
     except:
-        print "\nError: Could not open file.\n"
+        print("\nError: Could not open file.\n")
         sys.exit(1)
 
     length, width, side_a, side_b, side_c = [float(x) for x in in_file.read().split()]

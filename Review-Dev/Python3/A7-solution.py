@@ -13,9 +13,9 @@ import math
 # Print a centered and styled heading
 #
 def printHeading(title, width=40, outs=sys.stdout):
-    print >> outs, "=" * width
-    print >> outs,title.center(width)
-    print >> outs,"=" * width
+    print("=" * width, file=outs)
+    print(title.center(width), file=outs)
+    print("=" * width, file=outs)
 
 #
 # Determine the letter grade
@@ -47,12 +47,12 @@ def main():
     grade_var     = 0    #Variance in Grades
     grade_std_dev = 0    #Standard Deviation in Grades
 
-    num_grades = int( raw_input("How many grades will be entered?: ") )
+    num_grades = int( input("How many grades will be entered?: ") )
 
     #Read all the grades and perform initial analysis
     for i in range(0, num_grades):
         #Add the grade to the list
-        grades.append( float( raw_input("Enter Grade # {:>3}: ".format((i + 1)) ) ) )
+        grades.append( float( input("Enter Grade # {:>3}: ".format((i + 1)) ) ) )
 
         #Check if the new grade is a minimum
         if grades[i] < grade_min:
@@ -87,24 +87,24 @@ def main():
     printHeading("Grade Listing")
 
     #Output the grades in table form
-    print "{:<8}{:>16}{:>16}".format("Grade #", "Score", "Letter")
-    print "-" * 40
+    print("{:<8}{:>16}{:>16}".format("Grade #", "Score", "Letter"))
+    print("-" * 40)
 
     for i in range(0, len(grades)):
-        print "{:<8}{:>16.2f}{:>16}".format( (i+1), grades[i], determineLetterGrade( grades[i] ) )
+        print("{:<8}{:>16.2f}{:>16}".format( (i+1), grades[i], determineLetterGrade( grades[i] ) ))
 
     #Print a blank line
-    print 
+    print() 
 
     #print the grade summary
     printHeading("Grade Summary")
-    print "{:<16}:{:>8.2f} ({})".format( "Minimum",   grade_min,    determineLetterGrade(grade_min)   )
-    print "{:<16}:{:>8.2f} ({})".format( "Maximum",   grade_max,    determineLetterGrade(grade_max)   )
-    print "{:<16}:{:>8.2f} ({})".format( "Average",   grade_avg,    determineLetterGrade(grade_avg)   )
-    print "{:<16}:{:>8.2f} ({})".format( "Median",    grade_median, determineLetterGrade(grade_median))
-    print
-    print "{:<16}:{:>8.2f}".format( "Variance",  grade_var )
-    print "{:<16}:{:>8.2f}".format( "Std. Dev.", grade_std_dev )
+    print("{:<16}:{:>8.2f} ({})".format( "Minimum",   grade_min,    determineLetterGrade(grade_min)   ))
+    print("{:<16}:{:>8.2f} ({})".format( "Maximum",   grade_max,    determineLetterGrade(grade_max)   ))
+    print("{:<16}:{:>8.2f} ({})".format( "Average",   grade_avg,    determineLetterGrade(grade_avg)   ))
+    print("{:<16}:{:>8.2f} ({})".format( "Median",    grade_median, determineLetterGrade(grade_median)))
+    print()
+    print("{:<16}:{:>8.2f}".format( "Variance",  grade_var ))
+    print("{:<16}:{:>8.2f}".format( "Std. Dev.", grade_std_dev ))
 
 if __name__ == "__main__":
      main()

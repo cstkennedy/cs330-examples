@@ -16,9 +16,9 @@ DEBUG = True # Set to true to generate a log file with debug output
 # Print a centered and styled heading
 #
 def printHeading(title, width=40, outs=sys.stdout):
-    print >> outs, "=" * width
-    print >> outs,title.center(width)
-    print >> outs,"=" * width
+    print("=" * width, file=outs)
+    print(title.center(width), file=outs)
+    print("=" * width, file=outs)
 
 #
 # Create the deck of cards - initialize the array
@@ -26,7 +26,7 @@ def printHeading(title, width=40, outs=sys.stdout):
 def createCardDeck( deck ):
     for suit in ["Hearts", "Diamonds", "Clubs", "Spades"]:
         #create the cards in each suit
-        for value in ( ["A"] + range( 2,11 ) + ["J", "Q", "K"] ):
+        for value in ( ["A"] + list(range( 2,11)) + ["J", "Q", "K"] ):
             deck.append( {"suit":suit, "value":value} )
 
 #
@@ -48,7 +48,7 @@ def shuffleCardDeck( deck ):
 # Print One Card
 #
 def printCard( outs, card ):
-    print >> outs,  "{:>3} of {:<8}".format( card["value"], card["suit"] )
+    print("{:>3} of {:<8}".format( card["value"], card["suit"] ), file=outs)
 
 #Main Function
 def main():    
@@ -87,7 +87,7 @@ def main():
             printCard( sys.stdout, card )
 
         #Blank Line
-        print 
+        print() 
 
     #print the remaining cards
     printHeading( "{} Cards Remaining".format( len(deck[ (num_players*7): ]) ) )

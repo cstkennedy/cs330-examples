@@ -10,27 +10,27 @@ import random
 import math
 
 def printHeading(title, outs=sys.stdout):
-    print >> outs, "=" * 40
-    print >> outs,title.center(40)
-    print >> outs,"=" * 40
+    print("=" * 40, file=outs)
+    print(title.center(40), file=outs)
+    print("=" * 40, file=outs)
 
 #Main Function
 def main():
     #Prompt the user for prism length
-    length = float( raw_input( "{:<18}: ".format( "Enter the length" ) ) )
+    length = float( input( "{:<18}: ".format( "Enter the length" ) ) )
 
     #Prompt the user for prism height
-    height = float( raw_input( "{:<18}: ".format( "Enter the height" ) ) )
+    height = float( input( "{:<18}: ".format( "Enter the height" ) ) )
 
     #Prompt the user for prism width
-    width = float( raw_input( "{:<18}: ".format( "Enter the width"  ) ) )     
+    width = float( input( "{:<18}: ".format( "Enter the width"  ) ) )     
 
     #Prompt the user for sphere radius
-    radius = float( raw_input( "{:<18}: ".format( "Enter the radius" ) ) )
+    radius = float( input( "{:<18}: ".format( "Enter the radius" ) ) )
 
     #Validate Input
     if length <= 0 or width <= 0 or height <=0 or radius <= 0 :
-        print "\nERROR: All inputs must be strictly greater than 0."
+        print("\nERROR: All inputs must be strictly greater than 0.")
         sys.exit( 2 )
 
     #open the output file
@@ -47,35 +47,35 @@ def main():
     for output_sd in [sys.stdout, out_file]:
         printHeading( "Summary", output_sd )
 
-        print >> output_sd, "Rectangular Prism:" 
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "Length", length    )    
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "Width" , width     )  
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "Height", height    )  
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "S.A."  , prism_sa  )  
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "Volume", prism_vol )
+        print("Rectangular Prism:", file=output_sd) 
+        print("  {:<16}: {:>10.2f}".format( "Length", length    ), file=output_sd)    
+        print("  {:<16}: {:>10.2f}".format( "Width" , width     ), file=output_sd)  
+        print("  {:<16}: {:>10.2f}".format( "Height", height    ), file=output_sd)  
+        print("  {:<16}: {:>10.2f}".format( "S.A."  , prism_sa  ), file=output_sd)  
+        print("  {:<16}: {:>10.2f}".format( "Volume", prism_vol ), file=output_sd)
 
-        print >> output_sd, "\nSphere:" 
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "Radius", radius    )
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "S.A."  , sphere_sa ) 
-        print >> output_sd, "  {:<16}: {:>10.2f}".format( "Volume", sphere_vol)
+        print("\nSphere:", file=output_sd) 
+        print("  {:<16}: {:>10.2f}".format( "Radius", radius    ), file=output_sd)
+        print("  {:<16}: {:>10.2f}".format( "S.A."  , sphere_sa ), file=output_sd) 
+        print("  {:<16}: {:>10.2f}".format( "Volume", sphere_vol), file=output_sd)
 
-        print >> output_sd, "\nSurface Area:"
+        print("\nSurface Area:", file=output_sd)
 
         if prism_sa == sphere_sa:
-            print >> output_sd, "  Prism SA = Sphere SA"
+            print("  Prism SA = Sphere SA", file=output_sd)
         elif prism_sa < sphere_sa:
-            print >> output_sd, "  Prism SA < Sphere SA"
+            print("  Prism SA < Sphere SA", file=output_sd)
         else:
-            print >> output_sd, "  Prism SA > Sphere SA"
+            print("  Prism SA > Sphere SA", file=output_sd)
 
-        print >> output_sd, "\nVolume:"
+        print("\nVolume:", file=output_sd)
 
         if prism_vol == sphere_vol:
-            print >> output_sd, "  Prism Volume = Sphere Volume"
+            print("  Prism Volume = Sphere Volume", file=output_sd)
         elif prism_vol < sphere_vol:
-            print >> output_sd, "  Prism Volume < Sphere Volume"
+            print("  Prism Volume < Sphere Volume", file=output_sd)
         else:
-            print >> output_sd, "  Prism Volume > Sphere Volume"        
+            print("  Prism Volume > Sphere Volume", file=output_sd)        
 
     out_file.close()
 
