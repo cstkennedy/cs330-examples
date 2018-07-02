@@ -1,8 +1,5 @@
-#! /usr/bin/env python                          
+#! /usr/bin/env python3
 
-# Thomas Kennedy
-# April 2014
-# Assignment 11 Solution
 
 import os
 import sys
@@ -13,29 +10,34 @@ from itertools import groupby
 
 # Constants
 W_WIDTH = 80      # Width of the terminal window
-NUM_READINGS = 4; # Number of temperature readings stored by each station
+NUM_READINGS = 4  # Number of temperature readings stored by each station
+HEADINGS = []
 
-#
-# Print a centered and styled heading
-#
+
 def printHeading(title, width=40, outs=sys.stdout):
+    """
+    Print a centered and styled heading
+    """
+
     print("=" * width, file=outs)
     print(title.center(width), file=outs)
     print("=" * width, file=outs)
 
-#
-# Set the average temperature for one station
-#
-def computeAverageReading( to_update ):
-    #initialize the average temperature
-    to_update["average_temperature"] = ( sum( to_update["readings"] ) /
-                                      len(to_update["readings"] )
-                                    )
 
-#
-# Print the heading for the Weather Station table
-#
+def computeAverageReading( to_update ):
+    """
+    Set the average temperature for one station
+    """
+
+    to_update["average_temperature"] = sum( to_update["readings"]
+                                     / len(to_update["readings"] ))
+
+
 def printWeatherHeading():
+    """
+    Print the heading for the Weather Station table
+    """
+
     print("-" * 74)
 
     print("{:<4}| {:<10}| {:<10}| {:<32}| {:<10}".format( "ID", 
@@ -104,4 +106,4 @@ def main():
                                                     stations[-1]["id"] 
                                                   ))
 if __name__ == "__main__":
-     main()
+    main()
