@@ -190,14 +190,6 @@ void LinkedList::appendNode(int to_add)
 }
 
 /**
- * 
- */
-int LinkedList::size() const
-{
-    return this->nodes;
-}
-
-/**
  *
  */
 void LinkedList::display(std::ostream& outs) const
@@ -220,51 +212,9 @@ void LinkedList::display(std::ostream& outs) const
 /**
  *
  */
-LinkedList& LinkedList::operator=(const LinkedList& rhs)
+LinkedList& LinkedList::operator=(LinkedList rhs)
 {
-    // LinkedList lhs = rhs;
-    // LinkedList x;
-    // x = x;
-
-    if (this != &rhs) {
-        // Destructor for this
-        Node *this_iterator = nullptr; // Loop control pointer
-        Node *to_delete     = nullptr; // Node to delete        
-        
-        //start at the beginning of the this
-        this_iterator = this->head;
-        
-        //iterate through the this and delete each node
-        while(this_iterator != nullptr) {
-            to_delete = this_iterator;
-            
-            //move to next node
-            this_iterator = this_iterator->next;
-           
-            //delete the current node        
-            delete to_delete;
-            
-            to_delete = nullptr; //dangling pointers are bad
-
-            // Such output would not be included in
-            // a non-academic exercise
-            std::cerr << "Deleting Node" << "\n";
-        }
-                
-        // Are these three lines necessary?
-        head  = nullptr;
-        tail  = nullptr;
-        nodes = 0;
-
-        // Copy rhs into this
-        Node* srcIt = rhs.head;
-
-        while (srcIt != nullptr) {
-            this->appendNode(srcIt->data);
-
-            srcIt = srcIt->next;
-        }
-    }
+    swap(*this, rhs);
 
     return *this;
 }

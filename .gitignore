@@ -5,6 +5,7 @@
 **.zip
 **.class
 **.jar
+!**gradle/wrapper/*.jar
 **.pyc
 
 # Binary Specific Ignore rules
