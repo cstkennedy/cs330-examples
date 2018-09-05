@@ -9,9 +9,6 @@ class LinkedList {
             T     data;
             Node* next;
 
-            /**
-             * Node Constructor
-             */
             Node(T d)
             :data(d),
              next(nullptr)
@@ -20,119 +17,72 @@ class LinkedList {
         };
 
         /**
-         * A standard C++ STL style iterator.
+         * A standard C++ STL style iterator (can be const or non-const).
          * <p>
          * Recall the rules on Class naming and the STL.
          * <p>
-         * Note I have relaxed my rule regarding definitions
-         * within class declarations.
-         * <p>
-         * These are rudimentary iterators. There are a number
-         * of additions needed before we can require this complete--e.g.,
+         * These is a rudimentary iterator. There are a number
+         * of additions needed before we can claim this is complete--e.g.,
          * operator-> and iterator traits. The latter is beyond the scope
          * of this course.
          */
-        struct iterator{
+        template<bool is_const = true>
+        class Iterator{
+            public:
+                using N  = typename std::conditional<is_const,
+                                                     const Node, Node>::type;
+
+                using CT = typename std::conditional<is_const,
+                                                     const T, T>::type;
             private:
-                Node* pseudoPointer;
+                N* pseudoPointer;
 
             public:
-                iterator()
+                Iterator()
                     :pseudoPointer(nullptr)
                 {
                 }
 
-                iterator(Node* node)
+                Iterator(N* node)
                     :pseudoPointer(node)
                 {                    
                 }
 
-                T& operator*() const
+                CT& operator*() const
                 {
                     assert(pseudoPointer != nullptr);
                     return pseudoPointer->data;
                 }
 
-                iterator operator++(int v)
+                Iterator operator++(int v)
                 {
-                    iterator temp(this->pseudoPointer);
+                    Iterator temp(this->pseudoPointer);
                     
                     this->pseudoPointer = pseudoPointer->next;
 
                     return temp;
                 }
 
-                iterator operator++()
+                Iterator operator++()
                 {
                     this->pseudoPointer = pseudoPointer->next;
 
                     return *this;
                 }
 
-                bool operator== (const iterator &rhs) const
+                bool operator== (const Iterator &rhs) const
                 {
                     return this->pseudoPointer == rhs.pseudoPointer;
                 }
 
-                bool operator!= (const iterator &rhs) const
+                bool operator!= (const Iterator &rhs) const
                 {
                     return this->pseudoPointer != rhs.pseudoPointer;
                 }
         };
 
-        /**
-         * A standard C++ STL style const_iterator.
-         * <p>
-         * Recall the rules on Class naming and the STL.
-         */
-        struct const_iterator{
-            private:
-                const Node* pseudoPointer;
-
-            public:
-                const_iterator()
-                    :pseudoPointer(nullptr)
-                {
-                }
-
-                const_iterator(const Node* node)
-                    :pseudoPointer(node)
-                {                    
-                }
-
-                const T& operator*()
-                {
-                    assert(pseudoPointer != nullptr);
-                    return pseudoPointer->data;
-                }
-
-                const_iterator operator++(int v)
-                {
-                    const_iterator ctemp(this->pseudoPointer);
-                    
-                    this->pseudoPointer = pseudoPointer->next;
-
-                    return ctemp;
-                }
-
-                const_iterator operator++()
-                {
-                    this->pseudoPointer = pseudoPointer->next;
-
-                    return *this;
-                }
-
-                bool operator== (const const_iterator &rhs) const
-                {
-                    return this->pseudoPointer == rhs.pseudoPointer;
-                }
-
-                bool operator!= (const const_iterator &rhs) const
-                {
-                    return this->pseudoPointer != rhs.pseudoPointer;
-                }
-        };
-
+        using iterator       = Iterator<false>;
+        using const_iterator = Iterator<true>;
 
     private:
         /**
@@ -161,7 +111,6 @@ class LinkedList {
         {
         }
 
-
         LinkedList(const LinkedList& src)
             :head(nullptr),
              tail(nullptr),
@@ -171,7 +120,6 @@ class LinkedList {
 
             while (it != nullptr) {
                 this->push_back(it->data);
-
                 it = it->next;
             }
         }
@@ -193,7 +141,6 @@ class LinkedList {
             this->tail = nullptr;
             // End Linked List Deallocation
         }
-
 
         void push_back(T toAdd)
         {
@@ -223,33 +170,21 @@ class LinkedList {
             currentSize++;
         }
 
-        /**
-         *
-         */
         iterator begin()
         {
             return iterator(head);
         }
 
-        /**
-         *
-         */
         const_iterator begin() const
         {
             return const_iterator(head);
         }
 
-        /**
-         *
-         */
         iterator end()
         {
             return iterator(nullptr);
         }
 
-        /**
-         *
-         */
         const_iterator end() const
         {
             return const_iterator(nullptr);
@@ -263,17 +198,9 @@ class LinkedList {
         LinkedList<T>& operator=(LinkedList<T> rhs)
         {
             using std::swap;
-
             swap(*this, rhs);
         }
 
-        /**
-         * Swap the contents of two `LinkedList`s
-         * <p>
-         * I am using a friend function here and only here (under protest)
-         * <p>
-         * [Refer here](http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
-         */
         friend 
         void swap(LinkedList<T>& lhs, LinkedList<T>& rhs)
         {
@@ -283,7 +210,6 @@ class LinkedList {
             swap(lhs.tail, rhs.tail);
             swap(lhs.currentSize, rhs.currentSize);
         }
-
 };
 
 #endif

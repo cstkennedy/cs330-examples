@@ -29,9 +29,6 @@ class House{
          */
         std::string      name;
 
-        /**
-         * @todo add documentation
-         */
         LinkedList<Room> rooms;       
 
     public:
