@@ -3,8 +3,7 @@
 
 template <typename T>
 class LinkedList {
-
-    public:
+    private:
         struct Node{
             T     data;
             Node* next;
@@ -16,6 +15,7 @@ class LinkedList {
             }
         };
 
+    public:
         /**
          * A standard C++ STL style iterator (can be const or non-const).
          * <p>
@@ -101,7 +101,7 @@ class LinkedList {
          * Current size of the LinkedList--e.g.,
          * current (actual) number of rooms
          */
-        int              currentSize;
+        int           currentSize;
 
     public:
         LinkedList()
@@ -116,11 +116,16 @@ class LinkedList {
              tail(nullptr),
              currentSize(0)
         {
+            /*
             Node* it = src.head;
 
             while (it != nullptr) {
                 this->push_back(it->data);
                 it = it->next;
+            }
+            */
+            for(const T& src_data : src) {
+                this->push_back(src_data);
             }
         }
 

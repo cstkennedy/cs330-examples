@@ -10,6 +10,9 @@
 #include "Room.h"
 #include "LinkedList.h"
 
+#include <vector>
+#include <list>
+
 /**
  * A House is composed of zero or more Room objects.
  * <p>
@@ -17,10 +20,12 @@
  * iterator interface.
  */
 class House{
-    public:
-        using iterator       = LinkedList<Room>::iterator;
-        using const_iterator = LinkedList<Room>::const_iterator;
+    private:
+        using Collection = LinkedList<Room>;
 
+    public:
+        using iterator       = Collection::iterator;
+        using const_iterator = Collection::const_iterator;
 
     private:
         /**
@@ -29,7 +34,7 @@ class House{
          */
         std::string      name;
 
-        LinkedList<Room> rooms;       
+        Collection rooms;       
 
     public:
         /**

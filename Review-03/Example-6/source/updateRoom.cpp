@@ -7,6 +7,7 @@
 #include <cmath>
 #include <string>
 #include <utility>
+#include <algorithm>
 
 #include "utilities.h"
 
@@ -61,6 +62,8 @@ int main()
 
     cout << house;
 
+    cout << duplicateHouse << "\n";
+
     return 0;   
 }
 
@@ -99,9 +102,15 @@ House upgradeFlooring(House original)
 
     // What if we decide to use the same type of 
     // Flooring in every room?
+    /*
     for (Room& room : modified) {
         room.setFlooring("Stone Bricks", 12.97);
     }
+    */
+    std::for_each(modified.begin(), modified.end(),
+              [](Room& room) {
+                  room.setFlooring("Stone Bricks", 12.97);
+              });
 
     modified.setName("After Stone Bricks");
 
