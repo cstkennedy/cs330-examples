@@ -19,7 +19,7 @@ using namespace std;
 /**
  * Build our example house
  */
-void buildHouse(House &house);
+void buildHouse(House& house);
 
 /**
  * Take a room and change the flooring
@@ -67,15 +67,12 @@ int main()
     return 0;   
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void buildHouse(House &house)
 {
     // Add the Laundry Room
-    house.addRoom(
-        Room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate")
-    );
+    house.addRoom(Room("Laundry Room",
+                       Room::DimensionSet(8, 4), 1.95, "Laminate"));
     
     // Add the Kitchen
     house.addRoom(
@@ -83,19 +80,11 @@ void buildHouse(House &house)
     );
     
     // Add the Storage Room
-    house.addRoom(
-        Room(
-            "Storage Room", 
-            Room::DimensionSet(16, 16), 
-            4.39, 
-            "Birch Wood"
-        )
-    );
+    house.addRoom(Room("Storage Room",
+                       Room::DimensionSet(16, 16), 4.39, "Birch Wood"));
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House upgradeFlooring(House original)
 {
     House modified = original;
@@ -108,9 +97,9 @@ House upgradeFlooring(House original)
     }
     */
     std::for_each(modified.begin(), modified.end(),
-              [](Room& room) {
-                  room.setFlooring("Stone Bricks", 12.97);
-              });
+                  [](Room& room) {
+                      room.setFlooring("Stone Bricks", 12.97);
+                  });
 
     modified.setName("After Stone Bricks");
 

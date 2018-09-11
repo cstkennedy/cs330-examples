@@ -13,18 +13,29 @@
  * Print a blank line - we will discuss the meaning of *inline*
  * in a future Review Session
  */
-inline void println( std::ostream& outs=std::cout ) {
+inline
+void println(std::ostream& outs=std::cout)
+{
     outs << "\n";
 }
 
 /**
- * Prompt the user for a floating point, *double*, value
+ * Prompt the user for a value (no spaces)
  *
  * @param msg message to display as a user-prompt
  * 
- * @return double value entered by the user
+ * @return value entered by the user
  */
-double promptForDouble( std::string msg );
+template <typename T>
+T promptForValue(std::string msg)
+{
+    T value;
+
+    std::cout << msg << ": ";
+    std::cin >> value;
+
+    return value;
+}
 
 /**
  * Prompt the user for a Yes or No response

@@ -10,54 +10,41 @@ using std::right;
 
 const std::string Room::UNITS = "ft";
 
-//------------------------------------------------
+//------------------------------------------------------------------------------
 /*
- Pay close attention to scope. Inner classes
- exist within the scope of the outer--i.e., 
- containing class
+ Pay close attention to scope. Inner classes exist within the scope of
+ the outer--i.e., containing class
 */
-//------------------------------------------------
+//------------------------------------------------------------------------------
 
-/**
- * Default Constructor
- */
 Room::Flooring::Flooring()
     :unitCost(1.00),
      type("Generic")
 {
 }
 
-/**
- * Non-Default Constructor
- */
+//------------------------------------------------------------------------------
 Room::Flooring::Flooring(std::string n, Cost c)
     :unitCost(c),
      type(n)
 {
 }
 
-/**
- * Default to dimensions of 1
- */
+//------------------------------------------------------------------------------
 Room::DimensionSet::DimensionSet()
 {
     length = 1;
     width  = 1;
 }
 
-/**
- * Set the length and width to user 
- * specified values
- */
+//------------------------------------------------------------------------------
 Room::DimensionSet::DimensionSet(Dimension l, Dimension w)
     :length(l),
      width(w)
 {
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 Room::Room()
     :name("Generic"),
      flooring(),
@@ -67,9 +54,7 @@ Room::Room()
     //this->flooring.unitCost = 1;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Room::Room(Dimension l, Dimension w, Cost c)
     :name("Generic"),
      flooring("Generic", c),
@@ -80,9 +65,7 @@ Room::Room(Dimension l, Dimension w, Cost c)
 }
 
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Room::Room(std::string n, Dimension l, Dimension w, Cost c)
     :name(n),
      flooring("Generic", c),
@@ -90,9 +73,7 @@ Room::Room(std::string n, Dimension l, Dimension w, Cost c)
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Room::Room(std::string n, DimensionSet d, Cost c, std::string fn)
     :name(n),
      flooring(fn, c),
@@ -100,26 +81,22 @@ Room::Room(std::string n, DimensionSet d, Cost c, std::string fn)
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Room::setDimensions(Dimension l, Dimension w)
 {
     dimensions.setLength(l);
     dimensions.setWidth(w);
 }
 
-/**
- *
- */
-void Room::display(std::ostream &outs) const
+//------------------------------------------------------------------------------
+void Room::display(std::ostream& outs) const
 {
     // Print dimensions to 1 decimal place.        
     outs.precision(1);  
     outs.setf(std::ios::fixed);
 
     // Let us add spacing--simulate a table
-    println();
+    println(outs);
 
     outs << "Room (" << name << ")"         << "\n";
          
@@ -146,10 +123,8 @@ void Room::display(std::ostream &outs) const
          << "  Total Cost: $ " << right << setw(8) << flooringCost()    << "\n";
 }
 
-/**
- *
- */
-bool Room::operator==(const Room &rhs) const
+//------------------------------------------------------------------------------
+bool Room::operator==(const Room& rhs) const
 {
     // Note that I am directly comparing floating 
     // point values.
@@ -159,13 +134,11 @@ bool Room::operator==(const Room &rhs) const
     );
 }
 
-/**
- *
- */
-bool Room::operator<(const Room &rhs) const
+//------------------------------------------------------------------------------
+bool Room::operator<(const Room& rhs) const
 {
     if (this->name == rhs.name) {
-        return this->area() == rhs.area();
+        return this->area() < rhs.area();
     }
 
     return this->name < rhs.name;
