@@ -5,9 +5,7 @@
 
 #include "Board.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Board::Board()
 {
     for (int i = 0; i < theBoard.size(); i++) {
@@ -16,9 +14,7 @@ Board::Board()
     
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Board::CellValue Board::getCell(int id) const
 {
     assert(id > 0 && id < 10);
@@ -26,9 +22,7 @@ Board::CellValue Board::getCell(int id) const
     return theBoard[id - 1]; // Testing caught the missing -1
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Board::setCell(int id, CellValue newValue)
 {
      assert(id > 0 && id < 10);
@@ -36,9 +30,7 @@ void Board::setCell(int id, CellValue newValue)
     theBoard[id - 1] = newValue; // Testing caught the missing -1
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Board::CellTriple Board::get3Cells(int cell1Id, int cell2Id, int cell3Id) const
 {
     assert(cell1Id > 0 && cell1Id < 10);
@@ -58,9 +50,7 @@ Board::CellTriple Board::get3Cells(int cell1Id, int cell2Id, int cell3Id) const
     return trpl;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Board::isFull() const
 {
     int emptyCells = 0;
@@ -75,9 +65,7 @@ bool Board::isFull() const
     return (emptyCells == 0);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Board::display(std::ostream& outs) const
 {
     // row output
@@ -87,10 +75,10 @@ void Board::display(std::ostream& outs) const
             int idx = 3 * i; // row offset
             idx += j; //column offset
 
-            std::cout << theBoard[idx] << "|";
+            outs << theBoard[idx] << "|";
         }
 
-        std::cout << theBoard[(3*i) + 2] << "\n";
+        outs << theBoard[(3*i) + 2] << "\n";
     }
 }
 

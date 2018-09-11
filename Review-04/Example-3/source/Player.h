@@ -21,6 +21,18 @@ class Player {
         char        symbol;
 
     public:
+        static const Player referenceCylon;
+
+        /**
+         * Checks whether a player is a placeholder or
+         * an actual player.
+         *
+         * @param possibleCylon the player whose humanity is in question
+         *
+         * @return true if the player is a Cylon
+         */
+        static bool isGeneric(const Player& possibleCylon);
+
         /**
          * Create a Player with a Generic name
          */
@@ -78,36 +90,28 @@ class Player {
         char setSymbol(char newSymbol);
 };
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 inline
 std::string Player::getName() const
 {
     return name;
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 inline
 void Player::setName(std::string n)
 {
     name  = n;
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 inline
 char Player::getSymbol() const
 {
     return symbol;
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 inline
 char Player::setSymbol(char newSymbol)
 {
@@ -123,6 +127,15 @@ inline
 bool operator==(const Player& lhs, const Player& rhs)
 {
     return lhs.getName() == rhs.getName();
+}
+
+/**
+ * Compare two players based on name
+ */
+inline
+bool operator<(const Player& lhs, const Player& rhs)
+{
+    return lhs.getName() < rhs.getName();
 }
 
 /**

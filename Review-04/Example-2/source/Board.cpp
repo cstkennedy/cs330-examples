@@ -12,8 +12,7 @@ Board::Board()
 {
     for (int i = 0; i < theBoard.size(); i++) {
         theBoard[i] = '0' + (i+1);
-    }
-    
+    }    
 }
 
 /**

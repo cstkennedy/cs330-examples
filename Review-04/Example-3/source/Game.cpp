@@ -1,17 +1,13 @@
 #include "Game.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Game::Referee::Referee(const Board& b)
     :boardRef(b)
 {
     // Nothing else
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int Game::Referee::checkForWin() const
 {
     int winner = checkForHorizontalWin();
@@ -35,9 +31,7 @@ int Game::Referee::checkForWin() const
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int Game::Referee::checkForHorizontalWin() const
 {
     Board::CellTriple triple = boardRef.get3Cells(1, 2, 3);
@@ -64,9 +58,7 @@ int Game::Referee::checkForHorizontalWin() const
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int Game::Referee::checkForVerticalWin() const
 {
     Board::CellTriple triple = boardRef.get3Cells(1, 4, 7);
@@ -93,9 +85,7 @@ int Game::Referee::checkForVerticalWin() const
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int Game::Referee::checkForDiagonalWin() const
 {
     Board::CellTriple triple = boardRef.get3Cells(1, 5, 9);
@@ -115,9 +105,7 @@ int Game::Referee::checkForDiagonalWin() const
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::Referee::allThreeMatch(const Board::CellTriple& triple) const
 {
     Board::CellValue firstVal = triple[0].second; // std::pair first and second
@@ -133,9 +121,7 @@ bool Game::Referee::allThreeMatch(const Board::CellTriple& triple) const
     return (numMatches == 3);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int Game::Referee::playerNumFromSymbol(char sym) const
 {
     /*
@@ -148,11 +134,7 @@ int Game::Referee::playerNumFromSymbol(char sym) const
     return (sym == 'X' ? 1 : 2);
 }
 
-//------------------------------------------------------------
-
-/**
- *
- */
+//------------------------------------------------------------------------------
 Game::Game(Player& p1, Player& p2)
     :player1(p1),
      player2(p2),
@@ -163,9 +145,7 @@ Game::Game(Player& p1, Player& p2)
     player2.setSymbol('O');
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::playRound()
 {
     // The game ended already - assert could be used
@@ -207,17 +187,13 @@ bool Game::playRound()
     return false;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::endedWithWin() const
 {
     return (winner != nullptr);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::endedWithStalemate() const
 {
     return (board.isFull()) && (winner == nullptr);
@@ -233,14 +209,12 @@ bool Game::isNotOver() const
     return !isOver();
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 const Player& Game::getLoser() const
 {
     // Stalemate
     if (endedWithStalemate()) {
-        return Player();
+        return Player::referenceCylon;
     }
 
     // There was a win, figure out who lost
@@ -251,10 +225,7 @@ const Player& Game::getLoser() const
     return player1;
 }
 
-
-/**
- * 
- */
+//------------------------------------------------------------------------------
 bool Game::roundTurn(Player& player)
 {
     int               move;

@@ -28,6 +28,6 @@ class Game {
 
         const Board& getBoard() const;
 
-}
+};
 
 #endif
