@@ -2,7 +2,7 @@ MAINPROG=runShapes
 
 SOURCES:=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-FLAGS=-std=c++11 -fsanitize=address
+FLAGS=-std=c++11 -fsanitize=address -Wall
 
 all: $(SOURCES) $(MAINPROG)
 
