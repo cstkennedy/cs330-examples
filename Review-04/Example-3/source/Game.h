@@ -34,6 +34,8 @@ class Game {
                  */
                 int checkForWin() const;
 
+                bool selectedCellIsEmpty(int move) const;
+
             private:
 
                 int checkForHorizontalWin() const;

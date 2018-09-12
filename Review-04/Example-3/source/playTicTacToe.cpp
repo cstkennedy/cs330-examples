@@ -53,6 +53,12 @@ int main()
         while(game.isNotOver()) {
             game.playRound();
         }
+
+        cout << game.getBoard() << "\n";
+
+        if (game.endedWithWin()) {
+            cout << "Congratulations " << game.getWinner() << "!" << "\n";
+        }
     }
 
     return 0;

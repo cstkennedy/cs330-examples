@@ -134,6 +134,11 @@ int Game::Referee::playerNumFromSymbol(char sym) const
     return (sym == 'X' ? 1 : 2);
 }
 
+bool Game::Referee::selectedCellIsEmpty(int move) const
+{
+    return boardRef.getCell(move) != 'X' && boardRef.getCell(move) != 'O';
+}
+
 //------------------------------------------------------------------------------
 Game::Game(Player& p1, Player& p2)
     :player1(p1),
@@ -234,6 +239,11 @@ bool Game::roundTurn(Player& player)
     move = player.nextMove();
     sym = player.getSymbol();
 
+    //while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
+    while (!ref.selectedCellIsEmpty(move)) {
+        move = player.nextMove();
+        sym = player.getSymbol();        
+    }
     board.setCell(move, sym);
 
     // @todo add move validation
