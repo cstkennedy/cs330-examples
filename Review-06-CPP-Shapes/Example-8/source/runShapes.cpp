@@ -5,7 +5,10 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
+
 #include <memory>
+#include <iterator>
+#include <algorithm>
 
 #include "utilities.h"
 #include "shapeFactory.h"
@@ -126,6 +129,7 @@ int main(int argc, char** argv)
 ShapeCollection readShapes(std::istream& ins)
 {
     ShapeCollection collection;
+    /*
     Shape*          s;
 
     ins >> ws;
@@ -136,8 +140,19 @@ ShapeCollection readShapes(std::istream& ins)
         }
         ins >> ws;
     }
-
+    */
     // cout << collection << "\n"; // Not legal anymore
+
+    std::istream_iterator<Shape*> it(ins);
+    std::istream_iterator<Shape*> end;
+
+    // Let us re-enact the Back-to-the-Future I Guitar Scene!
+    for_each(it, end,
+             [&collection](Shape* s) {
+                  if (s != nullptr) {
+                      collection.emplace_back(s);
+                  }
+             });
 
     return collection;
 }
