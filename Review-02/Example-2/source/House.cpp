@@ -64,4 +64,11 @@ void House::display(std::ostream& outs) const
     for (const Room& prtRoom : rooms) {
         outs << prtRoom;
     }
+
+    /*
+    for_each(rooms.begin(), rooms.end(),
+             [](const Room& r){
+                cout << r;
+             });
+    */
 }
