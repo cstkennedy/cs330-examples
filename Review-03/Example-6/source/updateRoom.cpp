@@ -105,3 +105,8 @@ House upgradeFlooring(House original)
 
     return modified;
 }
+
+/*
+void doStuff(Room& room){
+    room.setFlooring("Stone Bricks", 12.97);
+}*/

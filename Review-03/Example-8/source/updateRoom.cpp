@@ -11,6 +11,7 @@
 #include <functional>
 #include <numeric>
 #include <iterator>
+#include <sstream>
 
 #include "utilities.h"
 
@@ -19,10 +20,14 @@
 
 using namespace std;
 
+const std::string ROOM_DATA = R"(Laundry Room; 8 4 1.95 Laminate
+Kitchen; 20 12 3.87 Tile
+Storage Room; 16 16 4.39 Birch Wood)";
+
 /**
  * Build our example house
  */
-void buildHouse(House& house);
+void buildHouse(std::istream& ins, House& house);
 
 /**
  * Take a room and change the flooring
@@ -51,7 +56,9 @@ int main()
 {  
     // Construct, build, and print a house
     House house;
-    buildHouse(house);
+
+    std::istringstream fakeInputFile(ROOM_DATA);
+    buildHouse(fakeInputFile, house);
 
     cout << house;
 
@@ -76,12 +83,6 @@ int main()
     vector<double> costs(duplicateHouse.size());
     std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
                    discountFlooring);
-
-    // Print the discounted prices
-    /*
-    for (auto c : costs) {
-        std::cout << c << "\n";
-    }*/
 
     std::copy(costs.begin(), costs.end(),
               std::ostream_iterator<double>(std::cout, "\n"));
@@ -111,20 +112,55 @@ int main()
 }
 
 //------------------------------------------------------------------------------
-void buildHouse(House& house)
+inline
+std::istream& operator>>(std::istream &ins, Room& rd)
 {
-    // Add the Laundry Room
-    house.addRoom(Room("Laundry Room",
-                       Room::DimensionSet(8, 4), 1.95, "Laminate"));
+    std::string name;
+    double      l, h;
+    double      cost;
+    std::string flooring;
+
+    ins >> ws;
+    getline(ins, name, ';');
+    ins >> l >> h >> cost;
     
-    // Add the Kitchen
-    house.addRoom(
-        Room("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile")
-    );
-    
-    // Add the Storage Room
-    house.addRoom(Room("Storage Room",
-                       Room::DimensionSet(16, 16), 4.39, "Birch Wood"));
+    ins >> ws;
+    getline(ins, flooring);
+    ins >> ws;
+
+    rd = Room(name, Room::DimensionSet(l,h), cost, flooring);
+
+    return ins;
+}
+
+//------------------------------------------------------------------------------
+void buildHouse(std::istream& ins, House& house)
+{
+    /*std::string name;
+    double      l, h;
+    double      cost;
+    std::string flooring;
+
+    ins >> ws;
+    while(getline(ins, name, ';')) {
+        ins >> l >> h >> cost;
+        
+        ins >> ws;
+        getline(ins, flooring);
+        ins >> ws;
+
+        house.addRoom(Room(name, Room::DimensionSet(l,h), cost, flooring));
+    }*/
+
+    std::istream_iterator<Room> ins_it(ins);
+    std::istream_iterator<Room> ins_end;
+
+    while (ins_it != ins_end) {
+        house.addRoom(*ins_it);
+
+        ins_it++;
+    }
+
 }
 
 //------------------------------------------------------------------------------
