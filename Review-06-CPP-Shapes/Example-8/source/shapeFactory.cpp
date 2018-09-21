@@ -104,8 +104,10 @@ std::istream& operator>>(std::istream& ins, Shape*& rd)
     }
     else {
         // throw away the rest of the line
+        std::cerr << name << "\n";
         getline(ins, name);
     }
+    ins >> std::ws;
 
     return ins;
 }

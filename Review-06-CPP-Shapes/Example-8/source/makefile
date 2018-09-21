@@ -2,7 +2,7 @@ MAINPROG=runShapes
 
 SOURCES:=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-FLAGS=-std=c++11 -fsanitize=address -Wall
+FLAGS=-std=c++14 -fsanitize=address -Wall # 11 is too old for auto in lambdas
 
 all: $(SOURCES) $(MAINPROG)
 

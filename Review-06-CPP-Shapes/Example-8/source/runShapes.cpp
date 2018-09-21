@@ -50,13 +50,6 @@ void printShapes(std::ostream& outs, const ShapeCollection& toPrint);
  */
 void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint);
 
-/** 
- * Find the largest `Shape` (by area) in a `ShapeCollection`
- *
- * @return an iterator at the position of the largest `Shape`
- */
-ShapeCollection::const_iterator findLargestShapeByArea(const ShapeCollection& collection);
-
 /**
  * This program accepts command line
  * arguments
@@ -98,9 +91,6 @@ int main(int argc, char** argv)
     // Create 5 "Random" Shapes
     ShapeCollection shapes = readShapes(shapesFile);
 
-    // Demonstrate assertions (review)
-    //shapes.addShape(ShapeFactory::createShape("1337 Haxor"));
-
     // Print all the shapes
     printHeading(cout, "Display All Shapes", 38, '~');
     //cout << shapes;
@@ -111,14 +101,27 @@ int main(int argc, char** argv)
     printShapeNames(cout, shapes);
 
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
+    ShapeCollection::const_iterator it;    
 
-    ShapeCollection::const_iterator it = findLargestShapeByArea(shapes);
+    it = std::max_element(shapes.begin(), shapes.end(), 
+                          [](const auto& lhs, const auto& rhs) {
+                              return (lhs)->area() < (rhs)->area();
+                          });
+    cout << *(*it) << "\n";
 
-    const std::unique_ptr<Shape>& largestShape = *it; // Shape* -> unique_ptr
+    printHeading(cout, "Display Smallest Shape (Perimeter)", 38, '~');
+    it = std::min_element(shapes.begin(), shapes.end(), 
+                          [](const auto& lhs, const auto& rhs) {
+                              return (lhs)->perimeter() < (rhs)->perimeter();
+                          });
+    cout << *(*it) << "\n";
 
-    cout << *largestShape << "\n";
-    cout << *(*it) << "\n";                           // skip the temporary Shape*
-    cout << **findLargestShapeByArea(shapes) << "\n"; // skip the variables all-together
+    printHeading(cout, "Display Sorted by Name", 38, '~');
+    std::sort(shapes.begin(), shapes.end(), 
+                          [](const auto& lhs, const auto& rhs) {
+                              return (lhs)->name() < (rhs)->name();
+                          });
+    printShapes(cout, shapes);
 
     return 0;
 }
@@ -145,7 +148,6 @@ ShapeCollection readShapes(std::istream& ins)
 
     std::istream_iterator<Shape*> it(ins);
     std::istream_iterator<Shape*> end;
-
     // Let us re-enact the Back-to-the-Future I Guitar Scene!
     for_each(it, end,
              [&collection](Shape* s) {
@@ -177,25 +179,4 @@ void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint)
     for(const std::unique_ptr<Shape>& s : toPrint) {
         outs << s->name() << "\n";
     }
-}
-
-ShapeCollection::const_iterator findLargestShapeByArea(const ShapeCollection& collection)
-{
-    ShapeCollection::const_iterator it           = collection.begin();
-    ShapeCollection::const_iterator largestShape = it;
-
-    // The first shape is the largest
-    // until I look at more
-    largestShape = it;
-
-    // Review pre increment
-    while(++it != collection.end()) {
-        //std::cerr << "\n" << *(*it) << "\n"; // debugging
-
-        if ((*it)->area() > (*largestShape)->area()) {
-            largestShape = it;
-        }
-    }
-
-    return largestShape;    
 }
