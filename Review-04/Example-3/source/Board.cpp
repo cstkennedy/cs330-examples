@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <cassert>
+#include <algorithm>
 
 #include "Board.h"
 
@@ -25,7 +26,7 @@ Board::CellValue Board::getCell(int id) const
 //------------------------------------------------------------------------------
 void Board::setCell(int id, CellValue newValue)
 {
-     assert(id > 0 && id < 10);
+    assert(id > 0 && id < 10);
 
     theBoard[id - 1] = newValue; // Testing caught the missing -1
 }
@@ -53,15 +54,18 @@ Board::CellTriple Board::get3Cells(int cell1Id, int cell2Id, int cell3Id) const
 //------------------------------------------------------------------------------
 bool Board::isFull() const
 {
+    /*
     int emptyCells = 0;
 
     for (int i = 0; i < theBoard.size(); i++) {
         if(isdigit(theBoard[i])) {
             emptyCells++;
         }
-    }
+    }*/
 
-    //return (emptyCells == 9); // OOPs... go thing I tested with fake unit tests
+    int emptyCells = std::count_if(theBoard.begin(), theBoard.end(), isdigit);
+
+    //return (emptyCells == 9); // OOPs... good thing I tested with fake unit tests
     return (emptyCells == 0);
 }
 
