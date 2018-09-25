@@ -77,14 +77,20 @@ int main()
     std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
                    discountFlooring);
 
+    /*for (const Room& rm : duplicateHouse) {
+        double cost = 0.9 * rm.flooringCost();
+        costs.push_back(cost);
+    }*/
+
     // Print the discounted prices
     /*
     for (auto c : costs) {
         std::cout << c << "\n";
     }*/
 
+    //std::ostream_iterator<double> outIt(std::cout, "\n");
     std::copy(costs.begin(), costs.end(),
-              std::ostream_iterator<double>(std::cout, "\n"));
+              std::ostream_iterator<double> outIt(std::cout, "\n"));
 
     // Print the sum, min, max -> D.R.Y!
     cout << "Total: "
