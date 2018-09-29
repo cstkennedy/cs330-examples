@@ -1,17 +1,20 @@
 import java.io.IOException;
 
+/**
+ * Orchestrates a single match of Tic-Tac-Toe.
+ */
 public class Game
 {
-    
+
     /**
-     * The Meta-player that checks gaome status
-     * e.g., checks for wins, who won, if there is 
+     * The Meta-player that checks game status
+     * e.g., checks for wins, who won, if there is
      * a stalemate.
      *
      * It is an implementation detail that is not
      * exposed to the outside world;
      */
-    class Referee {
+    private class Referee {
         /**
          * reference to the gameboard
          */
@@ -32,7 +35,7 @@ public class Game
         }
 
         /**
-         * Check for a win condition
+         * Check for a win condition.
          *
          * @return 1 if player1, or 2 if player2 won.
          *     A 0 indicates neither won
@@ -60,41 +63,63 @@ public class Game
             return 0;
         }
 
+        /**
+         * Determine whether a cell in the board has been selected
+         * by a player.
+         *
+         * @param move player candidate move
+         *
+         * @return true if the cell is currently empty
+         */
         public boolean selectedCellIsEmpty(int move)
         {
             return boardRef.getCell(move) != 'X' && boardRef.getCell(move) != 'O';
         }
 
 
+        /**
+         * Check each row of the board for three 'X' or three 'O'
+         * characters.
+         *
+         * @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
+         *     no one has won
+         */
         public int checkForHorizontalWin()
         {
-            Board.Pair triple[] = boardRef.get3Cells(1, 2, 3);
+            Board.Pair[] triple = boardRef.get3Cells(1, 2, 3);
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
-                return playerNumFromSymbol(triple[0].second); 
+                return playerNumFromSymbol(triple[0].second);
             }
 
             triple = boardRef.get3Cells(4, 5, 6);
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
-                return playerNumFromSymbol(triple[0].second); 
+                return playerNumFromSymbol(triple[0].second);
             }
 
             triple = boardRef.get3Cells(7, 8, 9);
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
-                return playerNumFromSymbol(triple[0].second); 
+                return playerNumFromSymbol(triple[0].second);
             }
 
             return 0;
         }
 
+        /**
+         * Check each column of the board for three 'X' or three 'O'
+         * characters.
+         *
+         * @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
+         *     no one has won
+         */
         public int checkForVerticalWin()
         {
-            Board.Pair triple[] = boardRef.get3Cells(1, 4, 7);
+            Board.Pair[] triple = boardRef.get3Cells(1, 4, 7);
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
@@ -105,45 +130,57 @@ public class Game
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
-                return playerNumFromSymbol(triple[0].second); 
+                return playerNumFromSymbol(triple[0].second);
             }
 
             triple = boardRef.get3Cells(3, 6, 9);
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
-                return playerNumFromSymbol(triple[0].second); 
+                return playerNumFromSymbol(triple[0].second);
             }
 
             return 0;
         }
 
+        /**
+         * Check the two diagonals of the board for three 'X' or three 'O'
+         * characters.
+         *
+         * @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
+         *     no one has won
+         */
         public int checkForDiagonalWin()
         {
-            Board.Pair triple[] = boardRef.get3Cells(1, 5, 9);
+            Board.Pair[] triple = boardRef.get3Cells(1, 5, 9);
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
-                return playerNumFromSymbol(triple[0].second); 
+                return playerNumFromSymbol(triple[0].second);
             }
 
             triple = boardRef.get3Cells(7, 5, 3);
 
             if (allThreeMatch(triple)) {
                 // if they match, grab the 'X' or 'O'
-                return playerNumFromSymbol(triple[0].second); 
+                return playerNumFromSymbol(triple[0].second);
             }
 
             return 0;
         }
 
+        /**
+         * Check for three matching symbols in the Pair-Triple.
+         *
+         * @return true if all three pairs contain the same symbol
+         */
         public boolean allThreeMatch(Board.Pair[] triple)
         {
             char firstVal = triple[0].second; // std::pair first and second
 
             int numMatches = 0;
 
-            for(int i = 0; i < triple.length; i++) {
+            for (int i = 0; i < triple.length; i++) {
                 if (firstVal == triple[i].second) {
                     numMatches++;
                 }
@@ -153,6 +190,10 @@ public class Game
         }
 
         /**
+         * Given an 'X' or an 'O' determine which player is using the symbol.
+         *
+         * @return 1 for player 1 or 2 for player 2
+         *
          * @pre sym == 'X' or 'O'
          */
         public int playerNumFromSymbol(char sym)
@@ -185,7 +226,7 @@ public class Game
     }
 
     /**
-     * Construct a Game setting player 1 and player 2
+     * Construct a Game setting player 1 and player 2.
      */
     public Game(Player p1, Player p2)
     {
@@ -200,16 +241,17 @@ public class Game
     }
 
     /**
-     * Play one round of Tic-Tac-Toe
+     * Play one round of Tic-Tac-Toe.
      *
      * @return true if the game ended during the round
      *
+     * @throws IOException if there is an error reading the selected move
      */
     public boolean playRound()
         throws IOException
     {
         // The game ended already - assert could be used
-        if(board.isFull()){
+        if (board.isFull()) {
             return true;
         }
 
@@ -219,7 +261,7 @@ public class Game
         roundTurn(player1);
 
         // The game is over
-        if(board.isFull()) {
+        if (board.isFull()) {
             System.out.println(board);
             return true;
         }
@@ -238,7 +280,7 @@ public class Game
         System.out.println(board);
 
         winnerId = ref.checkForWin();
-        
+
         if (winnerId == 2) {
             winner = player2;
             return true;
@@ -304,7 +346,7 @@ public class Game
     }
 
     /**
-     * Get a player move, and update the board
+     * Get a player move, and update the board.
      */
     private boolean roundTurn(Player player)
         throws IOException
@@ -313,12 +355,12 @@ public class Game
         char  sym;
 
         move = player.nextMove();
-        sym = player.getSymbol();
+        sym  = player.getSymbol();
 
         //while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
         while (!ref.selectedCellIsEmpty(move)) {
             move = player.nextMove();
-            sym = player.getSymbol();        
+            sym  = player.getSymbol();
         }
         board.setCell(move, sym);
 

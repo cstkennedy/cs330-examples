@@ -11,11 +11,10 @@ public class PlayTicTacToe
         Player tom = new Player("Thomas");
         Player jay = new Player("Jay");
 
-        
         Game game = new Game(tom, jay);
 
         //while(!(game.getBoard().isFull())) {
-        while(game.isNotOver()) {
+        while (game.isNotOver()) {
             game.playRound();
         }
 
@@ -24,6 +23,5 @@ public class PlayTicTacToe
         if (game.endedWithWin()) {
             System.out.printf("Congratulations %s!%n", game.getWinner());
         }
-        
     }
 }

@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * This is more a Player interface than a Player class.
  * <p>
- * However, such distinctions and discussions belong in 
+ * However, such distinctions and discussions belong in
  * the OOP and Inheritance Modules
  */
 class Player {
@@ -16,7 +16,9 @@ class Player {
     private String name;
     private char   symbol;
 
-
+    /**
+     * A Player that serves as a sentinal value or placeholder
+     */
     public static final Player REFERENCE_CYLON = new Player();
 
     /**
@@ -59,7 +61,7 @@ class Player {
     }
 
     /**
-     * Set player name
+     * Set player name.
      *
      * @param n new name
      *
@@ -71,7 +73,7 @@ class Player {
     }
 
     /**
-     * Retrieve the next move
+     * Retrieve the next move.
      */
     public int nextMove()
         throws IOException
@@ -108,7 +110,7 @@ class Player {
 
     /**
      * Retrieve player symbol to be used
-     * for marking moves
+     * for marking moves.
      */
     public char getSymbol()
     {
@@ -116,7 +118,9 @@ class Player {
     }
 
     /**
-     * Change the player symbol
+     * Change the player symbol.
+     *
+     * @param newSymbol new character to be used by the player
      */
     public void setSymbol(char newSymbol)
     {

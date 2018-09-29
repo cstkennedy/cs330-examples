@@ -1,9 +1,15 @@
 buildscript {
     repositories {
         jcenter()
+
+        // Add SpotBugs required repo
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        // none for this example
+        // Add SpotBugs
+        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.4"
     }
 }
 
@@ -14,8 +20,10 @@ apply plugin: "jacoco"
 
 apply plugin: "findbugs"
 apply plugin: "pmd"
+apply plugin: "com.github.spotbugs"
 
 apply plugin: "checkstyle"
+
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -70,6 +78,17 @@ findbugsMain {
     }
 }
 
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
 
 pmd {
     ignoreFailures = true
