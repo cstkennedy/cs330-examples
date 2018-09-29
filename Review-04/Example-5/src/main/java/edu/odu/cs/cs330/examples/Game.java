@@ -104,6 +104,12 @@ public class Game
 
     public Player getLoser()
     {
+        // @discussThisInLecture
+        // Caught this bug during testing
+        if (this.isNotOver()) {
+            return null;
+        }
+
         // Stalemate
         if (endedWithStalemate()) {
             //return Player::referenceCylon;

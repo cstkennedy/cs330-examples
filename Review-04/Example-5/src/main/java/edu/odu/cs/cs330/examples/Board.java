@@ -141,6 +141,24 @@ public class Board
         return (emptyCells == 0);
     }
 
+    @Override
+    public boolean equals(Object rhsObj)
+    {
+        if (!(rhsObj instanceof Board)) {
+            return false;
+        }
+
+        Board rhsBrd = (Board) rhsObj;
+
+        for (int i = 0; i < 9; i++) {
+            if (this.theBoard[i] != rhsBrd.theBoard[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Print the Board.
      * E.g.,

@@ -22,18 +22,87 @@ import org.hamcrest.core.IsNull;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestPlayer
 {
+    Player tom;
+    Player aCylon;
+    Player theDoctor;
+
+    @Before
+    public void setUp()
+    {
+        tom       = new Player("Tom");
+        aCylon    = new Player();
+        theDoctor = new Player("The Doctor");
+
+        tom.setSymbol('X');
+    }
+
     @Test
     public void testPlayerDefaultConstructor()
     {
-        Player tom = new Player("Tom");
+        assertTrue(Player.isGeneric(aCylon));
 
-        assertEquals("Tom", tom.toString());
+        assertThat(aCylon.getSymbol(), equalTo('?'));
 
-        // Fancy!!
-        assertThat(tom.toString(), equalTo("Tom"));
+        assertThat(aCylon.hashCode(), is(not(tom.hashCode())));
+        assertThat(aCylon, not(equalTo(tom)));
     }
 
-    // Where are the rest of the tests? This might
-    // be worth an F... if I am lucky.
+    @Test
+    public void testPlayerConstructor()
+    {
+        assertEquals("Tom", tom.toString());
+        assertThat(tom.toString(), equalTo("Tom"));
 
+        assertThat(tom.hashCode(), is(not(theDoctor.hashCode())));
+        assertThat(tom, not(equalTo(theDoctor)));
+
+        assertThat(tom.isHuman(), is(true));
+        assertThat(tom.isComputer(), is(false));
+
+        // Hand wave... These are not the cylons you are looking for.
+        assertThat(aCylon.isHuman(), is(true));
+        assertThat(aCylon.isComputer(), is(false));
+    }
+
+    @Test
+    public void testSetSymbol()
+    {
+        int oldHashCode = tom.hashCode();
+
+        assertThat(tom.getSymbol(), is('X'));
+        assertThat(tom.hashCode(), is(oldHashCode));
+
+        tom.setSymbol('O');
+        assertThat(tom.getSymbol(), is('O'));
+        assertThat(tom.hashCode(), is(oldHashCode));
+
+        // No clone function, can't test equals
+    }
+
+    @Test
+    public void testSetName()
+    {
+        int oldHashCode = theDoctor.hashCode();
+
+        assertThat(theDoctor.getName(), is("The Doctor"));
+        assertThat(theDoctor.hashCode(), is(oldHashCode));
+
+        theDoctor.setName("David Tennant");
+        assertThat(theDoctor.getName(), is("David Tennant"));
+        assertThat(theDoctor.hashCode(), is(not(oldHashCode)));
+
+        theDoctor.setName("Mat Smith");
+        assertThat(theDoctor.getName(), is("Mat Smith"));
+        assertThat(theDoctor.hashCode(), is(not(oldHashCode)));
+
+        theDoctor.setName("Peter Capaldi");
+        assertThat(theDoctor.getName(), is("Peter Capaldi"));
+        assertThat(theDoctor.hashCode(), is(not(oldHashCode)));
+
+        theDoctor.setName("Jodie Whittaker");
+        assertThat(theDoctor.getName(), is("Jodie Whittaker"));
+        assertThat(theDoctor.hashCode(), is(not(oldHashCode)));
+
+        // No clone function, can't test equals
+    }
 }

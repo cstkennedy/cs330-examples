@@ -14,6 +14,9 @@ public class Referee {
      */
     private final Board boardRef;
 
+    /**
+     * This constructor must never be called.
+     */
     private Referee()
     {
         boardRef = null;
@@ -172,7 +175,7 @@ public class Referee {
      *
      * @return true if all three pairs contain the same symbol
      */
-    public boolean allThreeMatch(Board.Pair[] triple)
+    private boolean allThreeMatch(Board.Pair[] triple)
     {
         char firstVal = triple[0].second; // std::pair first and second
 
@@ -196,7 +199,7 @@ public class Referee {
      *
      * @pre sym == 'X' or 'O'
      */
-    public int playerNumFromSymbol(char sym)
+    private int playerNumFromSymbol(char sym)
     {
         /*
         if (sym == 'X') {

@@ -76,4 +76,5 @@ public class TestBoard
 
         assertFalse(aBoard.isFull());
     }
+
 }

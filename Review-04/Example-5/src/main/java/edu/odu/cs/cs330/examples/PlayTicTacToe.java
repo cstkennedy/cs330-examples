@@ -7,6 +7,11 @@ import java.io.IOException;
  */
 public class PlayTicTacToe
 {
+    /**
+     * This program accepts no command line arguments.
+     *
+     * @param args not used
+     */
     public static void main(String[] args)
         throws IOException
     {

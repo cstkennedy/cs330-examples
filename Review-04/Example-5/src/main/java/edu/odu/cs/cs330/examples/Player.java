@@ -11,15 +11,22 @@ import java.util.Scanner;
  */
 class Player {
     /**
-     * Message used to prompt a human player for a move
+     * Message used to prompt a human player for a move.
      */
     private static final String PROMPT_MSG = "Enter your desired move (1-9): ";
 
+    /**
+     * Name of a player.
+     */
     private String name;
+
+    /**
+     * Symbol to be used when making moves. This may change between games.
+     */
     private char   symbol;
 
     /**
-     * A Player that serves as a sentinal value or placeholder
+     * A Player that serves as a sentinal value or placeholder.
      */
     public static final Player REFERENCE_CYLON = new Player();
 
@@ -37,25 +44,29 @@ class Player {
     }
 
     /**
-     * Create a Player with a Generic name
+     * Create a Player with a Generic name.
      */
     public Player()
     {
         name = "I. C. Generic";
+        symbol = '?';
     }
 
     /**
-     * Create a Player with a selected name
+     * Create a Player with a selected name.
      *
      * @param n desired name
      */
     public Player(String n)
     {
         name = n;
+        symbol = '?'; // testing caught this
     }
 
     /**
-     * Retrieve name
+     * Retrieve name.
+     *
+     * @return player name
      */
     public String getName()
     {
@@ -76,6 +87,10 @@ class Player {
 
     /**
      * Retrieve the next move.
+     *
+     * @return board cell id representing the selected move
+     *
+     * @throws IOException if the move can not be retreived from the player.
      */
     public int nextMove()
         throws IOException
@@ -94,6 +109,8 @@ class Player {
      * Is this a Human Player?
      * <p>
      * In this discussion, always yes :(
+     *
+     * @return true if the player is a human
      */
     public boolean isHuman()
     {
@@ -104,6 +121,8 @@ class Player {
      * Is this a Computer Player?
      * <p>
      * In this discussion, always no :(
+     *
+     * @return true if the player is a Cylon
      */
     public boolean isComputer()
     {
@@ -113,6 +132,8 @@ class Player {
     /**
      * Retrieve player symbol to be used
      * for marking moves.
+     *
+     * @return current player symbol
      */
     public char getSymbol()
     {
