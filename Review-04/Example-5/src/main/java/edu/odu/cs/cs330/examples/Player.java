@@ -9,7 +9,8 @@ import java.util.Scanner;
  * However, such distinctions and discussions belong in
  * the OOP and Inheritance Modules
  */
-class Player {
+class Player implements Cloneable
+{
     /**
      * Message used to prompt a human player for a move.
      */
@@ -177,5 +178,13 @@ class Player {
         return this.getName();
     }
 
-}
+    @Override
+    public Player clone()
+    {
+        Player cpy = new Player(this.name);
 
+        cpy.symbol = this.symbol;
+
+        return cpy;
+    }
+}

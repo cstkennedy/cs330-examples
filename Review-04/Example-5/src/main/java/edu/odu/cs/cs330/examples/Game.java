@@ -25,6 +25,9 @@ public class Game
 
     /**
      * Construct a Game setting player 1 and player 2.
+     *
+     * @param p1 the 'X' player
+     * @param p2 the 'O' player
      */
     public Game(Player p1, Player p2)
     {

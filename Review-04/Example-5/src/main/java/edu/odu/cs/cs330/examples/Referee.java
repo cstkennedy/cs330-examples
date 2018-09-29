@@ -83,7 +83,7 @@ public class Referee {
      * @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
      *     no one has won
      */
-    public int checkForHorizontalWin()
+    private int checkForHorizontalWin()
     {
         Board.Pair[] triple = boardRef.get3Cells(1, 2, 3);
 
@@ -116,7 +116,7 @@ public class Referee {
      * @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
      *     no one has won
      */
-    public int checkForVerticalWin()
+    private int checkForVerticalWin()
     {
         Board.Pair[] triple = boardRef.get3Cells(1, 4, 7);
 
@@ -149,7 +149,7 @@ public class Referee {
      * @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
      *     no one has won
      */
-    public int checkForDiagonalWin()
+    private int checkForDiagonalWin()
     {
         Board.Pair[] triple = boardRef.get3Cells(1, 5, 9);
 

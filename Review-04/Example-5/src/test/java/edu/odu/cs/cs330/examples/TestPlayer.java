@@ -75,8 +75,6 @@ public class TestPlayer
         tom.setSymbol('O');
         assertThat(tom.getSymbol(), is('O'));
         assertThat(tom.hashCode(), is(oldHashCode));
-
-        // No clone function, can't test equals
     }
 
     @Test
@@ -104,5 +102,27 @@ public class TestPlayer
         assertThat(theDoctor.hashCode(), is(not(oldHashCode)));
 
         // No clone function, can't test equals
+    }
+
+    @Test
+    public void testClone()
+    {
+
+        Player theOriginal = theDoctor.clone();
+
+        assertThat(theDoctor.hashCode(), equalTo(theOriginal.hashCode()));
+        assertThat(theDoctor, equalTo(theOriginal));
+        assertThat(theDoctor.getSymbol(), equalTo(theOriginal.getSymbol()));
+
+        theOriginal.setName("William Hartnell");
+        assertThat(theDoctor.hashCode(), not(equalTo(theOriginal.hashCode())));
+        assertThat(theDoctor, not(equalTo(theOriginal)));
+    }
+
+    @Test
+    public void testNextMove()
+    {
+        // Can not test due to hardcoded System.in use in Player.nextMove
+        fail("Can not test");
     }
 }
