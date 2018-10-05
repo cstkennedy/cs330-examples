@@ -1,0 +1,6 @@
+let collection be an array of size n
+T* collection = new T[n]
+
+for (int i = 0; i < n; i++) {
+    // do stuff
+}

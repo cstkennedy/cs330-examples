@@ -1,0 +1,9 @@
+let collection be a an arbitrary sequential data structure with n entries
+Container<T> collection;
+
+Container<T>::iterator it = collection.begin();
+while (it != container.end()) {
+    // do stuff
+
+    it++;
+}

@@ -86,10 +86,10 @@ void Board::display(std::ostream& outs) const
             int idx = 3 * i; // row offset
             idx += j; //column offset
 
-            std::cout << theBoard[idx] << "|";
+            outs << theBoard[idx] << "|";
         }
 
-        std::cout << theBoard[(3*i) + 2] << "\n";
+        outs << theBoard[(3*i) + 2] << "\n";
     }
 }
 
