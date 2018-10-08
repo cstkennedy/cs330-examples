@@ -12,7 +12,8 @@ class Player(object):
     """
     PROMPT_MSG = "Enter your desired move (1-9): "
 
-    def isGeneric(self, possibleCylon):
+    @staticmethod
+    def isGeneric(possibleCylon):
         """
         Checks whether a player is a placeholder or
         an actual player.
@@ -22,7 +23,8 @@ class Player(object):
         @return true if the player is a Cylon
         """
 
-        return possibleCylon == Player.REFERENCE_CYLON
+        print(REFERENCE_CYLON)
+        return possibleCylon == REFERENCE_CYLON
 
     def __init__(self, n="I. C. Generic"):
         """
@@ -108,14 +110,14 @@ class Player(object):
 
         self._symbol = newSymbol
 
-    def _eq_(self, rhs):
-        if not isinstance(rhs, self._class_):
+    def __eq__(self, rhs):
+        if not isinstance(rhs, self.__class__):
             return False
 
-        return self._name == rhsP.name
+        return self._name == rhs._name
 
     def __hash__(self):
-        return hash(self.name)
+        return hash(self._name)
 
     def __str__(self):
         """
