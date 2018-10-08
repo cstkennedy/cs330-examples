@@ -7,7 +7,15 @@ import copy
 
 
 class TestGame(unittest.TestCase):
+    """
+    1 - Does this piece of code perform the operations
+        it was designed to perform?
 
+    2 - Does this piece of code do something it was not
+        designed to perform?
+
+    1 Test per mutator
+    """
     def setUp(self):
 
         self.tom       = Player("Tom")
