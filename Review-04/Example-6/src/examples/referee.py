@@ -10,7 +10,7 @@ class Referee(object):
     exposed to the outside world.
     """
 
-    def __init__(board):
+    def __init__(self, board):
         """
         Create the referee and allow access
         to a board through a constant reference variable.
@@ -18,9 +18,9 @@ class Referee(object):
         @param board the board to monitor
         """
 
-        self._boardRef = b
+        self._boardRef = board
 
-    def checkForWin():
+    def checkForWin(self):
         """
         Check for a win condition.
 
@@ -28,24 +28,24 @@ class Referee(object):
                 A 0 indicates neither won
         """
 
-        winner = _checkForHorizontalWin()
+        winner = self._checkForHorizontalWin()
 
-        if (winner != 0):
+        if winner != 0:
             return winner
 
-        winner = _checkForVerticalWin()
+        winner = self._checkForVerticalWin()
 
-        if (winner != 0):
+        if winner != 0:
             return winner
 
-        winner = _checkForDiagonalWin()
+        winner = self._checkForDiagonalWin()
 
-        if (winner != 0):
+        if winner != 0:
             return winner
 
         return 0
 
-    def selectedCellIsEmpty(int move):
+    def selectedCellIsEmpty(self, move):
         """
         Determine whether a cell in the board has been selected
         by a player.
@@ -58,7 +58,7 @@ class Referee(object):
         # return boardRef.getCell(move) != 'X' && boardRef.getCell(move) != 'O'
         return self._boardRef.getCell(move) not in ['X', 'O']
 
-    def _checkForHorizontalWin():
+    def _checkForHorizontalWin(self):
         """
         Check each row of the board for three 'X' or three 'O'
         characters.
@@ -69,25 +69,25 @@ class Referee(object):
 
         triple = self._boardRef.get3Cells(1, 2, 3)
 
-        if allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return _playerNumFromSymbol(triple[0][1])
+            return self._playerNumFromSymbol(triple[0][1])
 
         triple = self._boardRef.get3Cells(4, 5, 6)
 
-        if allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return _playerNumFromSymbol(triple[0][1])
+            return self._playerNumFromSymbol(triple[0][1])
 
         triple = self._boardRef.get3Cells(7, 8, 9)
 
-        if allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return _playerNumFromSymbol(triple[0][1])
+            return self._playerNumFromSymbol(triple[0][1])
 
         return 0
 
-    def _checkForVerticalWin():
+    def _checkForVerticalWin(self):
         """
         Check each column of the board for three 'X' or three 'O'
         characters.
@@ -98,25 +98,25 @@ class Referee(object):
 
         triple = self._boardRef.get3Cells(1, 4, 7)
 
-        if _allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return _playerNumFromSymbol(triple[0].second)
+            return self._playerNumFromSymbol(triple[0][1])
 
         triple = self._boardRef.get3Cells(2, 5, 8)
 
-        if _allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return _playerNumFromSymbol(triple[0].second)
+            return self._playerNumFromSymbol(triple[0][1])
 
         triple = self._boardRef.get3Cells(3, 6, 9)
 
-        if _allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return _playerNumFromSymbol(triple[0].second)
+            return self._playerNumFromSymbol(triple[0][1])
 
         return 0
 
-    def _checkForDiagonalWin():
+    def _checkForDiagonalWin(self):
         """
         Check the two diagonals of the board for three 'X' or three 'O'
         characters.
@@ -127,19 +127,19 @@ class Referee(object):
 
         triple = self._boardRef.get3Cells(1, 5, 9)
 
-        if allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return playerNumFromSymbol(triple[0].second)
+            return self._playerNumFromSymbol(triple[0][1])
 
         triple = self._boardRef.get3Cells(7, 5, 3)
 
-        if allThreeMatch(triple):
+        if self._allThreeMatch(triple):
             # if they match, grab the 'X' or 'O'
-            return playerNumFromSymbol(triple[0].second)
+            return self._playerNumFromSymbol(triple[0][1])
 
         return 0
 
-    def _allThreeMatch(triple):
+    def _allThreeMatch(self, triple):
         """
         Check for three matching symbols in the Pair-Triple.
 
@@ -154,11 +154,11 @@ class Referee(object):
 
         for cell_id, symbol in triple:
             if firstVal == symbol:
-                numMatches++
+                numMatches += 1
 
         return numMatches == 3
 
-    def _playerNumFromSymbol(sym):
+    def _playerNumFromSymbol(self, sym):
         """
         Given an 'X' or an 'O' determine which player is using the symbol.
 

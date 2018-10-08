@@ -1,11 +1,13 @@
-
+from player import Player
+from board import Board
+from referee import Referee
 
 class Game(object):
     """
     Orchestrates a single match of Tic-Tac-Toe.
     """
 
-    def __init__(self):
+    def __init__(self, p1, p2):
         """
         Construct a Game setting player 1 and player 2.
 
@@ -40,7 +42,7 @@ class Game(object):
         winnerId = 0
 
         print(self._board)
-        roundTurn(self._player1)
+        self._roundTurn(self._player1)
 
         # The game is over
         if self._board.isFull():
@@ -54,7 +56,7 @@ class Game(object):
             return True
 
         print(self._board)
-        roundTurn(self._player2)
+        self._roundTurn(self._player2)
 
         # Final board
         print(self._board)
@@ -106,11 +108,11 @@ class Game(object):
 
     def isOver(self):
 
-        return (endedWithWin() or endedWithStalemate())
+        return (self.endedWithWin() or self.endedWithStalemate())
 
     def isNotOver(self):
 
-        return not isOver()
+        return not self.isOver()
 
     def getBoard(self):
 
@@ -125,7 +127,7 @@ class Game(object):
         sym  = player.getSymbol()
 
         # while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
-        while not ref.selectedCellIsEmpty(move):
+        while not self._ref.selectedCellIsEmpty(move):
             move = player.nextMove()
             sym  = player.getSymbol()
 

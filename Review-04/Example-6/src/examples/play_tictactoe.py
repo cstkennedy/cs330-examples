@@ -1,3 +1,7 @@
+#! /usr/bin/env python3
+
+from player import (Player, REFERENCE_CYLON)
+from game import Game
 
 def main():
 

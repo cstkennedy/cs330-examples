@@ -9,7 +9,7 @@ class Board(object):
     The digit represents the cell id and is used to update a Cell
     """
 
-    def _init_(self):
+    def __init__(self):
         """
         Construct an empty gameboard.
         """
@@ -73,11 +73,11 @@ class Board(object):
         cell2Id -= 1
         cell3Id -= 1
 
-        return ((cell1Id, _theBoard[cell1Id]),
-                (cell2Id, _theBoard[cell2Id]),
-                (cell3Id, _theBoard[cell3Id]))
+        return ((cell1Id, self._theBoard[cell1Id]),
+                (cell2Id, self._theBoard[cell2Id]),
+                (cell3Id, self._theBoard[cell3Id]))
 
-    def isFull():
+    def isFull(self):
         """
         Return true if all 9 cells hold player symbols.
 
@@ -88,21 +88,21 @@ class Board(object):
 
         emptyCells = 0
 
-        for cell in sself._theboard:
+        for cell in self._theBoard:
             if cell.isdigit():
-                emptyCells++
+                emptyCells += 1
 
         # return (emptyCells == 9) # OOPs... good thing I tested
         return (emptyCells == 0)
 
-    def _eq_(self, rhs):
+    def __eq__(self, rhs):
 
         if not isinstance(rhs, self._class_):
             return False
 
         return self._theBoard == rhs._theBoard
 
-    def _str_(self):
+    def __str__(self):
         """
         Print the Board.
         E.g.,
@@ -111,6 +111,6 @@ class Board(object):
           7|8|9
         """
 
-        return "\n".join([self._theBoard[0:2],
-                         self._theBoard[3:5],
-                         self._theBoard[6:8]])
+        return "\n".join(["|".join(self._theBoard[0:3]),
+                          "|".join(self._theBoard[3:6]),
+                          "|".join(self._theBoard[6:9])])

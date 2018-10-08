@@ -12,11 +12,6 @@ class Player(object):
     """
     PROMPT_MSG = "Enter your desired move (1-9): "
 
-    """
-    A Player that serves as a sentinal value or placeholder.
-    """
-    REFERENCE_CYLON = Player()
-
     def isGeneric(self, possibleCylon):
         """
         Checks whether a player is a placeholder or
@@ -104,7 +99,7 @@ class Player(object):
 
         return self._symbol
 
-    def setSymbol(self):
+    def setSymbol(self, newSymbol):
         """
         Change the player symbol.
 
@@ -138,3 +133,8 @@ class Player(object):
         cpy.setSymbol(self._symbol)
 
         return cpy
+
+"""
+A Player that serves as a sentinal value or placeholder.
+"""
+REFERENCE_CYLON = Player()
