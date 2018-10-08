@@ -1,6 +1,7 @@
-from player import Player
-from board import Board
-from referee import Referee
+from examples.player import Player
+from examples.board import Board
+from examples.referee import Referee
+
 
 class Game(object):
     """
@@ -41,6 +42,7 @@ class Game(object):
 
         winnerId = 0
 
+        print()
         print(self._board)
         self._roundTurn(self._player1)
 
@@ -55,10 +57,12 @@ class Game(object):
             self._winner = self._player1
             return True
 
+        print()
         print(self._board)
         self._roundTurn(self._player2)
 
         # Final board
+        print()
         print(self._board)
 
         winnerId = self._ref.checkForWin()

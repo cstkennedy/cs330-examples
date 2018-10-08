@@ -97,7 +97,7 @@ class Board(object):
 
     def __eq__(self, rhs):
 
-        if not isinstance(rhs, self._class_):
+        if not isinstance(rhs, self.__class__):
             return False
 
         return self._theBoard == rhs._theBoard

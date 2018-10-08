@@ -23,7 +23,7 @@ class Player(object):
         @return true if the player is a Cylon
         """
 
-        print(REFERENCE_CYLON)
+        # print(REFERENCE_CYLON)
         return possibleCylon == REFERENCE_CYLON
 
     def __init__(self, n="I. C. Generic"):
@@ -135,6 +135,7 @@ class Player(object):
         cpy.setSymbol(self._symbol)
 
         return cpy
+
 
 """
 A Player that serves as a sentinal value or placeholder.
