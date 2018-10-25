@@ -1,4 +1,4 @@
-all: src docs
+all: docs
 
 deploy:
 	zip -r deploy.zip source documentation* input tests
@@ -7,7 +7,7 @@ src:
 	make -C source
 
 docs:
-	doxygen documentation.config
+	echo "use pydoc"
 
 clean:
 	make -C source clean
