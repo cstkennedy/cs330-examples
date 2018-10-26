@@ -1,0 +1,73 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+class Board {
+	+Board()
+	+get3Cells(int cell1Id, int cell2Id, int cell3Id) : CellTriple
+	+getCell(int id) : CellValue
+	+isFull() : bool
+	-theBoard : std::array<CellValue, 9>
+	+CellTriple : using
+	+display(std::ostream& outs) : void
+	+setCell(int id, CellValue newValue) : void
+}
+
+class Game {
+	+Game()
+	+Game(Player& p1, Player& p2)
+	-board : Board
+	+getBoard() : Board&
+	+getLoser() : Player&
+	+getPlayer1() : Player&
+	+getPlayer2() : Player&
+	+getWinner() : Player&
+	-player1 : Player&
+	-player2 : Player&
+	-winner : Player*
+	-ref : Referee
+	+endedWithStalemate() : bool
+	+endedWithWin() : bool
+	+isNotOver() : bool
+	+isOver() : bool
+	+playRound() : bool
+	-roundTurn(Player& player) : bool
+	-numMovesMade : int
+}
+
+
+class Game::Referee {
+	+Referee()
+	+Referee(const Board& b)
+	-allThreeMatch(const Board::CellTriple& triple) : bool
+	+selectedCellIsEmpty(int move) : bool
+	-boardRef : const Board&
+	-checkForDiagonalWin() : int
+	-checkForHorizontalWin() : int
+	-checkForVerticalWin() : int
+	+checkForWin() : int
+	-playerNumFromSymbol(char sym) : int
+}
+
+
+class Player {
+	+Player()
+	+Player(std::string n)
+	+isComputer() : bool
+	+{static} isGeneric(const Player& possibleCylon) : bool
+	+isHuman() : bool
+	+getSymbol() : char
+	-symbol : char
+	+nextMove() : int
+	+{static} referenceCylon : static const Player
+	-{static} PROMPT_MSG : static std::string
+	+getName() : std::string
+	-name : std::string
+	+setName(std::string n) : void
+	+setSymbol(char newSymbol) : void
+}
+
+
+
+@enduml
+

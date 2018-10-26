@@ -1,0 +1,166 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+
+class Circle {
+	+Circle()
+	+Circle(double r)
+	+Circle(const Circle& src)
+	+~Circle()
+	+clone() : Shape*
+	-_radius : double
+	+area() : double
+	+diameter() : double
+	+perimeter() : double
+	+radius() : double
+	-{static} PI :const double
+	-{static} TAU :const double
+	+display(std::ostream& outs) : void
+	+radius(double r) : void
+	+read(std::istream& ins) : void
+}
+
+
+class EquilateralTriangle {
+	+EquilateralTriangle()
+	+EquilateralTriangle(double side)
+	+EquilateralTriangle(const EquilateralTriangle& src)
+	+~EquilateralTriangle()
+	+clone() : Shape*
+	+area() : double
+	+height() : double
+	+side() : double
+	-{static} ROOT_3_DIV_4 :const double
+	+display(std::ostream& outs) : void
+	+read(std::istream& ins) : void
+	+side(double s) : void
+}
+
+
+class RightTriangle {
+	+RightTriangle()
+	+RightTriangle(double base, double height)
+	+RightTriangle(const RightTriangle& src)
+	+~RightTriangle()
+	+clone() : Shape*
+	+area() : double
+	+base() : double
+	-{static} computeHypotenuse(double base, double height) : double
+	+height() : double
+	+hypotenuse() : double
+	-{static} ONE_HALF :const double
+	+base(double side) : void
+	+display(std::ostream& outs) : void
+	+height(double side) : void
+	+read(std::istream& ins) : void
+}
+
+
+abstract class Shape {
+	+Shape()
+	+Shape(std::string name)
+	+~Shape()
+	+{abstract} clone() : Shape*
+	+{abstract} area() : double
+	+{abstract} perimeter() : double
+	#{static} WIDTH_LABEL :const int
+	#{static} WIDTH_VALUE :const int
+	#_name : std::string
+	+name() : std::string
+	+display(std::ostream& outs) : void
+	#name(std::string _name) : void
+	+{abstract} read(std::istream& ins) : void
+}
+
+
+class ShapeFactory {
+	+{static} createShape(std::string name) : Shape*
+	+{static} isKnown(std::string name) : bool
+	+{static} numberKnown() : int
+	-{static} _known_shapes :ShapePair
+	+{static} listKnown(std::ostream& outs) : void
+}
+
+
+
+class ShapeFactory::ShapePair {
+	+ShapePair()
+	+ShapePair(std::string name, Shape* shape)
+	+~ShapePair()
+	+_model : Shape*
+	+_name : std::string
+}
+
+
+
+class Square {
+	+Square()
+	+Square(double s)
+	+Square(const Square& src)
+	+~Square()
+	+clone() : Shape*
+	-_side : double
+	+area() : double
+	+perimeter() : double
+	+side() : double
+	+display(std::ostream& outs) : void
+	+read(std::istream& ins) : void
+	+side(double s) : void
+}
+
+
+class Triangle {
+	+Triangle()
+	+Triangle(double _side_a, double _side_b, double _side_c)
+	+Triangle(const Triangle& src)
+	+~Triangle()
+	+clone() : Shape*
+	#_side_a : double
+	#_side_b : double
+	#_side_c : double
+	+area() : double
+	+perimeter() : double
+	+sideA() : double
+	+sideB() : double
+	+sideC() : double
+	+display(std::ostream& outs) : void
+	+read(std::istream& ins) : void
+	+sideA(double side) : void
+	+sideB(double side) : void
+	+sideC(double side) : void
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+.Shape <|-- .Circle
+
+
+.Shape <|-- .Square
+
+
+.Shape <|-- .Triangle
+
+
+.Triangle <|-- .EquilateralTriangle
+
+
+.Triangle <|-- .RightTriangle
+
+
+
+
+
+/' Aggregation relationships '/
+
+ShapeFactory::ShapePair o-- .Shape
+
+
+
+
+@enduml
+
