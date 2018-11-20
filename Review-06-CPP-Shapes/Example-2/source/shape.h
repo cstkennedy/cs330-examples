@@ -101,7 +101,8 @@ void Shape::name( std::string _name )
  *
  * @return the modified output stream
  */
-inline std::ostream& operator<< ( std::ostream& outs, const Shape &prt )
+inline
+std::ostream& operator<< ( std::ostream& outs, const Shape &prt )
 {
     prt.display( outs );
 
