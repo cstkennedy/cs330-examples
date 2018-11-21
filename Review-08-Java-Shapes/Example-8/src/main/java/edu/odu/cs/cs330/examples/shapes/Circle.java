@@ -38,7 +38,7 @@ public class Circle extends Shape implements Cloneable{
     /**
      * Construct a Circle.
      *
-     * @param s the desired radius length
+     * @param r the desired radius length
      */
     public Circle(double r)
     {
@@ -125,16 +125,14 @@ public class Circle extends Shape implements Cloneable{
 
     /**
      * Print the Circle.
-     *
-     * @param outs the output stream--i.e., destination
      */
     @Override
     public String toString()
     {
-        return String.format(getFormat("s\n"), "Name", this._name)
-             + String.format(getFormat(".4f\n"), "Radius", this.radius())
-             + String.format(getFormat(".4f\n"), "Diameter", this.diameter())
-             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
-             + String.format(getFormat(".4f\n"), "Area", this.area());
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Radius", this.radius())
+             + String.format(FMT_DBL, "Diameter", this.diameter())
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }

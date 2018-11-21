@@ -28,12 +28,15 @@ public class ShapeFactory {
      *
      *  @return A shape with the specified name
      *      or null if no matching shape is found
+     *
+     * @throws CloneNotSupportedException if a mdoel shape is found and the
+     *     copy (i.e., clone) operation fails
      */
     public static Shape createShape(String name)
         throws CloneNotSupportedException
     {
         for (Shape shape : _known_shapes) {
-            if ((shape.name()).equals(name)) {
+            if (shape.name().equals(name)) {
                 return (Shape) shape.clone();
             }
         }
@@ -51,7 +54,7 @@ public class ShapeFactory {
     public static boolean isKnown(String name)
     {
         for (Shape shape : _known_shapes) {
-            if ((shape.name()).equals(name)) {
+            if (shape.name().equals(name)) {
                 return true;
             }
         }
@@ -69,7 +72,7 @@ public class ShapeFactory {
         StringBuilder bld = new StringBuilder();
 
         for (Shape shape : _known_shapes) {
-            bld.append(shape);
+            bld.append(shape.name() + "\n");
         }
 
         return bld.toString();

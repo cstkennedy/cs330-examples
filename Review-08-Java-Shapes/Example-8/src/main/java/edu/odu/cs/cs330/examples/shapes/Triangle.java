@@ -189,11 +189,11 @@ public class Triangle extends Shape implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(getFormat("s\n"), "Name", this._name)
-             + String.format(getFormat(".4f\n"), "Side A", this._side_a)
-             + String.format(getFormat(".4f\n"), "Side B", this._side_b)
-             + String.format(getFormat(".4f\n"), "Side C", this._side_c)
-             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
-             + String.format(getFormat(".4f\n"), "Area", this.area());
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Side A", this._side_a)
+             + String.format(FMT_DBL, "Side B", this._side_b)
+             + String.format(FMT_DBL, "Side C", this._side_c)
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }

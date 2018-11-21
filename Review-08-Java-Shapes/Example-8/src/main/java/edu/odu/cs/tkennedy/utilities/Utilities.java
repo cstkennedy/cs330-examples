@@ -40,7 +40,9 @@ public final class Utilities {
      */
     public static String centeredTitle(final String title, final int width)
     {
-        final int magicWidth = (width / 2) - (title.length() / 2) + title.length();
+        final int magicWidth = (width >> 2)
+                             - (title.length() >> 2)
+                             + title.length();
 
         return String.format("%" + magicWidth + "s%n", title);
     }
@@ -54,7 +56,8 @@ public final class Utilities {
      *
      * @return heading with divider
      */
-    public static String seperatedHeading(final String heading, final int width, final char border)
+    public static String seperatedHeading(final String heading,
+                                          final int width, final char border)
     {
         return centeredTitle(heading, width)
              + horizontalLine(border, width);
@@ -72,8 +75,6 @@ public final class Utilities {
     {
         StringBuilder bld = new StringBuilder();
 
-        //bld.append(horizontalLine('*', width));
-        //bld.append("\n");
         bld.append(horizontalLine('*', width)).append("\n");
 
         for (final String line : titles) {
@@ -94,7 +95,8 @@ public final class Utilities {
      *
      * @return formatted centered heading
      */
-    public static String heading(final String title, final int width, final char border)
+    public static String heading(final String title,
+                                 final int width, final char border)
     {
         return horizontalLine(border, width) + "\n"
              + centeredTitle(title, width)

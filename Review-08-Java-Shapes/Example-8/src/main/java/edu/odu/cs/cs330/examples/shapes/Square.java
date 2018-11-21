@@ -6,7 +6,7 @@ package edu.odu.cs.cs330.examples.shapes;
 import java.util.Scanner;
 
 /**
- * A Rectangle with 4 Equal Sides
+ * A Rectangle with 4 Equal Sides.
  *
  * @author Thomas J Kennedy
  */
@@ -49,6 +49,8 @@ public class Square extends Shape implements Cloneable {
 
     /**
      * Return the side length.
+     *
+     * @return length of a single side
      */
     public double side()
     {
@@ -112,9 +114,9 @@ public class Square extends Shape implements Cloneable {
     public String toString()
     {
         return super.toString()
-             + String.format(getFormat(".4f\n"), "Side", this._side)
-             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
-             + String.format(getFormat(".4f\n"), "Area", this.area());
+             + String.format(FMT_DBL, "Side", this._side)
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }
 

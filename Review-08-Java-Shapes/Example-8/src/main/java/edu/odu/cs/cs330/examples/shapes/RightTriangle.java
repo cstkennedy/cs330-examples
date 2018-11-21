@@ -167,12 +167,12 @@ public class RightTriangle extends Triangle implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(getFormat("s\n"), "Name", this._name)
-             + String.format(getFormat(".4f\n"), "Base", this.base())
-             + String.format(getFormat(".4f\n"), "Height", this.height())
-             + String.format(getFormat(".4f\n"), "Hypotenuse", this.hypotenuse())
-             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
-             + String.format(getFormat(".4f\n"), "Area", this.area());
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Base", this.base())
+             + String.format(FMT_DBL, "Height", this.height())
+             + String.format(FMT_DBL, "Hypotenuse", this.hypotenuse())
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }
 

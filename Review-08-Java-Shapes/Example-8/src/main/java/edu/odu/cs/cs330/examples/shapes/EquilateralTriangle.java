@@ -92,7 +92,8 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
      *
      * @return the area
      */
-    public double area(){
+    public double area()
+    {
         return ROOT_3_DIV_4 * side() * side();
     }
 
@@ -122,11 +123,11 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(getFormat("s\n"), "Name", this._name)
-             + String.format(getFormat(".4f\n"), "Side", this._side_a)
-             + String.format(getFormat(".4f\n"), "Height", this.height())
-             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
-             + String.format(getFormat(".4f\n"), "Area", this.area());
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Side", this._side_a)
+             + String.format(FMT_DBL, "Height", this.height())
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }
 
