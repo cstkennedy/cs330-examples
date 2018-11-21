@@ -1,33 +1,33 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2018
 
 package edu.odu.cs.cs330.examples.shapes;
 
 import java.util.Scanner;
 
 /**
- * An Ellipse with equivalent major and minor axes
+ * An Ellipse with equivalent major and minor axes.
  *
  * @author Thomas J Kennedy
  */
-public class Circle extends Shape implements Cloneable{ 
+public class Circle extends Shape implements Cloneable{
     /**
-     * The mathematical constant PI
+     * The mathematical constant PI.
      */
     private static final double PI  = Math.PI;
 
     /**
-     * Tau is defined as 2*PI
-     */ 
+     * Tau is defined as 2 * PI.
+     */
     private static final double TAU = 2 * PI;
 
     /**
-     * Length of the radius
+     * Length of the radius.
      */
     private double _radius;
 
     /**
-     * Construct a Circle with radius set to 1
+     * Construct a Circle with radius set to 1.
      */
     public Circle()
     {
@@ -36,47 +36,47 @@ public class Circle extends Shape implements Cloneable{
     }
 
     /**
-     * Construct a Circle
-     *  
+     * Construct a Circle.
+     *
      * @param s the desired radius length
      */
-    public Circle( double r )
+    public Circle(double r)
     {
         this._name   = "Circle";
         this._radius = r;
     }
 
     /**
-     * Construct a Circle
+     * Construct a Circle.
      *
-     * @param src the Circle to copy       
-     */ 
-    public Circle( Circle src )
+     * @param src the Circle to copy
+     */
+    public Circle(Circle src)
     {
         this._name   = src._name;
         this._radius = src._radius;
     }
 
     /**
-     * Return the radius length
+     * Return the radius length.
      */
     public double radius()
     {
-        return _radius;        
+        return _radius;
     }
 
     /**
-     * Modify the radius length
+     * Modify the radius length.
      *
      * @param r the replacement length
      */
-    public void radius( double r )
+    public void radius(double r)
     {
         _radius = r;
     }
 
     /**
-     * Return the diameter
+     * Return the diameter.
      */
     public double diameter()
     {
@@ -84,7 +84,7 @@ public class Circle extends Shape implements Cloneable{
     }
 
     /**
-     * Compute the area using \f$ \pi r^2 \f$
+     * Compute the area using \f$ \pi r^2 \f$.
      *
      * @return area
      */
@@ -94,7 +94,7 @@ public class Circle extends Shape implements Cloneable{
     }
 
     /**
-     * Compute the perimeter using \f$ 2 \pi r \f$
+     * Compute the perimeter using \f$ 2 \pi r \f$.
      *
      * @return perimeter
      */
@@ -102,18 +102,18 @@ public class Circle extends Shape implements Cloneable{
     {
         return TAU * _radius;
     }
-    
+
     /**
-     * Return a new duplicate Circle
+     * Return a new duplicate Circle.
      */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Circle( this );
+        return new Circle(this);
     }
 
     /**
-     * Read the shape
+     * Read the shape.
      *
      * @param scanner the input stream--scanner in this example
      */
@@ -124,19 +124,17 @@ public class Circle extends Shape implements Cloneable{
     }
 
     /**
-     * Print the Circle
+     * Print the Circle.
      *
      * @param outs the output stream--i.e., destination
      */
     @Override
     public String toString()
-    {       
-        return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Radius",    this.radius()    ) +
-            String.format( getFormat( ".4f\n" ), "Diameter",  this.diameter()  ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );        
+    {
+        return String.format(getFormat("s\n"), "Name", this._name)
+             + String.format(getFormat(".4f\n"), "Radius", this.radius())
+             + String.format(getFormat(".4f\n"), "Diameter", this.diameter())
+             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
+             + String.format(getFormat(".4f\n"), "Area", this.area());
     }
 }

@@ -1,34 +1,34 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2018
 
 package edu.odu.cs.cs330.examples.shapes;
 
 import java.util.Scanner;
 
 /**
- * A Polygon with 3 Sides
+ * A Polygon with 3 Sides.
  *
  * @author Thomas J Kennedy
  */
 public class Triangle extends Shape implements Cloneable {
 
     /**
-     * Length of Side A
+     * Length of Side A.
      */
     protected double _side_a;
 
     /**
-     * Length of Side B
+     * Length of Side B.
      */
     protected double _side_b;
 
     /**
-     * Length of Side C
+     * Length of Side C.
      */
     protected double _side_c;
 
     /**
-     * Create a Triangle with side of length 1
+     * Create a Triangle with side of length 1.
      */
     public Triangle()
     {
@@ -40,7 +40,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Construct a triangle
+     * Construct a triangle.
      *
      * @param _side_a the length of side A
      * @param _side_b the length of side B
@@ -57,7 +57,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Construct a Triangle
+     * Construct a Triangle.
      *
      * @param src the Triangle to copy
      */
@@ -71,7 +71,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Length of side A
+     * Length of side A.
      *
      * @return the length of side A
      */
@@ -81,7 +81,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Modify the length of side A
+     * Modify the length of side A.
      *
      * @param side the replacement length
      */
@@ -91,7 +91,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Length of side B
+     * Length of side B.
      *
      * @return the length of side B
      */
@@ -101,7 +101,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Modify the length of side B
+     * Modify the length of side B.
      *
      * @param side the replacement length
      */
@@ -111,7 +111,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Length of side C
+     * Length of side C.
      *
      * @return the length of side C
      */
@@ -121,7 +121,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Modify the length of side C
+     * Modify the length of side C.
      *
      * @param side the replacement length
      */
@@ -149,7 +149,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Compute the perimeter
+     * Compute the perimeter.
      * @f$ side_a + side_b + side_c @f$
      *
      * @return the perimeter
@@ -162,7 +162,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Return a new duplicate Triangle
+     * Return a new duplicate Triangle.
      */
     @Override
     public Object clone() throws CloneNotSupportedException
@@ -171,7 +171,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Read the shape
+     * Read the shape.
      *
      * @param scanner the input stream--scanner in this example
      */
@@ -184,7 +184,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Print the Triangle
+     * Print the Triangle.
      */
     @Override
     public String toString()

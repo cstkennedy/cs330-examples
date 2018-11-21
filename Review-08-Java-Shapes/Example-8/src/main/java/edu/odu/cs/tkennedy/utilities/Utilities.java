@@ -1,26 +1,24 @@
 package edu.odu.cs.tkennedy.utilities;
 
-//import java.lang.StringBuilder;
-
 /**
  * A collection of general purpose utility functions
- * used during class discussions
+ * used during class discussions.
  *
  * @author Thomas J Kennedy
  */
-public final class Utilities{
+public final class Utilities {
     /**
-     * Width of the terminal window
+     * Width of the terminal window.
      */
-    public static final int W_WIDTH = 80;    
-    
+    public static final int W_WIDTH = 80;
+
     /**
-     * Default Precision (epsilon)
+     * Default Precision (epsilon).
      */
     public static final double EPS = 1E-6;
 
     /**
-     * Print a horizontal line
+     * Print a horizontal line.
      *
      * @param lineChar symbol used in divider
      * @param width width of divider
@@ -33,7 +31,7 @@ public final class Utilities{
     }
 
     /**
-     *  Print a centered title
+     * Print a centered title.
      *
      * @param title heading title
      * @param width width of divider
@@ -44,12 +42,12 @@ public final class Utilities{
     {
         final int magicWidth = (width / 2) - (title.length() / 2) + title.length();
 
-        return(String.format("%" + magicWidth + "s%n", title));
+        return String.format("%" + magicWidth + "s%n", title);
     }
 
     /**
-     * Print a heading followed by a horizontal rule
-     * 
+     * Print a heading followed by a horizontal rule.
+     *
      * @param heading the title to display
      * @param width the width of the heading
      * @param border the character with which to create the horizontal rule
@@ -58,14 +56,12 @@ public final class Utilities{
      */
     public static String seperatedHeading(final String heading, final int width, final char border)
     {
-        return(
-            centeredTitle(heading, width) +
-            horizontalLine(border, width)
-        );
-    } 
+        return centeredTitle(heading, width)
+             + horizontalLine(border, width);
+    }
 
     /**
-     * Print the stylized program/project heading
+     * Print the stylized program/project heading.
      *
      * @param titles title lines to display
      * @param width the width of the heading
@@ -80,7 +76,7 @@ public final class Utilities{
         //bld.append("\n");
         bld.append(horizontalLine('*', width)).append("\n");
 
-        for(final String line : titles){
+        for (final String line : titles) {
             bld.append(centeredTitle(line, width));
         }
 
@@ -90,31 +86,29 @@ public final class Utilities{
     }
 
     /**
-     *  Print a centered heading
+     * Print a centered heading.
      *
-     *  @param title the title to display
-     *  @param width the width of the heading
-     *  @param border the character with which to create the horizontal rule
+     * @param title the title to display
+     * @param width the width of the heading
+     * @param border the character with which to create the horizontal rule
      *
      * @return formatted centered heading
      */
     public static String heading(final String title, final int width, final char border)
     {
-        return(            
-            horizontalLine(border, width) + "\n" +
-            centeredTitle(title, width  ) +
-            horizontalLine(border, width)
-       );
+        return horizontalLine(border, width) + "\n"
+             + centeredTitle(title, width)
+             + horizontalLine(border, width);
     }
 
     /**
-     *  Compare two floating point numbers - determine if equal within
-     *  a specified threshold
+     * Compare two floating point numbers - determine if equal within
+     * a specified threshold.
      *
      * @param lhs first number
      * @param rhs second number
      * @param threshold epsilon (difference) value
-     * 
+     *
      * @return true if the values are equal and false otherwise
      */
     public static boolean areEqual(double lhs, double rhs, double threshold)

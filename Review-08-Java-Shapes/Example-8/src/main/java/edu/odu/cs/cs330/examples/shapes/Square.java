@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2018
 
 package edu.odu.cs.cs330.examples.shapes;
 
@@ -10,45 +10,45 @@ import java.util.Scanner;
  *
  * @author Thomas J Kennedy
  */
-public class Square extends Shape implements Cloneable {  
+public class Square extends Shape implements Cloneable {
     /**
-     * Length of One Side
+     * Length of One Side.
      */
     private double _side;
 
     /**
-     * Construct a Square with side set to 1
+     * Construct a Square with side set to 1.
      */
     public Square()
     {
-        super( "Square" );
+        super("Square");
         _side = 1;
     }
 
     /**
-     * Construct a Square
-     * 
+     * Construct a Square.
+     *
      * @param s the desired side length
      */
-    public Square( double s )
+    public Square(double s)
     {
-        super( "Square" );
+        super("Square");
         _side = s;
     }
 
     /**
-     * Construct a Square
+     * Construct a Square.
      *
-     * @param src the Square to copy       
-     */ 
-    public Square( Square src )
+     * @param src the Square to copy
+     */
+    public Square(Square src)
     {
-        super( "Square" );
+        super("Square");
         this._side = src._side;
     }
 
     /**
-     * Return the side length
+     * Return the side length.
      */
     public double side()
     {
@@ -56,27 +56,27 @@ public class Square extends Shape implements Cloneable {
     }
 
     /**
-     * Modify the side length
+     * Modify the side length.
      *
      * @param s the replacement length
      */
-    public void side( double s )
+    public void side(double s)
     {
         _side = s;
     }
 
     /**
-     * Compute the area
+     * Compute the area.
      *
      * @return area
      */
     public double area()
     {
-        return Math.pow( _side, 2.0 );
+        return Math.pow(_side, 2.0);
     }
 
     /**
-     * Compute the perimeter
+     * Compute the perimeter.
      *
      * @return perimeter
      */
@@ -86,16 +86,16 @@ public class Square extends Shape implements Cloneable {
     }
 
     /**
-     * Return a new duplicate Square
+     * Return a new duplicate Square.
      */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Square( this );
+        return new Square(this);
     }
 
     /**
-     * Read the shape
+     * Read the shape.
      *
      * @param scanner the input stream--scanner in this example
      */
@@ -106,17 +106,15 @@ public class Square extends Shape implements Cloneable {
     }
 
     /**
-     * Print the Square
+     * Print the Square.
      */
     @Override
     public String toString()
     {
-        return (
-            super.toString() +
-            String.format( getFormat( ".4f\n" ), "Side",      this._side       ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );
+        return super.toString()
+             + String.format(getFormat(".4f\n"), "Side", this._side)
+             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
+             + String.format(getFormat(".4f\n"), "Area", this.area());
     }
 }
 

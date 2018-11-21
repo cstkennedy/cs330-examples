@@ -1,14 +1,15 @@
 package edu.odu.cs.cs330.examples;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
-import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+
 import static java.util.stream.Collectors.*;
 import java.util.Comparator;
+
+import java.util.List;
+import java.util.ArrayList;
 
 import edu.odu.cs.tkennedy.utilities.Utilities;
 import static edu.odu.cs.tkennedy.utilities.Utilities.heading;
@@ -18,14 +19,13 @@ import static edu.odu.cs.tkennedy.utilities.Utilities.horizontalLine;
 import edu.odu.cs.cs330.examples.shapes.*;
 
 /**
- * This is the Java version of the previous C++
- * Shapes Inheritance Example
+ * This is the Java version of the previous C++ Shapes Inheritance Example.
  *
  * @author Thomas J Kennedy
  */
 public class RunShapes {
     /**
-     * Program Title 
+     * This is the Program Title.
      */
     private static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
@@ -33,13 +33,14 @@ public class RunShapes {
     };
 
     /**
-     * Main function
+     * This is the main function.
      *
      * @param args[0] input filename
      *
-     * @throws CloneNotSupportedException
+     * @throws CloneNotSupportedException if a shapes subclass can
+    *      not be copied.
      */
-    public static void main(String args[])
+    public static void main(String[] args)
         throws CloneNotSupportedException
     {
         BufferedReader shapesFile = null;
@@ -48,26 +49,24 @@ public class RunShapes {
             // the wrong way
             shapesFile = new BufferedReader(new FileReader(args[0]));
         }
-        catch(ArrayIndexOutOfBoundsException e) {
+        catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Usage: java -jar {jarfile} {inputTextFile}");
             System.exit(1);
         }
-        catch(FileNotFoundException e) {
+        catch (FileNotFoundException e) {
             System.out.println("File (" + args[0] + ") could not be opened.");
             System.exit(1);
         }
 
         // Print main program heading
-        System.out.println(
-            projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-       );        
+        System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
        /*
         * What happens when the number of shapes is non-trivial?
         *
         * Suppose we were to expand our Shape hierarchy to include
         * the following shapes:
-        *   - Isosceles Triangle 
+        *   - Isosceles Triangle
         *   - Circle
         *   - Ellipse
         *   - Rectangle
@@ -86,7 +85,7 @@ public class RunShapes {
         *   - Python
         *   - PHP
         *   - C#
-        * 
+        *
         * A class that contains static members is created.
         * As new classes are created, the Factory Class is
         * updated.
@@ -106,7 +105,8 @@ public class RunShapes {
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());    
+        System.out.printf("%2d shapes available.%n",
+                          ShapeFactory.numberKnown());
 
         System.out.println();
 
@@ -125,10 +125,10 @@ public class RunShapes {
         System.out.println();
 
         System.out.println(heading("Display Largest Shape (Area)", 38, '~'));
-        //Shape largestShape = findLargestShapeByArea(shapes); 
+        //Shape largestShape = findLargestShapeByArea(shapes);
         Shape largestShape = shapes.stream()
                                 .max(Comparator.comparing(Shape::area))
-                                .get(); 
+                                .get();
         System.out.println(largestShape);
 
         System.out.println(heading("Display Smallest Shape (Perimeter)", 38, '~'));
@@ -140,7 +140,14 @@ public class RunShapes {
 
     /**
      * Read shapes from an input stream
-     * and construct a `ArrayList<Shape>` object
+     * and construct an `ArrayList<Shape>` object.
+     *
+     * @param scanner input source
+     *
+     * @return collection of read-in shapes
+     *
+     * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
+     *     model shape
      */
     private static List<Shape> readShapes(Scanner scanner)
         throws CloneNotSupportedException
@@ -148,7 +155,7 @@ public class RunShapes {
         ArrayList<Shape> collection = new ArrayList<Shape>();
 
         while (scanner.hasNextLine()) {
-            String  line          = scanner.nextLine();            
+            String  line  = scanner.nextLine();
 
             //String name = inLineScanner.next();
             int    sIndex = line.indexOf(';', 0);
