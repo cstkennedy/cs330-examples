@@ -49,7 +49,7 @@ public class PrimeGuiThread extends JFrame {
             int prime = 2;
 
             for (int i = 0; i < toGenerate && !stop; i++) {
-                prime = primeGenerator.next();    
+                prime = primeGenerator.next();
             }
 
             // Update GUI elements
@@ -100,9 +100,14 @@ public class PrimeGuiThread extends JFrame {
     private JButton     startButton;  ///< Control - start generation
     private JButton     stopButton;   ///< Halt - stop generation
 
-    // Data--i.e., computation--elements
-    private PrimeWorker worker; ///< Worker Thread - Wrapper for Prime Generation
+    /**
+     * Worker Thread - Wrapper for Prime Generation.
+     */
+    private PrimeWorker worker;
 
+    /**
+     * The constructor for the GUI.
+     */
     public PrimeGuiThread() {
         super("Prime Generator");
         setLocation(50, 75);
@@ -162,7 +167,7 @@ public class PrimeGuiThread extends JFrame {
                     try {
                         numPrimes = Integer.parseInt(toGenField.getText());
                     }
-                    catch (NumberFormatException exc){
+                    catch (NumberFormatException exc) {
                         numPrimes = 10;
                         toGenField.setText("" + numPrimes);
                     }

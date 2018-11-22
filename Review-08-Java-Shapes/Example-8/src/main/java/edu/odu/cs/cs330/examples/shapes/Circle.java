@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Thomas J Kennedy
  */
-public class Circle extends Shape implements Cloneable{
+public class Circle extends Shape implements Cloneable {
     /**
      * The mathematical constant PI.
      */

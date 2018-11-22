@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 /**
- * This is a Brute Force Prime Number Generator. It is intentionally inefficient.
+ * This is a Brute Force Prime Number Generator. It is intentionally
+ * inefficient.
  * <p>
  * There exist far more appropriate methods to identify prime numbers.
  * <p>
@@ -14,7 +15,6 @@ import java.util.ListIterator;
  *  - CS 772, http://www.cs.odu.edu/~cs772/fall14/lectures/Number%20Theory.htm#Primes
  * <p>
  *  - CS 472, http://www.cs.odu.edu/~cs472/fall11/lectures/Number_Theory.htm#Primes
- *
  */
 public class BruteForce {
     /**
@@ -69,7 +69,7 @@ public class BruteForce {
                 int p = li.next().intValue();
 
                 // Is the number prime?
-                prime = (nextPrime % p != 0);
+                prime = nextPrime % p != 0;
             }
         }
 

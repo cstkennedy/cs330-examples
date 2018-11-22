@@ -9,12 +9,15 @@ import edu.odu.cs.cs330.examples.guithread.generator.prime.BruteForce;
  */
 public class TestPrimeGenerator {
 
+    /**
+     * The main function for the command line prime number generator.
+     */
     public static void main(String[] args)
     {
         /**
          * Prime number generator instance.
          */
-        BruteForce         gen = new BruteForce();
+        BruteForce gen = new BruteForce();
 
         /**
          * List of generated primes.
@@ -24,7 +27,7 @@ public class TestPrimeGenerator {
         /**
          * Number of primes to generate.
          */
-        int                numPrimes = 0;
+        int numPrimes = 0;
 
         // Parse command line argument 1
         try {

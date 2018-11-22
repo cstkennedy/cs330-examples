@@ -57,10 +57,7 @@ public class RightTriangle extends Triangle implements Cloneable {
 
         this._side_a = base;
         this._side_b = height;
-        this._side_c = RightTriangle.computeHypotenuse(
-            _side_a,
-            _side_b
-       );
+        this._side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
     }
 
     /**
@@ -79,6 +76,8 @@ public class RightTriangle extends Triangle implements Cloneable {
 
     /**
      * Return the base.
+     *
+     * @return the base
      */
     public double base()
     {
@@ -99,6 +98,8 @@ public class RightTriangle extends Triangle implements Cloneable {
 
     /**
      * Return the height.
+     *
+     * @return the height
      */
     public double height()
     {

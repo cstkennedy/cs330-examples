@@ -95,7 +95,9 @@ public class FlipTask
     public String toString()
     {
         return String.format("# Heads: %6d (%6.4f) / # Tails %6d (%6.4f)%n",
-                             this.numHeads, (1.0 * this.numHeads / this.numTrials),
-                             this.numTails, (1.0 * this.numTails / this.numTrials));
+                             this.numHeads,
+                             (1.0 * this.numHeads / this.numTrials),
+                             this.numTails,
+                             (1.0 * this.numTails / this.numTrials));
     }
 }
