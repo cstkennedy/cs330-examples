@@ -98,6 +98,7 @@ class Triangle(Shape):
             formatStr.format("Area", self.area())
         )
 
+
 if __name__ == "__main__":
     s = Triangle(2, 2, 2)
 

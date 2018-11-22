@@ -111,6 +111,7 @@ class RightTriangle(Triangle):
             formatStr.format("Area", self.area())
         )
 
+
 if __name__ == "__main__":
 
     s = RightTriangle(1, 2)
