@@ -12,13 +12,13 @@ def fibonacci_sequence(sequence_length):
 
     fm2 = 1  # n-2 (previous previous) fibonacci number
     fm1 = 1  # n-1 (previous) fibonacci number
-    f   = 0  # current fibonacci number
+    f = 0  # current fibonacci number
 
     yield fm2
     yield fm1
 
     for i in range(3, (sequence_length + 1)):
-        f   = fm1 + fm2
+        f = fm1 + fm2
         fm2 = fm1
         fm1 = f
 
@@ -46,7 +46,4 @@ def main():
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except:
-        pass
+    main()

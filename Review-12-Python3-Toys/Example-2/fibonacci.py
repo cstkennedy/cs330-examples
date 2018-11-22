@@ -13,9 +13,9 @@ def main():
     index = 3  # Desired length of sequence
 
     # Fibonaccci
-    fm2   = 1  # n-2 (previous previous) fibonacci number
-    fm1   = 1  # n-1 (previous) fibonacci number
-    f     = 0  # current fibonacci number
+    fm2 = 1  # n-2 (previous previous) fibonacci number
+    fm1 = 1  # n-1 (previous) fibonacci number
+    f = 0  # current fibonacci number
 
     # Prompt the user
     index = input("Generate how many numbers? ")
@@ -45,7 +45,7 @@ def main():
 
     # Fhe first 2 numbers were already output
     for i in range(3, (index + 1)):
-        f   = fm1 + fm2
+        f = fm1 + fm2
         fm2 = fm1
         fm1 = f
 

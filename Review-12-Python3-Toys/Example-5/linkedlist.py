@@ -51,8 +51,8 @@ class LinkedList(object):
         Construct an empty Linked List
         """
 
-        self.__head  = None
-        self.__tail  = None
+        self.__head = None
+        self.__tail = None
         self.__nodes = 0
 
     def appendNode(self, to_add):
