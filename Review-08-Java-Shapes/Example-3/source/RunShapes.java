@@ -20,7 +20,7 @@ public class RunShapes {
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-       );        
+        );        
 
        /*
         * What happens when the number of shapes is non-trivial?

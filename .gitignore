@@ -23,3 +23,11 @@
 
 # Assignment Ignore Rules
 **Assignment-0*
+
+# Eclipse Project Ignore Rules
+**.project
+**.settings
+**.classpath
+
+# Latex Ignore Rules
+**.aux

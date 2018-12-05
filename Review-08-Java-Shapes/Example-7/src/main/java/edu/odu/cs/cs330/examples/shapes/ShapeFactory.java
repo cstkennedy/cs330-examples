@@ -1,5 +1,4 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
 
 package edu.odu.cs.cs330.examples.shapes;
 
