@@ -19,7 +19,7 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Linked List Review",
     "Thomas J. Kennedy"
-}; ///< Program Title 
+}; ///< Program Title
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
@@ -45,12 +45,12 @@ LinkedList generateList(int n);
 int main(int argc, char** argv)
 {
     int         seed        = 0; // Seed for random number generation
-    int         toGenerate  = 0; // Number of nodes to generate    
+    int         toGenerate  = 0; // Number of nodes to generate
 
     // If a seed was passed from the command line,
     // parse it. Otherwise default to ctime
     if( argc >= 2 ) {
-        seed = atoi( argv[1] );          
+        seed = atoi( argv[1] );
     }
     else {
         seed = time( NULL );
@@ -59,20 +59,20 @@ int main(int argc, char** argv)
     // If a node  count was passed from the command line,
     // parse it. Otherwise default to 10
     if( argc >= 3 ) {
-        toGenerate = atoi( argv[2] );   
+        toGenerate = atoi( argv[2] );
     }
     else {
         toGenerate = 10;
-    } 
+    }
 
-    srand( seed );    
+    srand( seed );
 
     // Print the program heading
     printProjectHeading( cout, PROGRAM_HEADING, HEADING_LINES );
 
     // Create a Linked List
     LinkedList randomInts = generateList(toGenerate);
-    cout << randomInts;  
+    cout << randomInts;
 
     printHorizontalLine( cout, '*', W_WIDTH );
 
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
     cout << randomCopy;
 
     printHorizontalLine( cout, '*', W_WIDTH );
-    cout << randomInts; 
+    cout << randomInts;
 
     return 0;
 }
@@ -101,7 +101,7 @@ int randomInt( int min, int max )
 
     // Multiply x by the scaling factor and shift
     // by adding min
-    return ( x * s ) + min; 
+    return ( x * s ) + min;
 }
 
 /**
@@ -112,7 +112,7 @@ LinkedList generateList(int n)
     LinkedList ll;
 
     // Generate a Linked List (LL) of 10 Nodes
-    for( int i = 0; i < n; i++ ){     
+    for( int i = 0; i < n; i++ ){
         ll.appendNode( randomInt() );
     }
 

@@ -26,7 +26,7 @@ namespace utilities{
     bool readValue( std::istream &in_stream, T &value_in)
     {
         in_stream >> value_in;
-        
+
         //Return False on read error
         return in_stream.good();
     }
@@ -74,13 +74,13 @@ namespace utilities{
      * @param width the width of the heading
      * @param border the character with which to create the horizontal rule
      */
-    inline 
+    inline
     void printSeperatedHeading( std::ostream &outs, std::string heading,
                                 int width, char border = '-')
     {
         printCenteredTitle(  outs, heading, width );
         printHorizontalLine( outs, border, width );
-    } 
+    }
 
     /**
      * Print the stylized program/project heading
@@ -114,20 +114,20 @@ namespace utilities{
     /**
      * Print a blankline
      */
-    inline 
+    inline
     void println( std::ostream& outs=std::cout )
     {
         outs << "\n";
-    } 
+    }
 
     /**
      * Trim leading and trailing whitespace from a string.
-     * 
+     *
      * @param str string to prune
-     * 
+     *
      * @pre str is nonempty
      */
-    inline 
+    inline
     void trim( std::string &str )
     {
         // If the string is empty, do nothing
@@ -138,7 +138,7 @@ namespace utilities{
         int first_nonspace = str.find_first_not_of(" \t");
         int last_non_space = str.find_last_not_of(" \t");
 
-        str = str.substr( 
+        str = str.substr(
             first_nonspace,
             last_non_space + 1
         );

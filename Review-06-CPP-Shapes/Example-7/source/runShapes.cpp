@@ -17,7 +17,7 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title 
+}; ///< Program Title
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
@@ -42,7 +42,7 @@ void printShapes(std::ostream& outs, const ShapeCollection& toPrint);
  */
 void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint);
 
-/** 
+/**
  * Find the largest `Shape` (by area) in a `ShapeCollection`
  *
  * @return an iterator at the position of the largest `Shape`
@@ -80,10 +80,10 @@ int main(int argc, char** argv)
     // List the available shapes
     ShapeFactory::listKnown(cout);
     printHorizontalLine(cout, '-', 38);
-    cout << right << setw(2) 
-         << ShapeFactory::numberKnown() 
-         << " shapes available." 
-         << "\n";    
+    cout << right << setw(2)
+         << ShapeFactory::numberKnown()
+         << " shapes available."
+         << "\n";
 
     cout << "\n";
 
@@ -105,7 +105,7 @@ int main(int argc, char** argv)
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
 
     ShapeCollection::const_iterator it = findLargestShapeByArea(shapes);
-    Shape* largestShape = *it; 
+    Shape* largestShape = *it;
 
     //cout << largestShape << "\n"; // oops again
     cout << *largestShape << "\n";
@@ -175,5 +175,5 @@ ShapeCollection::const_iterator findLargestShapeByArea(const ShapeCollection& co
         }
     }
 
-    return largestShape;    
+    return largestShape;
 }

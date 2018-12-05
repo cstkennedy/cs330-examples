@@ -22,7 +22,7 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title 
+}; ///< Program Title
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
@@ -81,10 +81,10 @@ int main(int argc, char** argv)
     // List the available shapes
     ShapeFactory::listKnown(cout);
     printHorizontalLine(cout, '-', 38);
-    cout << right << setw(2) 
-         << ShapeFactory::numberKnown() 
-         << " shapes available." 
-         << "\n";    
+    cout << right << setw(2)
+         << ShapeFactory::numberKnown()
+         << " shapes available."
+         << "\n";
 
     cout << "\n";
 
@@ -101,23 +101,23 @@ int main(int argc, char** argv)
     printShapeNames(cout, shapes);
 
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
-    ShapeCollection::const_iterator it;    
+    ShapeCollection::const_iterator it;
 
-    it = std::max_element(shapes.begin(), shapes.end(), 
+    it = std::max_element(shapes.begin(), shapes.end(),
                           [](const auto& lhs, const auto& rhs) {
                               return (lhs)->area() < (rhs)->area();
                           });
     cout << *(*it) << "\n";
 
     printHeading(cout, "Display Smallest Shape (Perimeter)", 38, '~');
-    it = std::min_element(shapes.begin(), shapes.end(), 
+    it = std::min_element(shapes.begin(), shapes.end(),
                           [](const auto& lhs, const auto& rhs) {
                               return (lhs)->perimeter() < (rhs)->perimeter();
                           });
     cout << *(*it) << "\n";
 
     printHeading(cout, "Display Sorted by Name", 38, '~');
-    std::sort(shapes.begin(), shapes.end(), 
+    std::sort(shapes.begin(), shapes.end(),
                           [](const auto& lhs, const auto& rhs) {
                               return (lhs)->name() < (rhs)->name();
                           });

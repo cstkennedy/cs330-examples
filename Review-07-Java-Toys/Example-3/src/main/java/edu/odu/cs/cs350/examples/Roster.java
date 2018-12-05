@@ -30,11 +30,11 @@ public class Roster implements Cloneable {
     }
 
     /**
-     * Create a class roster with a specified 
+     * Create a class roster with a specified
      * enrollment limit and course number
      *
      * @param l enrollment limit
-     * @param c course number 
+     * @param c course number
      */
     public Roster(int l, String c)
     {
@@ -83,10 +83,10 @@ public class Roster implements Cloneable {
     /**
      * Attempt to enroll a Student in the course
      *
-     * Rules: 
+     * Rules:
      *   1- A student can not be added if the enrollment
      *     limit has been reached.
-     *   2- A can not be added to a roster multiple times 
+     *   2- A can not be added to a roster multiple times
      *
      * @param stu Student to enroll
      *
@@ -122,7 +122,7 @@ public class Roster implements Cloneable {
      * the order they were enrolled (added)
      *
      * @return Set of enrolled students. If no students
-     *     have been added to the roster, the set will be 
+     *     have been added to the roster, the set will be
      *     empty.
      */
     public Set<Student> listEnrolledStudents()
@@ -154,7 +154,7 @@ public class Roster implements Cloneable {
 
         if (!this.students.equals(rhsRoster.students)) {
             return false;
-        }        
+        }
 
         return true;
     }

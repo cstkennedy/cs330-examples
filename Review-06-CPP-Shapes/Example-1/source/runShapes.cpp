@@ -19,7 +19,7 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title 
+}; ///< Program Title
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
@@ -35,7 +35,7 @@ int main()
     // --Erroneous Variable Declarations--
     //Shape shape;                   // Declare an instance of Shape
     //Shape shapes[4];               // Declare an Array of Shapes
-    
+
     //Shape* shapes = new Shape[4] // Define an array of Shapes
 
     // --Corrected Variable Declarations--
@@ -56,8 +56,8 @@ int main()
     // & one EquilateralTriangle
     //rhtTri  = new RightTriangle(1, 2);
     rhtTri  = new RhtTri(1, 2);
-    
-    tri   = rhtTri; // Point tri to rhtTri    
+
+    tri   = rhtTri; // Point tri to rhtTri
     shape = rhtTri; // Point shape to rhtTri
 
     /*
@@ -112,10 +112,10 @@ int main()
     rhtTri = nullptr;
 
     // Create one Equilateral Triangle
-    //eqlTri  = new EquilateralTriangle(8); 
-    eqlTri  = new EqlTri(8); 
-    
-    tri   = eqlTri; // Point tri to rhtTri    
+    //eqlTri  = new EquilateralTriangle(8);
+    eqlTri  = new EqlTri(8);
+
+    tri   = eqlTri; // Point tri to rhtTri
     shape = eqlTri; // Point shape to rhtTri
 
     printSeperatedHeading( cout, "Display an Eql. Triangle (eqlTri)", 38 );
@@ -138,7 +138,7 @@ int main()
     //Force the use of Shape::display
     printSeperatedHeading( cout, "Print an Eql. Triangle as a Shape", 38 );
     eqlTri->Shape::display( cout );
-    cout << "\n";    
+    cout << "\n";
 
     cout << "\n";
 

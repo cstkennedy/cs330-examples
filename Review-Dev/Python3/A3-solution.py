@@ -1,4 +1,4 @@
-#! /usr/bin/env python                          
+#! /usr/bin/env python
 
 # Thomas Kennedy
 # February 2014
@@ -16,7 +16,7 @@ def printHeading(title, outs=sys.stdout):
 
 #Main Function
 def main():
-    
+
     file_name = str( input("Enter input filename: ") )
 
     try:
@@ -37,20 +37,20 @@ def main():
 
     circle_perimeter    = 2 * math.pi * radius
     circle_area         = math.pi * ( radius ** 2.0 )
-          
+
     #Output to the screen and file
     for output_sd in [sys.stdout, out_file]:
         printHeading( "Summary", output_sd )
 
-        print("Rectangle:", file=output_sd) 
-        print("  {:<16}: {:>10.2f}".format( "Length",    length    ), file=output_sd)    
-        print("  {:<16}: {:>10.2f}".format( "Width" ,    width     ), file=output_sd)  
-        print("  {:<16}: {:>10.2f}".format( "Perimeter", rectangle_perimeter  ), file=output_sd)  
+        print("Rectangle:", file=output_sd)
+        print("  {:<16}: {:>10.2f}".format( "Length",    length    ), file=output_sd)
+        print("  {:<16}: {:>10.2f}".format( "Width" ,    width     ), file=output_sd)
+        print("  {:<16}: {:>10.2f}".format( "Perimeter", rectangle_perimeter  ), file=output_sd)
         print("  {:<16}: {:>10.2f}".format( "Area",      rectangle_area ), file=output_sd)
 
-        print("\nCircle:", file=output_sd) 
+        print("\nCircle:", file=output_sd)
         print("  {:<16}: {:>10.2f}".format( "Radius", radius    ), file=output_sd)
-        print("  {:<16}: {:>10.2f}".format( "Perimeter"  , circle_perimeter ), file=output_sd) 
+        print("  {:<16}: {:>10.2f}".format( "Perimeter"  , circle_perimeter ), file=output_sd)
         print("  {:<16}: {:>10.2f}".format( "Area", circle_area), file=output_sd)
 
         print("\nPerimeter:", file=output_sd)
@@ -69,7 +69,7 @@ def main():
         elif rectangle_area < circle_area:
             print("  Rectangle Area < Circle Area", file=output_sd)
         else:
-            print("  Rectangle Area > Circle Area", file=output_sd)        
+            print("  Rectangle Area > Circle Area", file=output_sd)
 
     out_file.close()
     in_file.close()

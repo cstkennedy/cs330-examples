@@ -1,4 +1,4 @@
-#! /usr/bin/env python                          
+#! /usr/bin/env python
 
 # Thomas Kennedy
 # February 2014
@@ -45,17 +45,17 @@ def printFinalSummary( outs, a, b, c, triangle_perimeter,
                     triangle_area, l, w, rect_perim, rect_area):
     printHeading( "Summary", outs )
 
-    print("Rectangle:", file=outs) 
-    print("  {:<16}: {:>10.2f}".format( "Length",    l    ), file=outs)    
-    print("  {:<16}: {:>10.2f}\n".format( "Width" ,    w    ), file=outs)  
-    print("  {:<16}: {:>10.2f}".format( "Perimeter", rect_perim  ), file=outs)  
+    print("Rectangle:", file=outs)
+    print("  {:<16}: {:>10.2f}".format( "Length",    l    ), file=outs)
+    print("  {:<16}: {:>10.2f}\n".format( "Width" ,    w    ), file=outs)
+    print("  {:<16}: {:>10.2f}".format( "Perimeter", rect_perim  ), file=outs)
     print("  {:<16}: {:>10.2f}".format( "Area",      rect_area ), file=outs)
 
-    print("\nTriangle:", file=outs) 
+    print("\nTriangle:", file=outs)
     print("  {:<16}: {:>10.2f}".format( "Side A", a    ), file=outs)
     print("  {:<16}: {:>10.2f}".format( "Side B", b   ), file=outs)
     print("  {:<16}: {:>10.2f}\n".format( "Side C", c    ), file=outs)
-    print("  {:<16}: {:>10.2f}".format( "Perimeter"  , triangle_perimeter ), file=outs) 
+    print("  {:<16}: {:>10.2f}".format( "Perimeter"  , triangle_perimeter ), file=outs)
     print("  {:<16}: {:>10.2f}".format( "Area", triangle_area), file=outs)
 
     print("\nPerimeter:", file=outs)
@@ -74,11 +74,11 @@ def printFinalSummary( outs, a, b, c, triangle_perimeter,
     elif rect_area < triangle_area:
         print("  Rectangle Area < Triangle Area", file=outs)
     else:
-        print("  Rectangle Area > Triangle Area", file=outs)        
+        print("  Rectangle Area > Triangle Area", file=outs)
 
 #Main Function
 def main():
-    
+
     file_name = str( input("Enter input filename: ") )
 
     try:
@@ -99,7 +99,7 @@ def main():
 
     triangle_perimeter  = computeTrianglePerimeter( side_a, side_b, side_c )
     triangle_area       = computeTriangleArea( side_a, side_b, side_c, triangle_perimeter )
-          
+
     #Output to the screen and file
     for outs in [sys.stdout, out_file]:
         printFinalSummary( outs, side_a, side_b, side_c, triangle_perimeter, triangle_area,

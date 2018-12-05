@@ -16,7 +16,7 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title 
+}; ///< Program Title
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
@@ -40,7 +40,7 @@ int main()
     *
     * Suppose we were to expand our Shape hierarchy to include
     * the following shapes:
-    *   - Isosceles Triangle 
+    *   - Isosceles Triangle
     *   - Circle
     *   - Ellipse
     *   - Rectangle
@@ -83,7 +83,7 @@ int main()
     // List the available shapes
     ShapeFactory::listKnown( cout );
     printHorizontalLine( cout, '-', 38 );
-    cout << right << setw( 2 ) << ShapeFactory::numberKnown() << " shapes available." << "\n";    
+    cout << right << setw( 2 ) << ShapeFactory::numberKnown() << " shapes available." << "\n";
 
     cout << "\n";
 

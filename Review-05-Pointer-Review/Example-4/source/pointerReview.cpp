@@ -15,7 +15,7 @@ using namespace std;
 int main(int argc, char** argv)
 {
     const int numPowers = 32;
-    
+
     std::array<int, numPowers> powersOfTwo = {0};
 
     cout << std::string(48, '-') << "\n";
@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     for (auto it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
         std::cout << it << " -> " << *it << "\n";
     }
-    */    
+    */
 
     for (const int& v : powersOfTwo) {
         std::cout << v << "\n";
@@ -59,17 +59,17 @@ int main(int argc, char** argv)
     for (const auto& v : powersOfTwo) {
         std::cout << v << "\n";
     }
-    */    
-    
+    */
+
     cout << "\n";
     cout << std::string(48, '-') << "\n";
     cout << "\n";
 
     for (int i = 0; i < numPowers; i++) {
-        cout << right << setw(2)  << i << ": " 
-             << right << setw(11) << powersOfTwo[i] 
+        cout << right << setw(2)  << i << ": "
+             << right << setw(11) << powersOfTwo[i]
              << right << setw(33) << std::bitset<32>(powersOfTwo[i])
-             << "\n"; 
+             << "\n";
     }
 
     cout << "\n";
@@ -77,10 +77,10 @@ int main(int argc, char** argv)
     cout << "\n";
 
     for (int i = 0; i < numPowers; i++) {
-        cout << right << setw(2)  << i << ": " 
-             << right << setw(11) << powersOfTwo[i] 
+        cout << right << setw(2)  << i << ": "
+             << right << setw(11) << powersOfTwo[i]
              << right << setw(33) << &powersOfTwo[i]
-             << "\n"; 
+             << "\n";
     }
 
     int sizeInBytes = 0;
@@ -91,21 +91,21 @@ int main(int argc, char** argv)
 
     cout << "\n";
     cout << "sizeof(int) : " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)" 
+                             << sizeInBits  << " (bits)"
          << "\n";
 
     sizeInBytes = sizeof(int&);
     sizeInBits  = sizeInBytes << 3;
 
     cout << "sizeof(int&): " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)"  
+                             << sizeInBits  << " (bits)"
          << "\n";
 
     sizeInBytes = sizeof(int*);
     sizeInBits  = sizeInBytes << 3;
 
     cout << "sizeof(int*): " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)"  
+                             << sizeInBits  << " (bits)"
          << "\n";
 
     sizeInBytes = sizeof(powersOfTwo);
@@ -115,32 +115,32 @@ int main(int argc, char** argv)
     cout.setf(ios::right);
 
     cout << "\n";
-    cout << "sizeof(powersOfTwo): " 
-         << setw(4) << sizeInBytes 
+    cout << "sizeof(powersOfTwo): "
+         << setw(4) << sizeInBytes
          << " (bytes) / "
-         << setw(4) << sizeInBits  
-         << " (bits)"  
+         << setw(4) << sizeInBits
+         << " (bits)"
          << "\n";
 
     sizeInBytes = (sizeof(int) * numPowers);
     sizeInBits  = sizeInBytes << 3;
 
-    cout << "data size:           " 
-         << setw(4) << sizeInBytes 
+    cout << "data size:           "
+         << setw(4) << sizeInBytes
          << " (bytes) / "
-         << setw(4) << sizeInBits  
-         << " (bits)"  
+         << setw(4) << sizeInBits
+         << " (bits)"
          << "\n";
 
     sizeInBytes = (sizeof(int) * numPowers);
     sizeInBits  = sizeInBytes << 3;
 
     cout << "\n";
-    cout << "sizeof(std::array<int, numPowers>): " 
-         << setw(4) << sizeInBytes 
+    cout << "sizeof(std::array<int, numPowers>): "
+         << setw(4) << sizeInBytes
          << " (bytes) / "
-         << setw(4) << sizeInBits  
-         << " (bits)"  
+         << setw(4) << sizeInBits
+         << " (bits)"
          << "\n";
 
     return 0;

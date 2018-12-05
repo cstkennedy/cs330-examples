@@ -23,7 +23,7 @@ namespace utilities{
     }
 
     ///
-    /// 
+    ///
     ///
     void printHorizontalLine( std::ostream& outs, char line_char, int width ){
         outs << std::setfill( line_char ) << std::left << std::setw( width ) << line_char << "\n";
@@ -36,18 +36,18 @@ namespace utilities{
     ///
     std::string generateNumberTitle( std::string title_text, int title_num ){
         std::stringstream magic;
-        
+
         magic << title_text << " " << title_num;
-        
-        return (magic.str());     
+
+        return (magic.str());
     }
 
     ///
-    /// 
+    ///
     ///
     void printCenteredTitle( std::ostream& outs, std::string title, int width ){
         int magic_width = 0;
-        
+
         magic_width = (width/2) - (title.length()/2) + title.length();
 
         outs << std::right << std::setw( magic_width ) << title << "\n"
@@ -60,11 +60,11 @@ namespace utilities{
     void printProjectHeading( std::ostream& outs, const std::string titles[], int title_items, int width ){
         //Output the top line
         printHorizontalLine( outs, '*', width );
-        
+
         //Output the title text
         for( int i = 0; i < title_items; i++ ){
              printCenteredTitle( outs, titles[ i ], width );
-        }          
+        }
         //output the bottom line
         printHorizontalLine( outs, '*', width );
     }
@@ -77,7 +77,7 @@ namespace utilities{
         printHorizontalLine( outs, border_char, width );
         printCenteredTitle( outs, title, width);
         printHorizontalLine( outs, border_char, width );
-        
+
         //reset outs
         outs.clear();
         outs.fill(' ');

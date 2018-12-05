@@ -11,12 +11,12 @@ import static org.hamcrest.CoreMatchers.*;
 import org.hamcrest.core.IsNull;
 
 /**
- * 1 - Does this piece of code perform the operations 
+ * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
- * 
- * 2 - Does this piece of code do something it was not 
+ *
+ * 2 - Does this piece of code do something it was not
  *     designed to perform?
- * 
+ *
  * 1 Test per mutator
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -32,13 +32,13 @@ public class TestStudent {
 
     @Test
     public void testDefaultConstructor()
-    {      
+    {
         assertThat(student.getName(), is(Student.DEFAULT_NAME));
         assertThat(student.getName(), equalTo(Student.DEFAULT_NAME));
 
         assertThat(student.hashCode(),
                    equalTo((Student.DEFAULT_NAME).hashCode()));
-        
+
         assertThat(student.toString(), equalTo(Student.DEFAULT_NAME));
     }
 
@@ -52,7 +52,7 @@ public class TestStudent {
 
         assertThat(tommy.hashCode(),
                    not(equalTo(student.hashCode())));
-        
+
         assertThat(tommy.toString(), equalTo(desiredName));
         assertThat(tommy.toString(), containsString(desiredName));
 
@@ -71,7 +71,7 @@ public class TestStudent {
 
         assertThat(john.getName(), equalTo(newName));
         assertThat(john.hashCode(), not(oldHashCode));
-        
+
         //assertThat(john.toString(), equalTo(newName));
         assertThat(john.toString(), containsString(newName));
 

@@ -33,7 +33,7 @@ void printRow(std::string type, std::string varName, const T& var);
  */
 int main(int argc, char** argv)
 {
-    // Declarations & Defintions 
+    // Declarations & Defintions
     int        x               = 9001;
     int*       xPointer        = nullptr;
     int&       xReference      = x;
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
 template<typename T>
 void printRow(std::string type, std::string varName, const T& var)
 {
-    cout << left  << setw(COL_WIDTHS[0]) << type 
+    cout << left  << setw(COL_WIDTHS[0]) << type
          << left  << setw(COL_WIDTHS[1]) << varName
          << right << setw(COL_WIDTHS[2]) << &var
          << right << setw(COL_WIDTHS[3]) << var

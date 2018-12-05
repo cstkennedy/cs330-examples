@@ -1,4 +1,4 @@
-#! /usr/bin/env python                          
+#! /usr/bin/env python
 
 # Thomas Kennedy
 # March 2014
@@ -35,7 +35,7 @@ def determineLetterGrade( to_classify ):
     return to_return
 
 #Main Function
-def main():    
+def main():
     #Variable Declarations
     grades        = []   #List of grades
     num_grades    = 0    #Number of grades to enter
@@ -57,12 +57,12 @@ def main():
         #Check if the new grade is a minimum
         if grades[i] < grade_min:
             grade_min = grades[i]
-        
+
         #Check if the new grade is a maximum
         #this is a seperate and distinct conditional block
         if grades[i] > grade_max:
             grade_max = grades[i]
-        
+
         #update the running sum
         #consider the use of average as storage
         grade_avg += grades[i]
@@ -71,7 +71,7 @@ def main():
         #sum of squares of all grades
         #consider the use of variance as storage
         grade_var += ( grades[i] ** 2.0 )
-    
+
     #compute the average
     grade_avg /= num_grades
 
@@ -94,7 +94,7 @@ def main():
         print("{:<8}{:>16.2f}{:>16}".format( (i+1), grades[i], determineLetterGrade( grades[i] ) ))
 
     #Print a blank line
-    print() 
+    print()
 
     #print the grade summary
     printHeading("Grade Summary")

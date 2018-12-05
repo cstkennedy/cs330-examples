@@ -1,4 +1,4 @@
-#! /usr/bin/env python                          
+#! /usr/bin/env python
 
 # Thomas Kennedy
 # March 2014
@@ -10,7 +10,7 @@ import random
 import math
 
 # Constants
-DEBUG = True # Set to true to generate a log file with debug output 
+DEBUG = True # Set to true to generate a log file with debug output
 
 #
 # Print a centered and styled heading
@@ -51,7 +51,7 @@ def printCard( outs, card ):
     print("{:>3} of {:<8}".format( card["value"], card["suit"] ), file=outs)
 
 #Main Function
-def main():    
+def main():
     #Variable Declarations
     deck        = []  #Deck of Playing Cards - inmplemented as a list of dictionaries
     num_players = 4   #Number of hands to be dealt
@@ -87,7 +87,7 @@ def main():
             printCard( sys.stdout, card )
 
         #Blank Line
-        print() 
+        print()
 
     #print the remaining cards
     printHeading( "{} Cards Remaining".format( len(deck[ (num_players*7): ]) ) )

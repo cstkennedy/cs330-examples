@@ -12,7 +12,7 @@
  *  - Tail pointer
  *  - Node counter (cardinality)
  *
- * Only the head pointer is necessary, the latter three items are 
+ * Only the head pointer is necessary, the latter three items are
  * included for convenience.
  * <p>
  * In this version, the LinkedList has been converted to a proper class
@@ -62,7 +62,7 @@ class LinkedList {
  */
 inline
 std::ostream& operator<<( std::ostream &outs, const LinkedList &prt )
-{   
+{
     prt.display(outs);
 
     return outs;

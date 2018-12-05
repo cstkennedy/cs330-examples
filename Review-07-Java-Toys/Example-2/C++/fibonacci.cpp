@@ -38,11 +38,11 @@ int main(int argc, char** argv)
     !(index >= 3 && index <= 20)
     !(index >= 3) || !(index <= 20)
     (index < 3 || index > 20)
-    */    
-    if(index < 3 || index > 20) {       
+    */
+    if(index < 3 || index > 20) {
         // Error Message
         cout << index << " is not between 3 and 20" << "\n";
-        
+
         // Exit with an error state
         return 1;
     }
@@ -57,10 +57,10 @@ int main(int argc, char** argv)
         fm2 = fm1;
         fm1 = f;
 
-        cout << right << setw(2) << i << ": " 
+        cout << right << setw(2) << i << ": "
              << setw(10) << f << "\n";
     }
 
-    return 0;   
+    return 0;
 }
 

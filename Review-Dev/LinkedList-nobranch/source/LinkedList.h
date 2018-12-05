@@ -53,7 +53,7 @@ class LinkedList {
 
                 Iterator(N* node)
                     :pseudoPointer(node)
-                {                    
+                {
                 }
 
                 CT& operator*() const
@@ -65,7 +65,7 @@ class LinkedList {
                 Iterator operator++(int v)
                 {
                     Iterator temp(this->pseudoPointer);
-                    
+
                     this->pseudoPointer = pseudoPointer->next;
 
                     return temp;
@@ -216,7 +216,7 @@ class LinkedList {
             swap(*this, rhs);
         }
 
-        friend 
+        friend
         void swap(LinkedList<T>& lhs, LinkedList<T>& rhs)
         {
             using std::swap;

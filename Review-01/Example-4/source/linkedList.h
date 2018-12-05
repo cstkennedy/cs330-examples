@@ -10,7 +10,7 @@
  *  - Tail pointer
  *  - Node counter (cardinality)
  *
- * Only the head pointer is necessary, the latter three items are 
+ * Only the head pointer is necessary, the latter three items are
  * included for convenience.
  * <p>
  * In this version, the LinkedList has been converted to a proper class
@@ -39,12 +39,12 @@ class LinkedList {
              */
             Node( int data );
 
-            /** 
+            /**
              * Compare two Nodes. Check for equivalence.
              */
             bool operator==( const Node &rhs ) const;
 
-            /** 
+            /**
              * Compare two Nodes. Check for non-equivalence.
              */
             bool operator!=( const Node &rhs ) const;
@@ -101,7 +101,7 @@ class LinkedList {
 };
 
 /**
- * 
+ *
  */
 inline
 int LinkedList::size() const
@@ -115,7 +115,7 @@ int LinkedList::size() const
  */
 inline
 std::ostream& operator<<( std::ostream &outs, const LinkedList &prt )
-{   
+{
     prt.display(outs);
 
     return outs;

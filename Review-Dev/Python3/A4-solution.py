@@ -1,4 +1,4 @@
-#! /usr/bin/env python                          
+#! /usr/bin/env python
 
 # Thomas Kennedy
 # February 2014
@@ -31,8 +31,8 @@ def printHeading(title, width=40, outs=sys.stdout):
 #Main Function
 def main():
     #Variable declaration and intialization
-    total_residential = 0    # Total Profit from residential customers 
-    total_business    = 0    # Total Profit from business customers 
+    total_residential = 0    # Total Profit from residential customers
+    total_business    = 0    # Total Profit from business customers
 
     num_residential   = 0    # Number of residential customers
     num_business      = 0    # Number of business customers
@@ -64,21 +64,21 @@ def main():
         print(" {:<15}:".format("Acct Type"), end=' ')
 
         if account_type == "R":
-            print("Residential\n")  
+            print("Residential\n")
 
             num_premium_ch = int( input("Enter # of premium channels: ") )
 
-            account_balance = ( RES_BILL_PROC_FEES + RES_BASIC_SERV_COST 
-                             + ( num_premium_ch * RES_COST_PREM_CHANNEL )  
+            account_balance = ( RES_BILL_PROC_FEES + RES_BASIC_SERV_COST
+                             + ( num_premium_ch * RES_COST_PREM_CHANNEL )
                               )
 
-            total_residential += account_balance      
-            num_residential += 1       
+            total_residential += account_balance
+            num_residential += 1
 
             print("\n{:<15}: $ {:<.2f}".format("New Balance", account_balance ))
 
         elif account_type == "B":
-            print("Business\n\n")               
+            print("Business\n\n")
 
             num_serv_conn = int( input("Enter # of service connections: " ) )
 
@@ -92,12 +92,12 @@ def main():
             num_business += 1
 
             print("\n{:<15}: $ {:<.2f}".format("New Balance", account_balance ))
-        
+
         else:
-            print("Invalid\n") 
-        
+            print("Invalid\n")
+
         print("-" * 40)
-    
+
 
     printHeading( "PROFIT SUMMARY", 40 )
 

@@ -33,7 +33,7 @@ class Shape{
 
         /**
          * Shape Constructor
-         * 
+         *
          * @param name the desired Shape name
          */
         Shape( std::string name );

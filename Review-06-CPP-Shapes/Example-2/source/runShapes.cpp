@@ -15,7 +15,7 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title 
+}; ///< Program Title
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
@@ -25,10 +25,10 @@ typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTri
 /**
  * Prune the Non-Existent--i.e., nullptr--shapes
  * from the array
- * 
+ *
  * @param shapes the array to prune
  * @param count the size of the array
- * 
+ *
  * @return the new array size
  */
 int pruneNullPtr( Shape** &shapes, int count );
@@ -41,7 +41,7 @@ int main()
 {
     // --Erroneous Variable Declarations--
     //Shape shapes[4];               // Declare an Array of Shapes
-    
+
     //Shape* shapes = new Shape[4] // Define an array of Shapes
 
     // --Corrected Variable Declarations--
@@ -62,7 +62,7 @@ int main()
     *
     * Suppose we were to expand our Shape hierarchy to include
     * the following shapes:
-    *   - Isosceles Triangle 
+    *   - Isosceles Triangle
     *   - Circle
     *   - Ellipse
     *   - Rectangle
@@ -105,7 +105,7 @@ int main()
     // List the available shapes
     ShapeFactory::listKnown( cout );
     printHorizontalLine( cout, '-', 38 );
-    cout << right << setw( 2 ) << ShapeFactory::numberKnown() << " shapes available." << "\n";    
+    cout << right << setw( 2 ) << ShapeFactory::numberKnown() << " shapes available." << "\n";
 
     cout << "\n";
 
@@ -126,13 +126,13 @@ int main()
     // size is the original size of the array
 
     printHeading( cout, "Shapes That Exist", 38, '~' );
-    cout << left << setw( 24 ) << "Original Size"  << ": " 
-         << left << setw( 4 )  << size              
+    cout << left << setw( 24 ) << "Original Size"  << ": "
+         << left << setw( 4 )  << size
          << "\n"
          << left << setw( 24 ) << "Invalid Shapes" << ": "
          << left << setw( 4 )  << ( size - numShapes )
          << "\n"
-         << left << setw( 24 ) << "New Size"       << ": " 
+         << left << setw( 24 ) << "New Size"       << ": "
          << left << setw( 4 )  << numShapes        << "\n";
 
     cout << "\n";
@@ -167,7 +167,7 @@ int pruneNullPtr( Shape** &shapes, int count )
     for( int i = 0; i < count; i++ ){
         if( shapes[i] != nullptr ){
             pruned[nonNull] = shapes[i];
-            nonNull++; 
+            nonNull++;
         }
     }
 

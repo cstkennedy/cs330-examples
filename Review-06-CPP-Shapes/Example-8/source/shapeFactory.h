@@ -30,7 +30,7 @@ class ShapeFactory{
          * <p>
          * In this case, it serves as an academic discussion.
          */
-        struct ShapePair{            
+        struct ShapePair{
             std::string _name;   ///< Name of the shape to clone
             Shape      *_model;  ///< Model of the shape to clone
 

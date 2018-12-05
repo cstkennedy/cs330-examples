@@ -12,12 +12,12 @@ import org.hamcrest.core.IsNull;
 import org.hamcrest.core.IsSame;
 
 /**
- * 1 - Does this piece of code perform the operations 
+ * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
- * 
- * 2 - Does this piece of code do something it was not 
+ *
+ * 2 - Does this piece of code do something it was not
  *     designed to perform?
- * 
+ *
  * 1 Test per mutator
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -45,7 +45,7 @@ public class TestRoster {
 
     @Test
     public void testDefaultConstructor()
-    {      
+    {
         assertThat(defaultCourse.getCourseNum(), equalTo("CS 150"));
         assertThat(defaultCourse.getEnrollLimit(),
                    equalTo(Roster.DEFAULT_MAX_STUDENTS));
@@ -119,13 +119,13 @@ public class TestRoster {
         assertThat(cs252.toString(), containsString("CS 252"));
         assertThat(cs252.toString(),
                    containsString(Integer.toString(cs252.numEnrolled()))); // fixed mistake
-        assertThat(cs252.toString(), 
+        assertThat(cs252.toString(),
                    containsString(Integer.toString(Roster.DEFAULT_MAX_STUDENTS)));
     }
 
     @Test
     public void testSetEnrollLimit()
-    {       
+    {
         emptyCS350.setEnrollLimit(2);
 
         assertThat(emptyCS350.getCourseNum(), equalTo("CS 350"));
@@ -202,7 +202,7 @@ public class TestRoster {
         assertThat(cs725.toString(), containsString("CS 725"));
         assertThat(cs725.toString(),
                    containsString(Integer.toString(cs725.numEnrolled())));
-        assertThat(cs725.toString(), 
+        assertThat(cs725.toString(),
                    containsString(Integer.toString(4)));
 
         assertThat(cs725.toString(), containsString(allStudents[0].toString()));
@@ -220,7 +220,7 @@ public class TestRoster {
         cs725.enroll(john);
         cs725.enroll(tom);
         cs725.enroll(jay);
-      
+
         // Make the copy
         Roster copyCs725 = (Roster) cs725.clone();
 
@@ -259,7 +259,7 @@ public class TestRoster {
         assertThat(copyCs725.toString(), containsString("CS 725"));
         assertThat(copyCs725.toString(),
                    containsString(Integer.toString(copyCs725.numEnrolled())));
-        assertThat(copyCs725.toString(), 
+        assertThat(copyCs725.toString(),
                    containsString(Integer.toString(4)));
 
         assertThat(copyCs725.toString(), containsString(allStudents[0].toString()));

@@ -12,7 +12,7 @@
 /**
  * An Ellipse with equivalent major and minor axes
  */
-class Circle: public Shape{  
+class Circle: public Shape{
     private:
         static const double PI;   ///< @f$ \pi @f$
         static const double TAU;  ///< @f$ \tau = 2\pi @f$
@@ -22,55 +22,55 @@ class Circle: public Shape{
     public:
         /**
          * Construct a Circle with radius set to 1
-         */ 
+         */
         Circle();
 
         /**
          * Construct a Circle
-         *  
+         *
          * @param s the desired radius length
-         */ 
+         */
         Circle( double r );
 
         /**
          * Construct a Circle
-         * 
-         * @param src the Circle to copy       
-         */  
+         *
+         * @param src the Circle to copy
+         */
         Circle( const Circle &src );
 
         /**
          * Circle Destructor
-         */ 
+         */
         virtual ~Circle();
 
         /**
          * Return the radius length
-         */ 
+         */
         double radius() const;
 
         /**
          * Modify the radius length
-         * 
+         *
          * @param r the replacement length
-         */ 
+         */
         void radius( double r );
 
         /**
          * Return the diameter
-         */ 
+         */
         double diameter() const;
 
         /**
          * Compute the area using @f$ \pi r^2 @f$
-         * 
+         *
          * @return area
          */
         virtual double area() const;
 
         /**
          * Compute the perimeter using @f$ 2 \pi r @f$
-         * 
+         *
          * @return perimeter
          */
         virtual double perimeter() const;
@@ -82,9 +82,9 @@ class Circle: public Shape{
 
         /**
          * Print the Circle
-         * 
+         *
          * @param outs the output stream--i.e., destination
-         */ 
+         */
         virtual void display( std::ostream &outs ) const;
 
         /**
@@ -96,7 +96,7 @@ class Circle: public Shape{
 };
 
 /**
- *  
+ *
  */
 inline
 double Circle::radius() const
@@ -105,18 +105,18 @@ double Circle::radius() const
 }
 
 /**
- * 
+ *
  */
-inline 
+inline
 void Circle::radius( double r )
 {
     _radius = r;
 }
 
 /**
- * 
+ *
  */
-inline 
+inline
 double Circle::diameter() const
 {
     return (
@@ -125,9 +125,9 @@ double Circle::diameter() const
 }
 
 /**
- * 
+ *
  */
-inline 
+inline
 double Circle::area() const
 {
     return (
@@ -136,9 +136,9 @@ double Circle::area() const
 }
 
 /**
- * 
+ *
  */
-inline  
+inline
 double Circle::perimeter() const
 {
     return (
@@ -147,9 +147,9 @@ double Circle::perimeter() const
 }
 
 /**
- *  
+ *
  */
-inline 
+inline
 Shape* Circle::clone() const
 {
     return new Circle( *this );

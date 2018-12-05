@@ -26,12 +26,12 @@ struct Node {
      */
     Node( int data );
 
-    /** 
+    /**
      * Compare two Nodes. Check for equivalence.
      */
     bool operator==( const Node &rhs ) const;
 
-    /** 
+    /**
      * Compare two Nodes. Check for non-equivalence.
      */
     bool operator!=( const Node &rhs ) const;

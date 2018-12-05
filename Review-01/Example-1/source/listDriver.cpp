@@ -20,7 +20,7 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Linked List Review",
     "Thomas J. Kennedy"
-}; ///< Program Title 
+}; ///< Program Title
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
@@ -41,12 +41,12 @@ int main(int argc, char** argv)
     LinkedList* random_ints = nullptr; // List of random integers
 
     int         seed        = 0; // Seed for random number generation
-    int         to_generate;     // Number of nodes to generate    
+    int         to_generate;     // Number of nodes to generate
 
     // If a seed was passed from the command line,
     // parse it. Otherwise default to ctime
     if( argc >= 2 ) {
-        seed = atoi( argv[1] );          
+        seed = atoi( argv[1] );
     }
     else {
         seed = time( NULL );
@@ -55,13 +55,13 @@ int main(int argc, char** argv)
     // If a node  count was passed from the command line,
     // parse it. Otherwise default to 10
     if( argc >= 3 ) {
-        to_generate = atoi( argv[2] );   
+        to_generate = atoi( argv[2] );
     }
     else {
         to_generate = 10;
-    } 
+    }
 
-    srand( seed );    
+    srand( seed );
 
     // Print the program heading
     printProjectHeading( cout, PROGRAM_HEADING, HEADING_LINES );
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
     random_ints = new LinkedList();
 
     // Generate a Linked List (LL) of 10 Nodes
-    for( int i = 0; i < to_generate; i++ ){     
+    for( int i = 0; i < to_generate; i++ ){
         random_ints->appendNode( randomInt() );
     }
 
@@ -99,5 +99,5 @@ int randomInt( int min, int max )
 
     // Multiply x by the scaling factor and shift
     // by adding min
-    return ( x * s ) + min; 
+    return ( x * s ) + min;
 }

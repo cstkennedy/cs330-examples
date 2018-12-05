@@ -5,7 +5,7 @@ import edu.odu.cs.cs350.examples.Roster;
 
 class EnrollStudents {
     /**
-     * This is a non-trivial main function 
+     * This is a non-trivial main function
      */
     public static void main(String args[])
     {

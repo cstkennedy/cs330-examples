@@ -9,7 +9,7 @@ zipFile="`echo $workingDirectory | sed 's/ /\-/g'`".zip
 if [ -f $zipFile ]
 then
     rm $zipFile
-fi 
+fi
 
 for exampleDir in *
 do

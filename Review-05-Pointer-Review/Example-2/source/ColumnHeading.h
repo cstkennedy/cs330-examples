@@ -30,8 +30,8 @@ struct ColumnHeading {
 inline
 std::ostream& operator<<(std::ostream& outs, const ColumnHeading& prt)
 {
-    outs << (prt.alignment == ColumnHeading::Alignment::LEFT ? std::left : std::right) 
-         << std::setw(prt.width) 
+    outs << (prt.alignment == ColumnHeading::Alignment::LEFT ? std::left : std::right)
+         << std::setw(prt.width)
          << prt.title;
 
     return outs;
