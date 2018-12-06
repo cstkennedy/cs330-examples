@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-    
+
         // Add SpotBugs required repo
         maven {
             url "https://plugins.gradle.org/m2/"
