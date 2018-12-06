@@ -88,9 +88,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int randomInt( int min, int max )
 {
     // Generate a number in the range 0-1
@@ -104,9 +102,7 @@ int randomInt( int min, int max )
     return ( x * s ) + min;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList generateList(int n)
 {
     LinkedList ll;

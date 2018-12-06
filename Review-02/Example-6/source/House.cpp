@@ -1,8 +1,6 @@
 #include "House.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::House()
     :name("House"),
      rooms()
@@ -10,18 +8,14 @@ House::House()
     currentSize = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::House(std::string name)
     :name(name)
 {
     currentSize = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void House::addRoom(Room toAdd)
 {
     //rooms[currentSize] = toAdd;
@@ -30,48 +24,36 @@ void House::addRoom(Room toAdd)
     rooms[currentSize++] = toAdd;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 size_t House::size() const {
     return currentSize;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::iterator House::begin()
 {
     return &(rooms[0]);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::const_iterator House::begin() const
 {
     return &rooms[0];
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::iterator House::end()
 {
     return &rooms[currentSize];
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::const_iterator House::end() const
 {
     return &rooms[currentSize];
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void House::display(std::ostream& outs) const
 {
     outs << "--------" << this->name << "--------" << "\n";

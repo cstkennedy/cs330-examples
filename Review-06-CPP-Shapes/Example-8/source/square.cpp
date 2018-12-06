@@ -5,43 +5,33 @@
 
 #include "square.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Square::Square()
 {
     this->_name = "Square";
     this->_side = 1;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Square::Square( double s )
 {
     this->_name = "Square";
     this->_side = s;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Square::Square( const Square &src )
 {
     this->_name = src._name;
     this->_side = src._side;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Square::~Square()
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Square::display( std::ostream &outs ) const
 {
     Shape::display(outs);
@@ -51,9 +41,7 @@ void Square::display( std::ostream &outs ) const
          << std::left << std::setw( WIDTH_LABEL ) << "Area"       << ": " << std::right << std::setw( WIDTH_VALUE ) << area()       << "\n";
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Square::read(std::istream& ins)
 {
     ins >> this->_side;

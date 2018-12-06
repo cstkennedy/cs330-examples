@@ -1,26 +1,20 @@
 #include "linkedList.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
  LinkedList::Node::Node()
  {
     this->data = 0;
     this->next = nullptr;
  }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList::Node::Node(int data)
 {
     this->data = data;
     this->next = nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool LinkedList::Node::operator==(const Node &rhs) const
 {
     return (
@@ -29,9 +23,7 @@ bool LinkedList::Node::operator==(const Node &rhs) const
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool LinkedList::Node::operator!=(const Node &rhs) const
 {
     return (
@@ -40,9 +32,7 @@ bool LinkedList::Node::operator!=(const Node &rhs) const
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList::LinkedList()
 {
     //Initialize the private data members (attributes)
@@ -51,9 +41,7 @@ LinkedList::LinkedList()
     nodes = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList::LinkedList(const LinkedList& src)
 {
     // Important - every constructor must initialize
@@ -72,9 +60,7 @@ LinkedList::LinkedList(const LinkedList& src)
     }
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList::~LinkedList()
 {
     Node *this_iterator = nullptr; // Loop control pointer
@@ -110,9 +96,7 @@ LinkedList::~LinkedList()
     nodes = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void LinkedList::prependNode(int to_add)
 {
     // Create a new Node
@@ -152,9 +136,7 @@ void LinkedList::prependNode(int to_add)
     new_node = nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void LinkedList::appendNode(int to_add)
 {
     // Create a new Node
@@ -189,9 +171,7 @@ void LinkedList::appendNode(int to_add)
     new_node = nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void LinkedList::display(std::ostream& outs) const
 {
     int index = 0;   // Used to output ids
@@ -209,9 +189,7 @@ void LinkedList::display(std::ostream& outs) const
     }
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList& LinkedList::operator=(LinkedList rhs)
 {
     swap(*this, rhs);

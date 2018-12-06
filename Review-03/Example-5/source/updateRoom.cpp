@@ -64,9 +64,7 @@ int main()
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void buildHouse(House &house)
 {
     // Add the Laundry Room
@@ -90,9 +88,7 @@ void buildHouse(House &house)
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House upgradeFlooring(House original)
 {
     House modified = original;

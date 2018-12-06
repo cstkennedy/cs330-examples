@@ -7,9 +7,7 @@
 
 const double EquilateralTriangle::ROOT_3_DIV_4 = sqrt( 3 ) / 4;
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 EquilateralTriangle::EquilateralTriangle()
     :Triangle()
 {
@@ -18,9 +16,7 @@ EquilateralTriangle::EquilateralTriangle()
     side( 1 );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 EquilateralTriangle::EquilateralTriangle( double s )
 {
     _name = "Equilateral Triangle";
@@ -28,9 +24,7 @@ EquilateralTriangle::EquilateralTriangle( double s )
     this->side( s );    
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 EquilateralTriangle::EquilateralTriangle( const EquilateralTriangle &src )
 {
     this->_name = src._name;
@@ -38,16 +32,12 @@ EquilateralTriangle::EquilateralTriangle( const EquilateralTriangle &src )
     this->side( src.side() );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 EquilateralTriangle::~EquilateralTriangle()
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void EquilateralTriangle::display( std::ostream &outs ) const
 {
     Triangle::Shape::display(outs);
@@ -58,9 +48,7 @@ void EquilateralTriangle::display( std::ostream &outs ) const
          << std::left << std::setw( WIDTH_LABEL ) << "Area"       << ": " << std::right << std::setw( WIDTH_VALUE ) << area()       << "\n";
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void EquilateralTriangle::read(std::istream& ins)
 {
     double inSide;

@@ -1,18 +1,14 @@
 #include "House.h"
 
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::Node::Node(Room d)
     :data(d),
      next(nullptr)
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::House()
     :name("House"),
      head(nullptr),
@@ -21,9 +17,7 @@ House::House()
     currentSize = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::House(std::string name)
     :name(name),
      head(nullptr),
@@ -32,9 +26,7 @@ House::House(std::string name)
     currentSize = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::House(const House &src)
     :name(src.name),
      head(nullptr),
@@ -50,9 +42,7 @@ House::House(const House &src)
     }
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::~House() {
     // Deallocate the Linked List
     Node* it = this->head;
@@ -70,9 +60,7 @@ House::~House() {
     // End Linked List Deallocation
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void House::addRoom(Room toAdd)
 {
     Node* newNode = new Node(toAdd);
@@ -101,48 +89,36 @@ void House::addRoom(Room toAdd)
     currentSize++;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 size_t House::size() const {
     return currentSize;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::iterator House::begin()
 {
     return iterator(head);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::const_iterator House::begin() const
 {
     return const_iterator(head);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::iterator House::end()
 {
     return iterator(nullptr);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House::const_iterator House::end() const
 {
     return const_iterator(nullptr);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void House::display(std::ostream& outs) const
 {
     outs << "--------" << this->name << "--------" << "\n";
@@ -174,9 +150,7 @@ void House::display(std::ostream& outs) const
 }
 
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 House& House::operator=(House rhs)
 {
     std::swap(*this, rhs);
@@ -184,9 +158,7 @@ House& House::operator=(House rhs)
     return *this;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void swap(House& lhs, House& rhs)
 {
     using std::swap;

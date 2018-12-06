@@ -7,9 +7,7 @@
 
 const double RightTriangle::ONE_HALF = ( 1.0 / 2.0 );
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 RightTriangle::RightTriangle()
     :Triangle()
 {
@@ -21,9 +19,7 @@ RightTriangle::RightTriangle()
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 RightTriangle::RightTriangle( double base, double height )
 {
     this->_name   = "Right Triangle";
@@ -36,9 +32,7 @@ RightTriangle::RightTriangle( double base, double height )
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 RightTriangle::RightTriangle( const RightTriangle &src )
 {
     this->_name   = src._name;
@@ -48,16 +42,12 @@ RightTriangle::RightTriangle( const RightTriangle &src )
     this->_side_c = src._side_c;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 RightTriangle::~RightTriangle()
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void RightTriangle::display( std::ostream &outs ) const
 {
     Triangle::Shape::display(outs);
@@ -69,9 +59,7 @@ void RightTriangle::display( std::ostream &outs ) const
          << std::left << std::setw( WIDTH_LABEL ) << "Area"       << ": " << std::right << std::setw( WIDTH_VALUE ) << area()       << "\n";
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void RightTriangle::read(std::istream& ins)
 {
     ins >> this->_side_a; // base;
