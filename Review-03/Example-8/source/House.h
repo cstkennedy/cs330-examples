@@ -19,7 +19,7 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House{
+class House {
     private:
         using Collection = std::list<Room>;
 

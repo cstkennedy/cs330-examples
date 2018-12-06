@@ -17,9 +17,9 @@
  * <p>
  * Where are the Big-3?
  */
-class House{
+class House {
     public:
-        struct Node{
+        struct Node {
             Room  data;
             Node* next;
 
@@ -42,7 +42,7 @@ class House{
          * operator-> and iterator traits. The latter is beyond the scope
          * of this course.
          */
-        struct iterator{
+        struct iterator {
             private:
                 Node* pseudoPointer;
 
@@ -95,7 +95,7 @@ class House{
          * <p>
          * Recall the rules on Class naming and the STL.
          */
-        struct const_iterator{
+        struct const_iterator {
             private:
                 const Node* pseudoPointer;
 

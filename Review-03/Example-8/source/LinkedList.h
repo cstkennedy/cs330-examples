@@ -29,7 +29,7 @@ class LinkedList {
          * of this course.
          */
         template<bool is_const = true>
-        class Iterator{
+        class Iterator {
             public:
                 using N  = typename std::conditional<is_const,
                                                      const Node, Node>::type;

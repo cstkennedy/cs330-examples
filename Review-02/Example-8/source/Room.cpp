@@ -139,10 +139,8 @@ bool Room::operator==(const Room &rhs) const
 {
     // Note that I am directly comparing floating
     // point values.
-    return (
-        this->name   == rhs.name &&
-        this->area() == rhs.area()
-    );
+    return this->name   == rhs.name
+        && this->area() == rhs.area();
 }
 
 //------------------------------------------------------------------------------

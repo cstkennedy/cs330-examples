@@ -31,3 +31,7 @@
 
 # Latex Ignore Rules
 **.aux
+
+# Scratch (temp) File & Directory Ignore rules
+Scratch
+**.bak
