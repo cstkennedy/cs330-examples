@@ -5,7 +5,7 @@
 #include <string>
 
 /**
- * This module contains general purpose functions and constants that can reasonably be 
+ * This module contains general purpose functions and constants that can reasonably be
  * used in any program.
  */
 
@@ -23,7 +23,7 @@ void println(std::ostream& outs=std::cout)
  * Prompt the user for a value (no spaces)
  *
  * @param msg message to display as a user-prompt
- * 
+ *
  * @return value entered by the user
  */
 template <typename T>
@@ -41,8 +41,8 @@ T promptForValue(std::string msg)
  * Prompt the user for a Yes or No response
  *
  * @param msg message to display as a user-prompt
- * 
- * @return bool true if the user indicated Yes 
+ *
+ * @return bool true if the user indicated Yes
  *     and false otherwise
  */
 bool promptForYesNo( std::string msg );

@@ -79,7 +79,7 @@ class Room {
                 DimensionSet();
 
                 /**
-                 * Set the length and width to user 
+                 * Set the length and width to user
                  * specified values
                  */
                 DimensionSet(Dimension l, Dimension w);
@@ -118,7 +118,7 @@ class Room {
         /**
          * This is the Flooring object--i.e., instance
          */
-        Flooring     flooring; 
+        Flooring     flooring;
 
         /**
          * This is the name of the room--i.e., a std::string object
@@ -289,9 +289,9 @@ void Room::setName(std::string newName)
 }
 
 /**
- * 
+ *
  */
-inline 
+inline
 std::string Room::getName() const
 {
     return this->name;
@@ -326,7 +326,7 @@ const Room::DimensionSet& Room::getDimensions() const
 }
 
 /**
- * 
+ *
  */
 inline
 double Room::area() const
@@ -345,8 +345,8 @@ Cost Room::flooringCost() const
 
 /**
  * Room Stream Insertion (Output) Operator
- * 
- * This is often written as a wrapper for a 
+ *
+ * This is often written as a wrapper for a
  * display or print function.
  * <p>
  * This operator can *NOT* be implemented as a member function.

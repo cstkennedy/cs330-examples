@@ -95,7 +95,7 @@ const Player& Game::getLoser() const
 
 
 /**
- * 
+ *
  */
 bool Game::roundTurn(Player& player)
 {

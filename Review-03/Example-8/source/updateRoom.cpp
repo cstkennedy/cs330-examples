@@ -45,7 +45,7 @@ double discountFlooring(const Room& r)
 }
 
 /**
- * Compute the area of a room and the cost of 
+ * Compute the area of a room and the cost of
  * flooring for the room
  * <p>
  * Let us Review the use of reference and pointer variables.
@@ -53,7 +53,7 @@ double discountFlooring(const Room& r)
  * We will used these when we implement the iterator interface.
  */
 int main()
-{  
+{
     // Construct, build, and print a house
     House house;
 
@@ -68,10 +68,10 @@ int main()
 
     cout.setf(ios::boolalpha);
     cout << "\n"
-         << "house == duplicateHouse   -> " 
+         << "house == duplicateHouse   -> "
          << (house == duplicateHouse)
          << "\n"
-         << "&house == &duplicateHouse -> " 
+         << "&house == &duplicateHouse -> "
          << (&house == &duplicateHouse)
          << "\n"
          << "\n";
@@ -108,7 +108,7 @@ int main()
     cout << "Min: " << *(extremes.first)  << "\n"
          << "Max: " << *(extremes.second) << "\n";
 
-    return 0;   
+    return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ std::istream& operator>>(std::istream &ins, Room& rd)
     ins >> ws;
     getline(ins, name, ';');
     ins >> l >> h >> cost;
-    
+
     ins >> ws;
     getline(ins, flooring);
     ins >> ws;
@@ -144,7 +144,7 @@ void buildHouse(std::istream& ins, House& house)
     ins >> ws;
     while(getline(ins, name, ';')) {
         ins >> l >> h >> cost;
-        
+
         ins >> ws;
         getline(ins, flooring);
         ins >> ws;
