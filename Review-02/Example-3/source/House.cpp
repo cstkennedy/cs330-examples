@@ -72,14 +72,14 @@ void House::display(std::ostream& outs) const
 {
     outs << "--------" << this->name << "--------" << "\n";
 
-    // All of the loops in this function are 
+    // All of the loops in this function are
     // functionally equivalent
     /*
     for (int i = 0; i < rooms.size(); i++) {
         outs << rooms[i];
     }
 
-    const_iterator it = rooms.begin(); 
+    const_iterator it = rooms.begin();
 
     while (it < rooms.end()) {
         //outs << *it;

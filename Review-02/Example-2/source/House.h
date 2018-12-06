@@ -27,7 +27,7 @@ class House{
          * Container of Rooms
          */
         std::vector<Room> rooms;
-    
+
     public:
         /**
          * Construct a House with a
@@ -55,8 +55,8 @@ class House{
 
 /**
  * House Stream Insertion (Output) Operator
- * 
- * This is often written as a wrapper for a 
+ *
+ * This is often written as a wrapper for a
  * display or print function.
  * <p>
  * This operator can *NOT* be implemented as a member function.

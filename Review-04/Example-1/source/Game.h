@@ -11,7 +11,7 @@ class Game {
         int numMovesMade;
 
         class Referee {
-            
+
         }
 
     public:

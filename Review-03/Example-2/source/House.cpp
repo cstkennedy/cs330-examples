@@ -51,7 +51,7 @@ void House::addRoom(Room toAdd)
         currentSize = 1;
 
         rooms[0]    = toAdd;
-        
+
         // Stop here
         return;
     }
@@ -59,7 +59,7 @@ void House::addRoom(Room toAdd)
     // Create the new array
     //Room *newRooms = new Room[currentSize + 1];
     Room *newRooms = new Room[currentSize + 1];
-    
+
     // Copy from the old array to the new array
     for (int i = 0; i < currentSize; i++) {
         newRooms[i] = rooms[i];

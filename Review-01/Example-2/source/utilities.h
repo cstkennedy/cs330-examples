@@ -22,7 +22,7 @@ namespace utilities{
     template<class T>
     bool readValue( std::istream &in_stream, T &value_in){
         in_stream >> value_in;
-        
+
         //Return False on read error
         return in_stream.good();
     }
@@ -76,7 +76,7 @@ namespace utilities{
     ){
         printCenteredTitle(  outs, heading, width );
         printHorizontalLine( outs, border, width );
-    } 
+    }
 
     ///
     /// Print the stylized program/project heading

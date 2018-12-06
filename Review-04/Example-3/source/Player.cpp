@@ -28,7 +28,7 @@ int Player::nextMove()
 {
     int choice;
 
-    std::cout << (name + ", " + Player::PROMPT_MSG);    
+    std::cout << (name + ", " + Player::PROMPT_MSG);
     std::cin >> choice;
 
     return choice;

@@ -38,21 +38,21 @@ int Game::Referee::checkForHorizontalWin() const
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); 
+        return playerNumFromSymbol(triple[0].second);
     }
 
     triple = boardRef.get3Cells(4, 5, 6);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); 
+        return playerNumFromSymbol(triple[0].second);
     }
 
     triple = boardRef.get3Cells(7, 8, 9);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); 
+        return playerNumFromSymbol(triple[0].second);
     }
 
     return 0;
@@ -72,14 +72,14 @@ int Game::Referee::checkForVerticalWin() const
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); 
+        return playerNumFromSymbol(triple[0].second);
     }
 
     triple = boardRef.get3Cells(3, 6, 9);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); 
+        return playerNumFromSymbol(triple[0].second);
     }
 
     return 0;
@@ -92,14 +92,14 @@ int Game::Referee::checkForDiagonalWin() const
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); 
+        return playerNumFromSymbol(triple[0].second);
     }
 
     triple = boardRef.get3Cells(7, 5, 3);
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); 
+        return playerNumFromSymbol(triple[0].second);
     }
 
     return 0;
@@ -183,7 +183,7 @@ bool Game::playRound()
     std::cout << board << "\n";
 
     winnerId = ref.checkForWin();
-    
+
     if (winnerId == 2) {
         winner = &player2;
         return true;
@@ -242,7 +242,7 @@ bool Game::roundTurn(Player& player)
     //while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
     while (!ref.selectedCellIsEmpty(move)) {
         move = player.nextMove();
-        sym = player.getSymbol();        
+        sym = player.getSymbol();
     }
     board.setCell(move, sym);
 

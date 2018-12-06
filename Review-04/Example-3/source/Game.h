@@ -8,7 +8,7 @@ class Game {
     private:
         /**
          * The Meta-player that checks gaome status
-         * e.g., checks for wins, who won, if there is 
+         * e.g., checks for wins, who won, if there is
          * a stalemate.
          *
          * It is an implementation detail that is not

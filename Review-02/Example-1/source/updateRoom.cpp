@@ -15,7 +15,7 @@
 using namespace std;
 
 /**
- * Compute the area of a room and the cost of 
+ * Compute the area of a room and the cost of
  * flooring for the room
  * <p>
  * Let us Review the use of reference and pointer variables.
@@ -28,7 +28,7 @@ int main()
     Room kitchen("Kitchen", 20,12, 3.87);
 
     Room* roomPointer = &room;
-    
+
     room.setFlooring("Tile", 2.50);
 
     cout << "----------------------------------------------------------------"
@@ -74,5 +74,5 @@ int main()
     // I missed Java, so I invented this function
     println();
 
-    return 0;   
+    return 0;
 }

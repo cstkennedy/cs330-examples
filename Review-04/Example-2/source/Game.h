@@ -8,14 +8,14 @@ class Game {
     private:
         /**
          * The Meta-player that checks game status
-         * e.g., checks for wins, who won, if there is 
+         * e.g., checks for wins, who won, if there is
          * a stalemate.
          *
          * It is an implementation detail that is not
          * exposed to the outside world;
          */
         class Referee {
-            
+
         };
 
         Board board;

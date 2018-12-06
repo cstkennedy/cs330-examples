@@ -46,7 +46,7 @@ class House{
          * current (actual) number of rooms
          */
         int              currentSize;
-        
+
 
     public:
         /**
@@ -79,33 +79,33 @@ class House{
 
         /**
          * Allow access to the _beginning_ of the
-         * house--i.e., Room container--via an 
+         * house--i.e., Room container--via an
          * iterator.
          */
-        iterator begin(); 
+        iterator begin();
 
         /**
          * Allow access to the _beginning_ of the
-         * house--i.e., Room container--via a 
+         * house--i.e., Room container--via a
          * const_iterator.
          */
-        const_iterator begin() const; 
+        const_iterator begin() const;
 
         /**
          * Allow access to the _end_ of the
-         * house--i.e., Room container--via an 
+         * house--i.e., Room container--via an
          * iterator.
          */
-        iterator end(); 
+        iterator end();
 
         /**
          * Allow access to the _end_ of the
-         * house--i.e., Room container--via a 
+         * house--i.e., Room container--via a
          * const_iterator.
          */
-        const_iterator end() const; 
+        const_iterator end() const;
 
-        /** 
+        /**
          * Return the size of the house--i.e.,
          * the number of rooms
          */
@@ -123,7 +123,7 @@ class House{
 };
 
 /**
- * 
+ *
  */
 inline
 void House::setName(std::string newName)
@@ -132,7 +132,7 @@ void House::setName(std::string newName)
 }
 
 /**
- * 
+ *
  */
 inline
 std::string House::getName() const
@@ -171,8 +171,8 @@ bool House::operator==(const House &rhs) const
 
 /**
  * House Stream Insertion (Output) Operator
- * 
- * This is often written as a wrapper for a 
+ *
+ * This is often written as a wrapper for a
  * display or print function.
  * <p>
  * This operator can *NOT* be implemented as a member function.

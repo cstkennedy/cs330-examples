@@ -33,9 +33,9 @@ void House::display(std::ostream& outs) const
 {
     outs << "--------" << this->name << "--------" << "\n";
 
-    // All of the loops in this function are 
+    // All of the loops in this function are
     // functionally equivalent
-    
+
     std::cerr << "--> for loop (int i)" << "\n";
 
     for (int i = 0; i < rooms.size(); i++) {
@@ -44,7 +44,7 @@ void House::display(std::ostream& outs) const
 
     std::cerr << "\n--> while loop (stl iterator)" << "\n";
 
-    std::vector<Room>::const_iterator it = rooms.begin(); 
+    std::vector<Room>::const_iterator it = rooms.begin();
 
     while (it < rooms.end()) {
         //outs << *it;
@@ -58,7 +58,7 @@ void House::display(std::ostream& outs) const
         outs << *it;
         //it->display(outs);
     }
-    
+
     std::cerr << "\n--> for loop (range based)" << "\n";
 
     for (const Room& prtRoom : rooms) {

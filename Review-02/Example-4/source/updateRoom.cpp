@@ -16,7 +16,7 @@
 using namespace std;
 
 /**
- * Compute the area of a room and the cost of 
+ * Compute the area of a room and the cost of
  * flooring for the room
  * <p>
  * Let us Review the use of reference and pointer variables.
@@ -68,7 +68,7 @@ int main()
     }
 
     // Let us use a quick scope trick
-    {        
+    {
         double                avg   = 0;
         double                total = 0;
 
@@ -86,7 +86,7 @@ int main()
         cout << "Avg Room Cost: $ " << avg   << "\n";
     }
 
-    // What if we decide to use the same type of 
+    // What if we decide to use the same type of
     // Flooring in every room
     for (Room& room : house) {
         room.setFlooring("Stone Bricks", 12.97);
@@ -108,5 +108,5 @@ int main()
     cout << "Total Cost   : $ " << total << "\n";
     cout << "Avg Room Cost: $ " << avg   << "\n";
 
-    return 0;   
+    return 0;
 }

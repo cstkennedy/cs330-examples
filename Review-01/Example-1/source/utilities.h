@@ -13,7 +13,7 @@
 #include <cstdlib>
 #include <cmath>
 
-namespace utilities{
+namespace utilities {
     const int W_WIDTH = 70; ///< Width of the terminal window
 
     ///

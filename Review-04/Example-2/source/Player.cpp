@@ -3,7 +3,7 @@
 std::string Player::PROMPT_MSG = "Enter your desired move (1-9): ";
 
 /**
- * 
+ *
  */
 Player::Player()
 {
@@ -11,7 +11,7 @@ Player::Player()
 }
 
 /**
- * 
+ *
  */
 Player::Player(std::string n)
 {
@@ -19,20 +19,20 @@ Player::Player(std::string n)
 }
 
 /**
- * 
+ *
  */
 int Player::nextMove()
 {
     int choice;
 
-    std::cout << (name + ", " + Player::PROMPT_MSG);    
+    std::cout << (name + ", " + Player::PROMPT_MSG);
     std::cin >> choice;
 
     return choice;
 }
 
 /**
- * 
+ *
  */
 bool Player::isHuman() const
 {
@@ -40,7 +40,7 @@ bool Player::isHuman() const
 }
 
 /**
- * 
+ *
  */
 bool Player::isComputer() const
 {

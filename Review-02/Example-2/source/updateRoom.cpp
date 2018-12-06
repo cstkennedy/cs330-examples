@@ -16,7 +16,7 @@
 using namespace std;
 
 /**
- * Compute the area of a room and the cost of 
+ * Compute the area of a room and the cost of
  * flooring for the room
  * <p>
  * Let us Review the use of reference and pointer variables.
@@ -46,5 +46,5 @@ int main()
     // How do I access all the rooms to compute the average cost?
     // How do I compute the total cost?
 
-    return 0;   
+    return 0;
 }

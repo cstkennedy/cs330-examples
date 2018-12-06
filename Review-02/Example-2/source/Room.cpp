@@ -13,7 +13,7 @@ const std::string Room::UNITS = "ft";
 //------------------------------------------------
 /*
  Pay close attention to scope. Inner classes
- exist within the scope of the outer--i.e., 
+ exist within the scope of the outer--i.e.,
  containing class
 */
 //------------------------------------------------
@@ -46,7 +46,7 @@ Room::DimensionSet::DimensionSet()
 }
 
 /**
- * Set the length and width to user 
+ * Set the length and width to user
  * specified values
  */
 Room::DimensionSet::DimensionSet(Dimension l, Dimension w)
@@ -56,13 +56,13 @@ Room::DimensionSet::DimensionSet(Dimension l, Dimension w)
 }
 
 /**
- * 
+ *
  */
 Room::Room()
     :name("Generic"),
      flooring(),
      dimensions()
-{   
+{
     //this->flooring.type     = "Generic";
     //this->flooring.unitCost = 1;
 }
@@ -74,7 +74,7 @@ Room::Room(Dimension l, Dimension w, Cost c)
     :name("Generic"),
      flooring("Generic", c),
      dimensions(l, w)
-{   
+{
     //flooring.type     = "Generic";
     //flooring.unitCost = c;
 }
@@ -114,17 +114,17 @@ void Room::setDimensions(Dimension l, Dimension w)
  */
 void Room::display(std::ostream &outs) const
 {
-    // Print dimensions to 1 decimal place.        
-    outs.precision(1);  
+    // Print dimensions to 1 decimal place.
+    outs.precision(1);
     outs.setf(std::ios::fixed);
 
     // Let us add spacing--simulate a table
     println();
 
     outs << "Room (" << name << ")"         << "\n";
-         
+
     outs << left  << setw(8) << "  Length"  << ": "
-         << right << setw(8) << dimensions.getLength()    
+         << right << setw(8) << dimensions.getLength()
                              << " " << UNITS << "\n";
 
     outs << left  << setw(8) << "  Width"  << ": "
@@ -151,7 +151,7 @@ void Room::display(std::ostream &outs) const
  */
 bool Room::operator==(const Room &rhs) const
 {
-    // Note that I am directly comparing floating 
+    // Note that I am directly comparing floating
     // point values.
     return (
         this->name   == rhs.name &&

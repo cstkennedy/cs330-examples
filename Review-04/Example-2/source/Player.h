@@ -7,7 +7,7 @@
 /**
  * This is more a Player interface than a Player class.
  * <p>
- * However, such distinctions and discussions belong in 
+ * However, such distinctions and discussions belong in
  * the OOP and Inheritance Modules
  */
 class Player {
@@ -79,7 +79,7 @@ class Player {
 };
 
 /**
- * 
+ *
  */
 inline
 std::string Player::getName() const
@@ -88,7 +88,7 @@ std::string Player::getName() const
 }
 
 /**
- * 
+ *
  */
 inline
 void Player::setName(std::string n)
@@ -97,7 +97,7 @@ void Player::setName(std::string n)
 }
 
 /**
- * 
+ *
  */
 inline
 char Player::getSymbol() const
@@ -106,7 +106,7 @@ char Player::getSymbol() const
 }
 
 /**
- * 
+ *
  */
 inline
 char Player::setSymbol(char newSymbol)
