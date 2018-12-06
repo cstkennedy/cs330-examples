@@ -3,9 +3,7 @@
 #include "utilities.h"
 
 namespace utilities{
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     bool readLine( std::istream& in_stream, std::string &value_in)
     {
         getline( in_stream, value_in);
@@ -14,9 +12,7 @@ namespace utilities{
         return in_stream.good();
     }
 
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     bool readLine( std::istream &in_stream, std::string &value_in, std::string message, int width)
     {
         std::cout << std::left << std::setw( width ) << message << ": ";
@@ -24,9 +20,7 @@ namespace utilities{
         return readLine( in_stream, value_in );
     }
 
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     void printHorizontalLine( std::ostream& outs, char line_char, int width )
     {
         outs << std::setfill( line_char ) << std::left << std::setw( width ) << line_char << "\n";
@@ -34,9 +28,7 @@ namespace utilities{
         outs.fill( ' ' );
     }
 
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     std::string generateNumberTitle( std::string title_text, int title_num )
     {
         std::stringstream magic;
@@ -46,9 +38,7 @@ namespace utilities{
         return (magic.str());     
     }
 
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     void printCenteredTitle( std::ostream& outs, std::string title, int width )
     {
         int magic_width = 0;
@@ -59,9 +49,7 @@ namespace utilities{
              << std::left;
     }
 
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     void printProjectHeading( std::ostream& outs, const std::string titles[], int title_items, int width )
     {
         //Output the top line
@@ -75,9 +63,7 @@ namespace utilities{
         printHorizontalLine( outs, '*', width );
     }
 
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     void printHeading( std::ostream& outs, std::string title, int width, char border_char )
     {
         printHorizontalLine( outs, border_char, width );
@@ -89,9 +75,7 @@ namespace utilities{
         outs.fill(' ');
     }
 
-    /**
-     *
-     */
+    //--------------------------------------------------------------------------
     bool areEqual( double lhs, double rhs, double threshold )
     {
         return std::abs( rhs - lhs ) < threshold;

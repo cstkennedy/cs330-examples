@@ -5,9 +5,7 @@
 
 #include "triangle.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Triangle::Triangle()
     :Shape( "Triangle" )
 {
@@ -16,9 +14,7 @@ Triangle::Triangle()
     this->_side_c = 1;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Triangle::Triangle( double _side_a, double _side_b, double _side_c )
     :Shape( "Triangle" )
 {
@@ -27,9 +23,7 @@ Triangle::Triangle( double _side_a, double _side_b, double _side_c )
     this->_side_c = _side_c;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Triangle::Triangle( const Triangle &src )
     :Shape( "Triangle" )
 {
@@ -38,16 +32,12 @@ Triangle::Triangle( const Triangle &src )
     this->_side_c = src._side_c;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Triangle::~Triangle()
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 double Triangle::area() const
 {
     double s = perimeter() / 2;
@@ -59,9 +49,7 @@ double Triangle::area() const
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Triangle::display( std::ostream &outs ) const
 {
     Shape::display( outs );
@@ -89,9 +77,7 @@ void Triangle::display( std::ostream &outs ) const
          << "\n";
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Triangle::read(std::istream& ins)
 {
     ins >> this->_side_a;

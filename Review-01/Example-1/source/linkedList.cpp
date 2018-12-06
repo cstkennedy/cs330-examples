@@ -1,8 +1,6 @@
 #include "linkedList.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList::LinkedList()
 {
     //Initialize the private data members (attributes)
@@ -11,9 +9,7 @@ LinkedList::LinkedList()
     nodes = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 LinkedList::~LinkedList()
 {
     Node *this_iterator = nullptr; // Loop control pointer
@@ -45,9 +41,7 @@ LinkedList::~LinkedList()
     nodes = 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void LinkedList::prependNode( int to_add )
 {
     // Create a new Node
@@ -87,9 +81,7 @@ void LinkedList::prependNode( int to_add )
     new_node = nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void LinkedList::appendNode( int to_add )
 {
     // Create a new Node
@@ -123,17 +115,13 @@ void LinkedList::appendNode( int to_add )
     new_node = nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int LinkedList::size() const
 {
     return this->nodes;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void LinkedList::display(std::ostream& outs) const
 {
     Node* it  = this->head;

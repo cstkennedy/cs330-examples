@@ -1,26 +1,20 @@
 #include "node.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Node::Node()
 {
    this->data = 0;
    this->next = nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Node::Node( int data )
 {
     this->data = data;
     this->next = nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Node::operator==( const Node &rhs ) const
 {
     return (
@@ -29,9 +23,7 @@ bool Node::operator==( const Node &rhs ) const
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Node::operator!=( const Node &rhs ) const
 {
     return (

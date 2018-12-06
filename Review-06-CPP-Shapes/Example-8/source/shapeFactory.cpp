@@ -11,17 +11,13 @@ ShapeFactory::ShapePair ShapeFactory::_known_shapes[] = {
     ShapePair( "Circle",                new Circle()              )
 }; // No more empty ShapePair
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 ShapeFactory::ShapePair::ShapePair()
     : _name(), _model( nullptr )
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 ShapeFactory::ShapePair::ShapePair( std::string name, Shape *shape )
     : _name( name ), _model( shape )
 {
@@ -32,9 +28,7 @@ ShapeFactory::ShapePair::~ShapePair()
     delete _model;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Shape* ShapeFactory::createShape( std::string name )
 {
     for(const ShapePair& pair : _known_shapes){
@@ -47,9 +41,7 @@ Shape* ShapeFactory::createShape( std::string name )
     return nullptr;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool ShapeFactory::isKnown( std::string name )
 {
     for(const ShapePair& pair : _known_shapes){
@@ -62,9 +54,7 @@ bool ShapeFactory::isKnown( std::string name )
     return false;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void ShapeFactory::listKnown( std::ostream &outs )
 {
     for(const ShapePair& pair : _known_shapes){
@@ -72,9 +62,7 @@ void ShapeFactory::listKnown( std::ostream &outs )
     }
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int ShapeFactory::numberKnown()
 {
     int count = 0;
@@ -87,9 +75,7 @@ int ShapeFactory::numberKnown()
 }
 
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 std::istream& operator>>(std::istream& ins, Shape*& rd)
 {
     std::string     name;

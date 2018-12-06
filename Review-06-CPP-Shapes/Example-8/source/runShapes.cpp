@@ -126,9 +126,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 ShapeCollection readShapes(std::istream& ins)
 {
     ShapeCollection collection;
@@ -159,9 +157,7 @@ ShapeCollection readShapes(std::istream& ins)
     return collection;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 {
     // for(const Shape* s : toPrint) {
@@ -171,9 +167,7 @@ void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
     }
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint)
 {
     for(const std::unique_ptr<Shape>& s : toPrint) {

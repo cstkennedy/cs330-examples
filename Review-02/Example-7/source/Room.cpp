@@ -55,9 +55,7 @@ Room::DimensionSet::DimensionSet(Dimension l, Dimension w)
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Room::Room()
     :name("Generic"),
      flooring(),
@@ -67,9 +65,7 @@ Room::Room()
     //this->flooring.unitCost = 1;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Room::Room(Dimension l, Dimension w, Cost c)
     :name("Generic"),
      flooring("Generic", c),
@@ -80,9 +76,7 @@ Room::Room(Dimension l, Dimension w, Cost c)
 }
 
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Room::Room(std::string n, Dimension l, Dimension w, Cost c)
     :name(n),
      flooring("Generic", c),
@@ -90,9 +84,7 @@ Room::Room(std::string n, Dimension l, Dimension w, Cost c)
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Room::Room(std::string n, DimensionSet d, Cost c, std::string fn)
     :name(n),
      flooring(fn, c),
@@ -100,18 +92,14 @@ Room::Room(std::string n, DimensionSet d, Cost c, std::string fn)
 {
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Room::setDimensions(Dimension l, Dimension w)
 {
     dimensions.setLength(l);
     dimensions.setWidth(w);
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void Room::display(std::ostream &outs) const
 {
     // Print dimensions to 1 decimal place.
@@ -146,9 +134,7 @@ void Room::display(std::ostream &outs) const
          << "  Total Cost: $ " << right << setw(8) << flooringCost()    << "\n";
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Room::operator==(const Room &rhs) const
 {
     // Note that I am directly comparing floating
@@ -159,9 +145,7 @@ bool Room::operator==(const Room &rhs) const
     );
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Room::operator<(const Room &rhs) const
 {
     if (this->name == rhs.name) {
