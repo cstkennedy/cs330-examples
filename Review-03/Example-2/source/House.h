@@ -176,11 +176,16 @@ bool House::operator==(const House &rhs) const
         rhsIt++;
     }
 
+    /*
     if (lhsIt == this->end() && rhsIt == rhs.end()) {
         return true;
     }
 
     return false;
+    */
+
+    return lhsIt == this->end()
+        && rhsIt == rhs.end();
 }
 
 /**
