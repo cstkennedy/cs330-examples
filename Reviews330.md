@@ -64,7 +64,7 @@ This Review is split into three (3) recordings:
 
   This set of examples takes the Linked List and Dynamic Array examples from Review 02 and incorporates the Big-3. The final example includes an alternative appraoch to the assignment operator (copy and swap).
 
-  All source code is available in \ExampleZip{Review-03.zip}. The recorded review is located [here](https://youtu.be/hi7rGZ4gWlw). _Note that this is the Fall 2017 recording.
+  All source code is available in \ExampleZip{Review-03.zip}. The recorded review is located [here](https://youtu.be/hi7rGZ4gWlw). _Note that this is the Fall 2017 recording._
 
 
 # Review 4

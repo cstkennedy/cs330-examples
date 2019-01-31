@@ -25,7 +25,7 @@ using namespace std;
 int main()
 {
     Room room("Laundry Room", 8, 4, 1.95);
-    Room kitchen("Kitchen", 20,12, 3.87);
+    Room kitchen("Kitchen", 20, 12, 3.87);
 
     Room* roomPointer = &room;
 

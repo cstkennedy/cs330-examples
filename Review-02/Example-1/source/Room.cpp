@@ -107,7 +107,7 @@ void Room::display(std::ostream &outs) const
     outs.setf(std::ios::fixed);
 
     // Let us add spacing--simulate a table
-    println();
+    println(outs);
 
     outs << "Room (" << name << ")"         << "\n";
 
