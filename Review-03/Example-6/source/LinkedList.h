@@ -6,7 +6,7 @@
 template <typename T>
 class LinkedList {
     private:
-        struct Node{
+        struct Node {
             T     data;
             Node* next;
 
@@ -114,9 +114,7 @@ class LinkedList {
         }
 
         LinkedList(const LinkedList& src)
-            :head(nullptr),
-             tail(nullptr),
-             currentSize(0)
+            :LinkedList()
         {
             /*
             Node* it = src.head;

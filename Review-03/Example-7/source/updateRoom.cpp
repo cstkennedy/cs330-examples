@@ -90,7 +90,7 @@ int main()
 
     //std::ostream_iterator<double> outIt(std::cout, "\n");
     std::copy(costs.begin(), costs.end(),
-              std::ostream_iterator<double> outIt(std::cout, "\n"));
+              std::ostream_iterator<double>(std::cout, "\n"));
 
     // Print the sum, min, max -> D.R.Y!
     cout << "Total: "

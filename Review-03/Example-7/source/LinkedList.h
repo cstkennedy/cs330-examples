@@ -114,9 +114,7 @@ class LinkedList {
         }
 
         LinkedList(const LinkedList& src)
-            :head(nullptr),
-             tail(nullptr),
-             currentSize(0)
+            :LinkedList()
         {
             /*
             Node* it = src.head;

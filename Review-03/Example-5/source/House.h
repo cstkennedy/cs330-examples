@@ -17,7 +17,7 @@
  */
 class House{
     public:
-        struct Node{
+        struct Node {
             Room  data;
             Node* next;
 
@@ -310,11 +310,8 @@ bool House::operator==(const House &rhs) const
         rhsIt++;
     }
 
-    if (lhsIt == this->end() && rhsIt == rhs.end()) {
-        return true;
-    }
-
-    return false;
+    return lhsIt == this->end()
+        && rhsIt == rhs.end();
 }
 
 /**
