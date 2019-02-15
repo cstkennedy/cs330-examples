@@ -59,8 +59,8 @@ class Player {
 	+getSymbol() : char
 	-symbol : char
 	+nextMove() : int
-	+{static} referenceCylon : static const Player
-	-{static} PROMPT_MSG : static std::string
+	+{static} referenceCylon : const Player
+	-{static} PROMPT_MSG : std::string
 	+getName() : std::string
 	-name : std::string
 	+setName(std::string n) : void
