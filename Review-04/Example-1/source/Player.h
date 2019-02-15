@@ -47,6 +47,6 @@ class Player {
         char getSymbol() const;
 
         char setSymbol(char newSymbol);
-}
+};
 
 #endif
