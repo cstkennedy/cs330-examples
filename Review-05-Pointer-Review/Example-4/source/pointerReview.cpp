@@ -9,24 +9,17 @@
 
 using namespace std;
 
+const std::string D_LINE(48, '-'); // A 48-dash dividing line
+
 /**
  * Main Function - Basics of Pointers & References
  */
 int main(int argc, char** argv)
 {
     const int numPowers = 32;
-
     std::array<int, numPowers> powersOfTwo = {0};
 
-    cout << std::string(48, '-') << "\n";
-
-    /*
-    for_each(powersOfTwo.begin(), powersOfTwo.end(),
-             [](int& v) {
-                 static int i = 0;
-                 v = 1 << i++;
-             });
-    */
+    cout << D_LINE << "\n";
 
     for (int i = 0; i < powersOfTwo.size(); i++) {
         powersOfTwo[i] = (1 << i);
@@ -35,11 +28,11 @@ int main(int argc, char** argv)
     // Output Loop Options
     /*
     for (int i = 0; i < powersOfTwo.size(); i++) {
-        std::cout << powersOfTwo[i] << "\n";
+        cout << powersOfTwo[i] << "\n";
     }
 
     for (int* it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
-        std::cout << *it << "\n";
+        cout << *it << "\n";
     }
 
     for (std::array<int, numPowers>::iterator it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
@@ -47,22 +40,22 @@ int main(int argc, char** argv)
     }
 
     for (auto it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
-        std::cout << it << " -> " << *it << "\n";
+        cout << it << " -> " << *it << "\n";
     }
     */
 
     for (const int& v : powersOfTwo) {
-        std::cout << v << "\n";
+        cout << v << "\n";
     }
 
     /*
     for (const auto& v : powersOfTwo) {
-        std::cout << v << "\n";
+        cout << v << "\n";
     }
     */
 
     cout << "\n";
-    cout << std::string(48, '-') << "\n";
+    cout << D_LINE << "\n";
     cout << "\n";
 
     for (int i = 0; i < numPowers; i++) {
@@ -73,7 +66,7 @@ int main(int argc, char** argv)
     }
 
     cout << "\n";
-    cout << std::string(48, '-') << "\n";
+    cout << D_LINE << "\n";
     cout << "\n";
 
     for (int i = 0; i < numPowers; i++) {
@@ -126,17 +119,6 @@ int main(int argc, char** argv)
     sizeInBits  = sizeInBytes << 3;
 
     cout << "data size:           "
-         << setw(4) << sizeInBytes
-         << " (bytes) / "
-         << setw(4) << sizeInBits
-         << " (bits)"
-         << "\n";
-
-    sizeInBytes = (sizeof(int) * numPowers);
-    sizeInBits  = sizeInBytes << 3;
-
-    cout << "\n";
-    cout << "sizeof(std::array<int, numPowers>): "
          << setw(4) << sizeInBytes
          << " (bytes) / "
          << setw(4) << sizeInBits
