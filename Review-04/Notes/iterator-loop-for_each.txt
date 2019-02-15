@@ -1,7 +1,0 @@
-let collection be a an arbitrary sequential data structure with n entries
-Container<T> collection;
-
-
-for (const T& t : container) {
-    // do stuff
-}

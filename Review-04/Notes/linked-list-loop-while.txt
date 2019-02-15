@@ -1,9 +1,0 @@
-let collection be a linked list with n Node objects
-T* collection = new T[n]
-
-Node* it = this->head;
-while (it != nullptr) {
-    // do stuff
-
-    it = it->next;
-}

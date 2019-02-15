@@ -1,9 +1,0 @@
-let collection be an array of size n
-T* collection = new T[n]
-
-int i = 0;
-while (i < n) {
-    // do stuff
-    
-    i++;
-}
