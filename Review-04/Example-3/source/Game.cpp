@@ -140,12 +140,24 @@ bool Game::Referee::selectedCellIsEmpty(int move) const
 }
 
 //------------------------------------------------------------------------------
-Game::Game(Player& p1, Player& p2)
+/*Game::Game(Player& p1, Player& p2)
     :player1(p1),
      player2(p2),
      winner(nullptr),
      board(),
      ref(this->board)
+{
+    player1.setSymbol('X');
+    player2.setSymbol('O');
+}*/
+
+Game::Game(Player& p1, Player& p2)
+    :board(),
+     ref(this->board),
+     player1(p1),
+     player2(p2),
+     winner(nullptr),
+     numMovesMade(0)
 {
     player1.setSymbol('X');
     player2.setSymbol('O');
