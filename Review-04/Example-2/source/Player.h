@@ -15,7 +15,7 @@ class Player {
         /**
          * Message used to prompt a human player for a move
          */
-        static std::string PROMPT_MSG;
+        static const std::string PROMPT_MSG;
 
         std::string name;
         char        symbol;
@@ -75,7 +75,7 @@ class Player {
         /**
          * Change the player symbol
          */
-        char setSymbol(char newSymbol);
+        void setSymbol(char newSymbol);
 };
 
 /**
@@ -109,7 +109,7 @@ char Player::getSymbol() const
  *
  */
 inline
-char Player::setSymbol(char newSymbol)
+void Player::setSymbol(char newSymbol)
 {
     symbol = newSymbol;
 }

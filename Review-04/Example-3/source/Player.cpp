@@ -10,7 +10,6 @@ static bool isGeneric(const Player& possibleCylon)
     return possibleCylon == Player::referenceCylon;
 }
 
-
 //------------------------------------------------------------------------------
 Player::Player()
 {

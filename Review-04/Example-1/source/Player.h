@@ -2,7 +2,7 @@
 #define PLAYER_H_INCLUDED
 
 /**
- * This is more a PLayer interface than a Player class.
+ * This is more a Player interface than a Player class.
  * <p>
  * However, such distinctions and discussions belong in
  * the OOP and Inheritance Modules

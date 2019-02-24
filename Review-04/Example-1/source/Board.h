@@ -88,5 +88,10 @@ class Board {
  */
 inline
 std::ostream& operator<<(std::ostream& outs, const Board& prt)
+{
+    prt.display(outs);
+
+    return outs;
+}
 
 #endif

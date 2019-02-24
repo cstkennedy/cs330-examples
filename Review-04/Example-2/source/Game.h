@@ -60,37 +60,28 @@ class Game {
 
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 const Player& Game::getPlayer1() const
 {
     return player1;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 const Player& Game::getPlayer2() const
 {
     return player2;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 const Player& Game::getWinner() const
 {
     return (*winner);
 }
 
-
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 const Board& Game::getBoard() const
 {

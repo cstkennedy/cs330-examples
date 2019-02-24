@@ -61,7 +61,7 @@ std::string toStr(const T& thing)
 
 bool testBoardButPoorly()
 {
-    Board board;;
+    Board board;
 
     std::string expectedInitial = "1|2|3\n4|5|6\n7|8|9\n";
     std::string expectedFinal   = "X|X|X\nX|X|X\nX|X|X\n";

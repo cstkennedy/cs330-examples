@@ -1,8 +1,6 @@
 #include "Game.h"
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 Game::Game(Player& p1, Player& p2)
     :player1(p1),
      player2(p2)
@@ -11,13 +9,11 @@ Game::Game(Player& p1, Player& p2)
     player2.setSymbol('O');
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::playRound()
 {
     // The game ended already - assert could be used
-    if(board.isFull()){
+    if (board.isFull()) {
         return true;
     }
 
@@ -56,28 +52,26 @@ bool Game::playRound()
     // Final board
     std::cout << board << "\n";
 
+    if (board.isFull()) {
+        return true;
+    }
+
     return false;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::endedWithWin() const
 {
 
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::endedWithStalemate() const
 {
 
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 const Player& Game::getLoser() const
 {
     // Stalemate
@@ -94,9 +88,7 @@ const Player& Game::getLoser() const
 }
 
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool Game::roundTurn(Player& player)
 {
     int               move;
