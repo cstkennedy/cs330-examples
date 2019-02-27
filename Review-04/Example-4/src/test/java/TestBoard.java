@@ -9,12 +9,12 @@ import static org.hamcrest.CoreMatchers.*;
 import org.hamcrest.core.IsNull;
 
 /**
- * 1 - Does this piece of code perform the operations 
+ * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
- * 
- * 2 - Does this piece of code do something it was not 
+ *
+ * 2 - Does this piece of code do something it was not
  *     designed to perform?
- * 
+ *
  * 1 Test per mutator
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -22,7 +22,7 @@ public class TestBoard
 {
     @Test
     public void testBoardButPoorly()
-    {        
+    {
         Board board = new Board();
 
         String expectedInitial = "1|2|3\n4|5|6\n7|8|9\n";
@@ -36,7 +36,7 @@ public class TestBoard
         }
 
         assertThat(board.toString(), equalTo(expectedFinal));
-        assertTrue(board.isFull());        
+        assertTrue(board.isFull());
     }
 
     // Where are the rest of the tests? This might

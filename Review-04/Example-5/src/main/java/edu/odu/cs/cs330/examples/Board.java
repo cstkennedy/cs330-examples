@@ -178,7 +178,7 @@ public class Board
                 int idx = 3 * i; // row offset
                 idx += j; //column offset
 
-                 bld.append(theBoard[idx] + "|");
+                bld.append(theBoard[idx] + "|");
             }
 
             bld.append(theBoard[(3 * i) + 2] + "\n");

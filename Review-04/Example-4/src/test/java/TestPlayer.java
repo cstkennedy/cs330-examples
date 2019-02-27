@@ -9,12 +9,12 @@ import static org.hamcrest.CoreMatchers.*;
 import org.hamcrest.core.IsNull;
 
 /**
- * 1 - Does this piece of code perform the operations 
+ * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
- * 
- * 2 - Does this piece of code do something it was not 
+ *
+ * 2 - Does this piece of code do something it was not
  *     designed to perform?
- * 
+ *
  * 1 Test per mutator
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

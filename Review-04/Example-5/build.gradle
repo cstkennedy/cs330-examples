@@ -50,7 +50,7 @@ jar {
 test {
     reports {
         html.enabled = true
-    }           
+    }
     ignoreFailures = true
 
     testLogging {
@@ -63,7 +63,7 @@ test {
 }
 
 javadoc {
-    failOnError false    
+    failOnError false
 }
 
 
