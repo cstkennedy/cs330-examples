@@ -72,7 +72,8 @@ public class Game
          */
         public boolean selectedCellIsEmpty(int move)
         {
-            return boardRef.getCell(move) != 'X' && boardRef.getCell(move) != 'O';
+            return boardRef.getCell(move) != 'X'
+                && boardRef.getCell(move) != 'O';
         }
 
 

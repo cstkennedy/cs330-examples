@@ -45,6 +45,10 @@ public class TestPlayer
 
         assertThat(aCylon.hashCode(), is(not(tom.hashCode())));
         assertThat(aCylon, not(equalTo(tom)));
+
+        // Hand wave... These are not the cylons you are looking for.
+        assertThat(aCylon.isHuman(), is(true));
+        assertThat(aCylon.isComputer(), is(false));
     }
 
     @Test
@@ -58,10 +62,6 @@ public class TestPlayer
 
         assertThat(tom.isHuman(), is(true));
         assertThat(tom.isComputer(), is(false));
-
-        // Hand wave... These are not the cylons you are looking for.
-        assertThat(aCylon.isHuman(), is(true));
-        assertThat(aCylon.isComputer(), is(false));
     }
 
     @Test

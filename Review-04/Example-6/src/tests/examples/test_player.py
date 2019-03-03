@@ -33,6 +33,10 @@ class TestPlayer(unittest.TestCase):
         assert_that(hash(self.aCylon), is_not(hash(self.tom)))
         assert_that(self.aCylon, is_not(equal_to(self.tom)))
 
+        # Hand wave... These are not the cylons you are looking for.
+        assert_that(self.aCylon.isHuman(), is_(True))
+        assert_that(self.aCylon.isComputer(), is_(False))
+
     def testPlayerConstructor(self):
 
         self.assertEqual("Tom", str(self.tom))
@@ -43,10 +47,6 @@ class TestPlayer(unittest.TestCase):
 
         assert_that(self.tom.isHuman(), is_(True))
         assert_that(self.tom.isComputer(), is_(False))
-
-        # Hand wave... These are not the cylons you are looking for.
-        assert_that(self.aCylon.isHuman(), is_(True))
-        assert_that(self.aCylon.isComputer(), is_(False))
 
     def testSetSymbol(self):
 
