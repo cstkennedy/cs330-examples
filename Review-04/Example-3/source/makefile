@@ -15,6 +15,6 @@ tests: Player.o TestPlayer.o Board.o TestBoard.o
 
 .cpp.o:
 	g++ $(FLAGS) -c $< -o $@
-	
+
 clean:
 	rm *.o $(MAINPROG)

@@ -107,7 +107,6 @@ public class TestPlayer
     @Test
     public void testClone()
     {
-
         Player theOriginal = theDoctor.clone();
 
         assertThat(theDoctor.hashCode(), equalTo(theOriginal.hashCode()));
