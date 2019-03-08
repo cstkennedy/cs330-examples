@@ -11,6 +11,25 @@ using namespace std;
 const int COL_WIDTHS[4] = {12, 18, 16, 16};
 
 /**
+ * How about a function that is evaluated at compile time?
+ *
+ * https://en.cppreference.com/w/cpp/language/constexpr
+ */
+constexpr int getTotalWidth()
+{
+    int tableWidth = 0;
+
+    // Range based for loop
+    for (const int& i : COL_WIDTHS) {
+        tableWidth += i;
+    }
+
+    return tableWidth;
+}
+
+const int TOTAL_WIDTH = getTotalWidth();
+
+/**
  * Main Function - Basics of Pointers & References
  */
 int main(int argc, char** argv)
@@ -26,14 +45,6 @@ int main(int argc, char** argv)
     xPointer      = &x;
     xConstPointer = &x;
 
-    // Total Table Width
-    int tableWidth = 0;
-
-    // Range based for loop
-    for (const int& i : COL_WIDTHS) {
-        tableWidth += i;
-    }
-
     // Print Heading
     cout << left  << setw(COL_WIDTHS[0]) << "Type"
          << left  << setw(COL_WIDTHS[1]) << "Variable"
@@ -42,7 +53,7 @@ int main(int argc, char** argv)
          << "\n";
 
     // Divider
-    cout << std::string(tableWidth, '-')
+    cout << std::string(TOTAL_WIDTH, '-')
          << "\n";
 
     // Print Content
@@ -65,7 +76,7 @@ int main(int argc, char** argv)
          << "\n";
 
     // Divider
-    cout << std::string(tableWidth, '-')
+    cout << std::string(TOTAL_WIDTH, '-')
          << "\n";
 
     cout << left  << setw(COL_WIDTHS[0]) << "const int*"
