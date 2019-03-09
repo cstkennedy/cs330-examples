@@ -40,15 +40,15 @@ public class Fibonacci {
         */
         if (index < 3 || index > 20) {
             // Error Message
-            System.out.printf("%3d is not between 3 and 20\n", index);
+            System.out.printf("%3d is not between 3 and 20%n", index);
 
             // Exit with an error state
             System.exit(1);
         }
 
         // Initial output
-        System.out.printf("%2d: %10d\n", 1, fm2);
-        System.out.printf("%2d: %10d\n", 2, fm1);
+        System.out.printf("%2d: %10d%n", 1, fm2);
+        System.out.printf("%2d: %10d%n", 2, fm1);
 
         // The first 2 numbers were already output
         for (int i = 3; i <= index; i++) {
@@ -56,7 +56,7 @@ public class Fibonacci {
             fm2 = fm1;
             fm1 = f;
 
-            System.out.printf("%2d: %10d\n", i, f);
+            System.out.printf("%2d: %10d%n", i, f);
         }
     }
 }

@@ -44,13 +44,13 @@ class KeyboardInput {
         System.out.print("Enter a String (with spaces): ");
         inputStringWholeLine = inputStream.nextLine();
 
-        System.out.println(); // cout << "\n";
-        System.out.println("You Entered:"); // cout << "You Entered:" << "\n";
-        System.out.format("  Item %2d: %d\n",    1, inputInt);
-        System.out.format("  Item %2d: %4.2f\n", 2, inputDouble);
-        System.out.format("  Item %2d: %s\n",    3, inputChar);
-        System.out.format("  Item %2d: %b\n",    4, inputBoolean);
-        System.out.format("  Item %2d: %s\n",    5, inputStringNoSpaces);
-        System.out.format("  Item %2d: %s\n",    6, inputStringWholeLine);
+        System.out.println(); // cout << "%n";
+        System.out.println("You Entered:"); // cout << "You Entered:" << "%n";
+        System.out.format("  Item %2d: %d%n",    1, inputInt);
+        System.out.format("  Item %2d: %4.2f%n", 2, inputDouble);
+        System.out.format("  Item %2d: %s%n",    3, inputChar);
+        System.out.format("  Item %2d: %b%n",    4, inputBoolean);
+        System.out.format("  Item %2d: %s%n",    5, inputStringNoSpaces);
+        System.out.format("  Item %2d: %s%n",    6, inputStringWholeLine);
     }
 }

@@ -13,9 +13,9 @@ def main():
     index = 3  # Desired length of sequence
 
     # Fibonaccci
-    fm2   = 1  # n-2 (previous previous) fibonacci number
-    fm1   = 1  # n-1 (previous) fibonacci number
-    f     = 0  # current fibonacci number
+    fm2 = 1  # n-2 (previous previous) fibonacci number
+    fm1 = 1  # n-1 (previous) fibonacci number
+    f   = 0  # current fibonacci number
 
     # Prompt the user
     index = input("Generate how many numbers? ")
@@ -56,4 +56,5 @@ if __name__ == "__main__":
     try:
         main()
     except:
+        # Never write an except block with pass
         pass
