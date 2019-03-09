@@ -26,11 +26,7 @@ const string PROGRAM_HEADING[] = {
 
 const int HEADING_LINES = 2; ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri; ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTriangle
-
 using ShapeCollection = std::vector<std::unique_ptr<Shape>>;
-
 
 /**
  * Read shapes from an input stream

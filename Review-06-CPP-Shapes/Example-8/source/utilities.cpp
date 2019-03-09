@@ -46,7 +46,7 @@ namespace utilities{
     {
         int magic_width = 0;
 
-        magic_width = (width/2) - (title.length()/2) + title.length();
+        magic_width = (width / 2) - (title.length() / 2) + title.length();
 
         outs << std::right << std::setw(magic_width) << title << "\n"
              << std::left;
@@ -62,7 +62,7 @@ namespace utilities{
 
         //Output the title text
         for (int i = 0; i < title_items; i++) {
-             printCenteredTitle(outs, titles[ i ], width);
+             printCenteredTitle(outs, titles[i], width);
         }
         //output the bottom line
         printHorizontalLine(outs, '*', width);

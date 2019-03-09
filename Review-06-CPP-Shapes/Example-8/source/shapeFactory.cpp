@@ -48,15 +48,15 @@ void ShapeFactory::listKnown(std::ostream &outs)
 //------------------------------------------------------------------------------
 int ShapeFactory::numberKnown()
 {
+    /*
     int count = 0;
 
     for (const ShapePair& pair : _known_shapes) {
         count++;
     }
-
-    return count;
+    */
+    return (end(_known_shapes) - begin(_known_shapes));
 }
-
 
 //------------------------------------------------------------------------------
 std::istream& operator>>(std::istream& ins, Shape*& rd)
@@ -73,7 +73,7 @@ std::istream& operator>>(std::istream& ins, Shape*& rd)
     }
     else {
         // throw away the rest of the line
-        std::cerr << name << "\n";
+        std::cerr << name << "\n"; // Debug output
         getline(ins, name);
     }
     ins >> std::ws;
