@@ -7,11 +7,6 @@
 using namespace std;
 
 /**
- * Array of table widths
- */
-const int COL_WIDTHS[] = {12, 18, 16, 16};
-
-/**
  * Main Function - Basics of Pointers & References
  */
 int main(int argc, char** argv)
