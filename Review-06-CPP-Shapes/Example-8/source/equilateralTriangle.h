@@ -13,7 +13,7 @@
 /**
  * A Triangle with all sides set to the same length
  */
-class EquilateralTriangle: public Triangle{   
+class EquilateralTriangle: public Triangle {
     private:
         static const double ROOT_3_DIV_4; ///< @f$ \frac{\sqrt{3}}{4} @f$
 
@@ -29,14 +29,14 @@ class EquilateralTriangle: public Triangle{
          *
          * @param side the desired side length
          */
-        EquilateralTriangle( double side );
+        EquilateralTriangle(double side);
 
         /*
          * Construct an EquilateralTriangle
          *
-         * @param src the EquilateralTriangle to copy       
+         * @param src the EquilateralTriangle to copy
          */
-        EquilateralTriangle( const EquilateralTriangle &src );
+        EquilateralTriangle(const EquilateralTriangle &src);
 
         /*
          * Deconstruct the EquilateralTriangle
@@ -63,10 +63,10 @@ class EquilateralTriangle: public Triangle{
          *
          * @param s the desired side length
          */
-        void side( double s ); // Finally fix the mistake after 8 Examples (-Wall)
+        void side(double s);
 
         /*
-         * Compute the area using 
+         * Compute the area using
          * @f$ Area=@frac{\sqrt{3}}{4}side^2 @f$
          *
          * @return the area
@@ -81,7 +81,7 @@ class EquilateralTriangle: public Triangle{
         /*
          * Print the EquilateralTriangle
          */
-        virtual void display( std::ostream &outs ) const;
+        virtual void display(std::ostream &outs) const;
 
         /**
          * Read the Equilateral Triangle
@@ -91,53 +91,41 @@ class EquilateralTriangle: public Triangle{
         virtual void read(std::istream &ins);
 };
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double EquilateralTriangle::height() const
 {
-    return sqrt( 
-          1.25 * ( side() * side() )
-    );
+    return sqrt(1.25 * (side() * side()));
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double EquilateralTriangle::side() const
 {
     return _side_a;
 }
 
-/**
- *
- */
-inline 
-void EquilateralTriangle::side( double s ) // Finally fix the mistake after 8 Examples (-Wall)
+//------------------------------------------------------------------------------
+inline
+void EquilateralTriangle::side(double s)
 {
     _side_a = s;
     _side_b = s;
     _side_c = s;
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double EquilateralTriangle::area() const
 {
     return ROOT_3_DIV_4 * side() * side();
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 Shape* EquilateralTriangle::clone() const
 {
-    return new EquilateralTriangle( *this );
+    return new EquilateralTriangle(*this);
 }
 
 #endif

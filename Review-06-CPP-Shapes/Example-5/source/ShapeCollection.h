@@ -8,7 +8,7 @@
 
 /**
  * A container for all objects that
- * implement the _Shape_ interface 
+ * implement the _Shape_ interface
  */
 class ShapeCollection {
     public:
@@ -43,7 +43,7 @@ class ShapeCollection {
          * Each `Shape*` must be explicitly copied even
          * though they are in a `std::vector`
          * <p>
-         * Shallow-copy vs. Deep-copy 
+         * Shallow-copy vs. Deep-copy
          */
         ShapeCollection(const ShapeCollection& src);
 
@@ -82,7 +82,7 @@ class ShapeCollection {
         ShapeCollection& operator=(ShapeCollection rhs);
 
         /**
-         * Print all Shape Objects in the `ShapeCollection` 
+         * Print all Shape Objects in the `ShapeCollection`
          */
         void display(std::ostream& outs) const;
 
@@ -93,13 +93,11 @@ class ShapeCollection {
          * <p>
          * [Refer here](http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
          */
-        friend 
+        friend
         void swap(ShapeCollection& lhs, ShapeCollection& rhs);
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 size_t ShapeCollection::size() const
 {

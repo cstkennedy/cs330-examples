@@ -13,7 +13,7 @@
 /**
  * A Polygon with 3 Sides
  */
-class Triangle: public Shape{
+class Triangle: public Shape {
     protected:
         double _side_a;  ///< Length of Side A
         double _side_b;  ///< Length of Side B
@@ -33,14 +33,14 @@ class Triangle: public Shape{
          * @param _side_c the length of side C
          *
          */
-        Triangle( double _side_a, double _side_b, double _side_c );
+        Triangle(double _side_a, double _side_b, double _side_c);
 
         /**
          * Construct a Triangle
          *
-         * @param src the Triangle to copy       
-         */ 
-        Triangle( const Triangle &src );
+         * @param src the Triangle to copy
+         */
+        Triangle(const Triangle &src);
 
         /**
          * Deconstruct a Triangle
@@ -59,7 +59,7 @@ class Triangle: public Shape{
          *
          * @param side the replacement length
          */
-        void sideA( double side );
+        void sideA(double side);
 
         /**
          * Length of side B
@@ -73,7 +73,7 @@ class Triangle: public Shape{
          *
          * @param side the replacement length
          */
-        void sideB( double side );
+        void sideB(double side);
 
         /**
          * Length of side C
@@ -87,7 +87,7 @@ class Triangle: public Shape{
          *
          * @param side the replacement length
          */
-        void sideC( double side );
+        void sideC(double side);
 
         /**
          * Compute the area using Heron's Formula.
@@ -114,7 +114,7 @@ class Triangle: public Shape{
         /**
          * Print the Triangle
          */
-        virtual void display( std::ostream &outs ) const;
+        virtual void display(std::ostream &outs) const;
 
         /**
          * Read the Triangle
@@ -124,78 +124,60 @@ class Triangle: public Shape{
         virtual void read(std::istream &ins);
 };
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double Triangle::sideA() const
 {
     return _side_a;
 }
 
-/**
- *
- */
-inline 
-void Triangle::sideA( double side )
+//------------------------------------------------------------------------------
+inline
+void Triangle::sideA(double side)
 {
     this->_side_a = side;
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double Triangle::sideB() const
 {
     return _side_b;
 }
 
-/**
- *
- */
-inline 
-void Triangle::sideB( double side )
+//------------------------------------------------------------------------------
+inline
+void Triangle::sideB(double side)
 {
     this->_side_b = side;
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double Triangle::sideC() const
 {
     return _side_c;
 }
 
-/**
- *
- */
-inline 
-void Triangle::sideC( double side )
+//------------------------------------------------------------------------------
+inline
+void Triangle::sideC(double side)
 {
     this->_side_c = side;
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double Triangle::perimeter() const
 {
-    return (
-        _side_a + _side_b + _side_c
-    );
+    return (_side_a + _side_b + _side_c);
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 Shape* Triangle::clone() const
 {
-    return new Triangle( *this );
+    return new Triangle(*this);
 }
 
 #endif

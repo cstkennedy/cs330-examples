@@ -13,14 +13,14 @@ Square::Square()
 }
 
 //------------------------------------------------------------------------------
-Square::Square( double s )
+Square::Square(double s)
 {
     this->_name = "Square";
     this->_side = s;
 }
 
 //------------------------------------------------------------------------------
-Square::Square( const Square &src )
+Square::Square(const Square &src)
 {
     this->_name = src._name;
     this->_side = src._side;
@@ -32,13 +32,13 @@ Square::~Square()
 }
 
 //------------------------------------------------------------------------------
-void Square::display( std::ostream &outs ) const
+void Square::display(std::ostream &outs) const
 {
     Shape::display(outs);
 
-    outs << std::left << std::setw( WIDTH_LABEL ) << "Side"       << ": " << std::right << std::setw( WIDTH_VALUE ) << side()       << "\n"
-         << std::left << std::setw( WIDTH_LABEL ) << "Perimeter"  << ": " << std::right << std::setw( WIDTH_VALUE ) << perimeter()  << "\n"
-         << std::left << std::setw( WIDTH_LABEL ) << "Area"       << ": " << std::right << std::setw( WIDTH_VALUE ) << area()       << "\n";
+    outs << std::left << std::setw(WIDTH_LABEL) << "Side"       << ": " << std::right << std::setw(WIDTH_VALUE) << side()       << "\n"
+         << std::left << std::setw(WIDTH_LABEL) << "Perimeter"  << ": " << std::right << std::setw(WIDTH_VALUE) << perimeter()  << "\n"
+         << std::left << std::setw(WIDTH_LABEL) << "Area"       << ": " << std::right << std::setw(WIDTH_VALUE) << area()       << "\n";
 }
 
 //------------------------------------------------------------------------------

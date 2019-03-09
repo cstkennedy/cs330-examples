@@ -8,7 +8,7 @@
 
 /**
  * A container for all objects that
- * implement the _Shape_ interface 
+ * implement the _Shape_ interface
  */
 class ShapeCollection {
     public:
@@ -43,7 +43,7 @@ class ShapeCollection {
          * Each `Shape*` must be explicitly copied even
          * though they are in a `std::vector`
          * <p>
-         * Shallow-copy vs. Deep-copy 
+         * Shallow-copy vs. Deep-copy
          */
         ShapeCollection(const ShapeCollection& src);
 
@@ -57,31 +57,31 @@ class ShapeCollection {
 
         /**
          * Allow access to the _beginning_ of the
-         * `ShapeCollection` via an 
+         * `ShapeCollection` via an
          * iterator.
          */
-        iterator begin(); 
+        iterator begin();
 
         /**
          * Allow access to the _beginning_ of the
          * `ShapeCollection` via an
          * const_iterator.
          */
-        const_iterator begin() const; 
+        const_iterator begin() const;
 
         /**
          * Allow access to the _end_ of the
-         * `ShapeCollection` via an 
+         * `ShapeCollection` via an
          * iterator.
          */
-        iterator end(); 
+        iterator end();
 
         /**
          * Allow access to the _end_ of the
-         * `ShapeCollection` via a 
+         * `ShapeCollection` via a
          * const_iterator.
          */
-        const_iterator end() const; 
+        const_iterator end() const;
 
         /**
          * Return the number of `Shape*`s
@@ -110,7 +110,7 @@ class ShapeCollection {
         ShapeCollection& operator=(ShapeCollection rhs);
 
         /**
-         * Print all Shape Objects in the `ShapeCollection` 
+         * Print all Shape Objects in the `ShapeCollection`
          */
         void display(std::ostream& outs) const;
 
@@ -121,13 +121,11 @@ class ShapeCollection {
          * <p>
          * [Refer here](http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
          */
-        friend 
+        friend
         void swap(ShapeCollection& lhs, ShapeCollection& rhs);
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 size_t ShapeCollection::size() const
 {

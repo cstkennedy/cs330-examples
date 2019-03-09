@@ -82,9 +82,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 ShapeCollection readShapes(std::istream& ins)
 {
     ShapeCollection collection;
@@ -92,7 +90,7 @@ ShapeCollection readShapes(std::istream& ins)
 
     ins >> ws;
 
-    while(ins >> s) {
+    while (ins >> s) {
         if (s != nullptr) {
             collection.addShape(s);
         }

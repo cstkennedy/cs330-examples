@@ -3,25 +3,19 @@
 #include <cassert>
 #include "ShapeCollection.h"
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection()
     :shapes() // Is this necessary?
 {
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection(int n)
-{       
+{
     shapes.reserve(n);
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection(const ShapeCollection& src)
 {
     for (const Shape* s: src.shapes) {
@@ -29,9 +23,7 @@ ShapeCollection::ShapeCollection(const ShapeCollection& src)
     }
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 ShapeCollection::~ShapeCollection()
 {
     for (Shape* s : this->shapes) {
@@ -39,9 +31,7 @@ ShapeCollection::~ShapeCollection()
     }
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 bool ShapeCollection::addShape(Shape* toAdd)
 {
     assert(toAdd != nullptr);
@@ -50,23 +40,19 @@ bool ShapeCollection::addShape(Shape* toAdd)
     return true;
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 ShapeCollection& ShapeCollection::operator=(ShapeCollection rhs)
-{    
+{
     std::swap(*this, rhs);
 
     return *this;
 }
 
-/**
- * 
- */
+//------------------------------------------------------------------------------
 void ShapeCollection::display(std::ostream& outs) const
 {
     for (const Shape* s : this->shapes) {
-        assert(s != nullptr);
+        //assert(s != nullptr);
         outs << *s << "\n";
     }
 }

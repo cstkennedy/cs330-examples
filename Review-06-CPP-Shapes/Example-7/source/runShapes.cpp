@@ -114,9 +114,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 ShapeCollection readShapes(std::istream& ins)
 {
     ShapeCollection collection;
@@ -124,7 +122,7 @@ ShapeCollection readShapes(std::istream& ins)
 
     ins >> ws;
 
-    while(ins >> s) {
+    while (ins >> s) {
         if (s != nullptr) {
             collection.addShape(s);
         }
@@ -136,23 +134,19 @@ ShapeCollection readShapes(std::istream& ins)
     return collection;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 {
-    for(const Shape* s : toPrint) {
+    for (const Shape* s : toPrint) {
         //outs << s << "\n"; // oops
         outs << *s << "\n";
     }
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint)
 {
-    for(const Shape* s : toPrint) {
+    for (const Shape* s : toPrint) {
         outs << s->name() << "\n";
     }
 }
@@ -167,7 +161,7 @@ ShapeCollection::const_iterator findLargestShapeByArea(const ShapeCollection& co
     largestShape = it;
 
     // Review pre increment
-    while(++it != collection.end()) {
+    while (++it != collection.end()) {
         //std::cerr << "\n" << *(*it) << "\n"; // debugging
 
         if ((*it)->area() > (*largestShape)->area()) {

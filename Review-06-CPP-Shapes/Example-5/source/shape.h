@@ -10,7 +10,7 @@
 /**
  * Shape in a 2-D Cartesian Plane
  */
-class Shape{
+class Shape {
     protected:
         static const int WIDTH_LABEL;  ///< Label Output Width
         static const int WIDTH_VALUE;  ///< Value Output Width
@@ -23,7 +23,7 @@ class Shape{
          * @param _name new Shape name
          * @return shape name
          */
-        void name( std::string _name );
+        void name(std::string _name);
 
     public:
         /**
@@ -33,10 +33,10 @@ class Shape{
 
         /**
          * Shape Constructor
-         * 
+         *
          * @param name the desired Shape name
          */
-        Shape( std::string name );
+        Shape(std::string name);
 
         /**
          * Shape Destructor
@@ -72,7 +72,7 @@ class Shape{
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display( std::ostream &outs ) const;
+        virtual void display(std::ostream &outs) const;
 
         /**
          * Read the shape
@@ -82,20 +82,16 @@ class Shape{
         virtual void read(std::istream &ins) = 0;
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 std::string Shape::name() const
 {
     return this->_name;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
-void Shape::name( std::string _name )
+void Shape::name(std::string _name)
 {
     this->_name = _name;
 }
@@ -108,9 +104,9 @@ void Shape::name( std::string _name )
  *
  * @return the modified output stream
  */
-inline std::ostream& operator<< ( std::ostream& outs, const Shape &prt )
+inline std::ostream& operator<< (std::ostream& outs, const Shape &prt)
 {
-    prt.display( outs );
+    prt.display(outs);
 
     return outs;
 }
