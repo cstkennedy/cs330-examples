@@ -118,9 +118,9 @@ int main(int argc, char** argv)
 
     printHeading(cout, "Display Sorted by Name", 38, '~');
     std::sort(shapes.begin(), shapes.end(),
-                          [](const auto& lhs, const auto& rhs) {
-                              return (lhs)->name() < (rhs)->name();
-                          });
+              [](const auto& lhs, const auto& rhs) {
+                  return (lhs)->name() < (rhs)->name();
+              });
     printShapes(cout, shapes);
 
     return 0;

@@ -4,36 +4,19 @@
 #include "shapeFactory.h"
 
 ShapeFactory::ShapePair ShapeFactory::_known_shapes[] = {
-    ShapePair( "Triangle" ,             new Triangle()            ),
-    ShapePair( "Right Triangle" ,       new RightTriangle()       ),
-    ShapePair( "Equilateral Triangle" , new EquilateralTriangle() ),
-    ShapePair( "Square",                new Square()              ),
-    ShapePair( "Circle",                new Circle()              )
+    {"Triangle" ,            std::unique_ptr<Shape>(new Triangle())           },
+    {"Right Triangle" ,      std::unique_ptr<Shape>(new RightTriangle())      },
+    {"Equilateral Triangle", std::unique_ptr<Shape>(new EquilateralTriangle())},
+    {"Square",               std::unique_ptr<Shape>(new Square())             },
+    {"Circle",               std::unique_ptr<Shape>(new Circle())             }
 }; // No more empty ShapePair
 
 //------------------------------------------------------------------------------
-ShapeFactory::ShapePair::ShapePair()
-    : _name(), _model( nullptr )
+Shape* ShapeFactory::createShape(std::string name)
 {
-}
-
-//------------------------------------------------------------------------------
-ShapeFactory::ShapePair::ShapePair( std::string name, Shape *shape )
-    : _name( name ), _model( shape )
-{
-}
-
-ShapeFactory::ShapePair::~ShapePair()
-{
-    delete _model;
-}
-
-//------------------------------------------------------------------------------
-Shape* ShapeFactory::createShape( std::string name )
-{
-    for(const ShapePair& pair : _known_shapes){
-        if( pair._name == name ){
-            return pair._model->clone();
+    for (const ShapePair& pair : _known_shapes) {
+        if (pair.first == name) {
+            return pair.second->clone();
         }
     }
 
@@ -42,10 +25,10 @@ Shape* ShapeFactory::createShape( std::string name )
 }
 
 //------------------------------------------------------------------------------
-bool ShapeFactory::isKnown( std::string name )
+bool ShapeFactory::isKnown(std::string name)
 {
-    for(const ShapePair& pair : _known_shapes){
-        if( pair._name == name ){
+    for (const ShapePair& pair : _known_shapes) {
+        if (pair.first == name) {
             return true;
         }
     }
@@ -55,10 +38,10 @@ bool ShapeFactory::isKnown( std::string name )
 }
 
 //------------------------------------------------------------------------------
-void ShapeFactory::listKnown( std::ostream &outs )
+void ShapeFactory::listKnown(std::ostream &outs)
 {
-    for(const ShapePair& pair : _known_shapes){
-        outs << " " << pair._name << "\n"; 
+    for (const ShapePair& pair : _known_shapes) {
+        outs << " " << pair.first << "\n";
     }
 }
 
@@ -67,7 +50,7 @@ int ShapeFactory::numberKnown()
 {
     int count = 0;
 
-    for(const ShapePair& pair : _known_shapes){
+    for (const ShapePair& pair : _known_shapes) {
         count++;
     }
 
