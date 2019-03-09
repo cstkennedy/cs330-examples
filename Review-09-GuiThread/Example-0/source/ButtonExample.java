@@ -63,12 +63,10 @@ public class ButtonExample extends JFrame {
     {
         // Generate a message (pop-up)
         // dialog window
-        JOptionPane.showMessageDialog(
-            null,
-            "The Game",
-            "The Game",
-            JOptionPane.ERROR_MESSAGE
-        );
+        JOptionPane.showMessageDialog(null,
+                                      "The Game",
+                                      "The Game",
+                                      JOptionPane.ERROR_MESSAGE);
     }
 
     /**

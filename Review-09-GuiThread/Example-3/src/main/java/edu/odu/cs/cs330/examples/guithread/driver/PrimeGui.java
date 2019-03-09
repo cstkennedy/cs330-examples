@@ -48,7 +48,7 @@ public class PrimeGui extends JFrame {
             int prime = 2;
 
             for(int i = 0; i < toGenerate && !stop; i++) {
-                prime = primeGenerator.next();                
+                prime = primeGenerator.next();
             }
 
             // Update GUI elements
@@ -77,8 +77,8 @@ public class PrimeGui extends JFrame {
     private JPanel      inputPanel;   ///< Panel containing all input elements
     private JPanel      summaryPanel; ///< Panel containing all output elements
 
-    private JTextField  lastField;    ///< Output Field - Last--i.e., largest-- prime generated 
-    private JLabel      lastLabel;    ///< Label - Last--i.e., largest-- prime generated 
+    private JTextField  lastField;    ///< Output Field - Last--i.e., largest-- prime generated
+    private JLabel      lastLabel;    ///< Label - Last--i.e., largest-- prime generated
 
     private JTextField  toGenField;   ///< Input Field - # primes to generate
     private JLabel      toGenLabel;   ///< Label - # primes to generate
