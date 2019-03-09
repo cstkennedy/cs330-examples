@@ -10,15 +10,13 @@
 
 #include "triangle.h"
 
-/**
- *
- */
-class RightTriangle: public Triangle{   
+//------------------------------------------------------------------------------
+class RightTriangle: public Triangle {
     private:
         static const double ONE_HALF; ///< @f$ \frac{1}{2} @f$
 
         /**
-         * Compute the hyptoenuse using: 
+         * Compute the hyptoenuse using:
          * @f$ hypotenuse = \sqrt{base^2 + height^2} @f$
          *
          * @param base the base of a Right Triangle
@@ -26,7 +24,7 @@ class RightTriangle: public Triangle{
          *
          * @return the hypotenuse of a right triangle
          */
-        static double computeHypotenuse( double base, double height );
+        static double computeHypotenuse(double base, double height);
 
     public:
         /**
@@ -41,14 +39,14 @@ class RightTriangle: public Triangle{
          * @param base the desired base
          * @param height the desired height
          */
-        RightTriangle( double base, double height );
+        RightTriangle(double base, double height);
 
         /**
          * Construct a RightTriangle
          *
-         * @param src the RightTriangle to copy       
+         * @param src the RightTriangle to copy
          */
-        RightTriangle( const RightTriangle &src );
+        RightTriangle(const RightTriangle &src);
 
         /**
          * Deconstruct the RightTriangle
@@ -65,7 +63,7 @@ class RightTriangle: public Triangle{
          *
          * @param side the replacement base
          */
-        void base( double side );
+        void base(double side);
 
         /**
          * Return the height
@@ -77,7 +75,7 @@ class RightTriangle: public Triangle{
          *
          * @param side the replacement height
          */
-        void height( double side );
+        void height(double side);
 
         /**
          * Return the hypotenuse
@@ -104,87 +102,66 @@ class RightTriangle: public Triangle{
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display( std::ostream &outs ) const;
+        virtual void display(std::ostream &outs) const;
 };
 
-/**
- *
- */
-inline double RightTriangle::computeHypotenuse(double base, double height )
+//------------------------------------------------------------------------------
+inline
+double RightTriangle::computeHypotenuse(double base, double height)
 {
-    return sqrt(
-        ( base * base ) + ( height * height )
-    );
+    return sqrt((base * base) + (height * height));
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double RightTriangle::base() const
 {
     return _side_a;
 }
 
-/**
- *
- */
-inline 
-void RightTriangle::base( double side )
+//------------------------------------------------------------------------------
+inline
+void RightTriangle::base(double side)
 {
     _side_a = side;
-    
-    _side_c = RightTriangle::computeHypotenuse(
-        _side_a,
-        _side_b
-    );
+
+    _side_c = RightTriangle::computeHypotenuse(_side_a, _side_b);
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double RightTriangle::height() const
 {
     return _side_b;
 }
 
-/**
- *
- */
-inline 
-void RightTriangle::height( double side )
+//------------------------------------------------------------------------------
+inline
+void RightTriangle::height(double side)
 {
     _side_b = side;
 
-    _side_c = RightTriangle::computeHypotenuse(
-        _side_a,
-        _side_b
-    );
+    _side_c = RightTriangle::computeHypotenuse(_side_a, _side_b);
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double RightTriangle::hypotenuse() const
 {
     return _side_c;
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double RightTriangle::area() const
 {
     return ONE_HALF * _side_a * _side_b;
 }
 
-inline 
+inline
 Shape* RightTriangle::clone() const
 {
-    return new RightTriangle( *this );
+    return new RightTriangle(*this);
 }
 
 #endif

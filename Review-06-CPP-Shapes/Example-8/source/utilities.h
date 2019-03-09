@@ -16,14 +16,15 @@
 /**
  * A collection of useful utilities.
  */
-namespace utilities{
+namespace utilities {
     const int W_WIDTH = 70;  ///< Width of the terminal window
 
     /**
-     * Utility Function to read a value from an input stream ( any type with a operator>> defined ) - non-interactive
+     * Utility Function to read a value from an input stream (any type with an
+     *  operator>> defined) - non-interactive
      */
     template<class T>
-    bool readValue( std::istream &in_stream, T &value_in)
+    bool readValue(std::istream &in_stream, T &value_in)
     {
         in_stream >> value_in;
 
@@ -35,36 +36,40 @@ namespace utilities{
      * Utility Function to read a value from an input stream - interactive
      */
     template<class T>
-    bool readValue( std::istream &in_stream, T &value_in, std::string message, int width=34 ){
-        std::cout << std::left << std::setw( width ) << message << ": ";
+    bool readValue(std::istream &in_stream, T &value_in,
+                   std::string message, int width = 34)
+    {
+        std::cout << std::left << std::setw(width) << message << ": ";
 
-        return readValue( in_stream, value_in );
+        return readValue(in_stream, value_in);
     }
 
     /**
      * Utility function to read a line - non-interactive
      */
-    bool readLine( std::istream &in_stream, std::string &value_in);
+    bool readLine(std::istream &in_stream, std::string &value_in);
 
     /**
      * Utility function to read a line - interactive
      */
-    bool readLine( std::istream &in_stream, std::string &value_in, std::string message, int width=34 );
+    bool readLine(std::istream &in_stream, std::string &value_in,
+                  std::string message, int width=34);
 
     /**
      * Print a horizontal line
      */
-    void printHorizontalLine( std::ostream& outs=std::cout, char line_char='*', int width=W_WIDTH );
+    void printHorizontalLine(std::ostream& outs=std::cout,
+                             char line_char='*', int width=W_WIDTH);
 
     /**
      * Combine a title string and number into one string
      */
-    std::string generateNumberTitle( std::string title_text, int title_num );
+    std::string generateNumberTitle(std::string title_text, int title_num);
 
     /**
      * Print a centered title
      */
-    void printCenteredTitle( std::ostream& outs, std::string title, int width );
+    void printCenteredTitle(std::ostream& outs, std::string title, int width);
 
     /**
      * Print a heading followed by a horizonal rule
@@ -75,11 +80,11 @@ namespace utilities{
      * @param border the character with which to create the horizontal rule
      */
     inline
-    void printSeperatedHeading( std::ostream &outs, std::string heading,
-                                int width, char border = '-')
+    void printSeperatedHeading(std::ostream &outs, std::string heading,
+                               int width, char border = '-')
     {
-        printCenteredTitle(  outs, heading, width );
-        printHorizontalLine( outs, border, width );
+        printCenteredTitle( outs, heading, width);
+        printHorizontalLine(outs, border, width);
     }
 
     /**
@@ -90,7 +95,8 @@ namespace utilities{
      * @param title_items number of title lines
      * @param width heading width
      */
-    void printProjectHeading( std::ostream& outs, const std::string titles[], int title_items, int width=W_WIDTH );
+    void printProjectHeading(std::ostream& outs, const std::string titles[],
+                             int title_items, int width=W_WIDTH);
 
     /**
      * Print a centered heading
@@ -99,7 +105,8 @@ namespace utilities{
      * @param width heading width
      * @param border_char character out of whcih the dividing line is composed
      */
-    void printHeading( std::ostream& outs, std::string title, int width=W_WIDTH, char border_char = '*' );
+    void printHeading(std::ostream& outs, std::string title,
+                      int width=W_WIDTH, char border_char = '*');
 
     /**
      * Compare two floating point numbers - determine if equal within
@@ -109,13 +116,13 @@ namespace utilities{
      * @param rhs second number
      * @param threshold tolerance
      */
-    bool areEqual( double lhs, double rhs, double threshold=1e-6 );
+    bool areEqual(double lhs, double rhs, double threshold=1e-6);
 
     /**
      * Print a blankline
      */
     inline
-    void println( std::ostream& outs=std::cout )
+    void println(std::ostream& outs=std::cout)
     {
         outs << "\n";
     }
@@ -128,20 +135,18 @@ namespace utilities{
      * @pre str is nonempty
      */
     inline
-    void trim( std::string &str )
+    void trim(std::string &str)
     {
         // If the string is empty, do nothing
-        if( str.empty() ){
+        if (str.empty()) {
             return;
         }
 
         int first_nonspace = str.find_first_not_of(" \t");
         int last_non_space = str.find_last_not_of(" \t");
 
-        str = str.substr(
-            first_nonspace,
-            last_non_space + 1
-        );
+        str = str.substr(first_nonspace,
+                         last_non_space + 1);
     }
 }
 #endif

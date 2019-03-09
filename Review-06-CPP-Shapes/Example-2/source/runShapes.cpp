@@ -31,7 +31,7 @@ typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTri
  *
  * @return the new array size
  */
-int pruneNullPtr( Shape** &shapes, int count );
+int pruneNullPtr(Shape** &shapes, int count);
 
 /**
  * This program does not accept command line
@@ -52,10 +52,10 @@ int main()
     int size          = 0;
 
     // Set formatting
-    cout.precision( 4 );
-    cout.setf( ios::fixed );
+    cout.precision(4);
+    cout.setf(ios::fixed);
 
-    printProjectHeading( cout, PROGRAM_HEADING, HEADING_LINES );
+    printProjectHeading(cout, PROGRAM_HEADING, HEADING_LINES);
 
     /*
     * What happens when the number of shapes is non-trivial?
@@ -100,12 +100,12 @@ int main()
     */
 
     // Examine the ShapeFactory
-    printHeading( cout, "Available Shapes", 38, '~' );
+    printHeading(cout, "Available Shapes", 38, '~');
 
     // List the available shapes
-    ShapeFactory::listKnown( cout );
-    printHorizontalLine( cout, '-', 38 );
-    cout << right << setw( 2 ) << ShapeFactory::numberKnown() << " shapes available." << "\n";
+    ShapeFactory::listKnown(cout);
+    printHorizontalLine(cout, '-', 38);
+    cout << right << setw(2) << ShapeFactory::numberKnown() << " shapes available." << "\n";
 
     cout << "\n";
 
@@ -113,39 +113,39 @@ int main()
     size   = 6;
     shapes = new Shape*[ size ];
 
-    shapes[0] = ShapeFactory::createShape( "Triangle" );
-    shapes[1] = ShapeFactory::createShape( "Right Triangle" );
-    shapes[2] = ShapeFactory::createShape( "Equilateral Triangle" );
-    shapes[3] = ShapeFactory::createShape( "Square" );
-    shapes[4] = ShapeFactory::createShape( "Circle" );
-    shapes[5] = ShapeFactory::createShape( "1337 Haxor" );
+    shapes[0] = ShapeFactory::createShape("Triangle");
+    shapes[1] = ShapeFactory::createShape("Right Triangle");
+    shapes[2] = ShapeFactory::createShape("Equilateral Triangle");
+    shapes[3] = ShapeFactory::createShape("Square");
+    shapes[4] = ShapeFactory::createShape("Circle");
+    shapes[5] = ShapeFactory::createShape("1337 Haxor");
 
-    numShapes = pruneNullPtr( shapes, size );
+    numShapes = pruneNullPtr(shapes, size);
 
     // numShapes is the size of the array after removal of nullptrs
     // size is the original size of the array
 
-    printHeading( cout, "Shapes That Exist", 38, '~' );
-    cout << left << setw( 24 ) << "Original Size"  << ": "
-         << left << setw( 4 )  << size
+    printHeading(cout, "Shapes That Exist", 38, '~');
+    cout << left << setw(24) << "Original Size"  << ": "
+         << left << setw(4)  << size
          << "\n"
-         << left << setw( 24 ) << "Invalid Shapes" << ": "
-         << left << setw( 4 )  << ( size - numShapes )
+         << left << setw(24) << "Invalid Shapes" << ": "
+         << left << setw(4)  << (size - numShapes)
          << "\n"
-         << left << setw( 24 ) << "New Size"       << ": "
-         << left << setw( 4 )  << numShapes        << "\n";
+         << left << setw(24) << "New Size"       << ": "
+         << left << setw(4)  << numShapes        << "\n";
 
     cout << "\n";
 
     // Print all the shapes
-    printHeading( cout, "Display All Shapes", 38, '~' );
+    printHeading(cout, "Display All Shapes", 38, '~');
 
-    for( int i = 0; i < numShapes; i++ ){
+    for (int i = 0; i < numShapes; i++) {
         cout << *(shapes[i]) << "\n";
     }
 
     // Cleanup
-    for( int i = 0; i < numShapes; i++ ){
+    for (int i = 0; i < numShapes; i++) {
         delete shapes[i];
     }
 
@@ -157,15 +157,15 @@ int main()
 /**
  *
  */
-int pruneNullPtr( Shape** &shapes, int count )
+int pruneNullPtr(Shape** &shapes, int count)
 {
     int nonNull = 0;
 
     // Copy all non null pointers to a new array
     Shape **pruned = new Shape*[ count ];
 
-    for( int i = 0; i < count; i++ ){
-        if( shapes[i] != nullptr ){
+    for (int i = 0; i < count; i++) {
+        if (shapes[i] != nullptr) {
             pruned[nonNull] = shapes[i];
             nonNull++;
         }
@@ -178,7 +178,7 @@ int pruneNullPtr( Shape** &shapes, int count )
     shapes = new Shape*[ nonNull ];
 
     // Copy the elements from the pruned array
-    for( int i = 0; i < nonNull; i++ ){
+    for (int i = 0; i < nonNull; i++) {
         shapes[i] = pruned[i];
     }
 

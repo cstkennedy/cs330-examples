@@ -30,7 +30,6 @@ typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTri
  */
 ShapeCollection readShapes(std::istream& ins);
 
-
 /**
  * This program accepts command line
  * arguments
@@ -82,9 +81,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 ShapeCollection readShapes(std::istream& ins)
 {
     ShapeCollection collection;
@@ -92,7 +89,7 @@ ShapeCollection readShapes(std::istream& ins)
 
     ins >> ws;
 
-    while(getline(ins, name)) {
+    while (getline(ins, name)) {
         Shape* s = ShapeFactory::createShape(name);
 
         if (s != nullptr) {

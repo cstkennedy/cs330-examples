@@ -12,7 +12,7 @@
 /**
  * A Rectangle with 4 Equal Sides
  */
-class Square: public Shape{  
+class Square: public Shape {
     private:
         double _side;  ///< Length of One Side
 
@@ -24,17 +24,17 @@ class Square: public Shape{
 
         /**
          * Construct a Square
-         * 
+         *
          * @param s the desired side length
          */
-        Square( double s );
+        Square(double s);
 
         /**
          * Construct a Square
          *
-         * @param src the Square to copy       
-         */ 
-        Square( const Square &src );
+         * @param src the Square to copy
+         */
+        Square(const Square &src);
 
         /**
          * Square Destructor
@@ -51,7 +51,7 @@ class Square: public Shape{
          *
          * @param s the replacement length
          */
-        void side( double s );
+        void side(double s);
 
         /**
          * Compute the area
@@ -77,55 +77,41 @@ class Square: public Shape{
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display( std::ostream &outs ) const;
+        virtual void display(std::ostream &outs) const;
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 double Square::side() const{
     return _side;
 }
 
-/**
- *
- */
-inline 
-void Square::side( double s )
+//------------------------------------------------------------------------------
+inline
+void Square::side(double s)
 {
     _side = s;
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double Square::area() const
 {
-    return (
-        _side * _side
-    );
+    return (_side * _side);
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 double Square::perimeter() const
 {
-    return (
-        4 * _side
-    );
+    return (4 * _side);
 }
 
-/**
- *
- */
-inline 
+//------------------------------------------------------------------------------
+inline
 Shape* Square::clone() const
 {
-    return new Square( *this );
+    return new Square(*this);
 }
 
 #endif
