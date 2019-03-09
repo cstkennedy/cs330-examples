@@ -78,7 +78,7 @@ public class FlipTask
     }
 
     /**
-     * Get the number number of Trials that
+     * Get the number of Trials that
      * were set to run.
      *
      * @return number of trials
