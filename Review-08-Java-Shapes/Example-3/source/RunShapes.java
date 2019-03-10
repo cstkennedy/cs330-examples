@@ -10,24 +10,24 @@ public class RunShapes {
     static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
         "Thomas Kennedy"
-    };  ///< Program Title 
+    };  ///< Program Title
 
     /**
      *
      */
-    public static void main(String args[])
-    {       
+    public static void main(String[] args)
+    {
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-        );        
+        );
 
        /*
         * What happens when the number of shapes is non-trivial?
         *
         * Suppose we were to expand our Shape hierarchy to include
         * the following shapes:
-        *   - Isosceles Triangle 
+        *   - Isosceles Triangle
         *   - Circle
         *   - Ellipse
         *   - Rectangle
@@ -46,7 +46,7 @@ public class RunShapes {
         *   - Python
         *   - PHP
         *   - C#
-        * 
+        *
         * A class that contains static members is created.
         * As new classes are created, the Factory Class is
         * updated.
@@ -66,7 +66,7 @@ public class RunShapes {
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(Utilities.horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());    
+        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());
 
         System.out.println();
 
@@ -82,18 +82,18 @@ public class RunShapes {
         addShape(shapes, ShapeFactory.createShape("1337 Haxor"));
 
         size = shapes.size();
-        
+
         System.out.println(Utilities.heading("Shapes That Exist", 38, '*'));
-        System.out.printf("%-24s: %4d\n", "Original Size", size);     
+        System.out.printf("%-24s: %4d\n", "Original Size", size);
         System.out.printf("%-24s: %4d\n", "Invalid Shapes", (size - shapes.size()));
         System.out.printf("%-24s: %4d\n", "New Size", shapes.size());
-        
+
         System.out.println();
 
         // Print all the shapes
         System.out.println(Utilities.heading("Display All Shapes", 38, '*'));
 
-        for(Shape s : shapes){
+        for (Shape s : shapes) {
             System.out.println(s);
         }
 
@@ -103,7 +103,7 @@ public class RunShapes {
         System.out.println(Utilities.horizontalLine('~', 38));
 
         // C++ Container<Shape*>::iterator it = shapes.begin()
-        Iterator<Shape> it = shapes.iterator(); 
+        Iterator<Shape> it = shapes.iterator();
 
         // C++ while (it != shapes.end())
         while (it.hasNext()) {

@@ -7,21 +7,21 @@ public class RunShapes {
     static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
         "Thomas Kennedy"
-    };  ///< Program Title 
+    };  ///< Program Title
 
     /**
      *
      */
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         // --Erroneous C++ Variable Declarations--
         // --Valid Java Variable Declarations--
         Shape               shape  = null; // Declare an "instance" of Shape
         Shape[]             shapes = null; // Declare an Array of Shapes
-        
+
         // ShapeFactory Discussion
         int size = 0;
-        
+
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
@@ -32,7 +32,7 @@ public class RunShapes {
         *
         * Suppose we were to expand our Shape hierarchy to include
         * the following shapes:
-        *   - Isosceles Triangle 
+        *   - Isosceles Triangle
         *   - Circle
         *   - Ellipse
         *   - Rectangle
@@ -51,7 +51,7 @@ public class RunShapes {
         *   - Python
         *   - PHP
         *   - C#
-        * 
+        *
         * A class that contains static members is created.
         * As new classes are created, the Factory Class is
         * updated.
@@ -71,7 +71,7 @@ public class RunShapes {
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(Utilities.horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());    
+        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());
 
         System.out.println();
 
@@ -86,19 +86,19 @@ public class RunShapes {
         shapes[4] = ShapeFactory.createShape("Circle");
         shapes[5] = ShapeFactory.createShape("1337 Haxor");
 
-        shapes = pruneNullPtr(shapes);        
-        
+        shapes = pruneNullPtr(shapes);
+
         System.out.println(Utilities.heading("Shapes That Exist", 38, '*'));
-        System.out.printf("%-24s: %4d\n", "Original Size", size);     
+        System.out.printf("%-24s: %4d\n", "Original Size", size);
         System.out.printf("%-24s: %4d\n", "Invalid Shapes", (size - shapes.length));
         System.out.printf("%-24s: %4d\n", "New Size", shapes.length);
-        
+
         System.out.println();
 
         // Print all the shapes
         System.out.println(Utilities.heading("Display All Shapes", 38, '*'));
 
-        for(Shape s : shapes){
+        for (Shape s : shapes) {
             System.out.println(s);
         }
     }
@@ -109,7 +109,7 @@ public class RunShapes {
      *
      * @param shapes the array to prune
      * @param count the size of the array
-     * 
+     *
      * @return the new array size
      */
     static Shape[] pruneNullPtr(Shape[] shapes)
@@ -119,10 +119,10 @@ public class RunShapes {
         // Copy all non null pointers to a new array
         Shape[] pruned = new Shape[ shapes.length ];
 
-        for(int i = 0; i < shapes.length; i++){
-            if(shapes[i] != null){
+        for (int i = 0; i < shapes.length; i++) {
+            if (shapes[i] != null) {
                 pruned[non_null] = shapes[i];
-                non_null++; 
+                non_null++;
             }
         }
 
@@ -130,7 +130,7 @@ public class RunShapes {
         shapes = new Shape[ non_null ];
 
         // Copy the elements from the pruned array
-        for(int i = 0; i < non_null; i++){
+        for (int i = 0; i < non_null; i++) {
             shapes[i] = pruned[i];
         }
 

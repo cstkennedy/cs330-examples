@@ -6,9 +6,10 @@ package shapes;
 /**
  * A Triangle with all sides set to the same length
  */
-public class EquilateralTriangle extends Triangle {   
-    private static final double ROOT_3_DIV_4 = Math.sqrt( 3 ) / 4; ///< @f$ \frac{\sqrt{3}}{4} @f$
-    
+public class EquilateralTriangle extends Triangle
+{
+    private static final double ROOT_3_DIV_4 = Math.sqrt(3) / 4; ///< @f$ \frac{\sqrt{3}}{4} @f$
+
     /**
      * Construct an EquilateralTriangle
      * with all sides set to 1.
@@ -16,8 +17,8 @@ public class EquilateralTriangle extends Triangle {
     public EquilateralTriangle()
     {
         this._name = "Equilateral Triangle";
-        
-        this.side( 1 );
+
+        this.side(1);
     }
 
     /**
@@ -25,23 +26,23 @@ public class EquilateralTriangle extends Triangle {
      *
      * @param side the desired side length
      */
-    public EquilateralTriangle( double side )
+    public EquilateralTriangle(double side)
     {
         this._name = "Equilateral Triangle";
-        
-        this.side( side );
+
+        this.side(side);
     }
 
     /**
      * Construct an EquilateralTriangle
      *
-     * @param src the EquilateralTriangle to copy       
-     */ 
-    public EquilateralTriangle( EquilateralTriangle src )
+     * @param src the EquilateralTriangle to copy
+     */
+    public EquilateralTriangle(EquilateralTriangle src)
     {
         this._name = src._name;
 
-        this.side( src.side() );
+        this.side(src.side());
     }
 
     /**
@@ -52,9 +53,7 @@ public class EquilateralTriangle extends Triangle {
      */
     public double height()
     {
-        return Math.sqrt( 
-              1.25 * ( side() * side() )
-        );
+        return Math.sqrt(1.25 * (side() * side()));
     }
 
     /**
@@ -72,7 +71,7 @@ public class EquilateralTriangle extends Triangle {
      *
      * @param s the desired side length
      */
-    public void side( double s )
+    public void side(double s)
     {
         _side_a = s;
         _side_b = s;
@@ -80,12 +79,13 @@ public class EquilateralTriangle extends Triangle {
     }
 
     /**
-     * Compute the area using 
+     * Compute the area using
      * @f$ Area=\frac{\sqrt{3}}{4}side^2 @f$
      *
      * @return the area
      */
-    public double area(){
+    public double area()
+    {
         return ROOT_3_DIV_4 * side() * side();
     }
 
@@ -94,7 +94,7 @@ public class EquilateralTriangle extends Triangle {
      */
     public Shape clone()
     {
-        return new EquilateralTriangle( this );
+        return new EquilateralTriangle(this);
     }
 
     /**
@@ -102,13 +102,11 @@ public class EquilateralTriangle extends Triangle {
      */
     public String toString()
     {
-        return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Side",      this._side_a     ) +
-            String.format( getFormat( ".4f\n" ), "Height",    this.height()    ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );
+        return String.format(getFormat("s\n"  ), "Name", this._name)
+             + String.format(getFormat(".4f\n"), "Side", this._side_a)
+             + String.format(getFormat(".4f\n"), "Height", this.height())
+             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
+             + String.format(getFormat(".4f\n"), "Area", this.area());
     }
 }
 

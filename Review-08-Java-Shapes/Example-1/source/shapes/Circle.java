@@ -6,7 +6,8 @@ package shapes;
 /**
  * An Ellipse with equivlant major and minor axes
  */
-public class Circle extends Shape { 
+public class Circle extends Shape
+{
     private static final double PI  = Math.PI; ///< \f$ \pi \f$
     private static final double TAU = 2 * PI;  ///< \f$ \tau = 2\pi \f$
 
@@ -23,10 +24,10 @@ public class Circle extends Shape {
 
     /**
      * Construct a Circle
-     *  
+     *
      * @param s the desired radius length
      */
-    public Circle( double r )
+    public Circle(double r)
     {
         this._name   = "Circle";
         this._radius = r;
@@ -35,9 +36,9 @@ public class Circle extends Shape {
     /**
      * Construct a Circle
      *
-     * @param src the Circle to copy       
-     */ 
-    public Circle( Circle src )
+     * @param src the Circle to copy
+     */
+    public Circle(Circle src)
     {
         this._name   = src._name;
         this._radius = src._radius;
@@ -48,7 +49,7 @@ public class Circle extends Shape {
      */
     public double radius()
     {
-        return _radius;        
+        return _radius;
     }
 
     /**
@@ -56,7 +57,7 @@ public class Circle extends Shape {
      *
      * @param r the replacement length
      */
-    public void radius( double r )
+    public void radius(double r)
     {
         _radius = r;
     }
@@ -66,9 +67,7 @@ public class Circle extends Shape {
      */
     public double diameter()
     {
-        return (
-            2 * _radius
-        );
+        return 2 * _radius;
     }
 
     /**
@@ -78,9 +77,7 @@ public class Circle extends Shape {
      */
     public double area()
     {
-        return (
-            PI * _radius * _radius
-        );
+        return PI * _radius * _radius;
     }
 
     /**
@@ -90,17 +87,15 @@ public class Circle extends Shape {
      */
     public double perimeter()
     {
-        return (
-            TAU * _radius
-        );
+        return TAU * _radius;
     }
-    
+
     /**
      * Return a new duplicate Circle
      */
     public Shape clone()
     {
-        return new Circle( this );
+        return new Circle(this);
     }
 
     /**
@@ -109,13 +104,11 @@ public class Circle extends Shape {
      * @param outs the output stream--i.e., destination
      */
     public String toString()
-    {       
-        return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Radius",    this.radius()    ) +
-            String.format( getFormat( ".4f\n" ), "Diameter",  this.diameter()  ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );        
+    {
+        return String.format(getFormat("s\n"), "Name", this._name)
+             + String.format(getFormat(".4f\n"), "Radius", this.radius())
+             + String.format(getFormat(".4f\n"), "Diameter", this.diameter())
+             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
+             + String.format(getFormat(".4f\n"), "Area", this.area());
     }
 }

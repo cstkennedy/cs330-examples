@@ -8,12 +8,14 @@ import java.lang.StringBuilder;
 /**
  * The Shape Creating Wizard
  */
-public class ShapeFactory {
+public class ShapeFactory
+{
 
     /**
-     * Name Shape Pair 2-tuple( name, model )
+     * Name Shape Pair 2-tuple(name, model)
      */
-    private static class ShapePair {            
+    private static class ShapePair
+    {
         public String _name;  ///< Name of the shape to clone
         public Shape  _model; ///< Model of the shape to clone
 
@@ -28,18 +30,18 @@ public class ShapeFactory {
 
         /**
          * Non-Default Constructor
-         * 
+         *
          * @param name the name of a shape
          * @param shape a cloneable shape
          */
-        public ShapePair( String name, Shape shape )
+        public ShapePair(String name, Shape shape)
         {
             this._name  = name;
             this._model = shape;
         }
 
         /**
-         * Print the ShapePair 
+         * Print the ShapePair
          */
         public String toString()
         {
@@ -48,25 +50,25 @@ public class ShapeFactory {
     }
 
     private static ShapePair[] _known_shapes = new ShapePair[] {
-        new ShapePair( "Triangle" ,             new Triangle()            ),
-        new ShapePair( "Right Triangle" ,       new RightTriangle()       ),
-        new ShapePair( "Equilateral Triangle" , new EquilateralTriangle() ),
-        new ShapePair( "Square",                new Square()              ),
-        new ShapePair( "Circle",                new Circle()              )
+        new ShapePair("Triangle" ,             new Triangle()           ),
+        new ShapePair("Right Triangle" ,       new RightTriangle()      ),
+        new ShapePair("Equilateral Triangle" , new EquilateralTriangle()),
+        new ShapePair("Square",                new Square()             ),
+        new ShapePair("Circle",                new Circle()             )
     }; ///< Listing of known shapes
-    
+
     /**
      *  Create a Shape
-     * 
+     *
      *  @param name the shape to be created
-     * 
+     *
      *  @return A shape with the specified name
      *      or null if no matching shape is found
      */
-    public static Shape createShape( String name )
+    public static Shape createShape(String name)
     {
-        for( ShapePair pair : _known_shapes ){
-            if( (pair._name).equals(name) ){
+        for (ShapePair pair : _known_shapes) {
+            if ((pair._name).equals(name)) {
                 return (pair._model).clone();
             }
         }
@@ -76,13 +78,13 @@ public class ShapeFactory {
 
     /**
      *  Determine whether a given shape is known
-     * 
+     *
      *  @param name the shape for which to query
      */
-    public static boolean isKnown( String name )
+    public static boolean isKnown(String name)
     {
-        for( ShapePair pair : _known_shapes ){
-            if( (pair._name).equals(name) ){
+        for (ShapePair pair : _known_shapes) {
+            if ((pair._name).equals(name)) {
                 return true;
             }
         }
@@ -96,9 +98,9 @@ public class ShapeFactory {
     public static String listKnown()
     {
         StringBuilder bld = new StringBuilder();
-        
-        for( ShapePair pair : _known_shapes ){
-            bld.append( pair );
+
+        for (ShapePair pair : _known_shapes) {
+            bld.append(pair);
         }
 
         return bld.toString();
@@ -106,7 +108,7 @@ public class ShapeFactory {
 
     /**
      *  Determine the number of known Shapes
-     * 
+     *
      *  @return the number of known shapes
      */
     public static int numberKnown()

@@ -4,8 +4,8 @@ package utilities;
 
 import java.lang.StringBuilder;
 
-public final class Utilities{
-    public static final int    W_WIDTH = 80;   ///< Width of the terminal window    
+public final class Utilities {
+    public static final int    W_WIDTH = 80;   ///< Width of the terminal window
     public static final double EPS     = 1E-6; ///< Default Precision (epsilon)
 
     /**
@@ -21,29 +21,24 @@ public final class Utilities{
     public static String centeredTitle(String title, int width)
     {
         int magic_width = 0;
-        
+
         magic_width = (width/2) - (title.length()/2) + title.length();
 
-        return(
-            String.format("%" + magic_width + "s", title) + 
-            "\n"
-        );
+        return(String.format("%" + magic_width + "s", title) + "\n");
     }
 
     /**
      *  Print a heading followed by a horizontal rule
-     * 
+     *
      *  @param heading the title to display
      *  @param width the width of the heading
      *  @param border the character with which to create the horizontal rule
      */
     public static String seperatedHeading(String heading, int width, char border)
     {
-        return(
-            centeredTitle(heading, width) +
-            horizontalLine(border, width)
-        );
-    } 
+        return centeredTitle(heading, width)
+             + horizontalLine(border, width);
+    }
 
     /**
      *  Print the stylized program/project heading
@@ -55,7 +50,7 @@ public final class Utilities{
         bld.append(horizontalLine('*', width));
         bld.append("\n");
 
-        for(String line : titles){
+        for (String line : titles) {
             bld.append(centeredTitle(line, width));
         }
 
@@ -69,11 +64,9 @@ public final class Utilities{
      */
     public static String heading(String title, int width, char border)
     {
-        return(            
-            horizontalLine(border, width) + "\n" +
-            centeredTitle(title, width  ) +
-            horizontalLine(border, width)
-       );
+        return horizontalLine(border, width) + "\n"
+             + centeredTitle(title, width)
+             + horizontalLine(border, width);
     }
 
     /**
@@ -82,8 +75,6 @@ public final class Utilities{
      */
     public static boolean areEqual(double lhs, double rhs, double threshold)
     {
-        return (
-            Math.abs(rhs - lhs) < threshold
-       );
+        return Math.abs(rhs - lhs) < threshold;
     }
 }

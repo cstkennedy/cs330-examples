@@ -6,7 +6,8 @@ package shapes;
 /**
  * A Polygon with 3 Sides
  */
-public class Triangle extends Shape {
+public class Triangle extends Shape
+{
 
     protected double _side_a; ///< Length of Side A
     protected double _side_b; ///< Length of Side B
@@ -17,7 +18,7 @@ public class Triangle extends Shape {
      */
     public Triangle()
     {
-        super( "Triangle" );
+        super("Triangle");
 
         this._side_a = 1;
         this._side_b = 1;
@@ -32,9 +33,9 @@ public class Triangle extends Shape {
      * @param _side_c the length of side C
      *
      */
-    public Triangle( double _side_a, double _side_b, double _side_c )
+    public Triangle(double _side_a, double _side_b, double _side_c)
     {
-        super( "Triangle" );
+        super("Triangle");
 
         this._side_a = _side_a;
         this._side_b = _side_b;
@@ -44,11 +45,11 @@ public class Triangle extends Shape {
     /**
      * Construct a Triangle
      *
-     * @param src the Triangle to copy       
+     * @param src the Triangle to copy
      */
-    public Triangle( Triangle src )
+    public Triangle(Triangle src)
     {
-        super( "Triangle" );
+        super("Triangle");
 
         this._side_a = src._side_a;
         this._side_b = src._side_b;
@@ -70,7 +71,7 @@ public class Triangle extends Shape {
      *
      * @param side the replacement length
      */
-    public void sideA( double side )
+    public void sideA(double side)
     {
         this._side_a = side;
     }
@@ -90,7 +91,7 @@ public class Triangle extends Shape {
      *
      * @param side the replacement length
      */
-    public void sideB( double side )
+    public void sideB(double side)
     {
         this._side_b = side;
     }
@@ -110,7 +111,7 @@ public class Triangle extends Shape {
      *
      * @param side the replacement length
      */
-    public void sideC( double side )
+    public void sideC(double side)
     {
         this._side_c = side;
     }
@@ -126,11 +127,9 @@ public class Triangle extends Shape {
     {
         double s = perimeter() / 2;
 
-        return ( Math.sqrt( 
-            s * ( s - sideA() ) 
-              * ( s - sideB() ) 
-              * ( s - sideC() )
-        ) );
+        return Math.sqrt(s * (s - sideA())
+                           * (s - sideB())
+                           * (s - sideC()));
     }
 
     /**
@@ -141,9 +140,7 @@ public class Triangle extends Shape {
      */
     public double perimeter()
     {
-        return (
-            _side_a + _side_b + _side_c
-        );
+        return _side_a + _side_b + _side_c;
     }
 
     /**
@@ -151,7 +148,7 @@ public class Triangle extends Shape {
      */
     public Shape clone()
     {
-        return new Triangle( this );
+        return new Triangle(this);
     }
 
     /**
@@ -159,14 +156,12 @@ public class Triangle extends Shape {
      */
     public String toString()
     {
-        return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Side A",    this._side_a     ) +
-            String.format( getFormat( ".4f\n" ), "Side B",    this._side_b     ) +
-            String.format( getFormat( ".4f\n" ), "Side C",    this._side_c     ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );
+        return String.format(getFormat("s\n"), "Name", this._name)
+             + String.format(getFormat(".4f\n"), "Side A", this._side_a)
+             + String.format(getFormat(".4f\n"), "Side B", this._side_b)
+             + String.format(getFormat(".4f\n"), "Side C", this._side_c)
+             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
+             + String.format(getFormat(".4f\n"), "Area", this.area());
     }
-};
+}
 
