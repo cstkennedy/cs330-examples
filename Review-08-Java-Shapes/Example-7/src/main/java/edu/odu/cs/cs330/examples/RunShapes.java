@@ -19,7 +19,7 @@ import edu.odu.cs.cs330.examples.shapes.*;
  */
 public class RunShapes {
     /**
-     * Program Title 
+     * Program Title
      */
     private static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
@@ -33,7 +33,7 @@ public class RunShapes {
      *
      * @throws CloneNotSupportedException
      */
-    public static void main(String args[])
+    public static void main(String[] args)
         throws CloneNotSupportedException
     {
         BufferedReader shapesFile = null;
@@ -54,14 +54,14 @@ public class RunShapes {
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-       );        
+        );
 
        /*
         * What happens when the number of shapes is non-trivial?
         *
         * Suppose we were to expand our Shape hierarchy to include
         * the following shapes:
-        *   - Isosceles Triangle 
+        *   - Isosceles Triangle
         *   - Circle
         *   - Ellipse
         *   - Rectangle
@@ -80,7 +80,7 @@ public class RunShapes {
         *   - Python
         *   - PHP
         *   - C#
-        * 
+        *
         * A class that contains static members is created.
         * As new classes are created, the Factory Class is
         * updated.
@@ -100,7 +100,7 @@ public class RunShapes {
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(Utilities.horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());    
+        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
 
         System.out.println();
 
@@ -122,7 +122,7 @@ public class RunShapes {
         System.out.println();
 
         System.out.println(Utilities.heading("Display Largest Shape (Area)", 38, '~'));
-        Shape largestShape = findLargestShapeByArea(shapes); 
+        Shape largestShape = findLargestShapeByArea(shapes);
 
         //cout << largestShape << "\n"; // oops again
         //cout << *largestShape << "\n";
@@ -155,15 +155,14 @@ public class RunShapes {
         ArrayList<Shape> collection = new ArrayList<Shape>();
 
         while (scanner.hasNextLine()) {
-            String  line          = scanner.nextLine();            
+            String  line          = scanner.nextLine();
 
             //String name = inLineScanner.next();
             int    sIndex = line.indexOf(';', 0);
             String name   = line.substring(0, sIndex); // [0, sIndex)
 
             Scanner lineScanner = new Scanner(
-                line.substring(sIndex + 1, line.length())
-            );
+                line.substring(sIndex + 1, line.length()));
 
             //System.out.println(line);
             //System.out.println(name);
@@ -191,7 +190,7 @@ public class RunShapes {
      */
     private static void printShapes(List<Shape> toPrint)
     {
-        for(Shape s : toPrint){
+        for (Shape s : toPrint) {
             System.out.println(s);
         }
     }
@@ -203,7 +202,7 @@ public class RunShapes {
     private static void printShapeNames(List<Shape> toPrint)
     {
         // C++ Container<Shape*>::iterator it = shapes.begin()
-        Iterator<Shape> it = toPrint.iterator(); 
+        Iterator<Shape> it = toPrint.iterator();
 
         // C++ while (it != toPrint.end())
         while (it.hasNext()) {
@@ -212,7 +211,7 @@ public class RunShapes {
         }
     }
 
-    /** 
+    /**
      * Find the largest `Shape` (by area) in a `ArrayList<Shape>`
      *
      * @return an iterator at the position of the largest `Shape`
@@ -225,7 +224,7 @@ public class RunShapes {
         // until I look at more
         Shape largestShape = it.next();
 
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             //std::cerr << "\n" << *(*it) << "\n"; // debugging
 
             Shape s = it.next();
@@ -235,6 +234,6 @@ public class RunShapes {
             }
         }
 
-        return largestShape;  
+        return largestShape;
     }
 }
