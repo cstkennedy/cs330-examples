@@ -8,7 +8,8 @@ import java.util.Scanner;
 /**
  * A Rectangle with 4 Equal Sides
  */
-public class Square extends Shape {  
+public class Square extends Shape
+{
     private double _side; ///< Length of One Side
 
     /**
@@ -16,29 +17,29 @@ public class Square extends Shape {
      */
     public Square()
     {
-        super( "Square" );
+        super("Square");
         _side = 1;
     }
 
     /**
      * Construct a Square
-     * 
+     *
      * @param s the desired side length
      */
-    public Square( double s )
+    public Square(double s)
     {
-        super( "Square" );
+        super("Square");
         _side = s;
     }
 
     /**
      * Construct a Square
      *
-     * @param src the Square to copy       
-     */ 
-    public Square( Square src )
+     * @param src the Square to copy
+     */
+    public Square(Square src)
     {
-        super( "Square" );
+        super("Square");
         this._side = src._side;
     }
 
@@ -55,7 +56,7 @@ public class Square extends Shape {
      *
      * @param s the replacement length
      */
-    public void side( double s )
+    public void side(double s)
     {
         _side = s;
     }
@@ -67,7 +68,7 @@ public class Square extends Shape {
      */
     public double area()
     {
-        return Math.pow( _side, 2.0 );
+        return Math.pow(_side, 2.0);
     }
 
     /**
@@ -85,7 +86,7 @@ public class Square extends Shape {
      */
     public Shape clone()
     {
-        return new Square( this );
+        return new Square(this);
     }
 
     /**
@@ -103,12 +104,10 @@ public class Square extends Shape {
      */
     public String toString()
     {
-        return (
-            super.toString() +
-            String.format( getFormat( ".4f\n" ), "Side",      this._side       ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );
+       return super.toString()
+            + String.format(getFormat(".4f\n"), "Side", this._side)
+            + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
+            + String.format(getFormat(".4f\n"), "Area", this.area());
     }
 }
 

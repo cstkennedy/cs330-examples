@@ -8,18 +8,19 @@ import java.util.Scanner;
 /**
  * Shape in a 2-D Cartesian Plane
  */
-public abstract class Shape implements Cloneable {
+public abstract class Shape implements Cloneable
+{
 
     protected static final int WIDTH_LABEL = 12; ///< Label Output Width
     protected static final int WIDTH_VALUE = 24; ///< Value Output Width
-    
+
     /**
      * Generate the format string for a label-value pair
-     * 
+     *
      * @param value_format trailing portion of a format String
      * @return complete label-value format String
      */
-    protected static String getFormat( String value_format )
+    protected static String getFormat(String value_format)
     {
         return "%-" + WIDTH_LABEL +"s: %" + WIDTH_VALUE + value_format;
     }
@@ -36,10 +37,10 @@ public abstract class Shape implements Cloneable {
 
     /**
      * Shape Constructor
-     * 
+     *
      * @param name the desired Shape name
      */
-    public Shape( String name )
+    public Shape(String name)
     {
         this._name = name;
     }
@@ -58,7 +59,7 @@ public abstract class Shape implements Cloneable {
      * @param _name new Shape name
      * @return shape name
      */
-    protected void name( String _name )
+    protected void name(String _name)
     {
         this._name = _name;
     }
@@ -94,13 +95,7 @@ public abstract class Shape implements Cloneable {
      */
     public String toString()
     {
-        return (
-            String.format( 
-                getFormat( "s\n" ), 
-                "Name", 
-                this._name 
-            )
-        );
+        return String.format(getFormat("s\n"), "Name", this._name);
 
         //return "Name: " + this_.name;
     }

@@ -8,11 +8,12 @@ import java.util.Scanner;
 /**
  * A Triangle with all sides set to the same length
  */
-public class RightTriangle extends Triangle {   
-    private static final double ONE_HALF = 1.0/2.0; ///< @f$ \frac{1}{2} @f$
-    
+public class RightTriangle extends Triangle
+{
+    private static final double ONE_HALF = 1.0 / 2.0; ///< @f$ \frac{1}{2} @f$
+
     /**
-     * Compute the hyptoenuse using: 
+     * Compute the hypotenuse using:
      * @f$ hypotenuse = \sqrt{base^2 + height^2} @f$
      *
      * @param base the base of a Right Triangle
@@ -20,11 +21,9 @@ public class RightTriangle extends Triangle {
      *
      * @return hypotenuse of a right triangle
      */
-    private static double computeHypotenuse( double base, double height )
+    private static double computeHypotenuse(double base, double height)
     {
-        return Math.sqrt(
-            ( base * base ) + ( height * height )
-        );
+        return Math.sqrt((base * base) + (height * height));
     }
 
     /**
@@ -34,12 +33,9 @@ public class RightTriangle extends Triangle {
     public RightTriangle()
     {
         super();
-        _name   = "Right Triangle";    
+        _name   = "Right Triangle";
 
-        _side_c = computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+        _side_c = computeHypotenuse(_side_a, _side_b);
     }
 
     /**
@@ -48,24 +44,21 @@ public class RightTriangle extends Triangle {
      * @param base the desired base
      * @param height the desired height
      */
-    public RightTriangle( double base, double height )
+    public RightTriangle(double base, double height)
     {
         this._name   = "Right Triangle";
 
         this._side_a = base;
         this._side_b = height;
-        this._side_c = RightTriangle.computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+        this._side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
     }
 
     /**
      * Construct a RightTriangle
      *
-     * @param src the RightTriangle to copy       
-     */ 
-    public RightTriangle( RightTriangle src )
+     * @param src the RightTriangle to copy
+     */
+    public RightTriangle(RightTriangle src)
     {
         this._name   = src._name;
 
@@ -87,14 +80,11 @@ public class RightTriangle extends Triangle {
      *
      * @param side the replacement base
      */
-    public void base( double side )
+    public void base(double side)
     {
         _side_a = side;
-        
-        _side_c = RightTriangle.computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+
+        _side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
     }
 
     /**
@@ -110,14 +100,11 @@ public class RightTriangle extends Triangle {
      *
      * @param side the replacement height
      */
-    public void height( double side )
+    public void height(double side)
     {
         _side_b = side;
 
-        _side_c = RightTriangle.computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+        _side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
     }
 
     /**
@@ -146,7 +133,7 @@ public class RightTriangle extends Triangle {
      */
     public Shape clone()
     {
-        return new RightTriangle( this );
+        return new RightTriangle(this);
     }
 
     /**
@@ -167,14 +154,12 @@ public class RightTriangle extends Triangle {
      */
     public String toString()
     {
-        return (
-            String.format( getFormat( "s\n" ),   "Name",       this._name        ) +
-            String.format( getFormat( ".4f\n" ), "Base",       this.base()       ) +
-            String.format( getFormat( ".4f\n" ), "Height",     this.height()     ) +
-            String.format( getFormat( ".4f\n" ), "Hypotenuse", this.hypotenuse() ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter",  this.perimeter()  ) +
-            String.format( getFormat( ".4f\n" ), "Area",       this.area()       )
-        );
+        return String.format(getFormat("s\n"), "Name", this._name)
+             + String.format(getFormat(".4f\n"), "Base", this.base())
+             + String.format(getFormat(".4f\n"), "Height", this.height())
+             + String.format(getFormat(".4f\n"), "Hypotenuse", this.hypotenuse())
+             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
+             + String.format(getFormat(".4f\n"), "Area", this.area());
     }
 }
 
