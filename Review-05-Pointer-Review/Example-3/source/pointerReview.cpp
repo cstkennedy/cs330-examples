@@ -3,53 +3,59 @@
 #include <iostream>
 #include <iomanip>
 #include <bitset>
+#include <array>
+#include <utility>
+#include <algorithm>
 
 using namespace std;
+
+const std::string D_LINE(48, '-'); // A 48-dash dividing line
 
 /**
  * Main Function - Basics of Pointers & References
  */
 int main(int argc, char** argv)
 {
-    int* powersOfTwo = new int();
-
-    powersOfTwo[0] = 1;
-    //*powersOfTwo   = 1;
-
-    // Working with a pointer to a singleton
-    cout << "powersOfTwo    = " << powersOfTwo    << "\n"
-         << "&powersOfTwo   = " << &powersOfTwo   << "\n"
-         << "\n";
-
-    // Dereferencing a pointer & using offsets
-    cout << "*powersOfTwo   = " << *powersOfTwo   << "\n";
-    cout << "powersOfTwo[0] = " << powersOfTwo[0] << "\n";
-
-    cout << "\n";
-    cout << "Using a traditional for loop" << "\n";
-    for(int i = 0; i < 1; i++) {
-        cout << powersOfTwo[i] << "\n";
-    }
-
-    delete powersOfTwo;
-
-    cout << std::string(48, '-') << "\n";
-
-    // Working with a pointer to an array
     const int numPowers = 32;
+    std::array<int, numPowers> powersOfTwo = {0};
 
-    powersOfTwo = new int[numPowers];
+    cout << D_LINE << "\n";
 
-    for (int i = 0; i < numPowers; i++) {
+    for (int i = 0; i < powersOfTwo.size(); i++) {
         powersOfTwo[i] = (1 << i);
     }
 
-    for (int* it = powersOfTwo; it < powersOfTwo + numPowers; it++) {
+    // Output Loop Options
+    /*
+    for (int i = 0; i < powersOfTwo.size(); i++) {
+        cout << powersOfTwo[i] << "\n";
+    }
+
+    for (int* it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
+        cout << *it << "\n";
+    }
+
+    for (std::array<int, numPowers>::iterator it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
         cout << it << " -> " << *it << "\n";
     }
 
+    for (auto it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
+        cout << it << " -> " << *it << "\n";
+    }
+    */
+
+    for (const int& v : powersOfTwo) {
+        cout << v << "\n";
+    }
+
+    /*
+    for (const auto& v : powersOfTwo) {
+        cout << v << "\n";
+    }
+    */
+
     cout << "\n";
-    cout << std::string(48, '-') << "\n";
+    cout << D_LINE << "\n";
     cout << "\n";
 
     for (int i = 0; i < numPowers; i++) {
@@ -60,7 +66,7 @@ int main(int argc, char** argv)
     }
 
     cout << "\n";
-    cout << std::string(48, '-') << "\n";
+    cout << D_LINE << "\n";
     cout << "\n";
 
     for (int i = 0; i < numPowers; i++) {
@@ -118,9 +124,6 @@ int main(int argc, char** argv)
          << setw(4) << sizeInBits
          << " (bits)"
          << "\n";
-
-    //delete powersOfTwo;
-    delete[] powersOfTwo;
 
     return 0;
 }
