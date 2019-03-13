@@ -18,7 +18,7 @@ ShapeCollection::ShapeCollection(int n)
 //------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection(const ShapeCollection& src)
 {
-    for (const Shape* s: src.shapes) {
+    for (const Shape* s : src.shapes) {
         shapes.push_back(s->clone());
     }
 }

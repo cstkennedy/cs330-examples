@@ -68,7 +68,7 @@ int ShapeFactory::numberKnown()
 {
     int count = 0;
 
-    while (_known_shapes[ count ]._model != nullptr) {
+    while (_known_shapes[count]._model != nullptr) {
         count++;
     }
 

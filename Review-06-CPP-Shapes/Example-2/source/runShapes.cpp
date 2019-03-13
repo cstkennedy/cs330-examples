@@ -111,7 +111,7 @@ int main()
 
     // Create 5 "Random" Shapes
     size   = 6;
-    shapes = new Shape*[ size ];
+    shapes = new Shape*[size];
 
     shapes[0] = ShapeFactory::createShape("Triangle");
     shapes[1] = ShapeFactory::createShape("Right Triangle");

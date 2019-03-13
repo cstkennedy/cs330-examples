@@ -17,12 +17,12 @@
 /**
  * The Shape Creating Wizard
  */
-class ShapeFactory{
+class ShapeFactory {
     private:
         /**
          * Name Shape Pair 2-tuple(name, model)
          */
-        struct ShapePair{
+        struct ShapePair {
             std::string _name;   ///< Name of the shape to clone
             Shape      *_model;  ///< Model of the shape to clone
 

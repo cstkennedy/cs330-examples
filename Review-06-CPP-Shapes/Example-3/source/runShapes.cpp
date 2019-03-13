@@ -30,10 +30,10 @@ typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTri
 int main()
 {
     // Set formatting
-    cout.precision( 4 );
-    cout.setf( ios::fixed );
+    cout.precision(4);
+    cout.setf(ios::fixed);
 
-    printProjectHeading( cout, PROGRAM_HEADING, HEADING_LINES );
+    printProjectHeading(cout, PROGRAM_HEADING, HEADING_LINES);
 
     /*
     * What happens when the number of shapes is non-trivial?
@@ -78,12 +78,12 @@ int main()
     */
 
     // Examine the ShapeFactory
-    printHeading( cout, "Available Shapes", 38, '~' );
+    printHeading(cout, "Available Shapes", 38, '~');
 
     // List the available shapes
-    ShapeFactory::listKnown( cout );
-    printHorizontalLine( cout, '-', 38 );
-    cout << right << setw( 2 ) << ShapeFactory::numberKnown() << " shapes available." << "\n";
+    ShapeFactory::listKnown(cout);
+    printHorizontalLine(cout, '-', 38);
+    cout << right << setw(2) << ShapeFactory::numberKnown() << " shapes available." << "\n";
 
     cout << "\n";
 
@@ -98,7 +98,7 @@ int main()
     shapes.addShape(ShapeFactory::createShape("1337 Haxor"));
 
     // Print all the shapes
-    printHeading( cout, "Display All Shapes", 38, '~' );
+    printHeading(cout, "Display All Shapes", 38, '~');
     cout << shapes;
 
     return 0;
