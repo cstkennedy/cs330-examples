@@ -41,7 +41,7 @@ int main(int argc, char** argv)
     powersOfTwo = new int[numPowers];
 
     for (int i = 0; i < numPowers; i++) {
-        powersOfTwo[i] = (1 << i);
+        powersOfTwo[i] = (1 << i); // Left Bit Shift Operation
     }
 
     for (int* it = powersOfTwo; it < powersOfTwo + numPowers; it++) {
