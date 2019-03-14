@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Thomas J Kennedy
  */
-public class Circle extends Shape implements Cloneable{ 
+public class Circle extends Shape implements Cloneable{
     /**
      * The mathematical constant PI
      */
@@ -18,7 +18,7 @@ public class Circle extends Shape implements Cloneable{
 
     /**
      * Tau is defined as 2*PI
-     */ 
+     */
     private static final double TAU = 2 * PI;
 
     /**
@@ -37,7 +37,7 @@ public class Circle extends Shape implements Cloneable{
 
     /**
      * Construct a Circle
-     *  
+     *
      * @param s the desired radius length
      */
     public Circle( double r )
@@ -49,8 +49,8 @@ public class Circle extends Shape implements Cloneable{
     /**
      * Construct a Circle
      *
-     * @param src the Circle to copy       
-     */ 
+     * @param src the Circle to copy
+     */
     public Circle( Circle src )
     {
         this._name   = src._name;
@@ -62,7 +62,7 @@ public class Circle extends Shape implements Cloneable{
      */
     public double radius()
     {
-        return _radius;        
+        return _radius;
     }
 
     /**
@@ -102,7 +102,7 @@ public class Circle extends Shape implements Cloneable{
     {
         return TAU * _radius;
     }
-    
+
     /**
      * Return a new duplicate Circle
      */
@@ -130,13 +130,13 @@ public class Circle extends Shape implements Cloneable{
      */
     @Override
     public String toString()
-    {       
+    {
         return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Radius",    this.radius()    ) +
-            String.format( getFormat( ".4f\n" ), "Diameter",  this.diameter()  ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
-        );        
+            String.format(STR_FMT, "Name",      this._name       ) +
+            String.format(FPT_FMT, "Radius",    this.radius()    ) +
+            String.format(FPT_FMT, "Diameter",  this.diameter()  ) +
+            String.format(FPT_FMT, "Perimeter", this.perimeter() ) +
+            String.format(FPT_FMT, "Area",      this.area()      )
+        );
     }
 }

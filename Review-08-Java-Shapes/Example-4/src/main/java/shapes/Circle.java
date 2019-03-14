@@ -105,10 +105,10 @@ public class Circle extends Shape
      */
     public String toString()
     {
-        return String.format(getFormat("s\n"), "Name", this._name)
-             + String.format(getFormat(".4f\n"), "Radius", this.radius())
-             + String.format(getFormat(".4f\n"), "Diameter", this.diameter())
-             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
-             + String.format(getFormat(".4f\n"), "Area", this.area());
+        return String.format(STR_FMT, "Name", this._name)
+             + String.format(FPT_FMT, "Radius", this.radius())
+             + String.format(FPT_FMT, "Diameter", this.diameter())
+             + String.format(FPT_FMT, "Perimeter", this.perimeter())
+             + String.format(FPT_FMT, "Area", this.area());
     }
 }

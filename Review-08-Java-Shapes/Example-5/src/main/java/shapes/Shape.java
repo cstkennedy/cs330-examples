@@ -15,6 +15,17 @@ public abstract class Shape implements Cloneable
     protected static final int WIDTH_VALUE = 24; ///< Value Output Width
 
     /**
+     * Format String for a label and Floating Point value
+     */
+    protected static final String FPT_FMT = "%-" + WIDTH_LABEL + "s: "
+                                          + "%" + WIDTH_VALUE + ".4f%n";
+
+    /**
+     * Format String for a label and String value
+     */
+    protected static final String STR_FMT = "%-" + WIDTH_LABEL + "s: "
+
+    /**
      * Generate the format string for a label-value pair
      *
      * @param value_format trailing portion of a format String
@@ -95,7 +106,7 @@ public abstract class Shape implements Cloneable
      */
     public String toString()
     {
-        return String.format(getFormat("s\n"), "Name", this._name);
+        return String.format(STR_FMT, "Name", this._name);
 
         //return "Name: " + this_.name;
     }

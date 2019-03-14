@@ -14,10 +14,21 @@ public abstract class Shape implements Cloneable {
 
     protected static final int WIDTH_LABEL = 12; ///< Label Output Width
     protected static final int WIDTH_VALUE = 24; ///< Value Output Width
-    
+
+    /**
+     * Format String for a label and Floating Point value
+     */
+    protected static final String FPT_FMT = "%-" + WIDTH_LABEL + "s: "
+                                          + "%" + WIDTH_VALUE + ".4f%n";
+
+    /**
+     * Format String for a label and String value
+     */
+    protected static final String STR_FMT = "%-" + WIDTH_LABEL + "s: "
+
     /**
      * Generate the format string for a label-value pair
-     * 
+     *
      * @param value_format trailing portion of a format String
      * @return complete label-value format String
      */
@@ -38,7 +49,7 @@ public abstract class Shape implements Cloneable {
 
     /**
      * Shape Constructor
-     * 
+     *
      * @param name the desired Shape name
      */
     public Shape( String name )
@@ -59,7 +70,7 @@ public abstract class Shape implements Cloneable {
     /**
      * Modify the name
      *
-     * @param _name new Shape name     
+     * @param _name new Shape name
      */
     protected void name( String _name )
     {
@@ -79,7 +90,7 @@ public abstract class Shape implements Cloneable {
      * @return perimeter
      */
     public abstract double perimeter();
-            
+
     /**
      * Return a new duplicate Shape
      */
@@ -98,13 +109,7 @@ public abstract class Shape implements Cloneable {
     @Override
     public String toString()
     {
-        return (
-            String.format( 
-                getFormat( "s\n" ), 
-                "Name", 
-                this._name 
-            )
-        );
+        return String.format(STR_FMT, "Name", this._name);
 
         //return "Name: " + this_.name;
     }

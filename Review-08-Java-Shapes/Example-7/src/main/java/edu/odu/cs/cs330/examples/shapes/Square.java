@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author Thomas J Kennedy
  */
-public class Square extends Shape implements Cloneable {  
+public class Square extends Shape implements Cloneable {
     /**
      * Length of One Side
      */
@@ -27,7 +27,7 @@ public class Square extends Shape implements Cloneable {
 
     /**
      * Construct a Square
-     * 
+     *
      * @param s the desired side length
      */
     public Square( double s )
@@ -39,8 +39,8 @@ public class Square extends Shape implements Cloneable {
     /**
      * Construct a Square
      *
-     * @param src the Square to copy       
-     */ 
+     * @param src the Square to copy
+     */
     public Square( Square src )
     {
         super( "Square" );
@@ -113,9 +113,9 @@ public class Square extends Shape implements Cloneable {
     {
         return (
             super.toString() +
-            String.format( getFormat( ".4f\n" ), "Side",      this._side       ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
+            String.format(FPT_FMT, "Side",      this._side       ) +
+            String.format(FPT_FMT, "Perimeter", this.perimeter() ) +
+            String.format(FPT_FMT, "Area",      this.area()      )
         );
     }
 }

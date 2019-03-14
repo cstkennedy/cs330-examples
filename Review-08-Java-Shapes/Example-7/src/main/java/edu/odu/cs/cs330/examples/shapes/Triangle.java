@@ -190,13 +190,13 @@ public class Triangle extends Shape implements Cloneable {
     public String toString()
     {
         return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Side A",    this._side_a     ) +
-            String.format( getFormat( ".4f\n" ), "Side B",    this._side_b     ) +
-            String.format( getFormat( ".4f\n" ), "Side C",    this._side_c     ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
+            String.format(STR_FMT, "Name",      this._name       ) +
+            String.format(FPT_FMT, "Side A",    this._side_a     ) +
+            String.format(FPT_FMT, "Side B",    this._side_b     ) +
+            String.format(FPT_FMT, "Side C",    this._side_c     ) +
+            String.format(FPT_FMT, "Perimeter", this.perimeter() ) +
+            String.format(FPT_FMT, "Area",      this.area()      )
         );
     }
-};
+}
 

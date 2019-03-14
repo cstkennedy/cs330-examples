@@ -10,12 +10,12 @@ import java.util.Scanner;
  *
  * @author Thomas J Kennedy
  */
-public class EquilateralTriangle extends Triangle implements Cloneable {   
+public class EquilateralTriangle extends Triangle implements Cloneable {
     /**
      * sqrt(3) / 4
      */
     private static final double ROOT_3_DIV_4 = Math.sqrt( 3 ) / 4; ///< @f$ \frac{\sqrt{3}}{4} @f$
-    
+
     /**
      * Construct an EquilateralTriangle
      * with all sides set to 1.
@@ -23,7 +23,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     public EquilateralTriangle()
     {
         this._name = "Equilateral Triangle";
-        
+
         this.side( 1 );
     }
 
@@ -35,15 +35,15 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     public EquilateralTriangle( double side )
     {
         this._name = "Equilateral Triangle";
-        
+
         this.side( side );
     }
 
     /**
      * Construct an EquilateralTriangle
      *
-     * @param src the EquilateralTriangle to copy       
-     */ 
+     * @param src the EquilateralTriangle to copy
+     */
     public EquilateralTriangle( EquilateralTriangle src )
     {
         this._name = src._name;
@@ -59,7 +59,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
      */
     public double height()
     {
-        return Math.sqrt( 
+        return Math.sqrt(
               1.25 * ( side() * side() )
         );
     }
@@ -87,7 +87,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     }
 
     /**
-     * Compute the area using 
+     * Compute the area using
      * @f$ Area=\frac{\sqrt{3}}{4}side^2 @f$
      *
      * @return the area
@@ -123,11 +123,11 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     public String toString()
     {
         return (
-            String.format( getFormat( "s\n"   ), "Name",      this._name       ) +
-            String.format( getFormat( ".4f\n" ), "Side",      this._side_a     ) +
-            String.format( getFormat( ".4f\n" ), "Height",    this.height()    ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter", this.perimeter() ) +
-            String.format( getFormat( ".4f\n" ), "Area",      this.area()      )
+            String.format(STR_FMT, "Name",      this._name       ) +
+            String.format(FPT_FMT, "Side",      this._side_a     ) +
+            String.format(FPT_FMT, "Height",    this.height()    ) +
+            String.format(FPT_FMT, "Perimeter", this.perimeter() ) +
+            String.format(FPT_FMT, "Area",      this.area()      )
         );
     }
 }

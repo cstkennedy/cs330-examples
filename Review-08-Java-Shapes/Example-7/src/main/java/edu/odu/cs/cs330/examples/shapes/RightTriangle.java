@@ -13,11 +13,11 @@ import java.util.Scanner;
 public class RightTriangle extends Triangle implements Cloneable {
     /**
      * A constant for one half
-     */  
+     */
     private static final double ONE_HALF = 1.0/2.0; ///< @f$ \frac{1}{2} @f$
-    
+
     /**
-     * Compute the hyptoenuse using: 
+     * Compute the hyptoenuse using:
      * @f$ hypotenuse = \sqrt{base^2 + height^2} @f$
      *
      * @param base the base of a Right Triangle
@@ -37,7 +37,7 @@ public class RightTriangle extends Triangle implements Cloneable {
     public RightTriangle()
     {
         super();
-        _name   = "Right Triangle";    
+        _name   = "Right Triangle";
 
         _side_c = computeHypotenuse(
             _side_a,
@@ -66,8 +66,8 @@ public class RightTriangle extends Triangle implements Cloneable {
     /**
      * Construct a RightTriangle
      *
-     * @param src the RightTriangle to copy       
-     */ 
+     * @param src the RightTriangle to copy
+     */
     public RightTriangle( RightTriangle src )
     {
         this._name   = src._name;
@@ -93,7 +93,7 @@ public class RightTriangle extends Triangle implements Cloneable {
     public void base( double side )
     {
         _side_a = side;
-        
+
         _side_c = RightTriangle.computeHypotenuse(
             _side_a,
             _side_b
@@ -174,12 +174,12 @@ public class RightTriangle extends Triangle implements Cloneable {
     public String toString()
     {
         return (
-            String.format( getFormat( "s\n" ),   "Name",       this._name        ) +
-            String.format( getFormat( ".4f\n" ), "Base",       this.base()       ) +
-            String.format( getFormat( ".4f\n" ), "Height",     this.height()     ) +
-            String.format( getFormat( ".4f\n" ), "Hypotenuse", this.hypotenuse() ) +
-            String.format( getFormat( ".4f\n" ), "Perimeter",  this.perimeter()  ) +
-            String.format( getFormat( ".4f\n" ), "Area",       this.area()       )
+            String.format(STR_FMT,   "Name",       this._name        ) +
+            String.format(FPT_FMT, "Base",       this.base()       ) +
+            String.format(FPT_FMT, "Height",     this.height()     ) +
+            String.format(FPT_FMT, "Hypotenuse", this.hypotenuse() ) +
+            String.format(FPT_FMT, "Perimeter",  this.perimeter()  ) +
+            String.format(FPT_FMT, "Area",       this.area()       )
         );
     }
 }
