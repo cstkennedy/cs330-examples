@@ -30,7 +30,7 @@ class TestReferee(unittest.TestCase):
         for i in range(1, 10):
             assert_that(self.aReferee.selectedCellIsEmpty(i), is_(True))
 
-    def checkForHorizontalWin(self):
+    def testCheckForHorizontalWin(self):
 
         hBoard = Board()
 
@@ -46,7 +46,7 @@ class TestReferee(unittest.TestCase):
 
         assert_that(hReferee.checkForWin(), is_(1))
 
-    def checkForVerticalWin(self):
+    def testCheckForVerticalWin(self):
 
         vBoard = Board()
 
@@ -62,7 +62,7 @@ class TestReferee(unittest.TestCase):
 
         assert_that(vReferee.checkForWin(), is_(2))
 
-    def checkForDiagonalWin(self):
+    def testCheckForDiagonalWin(self):
 
         dBoard = Board()
 
