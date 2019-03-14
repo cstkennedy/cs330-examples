@@ -3,6 +3,8 @@
 
 package shapes;
 
+import java.util.Scanner;
+
 /**
  * Shape in a 2-D Cartesian Plane
  */
@@ -22,7 +24,7 @@ public abstract class Shape implements Cloneable
      * Format String for a label and String value
      */
     protected static final String STR_FMT = "%-" + WIDTH_LABEL + "s: "
-                                          + "%" + WIDTH_VALUE + "s%n";
+
     /**
      * Generate the format string for a label-value pair
      *
@@ -91,6 +93,13 @@ public abstract class Shape implements Cloneable
      * Return a new duplicate Shape
      */
     public abstract Shape clone();
+
+    /**
+     * Read the shape
+     *
+     * @param scanner the input stream--scanner in this example
+     */
+    public abstract void read(Scanner scanner);
 
     /**
      * Print the shape

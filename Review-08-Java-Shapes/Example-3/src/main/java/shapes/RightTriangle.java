@@ -3,8 +3,6 @@
 
 package shapes;
 
-import java.util.Scanner;
-
 /**
  * A Triangle with all sides set to the same length
  */
@@ -134,19 +132,6 @@ public class RightTriangle extends Triangle
     public Shape clone()
     {
         return new RightTriangle(this);
-    }
-
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
-    public void read(Scanner scanner)
-    {
-        this.base(scanner.nextDouble());
-        this.height(scanner.nextDouble());
-
-        this._side_c = computeHypotenuse(this.base(), this.height());
     }
 
     /**

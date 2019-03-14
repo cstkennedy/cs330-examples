@@ -3,8 +3,6 @@
 
 package shapes;
 
-import java.util.Scanner;
-
 /**
  * A Rectangle with 4 Equal Sides
  */
@@ -87,16 +85,6 @@ public class Square extends Shape
     public Shape clone()
     {
         return new Square(this);
-    }
-
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
-    public void read(Scanner scanner)
-    {
-        this._side = scanner.nextDouble();
     }
 
     /**
