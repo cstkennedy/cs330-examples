@@ -102,11 +102,11 @@ public class EquilateralTriangle extends Triangle
      */
     public String toString()
     {
-        return String.format(getFormat("s\n"  ), "Name", this._name)
-             + String.format(getFormat(".4f\n"), "Side", this._side_a)
-             + String.format(getFormat(".4f\n"), "Height", this.height())
-             + String.format(getFormat(".4f\n"), "Perimeter", this.perimeter())
-             + String.format(getFormat(".4f\n"), "Area", this.area());
+        return String.format(STR_FMT, "Name", this._name)
+             + String.format(FPT_FMT, "Side", this._side_a)
+             + String.format(FPT_FMT, "Height", this.height())
+             + String.format(FPT_FMT, "Perimeter", this.perimeter())
+             + String.format(FPT_FMT, "Area", this.area());
     }
 }
 
