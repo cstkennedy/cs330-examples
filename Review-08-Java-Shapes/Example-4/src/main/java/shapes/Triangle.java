@@ -3,6 +3,8 @@
 
 package shapes;
 
+import java.util.Scanner;
+
 /**
  * A Polygon with 3 Sides
  */
@@ -149,6 +151,18 @@ public class Triangle extends Shape
     public Shape clone()
     {
         return new Triangle(this);
+    }
+
+    /**
+     * Read the shape
+     *
+     * @param scanner the input stream--scanner in this example
+     */
+    public void read(Scanner scanner)
+    {
+        this._side_a = scanner.nextDouble();
+        this._side_b = scanner.nextDouble();
+        this._side_c = scanner.nextDouble();
     }
 
     /**

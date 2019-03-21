@@ -3,10 +3,8 @@
 
 package shapes;
 
-import java.util.Scanner;
-
 /**
- * An Ellipse with equivalent major and minor axes
+ * An Ellipse with equivlant major and minor axes
  */
 public class Circle extends Shape
 {
@@ -98,16 +96,6 @@ public class Circle extends Shape
     public Shape clone()
     {
         return new Circle(this);
-    }
-
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
-    public void read(Scanner scanner)
-    {
-        this._radius = scanner.nextDouble();
     }
 
     /**

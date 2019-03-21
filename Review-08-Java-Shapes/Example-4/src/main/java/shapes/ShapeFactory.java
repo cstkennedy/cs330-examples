@@ -10,7 +10,6 @@ import java.lang.StringBuilder;
  */
 public class ShapeFactory
 {
-
     /**
      * Name Shape Pair 2-tuple(name, model)
      */

@@ -3,8 +3,6 @@
 
 package shapes;
 
-import java.util.Scanner;
-
 /**
  * A Triangle with all sides set to the same length
  */
@@ -97,16 +95,6 @@ public class EquilateralTriangle extends Triangle
     public Shape clone()
     {
         return new EquilateralTriangle(this);
-    }
-
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
-    public void read(Scanner scanner)
-    {
-        this.side(scanner.nextDouble());
     }
 
     /**
