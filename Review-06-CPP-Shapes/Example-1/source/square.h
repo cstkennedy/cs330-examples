@@ -82,7 +82,8 @@ class Square: public Shape {
 
 //------------------------------------------------------------------------------
 inline
-double Square::side() const{
+double Square::side() const
+{
     return _side;
 }
 
