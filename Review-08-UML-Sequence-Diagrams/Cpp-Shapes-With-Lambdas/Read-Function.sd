@@ -1,0 +1,31 @@
+#![CPP RunShapes "read" Function With Iterators]
+rs:RunShapes[a]
+/collection:ShapeCollection
+/uPtr:unique_ptr<Shape>[a]
+/it:istream_iterator<Shape*>
+/end:istream_iterator<Shape*>
+sf:ShapeFactory[a]
+/s:Shape*
+
+#
+rs:collection.new()
+rs:it.new(ins)
+rs:end.new()
+[c:loop it != end]
+rs:s=it.operator*() [dereference]
+it:sf.operator>>(ins,s)
+sf:s=sf.createShape(name)&
+[c:alt s is not null]
+sf:s.new()
+sf:s.read(ins)&
+--else
+sf:getline(ins,name)[discard the rest of the line]
+[/c]
+[c:opt s not null]
+rs:collection.emplace_back(s)
+collection:uPtr.new(s)
+[/c]
+rs:it.operator++() [post increment]&
+[/c]
+rs:it.destroy()
+rs:end.destroy()

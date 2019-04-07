@@ -1,0 +1,11 @@
+#![CPP RunShapes Main Function]
+rs:RunShapes[a]
+sf:ShapeFactory[a]
+#
+rs:sf.listKnown(std::cout)
+rs:sf.numberKnown()
+rs:shapes=rs.readShapes(shapesFile)[refer to the "read" sequence diagram]&
+rs:rs.printShapes(std::cout, shapes)&
+rs:rs.printShapeNames(std::cout, shapes)&
+rs:it=rs.findLargestShapeByArea(shapes)
+
