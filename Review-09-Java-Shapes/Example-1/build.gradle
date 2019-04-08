@@ -8,6 +8,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'eclipse'
 apply plugin: 'org.ysb33r.doxygen'
 
@@ -31,6 +32,11 @@ jar {
         )
     }
 }
+
+run {
+    main = "RunShapes"
+}
+
 
 test {
     reports {

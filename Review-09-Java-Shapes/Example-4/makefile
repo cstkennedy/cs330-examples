@@ -1,16 +1,22 @@
 all: src docs
 
-deploy: docs clean
-	zip -r deploy.zip source documentation* input tests
+deploy: clean
+	echo "Gradle Based Example"
+	./gradlew deploy
 
 src:
 	make -C source
 
 docs:
-	doxygen documentation.config
+	# doxygen documentation.config
+	echo "Gradle Based Example"
+	./gradlew --no-daemon doxygen javadoc
+	rm -rf .gradle 
+
 
 clean:
-	make -C source clean
+	./gradlew --no-daemon clean cleanEclipse
+	rm -rf .gradle 
 
 
 	

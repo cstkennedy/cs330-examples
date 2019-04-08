@@ -8,6 +8,7 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: 'eclipse'
 apply plugin: 'org.ysb33r.doxygen'
 
@@ -32,6 +33,11 @@ jar {
     }
 }
 
+run {
+    main = "RunShapes"
+}
+
+
 test {
     reports {
         html.enabled = true
@@ -46,4 +52,8 @@ doxygen {
     source new File(projectDir,'src/main/java')
     //source new File(projectDir,'src/test/java')
     outputDir new File(buildDir,'docs')
+}
+
+javadoc {
+    failOnError false
 }
