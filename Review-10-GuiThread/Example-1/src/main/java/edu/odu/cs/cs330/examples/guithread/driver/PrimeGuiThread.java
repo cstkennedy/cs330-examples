@@ -64,12 +64,12 @@ public class PrimeGuiThread extends JFrame {
                 bld.append("Prime Generation Halted\n");
                 bld.append("# Generated: ");
                 bld.append(primeGenerator.numberOfPrimes());
-                bld.append("\n");
+                bld.append('\n');
             }
 
             for (Integer i : primeGenerator.getPrimes()) {
                 bld.append(i);
-                bld.append("\n");
+                bld.append('\n');
             }
 
             logArea.setText(bld.toString());

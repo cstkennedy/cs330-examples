@@ -58,7 +58,7 @@ public class PrimeGui extends JFrame {
 
             for (Integer i : primeGenerator.getPrimes()) {
                 bld.append(i);
-                bld.append("\n");
+                bld.append('\n');
             }
 
             logArea.setText(bld.toString());
