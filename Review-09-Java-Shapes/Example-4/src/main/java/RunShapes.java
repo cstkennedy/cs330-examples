@@ -33,7 +33,7 @@ public class RunShapes {
         }
         catch(FileNotFoundException e) {
             System.out.println("File (" + args[0] + ") could not be opened.");
-            System.exit(1);
+            System.exit(2);
         }
 
         // Print main program heading
@@ -137,7 +137,7 @@ public class RunShapes {
         ArrayList<Shape> collection = new ArrayList<Shape>();
 
         while (scanner.hasNextLine()) {
-            String  line          = scanner.nextLine();
+            String  line = scanner.nextLine();
 
             //String name = inLineScanner.next();
             int    sIndex = line.indexOf(';', 0);

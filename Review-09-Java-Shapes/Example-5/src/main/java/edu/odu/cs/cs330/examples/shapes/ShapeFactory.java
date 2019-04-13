@@ -18,7 +18,7 @@ public class ShapeFactory {
         /**
          * Name of the shape to clone
          */
-        public String _name; 
+        public String _name;
 
         /**
          * Model of the shape to clone
@@ -36,7 +36,7 @@ public class ShapeFactory {
 
         /**
          * Non-Default Constructor
-         * 
+         *
          * @param name the name of a shape
          * @param shape a cloneable shape
          */
@@ -47,7 +47,7 @@ public class ShapeFactory {
         }
 
         /**
-         * Print the ShapePair 
+         * Print the ShapePair
          */
         public String toString()
         {
@@ -65,9 +65,9 @@ public class ShapeFactory {
 
     /**
      *  Create a Shape
-     * 
+     *
      *  @param name the shape to be created
-     * 
+     *
      *  @return A shape with the specified name
      *      or null if no matching shape is found
      */
@@ -85,7 +85,7 @@ public class ShapeFactory {
 
     /**
      *  Determine whether a given shape is known
-     * 
+     *
      *  @param name the shape for which to query
      */
     public static boolean isKnown( String name )
@@ -105,7 +105,7 @@ public class ShapeFactory {
     public static String listKnown()
     {
         StringBuilder bld = new StringBuilder();
-        
+
         for( ShapePair pair : _known_shapes ){
             bld.append( pair );
         }
@@ -115,7 +115,7 @@ public class ShapeFactory {
 
     /**
      *  Determine the number of known Shapes
-     * 
+     *
      *  @return the number of known shapes
      */
     public static int numberKnown()

@@ -12,8 +12,8 @@ public final class Utilities{
     /**
      * Width of the terminal window
      */
-    public static final int W_WIDTH = 80;    
-    
+    public static final int W_WIDTH = 80;
+
     /**
      * Default Precision (epsilon)
      */
@@ -49,7 +49,7 @@ public final class Utilities{
 
     /**
      * Print a heading followed by a horizontal rule
-     * 
+     *
      * @param heading the title to display
      * @param width the width of the heading
      * @param border the character with which to create the horizontal rule
@@ -62,7 +62,7 @@ public final class Utilities{
             centeredTitle(heading, width) +
             horizontalLine(border, width)
         );
-    } 
+    }
 
     /**
      * Print the stylized program/project heading
@@ -100,7 +100,7 @@ public final class Utilities{
      */
     public static String heading(final String title, final int width, final char border)
     {
-        return(            
+        return(
             horizontalLine(border, width) + "\n" +
             centeredTitle(title, width  ) +
             horizontalLine(border, width)
@@ -114,7 +114,7 @@ public final class Utilities{
      * @param lhs first number
      * @param rhs second number
      * @param threshold epsilon (difference) value
-     * 
+     *
      * @return true if the values are equal and false otherwise
      */
     public static boolean areEqual(double lhs, double rhs, double threshold)

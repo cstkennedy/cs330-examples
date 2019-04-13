@@ -130,13 +130,13 @@ public class RunShapes {
 
         System.out.println(heading("Display Largest Shape (Area)", H_WIDTH, '~'));
         //Shape largestShape = findLargestShapeByArea(shapes);
-        Shape largestShape = shapes.stream()
+        Shape largestShape = shapes.parallelStream()
                                 .max(Comparator.comparing(Shape::area))
                                 .get();
         System.out.println(largestShape);
 
         System.out.println(heading("Display Smallest Shape (Perimeter)", H_WIDTH, '~'));
-        Shape smallestShape = shapes.stream()
+        Shape smallestShape = shapes.parallelStream()
                                 .min(Comparator.comparing(Shape::perimeter))
                                 .get();
         System.out.println(smallestShape);

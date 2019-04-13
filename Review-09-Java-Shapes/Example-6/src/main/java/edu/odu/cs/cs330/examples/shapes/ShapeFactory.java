@@ -9,7 +9,6 @@ package edu.odu.cs.cs330.examples.shapes;
  * @author Thomas J Kennedy
  */
 public class ShapeFactory {
-
     /**
      * Listing of known shapes.
      */
