@@ -8,7 +8,6 @@ package shapes;
  */
 public class Triangle extends Shape
 {
-
     protected double _side_a; ///< Length of Side A
     protected double _side_b; ///< Length of Side B
     protected double _side_c; ///< Length of Side C

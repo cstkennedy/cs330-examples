@@ -8,7 +8,6 @@ package shapes;
  */
 public abstract class Shape implements Cloneable
 {
-
     protected static final int WIDTH_LABEL = 12; ///< Label Output Width
     protected static final int WIDTH_VALUE = 24; ///< Value Output Width
 
