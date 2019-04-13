@@ -200,16 +200,37 @@ context of the [C++ Shapes Examples](#review-6-inheritance-in-c-c-shapes-)
 The diagrams and markup to generate them is available in
 \ExampleZip{Review-08-UML-Sequence-Diagrams.zip}
 
-**A recording will be available after the live discussion (tentatively 09 April).**
+The recorded discussion is available [here](https://youtu.be/PusrbfgFfDI).
 
 
 ## Continuing Object Oriented Design and Analysis
 
-The proper way to [**continue (validate & refine)**](doc:designDiscussionPart2) an
-objected oriented domain model.
+The proper way to [**continue (validate & refine)**](doc:designDiscussionPart2)
+an objected oriented domain model.
+
+The recorded discussion is available [here](https://youtu.be/hlGoVWsb8Y4).
 
 
-**A recording will be available after the live discussion (tentatively 11 April).**
+# Review 9: Java Inheritance
+
+This a Java version of the
+[C++ Shapes Discussion](#review-6-inheritance-in-c-c-shapes-). These examples
+present many of the same concepts... in the context of Java. This discussion
+continues our comparison of C++ and Java.
+
+**Note** these examples are not written in
+[idiomatic](http://www.merriam-webster.com/dictionary/idiomatic) Java. It is
+Java code written as a transition into Java from C++. Emphasis is placed on the
+mechanics of Java--as they parallel C++. (Yes, this means **I have been sloppy
+with decorators**)
+
+  This discussion is split into two parts:
+
+  1. [Part 1](https://youtu.be/_Qxt3yTuJOU) - Example 1 to Example 3
+  2. [Part 2](https://youtu.be/XKmfxGRj7vM) - Example 4 to Example 6
+
+
+All source code is available in \ExampleZip{Review-09-Java-Shapes.zip}.
 
 
 # Updates in Progress
@@ -218,23 +239,6 @@ objected oriented domain model.
 tweak existing materials and add additional materials throughout the semester.
 
 ---
-
-# Review 9: Java Inheritance
-
-This a Java version of the
-[C++ Shapes Discussion](#review-6-inheritance-in-c-c-shapes-) This example set
-presents the many of the same concepts... in the context of Java. This
-discussion continues our comparison of C++ and Java.
-
-**Note** these examples are not written in
-[idiomatic](http://www.merriam-webster.com/dictionary/idiomatic) Java. It is
-Java code written as a transition into Java from C++. Emphasis is placed on the
-mechanics of Java--as they parallel C++. (Yes, this means **I have been sloppy
-with decorators**)
-
-
-All source code is available in \ExampleZip{Review-09-Java-Shapes.zip}.
-
 
 # Review 10: Java Gui & Thread Discussion
 
