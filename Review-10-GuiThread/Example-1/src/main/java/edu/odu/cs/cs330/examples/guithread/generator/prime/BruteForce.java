@@ -3,6 +3,7 @@ package edu.odu.cs.cs330.examples.guithread.generator.prime;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Iterator;
 
 /**
  * This is a Brute Force Prime Number Generator. It is intentionally
@@ -16,7 +17,7 @@ import java.util.ListIterator;
  * <p>
  *  - CS 472, http://www.cs.odu.edu/~cs472/fall11/lectures/Number_Theory.htm#Primes
  */
-public class BruteForce {
+public class BruteForce implements Iterable<Integer> {
     /**
      * Ordered list of known primes.
      */
@@ -88,6 +89,16 @@ public class BruteForce {
     public final List<Integer> getPrimes()
     {
         return new ArrayList<Integer>(primes);
+    }
+
+    /**
+     * Return an iterator to the first known prime number
+     *
+     * @return Iterator over all Integer prime numbers
+     */
+    public Iterator<Integer> iterator()
+    {
+        return primes.iterator();
     }
 
     /**

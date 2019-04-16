@@ -67,7 +67,7 @@ public class PrimeGuiThread extends JFrame {
                 bld.append('\n');
             }
 
-            for (Integer i : primeGenerator.getPrimes()) {
+            for (Integer i : primeGenerator) {
                 bld.append(i);
                 bld.append('\n');
             }
