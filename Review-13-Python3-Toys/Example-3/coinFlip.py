@@ -72,7 +72,7 @@ def run_parallel(num_workers, num_trials):
 
     print("Overall   -> ", end="")
     print_summary({"Heads": total_heads, "Tails": total_tails})
-    print("Total Trials %d" % (total_heads + total_tails))
+    print("Total Trials -> %d" % (total_heads + total_tails))
 
 
 def main():

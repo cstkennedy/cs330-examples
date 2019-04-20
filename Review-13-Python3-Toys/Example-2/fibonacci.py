@@ -31,7 +31,6 @@ def main():
     # !(index >= 3 && index <= 20)
     # !(index >= 3) || !(index <= 20)
     # (index < 3 || index > 20)
-
     if index < 3 or index > 20:
         # Error Message
         print("{:3d} is not between 3 and 20\n".format(index))
@@ -43,7 +42,7 @@ def main():
     print("{:>2d}: {:10d}".format(1, fm2))
     print("{:>2d}: {:10d}".format(2, fm1))
 
-    # Fhe first 2 numbers were already output
+    # The first 2 numbers were already output
     for i in range(3, (index + 1)):
         f = fm1 + fm2
         fm2 = fm1

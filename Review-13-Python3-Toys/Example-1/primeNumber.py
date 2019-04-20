@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# Programmer : Thomas Kennedy
+# Programmer : Thomas J. Kennedy
 
 import sys
 

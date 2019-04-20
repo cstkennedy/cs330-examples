@@ -18,7 +18,7 @@ def generate_primes(to_generate):
         # true once a prime number has been identified
         prime = False
 
-        # Iterate of all existing known prime numbers
+        # Iterate over all existing known prime numbers
         # halt when a prime number has been identified
         while not prime:
             # Guess the next prime

@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
  * A coin flip driver.
  */
 public class CoinFlip {
-
     /**
      * Number of microseconds in one second.
      */
@@ -63,7 +62,6 @@ public class CoinFlip {
         catch (IndexOutOfBoundsException e) {
             numTrials = DEFAULT_NUM_TRIALS;
         }
-
 
         long totalStartTime = System.nanoTime();
 

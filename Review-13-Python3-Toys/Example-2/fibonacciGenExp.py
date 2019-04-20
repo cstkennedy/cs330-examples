@@ -38,10 +38,10 @@ def main():
     # !(index >= 3) || !(index <= 200)
     # (index < 3 || index > 200)
     if index < 3 or index > 200:
-        print("{:3d} is not between 3 and 20\n".format(index))
+        print("{:3d} is not between 3 and 200\n".format(index))
         exit(1)
 
-    for idx, f in enumerate(fibonacci_sequence(index)):
+    for idx, f in enumerate(fibonacci_sequence(index), start=1):
         print("{:>2d}: {:10d}".format(idx, f))
 
 
