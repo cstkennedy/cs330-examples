@@ -78,7 +78,7 @@ public class PrimeGui extends JFrame {
     private JPanel      summaryPanel; ///< Panel containing all output elements
 
     private JTextField  lastField;    ///< Output Field - Last--i.e., largest-- prime generated
-    private JLabel      lastLabel;    ///< Label - Last--i.e., largest-- prime generated 
+    private JLabel      lastLabel;    ///< Label - Last--i.e., largest-- prime generated
 
     private JTextField  toGenField;   ///< Input Field - # primes to generate
     private JLabel      toGenLabel;   ///< Label - # primes to generate
