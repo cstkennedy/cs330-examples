@@ -8,25 +8,18 @@ import edu.odu.cs.cs330.examples.guithread.generator.prime.BruteForce;
  * A simple command line test driver for Prime Generator.
  */
 public class TestPrimeGenerator {
-
     /**
      * The main function for the command line prime number generator.
      */
     public static void main(String[] args)
     {
-        /**
-         * Prime number generator instance.
-         */
+        // Prime number generator instance.
         BruteForce gen = new BruteForce();
 
-        /**
-         * List of generated primes.
-         */
+        // List of generated primes.
         List<Integer> primes;
 
-        /**
-         * Number of primes to generate.
-         */
+        // Number of primes to generate.
         int numPrimes = 0;
 
         // Parse command line argument 1
@@ -35,13 +28,11 @@ public class TestPrimeGenerator {
             numPrimes = Integer.parseInt(args[0]);
         }
         catch (NumberFormatException e) {
-            // If the argument could not be parsed,
-            // default to 10
+            // If the argument could not be parsed, default to 10
             numPrimes = 10;
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            // If no argument was supplied, default
-            // to 10
+            // If no argument was supplied, default to 10
             numPrimes = 10;
         }
 

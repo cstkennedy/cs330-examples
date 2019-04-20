@@ -149,6 +149,7 @@ public class PrimeGui extends JFrame {
         // Add start button Listener
         startButton.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     int numPrimes;
@@ -177,6 +178,7 @@ public class PrimeGui extends JFrame {
         // Add stop button Listener
         stopButton.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     if (worker != null) {

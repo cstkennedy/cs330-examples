@@ -39,6 +39,7 @@ public class ButtonExample extends JFrame {
          */
         clickButton.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     displayMessage();

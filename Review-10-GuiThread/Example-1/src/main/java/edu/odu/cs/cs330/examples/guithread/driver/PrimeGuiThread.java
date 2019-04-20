@@ -44,6 +44,7 @@ public class PrimeGuiThread extends JFrame {
         /**
          * Perform the prime number generation.
          */
+        @Override
         public void run()
         {
             int prime = 2;
@@ -160,6 +161,7 @@ public class PrimeGuiThread extends JFrame {
         // Add start button Listener
         startButton.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e)
                 {
                     int numPrimes;
@@ -188,6 +190,7 @@ public class PrimeGuiThread extends JFrame {
         // Add stop button Listener
         stopButton.addActionListener(
             new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     if (worker != null) {
                         worker.halt();
