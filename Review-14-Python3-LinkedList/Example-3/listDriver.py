@@ -46,7 +46,7 @@ def main():
     # Create a Linked List
     random_ints = LinkedList()
     for i in range(0, to_generate):
-        random_ints.append_node(random.randint(MIN, MAX))
+        random_ints.append(random.randint(MIN, MAX))
 
     print(random_ints)
 
@@ -54,7 +54,7 @@ def main():
 
     random_copy = copy.deepcopy(random_ints)
 
-    random_copy.append_node(337)
+    random_copy.append(337)
 
     print(random_copy)
 

@@ -25,8 +25,8 @@ class LinkedList(object):
         """
 
         def __init__(self, data=0, next=None):
-            self.data = data
-            self.next = next
+            self.__data = data
+            self.__next = next
 
     class Iterator(object):
         """
@@ -34,15 +34,15 @@ class LinkedList(object):
         """
 
         def __init__(self, node):
-            self.current_node = node
+            self.__current_node = node
 
         def __next__(self):
-            if self.current_node is None:
+            if self.__current_node is None:
                 raise StopIteration
 
-            next_val = (self.current_node).data
+            next_val = (self.__current_node)._Node__data
 
-            self.current_node = self.current_node.next
+            self.__current_node = self.__current_node._Node__next
 
             return next_val
 
@@ -55,7 +55,7 @@ class LinkedList(object):
         self.__tail = None
         self.__nodes = 0
 
-    def append_node(self, to_add):
+    def append(self, to_add):
         """
         Add a Node at the end of the list
         """
@@ -73,7 +73,7 @@ class LinkedList(object):
         else:
             # Add the new node to the this
             # What happens on the following two lines
-            (self.__tail).next = new_node
+            (self.__tail)._Node__next = new_node
             self.__tail = new_node
 
         # Increase the number of nodes
