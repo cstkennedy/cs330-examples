@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# Programmer : Thomas Kennedy
+# Programmer : Thomas J. Kennedy
 
 # Note how I did not translate my
 # utilities library that I wrote
@@ -53,7 +53,6 @@ def main():
     print(ShapeFactory.listKnown())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.numberKnown()))
-
     print()
 
     # makeCircle = lambda attribs : Circle(**attribs)

@@ -37,9 +37,7 @@ class ShapeFactory(object):
         """
 
         if name in ShapeFactory._known_shapes:
-            return copy.deepcopy(
-                ShapeFactory._known_shapes[name]
-            )
+            return copy.deepcopy(ShapeFactory._known_shapes[name])
 
         return None
 

@@ -52,9 +52,7 @@ class ShapeFactory(object):
         """
 
         if name in ShapeFactory._known_shapes:
-            return copy.deepcopy(
-                ShapeFactory._known_shapes[name][0]
-            )
+            return copy.deepcopy(ShapeFactory._known_shapes[name][0])
 
         return None
 
@@ -72,9 +70,7 @@ class ShapeFactory(object):
         """
 
         if name in ShapeFactory._known_shapes:
-            return (
-                ShapeFactory._known_shapes[name][1](**values)
-            )
+            return ShapeFactory._known_shapes[name][1](**values)
 
         return None
 

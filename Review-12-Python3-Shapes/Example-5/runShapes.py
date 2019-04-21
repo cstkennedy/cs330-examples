@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# Programmer : Thomas Kennedy
+# Programmer : Thomas J. Kennedy
 
 # Note how I did not translate my
 # utilities library that I wrote
@@ -89,8 +89,6 @@ def main():
         # One line, full data structure
         pickle.dump(shapes, pickleF)
 
-    # reBuiltShapes = None
-
     with open(outFilename, "rb") as pickleF:
         reBuiltShapes = pickle.load(pickleF)
 
@@ -101,11 +99,6 @@ def main():
 
     for s in reBuiltShapes:
         print(s)
-
-    # for s in shapes:
-    #     name = s.__dict__["_name"]
-    #     attribs = {key: s.__dict__[key] for key in s.__dict__ if key != "_name"}
-    #     print(attribs)
 
 
 if __name__ == "__main__":

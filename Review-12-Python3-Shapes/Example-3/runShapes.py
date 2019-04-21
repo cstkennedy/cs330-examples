@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# Programmer : Thomas Kennedy
+# Programmer : Thomas J. Kennedy
 
 # Note how I did not translate my
 # utilities library that I wrote
@@ -24,7 +24,6 @@ def main():
     out of familiarity.
 
     The "if __name__" line below determines what runs
-
     """
 
     # Print Program Heading
