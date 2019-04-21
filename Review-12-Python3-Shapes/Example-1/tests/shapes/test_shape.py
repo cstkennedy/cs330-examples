@@ -15,17 +15,6 @@ class TestShape(unittest.TestCase):
         designed to perform?
 
     1 Test per mutator
-
-if __name__ == "__main__":
-    s1 = Shape()
-    s2 = Shape("TestShape")
-
-    print(s1)
-    print(s2)
-
-    s1.name = "Test Set/Get name"
-    print(s1.name)
-    print(s1)
     """
 
     def setUp(self):
@@ -66,6 +55,3 @@ if __name__ == "__main__":
 
         assert_that(original_str,
                     matches_regexp("Name\\s*:\\s*An Original Shape Name!\\n"))
-
-
-

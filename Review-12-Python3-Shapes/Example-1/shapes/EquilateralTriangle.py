@@ -14,7 +14,7 @@ class EquilateralTriangle(Triangle):
 
     def __init__(self, side=1):
         """
-        Construct an EquilateralTriangle
+        Construct an Equilateral Triangle
         with all sides set to 1 by default.
         """
         self.name = "Equilateral Triangle"
@@ -30,9 +30,7 @@ class EquilateralTriangle(Triangle):
         :return: height
         """
 
-        return math.sqrt(
-            1.25 * (self.side ** 2)
-        )
+        return math.sqrt(1.25 * (self.side ** 2))
 
     @property
     def side(self):
@@ -53,7 +51,7 @@ class EquilateralTriangle(Triangle):
         :return: the area
         """
 
-        return EquilateralTriangle.ROOT_3_DIV_4 * self.side * self.side
+        return (EquilateralTriangle.ROOT_3_DIV_4 * self.side * self.side)
 
     def __deepcopy__(self, memo):
         """
@@ -65,18 +63,12 @@ class EquilateralTriangle(Triangle):
         )
 
     def __str__(self):
-        formatStr = (
-            "{:<" +
-            str(Shape.WIDTH_LABEL) +
-            "}:{:>" +
-            str(Shape.WIDTH_VALUE) +
-            ".4f}\n"
-        )
+        """
+        Print the Equilateral Triangle
+        """
 
-        return (
-            super(Triangle, self).__str__() +
-            formatStr.format("Side", self.side) +
-            formatStr.format("Height", self.height) +
-            formatStr.format("Perimeter", Triangle.perimeter(self)) +
-            formatStr.format("Area", self.area())
-        )
+        return (super(Triangle, self).__str__()
+                + Shape.FPT_FMT.format("Side", self.side)
+                + Shape.FPT_FMT.format("Height", self.height)
+                + Shape.FPT_FMT.format("Perimeter", Triangle.perimeter(self))
+                + Shape.FPT_FMT.format("Area", self.area()))

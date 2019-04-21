@@ -6,7 +6,7 @@ from shapes.Shape import Shape
 
 class Circle(Shape):
     """
-    An Ellipse with equivalent major and minor axes
+    An Ellipse with equivlant major and minor axes
     """
 
     PI = math.pi  # \f$ \pi \f$
@@ -58,28 +58,11 @@ class Circle(Shape):
 
     def __str__(self):
         """
-        Print the Square
+        Print the Circle
         """
 
-        formatStr = (
-            "{:<" +
-            str(Shape.WIDTH_LABEL) +
-            "}:{:>" +
-            str(Shape.WIDTH_VALUE) +
-            ".4f}\n"
-        )
-
-        return (
-            super(Circle, self).__str__() +
-            formatStr.format("Radius", self.radius) +
-            formatStr.format("Diameter", self.diameter) +
-            formatStr.format("Perimeter", self.perimeter()) +
-            formatStr.format("Area", self.area())
-        )
-
-
-if __name__ == "__main__":
-    s = Circle(7)
-
-    print(s)
-    print(s.diameter)
+        return (super(Circle, self).__str__()
+                + Shape.FPT_FMT.format("Radius", self.radius)
+                + Shape.FPT_FMT.format("Diameter", self.diameter)
+                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
+                + Shape.FPT_FMT.format("Area", self.area()))

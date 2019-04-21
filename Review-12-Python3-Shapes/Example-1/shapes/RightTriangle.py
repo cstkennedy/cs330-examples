@@ -37,10 +37,8 @@ class RightTriangle(Triangle):
 
         self.side_a = base
         self.side_b = height
-        self.side_c = RightTriangle.__computeHypotenuse(
-            self.side_a,
-            self.side_b
-        )
+        self.side_c = RightTriangle.__computeHypotenuse(self.side_a,
+                                                        self.side_b)
 
     @property
     def base(self):
@@ -51,10 +49,8 @@ class RightTriangle(Triangle):
 
         self.side_a = side
 
-        self.side_c = RightTriangle.__computeHypotenuse(
-            self.side_a,
-            self.side_b
-        )
+        self.side_c = RightTriangle.__computeHypotenuse(self.side_a,
+                                                        self.side_b)
 
     @property
     def height(self):
@@ -64,10 +60,8 @@ class RightTriangle(Triangle):
     def height(self, side):
         self.side_b = side
 
-        self.side_c = RightTriangle.__computeHypotenuse(
-            self.side_a,
-            self.side_b
-        )
+        self.side_c = RightTriangle.__computeHypotenuse(self.side_a,
+                                                        self.side_b)
 
     @property
     def hypotenuse(self):
@@ -81,38 +75,24 @@ class RightTriangle(Triangle):
         :return: the area
         """
 
-        return RightTriangle.ONE_HALF * self.side_a * self.side_b
+        return (RightTriangle.ONE_HALF * self.side_a * self.side_b)
 
     def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """
 
-        return RightTriangle(
-            copy.deepcopy(self.side_a),
-            copy.deepcopy(self.side_b),
-        )
+        return RightTriangle(copy.deepcopy(self.side_a),
+                             copy.deepcopy(self.side_b))
 
     def __str__(self):
-        formatStr = (
-            "{:<" +
-            str(Shape.WIDTH_LABEL) +
-            "}:{:>" +
-            str(Shape.WIDTH_VALUE) +
-            ".4f}\n"
-        )
+        """
+        Generate a string representing the Right Triangle
+        """
 
-        return (
-            super(Triangle, self).__str__() +
-            formatStr.format("Base", self.side_a) +
-            formatStr.format("Height", self.side_b) +
-            formatStr.format("Hypotenuse", self.side_c) +
-            formatStr.format("Perimeter", self.perimeter()) +
-            formatStr.format("Area", self.area())
-        )
-
-
-if __name__ == "__main__":
-
-    s = RightTriangle(1, 2)
-    print(s)
+        return (super(Triangle, self).__str__()
+                + Shape.FPT_FMT.format("Base", self.side_a)
+                + Shape.FPT_FMT.format("Height", self.side_b)
+                + Shape.FPT_FMT.format("Hypotenuse", self.side_c)
+                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
+                + Shape.FPT_FMT.format("Area", self.area()))

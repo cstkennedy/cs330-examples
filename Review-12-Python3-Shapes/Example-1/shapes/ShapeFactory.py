@@ -17,7 +17,7 @@ class ShapeFactory(object):
         """
         Name Shape Pair 2-tuple(name, model)
 
-        I could used namedtuple instead, but...
+        I could have used namedtuple instead, but...
         """
 
         def __init__(self, name="", shape=None):
@@ -28,16 +28,11 @@ class ShapeFactory(object):
             return self.name
 
     _known_shapes = [
-        ShapePair("Triangle",
-                  Triangle()),
-        ShapePair("Right Triangle",
-                  RightTriangle()),
-        ShapePair("Equilateral Triangle",
-                  EquilateralTriangle()),
-        ShapePair("Square",
-                  Square()),
-        ShapePair("Circle",
-                  Circle())
+        ShapePair("Triangle", Triangle()),
+        ShapePair("Right Triangle", RightTriangle()),
+        ShapePair("Equilateral Triangle", EquilateralTriangle()),
+        ShapePair("Square", Square()),
+        ShapePair("Circle", Circle())
     ]  # _List_ of known shapes
 
     @staticmethod

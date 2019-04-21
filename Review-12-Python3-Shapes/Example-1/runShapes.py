@@ -91,9 +91,8 @@ def main():
     print("-" * 38)
     print(shape)
 
-    print('~' * 80)
-
     # Divide Output - Separate ShapeFactory Output
+    print('~' * 80)
     print('~' * 80)
 
     # What happens when the number of shapes is non-trivial?
@@ -142,7 +141,6 @@ def main():
     print(ShapeFactory.listKnown())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.numberKnown()))
-
     print()
 
     # Create 5 "Random" Shapes
@@ -172,7 +170,6 @@ def main():
     print("{:<24}: {:>4}".format("Original Size", size))
     print("{:<24}: {:>4}".format("Invalid Shapes", (size - len(shapes))))
     print("{:<24}: {:>4}".format("New Size", len(shapes)))
-
     print()
 
     # Print all the shapes
