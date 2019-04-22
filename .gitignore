@@ -38,3 +38,7 @@ Scratch
 
 # Vim rules
 **.swp
+
+# Python Coverage (coverage.py) Rules
+**/.coverage
+**/htmlcov
