@@ -2,6 +2,7 @@ from hamcrest import *
 import unittest
 
 from shapes.Circle import Circle
+from shapes.Shape import Shape
 
 import copy
 
@@ -26,8 +27,8 @@ class TestCircle(unittest.TestCase):
         assert_that(self.generic.radius, close_to(1, 0.01))
 
     def test_constructor(self):
-        assert_that(self.fancy.name,
-                    equal_to("Circle"))
+        assert_that(self.fancy.name, equal_to("Circle"))
+        assert_that(self.fancy.radius, close_to(2.0, 1e-8))
 
     def test_radius_setter(self):
         a_circle = Circle()
@@ -35,6 +36,10 @@ class TestCircle(unittest.TestCase):
         a_circle.radius = 7.39
 
         assert_that(a_circle.radius, close_to(7.39, 1e-8))
+
+    def test_diameter(self):
+        assert_that(self.generic.diameter, close_to(2, 1e-6))
+        assert_that(self.fancy.diameter, close_to(4, 1e-6))
 
     def test_area(self):
         assert_that(self.generic.area(),
@@ -49,10 +54,6 @@ class TestCircle(unittest.TestCase):
 
         assert_that(self.fancy.perimeter(),
                     close_to(Circle.TAU * self.fancy.radius, 0.05))
-
-    def test_diameter(self):
-        assert_that(self.generic.diameter, close_to(2, 1e-6))
-        assert_that(self.fancy.diameter, close_to(4, 1e-6))
 
     def test_deep_copy(self):
         a_copy = copy.deepcopy(self.fancy)
@@ -70,4 +71,15 @@ class TestCircle(unittest.TestCase):
         assert_that(fancy_str, ends_with("\n"))
 
         assert_that(fancy_str,
-                    matches_regexp("Name\\s*:\\s*Circle\\n"))
+                    contains_string(Shape.FPT_FMT.format("Perimeter",
+                                                         self.fancy.perimeter())))
+        assert_that(fancy_str,
+                    contains_string(Shape.FPT_FMT.format("Area",
+                                                         self.fancy.area())))
+        assert_that(fancy_str,
+                    contains_string(Shape.FPT_FMT.format("Radius",
+                                                         self.fancy.radius)))
+        assert_that(fancy_str,
+                    contains_string(Shape.FPT_FMT.format("Diameter",
+                                                         self.fancy.diameter)))
+        assert_that(fancy_str, ends_with("\n"))
