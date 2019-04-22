@@ -36,7 +36,7 @@ class ShapeFactory(object):
     ]  # _List_ of known shapes
 
     @staticmethod
-    def createShape(name):
+    def create(name):
         """
         Create a Shape
 
@@ -67,15 +67,14 @@ class ShapeFactory(object):
         return False
 
     @staticmethod
-    def listKnown():
+    def list_known():
         """
         Print a list of known Shapes
         """
-        return "\n".join(
-            ["  " + str(s) for s in ShapeFactory._known_shapes])
+        return "\n".join(["  " + str(s) for s in ShapeFactory._known_shapes])
 
     @staticmethod
-    def numberKnown():
+    def number_known():
         """
         Determine the number of known Shapes
         """

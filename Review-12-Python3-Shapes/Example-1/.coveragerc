@@ -1,4 +1,5 @@
 [run]
 omit =
     /usr/*,
-    tests/*
+    tests/*,
+    shapes/__init__.py

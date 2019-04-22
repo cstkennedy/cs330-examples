@@ -14,12 +14,12 @@ class RightTriangle(Triangle):
     ONE_HALF = 1.0 / 2.0  # @f$ \frac{1}{2} @f$
 
     @staticmethod
-    def __computeHypotenuse(base, height):
+    def __compute_hypotenuse(base, height):
         """
-        Compute the hyptoenuse using:
+        Compute the hypotenuse using:
         @f$ hypotenuse = \sqrt{base^2 + height^2} @f$
-        :base: the base of a Right Triangle
-        :param: height the height of a Right Triangle
+        :param base: the base of a Right Triangle
+        :param height: the height of a Right Triangle
 
         :return: hypotenuse of a right triangle
         """
@@ -37,7 +37,7 @@ class RightTriangle(Triangle):
 
         self.side_a = base
         self.side_b = height
-        self.side_c = RightTriangle.__computeHypotenuse(self.side_a,
+        self.side_c = RightTriangle.__compute_hypotenuse(self.side_a,
                                                         self.side_b)
 
     @property
@@ -49,18 +49,18 @@ class RightTriangle(Triangle):
 
         self.side_a = side
 
-        self.side_c = RightTriangle.__computeHypotenuse(self.side_a,
+        self.side_c = RightTriangle.__compute_hypotenuse(self.side_a,
                                                         self.side_b)
 
     @property
     def height(self):
-        self.side_b
+        return self.side_b  # I caught a missing return because of unit testing
 
     @height.setter
     def height(self, side):
         self.side_b = side
 
-        self.side_c = RightTriangle.__computeHypotenuse(self.side_a,
+        self.side_c = RightTriangle.__compute_hypotenuse(self.side_a,
                                                         self.side_b)
 
     @property

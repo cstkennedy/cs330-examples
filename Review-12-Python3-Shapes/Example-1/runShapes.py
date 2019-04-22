@@ -138,21 +138,19 @@ def main():
     print("*" * 38)
 
     # List the available shapes
-    print(ShapeFactory.listKnown())
+    print(ShapeFactory.list_known())
     print("-" * 38)
-    print("{:>2} shapes available.".format(ShapeFactory.numberKnown()))
+    print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
     # Create 5 "Random" Shapes
     size = 6  # original size of the list
-    shapes = [
-        ShapeFactory.createShape("Triangle"),
-        ShapeFactory.createShape("Right Triangle"),
-        ShapeFactory.createShape("Equilateral Triangle"),
-        ShapeFactory.createShape("Square"),
-        ShapeFactory.createShape("Circle"),
-        ShapeFactory.createShape("1337 Haxor")
-    ]
+    shapes = [ShapeFactory.create("Triangle"),
+              ShapeFactory.create("Right Triangle"),
+              ShapeFactory.create("Equilateral Triangle"),
+              ShapeFactory.create("Square"),
+              ShapeFactory.create("Circle"),
+              ShapeFactory.create("1337 Haxor")]
 
     # Remove all `None` entries with a list comprehension
     shapes = [s for s in shapes if s]

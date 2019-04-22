@@ -6,7 +6,7 @@ from shapes.Shape import Shape
 
 class Circle(Shape):
     """
-    An Ellipse with equivlant major and minor axes
+    An Ellipse with equivalent major and minor axes
     """
 
     PI = math.pi  # \f$ \pi \f$

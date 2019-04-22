@@ -26,7 +26,6 @@ class EquilateralTriangle(Triangle):
         Compute the height using
         @f$ height = \frac{5}{4}side @f$
 
-
         :return: height
         """
 
@@ -58,9 +57,7 @@ class EquilateralTriangle(Triangle):
         Return a new duplicate Shape
         """
 
-        return EquilateralTriangle(
-            copy.deepcopy(self.side)
-        )
+        return EquilateralTriangle(copy.deepcopy(self.side))
 
     def __str__(self):
         """
