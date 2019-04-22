@@ -8,6 +8,12 @@ class Shape(object):
     WIDTH_LABEL = 12  # Label Output Width
     WIDTH_VALUE = 24  # Value Output Width
 
+    STR_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
+              "{:>" + str(WIDTH_VALUE) + "}\n"
+
+    FPT_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
+              "{:>" + str(WIDTH_VALUE) + ".4f}\n"
+
     # @classmethod for static
 
     def __init__(self, name="Shape"):
@@ -62,25 +68,4 @@ class Shape(object):
         Print the shape
         """
 
-        return (
-            "{:<" +
-            str(Shape.WIDTH_LABEL) +
-            "}:{:>" +
-            str(Shape.WIDTH_VALUE) +
-            "}\n"
-        ).format(
-            "Name",
-            self._name
-        )
-
-
-if __name__ == "__main__":
-    s1 = Shape()
-    s2 = Shape("TestShape")
-
-    print(s1)
-    print(s2)
-
-    s1.name = "Test Set/Get name"
-    print(s1.name)
-    print(s1)
+        return Shape.STR_FMT.format("Name", self._name)

@@ -50,14 +50,14 @@ def main():
     print("~" * 38)
 
     # List the available shapes
-    print(ShapeFactory.listKnown())
+    print(ShapeFactory.list_known())
     print("-" * 38)
-    print("{:>2} shapes available.".format(ShapeFactory.numberKnown()))
+    print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
     # makeCircle = lambda attribs : Circle(**attribs)
 
-    # print(ShapeFactory.createFromDictionary("Circle", {"radius": 4}))
+    # print(ShapeFactory.create_from_dictionary("Circle", {"radius": 4}))
 
     # The list needs to be intialzed outside the "with" closure
     shapes = list()
@@ -81,7 +81,7 @@ def main():
             values = json.loads(values)
             # print(values)
 
-            shapes.append(ShapeFactory.createFromDictionary(name, values))
+            shapes.append(ShapeFactory.create_from_dictionary(name, values))
 
     # Remove all `None` entries with a list comprehension
     shapes = [s for s in shapes if s is not None]

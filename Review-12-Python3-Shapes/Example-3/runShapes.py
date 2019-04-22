@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# Programmer : Thomas J. Kennedy
+# Programmer : Thomas Kennedy
 
 # Note how I did not translate my
 # utilities library that I wrote
@@ -24,6 +24,7 @@ def main():
     out of familiarity.
 
     The "if __name__" line below determines what runs
+
     """
 
     # Print Program Heading
@@ -77,22 +78,21 @@ def main():
     print("*" * 38)
 
     # List the available shapes
-    print(ShapeFactory.listKnown())
+    print(ShapeFactory.list_known())
     print("-" * 38)
-    print("{:>2} shapes available.".format(ShapeFactory.numberKnown()))
+    print("{:>2} shapes available.".format(ShapeFactory.number_known()))
 
     print()
 
     # Create 5 "Random" Shapes
-    size = 6  # original size of the list
-    shapes = [
-        ShapeFactory.createShape("Triangle"),
-        ShapeFactory.createShape("Right Triangle"),
-        ShapeFactory.createShape("Equilateral Triangle"),
-        ShapeFactory.createShape("Square"),
-        ShapeFactory.createShape("Circle"),
-        ShapeFactory.createShape("1337 Haxor")
-    ]
+    shapes = [ShapeFactory.create("Triangle"),
+              ShapeFactory.create("Right Triangle"),
+              ShapeFactory.create("Equilateral Triangle"),
+              ShapeFactory.create("Square"),
+              ShapeFactory.create("Circle"),
+              ShapeFactory.create("1337 Haxor")]
+
+    size = len(shapes)  # original size of the list
 
     # Remove all `None` entries with a list comprehension
     shapes = [s for s in shapes if s]
@@ -103,7 +103,6 @@ def main():
     print("{:<24}: {:>4}".format("Original Size", size))
     print("{:<24}: {:>4}".format("Invalid Shapes", (size - len(shapes))))
     print("{:<24}: {:>4}".format("New Size", len(shapes)))
-
     print()
 
     # Print all the shapes

@@ -77,12 +77,9 @@ class Triangle(Shape):
         Print the Triangle
         """
 
-        formatStr = ("{:<" + str(Shape.WIDTH_LABEL) +
-                     "}:{:>" + str(Shape.WIDTH_VALUE) + ".4f}\n")
-
         return (super(Triangle, self).__str__()
-                + formatStr.format("Side A", self.side_a)
-                + formatStr.format("Side B", self.side_b)
-                + formatStr.format("Side C", self.side_c)
-                + formatStr.format("Perimeter", self.perimeter())
-                + formatStr.format("Area", self.area()))
+                + Shape.FPT_FMT.format("Side A", self.side_a)
+                + Shape.FPT_FMT.format("Side B", self.side_b)
+                + Shape.FPT_FMT.format("Side C", self.side_c)
+                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
+                + Shape.FPT_FMT.format("Area", self.area()))

@@ -26,7 +26,7 @@ class ShapeFactory(object):
     }  # _Dictionary_ of known shapes
 
     @staticmethod
-    def createShape(name):
+    def create(name):
         """
         Create a Shape
 
@@ -43,7 +43,7 @@ class ShapeFactory(object):
         return None
 
     @staticmethod
-    def isKnown(name):
+    def is_known(name):
         """
         Determine whether a given shape is known
 
@@ -57,7 +57,7 @@ class ShapeFactory(object):
         return False
 
     @staticmethod
-    def listKnown():
+    def list_known():
         """
         Print a list of known Shapes
         """
@@ -65,7 +65,7 @@ class ShapeFactory(object):
             ["  " + name for name in ShapeFactory._known_shapes.keys()])
 
     @staticmethod
-    def numberKnown():
+    def number_known():
         """
         Determine the number of known Shapes
         """

@@ -53,23 +53,7 @@ class Square(Shape):
         Print the Square
         """
 
-        formatStr = (
-            "{:<" +
-            str(Shape.WIDTH_LABEL) +
-            "}:{:>" +
-            str(Shape.WIDTH_VALUE) +
-            ".4f}\n"
-        )
-
-        return (
-            super(Square, self).__str__() +
-            formatStr.format("Side", self.side) +
-            formatStr.format("Perimeter", self.perimeter()) +
-            formatStr.format("Area", self.area())
-        )
-
-
-if __name__ == "__main__":
-    s = Square(7)
-
-    print(s)
+        return (super(Square, self).__str__()
+                + Shape.FPT_FMT.format("Side", self.side)
+                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
+                + Shape.FPT_FMT.format("Area", self.area()))

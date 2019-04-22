@@ -23,9 +23,7 @@ class RightTriangle(Triangle):
 
         :return: hypotenuse of a right triangle
         """
-        return math.sqrt(
-            (base ** 2) + (height ** 2)
-        )
+        return math.sqrt((base ** 2) + (height ** 2))
 
     def __init__(self, base=1, height=1):
         """
@@ -38,7 +36,7 @@ class RightTriangle(Triangle):
         self.side_a = base
         self.side_b = height
         self.side_c = RightTriangle.__compute_hypotenuse(self.side_a,
-                                                        self.side_b)
+                                                         self.side_b)
 
     @property
     def base(self):
@@ -50,7 +48,7 @@ class RightTriangle(Triangle):
         self.side_a = side
 
         self.side_c = RightTriangle.__compute_hypotenuse(self.side_a,
-                                                        self.side_b)
+                                                         self.side_b)
 
     @property
     def height(self):
@@ -61,7 +59,7 @@ class RightTriangle(Triangle):
         self.side_b = side
 
         self.side_c = RightTriangle.__compute_hypotenuse(self.side_a,
-                                                        self.side_b)
+                                                         self.side_b)
 
     @property
     def hypotenuse(self):

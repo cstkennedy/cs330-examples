@@ -50,11 +50,9 @@ class Triangle(Shape):
 
         s = self.perimeter() / 2.0
 
-        return (
-            s * (s - self.side_a)
-              * (s - self.side_b)
-              * (s - self.side_c)
-        ) ** 0.5
+        return (s * (s - self.side_a)
+                  * (s - self.side_b)
+                  * (s - self.side_c)) ** 0.5
 
     def perimeter(self):
         """
@@ -70,37 +68,18 @@ class Triangle(Shape):
         Return a new duplicate Shape
         """
 
-        return Triangle(
-            copy.deepcopy(self.side_a),
-            copy.deepcopy(self.side_b),
-            copy.deepcopy(self.side_c)
-        )
+        return Triangle(copy.deepcopy(self.side_a),
+                        copy.deepcopy(self.side_b),
+                        copy.deepcopy(self.side_c))
 
     def __str__(self):
         """
         Print the Triangle
         """
 
-        formatStr = (
-            "{:<" +
-            str(Shape.WIDTH_LABEL) +
-            "}:{:>" +
-            str(Shape.WIDTH_VALUE) +
-            ".4f}\n"
-        )
-
-        return (
-            super(Triangle, self).__str__() +
-            formatStr.format("Side A", self.side_a) +
-            formatStr.format("Side B", self.side_b) +
-            formatStr.format("Side C", self.side_c) +
-            formatStr.format("Perimeter", self.perimeter()) +
-            formatStr.format("Area", self.area())
-        )
-
-
-if __name__ == "__main__":
-    s = Triangle(2, 2, 2)
-
-    print(s)
-    print(s.side_a)
+        return (super(Triangle, self).__str__()
+                + Shape.FPT_FMT.format("Side A", self.side_a)
+                + Shape.FPT_FMT.format("Side B", self.side_b)
+                + Shape.FPT_FMT.format("Side C", self.side_c)
+                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
+                + Shape.FPT_FMT.format("Area", self.area()))
