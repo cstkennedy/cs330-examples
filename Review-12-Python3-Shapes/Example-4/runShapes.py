@@ -14,10 +14,8 @@ import pickle
 import sys
 import json
 
-PROGRAM_HEADING = [
-    "Objects & Inheritance: 2-D Shapes",
-    "Thomas J. Kennedy"
-]  # Program Title
+PROGRAM_HEADING = ["Objects & Inheritance: 2-D Shapes",
+                   "Thomas J. Kennedy"]  # Program Title
 
 
 def main():

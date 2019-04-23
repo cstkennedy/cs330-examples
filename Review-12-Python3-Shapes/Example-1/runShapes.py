@@ -11,10 +11,8 @@
 from shapes import *
 
 
-PROGRAM_HEADING = [
-    "Objects & Inheritance: 2-D Shapes",
-    "Thomas J. Kennedy"
-]  # Program Title
+PROGRAM_HEADING = ["Objects & Inheritance: 2-D Shapes",
+                   "Thomas J. Kennedy"]  # Program Title
 
 
 def main():
@@ -24,7 +22,6 @@ def main():
     out of familiarity.
 
     The "if __name__" line below determines what runs
-
     """
 
     # Print Program Heading
@@ -36,17 +33,17 @@ def main():
     print("-" * 80)
 
     """
-        # --Erroneous C++ Variable Declarations--
-        # --Valid Java Variable Declarations--
-        Shape               shape   = null; # Declare an "instance" of Shape
-        Shape[]             shapes  = null; # Declare an Array of Shapes
+    # --Erroneous C++ Variable Declarations--
+    # --Valid Java Variable Declarations--
+    Shape               shape   = null; # Declare an "instance" of Shape
+    Shape[]             shapes  = null; # Declare an Array of Shapes
 
-        Triangle            tri     = null;
-        RightTriangle       rhtTri  = null;
-        EquilateralTriangle eqlTri  = null;
+    Triangle            tri     = null;
+    RightTriangle       rhtTri  = null;
+    EquilateralTriangle eqlTri  = null;
 
-        # ShapeFactory Discussion
-        int size = 0;
+    # ShapeFactory Discussion
+    int size = 0;
     """
 
     # Create one RightTriangle
@@ -144,13 +141,14 @@ def main():
     print()
 
     # Create 5 "Random" Shapes
-    size = 6  # original size of the list
     shapes = [ShapeFactory.create("Triangle"),
               ShapeFactory.create("Right Triangle"),
               ShapeFactory.create("Equilateral Triangle"),
               ShapeFactory.create("Square"),
               ShapeFactory.create("Circle"),
               ShapeFactory.create("1337 Haxor")]
+
+    size = len(shapes)  # original size of the list
 
     # Remove all `None` entries with a list comprehension
     shapes = [s for s in shapes if s]

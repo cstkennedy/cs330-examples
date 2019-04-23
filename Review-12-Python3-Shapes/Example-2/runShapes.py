@@ -11,10 +11,8 @@
 from shapes import *
 
 
-PROGRAM_HEADING = [
-    "Objects & Inheritance: 2-D Shapes",
-    "Thomas J. Kennedy"
-]  # Program Title
+PROGRAM_HEADING = ["Objects & Inheritance: 2-D Shapes",
+                   "Thomas J. Kennedy"]  # Program Title
 
 
 def main():
@@ -24,7 +22,6 @@ def main():
     out of familiarity.
 
     The "if __name__" line below determines what runs
-
     """
 
     # Print Program Heading
@@ -81,7 +78,6 @@ def main():
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
-
     print()
 
     # Create 5 "Random" Shapes
