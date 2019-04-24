@@ -233,14 +233,7 @@ with decorators**)
 All source code is available in \ExampleZip{Review-09-Java-Shapes.zip}.
 
 
-# Updates in Progress
-
-**Everything on this page is subject to change over the next 16 weeks.** I will
-tweak existing materials and add additional materials throughout the semester.
-
----
-
-# Review 10: Java Gui & Thread Discussion
+# Review 10: Java GUI & Thread Discussion
 
 This Review Session was a discussion of GUIs using the javax.swing library.
 Topics included:
@@ -251,10 +244,8 @@ Topics included:
   - Immediate Classes
   - A Basic Thread
 
-Part 1 is located [here](https://youtu.be/SBIygPN7rik).
-Part 2 is located [here](https://youtu.be/yBNufxSem4M).
-
-All source code is available in \ExampleZip{Review-09-GuiThread.zip}.
+The recording is located [here](https://youtu.be/HAhLTNlXL3o). All source code
+is available in \ExampleZip{Review-10-GuiThread.zip}.
 
 
 # Review 11: Java Thread & ThreadPool Discussion
@@ -262,41 +253,52 @@ All source code is available in \ExampleZip{Review-09-GuiThread.zip}.
 This was a discussion of Runnable objects in the context of Threads and Thread
 Pools.
 
-The recording is located [here (Fall 2018)](https://youtu.be/b9K3COmd_W8). All
-source code is available in \ExampleZip{Review-11-Threads.zip}.
+The recording is located [here](https://youtu.be/2AJAWSDhqb4). All source code
+is available in \ExampleZip{Review-11-Threads.zip}.
 
 
-# Review 12 Python
+# Review 12 Python Shapes (Will be Updated)
+
+**This discussion will be updated after the live discussion during on 22 April
+and 25 April.** I recommend you watch Reviews 13 and 14, then come back to this
+one.
 
 This is a discussion of Python 3 in the context of OOP.
 
-The recorded discussion is available [here](https://youtu.be/tXQgB07XTZI). All
-source code is available in \ExampleZip{Review-12-Python3-Shapes.zip}.
+The recorded **(Fall 2017)** discussion is available
+[here](https://youtu.be/tXQgB07XTZI). All source code is available in
+\ExampleZip{Review-12-Python3-Shapes.zip}.
 
 
 # Review 13 More Python!
 
 This is a discussion of selected examples from previous reviews re-implemented
-in Python 3.
+in Python 3. We will briefly discuss:
 
-The recorded discussion is available
-[here](https://www.youtube.com/watch?v=dJrsAadeW2A). All source code is
-available in \ExampleZip{Review-13-Python3-Toys.zip}.
+  - Generator Expressions
+  - Dictionary Comprehensions
+  - Modules
+  - `enumerate`
+  - `pydoc`
+
+The recorded discussion is available [here](https://youtu.be/i21FRLYxrZc). All
+source code is available in \ExampleZip{Review-13-Python3-Toys.zip}.
+
 
 # Review 14 Python Linked List!
 
-This is a revisting of our first [example](#review-1), but in Python!
+This is a revisiting of our first [example](#review-1-linked-lists), but in
+Python! While revisiting Linked Lists, in the context of Python 3, we
+will briefly discuss:
+
+  - Iterators
+  - Deep Copy
+  - List Comprehensions
+  - `@propery` and `@???.setter`
+  - Name Mangling
+  - `pydoc`
+
+The recorded discussion is available [here](https://youtu.be/7XmqiqbQD6M). All
+source code is available in \ExampleZip{Review-14-Python3-LinkedList.zip}.
 
 
-
-
-
-
-
-
-This is a discussion of selected examples from previous reviews re-implemented
-in Python 3.
-
-The recorded discussion is available
-[here](https://www.youtube.com/watch?v=dJrsAadeW2A). All source code is
-available in \ExampleZip{Review-12-Python3-Toys.zip}.
