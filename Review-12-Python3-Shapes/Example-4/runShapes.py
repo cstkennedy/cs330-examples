@@ -32,7 +32,7 @@ def main():
         print("Usage: {:} input_file".format(*sys.argv))
         exit(1)
 
-    shapesFilename = sys.argv[1]
+    shapes_filename = sys.argv[1]
 
     # Print Program Heading
     print("-" * 80)
@@ -60,9 +60,9 @@ def main():
     # The list needs to be intialzed outside the "with" closure
     shapes = list()
 
-    # shapesIn = open(shapesFilename, "r")
-    with open(shapesFilename, "r") as shapesIn:
-        for line in shapesIn:
+    # shapes_in = open(shapes_filename, "r")
+    with open(shapes_filename, "r") as shapes_in:
+        for line in shapes_in:
 
             line = line.strip()  # Strip leading/trailing whitespace
             # print(line)

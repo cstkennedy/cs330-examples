@@ -39,26 +39,26 @@ def main():
     Shape[]             shapes  = null; # Declare an Array of Shapes
 
     Triangle            tri     = null;
-    RightTriangle       rhtTri  = null;
-    EquilateralTriangle eqlTri  = null;
+    RightTriangle       rht_tri  = null;
+    EquilateralTriangle eql_tri  = null;
 
     # ShapeFactory Discussion
     int size = 0;
     """
 
     # Create one RightTriangle
-    rhtTri = RightTriangle(1, 2)
+    rht_tri = RightTriangle(1, 2)
 
-    tri = rhtTri  # Point tri to rhtTri
-    shape = rhtTri  # Point shape to rhtTri
+    tri = rht_tri  # Point tri to rht_tri
+    shape = rht_tri  # Point shape to rht_tri
 
     # Is this a valid assignment?
-    eqlTri = rhtTri
+    eql_tri = rht_tri
     # Yes, because Python is loosely typed.
 
-    print("{:^38}".format("Display a Right Triangle (rhtTri)"))
+    print("{:^38}".format("Display a Right Triangle (rht_tri)"))
     print("-" * 38)
-    print(rhtTri)
+    print(rht_tri)
 
     print("{:^38}".format("Display a Right Triangle (tri)"))
     print("-" * 38)
@@ -71,14 +71,14 @@ def main():
     print('~' * 80)
 
     # Create one Equilateral Triangle
-    eqlTri = EquilateralTriangle(8)
+    eql_tri = EquilateralTriangle(8)
 
-    tri = eqlTri  # Point tri to rhtTri
-    shape = eqlTri  # Point shape to rhtTri
+    tri = eql_tri  # Point tri to rht_tri
+    shape = eql_tri  # Point shape to rht_tri
 
-    print("{:^38}".format("Display an Eql. Triangle (eqlTri)"))
+    print("{:^38}".format("Display an Eql. Triangle (eql_tri)"))
     print("-" * 38)
-    print(eqlTri)
+    print(eql_tri)
 
     print("{:^38}".format("Display an Eql. Triangle (tri)"))
     print("-" * 38)

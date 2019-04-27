@@ -32,7 +32,7 @@ def main():
         print("Usage: {:} input_file".format(*sys.argv))
         exit(1)
 
-    shapesFilename = sys.argv[1]
+    shapes_filename = sys.argv[1]
 
     # Print Program Heading
     print("-" * 80)
@@ -56,8 +56,8 @@ def main():
     # The list needs to be intialzed outside the "with" closure
     shapes = list()
 
-    with open(shapesFilename, "r") as shapesIn:
-        for line in shapesIn:
+    with open(shapes_filename, "r") as shapes_in:
+        for line in shapes_in:
             # Split on ";" and Strip leading/trailing whitespace
             # And Unpack the list
             name, values = [part.strip() for part in line.split(";")]
@@ -77,25 +77,25 @@ def main():
     for s in shapes:
         print(s)
 
-    outFilename = "coolPickles.dat"
+    out_filename = "coolPickles.dat"
 
-    with open(outFilename, "wb") as pickleF:
+    with open(out_filename, "wb") as pickle_file:
         # LOL Nope
         # for s in shapes:
-        #     pickle.dump(s, pickleF)
+        #     pickle.dump(s, pickle_file)
 
         # One line, full data structure
-        pickle.dump(shapes, pickleF)
+        pickle.dump(shapes, pickle_file)
 
-    with open(outFilename, "rb") as pickleF:
-        reBuiltShapes = pickle.load(pickleF)
+    with open(out_filename, "rb") as pickle_file:
+        rebuilt_shapes = pickle.load(pickle_file)
 
     # Print all the reBuilt shapes
     print("~" * 38)
     print("{:^38}".format("Display Re-Built Shapes"))
     print("~" * 38)
 
-    for s in reBuiltShapes:
+    for s in rebuilt_shapes:
         print(s)
 
 
