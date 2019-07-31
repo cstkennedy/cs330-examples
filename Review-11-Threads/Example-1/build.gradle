@@ -9,22 +9,22 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.ysb33r.gradle:doxygen:0.2"
+        //classpath "org.ysb33r.gradle:doxygen:0.2"
 
         // Add SpotBugs
-        classpath "gradle.plugin.com.github.spotbugs:gradlePlugin:1.6.0"
+        //classpath "gradle.plugin.com.github.spotbugs:gradlePlugin:1.6.0"
     }
 }
 
 apply plugin: "java"
 apply plugin: "application"
 apply plugin: "eclipse"
-apply plugin: "org.ysb33r.doxygen"
+//apply plugin: "org.ysb33r.doxygen"
 apply plugin: "jacoco"
 
 apply plugin: "findbugs"
 apply plugin: "pmd"
-apply plugin: "com.github.spotbugs"
+//apply plugin: "com.github.spotbugs"
 
 apply plugin: "checkstyle"
 
@@ -62,7 +62,6 @@ run {
 
 task deploy(dependsOn: [
             jar,
-            doxygen,
             javadoc]){
 }
 
@@ -105,17 +104,17 @@ pmd {
 }
 
 // SpotBugs
-spotbugsMain {
-    ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
-    reports {
-       xml.enabled = false
-       html.enabled = true
-    }
-}
-
-spotbugsTest.enabled = false
+// spotbugsMain {
+//     ignoreFailures = true
+//     effort = "max"
+//     reportLevel = "medium"
+//     reports {
+//        xml.enabled = false
+//        html.enabled = true
+//     }
+// }
+//
+// spotbugsTest.enabled = false
 // End SpotBugs config
 
 jacoco {
