@@ -6,7 +6,7 @@
 template <typename T>
 class LinkedList {
     private:
-        struct Node{
+        struct Node {
             T     data;
             Node* next;
 
