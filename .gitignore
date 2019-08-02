@@ -42,3 +42,6 @@ Scratch
 # Python Coverage (coverage.py) Rules
 **/.coverage
 **/htmlcov
+
+# Style Check reports
+**style-check*

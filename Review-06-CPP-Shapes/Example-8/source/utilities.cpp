@@ -1,4 +1,4 @@
-//Programmer : Thomas Kennedy
+// Programmer : Thomas Kennedy
 
 #include "utilities.h"
 
@@ -8,7 +8,7 @@ namespace utilities{
     {
         getline(in_stream, value_in);
 
-        //Return False on read error
+        // Return False on read error
         return in_stream.good();
     }
 
@@ -27,7 +27,7 @@ namespace utilities{
         outs << std::setfill(line_char)
              << std::left << std::setw(width) << line_char << "\n";
 
-        //reset outs fill
+        // Reset outs fill
         outs.fill(' ');
     }
 
@@ -57,14 +57,14 @@ namespace utilities{
                              const std::string titles[],
                              int title_items, int width)
     {
-        //Output the top line
+        // Output the top line
         printHorizontalLine(outs, '*', width);
 
-        //Output the title text
+        // Output the title text
         for (int i = 0; i < title_items; i++) {
              printCenteredTitle(outs, titles[i], width);
         }
-        //output the bottom line
+        // Output the bottom line
         printHorizontalLine(outs, '*', width);
     }
 
@@ -76,7 +76,7 @@ namespace utilities{
         printCenteredTitle(outs, title, width);
         printHorizontalLine(outs, border_char, width);
 
-        //reset outs
+        // Reset outs
         outs.clear();
         outs.fill(' ');
     }

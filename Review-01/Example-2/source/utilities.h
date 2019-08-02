@@ -1,4 +1,4 @@
-//Programmer : Thomas Kennedy
+// Programmer : Thomas Kennedy
 
 #ifndef Utilities_H_INCLUDED
 #define Utilities_H_INCLUDED
@@ -23,7 +23,7 @@ namespace utilities {
     {
         in_stream >> value_in;
 
-        //Return False on read error
+        // Return False on read error
         return in_stream.good();
     }
 
@@ -32,7 +32,7 @@ namespace utilities {
      */
     template<class T>
     bool readValue(std::istream &in_stream,
-                   T &value_in, std::string message, int width=34)
+                   T &value_in, std::string message, int width = 34)
     {
         std::cout << std::left << std::setw(width) << message << ": ";
 
@@ -48,7 +48,7 @@ namespace utilities {
      * Utility function to read a line - interactive
      */
     bool readLine(std::istream &in_stream,
-                  std::string &value_in, std::string message, int width=34);
+                  std::string &value_in, std::string message, int width = 34);
 
     /**
      * Print a horizontal line
@@ -74,9 +74,9 @@ namespace utilities {
      * @param border the character with which to create the horizontal rule
      */
     inline void printSeperatedHeading(std::ostream &outs, std::string heading,
-                                      int width, char border='-')
+                                      int width, char border = '-')
     {
-        printCenteredTitle( outs, heading, width);
+        printCenteredTitle(outs, heading, width);
         printHorizontalLine(outs, border, width);
     }
 
@@ -85,20 +85,20 @@ namespace utilities {
      */
     void printProjectHeading(std::ostream& outs,
                              const std::string titles[],
-                             int title_items, int width=W_WIDTH);
+                             int title_items, int width = W_WIDTH);
 
     /**
      * Print a centered heading
      */
     void printHeading(std::ostream& outs,
                       std::string title,
-                      int width=W_WIDTH, char border_char = '*');
+                      int width = W_WIDTH, char border_char = '*');
 
     /**
      * Compare two floating point numbers - determine if equal within
      * a specified threshold
      */
-    bool areEqual(double lhs, double rhs, double threshold=1e-6);
+    bool areEqual(double lhs, double rhs, double threshold = 1e-6);
 
 }
 #endif
