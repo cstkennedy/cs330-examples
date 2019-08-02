@@ -8,9 +8,7 @@ import copy
 
 from shapes.circle import Circle
 from shapes.square import Square
-from shapes.triangle import Triangle
-from shapes.right_triangle import RightTriangle
-from shapes.equilateral_triangle import EquilateralTriangle
+from shapes.triangle import (Triangle, RightTriangle, EquilateralTriangle)
 
 
 _known_shapes = {

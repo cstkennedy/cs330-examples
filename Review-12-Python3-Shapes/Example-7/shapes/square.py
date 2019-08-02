@@ -1,6 +1,6 @@
 import copy
 
-from shapes.shape import Shape
+from shapes.shape import (Shape, FPT_FMT)
 
 
 class Square(Shape):
@@ -22,8 +22,8 @@ class Square(Shape):
         return self._side
 
     @side.setter
-    def side(self, s):
-        self._side = s
+    def side(self, some_value):
+        self._side = some_value
 
     def area(self):
         """
@@ -55,6 +55,6 @@ class Square(Shape):
         """
 
         return (super().__str__()
-                + Shape.FPT_FMT.format("Side", self.side)
-                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
-                + Shape.FPT_FMT.format("Area", self.area()))
+                + FPT_FMT.format("Side", self.side)
+                + FPT_FMT.format("Perimeter", self.perimeter())
+                + FPT_FMT.format("Area", self.area()))

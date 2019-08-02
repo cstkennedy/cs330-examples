@@ -1,8 +1,8 @@
 from hamcrest import *
 import unittest
 
-from shapes.right_triangle import RightTriangle
-from shapes.shape import Shape
+from shapes.triangle import RightTriangle
+from shapes.shape import (Shape, FPT_FMT)
 
 import math
 import copy
@@ -93,18 +93,18 @@ class TestRightTriangle(unittest.TestCase):
         assert_that(fancy_str, starts_with("Name"))
         assert_that(fancy_str, contains_string("Right Triangle"))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Perimeter",
-                                                         self.fancy.perimeter())))
+                    contains_string(FPT_FMT.format("Perimeter",
+                                                   self.fancy.perimeter())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Area",
-                                                         self.fancy.area())))
+                    contains_string(FPT_FMT.format("Area",
+                                                   self.fancy.area())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Base",
-                                                         self.fancy.base)))
+                    contains_string(FPT_FMT.format("Base",
+                                                   self.fancy.base)))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Height",
-                                                         self.fancy.height)))
+                    contains_string(FPT_FMT.format("Height",
+                                                   self.fancy.height)))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Hypotenuse",
-                                                         self.fancy.hypotenuse)))
+                    contains_string(FPT_FMT.format("Hypotenuse",
+                                                   self.fancy.hypotenuse)))
         assert_that(fancy_str, ends_with("\n"))

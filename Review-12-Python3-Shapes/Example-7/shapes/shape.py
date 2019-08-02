@@ -3,22 +3,20 @@ This module provides the Shape class and related constants which serve as the
 base for other (specialized) shapes.
 """
 
+WIDTH_LABEL = 12  # Label Output Width
+WIDTH_VALUE = 24  # Value Output Width
 
-import copy
+STR_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
+          "{:>" + str(WIDTH_VALUE) + "}\n"
+
+FPT_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
+          "{:>" + str(WIDTH_VALUE) + ".4f}\n"
 
 
 class Shape(object):
     """
     Shape in a 2-D Cartesian Plane
     """
-    WIDTH_LABEL = 12  # Label Output Width
-    WIDTH_VALUE = 24  # Value Output Width
-
-    STR_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
-              "{:>" + str(WIDTH_VALUE) + "}\n"
-
-    FPT_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
-              "{:>" + str(WIDTH_VALUE) + ".4f}\n"
 
     # @classmethod for static
 
@@ -80,4 +78,4 @@ class Shape(object):
         Print the shape
         """
 
-        return Shape.STR_FMT.format("Name", self._name)
+        return STR_FMT.format("Name", self._name)

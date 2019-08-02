@@ -9,7 +9,7 @@ import copy
 
 class TestShapeFactory(unittest.TestCase):
     """
-    **This is technically an Integration Tests**
+    **This is technically a set of Integration Tests**
 
     1 - Does this piece of code perform the operations
         it was designed to perform?

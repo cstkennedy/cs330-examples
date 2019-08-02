@@ -1,2 +1,4 @@
 # Ignore pydocs HTML 
 **.html
+
+**.dat

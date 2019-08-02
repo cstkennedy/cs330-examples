@@ -1,16 +1,15 @@
 import math
 import copy
 
-from shapes.shape import Shape
+from shapes.shape import (Shape, FPT_FMT)
 
+PI = math.pi  # \f$ \pi \f$
+TAU = 2 * PI  # \f$ \tau = 2\pi \f$
 
 class Circle(Shape):
     """
     An Ellipse with equivalent major and minor axes
     """
-
-    PI = math.pi  # \f$ \pi \f$
-    TAU = 2 * PI  # \f$ \tau = 2\pi \f$
 
     def __init__(self, radius=1):
         """
@@ -25,8 +24,8 @@ class Circle(Shape):
         return self._radius
 
     @radius.setter
-    def radius(self, s):
-        self._radius = s
+    def radius(self, some_value):
+        self._radius = some_value
 
     @property
     def diameter(self):
@@ -38,7 +37,7 @@ class Circle(Shape):
 
         :return: area
         """
-        return Circle.PI * (self._radius ** 2.0)
+        return PI * (self._radius ** 2.0)
 
     def perimeter(self):
         """
@@ -47,7 +46,7 @@ class Circle(Shape):
         :return: perimeter
         """
 
-        return Circle.TAU * self._radius
+        return TAU * self._radius
 
     def __deepcopy__(self, memo):
         """
@@ -62,7 +61,7 @@ class Circle(Shape):
         """
 
         return (super().__str__()
-                + Shape.FPT_FMT.format("Radius", self.radius)
-                + Shape.FPT_FMT.format("Diameter", self.diameter)
-                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
-                + Shape.FPT_FMT.format("Area", self.area()))
+                + FPT_FMT.format("Radius", self.radius)
+                + FPT_FMT.format("Diameter", self.diameter)
+                + FPT_FMT.format("Perimeter", self.perimeter())
+                + FPT_FMT.format("Area", self.area()))
