@@ -17,7 +17,7 @@ def fibonacci_sequence(sequence_length):
     yield fm2
     yield fm1
 
-    for i in range(3, (sequence_length + 1)):
+    for _ in range(3, (sequence_length + 1)):
         f = fm1 + fm2
         fm2 = fm1
         fm1 = f
@@ -26,11 +26,9 @@ def fibonacci_sequence(sequence_length):
 
 
 def main():
-    # Prompt the user
     index = input("Generate how many numbers? ")
     index = int(index)  # loosely typed
 
-    # Print a blank line
     print()
 
     # De-Morgan's Law
@@ -38,11 +36,11 @@ def main():
     # !(index >= 3) || !(index <= 200)
     # (index < 3 || index > 200)
     if index < 3 or index > 200:
-        print("{:3d} is not between 3 and 200\n".format(index))
+        print(f"{index:3d} is not between 3 and 200\n")
         exit(1)
 
     for idx, f in enumerate(fibonacci_sequence(index), start=1):
-        print("{:>2d}: {:10d}".format(idx, f))
+        print(f"{idx:>2d}: {f:10d}")
 
 
 if __name__ == "__main__":

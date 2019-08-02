@@ -17,11 +17,9 @@ def main():
     fm1 = 1  # n-1 (previous) fibonacci number
     f = 0  # current fibonacci number
 
-    # Prompt the user
     index = input("Generate how many numbers? ")
     index = int(index)  # loosely typed
 
-    # Print a blank line
     print()
 
     # Note what happens if we do not check the
@@ -32,10 +30,8 @@ def main():
     # !(index >= 3) || !(index <= 20)
     # (index < 3 || index > 20)
     if index < 3 or index > 20:
-        # Error Message
         print("{:3d} is not between 3 and 20\n".format(index))
 
-        # Exit with an error state
         exit(1)
 
     # Initial output

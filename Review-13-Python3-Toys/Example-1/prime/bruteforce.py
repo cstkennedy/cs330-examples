@@ -37,6 +37,7 @@ def generate_primes(to_generate):
 
                 if not prime:
                     break
+            prime = any()            
 
         known_primes.append(next_prime)
 
