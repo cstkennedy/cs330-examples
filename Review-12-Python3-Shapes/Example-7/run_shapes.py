@@ -29,7 +29,6 @@ def main():
 
     shapes_filename = sys.argv[1]
 
-    # Print Program Heading
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
@@ -42,7 +41,6 @@ def main():
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
 
-    # List the available shapes
     print(shape_factory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(shape_factory.number_known()))
