@@ -14,7 +14,7 @@ int main(int argc, char** argv)
     int* powersOfTwo = new int();
 
     powersOfTwo[0] = 1;
-    //*powersOfTwo   = 1;
+    // *powersOfTwo   = 1;
 
     // Working with a pointer to a singleton
     cout << "powersOfTwo    = " << powersOfTwo    << "\n"
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
 
     cout << "\n";
     cout << "Using a traditional for loop" << "\n";
-    for(int i = 0; i < 1; i++) {
+    for (int i = 0; i < 1; i++) {
         cout << powersOfTwo[i] << "\n";
     }
 
@@ -41,7 +41,7 @@ int main(int argc, char** argv)
     powersOfTwo = new int[numPowers];
 
     for (int i = 0; i < numPowers; i++) {
-        powersOfTwo[i] = (1 << i); // Left Bit Shift Operation
+        powersOfTwo[i] = (1 << i);  // Left Bit Shift Operation
     }
 
     for (int* it = powersOfTwo; it < powersOfTwo + numPowers; it++) {
@@ -119,7 +119,7 @@ int main(int argc, char** argv)
          << " (bits)"
          << "\n";
 
-    //delete powersOfTwo;
+    // delete powersOfTwo;
     delete[] powersOfTwo;
 
     return 0;

@@ -41,7 +41,7 @@ bool Game::playRound()
     roundTurn(player1);
 
     // The game is over
-    if(board.isFull()) {
+    if (board.isFull()) {
         std::cout << board << "\n";
         return true;
     }

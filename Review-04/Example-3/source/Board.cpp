@@ -20,7 +20,7 @@ Board::CellValue Board::getCell(int id) const
 {
     assert(id > 0 && id < 10);
 
-    return theBoard[id - 1]; // Testing caught the missing -1
+    return theBoard[id - 1];  // Testing caught the missing -1
 }
 
 //------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ void Board::setCell(int id, CellValue newValue)
 {
     assert(id > 0 && id < 10);
 
-    theBoard[id - 1] = newValue; // Testing caught the missing -1
+    theBoard[id - 1] = newValue;  // Testing caught the missing -1
 }
 
 //------------------------------------------------------------------------------
@@ -65,7 +65,8 @@ bool Board::isFull() const
 
     int emptyCells = std::count_if(theBoard.begin(), theBoard.end(), isdigit);
 
-    //return (emptyCells == 9); // OOPs... good thing I tested with fake unit tests
+    // OOPs... good thing I tested with fake unit tests
+    // return (emptyCells == 9);
     return (emptyCells == 0);
 }
 
@@ -76,8 +77,8 @@ void Board::display(std::ostream& outs) const
     for (int i = 0; i < 3; i++) {
         // column output
         for (int j = 0; j < 2; j++) {
-            int idx = 3 * i; // row offset
-            idx += j; //column offset
+            int idx = 3 * i;  // row offset
+            idx += j;  // column offset
 
             outs << theBoard[idx] << "|";
         }

@@ -65,7 +65,7 @@ int Game::Referee::checkForVerticalWin() const
 
     if (allThreeMatch(triple)) {
         // if they match, grab the 'X' or 'O'
-        return playerNumFromSymbol(triple[0].second); // Oops mistake
+        return playerNumFromSymbol(triple[0].second);  // Oops mistake
     }
 
     triple = boardRef.get3Cells(2, 5, 8);
@@ -108,11 +108,11 @@ int Game::Referee::checkForDiagonalWin() const
 //------------------------------------------------------------------------------
 bool Game::Referee::allThreeMatch(const Board::CellTriple& triple) const
 {
-    Board::CellValue firstVal = triple[0].second; // std::pair first and second
+    Board::CellValue firstVal = triple[0].second;  // std::pair first and second
 
     int numMatches = 0;
 
-    for(int i = 0; i < triple.size(); i++) {
+    for (int i = 0; i < triple.size(); i++) {
         if (firstVal == triple[i].second) {
             numMatches++;
         }
@@ -167,7 +167,7 @@ Game::Game(Player& p1, Player& p2)
 bool Game::playRound()
 {
     // The game ended already - assert could be used
-    if(board.isFull()){
+    if (board.isFull()) {
         return true;
     }
 
@@ -177,7 +177,7 @@ bool Game::playRound()
     roundTurn(player1);
 
     // The game is over
-    if(board.isFull()) {
+    if (board.isFull()) {
         std::cout << board << "\n";
         return true;
     }
@@ -252,7 +252,7 @@ bool Game::roundTurn(Player& player)
     move = player.nextMove();
     sym = player.getSymbol();
 
-    //while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
+    // while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
     while (!ref.selectedCellIsEmpty(move)) {
         move = player.nextMove();
         sym = player.getSymbol();
