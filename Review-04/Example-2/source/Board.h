@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include <utility>
 
 /**
  * This ADT represents the gameboard used in a round

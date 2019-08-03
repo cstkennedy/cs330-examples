@@ -14,7 +14,7 @@
  * in a future Review Session
  */
 inline
-void println( std::ostream& outs=std::cout )
+void println(std::ostream& outs = std::cout)
 {
     outs << "\n";
 }
@@ -26,7 +26,7 @@ void println( std::ostream& outs=std::cout )
  *
  * @return double value entered by the user
  */
-double promptForDouble( std::string msg );
+double promptForDouble(std::string msg);
 
 /**
  * Prompt the user for a Yes or No response
@@ -36,6 +36,6 @@ double promptForDouble( std::string msg );
  * @return bool true if the user indicated Yes
  *     and false otherwise
  */
-bool promptForYesNo( std::string msg );
+bool promptForYesNo(std::string msg);
 
 #endif

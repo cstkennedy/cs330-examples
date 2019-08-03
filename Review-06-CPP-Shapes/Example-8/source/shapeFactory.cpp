@@ -9,7 +9,7 @@ ShapeFactory::ShapePair ShapeFactory::_known_shapes[] = {
     {"Equilateral Triangle", std::unique_ptr<Shape>(new EquilateralTriangle())},
     {"Square",               std::unique_ptr<Shape>(new Square())             },
     {"Circle",               std::unique_ptr<Shape>(new Circle())             }
-}; // No more empty ShapePair
+};  // No more empty ShapePair
 
 //------------------------------------------------------------------------------
 Shape* ShapeFactory::createShape(std::string name)
@@ -68,7 +68,7 @@ std::istream& operator>>(std::istream& ins, Shape*& rd)
     rd = ShapeFactory::createShape(name);
 
     if (rd != nullptr) {
-        //do other stuff
+        // Do other stuff
         rd->read(ins);
     }
     else {

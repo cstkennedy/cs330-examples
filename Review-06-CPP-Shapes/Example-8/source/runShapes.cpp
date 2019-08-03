@@ -12,7 +12,7 @@
 
 #include "utilities.h"
 #include "shapeFactory.h"
-//#include "ShapeCollection.h" // No longer needed
+// #include "ShapeCollection.h" // No longer needed
 
 /** @file */
 
@@ -22,9 +22,9 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
 using ShapeCollection = std::vector<std::unique_ptr<Shape>>;
 
@@ -89,11 +89,11 @@ int main(int argc, char** argv)
 
     // Print all the shapes
     printHeading(cout, "Display All Shapes", 38, '~');
-    //cout << shapes;
+    // cout << shapes;
     printShapes(cout, shapes);
 
     printHeading(cout, "Display Shape Names", 38, '~');
-    //cout << shapes;
+    // cout << shapes;
     printShapeNames(cout, shapes);
 
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
@@ -157,8 +157,8 @@ ShapeCollection readShapes(std::istream& ins)
 void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 {
     // for(const Shape* s : toPrint) {
-    for(const std::unique_ptr<Shape>& s : toPrint) {
-        //outs << s << "\n"; // oops
+    for (const std::unique_ptr<Shape>& s : toPrint) {
+        // outs << s << "\n"; // oops
         outs << *s << "\n";
     }
 }
@@ -166,7 +166,7 @@ void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 //------------------------------------------------------------------------------
 void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint)
 {
-    for(const std::unique_ptr<Shape>& s : toPrint) {
+    for (const std::unique_ptr<Shape>& s : toPrint) {
         outs << s->name() << "\n";
     }
 }
