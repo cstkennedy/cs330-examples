@@ -32,7 +32,7 @@ ShapeFactory::ShapePair::~ShapePair()
 Shape* ShapeFactory::createShape(std::string name)
 {
     for (const ShapePair& pair : _known_shapes) {
-        if(pair._name == name) {
+        if (pair._name == name) {
             return pair._model->clone();
         }
     }

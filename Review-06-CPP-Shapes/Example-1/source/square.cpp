@@ -36,10 +36,10 @@ void Square::display(std::ostream &outs) const
 {
     Shape::display(outs);
 
-    outs << std::left << std::setw(WIDTH_LABEL) << "Side" << ": "
-         << std::right << std::setw(WIDTH_VALUE) << side() << "\n"
+    outs << std::left << std::setw(WIDTH_LABEL) << "Side"       << ": "
+         << std::right << std::setw(WIDTH_VALUE) << side()      << "\n"
          << std::left << std::setw(WIDTH_LABEL) << "Perimeter"  << ": "
-         << std::right << std::setw(WIDTH_VALUE) << perimeter()  << "\n"
+         << std::right << std::setw(WIDTH_VALUE) << perimeter() << "\n"
          << std::left << std::setw(WIDTH_LABEL) << "Area"       << ": "
-         << std::right << std::setw(WIDTH_VALUE) << area()       << "\n";
+         << std::right << std::setw(WIDTH_VALUE) << area()      << "\n";
 }
