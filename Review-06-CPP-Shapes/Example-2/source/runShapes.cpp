@@ -15,12 +15,12 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri; ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTriangle
+typedef RightTriangle       RhtTri;  ///< Convenient shorthand for RightTriangle
+typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTriangle
 
 /**
  * Prune the Non-Existent--i.e., nullptr--shapes
@@ -40,15 +40,15 @@ int pruneNullPtr(Shape** &shapes, int count);
 int main()
 {
     // --Erroneous Variable Declarations--
-    //Shape shapes[4];               // Declare an Array of Shapes
+    // Shape shapes[4];               // Declare an Array of Shapes
 
-    //Shape* shapes = new Shape[4] // Define an array of Shapes
+    // Shape* shapes = new Shape[4] // Define an array of Shapes
 
     // --Corrected Variable Declarations--
     Shape**   shapes  = nullptr;
 
     // ShapeFactory Discussion
-    int numShapes     = 0; // Number of shapes
+    int numShapes     = 0;  // Number of shapes
     int size          = 0;
 
     // Set formatting
@@ -105,7 +105,8 @@ int main()
     // List the available shapes
     ShapeFactory::listKnown(cout);
     printHorizontalLine(cout, '-', 38);
-    cout << right << setw(2) << ShapeFactory::numberKnown() << " shapes available." << "\n";
+    cout << right << setw(2) << ShapeFactory::numberKnown()
+                             << " shapes available." << "\n";
 
     cout << "\n";
 
@@ -182,9 +183,9 @@ int pruneNullPtr(Shape** &shapes, int count)
         shapes[i] = pruned[i];
     }
 
-    //delete the pruned array
+    // delete the pruned array
     delete[] pruned;
 
-    //return the new array size
+    // return the new array size
     return nonNull;
 }

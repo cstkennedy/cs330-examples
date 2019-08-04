@@ -131,14 +131,14 @@ ShapeCollection readShapes(std::istream& ins)
 
     ins >> ws;
 
-    while(ins >> s) {
+    while (ins >> s) {
         if (s != nullptr) {
             collection.emplace_back(s);
         }
         ins >> ws;
     }
     */
-    // cout << collection << "\n"; // Not legal anymore
+    // cout << collection << "\n";  // Not legal anymore
 
     std::istream_iterator<Shape*> it(ins);
     std::istream_iterator<Shape*> end;
@@ -156,9 +156,9 @@ ShapeCollection readShapes(std::istream& ins)
 //------------------------------------------------------------------------------
 void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 {
-    // for(const Shape* s : toPrint) {
+    // for (const Shape* s : toPrint) {
     for (const std::unique_ptr<Shape>& s : toPrint) {
-        // outs << s << "\n"; // oops
+        // outs << s << "\n";  // oops
         outs << *s << "\n";
     }
 }

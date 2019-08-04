@@ -19,12 +19,12 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri; ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTriangle
+typedef RightTriangle       RhtTri;  ///< Convenient shorthand for RightTriangle
+typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTriangle
 
 /**
  * This program does not accept command line
@@ -33,14 +33,14 @@ typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTri
 int main()
 {
     // --Erroneous Variable Declarations--
-    //Shape shape;                   // Declare an instance of Shape
-    //Shape shapes[4];               // Declare an Array of Shapes
+    // Shape shape;                   // Declare an instance of Shape
+    // Shape shapes[4];               // Declare an Array of Shapes
 
-    //Shape* shapes = new Shape[4] // Define an array of Shapes
+    // Shape* shapes = new Shape[4] // Define an array of Shapes
 
     // --Corrected Variable Declarations--
     Shape*    shape   = nullptr;
-    Shape**   shapes  = nullptr; // Not used in Example 1
+    Shape**   shapes  = nullptr;  // Not used in Example 1
 
     Triangle* tri     = nullptr;
     RhtTri*   rhtTri  = nullptr;
@@ -54,14 +54,14 @@ int main()
 
     // Create one RightTriangle
     // & one EquilateralTriangle
-    //rhtTri  = new RightTriangle(1, 2);
+    // rhtTri  = new RightTriangle(1, 2);
     rhtTri  = new RhtTri(1, 2);
 
-    tri   = rhtTri; // Point tri to rhtTri
-    shape = rhtTri; // Point shape to rhtTri
+    tri   = rhtTri;  // Point tri to rhtTri
+    shape = rhtTri;  // Point shape to rhtTri
 
     // Is this a valid assignment?
-    //eqlTri = rhtTri;
+    // eqlTri = rhtTri;
 
     printSeperatedHeading(cout, "Display a Right Triangle (rhtTri)", 38);
     rhtTri->display(cout);
@@ -75,12 +75,12 @@ int main()
     shape->display(cout);
     cout << "\n";
 
-    //Force the use of Triangle::display
+    // Force the use of Triangle::display
     printSeperatedHeading(cout, "Print a Right Triangle as a Triangle", 38);
     rhtTri->Triangle::display(cout);
     cout << "\n";
 
-    //Force the use of Shape::display
+    // Force the use of Shape::display
     printSeperatedHeading(cout, "Print a Right Triangle as a Shape", 38);
     rhtTri->Shape::display(cout);
     cout << "\n";
@@ -103,18 +103,18 @@ int main()
     cout << "\n";
 
     // Pointer Review - Why not all three pointers?
-    delete rhtTri; // Deallocate the RightTriangle Instance
-    //delete tri;   // Why can tri not be deleted?
-    //delete shape; // Why can shape not be deleted?
+    delete rhtTri;  // Deallocate the RightTriangle Instance
+    // delete tri;    // Why can tri not be deleted?
+    // delete shape;  // Why can shape not be deleted?
 
     rhtTri = nullptr;
 
     // Create one Equilateral Triangle
-    //eqlTri  = new EquilateralTriangle(8);
+    // eqlTri  = new EquilateralTriangle(8);
     eqlTri  = new EqlTri(8);
 
-    tri   = eqlTri; // Point tri to rhtTri
-    shape = eqlTri; // Point shape to rhtTri
+    tri   = eqlTri;  // Point tri to rhtTri
+    shape = eqlTri;  // Point shape to rhtTri
 
     printSeperatedHeading(cout, "Display an Eql. Triangle (eqlTri)", 38);
     eqlTri->display(cout);
@@ -128,12 +128,12 @@ int main()
     shape->display(cout);
     cout << "\n";
 
-    //Force the use of Triangle::display
+    // Force the use of Triangle::display
     printSeperatedHeading(cout, "Print an Eql. Triangle as a Triangle", 38);
     eqlTri->Triangle::display(cout);
     cout << "\n";
 
-    //Force the use of Shape::display
+    // Force the use of Shape::display
     printSeperatedHeading(cout, "Print an Eql. Triangle as a Shape", 38);
     eqlTri->Shape::display(cout);
     cout << "\n";
@@ -141,9 +141,9 @@ int main()
     cout << "\n";
 
     // Pointer Review
-    delete eqlTri; // Deallocate the EquilateralTriangle Instance
-    //delete tri;   // Why can tri not be deleted?
-    //delete shape; // Why can shape not be deleted?
+    delete eqlTri;  // Deallocate the EquilateralTriangle Instance
+    // delete tri;    // Why can tri not be deleted?
+    // delete shape;  // Why can shape not be deleted?
 
     // Divide Output - Separate ShapeFactory Output
     printHorizontalLine(cout, '~', W_WIDTH);
