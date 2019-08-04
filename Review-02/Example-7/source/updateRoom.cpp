@@ -34,7 +34,7 @@ int main()
 
     // Add the Kitchen
     house.addRoom(
-        Room("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile")
+        Room("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile")
     );
 
     // Add the Storage Room

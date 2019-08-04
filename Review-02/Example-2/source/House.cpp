@@ -11,7 +11,7 @@ House::House()
 House::House(std::string name)
     :name(name)
 {
-    //this->name = name;
+    // this->name = name;
 }
 
 //------------------------------------------------------------------------------
@@ -39,16 +39,16 @@ void House::display(std::ostream& outs) const
     std::vector<Room>::const_iterator it = rooms.begin();
 
     while (it < rooms.end()) {
-        //outs << *it;
+        // outs << *it;
         it->display(outs);
         it++;
     }
 
     std::cerr << "\n--> for loop (stl iterator)" << "\n";
 
-    for (std::vector<Room>::const_iterator it = rooms.begin(); it < rooms.end(); it++){
+    for (std::vector<Room>::const_iterator it = rooms.begin(); it < rooms.end(); it++) {
         outs << *it;
-        //it->display(outs);
+        // it->display(outs);
     }
 
     std::cerr << "\n--> for loop (range based)" << "\n";
@@ -59,7 +59,7 @@ void House::display(std::ostream& outs) const
 
     /*
     for_each(rooms.begin(), rooms.end(),
-             [](const Room& r){
+             [](const Room& r) {
                 cout << r;
              });
     */

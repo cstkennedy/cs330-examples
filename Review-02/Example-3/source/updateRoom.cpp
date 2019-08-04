@@ -27,15 +27,15 @@ int main()
 {
 
     // Why are these lines invalid?
-    //Room room("Laundry Room", 8, 4, 1.95, "Laminate");
-    //Room kitchen("Kitchen", 20,12, 3.87, "Tile");
+    // Room room("Laundry Room", 8, 4, 1.95, "Laminate");
+    // Room kitchen("Kitchen", 20,12, 3.87, "Tile");
 
     // Why are these lines invalid?
-    //Room room("Laundry Room", DimensionSet(8, 4), 1.95, "Laminate");
-    //Room kitchen("Kitchen", DimensionSet(20,12), 3.87, "Tile");
+    // Room room("Laundry Room", DimensionSet(8, 4), 1.95, "Laminate");
+    // Room kitchen("Kitchen", DimensionSet(20,12), 3.87, "Tile");
 
     Room room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate");
-    Room kitchen("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile");
+    Room kitchen("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile");
 
     House house;
 

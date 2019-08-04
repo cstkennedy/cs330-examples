@@ -34,17 +34,12 @@ int main()
 
     // Add the Kitchen
     house.addRoom(
-        Room("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile")
+        Room("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile")
     );
 
     // Add the Storage Room
     house.addRoom(
-        Room(
-            "Storage Room",
-            Room::DimensionSet(16, 16),
-            4.39,
-            "Birch Wood"
-        )
+        Room("Storage Room", Room::DimensionSet(16, 16), 4.39, "Birch Wood")
     );
 
     cout << house;

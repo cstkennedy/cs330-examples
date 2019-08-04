@@ -61,8 +61,8 @@ Room::Room()
      flooring(),
      dimensions()
 {
-    //this->flooring.type     = "Generic";
-    //this->flooring.unitCost = 1;
+    // this->flooring.type     = "Generic";
+    // this->flooring.unitCost = 1;
 }
 
 //------------------------------------------------------------------------------
@@ -71,8 +71,8 @@ Room::Room(Dimension l, Dimension w, Cost c)
      flooring("Generic", c),
      dimensions(l, w)
 {
-    //flooring.type     = "Generic";
-    //flooring.unitCost = c;
+    // flooring.type     = "Generic";
+    // flooring.unitCost = c;
 }
 
 
@@ -142,7 +142,7 @@ bool Room::operator==(const Room &rhs) const
     return (
         this->name   == rhs.name &&
         this->area() == rhs.area()
-    );
+   );
 }
 
 //------------------------------------------------------------------------------
