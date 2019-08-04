@@ -37,17 +37,17 @@ class LinkedList {
             /**
              * Construct a node given a piece of input data
              */
-            Node( int data );
+            Node(int data);
 
             /**
              * Compare two Nodes. Check for equivalence.
              */
-            bool operator==( const Node &rhs ) const;
+            bool operator==(const Node &rhs) const;
 
             /**
              * Compare two Nodes. Check for non-equivalence.
              */
-            bool operator!=( const Node &rhs ) const;
+            bool operator!=(const Node &rhs) const;
         };
 
         Node *head; ///< Pointer to the first node in the LL
@@ -74,12 +74,12 @@ class LinkedList {
         /**
          * Add a Node at the beginning of the list
          */
-        void prependNode( int to_add );
+        void prependNode(int to_add);
 
         /**
          * Add a Node at the end of the list
          */
-        void appendNode( int to_add );
+        void appendNode(int to_add);
 
         /**
          * Return the number of nodes
@@ -102,7 +102,7 @@ class LinkedList {
  * with an index.
  */
 inline
-std::ostream& operator<<( std::ostream &outs, const LinkedList &prt )
+std::ostream& operator<<(std::ostream &outs, const LinkedList &prt)
 {
     prt.display(outs);
 

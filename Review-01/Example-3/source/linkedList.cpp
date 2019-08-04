@@ -20,7 +20,7 @@ bool LinkedList::Node::operator==(const Node &rhs) const
     return (
         this->data == rhs.data &&
         this->next == rhs.next
-    );
+  );
 }
 
 //------------------------------------------------------------------------------
@@ -29,7 +29,7 @@ bool LinkedList::Node::operator!=(const Node &rhs) const
     return (
         this->data != rhs.data ||
         this->next != rhs.next
-    );
+  );
 }
 
 //------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ LinkedList::~LinkedList()
     this_iterator = this->head;
 
     //iterate through the this and delete each node
-    while(this_iterator != nullptr ){
+    while (this_iterator != nullptr) {
         to_delete = this_iterator;
 
         //move to next node
@@ -110,7 +110,7 @@ void LinkedList::prependNode(int to_add)
     // Consider how you would write this expression
     // using head or tail
     //
-    if(this->nodes == 0){
+    if (this->nodes == 0) {
         appendNode(to_add);
         return;
     }
@@ -148,7 +148,7 @@ void LinkedList::appendNode(int to_add)
     //Node* leak_node = new Node(to_add); // This node exists for memoroy leak demos
 
     // Handle the case where the first node is added
-    if(this->nodes == 0){
+    if (this->nodes == 0) {
         // this->head = this->tail = new_node;
         // Note the above line is it any different
         // from the next two lines?
@@ -211,7 +211,7 @@ LinkedList& LinkedList::operator=(const LinkedList& rhs)
         this_iterator = this->head;
 
         //iterate through the this and delete each node
-        while(this_iterator != nullptr) {
+        while (this_iterator != nullptr) {
             to_delete = this_iterator;
 
             //move to next node

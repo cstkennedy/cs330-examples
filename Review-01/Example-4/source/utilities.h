@@ -12,7 +12,7 @@
 #include <cmath>
 
 namespace utilities {
-    const int W_WIDTH = 70; ///< Width of the terminal window
+    const int W_WIDTH = 70;  ///< Width of the terminal window
 
     /**
      * Utility Function to read a value from an input stream

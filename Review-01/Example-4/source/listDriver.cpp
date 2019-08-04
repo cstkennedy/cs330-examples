@@ -19,18 +19,18 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Linked List Review",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-const int MIN = -10; ///< Lower bound for number generation
-const int MAX = 10;  ///< Upper bound for number generation
+const int MIN = -10;  ///< Lower bound for number generation
+const int MAX = 10;   ///< Upper bound for number generation
 
 /**
  * Generate a random integer in the range min, max.
  * Default to MIN and MAX
  */
-int randomInt(int min=MIN, int max=MAX);
+int randomInt(int min = MIN, int max = MAX);
 
 /**
  * Generate a Linked List of random integers
@@ -44,8 +44,8 @@ LinkedList generateList(int n);
  */
 int main(int argc, char** argv)
 {
-    int         seed        = 0; // Seed for random number generation
-    int         toGenerate  = 0; // Number of nodes to generate
+    int         seed        = 0;  // Seed for random number generation
+    int         toGenerate  = 0;  // Number of nodes to generate
 
     // If a seed was passed from the command line,
     // parse it. Otherwise default to ctime
