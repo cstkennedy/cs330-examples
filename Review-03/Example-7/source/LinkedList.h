@@ -125,7 +125,7 @@ class LinkedList {
                 it = it->next;
             }
             */
-            for(const T& src_data : src) {
+            for (const T& src_data : src) {
                 this->push_back(src_data);
             }
         }
@@ -170,7 +170,7 @@ class LinkedList {
 
             // Update tail;
             tail = tail->next;
-            //tail = newNode;
+            // tail = newNode;
 
             // Update the size
             currentSize++;

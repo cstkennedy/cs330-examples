@@ -83,7 +83,7 @@ void House::addRoom(Room toAdd)
 
     // Update tail;
     tail = tail->next;
-    //tail = newNode;
+    // tail = newNode;
 
     // Update the size
     currentSize++;

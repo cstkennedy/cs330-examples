@@ -76,7 +76,7 @@ void buildHouse(House &house)
 
     // Add the Kitchen
     house.addRoom(
-        Room("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile")
+        Room("Kitchen", Room::DimensionSet(20 , 12), 3.87, "Tile")
     );
 
     // Add the Storage Room
@@ -107,6 +107,6 @@ House upgradeFlooring(House original)
 }
 
 /*
-void doStuff(Room& room){
+void doStuff(Room& room) {
     room.setFlooring("Stone Bricks", 12.97);
 }*/
