@@ -17,19 +17,28 @@ LinkedList::Node::Node(int data)
 //------------------------------------------------------------------------------
 bool LinkedList::Node::operator==(const Node &rhs) const
 {
+    /*
     return (
         this->data == rhs.data &&
         this->next == rhs.next
-   );
+    );
+    */
+
+    return this->data == rhs.data
+        && this->next == rhs.next;
 }
 
 //------------------------------------------------------------------------------
 bool LinkedList::Node::operator!=(const Node &rhs) const
 {
+    /*
     return (
-        this->data != rhs.data ||
-        this->next != rhs.next
-   );
+         this->data != rhs.data ||
+         this->next != rhs.next
+    );
+    */
+    return this->data != rhs.data
+        || this->next != rhs.next;
 }
 
 //------------------------------------------------------------------------------
@@ -44,8 +53,8 @@ LinkedList::LinkedList()
 //------------------------------------------------------------------------------
 LinkedList::~LinkedList()
 {
-    Node *this_iterator = nullptr;  // Loop control pointer
-    Node *to_delete     = nullptr;  // Node to delete
+    Node *this_iterator = nullptr;   // Loop control pointer
+    Node *to_delete     = nullptr;   // Node to delete
 
     // start at the beginning of the this
     this_iterator = this->head;
@@ -60,7 +69,7 @@ LinkedList::~LinkedList()
         // delete the current node
         delete to_delete;
 
-        to_delete = nullptr;  //dangling pointers are bad
+        to_delete = nullptr;  // dangling pointers are bad
 
         // Such output would not be included in
         // a non-academic exercise

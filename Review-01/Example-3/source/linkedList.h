@@ -50,10 +50,10 @@ class LinkedList {
             bool operator!=(const Node &rhs) const;
         };
 
-        Node *head; ///< Pointer to the first node in the LL
-        Node *tail; ///< Pointer to the last node in the LL
+        Node *head;  ///< Pointer to the first node in the LL
+        Node *tail;  ///< Pointer to the last node in the LL
 
-        int nodes;  ///< Number of nodes in the LL (cardinality).
+        int nodes;   ///< Number of nodes in the LL (cardinality).
 
     public:
         /**

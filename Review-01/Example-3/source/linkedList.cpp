@@ -17,25 +17,21 @@ LinkedList::Node::Node(int data)
 //------------------------------------------------------------------------------
 bool LinkedList::Node::operator==(const Node &rhs) const
 {
-    return (
-        this->data == rhs.data &&
-        this->next == rhs.next
-  );
+    return this->data == rhs.data
+        && this->next == rhs.next;
 }
 
 //------------------------------------------------------------------------------
 bool LinkedList::Node::operator!=(const Node &rhs) const
 {
-    return (
-        this->data != rhs.data ||
-        this->next != rhs.next
-  );
+    return this->data != rhs.data
+        || this->next != rhs.next;
 }
 
 //------------------------------------------------------------------------------
 LinkedList::LinkedList()
 {
-    //Initialize the private data members (attributes)
+    // Initialize the private data members (attributes)
     head  = nullptr;
     tail  = nullptr;
     nodes = 0;
@@ -63,23 +59,23 @@ LinkedList::LinkedList(const LinkedList& src)
 //------------------------------------------------------------------------------
 LinkedList::~LinkedList()
 {
-    Node *this_iterator = nullptr; // Loop control pointer
-    Node *to_delete     = nullptr; // Node to delete
+    Node *this_iterator = nullptr;  // Loop control pointer
+    Node *to_delete     = nullptr;  // Node to delete
 
-    //start at the beginning of the this
+    // start at the beginning of the this
     this_iterator = this->head;
 
-    //iterate through the this and delete each node
+    // iterate through the this and delete each node
     while (this_iterator != nullptr) {
         to_delete = this_iterator;
 
-        //move to next node
+        // move to next node
         this_iterator = this_iterator->next;
 
-        //delete the current node
+        // delete the current node
         delete to_delete;
 
-        to_delete = nullptr; //dangling pointers are bad
+        to_delete = nullptr;  // dangling pointers are bad
 
         // Such output would not be included in
         // a non-academic exercise
@@ -145,7 +141,8 @@ void LinkedList::appendNode(int to_add)
 
     // Store the "to_add" data within the node
     new_node = new Node(to_add);
-    //Node* leak_node = new Node(to_add); // This node exists for memoroy leak demos
+    // This node exists for memory leak demos
+    // Node* leak_node = new Node(to_add);
 
     // Handle the case where the first node is added
     if (this->nodes == 0) {
@@ -204,23 +201,23 @@ LinkedList& LinkedList::operator=(const LinkedList& rhs)
 
     if (this != &rhs) {
         // Destructor for this
-        Node *this_iterator = nullptr; // Loop control pointer
-        Node *to_delete     = nullptr; // Node to delete
+        Node *this_iterator = nullptr;  // Loop control pointer
+        Node *to_delete     = nullptr;  // Node to delete
 
-        //start at the beginning of the this
+        // start at the beginning of the this
         this_iterator = this->head;
 
-        //iterate through the this and delete each node
+        // iterate through the this and delete each node
         while (this_iterator != nullptr) {
             to_delete = this_iterator;
 
-            //move to next node
+            // move to next node
             this_iterator = this_iterator->next;
 
-            //delete the current node
+            // delete the current node
             delete to_delete;
 
-            to_delete = nullptr; //dangling pointers are bad
+            to_delete = nullptr;  // dangling pointers are bad
 
             // Such output would not be included in
             // a non-academic exercise
