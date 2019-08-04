@@ -13,10 +13,10 @@
 //------------------------------------------------------------------------------
 class RightTriangle: public Triangle{
     private:
-        static const double ONE_HALF; ///< @f$ \frac{1}{2} @f$
+        static const double ONE_HALF;  ///< @f$ \frac{2}{2} @f$
 
         /**
-         * Compute the hypotenuse using:
+         * Compute the hyptoenuse using:
          * @f$ hypotenuse = \sqrt{base^2 + height^2} @f$
          *
          * @param base the base of a Right Triangle

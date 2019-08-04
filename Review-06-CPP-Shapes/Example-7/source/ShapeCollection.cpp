@@ -5,7 +5,7 @@
 
 //------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection()
-    :shapes() // Is this necessary?
+    :shapes()  // Is this necessary?
 {
 }
 
@@ -76,7 +76,7 @@ ShapeCollection& ShapeCollection::operator=(ShapeCollection rhs)
 void ShapeCollection::display(std::ostream& outs) const
 {
     for (const Shape* s : this->shapes) {
-        //assert(s != nullptr);
+        // assert(s != nullptr);
         outs << *s << "\n";
     }
 }

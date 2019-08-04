@@ -20,11 +20,11 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Linked List Review",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-const int MIN = -10; ///< Lower bound for number generation
+const int MIN = -10;  ///< Lower bound for number generation
 const int MAX = 10;  ///< Upper bound for number generation
 
 /**
@@ -38,10 +38,10 @@ int randomInt(int min=MIN, int max=MAX);
  */
 int main(int argc, char** argv)
 {
-    LinkedList* random_ints = nullptr; // List of random integers
+    LinkedList* random_ints = nullptr;  // List of random integers
 
-    int         seed        = 0; // Seed for random number generation
-    int         to_generate;     // Number of nodes to generate
+    int         seed        = 0;  // Seed for random number generation
+    int         to_generate;      // Number of nodes to generate
 
     // If a seed was passed from the command line,
     // parse it. Otherwise default to ctime
