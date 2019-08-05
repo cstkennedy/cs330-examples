@@ -6,6 +6,7 @@ from shapes.shape import (Shape, FPT_FMT)
 PI = math.pi  # \f$ \pi \f$
 TAU = 2 * PI  # \f$ \tau = 2\pi \f$
 
+
 class Circle(Shape):
     """
     An Ellipse with equivalent major and minor axes
