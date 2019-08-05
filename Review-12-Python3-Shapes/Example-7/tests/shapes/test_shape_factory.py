@@ -24,6 +24,12 @@ class TestShapeFactory(unittest.TestCase):
         self.known_shapes = copy.deepcopy(shape_factory._known_shapes)
         self.number_known = len(self.known_shapes)
 
+        self.known_names = ["Circle",
+                            "Square",
+                            "Triangle",
+                            "Equilateral Triangle",
+                            "Right Triangle"]
+
     def test_create_shape_success(self):
         """
         Create a known valid Shape
@@ -55,7 +61,7 @@ class TestShapeFactory(unittest.TestCase):
     def test_list_known(self):
         known_str = shape_factory.list_known()
 
-        for name in self.known_shapes.keys():
+        for name in self.known_names:
             assert_that(known_str, contains_string(name))
 
     def test_number_known(self):

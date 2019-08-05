@@ -36,6 +36,7 @@ class TestSquare(unittest.TestCase):
         a_square.side = 7.39
 
         assert_that(a_square.side, close_to(7.39, 1e-8))
+        assert_that(a_square.name, equal_to("Square"))
 
     def test_area(self):
         assert_that(self.generic.area(),
