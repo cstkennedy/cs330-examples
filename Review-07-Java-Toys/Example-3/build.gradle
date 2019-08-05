@@ -2,9 +2,9 @@ buildscript {
     repositories {
         jcenter()
     }
-    dependencies {
-        classpath 'org.ysb33r.gradle:doxygen:0.2'
-    }
+    // dependencies {
+        // classpath 'org.ysb33r.gradle:doxygen:0.2'
+    // }
 }
 
 apply plugin: 'java'
@@ -35,7 +35,7 @@ jar {
 test {
     reports {
         html.enabled = true
-    }           
+    }
     ignoreFailures = true
 
     testLogging {
