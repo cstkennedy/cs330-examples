@@ -2,7 +2,7 @@ package edu.odu.cs.cs350.examples;
 
 public class Student implements Cloneable {
     /**
-     * Constant defining the default student name
+     * Constant defining the default student name.
      */
     public static final String DEFAULT_NAME = "John Q. Smith";
 
@@ -10,7 +10,7 @@ public class Student implements Cloneable {
 
     /**
      * Create a Student with the default name
-     * of John Q. Smith
+     * of John Q. Smith.
      */
     public Student()
     {
@@ -18,7 +18,7 @@ public class Student implements Cloneable {
     }
 
     /**
-     * Create a Student with a specified name
+     * Create a Student with a specified name.
      *
      * @param n desired name
      */
@@ -28,7 +28,7 @@ public class Student implements Cloneable {
     }
 
     /**
-     * Get the Name
+     * Get the Name.
      */
     public String getName()
     {
@@ -36,7 +36,7 @@ public class Student implements Cloneable {
     }
 
     /**
-     * Change the student name
+     * Change the student name.
      *
      * @param n desired name
      */
@@ -46,22 +46,22 @@ public class Student implements Cloneable {
     }
 
     /**
-     * Compare 2 `Student`s based on name
+     * Compare 2 `Student`s based on name.
      *
      * @param rhs the other (right-hand-side) student object
      */
     @Override
     public boolean equals(Object rhs)
     {
-        if(!(rhs instanceof Student)) {
+        if (!(rhs instanceof Student)) {
             return false;
         }
 
-        return (this.name).equals(((Student)rhs).name);
+        return (this.name).equals(((Student) rhs).name);
     }
 
     /**
-     * Return a hashcode
+     * Return a hashcode.
      */
     @Override
     public int hashCode()
@@ -78,9 +78,6 @@ public class Student implements Cloneable {
         return new Student(name);
     }
 
-    /**
-     *
-     */
     @Override
     public String toString()
     {

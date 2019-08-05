@@ -2,46 +2,50 @@
 
 package utilities;
 
-import java.lang.StringBuilder;
+// import java.lang.StringBuilder;
 
 public final class Utilities {
     public static final int    W_WIDTH = 80;   ///< Width of the terminal window
     public static final double EPS     = 1E-6; ///< Default Precision (epsilon)
 
     /**
-     * Print a horizontal line
+     * Print a horizontal line.
      */
-    public static String horizontalLine(char line_char, int width){
-        return String.format("%0" + width + "d", 0).replace("0", "" + line_char);
+    public static String horizontalLine(char lineChar, int width)
+    {
+        return String.format("%0" + width + "d", 0).replace("0", "" + lineChar);
     }
 
     /**
-     *  Print a centered title
+     *  Print a centered title.
      */
     public static String centeredTitle(String title, int width)
     {
-        int magic_width = 0;
+        int magicWidth = 0;
+        magicWidth = (width / 2) - (title.length() / 2) + title.length();
 
-        magic_width = (width/2) - (title.length()/2) + title.length();
-
-        return(String.format("%" + magic_width + "s", title) + "\n");
+        return String.format("%" + magicWidth + "s%n", title);
     }
 
     /**
-     *  Print a heading followed by a horizontal rule
+     *  Print a heading followed by a horizontal rule.
      *
      *  @param heading the title to display
      *  @param width the width of the heading
      *  @param border the character with which to create the horizontal rule
      */
-    public static String seperatedHeading(String heading, int width, char border)
+    public static String seperatedHeading(String heading,
+                                          int width, char border)
     {
         return centeredTitle(heading, width)
              + horizontalLine(border, width);
     }
 
     /**
-     *  Print the stylized program/project heading
+     *  Print the stylized program/project heading.
+     *
+     *  @param titles the titles to display
+     *  @param width the width of the heading
      */
     public static String projectHeading(String[] titles, int width)
     {
@@ -60,7 +64,11 @@ public final class Utilities {
     }
 
     /**
-     *  Print a centered heading
+     *  Print a centered heading.
+     *
+     *  @param title the title to display
+     *  @param width the width of the heading
+     *  @param border the character with which to create the horizontal rule
      */
     public static String heading(String title, int width, char border)
     {
@@ -71,7 +79,7 @@ public final class Utilities {
 
     /**
      *  Compare two floating point numbers - determine if equal within
-     *  a specified threshold
+     *  a specified threshold.
      */
     public static boolean areEqual(double lhs, double rhs, double threshold)
     {

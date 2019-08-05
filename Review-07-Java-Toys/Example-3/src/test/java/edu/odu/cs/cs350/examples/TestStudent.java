@@ -8,7 +8,7 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 
 import static org.hamcrest.CoreMatchers.*;
-import org.hamcrest.core.IsNull;
+// import org.hamcrest.core.IsNull;
 
 /**
  * 1 - Does this piece of code perform the operations
@@ -72,7 +72,7 @@ public class TestStudent {
         assertThat(john.getName(), equalTo(newName));
         assertThat(john.hashCode(), not(oldHashCode));
 
-        //assertThat(john.toString(), equalTo(newName));
+        // assertThat(john.toString(), equalTo(newName));
         assertThat(john.toString(), containsString(newName));
 
         assertThat(john, not(equalTo(student)));
@@ -83,6 +83,4 @@ public class TestStudent {
     {
         fail("Left as an Exercise");
     }
-
-
 }
