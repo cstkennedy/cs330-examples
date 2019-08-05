@@ -43,5 +43,11 @@ Scratch
 **/.coverage
 **/htmlcov
 
+# Python Disttools
+MANIFEST
+
+# Python Tox
+**.tox
+
 # Style Check reports
 **style-check*
