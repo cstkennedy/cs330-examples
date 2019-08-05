@@ -13,7 +13,7 @@
 //------------------------------------------------------------------------------
 class RightTriangle: public Triangle{
     private:
-        static const double ONE_HALF; ///< @f$ \frac{1}{2} @f$
+        static const double ONE_HALF;  ///< @f$ \frac{1}{2} @f$
 
         /**
          * Compute the hypotenuse using:
