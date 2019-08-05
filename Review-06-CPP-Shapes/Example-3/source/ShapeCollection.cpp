@@ -5,7 +5,7 @@
 
 //------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection()
-    :shapes() // Is this necessary?
+    :shapes()  // Is this necessary?
 {
 }
 

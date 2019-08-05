@@ -86,7 +86,7 @@ std::istream& operator>>(std::istream& ins, Shape*& rd)
     rd = ShapeFactory::createShape(name);
 
     if (rd != nullptr) {
-        //do other stuff
+        // do other stuff
         rd->read(ins);
     }
     else {
