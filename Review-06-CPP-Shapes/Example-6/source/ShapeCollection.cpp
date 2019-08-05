@@ -5,7 +5,7 @@
 
 //------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection()
-    :shapes() // Is this necessary?
+    :shapes()  // Is this necessary?
 {
 }
 
@@ -18,7 +18,7 @@ ShapeCollection::ShapeCollection(int n)
 //------------------------------------------------------------------------------
 ShapeCollection::ShapeCollection(const ShapeCollection& src)
 {
-    for (const Shape* s: src.shapes) {
+    for (const Shape* s : src.shapes) {
         shapes.push_back(s->clone());
     }
 }
@@ -52,7 +52,7 @@ ShapeCollection& ShapeCollection::operator=(ShapeCollection rhs)
 void ShapeCollection::display(std::ostream& outs) const
 {
     for (const Shape* s : this->shapes) {
-        //assert(s != nullptr);
+        // assert(s != nullptr);
         outs << *s << "\n";
     }
 }

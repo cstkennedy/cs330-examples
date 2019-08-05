@@ -6,6 +6,8 @@
 
 #include <iostream>
 #include <memory>
+#include <utility>
+#include <string>
 
 #include "shape.h"
 #include "triangle.h"

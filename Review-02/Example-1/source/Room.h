@@ -352,7 +352,7 @@ Cost Room::flooringCost() const
  * This operator can *NOT* be implemented as a member function.
  */
 inline
-std::ostream& operator<<( std::ostream &outs, const Room &prt )
+std::ostream& operator<<(std::ostream &outs, const Room &prt)
 {
     prt.display(outs);
 

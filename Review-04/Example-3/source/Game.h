@@ -15,7 +15,7 @@ class Game {
          * exposed to the outside world;
          */
         class Referee {
-            const Board& boardRef; // reference to the gameboard
+            const Board& boardRef;  // reference to the gameboard
 
             public:
                 Referee() = delete;
@@ -53,7 +53,7 @@ class Game {
         };
 
         Board board;
-        Referee ref; // The referee for this game
+        Referee ref;  // The referee for this game
 
         Player& player1;
         Player& player2;

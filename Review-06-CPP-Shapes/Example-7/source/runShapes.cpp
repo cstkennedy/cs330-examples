@@ -17,12 +17,12 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri; ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTriangle
+typedef RightTriangle       RhtTri;  ///< Convenient shorthand for RightTriangle
+typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTriangle
 
 /**
  * Read shapes from an input stream
@@ -91,15 +91,15 @@ int main(int argc, char** argv)
     ShapeCollection shapes = readShapes(shapesFile);
 
     // Demonstrate assertions (review)
-    //shapes.addShape(ShapeFactory::createShape("1337 Haxor"));
+    // shapes.addShape(ShapeFactory::createShape("1337 Haxor"));
 
     // Print all the shapes
     printHeading(cout, "Display All Shapes", 38, '~');
-    //cout << shapes;
+    // cout << shapes;
     printShapes(cout, shapes);
 
     printHeading(cout, "Display Shape Names", 38, '~');
-    //cout << shapes;
+    // cout << shapes;
     printShapeNames(cout, shapes);
 
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
@@ -107,9 +107,9 @@ int main(int argc, char** argv)
     ShapeCollection::const_iterator it = findLargestShapeByArea(shapes);
     Shape* largestShape = *it;
 
-    //cout << largestShape << "\n"; // oops again
+    // cout << largestShape << "\n";  // oops again
     cout << *largestShape << "\n";
-    //cout << *(*it) << "\n"; // skip the temporary Shape*
+    // cout << *(*it) << "\n";  // skip the temporary Shape*
 
     return 0;
 }
@@ -138,7 +138,7 @@ ShapeCollection readShapes(std::istream& ins)
 void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 {
     for (const Shape* s : toPrint) {
-        //outs << s << "\n"; // oops
+        // outs << s << "\n";  // oops
         outs << *s << "\n";
     }
 }
@@ -162,7 +162,7 @@ ShapeCollection::const_iterator findLargestShapeByArea(const ShapeCollection& co
 
     // Review pre increment
     while (++it != collection.end()) {
-        //std::cerr << "\n" << *(*it) << "\n"; // debugging
+        // std::cerr << "\n" << *(*it) << "\n";  // debugging
 
         if ((*it)->area() > (*largestShape)->area()) {
             largestShape = it;

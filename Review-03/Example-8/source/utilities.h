@@ -14,7 +14,7 @@
  * in a future Review Session
  */
 inline
-void println(std::ostream& outs=std::cout)
+void println(std::ostream& outs = std::cout)
 {
     outs << "\n";
 }
@@ -45,6 +45,6 @@ T promptForValue(std::string msg)
  * @return bool true if the user indicated Yes
  *     and false otherwise
  */
-bool promptForYesNo( std::string msg );
+bool promptForYesNo(std::string msg);
 
 #endif

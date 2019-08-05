@@ -17,12 +17,12 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri; ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTriangle
+typedef RightTriangle       RhtTri;  ///< Convenient shorthand for RightTriangle
+typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTriangle
 
 /**
  * Read shapes from an input stream
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
     ShapeCollection shapes = readShapes(shapesFile);
 
     // Demonstrate assertions (review)
-    //shapes.addShape(ShapeFactory::createShape("1337 Haxor"));
+    // shapes.addShape(ShapeFactory::createShape("1337 Haxor"));
 
     // Print all the shapes
     printHeading(cout, "Display All Shapes", 38, '~');

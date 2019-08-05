@@ -3,7 +3,7 @@
 using namespace std;
 
 //------------------------------------------------------------------------------
-double promptForDouble( std::string msg )
+double promptForDouble(std::string msg)
 {
     double value = 0;
 
@@ -14,7 +14,7 @@ double promptForDouble( std::string msg )
 }
 
 //------------------------------------------------------------------------------
-bool promptForYesNo( std::string msg )
+bool promptForYesNo(std::string msg)
 {
     // Prompt the user for Y/N
     char yn_response = 'n';
@@ -22,7 +22,7 @@ bool promptForYesNo( std::string msg )
     cout << msg << ": ";
     cin >> yn_response;
 
-    yn_response = toupper( yn_response );
+    yn_response = toupper(yn_response);
 
     return (yn_response == 'Y');
 }

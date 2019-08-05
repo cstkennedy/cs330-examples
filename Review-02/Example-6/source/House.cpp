@@ -18,8 +18,8 @@ House::House(std::string name)
 //------------------------------------------------------------------------------
 void House::addRoom(Room toAdd)
 {
-    //rooms[currentSize] = toAdd;
-    //currentSize++;
+    // rooms[currentSize] = toAdd;
+    // currentSize++;
 
     rooms[currentSize++] = toAdd;
 }

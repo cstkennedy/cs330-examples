@@ -2,6 +2,7 @@
 #define LL_H_DEFINED
 
 #include <cassert>
+#include <utility>
 
 template <typename T>
 class LinkedList {
@@ -126,7 +127,7 @@ class LinkedList {
                 it = it->next;
             }
             */
-            for(const T& src_data : src) {
+            for (const T& src_data : src) {
                 this->push_back(src_data);
             }
         }
@@ -183,7 +184,7 @@ class LinkedList {
 
             // Update tail;
             tail = tail->next;
-            //tail = newNode;
+            // tail = newNode;
 
             // Update the size
             currentSize++;
@@ -227,7 +228,7 @@ class LinkedList {
             // This is as Draft Implementation
             std::cerr << "In Move Assignment" << "\n";
 
-            if (this == &rhs ) {
+            if (this == &rhs) {
                 return *this;
             }
 

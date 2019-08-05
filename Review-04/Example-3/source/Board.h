@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <array>
+#include <utility>
 
 /**
  * This ADT represents the gameboard used in a round
@@ -27,7 +28,7 @@ class Board {
          * is located at http://en.cppreference.com/w/cpp/container/array. Be careful,
          * it is easy to get lost in the rabbit hole
          */
-        //typedef std::array<std::pair<int, Board::CellValue>, 3> CellTriple;
+        // typedef std::array<std::pair<int, Board::CellValue>, 3> CellTriple;
         using CellTriple = std::array<std::pair<int, Board::CellValue>, 3>;
 
     private:

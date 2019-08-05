@@ -4,12 +4,12 @@
 #include "shapeFactory.h"
 
 ShapeFactory::ShapePair ShapeFactory::_known_shapes[] = {
-    ShapePair("Triangle" ,             new Triangle()           ),
-    ShapePair("Right Triangle" ,       new RightTriangle()      ),
-    ShapePair("Equilateral Triangle" , new EquilateralTriangle()),
-    ShapePair("Square",                new Square()             ),
-    ShapePair("Circle",                new Circle()             )
-}; // No more empty ShapePair
+    ShapePair("Triangle",             new Triangle()           ),
+    ShapePair("Right Triangle",       new RightTriangle()      ),
+    ShapePair("Equilateral Triangle", new EquilateralTriangle()),
+    ShapePair("Square",               new Square()             ),
+    ShapePair("Circle",               new Circle()             )
+};  // No more empty ShapePair
 
 //------------------------------------------------------------------------------
 ShapeFactory::ShapePair::ShapePair()
@@ -32,7 +32,7 @@ ShapeFactory::ShapePair::~ShapePair()
 Shape* ShapeFactory::createShape(std::string name)
 {
     for (const ShapePair& pair : _known_shapes) {
-        if(pair._name == name) {
+        if (pair._name == name) {
             return pair._model->clone();
         }
     }
@@ -45,7 +45,7 @@ Shape* ShapeFactory::createShape(std::string name)
 bool ShapeFactory::isKnown(std::string name)
 {
     for (const ShapePair& pair : _known_shapes) {
-        if(pair._name == name) {
+        if (pair._name == name) {
             return true;
         }
     }
@@ -85,7 +85,7 @@ std::istream& operator>>(std::istream& ins, Shape*& rd)
     rd = ShapeFactory::createShape(name);
 
     if (rd != nullptr) {
-        //do other stuff
+        // do other stuff
         rd->read(ins);
     }
     else {

@@ -128,7 +128,7 @@ std::istream& operator>>(std::istream &ins, Room& rd)
     getline(ins, flooring);
     ins >> ws;
 
-    rd = Room(name, Room::DimensionSet(l,h), cost, flooring);
+    rd = Room(name, Room::DimensionSet(l, h), cost, flooring);
 
     return ins;
 }

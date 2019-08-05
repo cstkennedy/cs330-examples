@@ -1,5 +1,3 @@
-//Programmer : Thomas Kennedy
-
 /** @file */
 
 #ifndef Utilities_H_INCLUDED
@@ -28,7 +26,7 @@ namespace utilities {
     {
         in_stream >> value_in;
 
-        //Return False on read error
+        // Return False on read error
         return in_stream.good();
     }
 
@@ -53,13 +51,13 @@ namespace utilities {
      * Utility function to read a line - interactive
      */
     bool readLine(std::istream &in_stream, std::string &value_in,
-                  std::string message, int width=34);
+                  std::string message, int width = 34);
 
     /**
      * Print a horizontal line
      */
-    void printHorizontalLine(std::ostream& outs=std::cout,
-                             char line_char='*', int width=W_WIDTH);
+    void printHorizontalLine(std::ostream& outs = std::cout,
+                             char line_char = '*', int width = W_WIDTH);
 
     /**
      * Combine a title string and number into one string
@@ -83,7 +81,7 @@ namespace utilities {
     void printSeperatedHeading(std::ostream &outs, std::string heading,
                                int width, char border = '-')
     {
-        printCenteredTitle( outs, heading, width);
+        printCenteredTitle(outs, heading, width);
         printHorizontalLine(outs, border, width);
     }
 
@@ -96,7 +94,7 @@ namespace utilities {
      * @param width heading width
      */
     void printProjectHeading(std::ostream& outs, const std::string titles[],
-                             int title_items, int width=W_WIDTH);
+                             int title_items, int width = W_WIDTH);
 
     /**
      * Print a centered heading
@@ -106,7 +104,7 @@ namespace utilities {
      * @param border_char character out of whcih the dividing line is composed
      */
     void printHeading(std::ostream& outs, std::string title,
-                      int width=W_WIDTH, char border_char = '*');
+                      int width = W_WIDTH, char border_char = '*');
 
     /**
      * Compare two floating point numbers - determine if equal within
@@ -116,13 +114,13 @@ namespace utilities {
      * @param rhs second number
      * @param threshold tolerance
      */
-    bool areEqual(double lhs, double rhs, double threshold=1e-6);
+    bool areEqual(double lhs, double rhs, double threshold = 1e-6);
 
     /**
      * Print a blankline
      */
     inline
-    void println(std::ostream& outs=std::cout)
+    void println(std::ostream& outs = std::cout)
     {
         outs << "\n";
     }

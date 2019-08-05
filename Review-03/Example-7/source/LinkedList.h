@@ -1,6 +1,7 @@
 #ifndef LL_H_DEFINED
 #define LL_H_DEFINED
 
+#include <utility>
 #include <cassert>
 
 template <typename T>
@@ -124,7 +125,7 @@ class LinkedList {
                 it = it->next;
             }
             */
-            for(const T& src_data : src) {
+            for (const T& src_data : src) {
                 this->push_back(src_data);
             }
         }
@@ -169,7 +170,7 @@ class LinkedList {
 
             // Update tail;
             tail = tail->next;
-            //tail = newNode;
+            // tail = newNode;
 
             // Update the size
             currentSize++;

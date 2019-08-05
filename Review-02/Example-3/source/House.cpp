@@ -11,7 +11,7 @@ House::House()
 House::House(std::string name)
     :name(name)
 {
-    //this->name = name;
+    // this->name = name;
 }
 
 //------------------------------------------------------------------------------
@@ -64,14 +64,14 @@ void House::display(std::ostream& outs) const
     const_iterator it = rooms.begin();
 
     while (it < rooms.end()) {
-        //outs << *it;
+        // outs << *it;
         it->display(outs);
         it++;
     }
 
-    for (const_iterator it = rooms.begin(); it < rooms.end(); it++){
+    for (const_iterator it = rooms.begin(); it < rooms.end(); it++) {
         outs << *it;
-        //it->display(outs);
+        // it->display(outs);
     }
     */
 

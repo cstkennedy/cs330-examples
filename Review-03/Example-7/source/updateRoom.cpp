@@ -88,7 +88,7 @@ int main()
         std::cout << c << "\n";
     }*/
 
-    //std::ostream_iterator<double> outIt(std::cout, "\n");
+    // std::ostream_iterator<double> outIt(std::cout, "\n");
     std::copy(costs.begin(), costs.end(),
               std::ostream_iterator<double>(std::cout, "\n"));
 
@@ -125,7 +125,7 @@ void buildHouse(House& house)
 
     // Add the Kitchen
     house.addRoom(
-        Room("Kitchen", Room::DimensionSet(20,12), 3.87, "Tile")
+        Room("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile")
     );
 
     // Add the Storage Room

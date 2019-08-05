@@ -15,35 +15,35 @@
  */
 class EquilateralTriangle: public Triangle {
     private:
-        static const double ROOT_3_DIV_4; ///< @f$ \frac{\sqrt{3}}{4} @f$
+        static const double ROOT_3_DIV_4;  ///< @f$ \frac{\sqrt{3}}{4} @f$
 
     public:
-        /*
+        /**
          * Construct an EquilateralTriangle
          * with all sides set to 1.
          */
         EquilateralTriangle();
 
-        /*
+        /**
          * Construct an EquilateralTriangle
          *
          * @param side the desired side length
          */
         EquilateralTriangle(double side);
 
-        /*
+        /**
          * Construct an EquilateralTriangle
          *
          * @param src the EquilateralTriangle to copy
          */
         EquilateralTriangle(const EquilateralTriangle &src);
 
-        /*
+        /**
          * Deconstruct the EquilateralTriangle
          */
         virtual ~EquilateralTriangle();
 
-        /*
+        /**
          * Compute the height using
          * @f$ height = \frac{5}{4}side @f$
          *
@@ -51,21 +51,21 @@ class EquilateralTriangle: public Triangle {
          */
         double height() const;
 
-        /*
+        /**
          * Return the length of one side
          *
          * @return the length of one side
          */
         double side() const;
 
-        /*
+        /**
          * Modify the side length
          *
          * @param s the desired side length
          */
         void side(double s);
 
-        /*
+        /**
          * Compute the area using
          * @f$ Area=@frac{\sqrt{3}}{4}side^2 @f$
          *
@@ -73,7 +73,7 @@ class EquilateralTriangle: public Triangle {
          */
         virtual double area() const;
 
-        /*
+        /**
          * Return a new duplicate EquilateralTriangle
          */
         virtual Shape* clone() const;

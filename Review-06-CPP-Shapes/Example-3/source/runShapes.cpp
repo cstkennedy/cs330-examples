@@ -16,12 +16,12 @@ using namespace utilities;
 const string PROGRAM_HEADING[] = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
-}; ///< Program Title
+};  ///< Program Title
 
-const int HEADING_LINES = 2; ///< Number of lines in Program Heading
+const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri; ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri; ///< Convenient shorthand for EquilateralTriangle
+typedef RightTriangle       RhtTri;  ///< Convenient shorthand for RightTriangle
+typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTriangle
 
 /**
  * This program does not accept command line
@@ -83,7 +83,8 @@ int main()
     // List the available shapes
     ShapeFactory::listKnown(cout);
     printHorizontalLine(cout, '-', 38);
-    cout << right << setw(2) << ShapeFactory::numberKnown() << " shapes available." << "\n";
+    cout << right << setw(2) << ShapeFactory::numberKnown()
+                             << " shapes available." << "\n";
 
     cout << "\n";
 

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const std::string D_LINE(48, '-'); // A 48-dash dividing line
+const std::string D_LINE(48, '-');  // A 48-dash dividing line
 
 /**
  * Main Function - Basics of Pointers & References

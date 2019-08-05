@@ -11,7 +11,7 @@ House::House()
 House::House(std::string name)
     :name(name)
 {
-    //this->name = name;
+    // this->name = name;
 }
 
 //------------------------------------------------------------------------------
