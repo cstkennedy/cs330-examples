@@ -11,7 +11,7 @@ import java.lang.StringBuilder;
 public class ShapeFactory
 {
     /**
-     * Name Shape Pair 2-tuple(name, model)
+     * Name Shape Pair 2-tuple(name, model).
      */
     private static class ShapePair
     {
@@ -19,7 +19,7 @@ public class ShapeFactory
         public Shape  _model; ///< Model of the shape to clone
 
         /**
-         * Default Constructor - Used as sentinel
+         * Default Constructor - Used as sentinel.
          */
         public ShapePair()
         {
@@ -28,7 +28,7 @@ public class ShapeFactory
         }
 
         /**
-         * Non-Default Constructor
+         * Non-Default Constructor.
          *
          * @param name the name of a shape
          * @param shape a cloneable shape
@@ -40,7 +40,7 @@ public class ShapeFactory
         }
 
         /**
-         * Print the ShapePair
+         * Print the ShapePair.
          */
         public String toString()
         {
@@ -49,15 +49,15 @@ public class ShapeFactory
     }
 
     private static ShapePair[] _known_shapes = new ShapePair[] {
-        new ShapePair("Triangle" ,             new Triangle()           ),
-        new ShapePair("Right Triangle" ,       new RightTriangle()      ),
-        new ShapePair("Equilateral Triangle" , new EquilateralTriangle()),
-        new ShapePair("Square",                new Square()             ),
-        new ShapePair("Circle",                new Circle()             )
+        new ShapePair("Triangle",             new Triangle()           ),
+        new ShapePair("Right Triangle",       new RightTriangle()      ),
+        new ShapePair("Equilateral Triangle", new EquilateralTriangle()),
+        new ShapePair("Square",               new Square()             ),
+        new ShapePair("Circle",               new Circle()             )
     }; ///< Listing of known shapes
 
     /**
-     *  Create a Shape
+     *  Create a Shape.
      *
      *  @param name the shape to be created
      *
@@ -76,7 +76,7 @@ public class ShapeFactory
     }
 
     /**
-     *  Determine whether a given shape is known
+     *  Determine whether a given shape is known.
      *
      *  @param name the shape for which to query
      */
@@ -92,7 +92,7 @@ public class ShapeFactory
     }
 
     /**
-     *  Print a list of known Shapes
+     *  Print a list of known Shapes.
      */
     public static String listKnown()
     {
@@ -106,7 +106,7 @@ public class ShapeFactory
     }
 
     /**
-     *  Determine the number of known Shapes
+     *  Determine the number of known Shapes.
      *
      *  @return the number of known shapes
      */

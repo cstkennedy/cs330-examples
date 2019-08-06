@@ -49,11 +49,11 @@ public class ShapeFactory
     }
 
     private static ShapePair[] _known_shapes = new ShapePair[] {
-        new ShapePair("Triangle" ,             new Triangle()           ),
-        new ShapePair("Right Triangle" ,       new RightTriangle()      ),
-        new ShapePair("Equilateral Triangle" , new EquilateralTriangle()),
-        new ShapePair("Square",                new Square()             ),
-        new ShapePair("Circle",                new Circle()             )
+        new ShapePair("Triangle",             new Triangle()           ),
+        new ShapePair("Right Triangle",       new RightTriangle()      ),
+        new ShapePair("Equilateral Triangle", new EquilateralTriangle()),
+        new ShapePair("Square",               new Square()             ),
+        new ShapePair("Circle",               new Circle()             )
     }; ///< Listing of known shapes
 
     /**
