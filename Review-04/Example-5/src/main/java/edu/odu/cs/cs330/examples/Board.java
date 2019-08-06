@@ -142,6 +142,12 @@ public class Board
     }
 
     @Override
+    public int hashCode()
+    {
+        return theBoard.hashCode();
+    }
+
+    @Override
     public boolean equals(Object rhsObj)
     {
         if (!(rhsObj instanceof Board)) {
