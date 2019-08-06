@@ -92,7 +92,7 @@ public class BruteForce implements Iterable<Integer> {
     }
 
     /**
-     * Return an iterator to the first known prime number
+     * Return an iterator to the first known prime number.
      *
      * @return Iterator over all Integer prime numbers
      */
