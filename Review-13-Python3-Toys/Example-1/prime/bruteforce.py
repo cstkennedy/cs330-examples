@@ -31,13 +31,11 @@ def generate_primes(to_generate):
 
                 # Check for divisibility by the next element--i.e.,
                 # if nextPrime %p == 0 for any p, discard nextPrime
-
                 # Is the number prime?
                 prime = (next_prime % previous_prime != 0)
 
                 if not prime:
                     break
-            prime = any()            
 
         known_primes.append(next_prime)
 
