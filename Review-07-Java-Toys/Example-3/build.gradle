@@ -2,14 +2,17 @@ buildscript {
     repositories {
         jcenter()
     }
-    // dependencies {
-        // classpath 'org.ysb33r.gradle:doxygen:0.2'
-    // }
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-//apply plugin: 'org.ysb33r.doxygen'
+plugins {
+    id "java"
+    id "eclipse"
+
+    id "com.github.spotbugs" version "2.0.0"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -43,14 +46,39 @@ test {
     }
 }
 
-/*
-doxygen {
-    generate_html true
-
-    template 'src/documentation.config'
-
-    source new File(projectDir,'src/main/java')
-    //source new File(projectDir,'src/test/java')
-    outputDir new File(buildDir,'docs')
+jacoco {
+    toolVersion = "0.8.4"
 }
-*/
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
