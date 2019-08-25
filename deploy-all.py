@@ -20,25 +20,32 @@ def prepare_example_set(example_set: str):
     """
 
     for example_dir in glob.iglob(f"{example_set}/Example*"):
-
         if os.path.isfile(f"{example_dir}/makefile"):
-            print(f"{example_dir} -> clean")
+            clean_col = "clean"
+            example_type = "Makefile"
+
             try:
                 subprocess.run(f"make -C {example_dir} clean".split(),
                                stdout=subprocess.DEVNULL,
                                stderr=subprocess.DEVNULL)
 
             except subprocess.CalledProcessError as err:
-                print(f"{example_dir} -> Already clean")
+                clean_col = "Already clean"
 
-            print(f"{example_dir} -> docs")
+            doc_col = "Generated"
             subprocess.run(f"make docs".split(),
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL,
                            cwd=example_dir)
 
+
+
         else:
-            print(f"{example_dir} -> No Makefile found.")
+            example_type = "-?-"
+            clean_col = "-?-"
+            doc_col = "-?-"
+
+        print(f"|{example_dir:<50}|{example_type:^16}|{clean_col:^10}|{doc_col:^10}|")
 
 
 def main():
