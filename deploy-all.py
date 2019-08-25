@@ -27,7 +27,8 @@ def prepare_example_set(example_set: str):
             try:
                 subprocess.run(f"make -C {example_dir} clean".split(),
                                stdout=subprocess.DEVNULL,
-                               stderr=subprocess.DEVNULL)
+                               stderr=subprocess.DEVNULL,
+                               cwd=example_dir)
 
             except subprocess.CalledProcessError as err:
                 clean_col = "Already clean"
@@ -68,7 +69,7 @@ def main():
 
         print(zip_name, "->", review_dir)
 
-        with zipfile.ZipFile(zip_name, "w") as review_zip:
+        with zipfile.ZipFile(zip_name, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as review_zip:
             for root_dir, _, files in os.walk(review_dir):
                 for a_file in files:
                     review_zip.write(os.path.join(root_dir, a_file))
