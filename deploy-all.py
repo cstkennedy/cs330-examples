@@ -7,6 +7,7 @@ import subprocess
 import argparse
 
 from concurrent.futures import ProcessPoolExecutor
+from typing import List
 
 
 def prepare_example_set(example_set: str):
@@ -77,6 +78,33 @@ def prepare_example(example_dir: str):
     print(f"|{example_dir:<50}|{example_type:^16}|{clean_col:^10}|{doc_col:^10}|")
 
 
+def prepare_zip_files(review_dirs: List[str], build_dir: str):
+    """
+    Generate one zip file for each specified top-level directory.
+
+    # Args
+        review_dirs: top-level review directory
+
+        build_dir: directory in which to generate zip files
+    """
+
+    if not os.path.isdir(build_dir):
+        os.mkdir(build_dir)
+
+    for review_dir in review_dirs:
+        zip_name = build_dir + "/" + review_dir.split("/")[-1] + ".zip"
+
+        print(zip_name, "->", review_dir)
+
+        with zipfile.ZipFile(zip_name, "w",
+                             compression=zipfile.ZIP_DEFLATED,
+                             compresslevel=9) as review_zip:
+
+            for root_dir, _, files in os.walk(review_dir):
+                for a_file in files:
+                    review_zip.write(os.path.join(root_dir, a_file))
+
+
 def main():
     parser = argparse.ArgumentParser(description="Perform Review Example deploy operations.")
 
@@ -99,6 +127,12 @@ def main():
                         default="example",
                         help="How to queue tasks")
 
+    parser.add_argument("--no-zip",
+                        dest="no_zip",
+                        action="store_true",
+                        default=False,
+                        help="Skip Generation of zip files")
+
     parser.add_argument("--all-dirs",
                         dest="all_dirs",
                         action="store_true",
@@ -118,7 +152,9 @@ def main():
         example_dirs = glob.glob(f"{base_review_dir}/Review-*/Example*")
 
     else:
-        review_dirs = [d for d in glob.glob(f"{base_review_dir}/Review-*") if os.path.isdir(d)]
+        review_dirs = [d for d in glob.glob(f"{base_review_dir}/Review-*")
+                       if os.path.isdir(d)]
+
         example_dirs = glob.glob(f"{base_review_dir}/*/Example*")
 
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
@@ -129,18 +165,8 @@ def main():
             for example_dir in example_dirs:
                 executor.submit(prepare_example, example_dir)
 
-    for review_dir in review_dirs:
-        zip_name = build_dir + "/" + review_dir.split("/")[-1] + ".zip"
-
-        print(zip_name, "->", review_dir)
-
-        with zipfile.ZipFile(zip_name, "w",
-                             compression=zipfile.ZIP_DEFLATED,
-                             compresslevel=9) as review_zip:
-
-            for root_dir, _, files in os.walk(review_dir):
-                for a_file in files:
-                    review_zip.write(os.path.join(root_dir, a_file))
+    if not args["no_zip"]:
+        prepare_zip_files(review_dirs, build_dir)
 
 
 if __name__ == "__main__":
