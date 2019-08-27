@@ -1,13 +1,11 @@
 #! /usr/bin/env python
 
-import sys
 import os
 import zipfile
 import glob
 import subprocess
 import argparse
 
-from multiprocessing import Pool
 from concurrent.futures import ProcessPoolExecutor
 
 
@@ -21,50 +19,43 @@ def prepare_example_set(example_set: str):
     """
 
     for example_dir in glob.iglob(f"{example_set}/Example*"):
-        if os.path.isfile(f"{example_dir}/makefile"):
-            clean_col = "clean"
-            example_type = "Makefile"
-
-            try:
-                subprocess.run(f"make -C {example_dir} clean".split(),
-                               stdout=subprocess.DEVNULL,
-                               stderr=subprocess.DEVNULL,
-                               cwd=example_dir)
-
-            except subprocess.CalledProcessError as err:
-                clean_col = "Already clean"
-
-            doc_col = "Generated"
-            subprocess.run(f"make docs".split(),
-                           stdout=subprocess.DEVNULL,
-                           stderr=subprocess.DEVNULL,
-                           cwd=example_dir)
-
-
-
-        else:
-            example_type = "-?-"
-            clean_col = "-?-"
-            doc_col = "-?-"
-
-        print(f"|{example_dir:<50}|{example_type:^16}|{clean_col:^10}|{doc_col:^10}|")
+        prepare_example(example_dir)
 
 
 def prepare_example(example_dir: str):
     """
-    Prepare an Example directory by running cleanup operations, then documentation
-    generation.
+    Prepare an Example directory by running cleanup operations, then
+    documentation generation.
 
     # Args
         example_set: directory containing one or more examples
     """
 
-    if os.path.isfile(f"{example_dir}/makefile"):
+    if os.path.isfile(f"{example_dir}/gradlew"):
+        clean_col = "clean"
+        example_type = "Gradle"
+
+        try:
+            subprocess.run(f"./gradlew --no-daemon clean".split(),
+                           stdout=subprocess.DEVNULL,
+                           stderr=subprocess.DEVNULL,
+                           cwd=example_dir)
+
+        except subprocess.CalledProcessError as err:
+            clean_col = "Already clean"
+
+        doc_col = "Javadoc"
+        subprocess.run(f"./gradlew --no-daemon  javadoc".split(),
+                       stdout=subprocess.DEVNULL,
+                       stderr=subprocess.DEVNULL,
+                       cwd=example_dir)
+
+    elif os.path.isfile(f"{example_dir}/makefile"):
         clean_col = "clean"
         example_type = "Makefile"
 
         try:
-            subprocess.run(f"make -C {example_dir} clean".split(),
+            subprocess.run(f"make clean".split(),
                            stdout=subprocess.DEVNULL,
                            stderr=subprocess.DEVNULL,
                            cwd=example_dir)
@@ -86,7 +77,6 @@ def prepare_example(example_dir: str):
     print(f"|{example_dir:<50}|{example_type:^16}|{clean_col:^10}|{doc_col:^10}|")
 
 
-
 def main():
     parser = argparse.ArgumentParser(description="Perform Review Example deploy operations.")
 
@@ -101,28 +91,42 @@ def main():
                         type=str,
                         help="Base Review directory")
 
+    parser.add_argument("--build-type",
+                        dest="build_type",
+                        nargs=1,
+                        type=str,
+                        choices=["review", "example"],
+                        default="example",
+                        help="How to queue tasks")
+
     args = vars(parser.parse_args())
 
     base_review_dir = args["review_dir"][0]
     num_workers = args["num_workers"]
+    build_type = args["build_type"]
+
     build_dir = f"{base_review_dir}/build"
 
     review_dirs = glob.glob(f"{base_review_dir}/Review-*")
     example_dirs = glob.glob(f"{base_review_dir}/Review-*/Example*")
 
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
-        #  for review_dir in review_dirs:
-            #  executor.submit(prepare_example_set, review_dir)
-
-        for example_dir in example_dirs:
-            executor.submit(prepare_example, example_dir)
+        if build_type == "review":
+            for review_dir in review_dirs:
+                executor.submit(prepare_example_set, review_dir)
+        else:
+            for example_dir in example_dirs:
+                executor.submit(prepare_example, example_dir)
 
     for review_dir in review_dirs:
         zip_name = build_dir + "/" + review_dir.split("/")[-1] + ".zip"
 
         print(zip_name, "->", review_dir)
 
-        with zipfile.ZipFile(zip_name, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as review_zip:
+        with zipfile.ZipFile(zip_name, "w",
+                             compression=zipfile.ZIP_DEFLATED,
+                             compresslevel=9) as review_zip:
+
             for root_dir, _, files in os.walk(review_dir):
                 for a_file in files:
                     review_zip.write(os.path.join(root_dir, a_file))
@@ -130,5 +134,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
