@@ -127,6 +127,12 @@ def main():
                         default="example",
                         help="How to queue tasks")
 
+    parser.add_argument("--no-deploy",
+                        dest="no_deploy",
+                        action="store_true",
+                        default=False,
+                        help="Skip pre-deploy cleanup and doc generation")
+
     parser.add_argument("--no-zip",
                         dest="no_zip",
                         action="store_true",
@@ -139,15 +145,11 @@ def main():
                         default=False,
                         help="Examine all top-level directories")
 
-    args = vars(parser.parse_args())
-
-    base_review_dir = args["review_dir"][0]
-    num_workers = args["num_workers"]
-    build_type = args["build_type"]
-
+    args = parser.parse_args()
+    base_review_dir = args.review_dir[0]
     build_dir = f"{base_review_dir}/build"
 
-    if not args["all_dirs"]:
+    if not args.all_dirs:
         review_dirs = glob.glob(f"{base_review_dir}/Review-*")
         example_dirs = glob.glob(f"{base_review_dir}/Review-*/Example*")
 
@@ -157,15 +159,16 @@ def main():
 
         example_dirs = glob.glob(f"{base_review_dir}/*/Example*")
 
-    with ProcessPoolExecutor(max_workers=num_workers) as executor:
-        if build_type == "review":
-            for review_dir in review_dirs:
-                executor.submit(prepare_example_set, review_dir)
-        else:
-            for example_dir in example_dirs:
-                executor.submit(prepare_example, example_dir)
+    if not args.no_deploy:
+        with ProcessPoolExecutor(max_workers=args.num_workers) as executor:
+            if args.build_type == "review":
+                for review_dir in review_dirs:
+                    executor.submit(prepare_example_set, review_dir)
+            else:
+                for example_dir in example_dirs:
+                    executor.submit(prepare_example, example_dir)
 
-    if not args["no_zip"]:
+    if not args.no_zip:
         prepare_zip_files(review_dirs, build_dir)
 
 
