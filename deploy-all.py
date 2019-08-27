@@ -99,6 +99,12 @@ def main():
                         default="example",
                         help="How to queue tasks")
 
+    parser.add_argument("--all-dirs",
+                        dest="all_dirs",
+                        action="store_true",
+                        default=False,
+                        help="Examine all top-level directories")
+
     args = vars(parser.parse_args())
 
     base_review_dir = args["review_dir"][0]
@@ -107,8 +113,13 @@ def main():
 
     build_dir = f"{base_review_dir}/build"
 
-    review_dirs = glob.glob(f"{base_review_dir}/Review-*")
-    example_dirs = glob.glob(f"{base_review_dir}/Review-*/Example*")
+    if not args["all_dirs"]:
+        review_dirs = glob.glob(f"{base_review_dir}/Review-*")
+        example_dirs = glob.glob(f"{base_review_dir}/Review-*/Example*")
+
+    else:
+        review_dirs = [d for d in glob.glob(f"{base_review_dir}/Review-*") if os.path.isdir(d)]
+        example_dirs = glob.glob(f"{base_review_dir}/*/Example*")
 
     with ProcessPoolExecutor(max_workers=num_workers) as executor:
         if build_type == "review":
