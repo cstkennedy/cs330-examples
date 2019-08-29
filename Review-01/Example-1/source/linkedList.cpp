@@ -92,17 +92,17 @@ void LinkedList::appendNode( int to_add )
     new_node = new Node( to_add );
 
     // Handle the case where the first node is added
-    if( this->head == nullptr){
+    if(this->head == nullptr){
         // this->head = this->tail = new_node;
         // Note the above line is it any different
         // from the next two lines?
         this->head = new_node;
         this->tail = new_node;
     }
-    else{
+    else {
         // Add the new node to the this
         // What happens on the following two lines
-        (this->tail )->next = new_node;
+        (this->tail)->next = new_node;
         this->tail = new_node;
     }
 
