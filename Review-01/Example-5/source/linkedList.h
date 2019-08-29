@@ -11,7 +11,8 @@ class LinkedList {
             T     data;
             Node* next;
 
-            Node(T d)
+
+            Node(T d=0)
             :data(d),
              next(nullptr)
             {
@@ -73,12 +74,12 @@ class LinkedList {
                     return *this;
                 }
 
-                bool operator== (const Iterator &rhs) const
+                bool operator==(const Iterator &rhs) const
                 {
                     return this->pseudoPointer == rhs.pseudoPointer;
                 }
 
-                bool operator!= (const Iterator &rhs) const
+                bool operator!=(const Iterator &rhs) const
                 {
                     return this->pseudoPointer != rhs.pseudoPointer;
                 }
@@ -115,10 +116,9 @@ class LinkedList {
         }
 
         LinkedList(const LinkedList& src)
-            :head(nullptr),
-             tail(nullptr),
-             currentSize(0)
+            :LinkedList()
         {
+            // Option 1
             /*
             Node* it = src.head;
 
@@ -127,9 +127,32 @@ class LinkedList {
                 it = it->next;
             }
             */
+
+            // Option 2
             for (const T& src_data : src) {
                 this->push_back(src_data);
             }
+
+            // Option 3 - Segfaults in ~LinkedList on atria after 8192 nodes
+            /*
+            this->currentSize = src.currentSize;
+
+            Node* temp_pool = new Node[this->currentSize]();
+            int last_idx = this->currentSize - 1;
+
+            this->head = &temp_pool[0];
+            this->tail = &temp_pool[last_idx];
+
+            Node* srcIt = src.head;
+            for (int pos = 0; pos < last_idx; pos++) {
+                temp_pool[pos].next = &temp_pool[pos + 1];
+                temp_pool[pos].data = srcIt->data;
+
+                srcIt = srcIt->next;
+            }
+
+            tail->data = srcIt->data;
+            */
         }
 
         LinkedList(LinkedList&& src)
@@ -148,7 +171,6 @@ class LinkedList {
         {
             // Deallocate the Linked List
             Node* it = this->head;
-
             while (it != nullptr) {
                 Node* prev = it;
 

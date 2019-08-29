@@ -1,0 +1,10 @@
+time ./ll2 10 8192 > /dev/null
+In Move Copy
+./ll2 10 8192 > /dev/null   0.02s  user 0.00s system 76% cpu 0.031 total
+avg shared (code):         0 KB
+avg unshared (data/stack): 0 KB
+total (sum):               0 KB
+max memory:                14 MB
+page faults from disk:     0
+other page faults:         943
+
