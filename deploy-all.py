@@ -32,6 +32,10 @@ def prepare_example(example_dir: str):
         example_set: directory containing one or more examples
     """
 
+    example_type = "-?-"
+    clean_col = "-?-"
+    doc_col = "-?-"
+
     if os.path.isfile(f"{example_dir}/gradlew"):
         clean_col = "clean"
         example_type = "Gradle"
@@ -71,11 +75,30 @@ def prepare_example(example_dir: str):
                        cwd=example_dir)
 
     else:
-        example_type = "-?-"
-        clean_col = "-?-"
-        doc_col = "-?-"
+        for src_dir in ["source", "src"]:
+            if os.path.isfile(f"{example_dir}/{src_dir}/makefile"):
+                clean_col = "clean"
+                example_type = f"{src_dir}/Makefile"
+                working_dir=f"{example_dir}/{src_dir}"
 
-    print(f"|{example_dir:<50}|{example_type:^16}|{clean_col:^10}|{doc_col:^10}|")
+                try:
+                    subprocess.run(f"make clean".split(),
+                                   stdout=subprocess.DEVNULL,
+                                   stderr=subprocess.DEVNULL,
+                                   cwd=working_dir)
+
+                except subprocess.CalledProcessError as err:
+                    clean_col = "Already clean"
+
+        for doc_config in ["documentation.config", "Doxyfile"]:
+            if os.path.isfile(f"{example_dir}/{doc_config}"):
+                doc_col = "Doxygen"
+                subprocess.run(f"doxygen {doc_config}".split(),
+                               stdout=subprocess.DEVNULL,
+                               stderr=subprocess.DEVNULL,
+                               cwd=example_dir)
+
+    print(f"|{example_dir:<42}|{example_type:^18}|{clean_col:^10}|{doc_col:^10}|")
 
 
 def prepare_zip_files(review_dirs: List[str], build_dir: str):
