@@ -1,29 +1,20 @@
 buildscript {
     repositories {
         jcenter()
-
-        // Add SpotBugs required repo
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        // Add SpotBugs
-        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.4"
     }
 }
 
-apply plugin: "java"
-apply plugin: "eclipse"
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
 
-apply plugin: "jacoco"
-
-apply plugin: "findbugs"
-apply plugin: "pmd"
-apply plugin: "com.github.spotbugs"
-
-apply plugin: "checkstyle"
-
+    id "checkstyle"
+    id "com.github.spotbugs" version "2.0.0"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -47,40 +38,38 @@ jar {
     }
 }
 
+run {
+    main = "PlayTicTacToe"
+}
+
 test {
     reports {
         html.enabled = true
-    }           
+    }
     ignoreFailures = true
 
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
-
-    jacoco {
-        append = false
-    }
 }
 
 javadoc {
-    failOnError false    
+    failOnError false
 }
 
+task deploy(dependsOn: [jar, javadoc, check]) {
 
-/**
- * Run code style/error checks
- */
-findbugsMain {
-    ignoreFailures true
-    reports {
-        xml.enabled false
-        html.enabled true
-    }
 }
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
 
 // SpotBugs
 spotbugsMain {
     ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
     reports {
        xml.enabled = false
        html.enabled = true
@@ -89,32 +78,6 @@ spotbugsMain {
 
 spotbugsTest.enabled = false
 // End SpotBugs config
-
-pmd {
-    ignoreFailures = true
-    ruleSets = [
-        "java-basic",
-        "java-braces",
-        //"java-clone",
-        "java-codesize",
-        //"java-comments",
-        //"java-controversial",
-        //"java-coupling",
-        //"java-design",
-        "java-empty",
-        //"java-finalizers",
-        "java-imports",
-        //"java-junit",
-        "java-naming",
-        //"java-optimizations",
-        "java-strictexception",
-        "java-strings",
-        "java-sunsecure",
-        "java-typeresolution",
-        "java-unnecessary",
-        "java-unusedcode"
-    ]
-}
 
 jacoco {
     toolVersion = "0.8.0"
@@ -127,7 +90,6 @@ jacocoTestReport {
         csv.enabled true
     }
 }
-
 
 // Check Style Config
 checkstyle {
@@ -142,3 +104,16 @@ tasks.withType(Checkstyle) {
 }
 checkstyleTest.enabled = false
 // End Checkstyle config
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+
