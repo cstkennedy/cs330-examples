@@ -1,25 +1,20 @@
 buildscript {
     repositories {
         jcenter()
-
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-
-    dependencies {
-        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:2.0.0"
     }
 }
 
-apply plugin: "java"
-apply plugin: "eclipse"
-apply plugin: "jacoco"
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
 
-apply plugin: "pmd"
-apply plugin: "com.github.spotbugs"
-
-apply plugin: "checkstyle"
+    id "checkstyle"
+    id "com.github.spotbugs" version "2.0.0"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -27,7 +22,6 @@ targetCompatibility = 1.8
 repositories {
     jcenter()
 }
-
 
 dependencies {
     testCompile "junit:junit:4.12"
@@ -59,15 +53,13 @@ javadoc {
     failOnError false
 }
 
-
-
 task deploy(dependsOn: [
             javadoc]){
 }
 
-/**
- * Run code style/error checks
- */
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
 
 // SpotBugs
 spotbugsMain {
@@ -95,32 +87,6 @@ jacocoTestReport {
     }
 }
 
-pmd {
-    ignoreFailures = true
-    ruleSets = [
-        "java-basic",
-        "java-braces",
-        //"java-clone",
-        "java-codesize",
-        //"java-comments",
-        //"java-controversial",
-        //"java-coupling",
-        //"java-design",
-        "java-empty",
-        //"java-finalizers",
-        "java-imports",
-        //"java-junit",
-        "java-naming",
-        //"java-optimizations",
-        "java-strictexception",
-        "java-strings",
-        "java-sunsecure",
-        "java-typeresolution",
-        "java-unnecessary",
-        "java-unusedcode"
-    ]
-}
-
 // Check Style Config
 checkstyle {
     ignoreFailures = true
@@ -134,3 +100,16 @@ tasks.withType(Checkstyle) {
 }
 checkstyleTest.enabled = false
 // End Checkstyle config
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+
