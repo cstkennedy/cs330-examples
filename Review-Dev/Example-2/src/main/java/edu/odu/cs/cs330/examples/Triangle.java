@@ -73,7 +73,7 @@ public class Triangle implements Cloneable {
     /**
      * Compute the normal vector
      *
-     * @return an x,y,z triple representing the centroid
+     * @return an x,y,z triple representing the normal
      */
     Vector3d normal()
     {
@@ -89,7 +89,7 @@ public class Triangle implements Cloneable {
 
         Vector3d normalVector = new Vector3d();
 
-        normalVector.cross(sideBA, sideBA);
+        normalVector.cross(sideBA, sideCA);
 
         return normalVector;
     }
@@ -157,7 +157,11 @@ public class Triangle implements Cloneable {
      */
     double perimeter()
     {
-        return -1;
+        double[] sideLengths = this.computeSides();
+
+        return sideLengths[0]
+             + sideLengths[1]
+             + sideLengths[2];
     }
 
     /**

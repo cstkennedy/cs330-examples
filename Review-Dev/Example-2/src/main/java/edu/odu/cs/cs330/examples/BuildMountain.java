@@ -157,12 +157,18 @@ public class BuildMountain {
      */
     static boolean canBeSplitMore(Triangle aTri)
     {
-        if (aTri.smallestSide() > 1) {
-            return true;
+        System.out.println("Smallest -> " + aTri.smallestSide());
+        if (aTri.smallestSide() <= 1.0) {
+            return false;
+        }
+
+        System.out.println("Perimeter -> " + aTri.perimeter());
+        if (aTri.perimeter() <= 2) {
+             return false;
         }
 
         // Placeholder
-        return false;
+        return true;
     }
 
     /**
