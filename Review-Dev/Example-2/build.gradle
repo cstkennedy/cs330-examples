@@ -2,23 +2,21 @@ buildscript {
     repositories {
         jcenter()
     }
-
-    dependencies {
-        classpath "org.ysb33r.gradle:doxygen:0.2"
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.3'
-    }
 }
 
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
 
-apply plugin: 'com.github.johnrengelman.shadow'
+    id "checkstyle"
+    id "com.github.spotbugs" version "2.0.0"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
 
-apply plugin: "java"
-apply plugin: "eclipse"
-
-apply plugin: "findbugs"
-apply plugin: "pmd"
-
-apply plugin: "checkstyle"
+    id "com.github.johnrengelman.shadow" version "5.1.0"
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -29,13 +27,10 @@ repositories {
 
 dependencies {
     compile group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
+    testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
 }
 
-
-
-/**
- * Build cmdline jar
- */
 jar {
     baseName = "BuildMountain"
 
@@ -46,7 +41,9 @@ jar {
     }
 }
 
-shadowJar {    
+mainClassName = "edu.odu.cs.cs330.examples.BuildMountain"
+
+shadowJar {
     configurations = [project.configurations.compile]
 
     baseName = "BuildMountain"
@@ -63,42 +60,49 @@ task deploy(dependsOn: [
             javadoc]){
 }
 
-/**
- * Run code style/error checks
- */
-findbugsMain {
-    ignoreFailures true
+test {
     reports {
-        xml.enabled false
-        html.enabled true
+        html.enabled = true
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 }
 
+javadoc {
+    failOnError false
+}
 
-pmd {
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+
+// SpotBugs
+spotbugsMain {
     ignoreFailures = true
-    ruleSets = [
-        "java-basic",
-        "java-braces",
-        //"java-clone",
-        "java-codesize",
-        //"java-comments",
-        //"java-controversial",
-        //"java-coupling",
-        //"java-design",
-        "java-empty",
-        //"java-finalizers",
-        "java-imports",
-        //"java-junit",
-        "java-naming",
-        //"java-optimizations",
-        "java-strictexception",
-        "java-strings",
-        "java-sunsecure",
-        "java-typeresolution",
-        "java-unnecessary",
-        "java-unusedcode"
-    ]
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+jacoco {
+    toolVersion = "0.8.0"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
 }
 
 // Check Style Config
@@ -114,3 +118,16 @@ tasks.withType(Checkstyle) {
 }
 checkstyleTest.enabled = false
 // End Checkstyle config
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+

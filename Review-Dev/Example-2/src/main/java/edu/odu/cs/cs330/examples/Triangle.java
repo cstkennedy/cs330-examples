@@ -41,6 +41,14 @@ public class Triangle implements Cloneable {
     }
 
     /**
+     * Return the three vertices v0, v1, v2 in order.
+     */
+    final Vector3d[] getVertices()
+    {
+        return vertices;
+    }
+
+    /**
      * Compute the centroid
      *
      * @return an x,y,z triple representing the centroid
@@ -89,9 +97,11 @@ public class Triangle implements Cloneable {
     /**
      * Split this Triangle at the centroid
      * and after shifting the centroid by the
-     * normal
+     * normal.
+     *
+     * @TODO Replace hardcoded 0.1 with constant or arg.
      */
-    List<Triangle> split()
+    List<Triangle> shiftCentroidAndSplit()
     {
         List<Triangle> resultTris = new ArrayList<Triangle>();
 
@@ -99,10 +109,10 @@ public class Triangle implements Cloneable {
         Vector3d pntB = vertices[1];
         Vector3d pntC = vertices[2];
 
-        Vector3d pntCentroid = (Vector3d) this.centroid().clone();        
+        Vector3d pntCentroid = (Vector3d) this.centroid().clone();
 
-        Vector3d shiftedCentroid = new Vector3d();
-        shiftedCentroid.scaleAdd(0.1, this.normal(), pntCentroid);
+        // Vector3d shiftedCentroid = new Vector3d();
+        // shiftedCentroid.scaleAdd(0.1, this.normal(), pntCentroid);
 
         resultTris.add(new Triangle(pntA, pntC, pntCentroid));
         resultTris.add(new Triangle(pntA, pntCentroid, pntB));
@@ -111,6 +121,54 @@ public class Triangle implements Cloneable {
         return resultTris;
     }
 
+    private double computeSide(Vector3d v1, Vector3d v2)
+    {
+        double x = v2.x - v1.x;
+        double y = v2.y - v1.y;
+        double z = v2.z - v1.z;
+
+        return Math.sqrt(Math.pow(x, 2.0)
+                       + Math.pow(y, 2.0)
+                       + Math.pow(z, 2.0));
+    }
+
+    public double[] computeSides()
+    {
+        return new double[] {
+            computeSide(vertices[0], vertices[1]),
+            computeSide(vertices[1], vertices[2]),
+            computeSide(vertices[2], vertices[0])
+        };
+    }
+
+    public double smallestSide()
+    {
+        double[] sideLengths = this.computeSides();
+
+        return Math.min(Math.min(sideLengths[0],
+                                 sideLengths[1]),
+                        sideLengths[2]);
+    }
+
+    /**
+     * Compute perimeter using vector arithmetic.
+     *
+     * @TODO implement
+     */
+    double perimeter()
+    {
+        return -1;
+    }
+
+    /**
+     * Use the semi-perimeter method to compute area.
+     *
+     * @TODO implement
+     */
+    double area()
+    {
+        return -1;
+    }
 
     /**
      * Create a deep copy
