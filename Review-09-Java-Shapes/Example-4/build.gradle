@@ -1,16 +1,22 @@
 buildscript {
-  repositories {
-    jcenter()
-  }
-  dependencies {
-    classpath 'org.ysb33r.gradle:doxygen:0.2'
-  }
+    repositories {
+        jcenter()
+    }
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'eclipse'
-apply plugin: 'org.ysb33r.doxygen'
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
+
+    id "checkstyle"
+    id "com.github.spotbugs" version "2.0.0"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+
+    id "org.ysb33r.doxygen" version "0.5"
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -21,14 +27,15 @@ repositories {
 
 dependencies {
     testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
 }
 
 jar {
-    baseName = 'RunShapes'
+    baseName = "RunShapes"
 
     manifest {
         attributes(
-          'Main-Class': 'RunShapes'
+            "Main-Class": "RunShapes"
         )
     }
 }
@@ -44,16 +51,73 @@ test {
     }
 }
 
-doxygen {
-    generate_html true
-
-    template 'documentation.config'
-
-    source new File(projectDir,'src/main/java')
-    //source new File(projectDir,'src/test/java')
-    outputDir new File(buildDir,'docs')
-}
-
 javadoc {
     failOnError false
 }
+
+doxygen {
+    generate_html true
+
+    template "documentation.config"
+
+    source new File(projectDir, "src/main/java")
+    //source new File(projectDir, "src/test/java")
+    outputDir new File(buildDir, "docs")
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+jacoco {
+    toolVersion = "0.8.0"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+// Check Style Config
+checkstyle {
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+// End Checkstyle config
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+
