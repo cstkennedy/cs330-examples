@@ -162,7 +162,7 @@ class LinkedList {
         {
             // Node* newNode = new Node(toAdd);
             Node* newNode = memPool.getNext();
-            newNode->data = toAdd; //Mistake -> forgot to assign toAdd 
+            newNode->data = toAdd; // Mistake -> forgot to assign toAdd
 
             // If adding the first Node
             if (head == nullptr) {

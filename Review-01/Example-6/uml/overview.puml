@@ -1,0 +1,67 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+class Node <<template>> {
+    + data: T
+    + next: Node*
+}
+
+class LinkedList <<template>> {
+    - head: Node*
+    - tail: Node*
+    - currentSize: int
+
+    + push_back(date: T) -> void
+    + size() -> int
+
+    + begin() -> iterator
+    + end() -> iterator
+    + begin() -> const_iterator
+    + end() -> const_iterator
+}
+
+class NaivePool <<template>> {
+    - thePools: T[][]
+    - numPools: int
+    - blocksPerPool: int
+    - nextAvailBlock: pair<int, int>
+
+    + NaivePool(bSize: int = 8, preAlloc: int = 1)
+    + ~NaivePool()
+    + getNext() -> T*
+    - reserveNext()
+}
+
+class LinkedList::Iterator {
+
+}
+
+package std {
+    Interface Iterator {
+
+    }
+
+    Interface Container {
+
+    }
+
+    Interface Allocator {
+
+    }
+}
+
+NaivePool -[#blue]> Node: "handles allocation of"
+NaivePool -[#blue]> LinkedList: "allocates Nodes for"
+LinkedList o-Node
+
+LinkedList::Iterator --> Node
+LinkedList::Iterator <-- LinkedList: "provides"
+
+LinkedList::Iterator .[#green].|> Iterator: "partially"
+LinkedList .[#green].|> Container: "partially"
+
+NaivePool .[#green].|> Allocator: "fakes"
+
+@enduml
+

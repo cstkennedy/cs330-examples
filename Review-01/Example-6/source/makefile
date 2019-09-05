@@ -11,7 +11,7 @@ MAINPROG=ll2
 
 SOURCES:=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-FLAGS=-std=c++17 -fsanitize=leak,address -Wall -Wpedantic -fuse-ld=gold
+FLAGS=-std=c++17 -fsanitize=leak,address -Wall -Wpedantic -fuse-ld=gold -DPOOLDEBUG
 
 all: $(SOURCES) $(MAINPROG)
 
