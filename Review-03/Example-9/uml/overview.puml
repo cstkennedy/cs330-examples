@@ -1,0 +1,106 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+
+package "Data Structure" {
+    class Node << (T, #00AAFF) Template >> {
+        + data: T
+        + next: Node*
+    }
+
+    class LinkedList << (T, #00AAFF) Template >> {
+        - head: Node*
+        - tail: Node*
+        - currentSize: int
+
+        + push_back(date: T) -> void
+        + size() -> int
+
+        + begin() -> iterator
+        + end() -> iterator
+        + begin() -> const_iterator
+        + end() -> const_iterator
+    }
+
+    class NaivePool << (T, #00AAFF) Template >>  {
+        - thePools: T[][]
+        - numPools: int
+        - blocksPerPool: int
+        - nextAvailBlock: pair<int, int>
+
+        + NaivePool(bSize: int = 8, preAlloc: int = 1)
+        + ~NaivePool()
+        + getNext() -> T*
+        - reserveNext()
+    }
+
+    class LinkedList::Iterator << (T, #00AAFF) Template >>  {
+
+    }
+}
+
+package "The Actual Problem" {
+    class Room::Flooring {
+        + type: String
+        + unitCost: Cost
+
+        + Flooring(n: String = "Generic", c: Cost = 1.00)
+    }
+
+    class Room::DimensionSet {
+        - length: Dimension
+        - width: Dimension
+
+        + DimensionSet(l: Dimension = 1, w: Dimension = 1)
+        + setLength(v: Dimension)
+        + getLength() -> Dimension
+        + setWidth(v: Dimension)
+        + getWidth() -> Dimension
+    }
+
+    class Room {
+
+    }
+
+    class House {
+
+    }
+}
+
+package std {
+    Interface Iterator {
+
+    }
+
+    Interface Container {
+
+    }
+
+    Interface Allocator {
+
+    }
+}
+
+NaivePool -[#blue]> Node: "handles allocation of"
+NaivePool -[#blue]> LinkedList: "allocates Nodes for"
+LinkedList o-Node
+
+LinkedList::Iterator --> Node
+LinkedList::Iterator <-- LinkedList: "provides"
+
+LinkedList::Iterator .[#green].|> Iterator: "partially"
+LinkedList .[#green].|> Container: "partially"
+
+NaivePool .[#green].|> Allocator: "fakes"
+
+House -[#DarkSlateGrey]--> "container" LinkedList
+House o-- Room
+
+House .[#green].|> Container: "partially"
+
+Room o-- "flooring" Room::Flooring
+Room o-- "dimensions" Room::DimensionSet 
+
+@enduml
+
