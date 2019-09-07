@@ -1,7 +1,9 @@
 extern crate room_renovation;
 extern crate ordered_float;
+extern crate itertools;
 
 use ordered_float::OrderedFloat;
+use itertools::Itertools;
 
 use std::io::BufReader;
 use std::fs::File;
@@ -51,10 +53,20 @@ fn main() {
     vector<double> costs(duplicateHouse.size());
     std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
                    discountFlooring);
+    */
+    let costs: Vec<f64> = duplicate_house.rooms.iter()
+                            .map(|r| discount_flooring(r))
+                            .collect();
 
+    /*
     std::copy(costs.begin(), costs.end(),
               std::ostream_iterator<double>(std::cout, "\n"));
+    */
+    for room_cost in costs.iter() {
+        println!("{:.2}", room_cost)
+    }
 
+    /*
     // Print the sum, min, max -> D.R.Y!
     cout << "Total: "
          << std::accumulate(costs.begin(), costs.end(), 0.0, std::plus<double>())
@@ -65,18 +77,34 @@ fn main() {
          << "Max: "
          << *std::max_element(costs.begin(), costs.end())
          << "\n";
+    */
+
+    let total: f64 = costs.iter().sum();
+    let min: f64 = *costs.iter().min_by_key(|c| OrderedFloat(**c)).unwrap();
+    let max: f64 = *costs.iter().max_by_key(|c| OrderedFloat(**c)).unwrap();
+
+    println!("Total: {:.2}", total);
+    println!("Min  : {:.2}", min);
+    println!("Max  : {:.2}", max);
 
     // I would probably use minmax_element and auto
     /*
     std::pair<std::vector<double>::const_iterator,
               std::vector<double>::const_iterator> extremes = std::minmax_element(costs.begin(), costs.end());
     */
+    /*
     auto extremes = std::minmax_element(costs.begin(), costs.end());
 
     cout << "Min: " << *(extremes.first)  << "\n"
          << "Max: " << *(extremes.second) << "\n";
     */
-
+    match costs.iter().minmax_by_key(|c| OrderedFloat(**c)) {
+        itertools::MinMaxResult::MinMax(ex_min, ex_max) => {
+            println!("Min  : {:.2}", ex_min);
+            println!("Max  : {:.2}", ex_max);
+        },
+        _ => {}
+    }
 }
 
 /**

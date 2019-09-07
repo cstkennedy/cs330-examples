@@ -15,7 +15,7 @@ pub struct House {
 impl House {
     pub fn new() -> Self {
         House {
-            name: "Generic".to_string(),
+            name: "House".to_string(),
             rooms: Collection::new()
         }
     }

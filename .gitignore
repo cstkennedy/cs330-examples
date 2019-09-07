@@ -51,3 +51,6 @@ MANIFEST
 
 # Style Check reports
 **style-check*
+
+# Rust
+**/target
