@@ -110,9 +110,9 @@ void Room::setDimensions(Dimension l, Dimension w)
 impl Display for Room {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "Room ({})", self.name);
-        writeln!(f, "  {:<8}: {:>8.1}", "Length", self.dimensions.length);
-        writeln!(f, "  {:<8}: {:>8.1}", "Width", self.dimensions.width);
-        writeln!(f, "  {:<8}: {:>8.1}", "Area", self.area());
+        writeln!(f, "  {:<6}: {:>8.1}", "Length", self.dimensions.length);
+        writeln!(f, "  {:<6}: {:>8.1}", "Width", self.dimensions.width);
+        writeln!(f, "  {:<6}: {:>8.1}", "Area", self.area());
         writeln!(f);
         writeln!(f, "  Flooring  : {}", self.flooring.type_name);
         writeln!(f, "  Unit Cost : $ {:>8.2}", self.flooring.unit_cost);

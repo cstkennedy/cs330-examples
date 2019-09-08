@@ -70,7 +70,7 @@ impl Display for House {
     ///   - `toString` in Java
     ///   - `__str__` in Python
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        writeln!(f, "--------{}--------", self.name);
+        writeln!(f, "--------{}--------\n", self.name);
 
         let mut total = 0f64;
 
@@ -82,9 +82,7 @@ impl Display for House {
 
         let avg = total / (self.len() as f64);
 
-        writeln!(f);
         writeln!(f, "------------------------------");
-        writeln!(f);
 
         writeln!(f, "Total Cost   : $ {:.2}", total);
         writeln!(f, "Avg Room Cost: $ {:.2}", avg)

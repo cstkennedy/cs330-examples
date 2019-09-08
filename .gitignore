@@ -54,3 +54,8 @@ MANIFEST
 
 # Rust
 **/target
+
+# output comparison
+**/out-Rust.txt
+**/out-rust.txt
+**/out-cpp.txt
