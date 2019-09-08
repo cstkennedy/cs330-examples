@@ -55,6 +55,25 @@ def prepare_example(example_dir: str):
                        stderr=subprocess.DEVNULL,
                        cwd=example_dir)
 
+    if os.path.isfile(f"{example_dir}/Cargo.toml"):
+        clean_col = "clean"
+        example_type = "Cargo"
+
+        try:
+            subprocess.run(f"cargo clean".split(),
+                           stdout=subprocess.DEVNULL,
+                           stderr=subprocess.DEVNULL,
+                           cwd=example_dir)
+
+        except subprocess.CalledProcessError as err:
+            clean_col = "Already clean"
+
+        doc_col = "Rustdoc"
+        subprocess.run(f"cargo rustdoc".split(),
+                       stdout=subprocess.DEVNULL,
+                       stderr=subprocess.DEVNULL,
+                       cwd=example_dir)
+
     elif os.path.isfile(f"{example_dir}/makefile"):
         clean_col = "clean"
         example_type = "Makefile"
