@@ -1,8 +1,8 @@
 use std::fmt;
-use std::fmt::{Display,Formatter,Result};
+use std::fmt::{Display}; //,Formatter,Result};
 use std::cmp::Ordering;
-use std::str::FromStr;
-use std::num::ParseFloatError;
+// use std::str::FromStr;
+// use std::num::ParseFloatError;
 
 #[derive(Clone)]
 pub struct Flooring {
@@ -12,7 +12,7 @@ pub struct Flooring {
 
 impl Flooring {
     fn new() -> Self {
-        Flooring{
+        Flooring {
             type_name: "Generic".to_string(),
             unit_cost: 1.0f64
         }
@@ -38,7 +38,7 @@ pub struct DimensionSet {
 }
 
 impl DimensionSet {
-    fn new(l: f64, w: f64) -> Self {
+    pub fn new(l: f64, w: f64) -> Self {
         DimensionSet {
             length: l,
             width: w

@@ -5,9 +5,9 @@ extern crate itertools;
 use ordered_float::OrderedFloat;
 use itertools::Itertools;
 
-use std::io::BufReader;
-use std::fs::File;
-use std::env;
+// use std::io::BufReader;
+// use std::fs::File;
+// use std::env;
 use std::vec::Vec;
 
 use room_renovation::room::{Room,Flooring,DimensionSet};
@@ -31,9 +31,9 @@ fn main() {
 
     println!("{}", house);
 
-    // Upgrade the flooring in a
-    // second duplicate house
+    // Upgrade the flooring in a second duplicate house
     let duplicate_house = upgrade_flooring(&house);
+
     /*
     // cout.setf(ios::boolalpha);
     cout << "\n"
@@ -45,6 +45,10 @@ fn main() {
          << "\n"
          << "\n";
     */
+    println!("house == duplicate_house -> {}", (house == duplicate_house));
+    println!("&house == &duplicate_house -> {}",
+             std::ptr::eq(&house, &duplicate_house));
+
     println!("{}", house);
     println!("{}", duplicate_house);
 
@@ -54,7 +58,7 @@ fn main() {
     std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
                    discountFlooring);
     */
-    let costs: Vec<f64> = duplicate_house.rooms.iter()
+    let costs: Vec<f64> = duplicate_house.iter()
                             .map(|r| discount_flooring(r))
                             .collect();
 
@@ -107,9 +111,9 @@ fn main() {
     }
 }
 
-/**
- * Build our example house
- */
+///
+/// Build our example house
+///
 fn build_house(house: &mut House) {
 
 /*
@@ -120,10 +124,7 @@ fn build_house(house: &mut House) {
     house.add_room(
         Room {
             name: "Laundry Room".to_string(),
-            dimensions: DimensionSet {
-                length: 8f64,
-                width: 4f64,
-            },
+            dimensions: DimensionSet::new(8f64, 4f64),
             flooring: Flooring {
                 unit_cost: 1.95f64,
                 type_name: "Laminate".to_string()
@@ -133,10 +134,7 @@ fn build_house(house: &mut House) {
     house.add_room(
         Room {
             name: "Kitchen".to_string(),
-            dimensions: DimensionSet {
-                length: 20f64,
-                width: 12f64,
-            },
+            dimensions: DimensionSet::new(20f64, 12f64),
             flooring: Flooring {
                 unit_cost: 3.87f64,
                 type_name: "Tile".to_string()
@@ -146,10 +144,7 @@ fn build_house(house: &mut House) {
     house.add_room(
         Room {
             name: "Storage Room".to_string(),
-            dimensions: DimensionSet {
-                length: 16f64,
-                width: 16f64,
-            },
+            dimensions: DimensionSet::new(16f64, 16f64),
             flooring: Flooring {
                 unit_cost: 4.39f64,
                 type_name: "Birch Wood".to_string()
@@ -159,17 +154,21 @@ fn build_house(house: &mut House) {
 
 }
 
-/**
- * Take a room and change the flooring
- *
- * @param original House to change
- *
- * @return House with the updated flooring
- */
+///
+/// Take a room and change the flooring
+///
+/// # Arguments
+///
+///   * `original` House to change
+///
+/// # Returns
+///
+/// House with the updated flooring
+///
 fn upgrade_flooring(original: &House) -> House {
     let mut modified = original.clone();
 
-    for room in modified.rooms.iter_mut() {
+    for room in modified.iter_mut() {
         room.set_flooring("Stone Bricks", 12.97);
     }
 
@@ -178,6 +177,13 @@ fn upgrade_flooring(original: &House) -> House {
     modified
 }
 
+///
+/// Take a room, discount the flooring cost by 90%.
+///
+/// # Returns
+///
+/// Discounted flooring cost
+///
 fn discount_flooring(r: &Room) -> f64 {
     0.90 * r.flooring_cost()
 }
