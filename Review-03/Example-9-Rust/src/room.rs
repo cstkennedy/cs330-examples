@@ -1,6 +1,6 @@
-use std::fmt;
-use std::fmt::{Display}; //,Formatter,Result};
 use std::cmp::Ordering;
+use std::fmt;
+use std::fmt::Display; //,Formatter,Result};
 // use std::str::FromStr;
 // use std::num::ParseFloatError;
 
@@ -14,7 +14,7 @@ impl Flooring {
     fn new() -> Self {
         Flooring {
             type_name: "Generic".to_string(),
-            unit_cost: 1.0f64
+            unit_cost: 1.0f64,
         }
     }
 
@@ -31,6 +31,12 @@ impl Flooring {
     }
 }
 
+impl Default for Flooring {
+    fn default() -> Self {
+        Flooring::new()
+    }
+}
+
 #[derive(Clone)]
 pub struct DimensionSet {
     pub length: f64,
@@ -41,8 +47,14 @@ impl DimensionSet {
     pub fn new(l: f64, w: f64) -> Self {
         DimensionSet {
             length: l,
-            width: w
+            width: w,
         }
+    }
+}
+
+impl Default for DimensionSet {
+    fn default() -> Self {
+        DimensionSet::new(1f64, 1f64)
     }
 }
 
@@ -50,62 +62,78 @@ impl DimensionSet {
 pub struct Room {
     pub name: String,
     pub dimensions: DimensionSet,
-    pub flooring: Flooring
+    pub flooring: Flooring,
 }
 
 impl Room {
+    /// Set the name using the builder pattern.
+    ///
+    /// # Arguments
+    ///  * `nme` - room name
+    ///
+    pub fn with_name(&mut self, nme: &str) -> &mut Self {
+        self.name = nme.to_string();
+
+        self
+    }
+
+    /// Set the Flooring using the builder pattern.
+    ///
+    /// # Arguments
+    ///  * `nme` - flooring type name
+    ///  * `unit_c` - unit cost
+    ///
+    pub fn with_flooring(&mut self, nme: &str, unit_c: f64) -> &mut Self {
+        self.flooring.type_name = nme.to_string();
+        self.flooring.unit_cost = unit_c;
+
+        self
+    }
+
+    /// Set the Flooring using the builder pattern.
+    ///
+    /// # Arguments
+    ///  * `l` - length
+    ///  * `w` - width
+    ///
+    pub fn with_dimensions(&mut self, l: f64, w: f64) -> &mut Self {
+        self.dimensions.length = l;
+        self.dimensions.width = w;
+
+        self
+    }
+
+    /// Set the flooring.
+    ///
+    /// # Arguments
+    ///  * `nme` - flooring type name
+    ///  * `unit_c` - unit cost
+    ///
     pub fn set_flooring(&mut self, nme: &str, unit_c: f64) {
         self.flooring.type_name = nme.to_string();
         self.flooring.unit_cost = unit_c;
     }
 
+    /// Compute the area of flooring for a room.
     pub fn area(&self) -> f64 {
         self.dimensions.width * self.dimensions.length
     }
 
+    /// Compute the flooring cost based on `self.area()` and unit cost.
     pub fn flooring_cost(&self) -> f64 {
         self.area() * self.flooring.unit_cost
     }
 }
 
-/*
-Room::Room()
-    :name("Generic")
-{
+impl Default for Room {
+    fn default() -> Self {
+        Room {
+            name: "Generic".to_string(),
+            dimensions: Default::default(),
+            flooring: Default::default(),
+        }
+    }
 }
-
-//------------------------------------------------------------------------------
-Room::Room(Dimension l, Dimension w, Cost c)
-    :Room("Generic", l, w, c)
-{
-}
-
-
-//------------------------------------------------------------------------------
-Room::Room(std::string n, Dimension l, Dimension w, Cost c)
-    :name(n),
-     flooring("Generic", c),
-     dimensions(l, w)
-{
-    // Wreorder as a topic for discussion
-}
-
-//------------------------------------------------------------------------------
-Room::Room(std::string n, DimensionSet d, Cost c, std::string fn)
-    :dimensions(d),
-     flooring(fn, c),
-     name(n)
-{
-}
-
-//------------------------------------------------------------------------------
-void Room::setDimensions(Dimension l, Dimension w)
-{
-    dimensions.setLength(l);
-    dimensions.setWidth(w);
-}
-
-*/
 
 impl Display for Room {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {

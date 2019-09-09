@@ -115,12 +115,6 @@ fn main() {
 /// Build our example house
 ///
 fn build_house(house: &mut House) {
-
-/*
-    Kitchen; 20 12 3.87 Tile
-    Storage Room; 16 16 4.39 Birch Wood)
-*/
-
     house.add_room(
         Room {
             name: "Laundry Room".to_string(),
@@ -131,25 +125,21 @@ fn build_house(house: &mut House) {
             }
         }
     );
+
+    let kitchen = Room::default()
+        .with_name("Kitchen")
+        .with_dimensions(20f64, 12f64)
+        .with_flooring("Tile", 3.87f64)
+        .to_owned();
+
+    house.add_room(kitchen);
+
     house.add_room(
-        Room {
-            name: "Kitchen".to_string(),
-            dimensions: DimensionSet::new(20f64, 12f64),
-            flooring: Flooring {
-                unit_cost: 3.87f64,
-                type_name: "Tile".to_string()
-            }
-        }
-    );
-    house.add_room(
-        Room {
-            name: "Storage Room".to_string(),
-            dimensions: DimensionSet::new(16f64, 16f64),
-            flooring: Flooring {
-                unit_cost: 4.39f64,
-                type_name: "Birch Wood".to_string()
-            }
-        }
+        Room::default()
+            .with_name("Storage Room")
+            .with_dimensions(16f64, 16f64)
+            .with_flooring("Birch Wood", 4.39f64)
+            .to_owned()
     );
 
 }
