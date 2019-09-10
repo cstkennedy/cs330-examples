@@ -135,7 +135,8 @@ impl Default for Room {
     }
 }
 
-impl Display for Room {
+impl Display for Room {    
+    #[allow(unused_must_use)]
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "Room ({})", self.name);
         writeln!(f, "  {:<6}: {:>8.1}", "Length", self.dimensions.length);

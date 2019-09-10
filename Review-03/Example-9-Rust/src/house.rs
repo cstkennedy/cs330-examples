@@ -104,16 +104,18 @@ impl Display for House {
         let mut total = 0f64;
 
         for room in self.rooms.iter() {
-            writeln!(f, "{}", room);
+            let _ = writeln!(f, "{}", room);
 
             total += room.flooring_cost();
         }
 
         let avg = total / (self.len() as f64);
 
-        writeln!(f, "------------------------------");
-        writeln!(f, "Total Cost   : $ {:.2}", total);
-        writeln!(f, "Avg Room Cost: $ {:.2}", avg)
+        #[allow(unused_must_use)] {
+            writeln!(f, "------------------------------");
+            writeln!(f, "Total Cost   : $ {:.2}", total);
+            writeln!(f, "Avg Room Cost: $ {:.2}", avg)
+        }
     }
 }
 
