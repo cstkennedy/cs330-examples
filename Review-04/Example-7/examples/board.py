@@ -20,11 +20,14 @@ class Board(object):
         """
         Retrieve the value stored in a selected Cell.
 
-        @param id numeric id representing the desired cell
+        Args:
+            cell_id: numeric id representing the desired cell
 
-        @return value stored in the Cell
+        Returns:
+            value stored in the Cell
 
-        @pre (id > 0 && id < 10) -> @todo change to
+        Precondition:
+            (cell_id > 0 && cell_id < 10) -> @todo change to
             throws IllegalArgumentException
         """
 
@@ -37,14 +40,16 @@ class Board(object):
         """
         Set the value stored in a selected Cell.
 
-        @param id numeric id representing the desired cell
-        @param new_value replacement `CellValue`
+        Args:
+            cell_id: numeric id representing the desired cell
+            new_value: replacement `CellValue`
 
-        @pre (id > 0 && id < 10) &&
-                (
-                    (new_value == 'X' || new_value == 'O') ||
-                    (new_value >= '1' && new_value <= '9')
-                )
+        Precondition:
+            (id > 0 && id < 10) &&
+            (
+                (new_value == 'X' || new_value == 'O') ||
+                (new_value >= '1' && new_value <= '9')
+            )
         """
 
         # assert (cell_id > 0 and cell_id < 10)
@@ -57,13 +62,16 @@ class Board(object):
         """
         Retrieve the value stored in three selected Cells.
 
-        @param cell1Id numeric id representing the 1st desired cell
-        @param cell2Id numeric id representing the 2nd desired cell
-        @param cell3Id numeric id representing the 3rd desired cell
+        Args:
+            cell1Id: numeric id representing the 1st desired cell
+            cell2Id: numeric id representing the 2nd desired cell
+            cell3Id: numeric id representing the 3rd desired cell
 
-        @return value stored in the Cell
+        Returns:
+            value stored in the Cell
 
-        @pre (cell1_id > 0 && cell1_id < 10) &&
+        Precondition:
+             (cell1_id > 0 && cell1_id < 10) &&
              (cell2_id > 0 && cell2_id < 10) &&
              (cell3_id > 0 && cell3_id < 10)
         """
@@ -89,7 +97,8 @@ class Board(object):
 
         _I added this during implementation of the Game ADT in C++_
 
-        @return true if every cell in the board has either an 'X' or an 'O'
+        Returns:
+            True if every cell in the board has either an 'X' or an 'O'
         """
 
         empty_cells = 0

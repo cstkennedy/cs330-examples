@@ -15,7 +15,8 @@ class Referee(object):
         Create the referee and allow access
         to a board through a constant reference variable.
 
-        @param board the board to monitor
+        Args:
+            board: the board to monitor
         """
 
         self._board_ref = board
@@ -24,8 +25,8 @@ class Referee(object):
         """
         Check for a win condition.
 
-        @return 1 if player1, or 2 if player2 won.
-                A 0 indicates neither won
+        Returns:
+            1 if player1, or 2 if player2 won. 0 indicates neither player won.
         """
 
         winner = self._check_for_horizontal_win()
@@ -50,9 +51,11 @@ class Referee(object):
         Determine whether a cell in the board has been selected
         by a player.
 
-        @param move player candidate move
+        Args:
+            move: player candidate move
 
-        @return true if the cell is currently empty
+        Returns:
+            True if the cell is currently empty
         """
 
         return self._board_ref.get_cell(move) not in ['X', 'O']
@@ -62,7 +65,8 @@ class Referee(object):
         Check each row of the board for three 'X' or three 'O'
         characters.
 
-        @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
+        Returns:
+            1 if player 1 has won, 2 if player 2 has one, or 0 if
             no one has won
         """
 
@@ -91,7 +95,8 @@ class Referee(object):
         Check each column of the board for three 'X' or three 'O'
         characters.
 
-        @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
+        Returns:
+            1 if player 1 has won, 2 if player 2 has one, or 0 if
             no one has won
         """
 
@@ -120,7 +125,8 @@ class Referee(object):
         Check the two diagonals of the board for three 'X' or three 'O'
         characters.
 
-        @return 1 if player 1 has won, 2 if player 2 has one, or 0 if
+        Returns:
+            1 if player 1 has won, 2 if player 2 has one, or 0 if
             no one has won
         """
 
@@ -143,9 +149,11 @@ class Referee(object):
         """
         Check for three matching symbols in the Pair-Triple.
 
-        @param triple set of three cells to check
+        Args:
+            triple: set of three cells to check
 
-        @return true if all three pairs contain the same symbol
+        Returns:
+            True if all three pairs contain the same symbol
         """
 
         first_val = triple[0][1]  # std::pair first and second
@@ -163,17 +171,15 @@ class Referee(object):
         """
         Given an 'X' or an 'O' determine which player is using the symbol.
 
-        @param sym symbol to check
+        Args:
+            sym: symbol to check
 
-        @return 1 for player 1 or 2 for player 2
+        Returns:
+            1 for player 1 or 2 for player 2
 
-        @pre sym == 'X' or 'O'
+        Precondition:
+            `sym == 'X' or 'O'`
         """
-
-        # if (sym == 'X')
-        #     return 1
-
-        # return 2
 
         # return (sym == 'X' ? 1 : 2)
         return (1 if sym == 'X' else 2)

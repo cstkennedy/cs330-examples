@@ -12,8 +12,9 @@ class Game(object):
         """
         Construct a Game setting player 1 and player 2.
 
-        @param p1 the 'X' player
-        @param p2 the 'O' player
+        Args:
+            p1: the 'X' player
+            p2: the 'O' player
         """
 
         self._player1 = p1
@@ -31,9 +32,11 @@ class Game(object):
         """
         Play one round of Tic-Tac-Toe.
 
-        @return true if the game ended during the round
+        Returns:
+            True if the game ended during the round
 
-        @throws IOException if there is an error reading the selected move
+        Raises:
+            IOException if there is an error reading the selected move
         """
 
         # The game ended already - assert could be used

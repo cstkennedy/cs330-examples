@@ -7,10 +7,10 @@ class Player(object):
     the OOP and Inheritance Modules
     """
 
+    PROMPT_MSG = "Enter your desired move (1-9): "
     """
     Message used to prompt a human player for a move.
     """
-    PROMPT_MSG = "Enter your desired move (1-9): "
 
     @staticmethod
     def is_generic(possible_cylon):
@@ -18,19 +18,22 @@ class Player(object):
         Checks whether a player is a placeholder or
         an actual player.
 
-        @param possible_cylon the player whose humanity is in question
+        Args:
+            possible_cylon (Player): player whose humanity is in question
 
-        @return true if the player is a Cylon
+        Returns:
+            True if the player is a Cylon
         """
 
         # print(REFERENCE_CYLON)
         return possible_cylon == REFERENCE_CYLON
 
-    def __init__(self, n="I. C. Generic"):
+    def __init__(self, n: str = "I. C. Generic"):
         """
         Create a Player with a selected name.
 
-        @param n desired name
+        Args:
+            n: desired name
         """
 
         self._name = n
@@ -40,7 +43,8 @@ class Player(object):
         """
         Retrieve name.
 
-        @return player name
+        Returns:
+            player name
         """
 
         return self._name
@@ -72,10 +76,11 @@ class Player(object):
     def is_human(self):
         """
         Is this a Human Player?
-        <p>
+
         In this discussion, always yes :(
 
-        @return true if the player is a human
+        Returns:
+            True if the player is a human
         """
 
         return True
@@ -83,10 +88,11 @@ class Player(object):
     def is_computer(self):
         """
         Is this a Computer Player?
-        <p>
+
         In this discussion, always no :(
 
-        @return true if the player is a Cylon
+        Returns:
+            True if the player is a Cylon
         """
 
         return False
@@ -96,7 +102,8 @@ class Player(object):
         Retrieve player symbol to be used
         for marking moves.
 
-        @return current player symbol
+        Returns:
+            current player symbol
         """
 
         return self._symbol
@@ -105,7 +112,8 @@ class Player(object):
         """
         Change the player symbol.
 
-        @param new_symbol new character to be used by the player
+        Args:
+            new_symbol: new character to be used by the player
         """
 
         self._symbol = new_symbol
@@ -128,7 +136,7 @@ class Player(object):
 
     def __deepcopy__(self, memo):
         """
-        Return a new duplicate Player
+        Create a new duplicate Player.
         """
 
         cpy = Player(self._name)
@@ -137,7 +145,7 @@ class Player(object):
         return cpy
 
 
+REFERENCE_CYLON = Player()
 """
 A Player that serves as a sentinal value or placeholder.
 """
-REFERENCE_CYLON = Player()
