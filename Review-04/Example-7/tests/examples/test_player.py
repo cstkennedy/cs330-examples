@@ -18,8 +18,8 @@ class TestPlayer(unittest.TestCase):
     """
 
     def setUp(self):
-        self.tom       = Player("Tom")
-        self.a_cylon    = Player()
+        self.tom = Player("Tom")
+        self.a_cylon = Player()
         self.the_doctor = Player("The Doctor")
 
         self.tom.set_symbol('X')
@@ -94,7 +94,8 @@ class TestPlayer(unittest.TestCase):
                     equal_to(the_original.get_symbol()))
 
         the_original.set_name("William Hartnell")
-        assert_that(hash(self.the_doctor), is_not(equal_to(hash(the_original))))
+        assert_that(hash(self.the_doctor),
+                    is_not(equal_to(hash(the_original))))
         assert_that(self.the_doctor, is_not(equal_to(the_original)))
 
     @unittest.skip("can not test")

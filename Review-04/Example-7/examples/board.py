@@ -50,7 +50,8 @@ class Board(object):
         # assert (cell_id > 0 and cell_id < 10)
         assert (0 < cell_id < 10)
 
-        self._the_board[cell_id - 1] = new_value  # Testing caught the missing -1
+        # Testing caught the missing -1
+        self._the_board[cell_id - 1] = new_value
 
     def get_3_cells(self, cell1_id, cell2_id, cell3_id):
         """

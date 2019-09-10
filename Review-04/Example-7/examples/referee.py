@@ -55,7 +55,6 @@ class Referee(object):
         @return true if the cell is currently empty
         """
 
-        # return board_ref.get_cell(move) != 'X' && board_ref.get_cell(move) != 'O'
         return self._board_ref.get_cell(move) not in ['X', 'O']
 
     def _check_for_horizontal_win(self):
@@ -139,7 +138,8 @@ class Referee(object):
 
         return 0
 
-    def _all_three_match(self, triple):
+    @staticmethod
+    def _all_three_match(triple):
         """
         Check for three matching symbols in the Pair-Triple.
 
@@ -158,7 +158,8 @@ class Referee(object):
 
         return num_matches == 3
 
-    def _player_num_from_symbol(self, sym):
+    @staticmethod
+    def _player_num_from_symbol(sym):
         """
         Given an 'X' or an 'O' determine which player is using the symbol.
 

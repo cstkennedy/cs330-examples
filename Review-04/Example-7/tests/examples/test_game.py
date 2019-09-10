@@ -18,8 +18,8 @@ class TestGame(unittest.TestCase):
     """
     def setUp(self):
 
-        self.tom       = Player("Tom")
-        self.a_cylon    = Player()
+        self.tom = Player("Tom")
+        self.a_cylon = Player()
 
         self.empty_board = Board()
 

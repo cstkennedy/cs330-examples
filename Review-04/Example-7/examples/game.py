@@ -96,7 +96,7 @@ class Game(object):
             return None
 
         # Stalemate
-        #if ended_with_stalemate(): # @DISCUSS mistake caught with pylint
+        # if ended_with_stalemate(): # @DISCUSS mistake caught with pylint
         if self.ended_with_stalemate():
             # return Player::referenceCylon
             return None
