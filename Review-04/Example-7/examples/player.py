@@ -39,7 +39,7 @@ class Player(object):
         self._name = n
         self._symbol = '?'  # testing caught this
 
-    def get_name(self):
+    def get_name(self) -> str:
         """
         Retrieve name.
 
@@ -49,7 +49,7 @@ class Player(object):
 
         return self._name
 
-    def set_name(self, n):
+    def set_name(self, n: str):
         """
         Set player name.
 
@@ -73,7 +73,7 @@ class Player(object):
 
         return choice
 
-    def is_human(self):
+    def is_human(self) -> bool:
         """
         Is this a Human Player?
 
@@ -108,7 +108,7 @@ class Player(object):
 
         return self._symbol
 
-    def set_symbol(self, new_symbol):
+    def set_symbol(self, new_symbol: str):
         """
         Change the player symbol.
 

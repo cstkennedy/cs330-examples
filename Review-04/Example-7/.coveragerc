@@ -1,3 +1,4 @@
 [run]
 omit =
     /usr/*
+    .tox/*

@@ -17,7 +17,6 @@ def main():
 
     game = Game(tom, jay)
 
-    # while(!(game.get_board().is_full())) {
     while game.is_not_over():
         game.play_round()
 

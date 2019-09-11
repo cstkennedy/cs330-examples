@@ -70,23 +70,12 @@ class Referee(object):
             no one has won
         """
 
-        triple = self._board_ref.get_3_cells(1, 2, 3)
+        for idx_triple in ((1, 2, 3), (4, 5, 6), (7, 8, 9)):
+            triple = self._board_ref.get_3_cells(*idx_triple)
 
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
-
-        triple = self._board_ref.get_3_cells(4, 5, 6)
-
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
-
-        triple = self._board_ref.get_3_cells(7, 8, 9)
-
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
+            if self._all_three_match(triple):
+                # if they match, grab the 'X' or 'O'
+                return self._player_num_from_symbol(triple[0][1])
 
         return 0
 
@@ -100,23 +89,12 @@ class Referee(object):
             no one has won
         """
 
-        triple = self._board_ref.get_3_cells(1, 4, 7)
+        for idx_triple in ((1, 4, 7), (2, 5, 8), (3, 6, 9)):
+            triple = self._board_ref.get_3_cells(*idx_triple)
 
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
-
-        triple = self._board_ref.get_3_cells(2, 5, 8)
-
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
-
-        triple = self._board_ref.get_3_cells(3, 6, 9)
-
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
+            if self._all_three_match(triple):
+                # if they match, grab the 'X' or 'O'
+                return self._player_num_from_symbol(triple[0][1])
 
         return 0
 
@@ -130,17 +108,12 @@ class Referee(object):
             no one has won
         """
 
-        triple = self._board_ref.get_3_cells(1, 5, 9)
+        for idx_triple in ((1, 5, 9), (7, 5, 3)):
+            triple = self._board_ref.get_3_cells(*idx_triple)
 
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
-
-        triple = self._board_ref.get_3_cells(7, 5, 3)
-
-        if self._all_three_match(triple):
-            # if they match, grab the 'X' or 'O'
-            return self._player_num_from_symbol(triple[0][1])
+            if self._all_three_match(triple):
+                # if they match, grab the 'X' or 'O'
+                return self._player_num_from_symbol(triple[0][1])
 
         return 0
 

@@ -28,7 +28,6 @@ class Board(object):
 
         Precondition:
             (cell_id > 0 && cell_id < 10) -> @todo change to
-            throws IllegalArgumentException
         """
 
         # assert(cell_id > 0 and cell_id < 10)
