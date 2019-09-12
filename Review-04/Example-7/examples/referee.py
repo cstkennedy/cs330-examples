@@ -1,4 +1,9 @@
+from examples.player import Player
 
+from typing import (Tuple)
+
+CellPair = Tuple[int, str]
+CellTriple = Tuple[CellPair, CellPair, CellPair]
 
 class Referee(object):
     """
@@ -21,7 +26,7 @@ class Referee(object):
 
         self._board_ref = board
 
-    def check_for_win(self):
+    def check_for_win(self) -> int:
         """
         Check for a win condition.
 
@@ -46,7 +51,7 @@ class Referee(object):
 
         return 0
 
-    def selected_cell_is_empty(self, move):
+    def selected_cell_is_empty(self, move: int) -> bool:
         """
         Determine whether a cell in the board has been selected
         by a player.
@@ -60,7 +65,7 @@ class Referee(object):
 
         return self._board_ref.get_cell(move) not in ['X', 'O']
 
-    def _check_for_horizontal_win(self):
+    def _check_for_horizontal_win(self) -> int:
         """
         Check each row of the board for three 'X' or three 'O'
         characters.
@@ -79,7 +84,7 @@ class Referee(object):
 
         return 0
 
-    def _check_for_vertical_win(self):
+    def _check_for_vertical_win(self) -> int:
         """
         Check each column of the board for three 'X' or three 'O'
         characters.
@@ -98,7 +103,7 @@ class Referee(object):
 
         return 0
 
-    def _check_for_diagonal_win(self):
+    def _check_for_diagonal_win(self) -> int:
         """
         Check the two diagonals of the board for three 'X' or three 'O'
         characters.
@@ -118,7 +123,7 @@ class Referee(object):
         return 0
 
     @staticmethod
-    def _all_three_match(triple):
+    def _all_three_match(triple: CellTriple) -> bool:
         """
         Check for three matching symbols in the Pair-Triple.
 
@@ -140,7 +145,7 @@ class Referee(object):
         return num_matches == 3
 
     @staticmethod
-    def _player_num_from_symbol(sym):
+    def _player_num_from_symbol(sym: str) -> Player:
         """
         Given an 'X' or an 'O' determine which player is using the symbol.
 

@@ -1,3 +1,8 @@
+from typing import (Tuple)
+
+CellPair = Tuple[int, str]
+CellTriple = Tuple[CellPair, CellPair, CellPair]
+
 
 class Board(object):
     """
@@ -16,7 +21,7 @@ class Board(object):
 
         self._the_board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-    def get_cell(self, cell_id):
+    def get_cell(self, cell_id) -> str:
         """
         Retrieve the value stored in a selected Cell.
 
@@ -57,7 +62,7 @@ class Board(object):
         # Testing caught the missing -1
         self._the_board[cell_id - 1] = new_value
 
-    def get_3_cells(self, cell1_id, cell2_id, cell3_id):
+    def get_3_cells(self, cell1_id, cell2_id, cell3_id) -> CellTriple:
         """
         Retrieve the value stored in three selected Cells.
 
@@ -69,18 +74,29 @@ class Board(object):
         Returns:
             value stored in the Cell
 
-        Precondition:
-             (cell1_id > 0 && cell1_id < 10) &&
-             (cell2_id > 0 && cell2_id < 10) &&
-             (cell3_id > 0 && cell3_id < 10)
+        Raises:
+            IndexError if
+
+                !(cell1_id > 0 && cell1_id < 10) ||
+                !(cell2_id > 0 && cell2_id < 10) ||
+                !(cell3_id > 0 && cell3_id < 10)
         """
 
         #  assert (cell1_id > 0 and cell1_id < 10)
         #  assert (cell2_id > 0 and cell2_id < 10)
         #  assert (cell3_id > 0 and cell3_id < 10)
-        assert (0 < cell1_id < 10)
-        assert (0 < cell2_id < 10)
-        assert (0 < cell3_id < 10)
+        #  assert (0 < cell1_id < 10)
+        #  assert (0 < cell2_id < 10)
+        #  assert (0 < cell3_id < 10)
+
+        if not (0 < cell1_id < 10):
+            raise IndexError("Cell 1 Index is not between 0 and 10, exclusive")
+
+        if not (0 < cell2_id < 10):
+            raise IndexError("Cell 2 Index is not between 0 and 10, exclusive")
+
+        if not (0 < cell3_id < 10):
+            raise IndexError("Cell 3 Index is not between 0 and 10, exclusive")
 
         cell1_id -= 1
         cell2_id -= 1
@@ -90,7 +106,7 @@ class Board(object):
                 (cell2_id, self._the_board[cell2_id]),
                 (cell3_id, self._the_board[cell3_id]))
 
-    def is_full(self):
+    def is_full(self) -> bool:
         """
         Return true if all 9 cells hold player symbols.
 

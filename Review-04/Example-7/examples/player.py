@@ -13,7 +13,7 @@ class Player(object):
     """
 
     @staticmethod
-    def is_generic(possible_cylon):
+    def is_generic(possible_cylon: "Player") -> bool:
         """
         Checks whether a player is a placeholder or
         an actual player.
@@ -60,7 +60,7 @@ class Player(object):
 
         self._name = n
 
-    def next_move(self):
+    def next_move(self) -> str:
         """
         Retrieve the next move.
 
@@ -97,7 +97,7 @@ class Player(object):
 
         return False
 
-    def get_symbol(self):
+    def get_symbol(self) -> str:
         """
         Retrieve player symbol to be used
         for marking moves.
