@@ -1,0 +1,61 @@
+@startuml
+autoactivate on
+hide footbox
+
+title CPP RunShapes "read" Function With Iterators
+
+participant ":RunShapes"
+
+activate ":RunShapes"
+
+create "collection:ShapeCollection"
+":RunShapes" -> "collection:ShapeCollection": new
+return
+
+create "it:istream_iterator<Shape*>"
+":RunShapes" -> "it:istream_iterator<Shape*>": new(ins)
+return
+
+create "end:istream_iterator<Shape*>"
+":RunShapes" -> "end:istream_iterator<Shape*>": new(ins)
+return
+
+participant ":ShapeFactory"
+
+loop it != end
+":RunShapes" -> "it:istream_iterator<Shape*>": operator*() [dereference]
+    "it:istream_iterator<Shape*>" -> ":ShapeFactory": operator>>(ins, s)
+        ":ShapeFactory" -> ":ShapeFactory": createShape(name)
+        return s
+        alt s is not null
+            create "s:Shape*"
+            ":ShapeFactory" -> "s:Shape*": new()
+            return
+            ":ShapeFactory" -> "s:Shape*": read(ins)
+            return
+        else discard the rest of the line
+        end
+    return
+return  s
+end
+
+opt s is not null
+    ":RunShapes" -> "collection:ShapeCollection": emplace_back(s)
+    create ":unique_ptr<Shape>"
+        "collection:ShapeCollection" -> ":unique_ptr<Shape>": new(s)
+        return
+    return
+    ":RunShapes" -> "it:istream_iterator<Shape*>": operator++() [post increment]
+    return
+end
+
+
+
+
+":RunShapes" -> "it:istream_iterator<Shape*>" !!: delete
+":RunShapes" -> "end:istream_iterator<Shape*>" !!: delete
+
+deactivate ":RunShapes"
+
+@enduml
+
