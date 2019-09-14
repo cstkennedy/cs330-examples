@@ -2,13 +2,15 @@ from examples.player import Player
 from examples.board import Board
 from examples.referee import Referee
 
+from typing import Optional
+
 
 class Game(object):
     """
     Orchestrates a single match of Tic-Tac-Toe.
     """
 
-    def __init__(self, p1, p2):
+    def __init__(self, p1: Player, p2: Player):
         """
         Construct a Game setting player 1 and player 2.
 
@@ -28,7 +30,7 @@ class Game(object):
 
         self._winner = None
 
-    def play_round(self):
+    def play_round(self) -> bool:
         """
         Play one round of Tic-Tac-Toe.
 
@@ -80,19 +82,19 @@ class Game(object):
 
         return False
 
-    def get_player1(self):
+    def get_player1(self) -> Player:
 
         return self._player1
 
-    def get_player2(self):
+    def get_player2(self) -> Player:
 
         return self._player2
 
-    def get_winner(self):
+    def get_winner(self) -> Optional[Player]:
 
         return self._winner
 
-    def get_loser(self):
+    def get_loser(self) -> Optional[Player]:
         # @discussThisInLecture
         # Caught this bug during testing
         if self.is_not_over():
@@ -110,27 +112,27 @@ class Game(object):
 
         return self._player1
 
-    def ended_with_win(self):
+    def ended_with_win(self) -> bool:
 
         return self._winner is not None
 
-    def ended_with_stalemate(self):
+    def ended_with_stalemate(self) -> bool:
 
         return self._board.is_full() and (self._winner is None)
 
-    def is_over(self):
+    def is_over(self) -> bool:
 
         return self.ended_with_win() or self.ended_with_stalemate()
 
-    def is_not_over(self):
+    def is_not_over(self) -> bool:
 
         return not self.is_over()
 
-    def get_board(self):
+    def get_board(self) -> bool:
 
         return self._board
 
-    def _round_turn(self, player):
+    def _round_turn(self, player) -> bool:
         """
         Get a player move, and update the board.
         """
