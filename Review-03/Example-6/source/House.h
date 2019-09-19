@@ -33,9 +33,9 @@ class House{
          * Name of the house--e.g.,
          * Minecraft Beach House
          */
-        std::string      name;
+        std::string name;
 
-        Collection rooms;
+        Collection  rooms;
 
     public:
         /**
