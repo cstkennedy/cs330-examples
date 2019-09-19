@@ -12,7 +12,7 @@
 #include <numeric>
 #include <iterator>
 #include <sstream>
-
+//#include <execution>
 #include "utilities.h"
 
 #include "Room.h"
@@ -38,10 +38,20 @@ void buildHouse(std::istream& ins, House& house);
  */
 House upgradeFlooring(House original);
 
+/**
+ * Compute the discounting flooring price for a single Room.
+ *
+ * @param r room to examine
+ * @param percent discount as a decimal
+ *
+ * @pre 0 <= percent && percent <= 1
+ */
 inline
-double discountFlooring(const Room& r)
+double discountFlooring(const Room& r, const double percent)
 {
-    return 0.90 * r.flooringCost();
+    const double scale = 1 - percent;
+
+    return scale * r.flooringCost();
 }
 
 /**
@@ -80,9 +90,11 @@ int main()
     cout << duplicateHouse << "\n";
 
     // Get all the flooring costs with a 10% discount
+    auto discountFunc = std::bind(discountFlooring, std::placeholders::_1, 0.1);
+
     vector<double> costs(duplicateHouse.size());
     std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
-                   discountFlooring);
+                   discountFunc);
 
     std::copy(costs.begin(), costs.end(),
               std::ostream_iterator<double>(std::cout, "\n"));
@@ -168,6 +180,7 @@ House upgradeFlooring(House original)
 {
     House modified = original;
 
+    //std::for_each(std::execution::par_unseq, modified.begin(), modified.end(),
     std::for_each(modified.begin(), modified.end(),
                   [](Room& room) {
                       room.setFlooring("Stone Bricks", 12.97);

@@ -2,7 +2,7 @@ MAINPROG=updateRoom
 
 SOURCES:=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-FLAGS=-std=c++11 -fsanitize=leak,address -Wall -Wpedantic -fuse-ld=gold -O3
+FLAGS=-std=c++17 -fsanitize=leak,address -Wall -Wpedantic -fuse-ld=gold -O3
 
 all: $(SOURCES) $(MAINPROG)
 
