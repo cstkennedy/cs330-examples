@@ -124,46 +124,8 @@ int main()
 }
 
 //------------------------------------------------------------------------------
-inline
-std::istream& operator>>(std::istream &ins, Room& rd)
-{
-    std::string name;
-    double      l, h;
-    double      cost;
-    std::string flooring;
-
-    ins >> ws;
-    getline(ins, name, ';');
-    ins >> l >> h >> cost;
-
-    ins >> ws;
-    getline(ins, flooring);
-    ins >> ws;
-
-    rd = Room(name, Room::DimensionSet(l, h), cost, flooring);
-
-    return ins;
-}
-
-//------------------------------------------------------------------------------
 void buildHouse(std::istream& ins, House& house)
 {
-    /*std::string name;
-    double      l, h;
-    double      cost;
-    std::string flooring;
-
-    ins >> ws;
-    while(getline(ins, name, ';')) {
-        ins >> l >> h >> cost;
-
-        ins >> ws;
-        getline(ins, flooring);
-        ins >> ws;
-
-        house.addRoom(Room(name, Room::DimensionSet(l,h), cost, flooring));
-    }*/
-
     std::istream_iterator<Room> ins_it(ins);
     std::istream_iterator<Room> ins_end;
 
@@ -172,7 +134,6 @@ void buildHouse(std::istream& ins, House& house)
 
         ins_it++;
     }
-
 }
 
 //------------------------------------------------------------------------------
