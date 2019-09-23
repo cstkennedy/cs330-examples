@@ -13,14 +13,14 @@ use std::vec::Vec;
 use room_renovation::room::{Room,Flooring,DimensionSet};
 use room_renovation::house::{House};
 
-/**
- * Compute the area of a room and the cost of
- * flooring for the room
- * <p>
- * Let us Review the use of reference and pointer variables.
- * <p>
- * We will used these when we implement the iterator interface.
- */
+///
+/// Compute the area of a room and the cost of
+/// flooring for the room
+/// <p>
+/// Let us Review the use of reference and pointer variables.
+/// <p>
+/// We will used these when we implement the iterator interface.
+///
 #[cfg_attr(tarpaulin, skip)]
 fn main() {
     // Construct, build, and print a house
