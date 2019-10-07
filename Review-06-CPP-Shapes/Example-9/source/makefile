@@ -1,0 +1,16 @@
+MAINPROG=runShapes
+
+SOURCES:=$(wildcard *.cpp)
+OBJECTS=$(SOURCES:.cpp=.o)
+FLAGS=-std=c++2a -fsanitize=address,leak  -Wall -fuse-ld=gold
+
+all: $(SOURCES) $(MAINPROG)
+
+$(MAINPROG): $(OBJECTS)
+	g++ $(FLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	g++ $(FLAGS) -c $< -o $@
+
+clean:
+	rm *.o $(MAINPROG)

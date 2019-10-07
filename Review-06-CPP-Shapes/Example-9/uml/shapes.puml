@@ -1,0 +1,25 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+class Shape {
+    # _name : std::string 
+    # name( _name : std::string) : void
+    + Shape()
+    + Shape(std::string name)
+    + ~Shape()
+    + name() : std::string 
+    + {abstract} double area() : double
+    + {abstract} perimeter() : double
+    + {abstract} clone() const : Shape*
+    + {abstract} display(std::ostream& outs) : void
+    + {abstract} void read(std::istream& ins) :void
+}
+
+
+Shape <|-- Circle
+Shape <|-- Square
+Shape <|-- Triangle
+Triangle <|-- RightTriangle
+Triangle <|-- EquilateralTriangle 
+@enduml
