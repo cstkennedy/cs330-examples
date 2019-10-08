@@ -8,6 +8,7 @@
 #include <sstream>
 #include <iomanip>
 #include <string>
+#include <string_view>
 #include <cstdlib>
 #include <cmath>
 
@@ -35,7 +36,7 @@ namespace utilities {
      */
     template<class T>
     bool readValue(std::istream &in_stream, T &value_in,
-                   std::string message, int width = 34)
+                   std::string_view message, int width = 34)
     {
         std::cout << std::left << std::setw(width) << message << ": ";
 
@@ -51,7 +52,7 @@ namespace utilities {
      * Utility function to read a line - interactive
      */
     bool readLine(std::istream &in_stream, std::string &value_in,
-                  std::string message, int width = 34);
+                  std::string_view message, int width = 34);
 
     /**
      * Print a horizontal line
@@ -62,12 +63,12 @@ namespace utilities {
     /**
      * Combine a title string and number into one string
      */
-    std::string generateNumberTitle(std::string title_text, int title_num);
+    std::string generateNumberTitle(std::string_view title_text, int title_num);
 
     /**
      * Print a centered title
      */
-    void printCenteredTitle(std::ostream& outs, std::string title, int width);
+    void printCenteredTitle(std::ostream& outs, std::string_view title, int width);
 
     /**
      * Print a heading followed by a horizonal rule
@@ -78,7 +79,7 @@ namespace utilities {
      * @param border the character with which to create the horizontal rule
      */
     inline
-    void printSeperatedHeading(std::ostream &outs, std::string heading,
+    void printSeperatedHeading(std::ostream &outs, std::string_view heading,
                                int width, char border = '-')
     {
         printCenteredTitle(outs, heading, width);
@@ -103,7 +104,7 @@ namespace utilities {
      * @param width heading width
      * @param border_char character out of whcih the dividing line is composed
      */
-    void printHeading(std::ostream& outs, std::string title,
+    void printHeading(std::ostream& outs, std::string_view title,
                       int width = W_WIDTH, char border_char = '*');
 
     /**
@@ -140,8 +141,8 @@ namespace utilities {
             return;
         }
 
-        int first_nonspace = str.find_first_not_of(" \t");
-        int last_non_space = str.find_last_not_of(" \t");
+        const int first_nonspace = str.find_first_not_of(" \t");
+        const int last_non_space = str.find_last_not_of(" \t");
 
         str = str.substr(first_nonspace,
                          last_non_space + 1);

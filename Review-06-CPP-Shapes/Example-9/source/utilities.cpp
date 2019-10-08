@@ -32,7 +32,7 @@ namespace utilities {
     }
 
     //--------------------------------------------------------------------------
-    std::string generateNumberTitle(std::string title_text, int title_num)
+    std::string generateNumberTitle(std::string_view title_text, int title_num)
     {
         std::stringstream magic;
 
@@ -42,7 +42,7 @@ namespace utilities {
     }
 
     //--------------------------------------------------------------------------
-    void printCenteredTitle(std::ostream& outs, std::string title, int width)
+    void printCenteredTitle(std::ostream& outs, std::string_view title, int width)
     {
         int magic_width = 0;
 
@@ -69,7 +69,7 @@ namespace utilities {
     }
 
     //--------------------------------------------------------------------------
-    void printHeading(std::ostream& outs, std::string title,
+    void printHeading(std::ostream& outs, std::string_view title,
                       int width, char border_char)
     {
         printHorizontalLine(outs, border_char, width);
