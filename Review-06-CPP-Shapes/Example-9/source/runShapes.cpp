@@ -152,7 +152,16 @@ void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 //------------------------------------------------------------------------------
 void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint)
 {
+    /*
     for (const std::unique_ptr<Shape>& s : toPrint) {
         outs << s->name() << "\n";
     }
+    */
+
+    std::transform(toPrint.begin(), toPrint.end(),
+                   std::ostream_iterator<std::string>(cout, "\n"),
+                   [](const std::unique_ptr<Shape>& s) -> std::string {
+                       return s->name();
+                   });
+
 }
