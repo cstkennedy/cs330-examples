@@ -2,7 +2,7 @@ MAINPROG=pointerReview
 
 SOURCES:=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-FLAGS=-std=c++14 -fsanitize=address,leak -fuse-ld=gold -Wall
+FLAGS=-std=c++14 -fsanitize=address,leak -fuse-ld=gold -Wall -Wextra -Wpedantic -Weffc++
 
 all: $(SOURCES) $(MAINPROG)
 

@@ -36,23 +36,15 @@ int main(int argc, char** argv)
     }
 
     for (std::array<int, numPowers>::iterator it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
-        cout << it << " -> " << *it << "\n";
-    }
-
     for (auto it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
         cout << it << " -> " << *it << "\n";
     }
     */
 
+    // for (const auto& v : powersOfTwo) {
     for (const int& v : powersOfTwo) {
         cout << v << "\n";
     }
-
-    /*
-    for (const auto& v : powersOfTwo) {
-        cout << v << "\n";
-    }
-    */
 
     cout << "\n";
     cout << D_LINE << "\n";
@@ -84,22 +76,19 @@ int main(int argc, char** argv)
 
     cout << "\n";
     cout << "sizeof(int) : " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)"
-         << "\n";
+                             << sizeInBits  << " (bits)" << "\n";
 
     sizeInBytes = sizeof(int&);
     sizeInBits  = sizeInBytes << 3;
 
     cout << "sizeof(int&): " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)"
-         << "\n";
+                             << sizeInBits  << " (bits)" << "\n";
 
     sizeInBytes = sizeof(int*);
     sizeInBits  = sizeInBytes << 3;
 
     cout << "sizeof(int*): " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)"
-         << "\n";
+                             << sizeInBits  << " (bits)" << "\n";
 
     sizeInBytes = sizeof(powersOfTwo);
     sizeInBits  = sizeInBytes << 3;
@@ -109,20 +98,16 @@ int main(int argc, char** argv)
 
     cout << "\n";
     cout << "sizeof(powersOfTwo): "
-         << setw(4) << sizeInBytes
-         << " (bytes) / "
-         << setw(4) << sizeInBits
-         << " (bits)"
+         << setw(4) << sizeInBytes << " (bytes) / "
+         << setw(4) << sizeInBits  << " (bits)"
          << "\n";
 
     sizeInBytes = (sizeof(int) * numPowers);
     sizeInBits  = sizeInBytes << 3;
 
     cout << "data size:           "
-         << setw(4) << sizeInBytes
-         << " (bytes) / "
-         << setw(4) << sizeInBits
-         << " (bits)"
+         << setw(4) << sizeInBytes << " (bytes) / "
+         << setw(4) << sizeInBits  << " (bits)"
          << "\n";
 
     return 0;
