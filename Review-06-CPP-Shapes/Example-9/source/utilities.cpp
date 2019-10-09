@@ -22,16 +22,6 @@ namespace utilities {
     }
 
     //--------------------------------------------------------------------------
-    void printHorizontalLine(std::ostream& outs, char line_char, int width)
-    {
-        outs << std::setfill(line_char)
-             << std::left << std::setw(width) << line_char << "\n";
-
-        // Reset outs fill
-        outs.fill(' ');
-    }
-
-    //--------------------------------------------------------------------------
     std::string generateNumberTitle(std::string_view title_text, int title_num)
     {
         std::stringstream magic;
@@ -46,39 +36,11 @@ namespace utilities {
     {
         int magic_width = 0;
 
-        magic_width = (width / 2) - (title.length() / 2) + title.length();
+        //magic_width = (width / 2) - (title.length() / 2) + title.length();
+        magic_width = (width >> 1) - (title.length() >> 1) + title.length();
 
         outs << std::right << std::setw(magic_width) << title << "\n"
              << std::left;
-    }
-
-    //--------------------------------------------------------------------------
-    void printProjectHeading(std::ostream& outs,
-                             const std::string titles[],
-                             int title_items, int width)
-    {
-        // Output the top line
-        printHorizontalLine(outs, '*', width);
-
-        // Output the title text
-        for (int i = 0; i < title_items; i++) {
-             printCenteredTitle(outs, titles[i], width);
-        }
-        // Output the bottom line
-        printHorizontalLine(outs, '*', width);
-    }
-
-    //--------------------------------------------------------------------------
-    void printHeading(std::ostream& outs, std::string_view title,
-                      int width, char border_char)
-    {
-        printHorizontalLine(outs, border_char, width);
-        printCenteredTitle(outs, title, width);
-        printHorizontalLine(outs, border_char, width);
-
-        // Reset outs
-        outs.clear();
-        outs.fill(' ');
     }
 
     //--------------------------------------------------------------------------

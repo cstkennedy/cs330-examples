@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
+#include <array>
 
 #include <memory>
 #include <iterator>
@@ -19,7 +20,7 @@
 using namespace std;
 using namespace utilities;
 
-const string PROGRAM_HEADING[] = {
+const std::array<string_view, 2> PROGRAM_HEADING = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
 };  ///< Program Title
@@ -69,7 +70,7 @@ int main(int argc, char** argv)
     cout.precision(4);
     cout.setf(ios::fixed);
 
-    printProjectHeading(cout, PROGRAM_HEADING, HEADING_LINES);
+    printProjectHeading(cout, PROGRAM_HEADING);
 
     // Examine the ShapeFactory
     printHeading(cout, "Available Shapes", 38, '~');

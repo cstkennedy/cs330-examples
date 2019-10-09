@@ -11,6 +11,7 @@
 #include <string_view>
 #include <cstdlib>
 #include <cmath>
+#include <array>
 
 /**
  * A collection of useful utilities.
@@ -57,8 +58,13 @@ namespace utilities {
     /**
      * Print a horizontal line
      */
+    //constexpr ostream is not constexpr
+    inline
     void printHorizontalLine(std::ostream& outs = std::cout,
-                             char line_char = '*', int width = W_WIDTH);
+                             char line_char = '*', int width = W_WIDTH)
+    {
+        outs << std::string(width, line_char) << "\n";
+    }
 
     /**
      * Combine a title string and number into one string
@@ -94,8 +100,22 @@ namespace utilities {
      * @param title_items number of title lines
      * @param width heading width
      */
-    void printProjectHeading(std::ostream& outs, const std::string titles[],
-                             int title_items, int width = W_WIDTH);
+    template <size_t NUM_LINES>
+    void printProjectHeading(
+        std::ostream& outs,
+        const std::array<std::string_view, NUM_LINES>& titles,
+        int width = W_WIDTH)
+    {
+        // Output the top line
+        printHorizontalLine(outs, '*', width);
+
+        // Output the title text
+        for (std::string_view line : titles) {
+             printCenteredTitle(outs, line, width);
+        }
+        // Output the bottom line
+        printHorizontalLine(outs, '*', width);
+    }
 
     /**
      * Print a centered heading
@@ -104,8 +124,14 @@ namespace utilities {
      * @param width heading width
      * @param border_char character out of whcih the dividing line is composed
      */
+    inline
     void printHeading(std::ostream& outs, std::string_view title,
-                      int width = W_WIDTH, char border_char = '*');
+                      int width, char border_char)
+    {
+        printHorizontalLine(outs, border_char, width);
+        printCenteredTitle(outs, title, width);
+        printHorizontalLine(outs, border_char, width);
+    }
 
     /**
      * Compare two floating point numbers - determine if equal within
