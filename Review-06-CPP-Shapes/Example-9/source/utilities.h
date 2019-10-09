@@ -19,62 +19,33 @@
 namespace utilities {
     const int W_WIDTH = 70;  ///< Width of the terminal window
 
-    /**
-     * Utility Function to read a value from an input stream (any type with an
-     *  operator>> defined) - non-interactive
-     */
-    template<class T>
-    bool readValue(std::istream &in_stream, T &value_in)
-    {
-        in_stream >> value_in;
-
-        // Return False on read error
-        return in_stream.good();
-    }
-
-    /**
-     * Utility Function to read a value from an input stream - interactive
-     */
-    template<class T>
-    bool readValue(std::istream &in_stream, T &value_in,
-                   std::string_view message, int width = 34)
-    {
-        std::cout << std::left << std::setw(width) << message << ": ";
-
-        return readValue(in_stream, value_in);
-    }
-
-    /**
-     * Utility function to read a line - non-interactive
-     */
-    bool readLine(std::istream &in_stream, std::string &value_in);
-
-    /**
-     * Utility function to read a line - interactive
-     */
-    bool readLine(std::istream &in_stream, std::string &value_in,
-                  std::string_view message, int width = 34);
+    // TJK - Removed input utility functions
+    // TJK - Removed NUmber string title utility function
 
     /**
      * Print a horizontal line
      */
     //constexpr ostream is not constexpr
-    inline
-    void printHorizontalLine(std::ostream& outs = std::cout,
-                             char line_char = '*', int width = W_WIDTH)
+    template<char line_char, int width = W_WIDTH>
+    void printHorizontalLine(std::ostream& outs = std::cout)
     {
         outs << std::string(width, line_char) << "\n";
     }
 
     /**
-     * Combine a title string and number into one string
-     */
-    std::string generateNumberTitle(std::string_view title_text, int title_num);
-
-    /**
      * Print a centered title
      */
-    void printCenteredTitle(std::ostream& outs, std::string_view title, int width);
+    template<int width = W_WIDTH>
+    void printCenteredTitle(std::ostream& outs, std::string_view title)
+    {
+        int magic_width = 0;
+
+        //magic_width = (width / 2) - (title.length() / 2) + title.length();
+        magic_width = (width >> 1) - (title.length() >> 1) + title.length();
+
+        outs << std::right << std::setw(magic_width) << title << "\n"
+             << std::left;
+    }
 
     /**
      * Print a heading followed by a horizonal rule
@@ -84,12 +55,11 @@ namespace utilities {
      * @param width the width of the heading
      * @param border the character with which to create the horizontal rule
      */
-    inline
-    void printSeperatedHeading(std::ostream &outs, std::string_view heading,
-                               int width, char border = '-')
+    template<char border_char = '-', int width = W_WIDTH>
+    void printSeperatedHeading(std::ostream &outs, std::string_view heading)
     {
-        printCenteredTitle(outs, heading, width);
-        printHorizontalLine(outs, border, width);
+        printCenteredTitle<width>(outs, heading);
+        printHorizontalLine<border_char, width>(outs);
     }
 
     /**
@@ -100,21 +70,19 @@ namespace utilities {
      * @param title_items number of title lines
      * @param width heading width
      */
-    template <size_t NUM_LINES>
-    void printProjectHeading(
-        std::ostream& outs,
-        const std::array<std::string_view, NUM_LINES>& titles,
-        int width = W_WIDTH)
+    template <size_t NUM_LINES, int width = W_WIDTH>
+    void printProjectHeading(std::ostream& outs,
+                             const std::array<std::string_view, NUM_LINES>& titles)
     {
         // Output the top line
-        printHorizontalLine(outs, '*', width);
+        printHorizontalLine<'*', width>(outs);
 
         // Output the title text
         for (std::string_view line : titles) {
-             printCenteredTitle(outs, line, width);
+             printCenteredTitle<width>(outs, line);
         }
         // Output the bottom line
-        printHorizontalLine(outs, '*', width);
+        printHorizontalLine<'*', width>(outs);
     }
 
     /**
@@ -124,13 +92,12 @@ namespace utilities {
      * @param width heading width
      * @param border_char character out of whcih the dividing line is composed
      */
-    inline
-    void printHeading(std::ostream& outs, std::string_view title,
-                      int width, char border_char)
+    template<char border_char, int width = W_WIDTH>
+    void printHeading(std::ostream& outs, std::string_view title)
     {
-        printHorizontalLine(outs, border_char, width);
-        printCenteredTitle(outs, title, width);
-        printHorizontalLine(outs, border_char, width);
+        printHorizontalLine<border_char, width>(outs);
+        printCenteredTitle<width>(outs, title);
+        printHorizontalLine<border_char, width>(outs);
     }
 
     /**

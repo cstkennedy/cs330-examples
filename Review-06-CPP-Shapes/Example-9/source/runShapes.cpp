@@ -73,11 +73,11 @@ int main(int argc, char** argv)
     printProjectHeading(cout, PROGRAM_HEADING);
 
     // Examine the ShapeFactory
-    printHeading(cout, "Available Shapes", 38, '~');
+    printHeading<'~', 38>(cout, "Available Shapes");
 
     // List the available shapes
     ShapeFactory::listKnown(cout);
-    printHorizontalLine(cout, '-', 38);
+    printHorizontalLine<'-', 38>(cout);
     cout << right << setw(2)
          << ShapeFactory::numberKnown()
          << " shapes available."
@@ -89,13 +89,13 @@ int main(int argc, char** argv)
     ShapeCollection shapes = readShapes(shapesFile);
 
     // Print all the shapes
-    printHeading(cout, "Display All Shapes", 38, '~');
+    printHeading<'~', 38>(cout, "Display All Shapes");
     printShapes(cout, shapes);
 
-    printHeading(cout, "Display Shape Names", 38, '~');
+    printHeading<'~', 38>(cout, "Display Shape Names");
     printShapeNames(cout, shapes);
 
-    printHeading(cout, "Display Largest Shape (Area)", 38, '~');
+    printHeading<'~', 38>(cout, "Display Largest Shape (Area)");
     ShapeCollection::const_iterator it;
 
     it = std::max_element(shapes.begin(), shapes.end(),
@@ -104,14 +104,14 @@ int main(int argc, char** argv)
                           });
     cout << *(*it) << "\n";
 
-    printHeading(cout, "Display Smallest Shape (Perimeter)", 38, '~');
+    printHeading<'~', 38>(cout, "Display Smallest Shape (Perimeter)");
     it = std::min_element(shapes.begin(), shapes.end(),
                           [](const auto& lhs, const auto& rhs) {
                               return (lhs)->perimeter() < (rhs)->perimeter();
                           });
     cout << *(*it) << "\n";
 
-    printHeading(cout, "Display Sorted by Name", 38, '~');
+    printHeading<'~', 38>(cout, "Display Sorted by Name");
     std::sort(shapes.begin(), shapes.end(),
               [](const auto& lhs, const auto& rhs) {
                   return (lhs)->name() < (rhs)->name();
