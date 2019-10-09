@@ -7,26 +7,21 @@
 
 //------------------------------------------------------------------------------
 Square::Square()
-	:Shape("Square")
+	:Square(1)
 {
-    // this->_name = "Square";
-    this->_side = 1;
 }
 
 //------------------------------------------------------------------------------
 Square::Square(double s)
-	:Shape("Square")
+	:Shape("Square"),
+     _side(s)
 {
-    // this->_name = "Square";
-    this->_side = s;
 }
 
 //------------------------------------------------------------------------------
 Square::Square(const Square &src)
-	:Shape("Square")
+	:Square(src._side)
 {
-    // this->_name = src._name;
-    this->_side = src._side;
 }
 
 //------------------------------------------------------------------------------

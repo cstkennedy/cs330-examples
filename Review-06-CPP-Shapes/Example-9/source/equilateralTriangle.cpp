@@ -9,27 +9,21 @@ const double EquilateralTriangle::ROOT_3_DIV_4 = sqrt(3) / 4;
 
 //------------------------------------------------------------------------------
 EquilateralTriangle::EquilateralTriangle()
-    :Triangle()
+    :EquilateralTriangle(1)
 {
-    _name = "Equilateral Triangle";
-
-    side(1);
 }
 
 //------------------------------------------------------------------------------
 EquilateralTriangle::EquilateralTriangle(double s)
+    :Triangle(s, s, s)
 {
     _name = "Equilateral Triangle";
-
-    this->side(s);
 }
 
 //------------------------------------------------------------------------------
 EquilateralTriangle::EquilateralTriangle(const EquilateralTriangle &src)
+    :EquilateralTriangle(src.side())
 {
-    this->_name = src._name;
-
-    this->side(src.side());
 }
 
 //------------------------------------------------------------------------------

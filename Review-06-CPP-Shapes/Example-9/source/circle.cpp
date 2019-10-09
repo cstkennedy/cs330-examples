@@ -10,26 +10,23 @@ const double Circle::TAU = 2 * PI;
 
 //------------------------------------------------------------------------------
 Circle::Circle()
-	:Shape("Circle")
+	:Shape("Circle"),
+     _radius(1)
 {
-    // this->_name   = "Circle";
-    this->_radius = 1;
 }
 
 //------------------------------------------------------------------------------
 Circle::Circle(double r)
-	:Shape("Circle")
+	:Shape("Circle"),
+     _radius(r)
 {
-    // this->_name   = "Circle";
-    this->_radius = r;
 }
 
 //------------------------------------------------------------------------------
-Circle::Circle(const Circle &src)
-	:Shape(src._name)
+Circle::Circle(const Circle& src)
+	:Shape(src._name),
+     _radius(src._radius)
 {
-    // this->_name   = src._name;
-    this->_radius = src._radius;
 }
 
 //------------------------------------------------------------------------------

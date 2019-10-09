@@ -66,33 +66,33 @@ class Circle: public Shape {
          *
          * @return area
          */
-        virtual double area() const;
+        virtual double area() const override;
 
         /**
          * Compute the perimeter using @f$ 2 \pi r @f$
          *
          * @return perimeter
          */
-        virtual double perimeter() const;
+        virtual double perimeter() const override;
 
         /**
          * Return a new duplicate Circle
          */
-        virtual Shape* clone() const;
+        virtual Shape* clone() const override;
 
         /**
          * Print the Circle
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display(std::ostream &outs) const;
+        virtual void display(std::ostream &outs) const override;
 
         /**
          * Read the Circle
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins);
+        virtual void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------
