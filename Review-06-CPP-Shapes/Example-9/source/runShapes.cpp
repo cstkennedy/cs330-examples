@@ -70,14 +70,14 @@ int main(int argc, char** argv)
     cout.precision(4);
     cout.setf(ios::fixed);
 
-    printProjectHeading(cout, PROGRAM_HEADING);
+    cout << generateProjectHeading(PROGRAM_HEADING);
 
     // Examine the ShapeFactory
-    printHeading<'~', 38>(cout, "Available Shapes");
+    cout << generateHeading<'~', 38>("Available Shapes");
 
     // List the available shapes
     ShapeFactory::listKnown(cout);
-    printHorizontalLine<'-', 38>(cout);
+    cout << generateHorizontalLine<'-', 38>();
     cout << right << setw(2)
          << ShapeFactory::numberKnown()
          << " shapes available."
@@ -89,13 +89,13 @@ int main(int argc, char** argv)
     ShapeCollection shapes = readShapes(shapesFile);
 
     // Print all the shapes
-    printHeading<'~', 38>(cout, "Display All Shapes");
+    cout << generateHeading<'~', 38>("Display All Shapes");
     printShapes(cout, shapes);
 
-    printHeading<'~', 38>(cout, "Display Shape Names");
+    cout << generateHeading<'~', 38>("Display Shape Names");
     printShapeNames(cout, shapes);
 
-    printHeading<'~', 38>(cout, "Display Largest Shape (Area)");
+    cout << generateHeading<'~', 38>("Display Largest Shape (Area)");
     ShapeCollection::const_iterator it;
 
     it = std::max_element(shapes.begin(), shapes.end(),
@@ -104,14 +104,14 @@ int main(int argc, char** argv)
                           });
     cout << *(*it) << "\n";
 
-    printHeading<'~', 38>(cout, "Display Smallest Shape (Perimeter)");
+    cout << generateHeading<'~', 38>("Display Smallest Shape (Perimeter)");
     it = std::min_element(shapes.begin(), shapes.end(),
                           [](const auto& lhs, const auto& rhs) {
                               return (lhs)->perimeter() < (rhs)->perimeter();
                           });
     cout << *(*it) << "\n";
 
-    printHeading<'~', 38>(cout, "Display Sorted by Name");
+    cout << generateHeading<'~', 38>("Display Sorted by Name");
     std::sort(shapes.begin(), shapes.end(),
               [](const auto& lhs, const auto& rhs) {
                   return (lhs)->name() < (rhs)->name();

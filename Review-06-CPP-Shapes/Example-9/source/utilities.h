@@ -20,31 +20,34 @@ namespace utilities {
     const int W_WIDTH = 70;  ///< Width of the terminal window
 
     // TJK - Removed input utility functions
-    // TJK - Removed NUmber string title utility function
+    // TJK - Removed Number string title utility function
+    // TJK - Added string_view concatenation helper
+
+    inline
+    std::string operator+(std::string_view lhs, std::string_view rhs)
+    {
+        return std::string(lhs.data()) + std::string(rhs.data());
+    }
 
     /**
      * Print a horizontal line
      */
     //constexpr ostream is not constexpr
     template<char line_char, int width = W_WIDTH>
-    void printHorizontalLine(std::ostream& outs = std::cout)
+    constexpr std::string generateHorizontalLine()
     {
-        outs << std::string(width, line_char) << "\n";
+        return std::string(width, line_char) + "\n";
     }
 
     /**
      * Print a centered title
      */
     template<int width = W_WIDTH>
-    void printCenteredTitle(std::ostream& outs, std::string_view title)
+    constexpr std::string generateCenteredTitle(std::string_view title)
     {
-        int magic_width = 0;
+        const int magic_width = (width >> 1) - (title.length() >> 1);
 
-        //magic_width = (width / 2) - (title.length() / 2) + title.length();
-        magic_width = (width >> 1) - (title.length() >> 1) + title.length();
-
-        outs << std::right << std::setw(magic_width) << title << "\n"
-             << std::left;
+        return std::string(magic_width, ' ') + title + "\n";
     }
 
     /**
@@ -56,10 +59,10 @@ namespace utilities {
      * @param border the character with which to create the horizontal rule
      */
     template<char border_char = '-', int width = W_WIDTH>
-    void printSeperatedHeading(std::ostream &outs, std::string_view heading)
+    constexpr std::string generateSeperatedHeading(std::string_view heading)
     {
-        printCenteredTitle<width>(outs, heading);
-        printHorizontalLine<border_char, width>(outs);
+        return generateCenteredTitle<width>(heading)
+             + generateHorizontalLine<border_char, width>();
     }
 
     /**
@@ -71,18 +74,21 @@ namespace utilities {
      * @param width heading width
      */
     template <size_t NUM_LINES, int width = W_WIDTH>
-    void printProjectHeading(std::ostream& outs,
-                             const std::array<std::string_view, NUM_LINES>& titles)
+    std::string generateProjectHeading(const std::array<std::string_view, NUM_LINES>& titles)
     {
+        std::string the_heading;
+
         // Output the top line
-        printHorizontalLine<'*', width>(outs);
+        the_heading += generateHorizontalLine<'*', width>();
 
         // Output the title text
         for (std::string_view line : titles) {
-             printCenteredTitle<width>(outs, line);
+             the_heading += generateCenteredTitle<width>(line);
         }
         // Output the bottom line
-        printHorizontalLine<'*', width>(outs);
+        the_heading += generateHorizontalLine<'*', width>();
+
+        return the_heading;
     }
 
     /**
@@ -93,11 +99,11 @@ namespace utilities {
      * @param border_char character out of whcih the dividing line is composed
      */
     template<char border_char, int width = W_WIDTH>
-    void printHeading(std::ostream& outs, std::string_view title)
+    constexpr std::string generateHeading(std::string_view title)
     {
-        printHorizontalLine<border_char, width>(outs);
-        printCenteredTitle<width>(outs, title);
-        printHorizontalLine<border_char, width>(outs);
+        return generateHorizontalLine<border_char, width>()
+             + generateCenteredTitle<width>(title)
+             + generateHorizontalLine<border_char, width>();
     }
 
     /**
