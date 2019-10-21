@@ -37,7 +37,7 @@ class Circle: public Shape {
          *
          * @param src the Circle to copy
          */
-        Circle(const Circle &src);
+        Circle(const Circle &src) = default;
 
         /**
          * Circle Destructor
@@ -45,7 +45,7 @@ class Circle: public Shape {
         virtual ~Circle() = default;
 
         // Thank the compiler
-        Circle& operator(const Circle& rhs) = default;
+        Circle& operator=(const Circle& rhs) = default;
 
         /**
          * Return the radius length

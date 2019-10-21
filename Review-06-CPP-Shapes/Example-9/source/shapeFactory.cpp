@@ -35,7 +35,7 @@ bool ShapeFactory::isKnown(std::string_view name)
 {
     return std::find_if(begin(ShapeFactory::_known_shapes),
                         end(ShapeFactory::_known_shapes),
-                        [name](const ShapePair& pair) -> bool {
+                        [&name](const ShapePair& pair) -> bool {
                             return (pair.first == name);
                         });
 }
