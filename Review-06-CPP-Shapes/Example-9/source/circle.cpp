@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include <iomanip>
 
@@ -19,18 +19,6 @@ Circle::Circle()
 Circle::Circle(double r)
 	:Shape("Circle"),
      _radius(r)
-{
-}
-
-//------------------------------------------------------------------------------
-Circle::Circle(const Circle& src)
-	:Shape(src._name),
-     _radius(src._radius)
-{
-}
-
-//------------------------------------------------------------------------------
-Circle::~Circle()
 {
 }
 

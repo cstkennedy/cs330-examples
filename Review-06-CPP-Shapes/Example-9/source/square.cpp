@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include <iomanip>
 
@@ -15,17 +15,6 @@ Square::Square()
 Square::Square(double s)
 	:Shape("Square"),
      _side(s)
-{
-}
-
-//------------------------------------------------------------------------------
-Square::Square(const Square &src)
-	:Square(src._side)
-{
-}
-
-//------------------------------------------------------------------------------
-Square::~Square()
 {
 }
 

@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef SHAPE_H_INCLUDED
 #define SHAPE_H_INCLUDED

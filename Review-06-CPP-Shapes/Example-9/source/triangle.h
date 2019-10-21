@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef TRIANGLE_H_INCLUDED
 #define TRIANGLE_H_INCLUDED
@@ -40,12 +40,15 @@ class Triangle: public Shape {
          *
          * @param src the Triangle to copy
          */
-        Triangle(const Triangle &src);
+        Triangle(const Triangle &src) = default;
 
         /**
          * Deconstruct a Triangle
          */
-        virtual ~Triangle();
+        virtual ~Triangle() = default;
+
+        // Let the compiler write this...
+        Triangle& operator=(const Triangle& rhs) = default;
 
         /**
          * Length of side A

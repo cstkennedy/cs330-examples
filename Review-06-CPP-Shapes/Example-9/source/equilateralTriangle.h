@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef EQUILATERAL_TRIANGLE_H_INCLUDED
 #define EQUILATERAL_TRIANGLE_H_INCLUDED
@@ -36,12 +36,15 @@ class EquilateralTriangle: public Triangle {
          *
          * @param src the EquilateralTriangle to copy
          */
-        EquilateralTriangle(const EquilateralTriangle &src);
+        EquilateralTriangle(const EquilateralTriangle &src) = default;
 
         /**
          * Deconstruct the EquilateralTriangle
          */
-        virtual ~EquilateralTriangle();
+        virtual ~EquilateralTriangle() = default;
+
+        // Let the compiler write this for me
+        EquilateralTriangle& operator=(const EquilateralTriangle& rhs) = default;
 
         /**
          * Compute the height using

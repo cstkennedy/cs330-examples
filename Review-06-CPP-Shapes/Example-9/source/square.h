@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef SQUARE_H_INCLUDED
 #define SQUARE_H_INCLUDED
@@ -34,12 +34,15 @@ class Square: public Shape {
          *
          * @param src the Square to copy
          */
-        Square(const Square &src);
+        Square(const Square& src) = default;
 
         /**
          * Square Destructor
          */
-        virtual ~Square();
+        virtual ~Square() = default;
+
+        // Let the compiler hook me up
+        Square& operator=(const Square& rhs) = default;
 
         /**
          * Return the side length

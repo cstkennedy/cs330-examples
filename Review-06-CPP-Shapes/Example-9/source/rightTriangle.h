@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef RIGHT_TRIANGLE_H_INCLUDED
 #define RIGHT_TRIANGLE_H_INCLUDED
@@ -46,12 +46,15 @@ class RightTriangle: public Triangle{
          *
          * @param src the RightTriangle to copy
          */
-        RightTriangle(const RightTriangle &src);
+        RightTriangle(const RightTriangle &src) = default;
 
         /**
          * Deconstruct the RightTriangle
          */
-        virtual ~RightTriangle();
+        virtual ~RightTriangle() = default;
+
+        // Let the compiler write this for me
+        RightTriangle& operator=(const RightTriangle& rhs) = default;
 
         /**
          * Return the base

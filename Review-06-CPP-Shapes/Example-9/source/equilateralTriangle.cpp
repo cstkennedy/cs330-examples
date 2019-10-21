@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include <iomanip>
 
@@ -18,17 +18,6 @@ EquilateralTriangle::EquilateralTriangle(double s)
     :Triangle(s, s, s)
 {
     _name = "Equilateral Triangle";
-}
-
-//------------------------------------------------------------------------------
-EquilateralTriangle::EquilateralTriangle(const EquilateralTriangle &src)
-    :EquilateralTriangle(src.side())
-{
-}
-
-//------------------------------------------------------------------------------
-EquilateralTriangle::~EquilateralTriangle()
-{
 }
 
 //------------------------------------------------------------------------------

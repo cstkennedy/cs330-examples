@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef CIRCLE_H_INCLUDED
 #define CIRCLE_H_INCLUDED
@@ -42,7 +42,10 @@ class Circle: public Shape {
         /**
          * Circle Destructor
          */
-        virtual ~Circle();
+        virtual ~Circle() = default;
+
+        // Thank the compiler
+        Circle& operator(const Circle& rhs) = default;
 
         /**
          * Return the radius length

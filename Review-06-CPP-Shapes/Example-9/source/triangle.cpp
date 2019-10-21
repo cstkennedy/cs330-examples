@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include <iomanip>
 
@@ -18,20 +18,6 @@ Triangle::Triangle(double _side_a, double _side_b, double _side_c)
     this->_side_a = _side_a;
     this->_side_b = _side_b;
     this->_side_c = _side_c;
-}
-
-//------------------------------------------------------------------------------
-Triangle::Triangle(const Triangle &src)
-    :Shape("Triangle")
-{
-    this->_side_a = src._side_a;
-    this->_side_b = src._side_b;
-    this->_side_c = src._side_c;
-}
-
-//------------------------------------------------------------------------------
-Triangle::~Triangle()
-{
 }
 
 //------------------------------------------------------------------------------
