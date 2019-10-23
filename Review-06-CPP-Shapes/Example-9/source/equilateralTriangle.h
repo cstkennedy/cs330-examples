@@ -74,24 +74,24 @@ class EquilateralTriangle: public Triangle {
          *
          * @return the area
          */
-        virtual double area() const;
+        double area() const override;
 
         /**
          * Return a new duplicate EquilateralTriangle
          */
-        virtual Shape* clone() const;
+        Shape* clone() const override;
 
         /*
          * Print the EquilateralTriangle
          */
-        virtual void display(std::ostream &outs) const;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the Equilateral Triangle
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins);
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------

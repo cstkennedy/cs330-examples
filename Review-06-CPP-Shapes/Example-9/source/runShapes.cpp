@@ -25,8 +25,6 @@ const std::array<string_view, 2> PROGRAM_HEADING = {
     "Thomas J. Kennedy"
 };  ///< Program Title
 
-const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
-
 using ShapeCollection = std::vector<std::unique_ptr<Shape>>;
 
 /**
@@ -93,7 +91,12 @@ int main(int argc, char** argv)
     printShapes(cout, shapes);
 
     cout << generateHeading<'~', 38>("Display Shape Names");
-    printShapeNames(cout, shapes);
+    // printShapeNames(cout, shapes);
+    std::transform(shapes.begin(), shapes.end(),
+                   std::ostream_iterator<std::string>(cout, "\n"),
+                   [](const unique_ptr<Shape>& shp) -> std::string {
+                       return shp->name();
+                   });
 
     cout << generateHeading<'~', 38>("Display Largest Shape (Area)");
     ShapeCollection::const_iterator it;
@@ -129,7 +132,7 @@ ShapeCollection readShapes(std::istream& ins)
     std::istream_iterator<Shape*> it(ins);
     std::istream_iterator<Shape*> end;
 
-	// Let us re-enact the Back-to-the-Future I Guitar Scene!
+    // Let us re-enact the Back-to-the-Future I Guitar Scene!
     for_each(it, end,
              [&collection](Shape* s) {
                   if (s != nullptr) {

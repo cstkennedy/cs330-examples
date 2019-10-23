@@ -10,14 +10,14 @@ const double Circle::TAU = 2 * PI;
 
 //------------------------------------------------------------------------------
 Circle::Circle()
-	:Shape("Circle"),
+    :Shape("Circle"),
      _radius(1)
 {
 }
 
 //------------------------------------------------------------------------------
 Circle::Circle(double r)
-	:Shape("Circle"),
+    :Shape("Circle"),
      _radius(r)
 {
 }

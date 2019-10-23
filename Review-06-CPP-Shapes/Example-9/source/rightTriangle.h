@@ -93,30 +93,31 @@ class RightTriangle: public Triangle{
          *
          * @return the area
          */
-        virtual double area() const;
+        double area() const override;
 
         /**
          * Return a new duplicate RightTriangle
          */
-        virtual Shape* clone() const;
+        Shape* clone() const override;
 
         /**
          * Print the RightTriangle
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display(std::ostream &outs) const;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the RightTriangle
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins);
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------
-inline double RightTriangle::computeHypotenuse(double base, double height)
+inline
+double RightTriangle::computeHypotenuse(double base, double height)
 {
     return sqrt((base * base) + (height * height));
 }

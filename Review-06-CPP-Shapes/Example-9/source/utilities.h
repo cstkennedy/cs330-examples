@@ -31,8 +31,9 @@ namespace utilities {
 
     /**
      * Print a horizontal line
+     *
+     * ostream is not constexpr
      */
-    //constexpr ostream is not constexpr
     template<char line_char, int width = W_WIDTH>
     constexpr std::string generateHorizontalLine()
     {
@@ -107,16 +108,6 @@ namespace utilities {
     }
 
     /**
-     * Compare two floating point numbers - determine if equal within
-     * a specified threshold
-     *
-     * @param lhs first number
-     * @param rhs second number
-     * @param threshold tolerance
-     */
-    bool areEqual(double lhs, double rhs, double threshold = 1e-6);
-
-    /**
      * Print a blankline
      */
     inline
@@ -146,5 +137,15 @@ namespace utilities {
         str = str.substr(first_nonspace,
                          last_non_space + 1);
     }
+
+	/**
+     * Compare two floating point numbers - determine if equal within
+     * a specified threshold
+     *
+     * @param lhs first number
+     * @param rhs second number
+     * @param threshold tolerance
+     */
+    bool areEqual(double lhs, double rhs, double threshold = 1e-6);
 }
 #endif

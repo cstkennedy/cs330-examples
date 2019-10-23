@@ -61,33 +61,33 @@ class Square: public Shape {
          *
          * @return area
          */
-        virtual double area() const override;
+        double area() const override;
 
         /**
          * Compute the perimeter
          *
          * @return perimeter
          */
-        virtual double perimeter() const override;
+        double perimeter() const override;
 
         /**
          * Return a new duplicate Square
          */
-        virtual Shape* clone() const override;
+        Shape* clone() const override;
 
         /**
          * Print the Square
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display(std::ostream &outs) const override;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the Square
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins) override;
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------

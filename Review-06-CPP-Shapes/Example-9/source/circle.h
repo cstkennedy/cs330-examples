@@ -69,33 +69,36 @@ class Circle: public Shape {
          *
          * @return area
          */
-        virtual double area() const override;
+        double area() const override;
 
         /**
          * Compute the perimeter using @f$ 2 \pi r @f$
          *
          * @return perimeter
          */
-        virtual double perimeter() const override;
+        double perimeter() const override;
 
         /**
          * Return a new duplicate Circle
          */
-        virtual Shape* clone() const override;
+        Shape* clone() const override;
 
         /**
          * Print the Circle
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display(std::ostream &outs) const override;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the Circle
          *
          * @param ins the input stream--i.e., source
+         *
+         * "virtual" is redundant if function is already declared as
+         * "override"
          */
-        virtual void read(std::istream &ins) override;
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------
