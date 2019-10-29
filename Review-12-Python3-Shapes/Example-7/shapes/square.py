@@ -13,9 +13,15 @@ class Square(Shape):
         Construct a Square
         """
 
-        super().__init__("Square")
-
         self._side = side
+
+    @property
+    def name(self) -> str:
+        """
+        Provide read-only access to the name attribute.
+        """
+
+        return "Square"
 
     @property
     def side(self):

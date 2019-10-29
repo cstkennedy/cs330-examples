@@ -17,8 +17,15 @@ class Circle(Shape):
         Construct a Circle
         """
 
-        super().__init__("Circle")
         self._radius = radius
+
+    @property
+    def name(self) -> str:
+        """
+        Provide read-only access to the name attribute.
+        """
+
+        return "Circle"
 
     @property
     def radius(self):

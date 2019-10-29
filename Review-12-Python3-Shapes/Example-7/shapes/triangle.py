@@ -10,11 +10,18 @@ class Triangle(Shape):
     """
 
     def __init__(self, a=1, b=1, c=1):
-        super().__init__("Triangle")
 
         self._side_a = a
         self._side_b = b
         self._side_c = c
+
+    @property
+    def name(self) -> str:
+        """
+        Provide read-only access to the name attribute.
+        """
+
+        return "Triangle"
 
     @property
     def side_a(self):
@@ -104,7 +111,14 @@ class EquilateralTriangle(Triangle):
         with all sides set to 1 by default.
         """
         super().__init__(side, side, side)
-        self.name = "Equilateral Triangle"
+
+    @property
+    def name(self) -> str:
+        """
+        Provide read-only access to the name attribute.
+        """
+
+        return "Equilateral Triangle"
 
     @property
     def height(self):
@@ -187,12 +201,19 @@ class RightTriangle(Triangle):
         with base and height set to 1 by
         default.
         """
-        self.name = "Right Triangle"
 
         self.side_a = base
         self.side_b = height
         self.side_c = RightTriangle.__compute_hypotenuse(self.side_a,
                                                          self.side_b)
+
+    @property
+    def name(self) -> str:
+        """
+        Provide read-only access to the name attribute.
+        """
+
+        return "Right Triangle"
 
     @property
     def base(self):
