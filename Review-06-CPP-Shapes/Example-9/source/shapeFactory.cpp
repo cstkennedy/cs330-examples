@@ -37,7 +37,7 @@ bool ShapeFactory::isKnown(std::string_view name)
                         end(ShapeFactory::_known_shapes),
                         [&name](const ShapePair& pair) -> bool {
                             return (pair.first == name);
-                        });
+                        }) != std::end(_known_shapes);
 }
 
 //------------------------------------------------------------------------------

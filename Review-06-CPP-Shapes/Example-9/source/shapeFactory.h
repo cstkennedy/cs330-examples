@@ -66,8 +66,6 @@ class ShapeFactory{
         static int numberKnown();
 };
 
-
-
 /**
  * Create the appropriate Shape class
  *

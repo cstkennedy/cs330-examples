@@ -70,10 +70,9 @@ int main(int argc, char** argv)
 
     cout << generateProjectHeading(PROGRAM_HEADING);
 
-    // Examine the ShapeFactory
+    // Examine the ShapeFactory & list available shapes
     cout << generateHeading<'~', 38>("Available Shapes");
 
-    // List the available shapes
     ShapeFactory::listKnown(cout);
     cout << generateHorizontalLine<'-', 38>();
     cout << right << setw(2)
@@ -98,6 +97,7 @@ int main(int argc, char** argv)
                        return shp->name();
                    });
 
+    //--------------------------------------------------------------------------
     cout << generateHeading<'~', 38>("Display Largest Shape (Area)");
     ShapeCollection::const_iterator it;
 
@@ -107,6 +107,7 @@ int main(int argc, char** argv)
                           });
     cout << *(*it) << "\n";
 
+    //--------------------------------------------------------------------------
     cout << generateHeading<'~', 38>("Display Smallest Shape (Perimeter)");
     it = std::min_element(shapes.begin(), shapes.end(),
                           [](const auto& lhs, const auto& rhs) {
@@ -114,6 +115,7 @@ int main(int argc, char** argv)
                           });
     cout << *(*it) << "\n";
 
+    //--------------------------------------------------------------------------
     cout << generateHeading<'~', 38>("Display Sorted by Name");
     std::sort(shapes.begin(), shapes.end(),
               [](const auto& lhs, const auto& rhs) {
@@ -166,5 +168,4 @@ void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint)
                    [](const std::unique_ptr<Shape>& s) -> std::string {
                        return s->name();
                    });
-
 }
