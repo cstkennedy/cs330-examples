@@ -19,9 +19,9 @@ int main(int argc, char** argv)
     int index = 3;  // Desired length of sequence
 
     // Fibonaccci
-    int   fm2 = 1;  // n-2 (previous previous) fibonacci number
-    int   fm1 = 1;  // n-1 (previous) fibonacci number
-    int   f   = 0;  // current fibonacci number
+    int fm2 = 1;  // n-2 (previous previous) fibonacci number
+    int fm1 = 1;  // n-1 (previous) fibonacci number
+    int f   = 0;  // current fibonacci number
 
     // Prompt the user
     cout << "Generate how many numbers? ";
