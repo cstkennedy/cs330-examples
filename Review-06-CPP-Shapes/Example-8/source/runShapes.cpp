@@ -100,6 +100,7 @@ int main(int argc, char** argv)
     ShapeCollection::const_iterator it;
 
     it = std::max_element(shapes.begin(), shapes.end(),
+                          // [](const unique_ptr<Shape>& lhs, const unique_ptr<Shape>& rhs) {
                           [](const auto& lhs, const auto& rhs) {
                               return (lhs)->area() < (rhs)->area();
                           });
