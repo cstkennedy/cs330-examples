@@ -4,61 +4,75 @@ TOC: yes
 
 %define <\ExampleZip> <zipFile> {[zipFile](./zipFile)}
 
-This page will be updated throughout the semester as we cover topics of import.
-
 **Everything on this page is subject to change over the next 16 weeks.** I will
 tweak existing materials and add additional materials throughout the semester.
 
+---
+
+If you are logged into `atria.cs.odu.edu` or `sirius.cs.odu.edu` you can copy
+the zip files from
+
+> `/home/tkennedy/Public/cs330`.
+
+---
 
 # Review 1: Linked Lists
 
-During this Review, I discussed Linked Lists and addressed questions I received
-via email and during my office hours.
+During this Review, I discussed Linked Lists and addressed questions usually
+received via email and during office hours.
 
-  * Example 1 was an implementation of Linked Lists similar to what one would
+\bSidebar
+
+Note that while there is an Example 5, it will not be discussed in detail...
+yet.
+
+Example 6 will cover Memory Pools as a topic of interest. Just like Example 5,
+you are not required (or expected) to apply this material on Assignment 1.
+
+\eSidebar
+
+  * **Example 1** was an implementation of Linked Lists similar to what one would
     see at the end of CS 250.
     * I briefly discussed command line arguments during this example.
     * The Linked List destructor was introduced in this example.
-
-  * Example 2 was a similar implementation, but with the Node struct moved
+  * **Example 2** was a similar implementation, but with the Node struct moved
     within the scope of the Inventory class.
-
-  * Example 3 included a discussion of the Big-3.
+  * **Example 3** included a discussion of the Big-3.
     * This included a discussion of the LeakTracer utility.
-
-  * Example 4 covered the Copy-and-Swap Idiom.
+  * **Example 4** covered the Copy-and-Swap Idiom.
     * I started with a brief review of how to explore an unfamiliar code.
     * I discussed the `-fsanitize` compilation flag and using the compiler to
       detect memory leaks.
+  * **Example 5** is a preview of what we will have at the end of Review 03.
 
-
-All source code is available in \ExampleZip{Review-01.zip}.
-
-This Review is split into three (3) recordings:
+All source code is available in \ExampleZip{Review-01.zip}. This Review is
+split into three (3) recordings:
 
   - [Part 1 (in which I discuss Examples 1 & 2)](https://youtu.be/WwHUr1N2z7A).
   - [Part 2 (in which I discuss Example 3)](https://youtu.be/zuD8Oc4v22c).
   - [Part 3 (in which I discuss Example 4)](https://youtu.be/sBKR0KOG3fc).
 
 
-# Review 2
+# Review 2: Well Defined Interfaces
 
-  I discussed two main themes:
+I discussed two main themes in this review:
 
-  1. ADTs as a contract and creating a complete ADT interface. Refer to the
-     [C++ class checklist](doc:implementingADTS)).
+  1. ADTs as a contract and creating a complete ADT interface.
+    - Read through [C++ class checklist](doc:implementingADTS).
+    - **Skim** through [Abstraction with Iterators](doc:designDiscussionIterators).
   2. The abstraction provided by defining such an interface. We explored this
      by using the STL container interface as a case study.
-    - Examples 1 through 7 were the focus.
-    - Example 8 served to motivate the need for, based on the data-structure, a
-      formal iterator implementation. We will revisit the Big-3 in Review 03.
+
+Examples 1 through 7 were the focus. Example 8 served to motivate the need for,
+based on the data-structure, a formal iterator implementation. We will revisit
+the Big-3 in Review 03 (i.e., add iterators to memory-leak free codes).
 
 All source code is available in \ExampleZip{Review-02.zip}. The recorded review
 is located [here](https://youtu.be/dWcPTtZl6Gs). _Note that this is the Fall
 2017 recording._
 
 
-# Review 3
+# Review 3: Seperation of Concerns (And No Memory Leaks)
 
 This example takes the Linked List and Dynamic Array examples from
 Review 02 and incorporates the Big-3 (Examples 1 to 4). Example 5 covers the
@@ -68,11 +82,13 @@ Examples 6 through 8 cover how to generalize our code with: template tricks, and
 iterators.
 
 All source code is available in \ExampleZip{Review-03.zip}. The recorded
-review is split into two parts:
+review is split into three parts:
 
   1. [Part 1](https://youtu.be/hi7rGZ4gWlw) - Examples 1 through 4.
   2. [Part 2](https://youtu.be/wmv6MgQSWpY) - Example 5 (review) through Example 8.
+  2. Part 3 (TBA) - Example 9 & Example 9 (Rust Version).
 
+---
 
 # Review 4: Design, Tools, and Testing
 
