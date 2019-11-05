@@ -10,6 +10,7 @@
 #include <memory>
 #include <iterator>
 #include <algorithm>
+#include <functional>
 
 #include "utilities.h"
 #include "shapeFactory.h"
@@ -44,6 +45,37 @@ void printShapes(std::ostream& outs, const ShapeCollection& toPrint);
  * specified output stream
  */
 void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint);
+
+/**
+ * Implementation of a `transform_if` based on `transform` as documented at
+ * https://en.cppreference.com/w/cpp/algorithm/transform
+ *
+ * @tparam InputIt iterator for the source container
+ * @tparam OutputIt iterator that allows insertion into an output container
+ * @tparam UnaryOp1 boolean function that determines whether include or skip
+ *         source data
+ * @tparam UnaryOp2 function that transforms data
+ *
+ * @todo discuss why this is incomplete
+ */
+template<class InputIt, class OutputIt, class UnaryOp1, class UnaryOp2>
+OutputIt transform_if(InputIt itInputStart,
+                      InputIt itInputEnd,
+                      OutputIt itOutput,
+                      UnaryOp1 conditionOperation,
+                      UnaryOp2 transformOperation)
+{
+    while (itInputStart != itInputEnd) {
+
+        if (conditionOperation(*itInputStart)) {
+            *itOutput++ = transformOperation(*itInputStart);
+        }
+
+        itInputStart++;
+    }
+
+    return itOutput;
+}
 
 /**
  * This program accepts command line
@@ -135,12 +167,28 @@ ShapeCollection readShapes(std::istream& ins)
     std::istream_iterator<Shape*> end;
 
     // Let us re-enact the Back-to-the-Future I Guitar Scene!
+    //
+    // std::copy_if would copy raw pointers, not unique pointers.
+    //
+    // To get our desired result we would need a copy-if folowed by a transform.
+    //
+    /*
     for_each(it, end,
              [&collection](Shape* s) {
                   if (s != nullptr) {
                       collection.emplace_back(s);
                   }
              });
+    */
+
+    transform_if(it, end,
+                 std::back_inserter(collection),
+                 [](Shape* rawPtr) -> bool {
+                     return rawPtr != nullptr;
+                 },
+                 [](Shape* rawPtr) {
+                     return std::unique_ptr<Shape>(rawPtr);
+                 });
 
     return collection;
 }
