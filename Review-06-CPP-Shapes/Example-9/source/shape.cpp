@@ -15,11 +15,6 @@ Shape::Shape(std::string name)
 }
 
 //------------------------------------------------------------------------------
-Shape::~Shape()
-{
-}
-
-//------------------------------------------------------------------------------
 void Shape::display(std::ostream &outs) const
 {
     outs << std::left  << std::setw(WIDTH_LABEL)

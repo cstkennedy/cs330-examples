@@ -41,7 +41,7 @@ class Shape {
         /**
          * Shape Destructor
          */
-        virtual ~Shape();
+        virtual ~Shape() = default;
 
         /**
          * Return the name

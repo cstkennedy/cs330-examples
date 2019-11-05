@@ -16,10 +16,10 @@ ShapeFactory::ShapePair ShapeFactory::_known_shapes[] = {
 Shape* ShapeFactory::createShape(std::string_view name)
 {
     const auto pair_it = std::find_if(begin(ShapeFactory::_known_shapes),
-                         end(ShapeFactory::_known_shapes),
-                         [name](const ShapePair& pair) -> bool {
-                             return (pair.first == name);
-                         });
+                                      end(ShapeFactory::_known_shapes),
+                                      [name](const ShapePair& pair) -> bool {
+                                          return (pair.first == name);
+                                      });
 
     if (pair_it != end(ShapeFactory::_known_shapes)) {
         const auto& [name, model_shape] = *pair_it;

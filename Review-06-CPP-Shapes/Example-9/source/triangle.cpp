@@ -23,7 +23,7 @@ Triangle::Triangle(double _side_a, double _side_b, double _side_c)
 //------------------------------------------------------------------------------
 double Triangle::area() const
 {
-    double s = perimeter() / 2;
+    const double s = perimeter() / 2;
 
     return sqrt(s * (s - sideA())
                   * (s - sideB())
