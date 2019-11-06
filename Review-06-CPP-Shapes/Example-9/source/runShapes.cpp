@@ -194,12 +194,27 @@ ShapeCollection readShapes(std::istream& ins)
 }
 
 //------------------------------------------------------------------------------
+inline
+std::ostream& operator<<(std::ostream& outs, const unique_ptr<Shape>& prt)
+{
+    // prt->display(outs);
+    outs << *prt;
+
+    return outs;
+}
+
+//------------------------------------------------------------------------------
 void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 {
+    /*
     for (const std::unique_ptr<Shape>& s : toPrint) {
         // outs << s << "\n";  // oops
         outs << *s << "\n";
     }
+    */
+
+    std::copy(toPrint.begin(), toPrint.end(),
+              std::ostream_iterator<unique_ptr<Shape>>(outs, "\n"));
 }
 
 //------------------------------------------------------------------------------
