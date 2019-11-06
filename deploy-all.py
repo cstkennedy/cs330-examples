@@ -130,13 +130,16 @@ def prepare_zip_files(review_dirs: List[str], build_dir: str):
         build_dir: directory in which to generate zip files
     """
 
+    print()
+    print("Zip File Generation")
+
     if not os.path.isdir(build_dir):
         os.mkdir(build_dir)
 
     for review_dir in review_dirs:
         zip_name = build_dir + "/" + review_dir.split("/")[-1] + ".zip"
 
-        print(zip_name, "->", review_dir)
+        print(f"{review_dir:<42} -> {zip_name:<20}")
 
         with zipfile.ZipFile(zip_name, "w",
                              compression=zipfile.ZIP_DEFLATED,
