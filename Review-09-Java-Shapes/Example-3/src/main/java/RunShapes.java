@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import utilities.Utilities;
+import static utilities.Utilities.projectHeading;
+import static utilities.Utilities.heading;
+import static utilities.Utilities.projectHeading;
+import static utilities.Utilities.horizontalLine;
+
 import shapes.*;
+
 
 public class RunShapes {
     static final String[] PROGRAM_HEADING = {
@@ -18,9 +24,7 @@ public class RunShapes {
     public static void main(String[] args)
     {
         // Print main program heading
-        System.out.println(
-            Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-        );
+        System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
        /*
         * What happens when the number of shapes is non-trivial?
@@ -61,7 +65,7 @@ public class RunShapes {
         */
 
         // Examine the ShapeFactory
-        System.out.println(Utilities.heading("Available Shapes", 38, '*'));
+        System.out.println(heading("Available Shapes", 38, '*'));
 
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
@@ -83,7 +87,7 @@ public class RunShapes {
 
         size = shapes.size();
 
-        System.out.println(Utilities.heading("Shapes That Exist", 38, '*'));
+        System.out.println(heading("Shapes That Exist", 38, '*'));
         System.out.printf("%-24s: %4d\n", "Original Size", size);
         System.out.printf("%-24s: %4d\n", "Invalid Shapes", (size - shapes.size()));
         System.out.printf("%-24s: %4d\n", "New Size", shapes.size());
@@ -91,7 +95,7 @@ public class RunShapes {
         System.out.println();
 
         // Print all the shapes
-        System.out.println(Utilities.heading("Display All Shapes", 38, '*'));
+        System.out.println(heading("Display All Shapes", 38, '*'));
 
         for (Shape s : shapes) {
             System.out.println(s);
@@ -100,7 +104,7 @@ public class RunShapes {
         // Using an iterator
 
         System.out.println();
-        System.out.println(Utilities.horizontalLine('~', 38));
+        System.out.println(horizontalLine('~', 38));
 
         // C++ Container<Shape*>::iterator it = shapes.begin()
         Iterator<Shape> it = shapes.iterator();

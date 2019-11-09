@@ -127,7 +127,7 @@ public class RunShapes {
         }
 
         // Create an a new array of size non_null
-        shapes = new Shape[ non_null ];
+        shapes = new Shape[non_null];
 
         // Copy the elements from the pruned array
         for (int i = 0; i < non_null; i++) {
