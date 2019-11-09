@@ -51,6 +51,11 @@ test {
     reports {
         html.enabled = true
     }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
 }
 
 javadoc {
