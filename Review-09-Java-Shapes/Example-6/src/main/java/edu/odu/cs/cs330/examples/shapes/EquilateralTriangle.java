@@ -22,9 +22,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
      */
     public EquilateralTriangle()
     {
-        this._name = "Equilateral Triangle";
-
-        this.side(1);
+        this(1);
     }
 
     /**
@@ -92,6 +90,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         return ROOT_3_DIV_4 * side() * side();

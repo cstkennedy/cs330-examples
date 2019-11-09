@@ -43,6 +43,10 @@ run {
     main = "RunShapes"
 }
 
+application {
+    mainClassName = "RunShapes"
+}
+
 test {
     reports {
         html.enabled = true

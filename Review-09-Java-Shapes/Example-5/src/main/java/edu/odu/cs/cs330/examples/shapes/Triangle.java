@@ -1,55 +1,51 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2018
 
 package edu.odu.cs.cs330.examples.shapes;
 
 import java.util.Scanner;
 
 /**
- * A Polygon with 3 Sides
+ * A Polygon with 3 Sides.
  *
  * @author Thomas J Kennedy
  */
 public class Triangle extends Shape implements Cloneable {
 
     /**
-     * Length of Side A
+     * Length of Side A.
      */
     protected double _side_a;
 
     /**
-     * Length of Side B
+     * Length of Side B.
      */
     protected double _side_b;
 
     /**
-     * Length of Side C
+     * Length of Side C.
      */
     protected double _side_c;
 
     /**
-     * Create a Triangle with side of length 1
+     * Create a Triangle with side of length 1.
      */
     public Triangle()
     {
-        super( "Triangle" );
-
-        this._side_a = 1;
-        this._side_b = 1;
-        this._side_c = 1;
+        this(1, 1, 1);
     }
 
     /**
-     * Construct a triangle
+     * Construct a triangle.
      *
      * @param _side_a the length of side A
      * @param _side_b the length of side B
      * @param _side_c the length of side C
      *
      */
-    public Triangle( double _side_a, double _side_b, double _side_c )
+    public Triangle(double _side_a, double _side_b, double _side_c)
     {
-        super( "Triangle" );
+        super("Triangle");
 
         this._side_a = _side_a;
         this._side_b = _side_b;
@@ -57,13 +53,13 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Construct a Triangle
+     * Construct a Triangle.
      *
-     * @param src the Triangle to copy       
+     * @param src the Triangle to copy
      */
-    public Triangle( Triangle src )
+    public Triangle(Triangle src)
     {
-        super( "Triangle" );
+        super("Triangle");
 
         this._side_a = src._side_a;
         this._side_b = src._side_b;
@@ -71,7 +67,7 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Length of side A
+     * Length of side A.
      *
      * @return the length of side A
      */
@@ -81,17 +77,17 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Modify the length of side A
+     * Modify the length of side A.
      *
      * @param side the replacement length
      */
-    public void sideA( double side )
+    public void sideA(double side)
     {
         this._side_a = side;
     }
 
     /**
-     * Length of side B
+     * Length of side B.
      *
      * @return the length of side B
      */
@@ -101,17 +97,17 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Modify the length of side B
+     * Modify the length of side B.
      *
      * @param side the replacement length
      */
-    public void sideB( double side )
+    public void sideB(double side)
     {
         this._side_b = side;
     }
 
     /**
-     * Length of side C
+     * Length of side C.
      *
      * @return the length of side C
      */
@@ -121,11 +117,11 @@ public class Triangle extends Shape implements Cloneable {
     }
 
     /**
-     * Modify the length of side C
+     * Modify the length of side C.
      *
      * @param side the replacement length
      */
-    public void sideC( double side )
+    public void sideC(double side)
     {
         this._side_c = side;
     }
@@ -137,44 +133,38 @@ public class Triangle extends Shape implements Cloneable {
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         double s = perimeter() / 2;
 
-        return ( Math.sqrt( 
-            s * ( s - sideA() ) 
-              * ( s - sideB() ) 
-              * ( s - sideC() )
-        ) );
+        return (Math.sqrt(
+            s * (s - sideA())
+              * (s - sideB())
+              * (s - sideC())
+       ));
     }
 
     /**
-     * Compute the perimeter
+     * Compute the perimeter.
      * @f$ side_a + side_b + side_c @f$
      *
      * @return the perimeter
      */
+    @Override
     public double perimeter()
     {
         return (
             _side_a + _side_b + _side_c
-        );
+       );
     }
 
-    /**
-     * Return a new duplicate Triangle
-     */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Triangle( this );
+        return new Triangle(this);
     }
 
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
     @Override
     public void read(Scanner scanner)
     {
@@ -183,20 +173,14 @@ public class Triangle extends Shape implements Cloneable {
         this._side_c = scanner.nextDouble();
     }
 
-    /**
-     * Print the Triangle
-     */
     @Override
     public String toString()
     {
-        return (
-            String.format(STR_FMT, "Name",      this._name       ) +
-            String.format(FPT_FMT, "Side A",    this._side_a     ) +
-            String.format(FPT_FMT, "Side B",    this._side_b     ) +
-            String.format(FPT_FMT, "Side C",    this._side_c     ) +
-            String.format(FPT_FMT, "Perimeter", this.perimeter() ) +
-            String.format(FPT_FMT, "Area",      this.area()      )
-        );
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Side A", this._side_a)
+             + String.format(FMT_DBL, "Side B", this._side_b)
+             + String.format(FMT_DBL, "Side C", this._side_c)
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }
-

@@ -121,22 +121,19 @@ public class RightTriangle extends Triangle
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         return ONE_HALF * _side_a * _side_b;
     }
 
-    /**
-     * Return a new duplicate RightTriangle
-     */
+    @Override
     public Shape clone()
     {
         return new RightTriangle(this);
     }
 
-    /**
-     * Print the RightTriangle
-     */
+    @Override
     public String toString()
     {
         return String.format(STR_FMT, "Name", this._name)

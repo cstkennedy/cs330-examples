@@ -1,33 +1,33 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2018
 
 package edu.odu.cs.cs330.examples.shapes;
 
 import java.util.Scanner;
 
 /**
- * A Triangle with all sides set to the same length
+ * A Triangle with all sides set to the same length.
  *
  * @author Thomas J Kennedy
  */
 public class RightTriangle extends Triangle implements Cloneable {
     /**
-     * A constant for one half
+     * A constant for one half. @f$ \frac{1}{2} @f$
      */
-    private static final double ONE_HALF = 1.0/2.0; ///< @f$ \frac{1}{2} @f$
+    private static final double ONE_HALF = 1.0 / 2.0;
 
     /**
      * Compute the hyptoenuse using:
-     * @f$ hypotenuse = \sqrt{base^2 + height^2} @f$
+     * @f$ hypotenuse = \sqrt{base^2 + height^2} @f$.
      *
      * @param base the base of a Right Triangle
      * @param height the height of a Right Triangle
      *
      * @return hypotenuse of a right triangle
      */
-    private static double computeHypotenuse( double base, double height )
+    private static double computeHypotenuse(double base, double height)
     {
-        return Math.sqrt(( base * base ) + ( height * height ));
+        return Math.sqrt((base * base) + (height * height));
     }
 
     /**
@@ -36,39 +36,30 @@ public class RightTriangle extends Triangle implements Cloneable {
      */
     public RightTriangle()
     {
-        super();
-        _name   = "Right Triangle";
-
-        _side_c = computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+        this(1, 1);
     }
 
     /**
-     * Construct a RightTriangle
+     * Construct a RightTriangle.
      *
      * @param base the desired base
      * @param height the desired height
      */
-    public RightTriangle( double base, double height )
+    public RightTriangle(double base, double height)
     {
         this._name   = "Right Triangle";
 
         this._side_a = base;
         this._side_b = height;
-        this._side_c = RightTriangle.computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+        this._side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
     }
 
     /**
-     * Construct a RightTriangle
+     * Construct a RightTriangle.
      *
      * @param src the RightTriangle to copy
      */
-    public RightTriangle( RightTriangle src )
+    public RightTriangle(RightTriangle src)
     {
         this._name   = src._name;
 
@@ -78,7 +69,9 @@ public class RightTriangle extends Triangle implements Cloneable {
     }
 
     /**
-     * Return the base
+     * Return the base.
+     *
+     * @return the base
      */
     public double base()
     {
@@ -86,22 +79,21 @@ public class RightTriangle extends Triangle implements Cloneable {
     }
 
     /**
-     * Modify the base
+     * Modify the base.
      *
      * @param side the replacement base
      */
-    public void base( double side )
+    public void base(double side)
     {
         _side_a = side;
 
-        _side_c = RightTriangle.computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+        _side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
     }
 
     /**
-     * Return the height
+     * Return the height.
+     *
+     * @return the height
      */
     public double height()
     {
@@ -109,22 +101,19 @@ public class RightTriangle extends Triangle implements Cloneable {
     }
 
     /**
-     * Modify the height
+     * Modify the height.
      *
      * @param side the replacement height
      */
-    public void height( double side )
+    public void height(double side)
     {
         _side_b = side;
 
-        _side_c = RightTriangle.computeHypotenuse(
-            _side_a,
-            _side_b
-        );
+        _side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
     }
 
     /**
-     * Return the hypotenuse
+     * Return the hypotenuse.
      *
      * @return the hypotenuse
      */
@@ -135,26 +124,27 @@ public class RightTriangle extends Triangle implements Cloneable {
 
     /**
      * Compute the area using
-     * @f$ Area = \frac{1}{2}*base*height @f$
+     * @f$ Area = \frac{1}{2}*base*height @f$.
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         return ONE_HALF * _side_a * _side_b;
     }
 
     /**
-     * Return a new duplicate RightTriangle
+     * Return a new duplicate RightTriangle.
      */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new RightTriangle( this );
+        return new RightTriangle(this);
     }
 
     /**
-     * Read the shape
+     * Read the shape.
      *
      * @param scanner the input stream--scanner in this example
      */
@@ -168,19 +158,17 @@ public class RightTriangle extends Triangle implements Cloneable {
     }
 
     /**
-     * Print the RightTriangle
+     * Print the RightTriangle.
      */
     @Override
     public String toString()
     {
-        return (
-            String.format(STR_FMT,   "Name",       this._name        ) +
-            String.format(FPT_FMT, "Base",       this.base()       ) +
-            String.format(FPT_FMT, "Height",     this.height()     ) +
-            String.format(FPT_FMT, "Hypotenuse", this.hypotenuse() ) +
-            String.format(FPT_FMT, "Perimeter",  this.perimeter()  ) +
-            String.format(FPT_FMT, "Area",       this.area()       )
-        );
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Base", this.base())
+             + String.format(FMT_DBL, "Height", this.height())
+             + String.format(FMT_DBL, "Hypotenuse", this.hypotenuse())
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }
 

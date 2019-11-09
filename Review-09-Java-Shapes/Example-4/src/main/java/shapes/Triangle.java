@@ -10,7 +10,6 @@ import java.util.Scanner;
  */
 public class Triangle extends Shape
 {
-
     protected double _side_a; ///< Length of Side A
     protected double _side_b; ///< Length of Side B
     protected double _side_c; ///< Length of Side C
@@ -134,30 +133,19 @@ public class Triangle extends Shape
                            * (s - sideC()));
     }
 
-    /**
-     * Compute the perimeter
-     * @f$ side_a + side_b + side_c @f$
-     *
-     * @return the perimeter
-     */
+    @Override
     public double perimeter()
     {
         return _side_a + _side_b + _side_c;
     }
 
-    /**
-     * Return a new duplicate Triangle
-     */
+    @Override
     public Shape clone()
     {
         return new Triangle(this);
     }
 
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
+    @Override
     public void read(Scanner scanner)
     {
         this._side_a = scanner.nextDouble();
@@ -165,9 +153,7 @@ public class Triangle extends Shape
         this._side_c = scanner.nextDouble();
     }
 
-    /**
-     * Print the Triangle
-     */
+    @Override
     public String toString()
     {
         return String.format(STR_FMT, "Name", this._name)

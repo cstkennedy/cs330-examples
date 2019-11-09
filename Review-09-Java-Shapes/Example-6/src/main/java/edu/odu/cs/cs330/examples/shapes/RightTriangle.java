@@ -36,13 +36,7 @@ public class RightTriangle extends Triangle implements Cloneable {
      */
     public RightTriangle()
     {
-        super();
-        _name   = "Right Triangle";
-
-        _side_c = computeHypotenuse(
-            _side_a,
-            _side_b
-       );
+        this(1, 1);
     }
 
     /**
@@ -134,6 +128,7 @@ public class RightTriangle extends Triangle implements Cloneable {
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         return ONE_HALF * _side_a * _side_b;

@@ -45,6 +45,10 @@ run {
     args = ["src/main/resources/inputShapes.txt", "2"]
 }
 
+application {
+    mainClassName = "RunShapes"
+}
+
 test {
     reports {
         html.enabled = true

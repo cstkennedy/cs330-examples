@@ -31,8 +31,7 @@ public class Circle extends Shape implements Cloneable {
      */
     public Circle()
     {
-        this._name   = "Circle";
-        this._radius = 1;
+        this(1);
     }
 
     /**
@@ -88,6 +87,7 @@ public class Circle extends Shape implements Cloneable {
      *
      * @return area
      */
+    @Override
     public double area()
     {
         return PI * _radius * _radius;
@@ -98,6 +98,7 @@ public class Circle extends Shape implements Cloneable {
      *
      * @return perimeter
      */
+    @Override
     public double perimeter()
     {
         return TAU * _radius;

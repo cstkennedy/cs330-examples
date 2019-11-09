@@ -32,11 +32,7 @@ public class Triangle extends Shape implements Cloneable {
      */
     public Triangle()
     {
-        super("Triangle");
-
-        this._side_a = 1;
-        this._side_b = 1;
-        this._side_c = 1;
+        this(1, 1, 1);
     }
 
     /**
@@ -137,6 +133,7 @@ public class Triangle extends Shape implements Cloneable {
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         double s = perimeter() / 2;
@@ -154,6 +151,7 @@ public class Triangle extends Shape implements Cloneable {
      *
      * @return the perimeter
      */
+    @Override
     public double perimeter()
     {
         return (
@@ -161,20 +159,12 @@ public class Triangle extends Shape implements Cloneable {
        );
     }
 
-    /**
-     * Return a new duplicate Triangle.
-     */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
         return new Triangle(this);
     }
 
-    /**
-     * Read the shape.
-     *
-     * @param scanner the input stream--scanner in this example
-     */
     @Override
     public void read(Scanner scanner)
     {
@@ -183,9 +173,6 @@ public class Triangle extends Shape implements Cloneable {
         this._side_c = scanner.nextDouble();
     }
 
-    /**
-     * Print the Triangle.
-     */
     @Override
     public String toString()
     {

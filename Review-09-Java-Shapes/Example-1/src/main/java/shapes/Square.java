@@ -59,37 +59,25 @@ public class Square extends Shape
         _side = s;
     }
 
-    /**
-     * Compute the area
-     *
-     * @return area
-     */
+    @Override
     public double area()
     {
         return Math.pow(_side, 2.0);
     }
 
-    /**
-     * Compute the perimeter
-     *
-     * @return perimeter
-     */
+    @Override
     public double perimeter()
     {
         return 4 * _side;
     }
 
-    /**
-     * Return a new duplicate Square
-     */
+    @Override
     public Shape clone()
     {
         return new Square(this);
     }
 
-    /**
-     * Print the Square
-     */
+    @Override
     public String toString()
     {
        return super.toString()

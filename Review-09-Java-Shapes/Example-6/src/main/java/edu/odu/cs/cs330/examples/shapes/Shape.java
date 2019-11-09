@@ -112,9 +112,6 @@ public abstract class Shape implements Cloneable {
      */
     public abstract void read(Scanner scanner);
 
-    /**
-     * Print the shape.
-     */
     @Override
     public String toString()
     {

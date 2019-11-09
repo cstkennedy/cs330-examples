@@ -87,14 +87,9 @@ public abstract class Shape implements Cloneable
      */
     public abstract double perimeter();
 
-    /**
-     * Return a new duplicate Shape
-     */
+    @Override
     public abstract Shape clone();
 
-    /**
-     * Print the shape
-     */
     @Override
     public String toString()
     {

@@ -77,6 +77,7 @@ public class Circle extends Shape
      *
      * @return area
      */
+    @Override
     public double area()
     {
         return PI * _radius * _radius;
@@ -87,34 +88,25 @@ public class Circle extends Shape
      *
      * @return perimeter
      */
+    @Override
     public double perimeter()
     {
         return TAU * _radius;
     }
 
-    /**
-     * Return a new duplicate Circle
-     */
+    @Override
     public Shape clone()
     {
         return new Circle(this);
     }
 
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
+    @Override
     public void read(Scanner scanner)
     {
         this._radius = scanner.nextDouble();
     }
 
-    /**
-     * Print the Circle
-     *
-     * @param outs the output stream--i.e., destination
-     */
+    @Override
     public String toString()
     {
         return String.format(STR_FMT, "Name", this._name)

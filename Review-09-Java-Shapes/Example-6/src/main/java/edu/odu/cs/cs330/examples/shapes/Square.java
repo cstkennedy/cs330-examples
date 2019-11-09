@@ -21,8 +21,7 @@ public class Square extends Shape implements Cloneable {
      */
     public Square()
     {
-        super("Square");
-        _side = 1;
+        this(1);
     }
 
     /**
@@ -67,49 +66,30 @@ public class Square extends Shape implements Cloneable {
         _side = s;
     }
 
-    /**
-     * Compute the area.
-     *
-     * @return area
-     */
+    @Override
     public double area()
     {
         return Math.pow(_side, 2.0);
     }
 
-    /**
-     * Compute the perimeter.
-     *
-     * @return perimeter
-     */
+    @Override
     public double perimeter()
     {
         return 4 * _side;
     }
 
-    /**
-     * Return a new duplicate Square.
-     */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
         return new Square(this);
     }
 
-    /**
-     * Read the shape.
-     *
-     * @param scanner the input stream--scanner in this example
-     */
     @Override
     public void read(Scanner scanner)
     {
         this._side = scanner.nextDouble();
     }
 
-    /**
-     * Print the Square.
-     */
     @Override
     public String toString()
     {

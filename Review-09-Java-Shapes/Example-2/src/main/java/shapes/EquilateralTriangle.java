@@ -84,22 +84,19 @@ public class EquilateralTriangle extends Triangle
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         return ROOT_3_DIV_4 * side() * side();
     }
 
-    /**
-     * Return a new duplicate EquilateralTriangle
-     */
+    @Override
     public Shape clone()
     {
         return new EquilateralTriangle(this);
     }
 
-    /**
-     * Print the EquilateralTriangle
-     */
+    @Override
     public String toString()
     {
         return String.format(STR_FMT, "Name", this._name)

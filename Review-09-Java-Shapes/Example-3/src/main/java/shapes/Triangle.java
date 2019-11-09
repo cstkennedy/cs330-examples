@@ -8,7 +8,6 @@ package shapes;
  */
 public class Triangle extends Shape
 {
-
     protected double _side_a; ///< Length of Side A
     protected double _side_b; ///< Length of Side B
     protected double _side_c; ///< Length of Side C
@@ -123,6 +122,7 @@ public class Triangle extends Shape
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         double s = perimeter() / 2;
@@ -138,22 +138,19 @@ public class Triangle extends Shape
      *
      * @return the perimeter
      */
+    @Override
     public double perimeter()
     {
         return _side_a + _side_b + _side_c;
     }
 
-    /**
-     * Return a new duplicate Triangle
-     */
+    @Override
     public Shape clone()
     {
         return new Triangle(this);
     }
 
-    /**
-     * Print the Triangle
-     */
+    @Override
     public String toString()
     {
         return String.format(STR_FMT, "Name", this._name)

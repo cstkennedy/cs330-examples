@@ -45,6 +45,10 @@ run {
     args = ["src/main/resources/inputShapes.txt", "2"]
 }
 
+application {
+    mainClassName = "edu.odu.cs.cs330.examples.RunShapes"
+}
+
 test {
     reports {
         html.enabled = true

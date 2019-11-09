@@ -4,7 +4,7 @@
 package shapes;
 
 /**
- * An Ellipse with equivlant major and minor axes
+ * An Ellipse with equivalent major and minor axes
  */
 public class Circle extends Shape
 {
@@ -75,6 +75,7 @@ public class Circle extends Shape
      *
      * @return area
      */
+    @Override
     public double area()
     {
         return PI * _radius * _radius;
@@ -85,24 +86,19 @@ public class Circle extends Shape
      *
      * @return perimeter
      */
+    @Override
     public double perimeter()
     {
         return TAU * _radius;
     }
 
-    /**
-     * Return a new duplicate Circle
-     */
+    @Override
     public Shape clone()
     {
         return new Circle(this);
     }
 
-    /**
-     * Print the Circle
-     *
-     * @param outs the output stream--i.e., destination
-     */
+    @Override
     public String toString()
     {
         return String.format(STR_FMT, "Name", this._name)

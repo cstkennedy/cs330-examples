@@ -123,24 +123,19 @@ public class RightTriangle extends Triangle
      *
      * @return the area
      */
+    @Override
     public double area()
     {
         return ONE_HALF * _side_a * _side_b;
     }
 
-    /**
-     * Return a new duplicate RightTriangle
-     */
+    @Override
     public Shape clone()
     {
         return new RightTriangle(this);
     }
 
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
+    @Override
     public void read(Scanner scanner)
     {
         this.base(scanner.nextDouble());
@@ -149,9 +144,7 @@ public class RightTriangle extends Triangle
         this._side_c = computeHypotenuse(this.base(), this.height());
     }
 
-    /**
-     * Print the RightTriangle
-     */
+    @Override
     public String toString()
     {
         return String.format(STR_FMT, "Name", this._name)

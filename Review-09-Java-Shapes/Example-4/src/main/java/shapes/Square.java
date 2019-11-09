@@ -66,6 +66,7 @@ public class Square extends Shape
      *
      * @return area
      */
+    @Override
     public double area()
     {
         return Math.pow(_side, 2.0);
@@ -76,32 +77,25 @@ public class Square extends Shape
      *
      * @return perimeter
      */
+    @Override
     public double perimeter()
     {
         return 4 * _side;
     }
 
-    /**
-     * Return a new duplicate Square
-     */
+    @Override
     public Shape clone()
     {
         return new Square(this);
     }
 
-    /**
-     * Read the shape
-     *
-     * @param scanner the input stream--scanner in this example
-     */
+    @Override
     public void read(Scanner scanner)
     {
         this._side = scanner.nextDouble();
     }
 
-    /**
-     * Print the Square
-     */
+    @Override
     public String toString()
     {
        return super.toString()

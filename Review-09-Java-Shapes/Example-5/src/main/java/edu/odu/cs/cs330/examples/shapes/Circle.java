@@ -1,64 +1,63 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2018
 
 package edu.odu.cs.cs330.examples.shapes;
 
 import java.util.Scanner;
 
 /**
- * An Ellipse with equivalent major and minor axes
+ * An Ellipse with equivalent major and minor axes.
  *
  * @author Thomas J Kennedy
  */
-public class Circle extends Shape implements Cloneable{
+public class Circle extends Shape implements Cloneable {
     /**
-     * The mathematical constant PI
+     * The mathematical constant PI.
      */
     private static final double PI  = Math.PI;
 
     /**
-     * Tau is defined as 2*PI
+     * Tau is defined as 2 * PI.
      */
     private static final double TAU = 2 * PI;
 
     /**
-     * Length of the radius
+     * Length of the radius.
      */
     private double _radius;
 
     /**
-     * Construct a Circle with radius set to 1
+     * Construct a Circle with radius set to 1.
      */
     public Circle()
     {
-        this._name   = "Circle";
-        this._radius = 1;
+        this(1);
     }
 
     /**
-     * Construct a Circle
+     * Construct a Circle.
      *
-     * @param s the desired radius length
+     * @param r the desired radius length
      */
-    public Circle( double r )
+    public Circle(double r)
     {
         this._name   = "Circle";
         this._radius = r;
     }
 
     /**
-     * Construct a Circle
+     * Construct a Circle.
      *
      * @param src the Circle to copy
      */
-    public Circle( Circle src )
+    public Circle(Circle src)
     {
         this._name   = src._name;
         this._radius = src._radius;
     }
 
     /**
-     * Return the radius length
+     * Return the radius length.
      */
     public double radius()
     {
@@ -66,17 +65,17 @@ public class Circle extends Shape implements Cloneable{
     }
 
     /**
-     * Modify the radius length
+     * Modify the radius length.
      *
      * @param r the replacement length
      */
-    public void radius( double r )
+    public void radius(double r)
     {
         _radius = r;
     }
 
     /**
-     * Return the diameter
+     * Return the diameter.
      */
     public double diameter()
     {
@@ -84,36 +83,38 @@ public class Circle extends Shape implements Cloneable{
     }
 
     /**
-     * Compute the area using \f$ \pi r^2 \f$
+     * Compute the area using \f$ \pi r^2 \f$.
      *
      * @return area
      */
+    @Override
     public double area()
     {
         return PI * _radius * _radius;
     }
 
     /**
-     * Compute the perimeter using \f$ 2 \pi r \f$
+     * Compute the perimeter using \f$ 2 \pi r \f$.
      *
      * @return perimeter
      */
+    @Override
     public double perimeter()
     {
         return TAU * _radius;
     }
 
     /**
-     * Return a new duplicate Circle
+     * Return a new duplicate Circle.
      */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Circle( this );
+        return new Circle(this);
     }
 
     /**
-     * Read the shape
+     * Read the shape.
      *
      * @param scanner the input stream--scanner in this example
      */
@@ -124,19 +125,15 @@ public class Circle extends Shape implements Cloneable{
     }
 
     /**
-     * Print the Circle
-     *
-     * @param outs the output stream--i.e., destination
+     * Print the Circle.
      */
     @Override
     public String toString()
     {
-        return (
-            String.format(STR_FMT, "Name",      this._name       ) +
-            String.format(FPT_FMT, "Radius",    this.radius()    ) +
-            String.format(FPT_FMT, "Diameter",  this.diameter()  ) +
-            String.format(FPT_FMT, "Perimeter", this.perimeter() ) +
-            String.format(FPT_FMT, "Area",      this.area()      )
-        );
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Radius", this.radius())
+             + String.format(FMT_DBL, "Diameter", this.diameter())
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }
