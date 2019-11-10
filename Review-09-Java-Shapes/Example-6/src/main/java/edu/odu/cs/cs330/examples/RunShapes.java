@@ -120,12 +120,16 @@ public class RunShapes {
         // Print all the shapes
         System.out.println(heading("Display Shape Names", H_WIDTH, '*'));
         //printShapes(shapes);
-        shapes.stream().map(Shape::name).forEach(System.out::println);
+        shapes.stream()
+            .map(Shape::name)
+            .forEach(System.out::println);
 
         // Using a stream
         System.out.println();
         System.out.println(heading("Display Shapes", H_WIDTH, '~'));
-        shapes.stream().forEach(System.out::println);
+        shapes.stream()
+            .forEach(System.out::println);
+
         System.out.println();
 
         System.out.println(heading("Display Largest Shape (Area)", H_WIDTH, '~'));

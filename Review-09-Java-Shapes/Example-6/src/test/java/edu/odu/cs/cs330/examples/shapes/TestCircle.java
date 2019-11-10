@@ -11,6 +11,9 @@ import static org.hamcrest.CoreMatchers.*;
 import org.hamcrest.core.IsNull;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
+import java.io.StringReader;
+import java.util.Scanner;
+
 /**
  * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
@@ -119,5 +122,17 @@ public class TestCircle {
                    containsString(String.format("%-12s: %24.4f", "Diameter", this.fancy.diameter())));
 
         assertThat(fancyStr, endsWith("\n"));
+    }
+
+    @Test
+    public void testRead()
+    {
+        Scanner snr = new Scanner(new StringReader("9.7"));
+
+        Circle aCircle = new Circle();
+        aCircle.read(snr);
+
+        assertThat(aCircle.name(), equalTo("Circle"));
+        assertThat(aCircle.radius(), closeTo(9.7, 0.01));
     }
 }

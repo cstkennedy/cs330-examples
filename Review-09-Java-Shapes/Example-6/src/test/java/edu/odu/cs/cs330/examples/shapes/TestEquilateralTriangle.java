@@ -11,6 +11,9 @@ import static org.hamcrest.CoreMatchers.*;
 import org.hamcrest.core.IsNull;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
+import java.io.StringReader;
+import java.util.Scanner;
+
 /**
  * 1 - Does this piece of code perform the operations
  *     it was designed to perform?
@@ -107,5 +110,17 @@ public class TestEquilateralTriangle
                    containsString(String.format("%-12s: %24.4f", "Side", this.fancy.side())));
 
         assertThat(fancyStr, endsWith("\n"));
+    }
+
+    @Test
+    public void testRead()
+    {
+        Scanner snr = new Scanner(new StringReader("9.7"));
+
+        EquilateralTriangle anEquilateralTriangle = new EquilateralTriangle();
+        anEquilateralTriangle.read(snr);
+
+        assertThat(anEquilateralTriangle.name(), equalTo("Equilateral Triangle"));
+        assertThat(anEquilateralTriangle.side(), closeTo(9.7, 0.01));
     }
 }
