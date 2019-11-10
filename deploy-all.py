@@ -199,8 +199,8 @@ def main():
         example_dirs = glob.glob(f"{base_review_dir}/Review-*/Example*")
 
     else:
-        review_dirs = [d for d in glob.glob(f"{base_review_dir}/Review-*")
-                       if os.path.isdir(d)]
+        review_dirs = [d for d in glob.glob(f"{base_review_dir}/*")
+                       if os.path.isdir(d) and str(d) != f"{base_review_dir}/build"]
 
         example_dirs = glob.glob(f"{base_review_dir}/*/Example*")
 
