@@ -30,7 +30,7 @@ def main():
     # !(index >= 3) || !(index <= 20)
     # (index < 3 || index > 20)
     if index < 3 or index > 20:
-        print("{:3d} is not between 3 and 20\n".format(index))
+        print(f"{index:3d} is not between 3 and 20\n")
 
         exit(1)
 
@@ -44,7 +44,7 @@ def main():
         fm2 = fm1
         fm1 = f
 
-        print("{:>2d}: {:10d}".format(i, f))
+        print(f"{i:>2d}: {f:10d}")
 
 
 if __name__ == "__main__":
