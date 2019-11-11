@@ -56,7 +56,7 @@ def main():
     except IndexError:
         pass
 
-    # If a node  count was passed from the command line,
+    # If a node count was passed from the command line,
     # parse it. Otherwise default to 10
     try:
         toGenerate = int(sys.argv[2])
