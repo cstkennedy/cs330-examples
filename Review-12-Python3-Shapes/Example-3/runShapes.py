@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-# Programmer : Thomas Kennedy
+# Programmer : Thomas J. Kennedy
 
 # Note how I did not translate my
 # utilities library that I wrote
@@ -33,9 +33,9 @@ def main():
     print("-" * 80)
 
     # Examine the ShapeFactory
-    print("*" * 38)
+    print("~" * 38)
     print("{:^38}".format("Available Shapes"))
-    print("*" * 38)
+    print("~" * 38)
 
     # List the available shapes
     print(ShapeFactory.list_known())
@@ -65,9 +65,9 @@ def main():
     print()
 
     # Print all the shapes
-    print("*" * 38)
+    print("~" * 38)
     print("{:^38}".format("Display All Shapes"))
-    print("*" * 38)
+    print("~" * 38)
 
     for s in shapes:
         print(s)

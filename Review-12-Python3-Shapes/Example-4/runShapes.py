@@ -58,7 +58,7 @@ def main():
     # print(ShapeFactory.create_from_dictionary("Circle", {"radius": 4}))
 
     # The list needs to be intialzed outside the "with" closure
-    shapes = list()
+    shapes = []  # Create an empty list (prefer `[]` over `list()`)
 
     # shapes_in = open(shapes_filename, "r")
     with open(shapes_filename, "r") as shapes_in:
