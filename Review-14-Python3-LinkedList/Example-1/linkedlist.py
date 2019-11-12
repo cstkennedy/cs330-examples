@@ -37,7 +37,7 @@ class LinkedList(object):
         self.__tail  = None
         self.__nodes = 0
 
-    def appendNode(self, to_add):
+    def append(self, to_add):
         """
         Add a Node at the end of the list
         """
@@ -54,7 +54,7 @@ class LinkedList(object):
 
         else:
             # Add the new node to the this
-            # What happens on the following two lines
+            # What happens on the following two lines?
             (self.__tail).next = new_node
             self.__tail = new_node
 

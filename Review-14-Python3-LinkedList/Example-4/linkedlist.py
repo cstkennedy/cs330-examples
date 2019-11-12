@@ -1,7 +1,8 @@
 import copy
 
+from collections.abc import (Iterator, Iterable)
 
-class LinkedList(object):
+class LinkedList(Iterable):
     """
     The LinkedList (LL) is a wrapper for three items.
      - Head pointer
@@ -44,7 +45,7 @@ class LinkedList(object):
         def next(self, nxt):
             self.__next = nxt
 
-    class Iterator(object):
+    class Iterator(Iterator):
         """
         A special purpose Linked List Iterator
         """
@@ -80,8 +81,6 @@ class LinkedList(object):
         Add a Node at the end of the list
         """
 
-        new_node = None
-
         # Store the "to_add" data within the node
         new_node = LinkedList.Node(data=to_add)
 
@@ -91,16 +90,11 @@ class LinkedList(object):
             self.__tail = new_node
 
         else:
-            # Add the new node to the this
-            # What happens on the following two lines?
             (self.__tail).next = new_node
             self.__tail = new_node
 
-        # Increase the number of nodes
         self.__nodes += 1
 
-        # Do not allow access to the node except
-        # through the linked list
         # Is this line necessary?
         new_node = None
 
@@ -116,5 +110,5 @@ class LinkedList(object):
         with an index.
         """
 
-        return "\n".join(["Node # {:>4} - {:>4}".format(index, data)
+        return "\n".join([f"Node # {index:>4} - {data:>4}"
                           for index, data in enumerate(self)])

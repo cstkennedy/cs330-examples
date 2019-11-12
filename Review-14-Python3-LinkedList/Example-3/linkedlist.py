@@ -1,7 +1,8 @@
 import copy
 
+from collections.abc import (Iterator, Iterable)
 
-class LinkedList(object):
+class LinkedList(Iterable):
     """
     The LinkedList (LL) is a wrapper for three items.
      - Head pointer
@@ -28,7 +29,7 @@ class LinkedList(object):
             self.__data = data
             self.__next = next
 
-    class Iterator(object):
+    class Iterator(Iterator):
         """
         A special purpose Linked List Iterator
         """
@@ -96,5 +97,5 @@ class LinkedList(object):
         with an index.
         """
 
-        return "\n".join(["Node # {:>4} - {:>4}".format(index, data)
+        return "\n".join([f"Node # {index:>4} - {data:>4}"
                           for index, data in enumerate(self)])

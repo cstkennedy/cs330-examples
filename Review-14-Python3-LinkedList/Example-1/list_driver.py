@@ -16,7 +16,7 @@ MIN = -10  # Lower bound for number generation
 MAX =  10  # Upper bound for number generation
 
 
-def randomInt(min=MIN, max=MAX):
+def random_int(min=MIN, max=MAX):
     """
     Generate a random integer in the range min, max.
     Default to MIN and MAX
@@ -25,7 +25,7 @@ def randomInt(min=MIN, max=MAX):
     return random.randint(min, max)
 
 
-def generateList(n):
+def generate_list(n):
     """
     Generate a Linked List of random integers
 
@@ -36,7 +36,7 @@ def generateList(n):
 
     # Generate a Linked List (LL) of n Nodes
     for i in range(0, n):
-        ll.appendNode(randomInt())
+        ll.append(random_int())
 
     return ll
 
@@ -46,7 +46,7 @@ def main():
     Back to the beginning of the semester... with Linked Lists
     """
 
-    toGenerate = 0  # Number of nodes to generate
+    to_generate = 0  # Number of nodes to generate
 
     # If a seed was passed from the command line,
     # parse it. Otherwise default to ctime
@@ -59,10 +59,10 @@ def main():
     # If a node count was passed from the command line,
     # parse it. Otherwise default to 10
     try:
-        toGenerate = int(sys.argv[2])
+        to_generate = int(sys.argv[2])
 
     except (IndexError, ValueError) as e:
-        toGenerate = 10
+        to_generate = 10
 
     # Print the program heading
     print("-" * 80)
@@ -73,19 +73,19 @@ def main():
     print("-" * 80)
 
     # Create a Linked List
-    randomInts = generateList(toGenerate)
-    print(randomInts)
+    random_ints = generate_list(to_generate)
+    print(random_ints)
 
     print("*" * 80)
 
-    randomCopy = copy.deepcopy(randomInts)
+    random_copy = copy.deepcopy(random_ints)
 
-    randomCopy.appendNode(337)
+    random_copy.append(337)
 
-    print(randomCopy)
+    print(random_copy)
 
     print("*" * 80)
-    print(randomInts)
+    print(random_ints)
 
 
 if __name__ == "__main__":

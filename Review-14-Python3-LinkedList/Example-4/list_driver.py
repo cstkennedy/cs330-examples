@@ -66,7 +66,7 @@ def main():
     print("#" * 80)
 
     for idx, value in enumerate(random_ints):
-        print("Node # {:>4} - {:>4}".format(idx, value))
+        print(f"Node # {idx:>4} - {value:>4}")
 
 
 if __name__ == "__main__":
