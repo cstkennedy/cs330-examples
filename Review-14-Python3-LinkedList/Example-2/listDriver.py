@@ -36,7 +36,7 @@ def generateList(n):
 
     # Generate a Linked List (LL) of n Nodes
     for i in range(0, n):
-        ll.appendNode(randomInt())
+        ll.append(randomInt())
 
     return ll
 

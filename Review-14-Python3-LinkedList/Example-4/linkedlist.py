@@ -92,7 +92,7 @@ class LinkedList(object):
 
         else:
             # Add the new node to the this
-            # What happens on the following two lines
+            # What happens on the following two lines?
             (self.__tail).next = new_node
             self.__tail = new_node
 

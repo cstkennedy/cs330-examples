@@ -10,7 +10,7 @@ class LinkedList(object):
 
     Only the head pointer is necessary, the latter three items are
     included for convenience.
-    <p>
+
     In this version, the LinkedList has been converted to a proper class
     """
 
@@ -18,7 +18,7 @@ class LinkedList(object):
         """
         The Node class is the atom--smallest base component--of a Linked List.
         An array element can viewed as its analog.
-        <p>
+
         For simplicity in this example, the Node will store an integers as
         data. In a later example, methods for generalizing this--through use of
         templates--will be utilized.
