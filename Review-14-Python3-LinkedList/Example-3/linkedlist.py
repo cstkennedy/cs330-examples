@@ -61,8 +61,6 @@ class LinkedList(Iterable):
         Add a Node at the end of the list
         """
 
-        new_node = None
-
         # Store the "to_add" data within the node
         new_node = LinkedList.Node(data=to_add)
 
@@ -72,18 +70,10 @@ class LinkedList(Iterable):
             self.__tail = new_node
 
         else:
-            # Add the new node to the this
-            # What happens on the following two lines
             (self.__tail)._Node__next = new_node
             self.__tail = new_node
 
-        # Increase the number of nodes
         self.__nodes += 1
-
-        # Do not allow access to the node except
-        # through the linked list
-        # Is this line necessary?
-        new_node = None
 
     def __len__(self):
         return self.__nodes
