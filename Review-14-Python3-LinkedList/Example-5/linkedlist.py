@@ -39,14 +39,14 @@ class LinkedList(Iterable):
         A special purpose Linked List Iterator
         """
 
-        def __init__(self, node):
+        def __init__(self, node: "Node"):
             self.__current_node = node
 
         def __next__(self):
             if self.__current_node is None:
                 raise StopIteration
 
-            next_val = (self.__current_node).data
+            next_val = (self.current_node).data
 
             self.__current_node = (self.current_node).next
 
@@ -65,7 +65,7 @@ class LinkedList(Iterable):
         self.__tail: "Node" = None
         self.__nodes: int = 0
 
-    def append(self, to_add):
+    def append(self, to_add: Any):
         """
         Add a Node at the end of the list
         """
@@ -83,9 +83,6 @@ class LinkedList(Iterable):
             self.__tail = new_node
 
         self.__nodes += 1
-
-        # Is this line necessary?
-        new_node = None
 
     def __len__(self):
         return self.__nodes
