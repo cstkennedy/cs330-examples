@@ -116,7 +116,6 @@ public class RunShapes {
 
         System.out.println();
 
-        // Scanner scanner = new Scanner(shapesFile);
         List<Shape> shapes = readShapes(shapesFile);
 
         // Print all the shapes
