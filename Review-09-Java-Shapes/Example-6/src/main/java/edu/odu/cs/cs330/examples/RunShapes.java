@@ -10,6 +10,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.util.Iterator;
+
 import edu.odu.cs.tkennedy.utilities.Utilities;
 import static edu.odu.cs.tkennedy.utilities.Utilities.heading;
 import static edu.odu.cs.tkennedy.utilities.Utilities.projectHeading;
@@ -114,8 +116,8 @@ public class RunShapes {
 
         System.out.println();
 
-        Scanner scanner = new Scanner(shapesFile);
-        List<Shape> shapes = readShapes(scanner);
+        // Scanner scanner = new Scanner(shapesFile);
+        List<Shape> shapes = readShapes(shapesFile);
 
         // Print all the shapes
         System.out.println(heading("Display Shape Names", H_WIDTH, '*'));
@@ -150,30 +152,24 @@ public class RunShapes {
      * Read shapes from an input stream
      * and construct an `ArrayList<Shape>` object.
      *
-     * @param scanner input source
+     * @param buffer input source
      *
      * @return collection of read-in shapes
      *
      * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
      *     model shape
      */
-    private static List<Shape> readShapes(Scanner scanner)
+    private static List<Shape> readShapes(BufferedReader buffer)
         throws CloneNotSupportedException
     {
         List<Shape> collection = new ArrayList<Shape>();
 
-        while (scanner.hasNextLine()) {
-            String line   = scanner.nextLine();
-            int    sIndex = line.indexOf(';', 0);
-            String name   = line.substring(0, sIndex); // [0, sIndex)
+        Iterator<Shape> it = new ShapeIterator(buffer);
 
-            Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
-                                                             line.length()));
-
-            Shape shp = ShapeFactory.createShape(name);
+        while (it.hasNext()) {
+            Shape shp = it.next();
 
             if (shp != null) {
-                shp.read(lineScanner);
                 collection.add(shp);
             }
         }
