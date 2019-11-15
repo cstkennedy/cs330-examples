@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.Iterator;
 
 /**
- * Iterator over a buffer of Shape objects. This iterator stops when the
- * Buffer is exhausted or an invalid shape is encountered.
+ * Iterator over a buffer of Shape objects. This iterator stops when
+ * Buffer is exhausted. Invalid Shape objects (null) are skipped.
  */
 public class ShapeIterator implements Iterator<Shape>
 {
@@ -18,10 +18,15 @@ public class ShapeIterator implements Iterator<Shape>
     private BufferedReader theBuffer;
 
     /**
-     * Store the next pre-read Shape
+     * Store the next pre-read Shape.
      */
-    Shape queued;
+    private Shape queued;
 
+    /**
+     * Construct a ShepIterator of an input buffer.
+     *
+     * @param buffer shape data buffer
+     */
     public ShapeIterator(BufferedReader buffer)
     {
         this.theBuffer = buffer;
@@ -55,17 +60,25 @@ public class ShapeIterator implements Iterator<Shape>
     private Shape readNext()
         throws IOException, CloneNotSupportedException
     {
-        String line   = theBuffer.readLine();
-        int    sIndex = line.indexOf(';', 0);
-        String name   = line.substring(0, sIndex); // [0, sIndex)
+        String  line        = theBuffer.readLine();
+        Scanner lineScanner = null;
 
-        Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
+        Shape shp = null;
+
+        while (shp == null && line != null) {
+            final int    sIndex = line.indexOf(';', 0);
+            final String name   = line.substring(0, sIndex); // [0, sIndex)
+
+            shp = ShapeFactory.createShape(name);
+
+            if (shp != null) {
+                lineScanner = new Scanner(line.substring(sIndex + 1,
                                                          line.length()));
-
-        Shape shp = ShapeFactory.createShape(name);
-
-        if (shp != null) {
-            shp.read(lineScanner);
+                shp.read(lineScanner);
+            }
+            else {
+                line = theBuffer.readLine();
+            }
         }
 
         return shp;
