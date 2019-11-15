@@ -2,14 +2,31 @@
 
 package edu.odu.cs.tkennedy.utilities;
 
-// import java.lang.StringBuilder;
 
+/**
+ * A collection of miscellaneous **quick-and-dirty** utility functions,
+ * including heading generation, and floating point comparisons.
+ *
+ * @author Thomas J Kennedy.
+ */
 public final class Utilities {
-    public static final int    W_WIDTH = 80;   ///< Width of the terminal window
-    public static final double EPS     = 1E-6; ///< Default Precision (epsilon)
+    /**
+     * Width of the terminal window (best practice line width).
+     */
+    public static final int W_WIDTH = 80;
+
+    /**
+     * Default precision for floating point comparisons.
+     */
+    public static final double EPS = 1E-6;
 
     /**
      * Print a horizontal line.
+     *
+     * @param lineChar character that will comprise the line
+     * @param width horizontal length of the line (left to right)
+     *
+     * @return horizontal line as a string
      */
     public static String horizontalLine(char lineChar, int width)
     {
@@ -17,22 +34,30 @@ public final class Utilities {
     }
 
     /**
-     *  Print a centered title.
+     * Print a centered title.
+     *
+     * @param title text for the title
+     * @param width horizontal length of the line (left to right)
+     *
+     * @return generated title as a string
      */
     public static String centeredTitle(String title, int width)
     {
-        int magicWidth = 0;
-        magicWidth = (width / 2) - (title.length() / 2) + title.length();
+        final int magicWidth = (width >> 2)
+                             - (title.length() >> 2)
+                             + title.length();
 
         return String.format("%" + magicWidth + "s%n", title);
     }
 
     /**
-     *  Print a heading followed by a horizontal rule.
+     * Print a heading followed by a horizontal rule.
      *
-     *  @param heading the title to display
-     *  @param width the width of the heading
-     *  @param border the character with which to create the horizontal rule
+     * @param heading the title to display
+     * @param width the width of the heading
+     * @param border the character with which to create the horizontal rule
+     *
+     * @return generated title as a string
      */
     public static String seperatedHeading(String heading,
                                           int width, char border)
@@ -42,10 +67,12 @@ public final class Utilities {
     }
 
     /**
-     *  Print the stylized program/project heading.
+     * Print the stylized program/project heading.
      *
-     *  @param titles the titles to display
-     *  @param width the width of the heading
+     * @param titles the titles to display
+     * @param width the width of the heading
+     *
+     * @return generated heading as a string
      */
     public static String projectHeading(String[] titles, int width)
     {
@@ -64,11 +91,13 @@ public final class Utilities {
     }
 
     /**
-     *  Print a centered heading.
+     * Print a centered heading.
      *
-     *  @param title the title to display
-     *  @param width the width of the heading
-     *  @param border the character with which to create the horizontal rule
+     * @param title the title to display
+     * @param width the width of the heading
+     * @param border the character with which to create the horizontal rule
+     *
+     * @return generated heading as a string
      */
     public static String heading(String title, int width, char border)
     {
@@ -78,11 +107,22 @@ public final class Utilities {
     }
 
     /**
-     *  Compare two floating point numbers - determine if equal within
-     *  a specified threshold.
+     * Compare two floating point numbers - determine if equal within
+     * a specified threshold.
+     *
+     * @param lhs first (left hand side) number
+     * @param rhs second (right hand side) number
+     * @param threshold allowable difference (epsilon) for the two numbers to
+     *     be considered equal
+     *
+     * @return true if lhs and rhs are equal
      */
     public static boolean areEqual(double lhs, double rhs, double threshold)
     {
         return Math.abs(rhs - lhs) < threshold;
+    }
+
+    private Utilities()
+    {
     }
 }
