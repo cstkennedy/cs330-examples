@@ -6,6 +6,10 @@ import java.io.IOException;
 
 import java.util.Iterator;
 
+/**
+ * Iterator over a buffer of Shape objects. This iterator stops when the
+ * Buffer is exhausted or an invalid shape is encountered.
+ */
 public class ShapeIterator implements Iterator<Shape>
 {
     /**
@@ -39,13 +43,12 @@ public class ShapeIterator implements Iterator<Shape>
         return queued != null;
     }
 
-
     /**
      * Read the next Shape.
      *
      * @return next Shape
      *
-     * @throws IOException if an erro occurred reading from the buffer
+     * @throws IOException if an error occurred reading from the buffer
      *
      * @throws CloneNotSupportedException if ShapeFactory can not clone a Shape
      */
