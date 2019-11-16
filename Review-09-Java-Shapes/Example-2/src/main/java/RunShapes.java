@@ -1,5 +1,3 @@
-//Programmer : Thomas Kennedy
-
 import utilities.Utilities;
 import shapes.*;
 
@@ -9,9 +7,6 @@ public class RunShapes {
         "Thomas Kennedy"
     };  ///< Program Title
 
-    /**
-     *
-     */
     public static void main(String[] args)
     {
         // --Erroneous C++ Variable Declarations--
@@ -134,7 +129,7 @@ public class RunShapes {
             shapes[i] = pruned[i];
         }
 
-        //Return the new array
+        // Return the new array
         return shapes;
     }
 }

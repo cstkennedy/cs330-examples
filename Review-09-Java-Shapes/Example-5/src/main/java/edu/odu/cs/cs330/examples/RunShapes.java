@@ -9,7 +9,13 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 
 import edu.odu.cs.tkennedy.utilities.Utilities;
-import edu.odu.cs.cs330.examples.shapes.*;
+import static edu.odu.cs.tkennedy.utilities.Utilities.heading;
+import static edu.odu.cs.tkennedy.utilities.Utilities.horizontalLine;
+import static edu.odu.cs.tkennedy.utilities.Utilities.projectHeading;
+
+// import edu.odu.cs.cs330.examples.shapes.*;
+import edu.odu.cs.cs330.examples.shapes.Shape;
+import edu.odu.cs.cs330.examples.shapes.ShapeFactory;
 
 /**
  * This is the Java version of the previous C++ Shapes Inheritance Example.
@@ -30,7 +36,7 @@ public class RunShapes {
      *
      * @param args[0] input filename
      *
-     * @throws CloneNotSupportedException if a shapes subclass can
+     * @throws CloneNotSupportedException if a Shape subclass can
      *     not be copied.
      */
     public static void main(String[] args)
@@ -56,50 +62,12 @@ public class RunShapes {
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
         );
 
-        /*
-         * What happens when the number of shapes is non-trivial?
-         *
-         * Suppose we were to expand our Shape hierarchy to include
-         * the following shapes:
-         *   - Isosceles Triangle
-         *   - Circle
-         *   - Ellipse
-         *   - Rectangle
-         *   - Square
-         *   - Rhombus
-         *   - Parallelogram
-         *   - Kite
-         *   - Generalized Polygon
-         *
-         * How would we manage the addition of new Shapes?
-         *
-         * A common approach is to make use of the Factory Model.
-         * This Model exists in a number of languages--e.g.:
-         *   - C++
-         *   - Java
-         *   - Python
-         *   - PHP
-         *   - C#
-         *
-         * A class that contains static members is created.
-         * As new classes are created, the Factory Class is
-         * updated.
-         *
-         * In this example, our factory class is called ShapeFactory
-         * The ShapeFactory could be designed as a singleton class.
-         * Our ShapeFactory is simply a tracker--i.e., records are static
-         * and will be updated manually at compile time.
-         *
-         * The Singleton Class implementation may be discussed at a
-         * later date
-         */
-
         // Examine the ShapeFactory
-        System.out.println(Utilities.heading("Available Shapes", 38, '*'));
+        System.out.println(heading("Available Shapes", 38, '*'));
 
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
-        System.out.println(Utilities.horizontalLine('-', 38));
+        System.out.println(horizontalLine('-', 38));
         System.out.printf("%2d shapes available.%n",
                           ShapeFactory.numberKnown());
 
@@ -113,16 +81,16 @@ public class RunShapes {
         List<Shape> shapes = readShapes(scanner);
 
         // Print all the shapes
-        System.out.println(Utilities.heading("Display All Shapes", 38, '*'));
+        System.out.println(heading("Display All Shapes", 38, '*'));
         printShapes(shapes);
 
         // Using an iterator
         System.out.println();
-        System.out.println(Utilities.heading("Display Shape Names", 38, '~'));
+        System.out.println(heading("Display Shape Names", 38, '~'));
         printShapeNames(shapes);
         System.out.println();
 
-        System.out.println(Utilities.heading("Display Largest Shape (Area)", 38, '~'));
+        System.out.println(heading("Display Largest Shape (Area)", 38, '~'));
         Shape largestShape = findLargestShapeByArea(shapes);
 
         //cout << largestShape << "\n"; // oops again

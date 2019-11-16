@@ -9,9 +9,6 @@ public class RunShapes {
         "Thomas Kennedy"
     };  ///< Program Title
 
-    /**
-     *
-     */
     public static void main(String[] arg)
     {
         // --Erroneous C++ Variable Declarations--

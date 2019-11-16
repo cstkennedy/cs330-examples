@@ -44,7 +44,7 @@ public class RunShapes {
      *
      * @param args args[0] must specify the filename of a valid shape text file
      *
-     * @throws CloneNotSupportedException if a shapes subclass can
+     * @throws CloneNotSupportedException if a Shape subclass can
      *     not be copied.
      */
     public static void main(String[] args)

@@ -8,6 +8,11 @@ import java.io.FileReader;
 import java.io.FileNotFoundException;
 
 import utilities.Utilities;
+import static utilities.Utilities.projectHeading;
+import static utilities.Utilities.heading;
+import static utilities.Utilities.projectHeading;
+import static utilities.Utilities.horizontalLine;
+
 import shapes.*;
 
 public class RunShapes {
@@ -16,9 +21,6 @@ public class RunShapes {
         "Thomas Kennedy"
     };  ///< Program Title
 
-    /**
-     *
-     */
     public static void main(String[] args)
     {
         BufferedReader shapesFile = null;
@@ -37,54 +39,14 @@ public class RunShapes {
         }
 
         // Print main program heading
-        System.out.println(
-            Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-        );
-
-       /*
-        * What happens when the number of shapes is non-trivial?
-        *
-        * Suppose we were to expand our Shape hierarchy to include
-        * the following shapes:
-        *   - Isosceles Triangle
-        *   - Circle
-        *   - Ellipse
-        *   - Rectangle
-        *   - Square
-        *   - Rhombus
-        *   - Parallelogram
-        *   - Kite
-        *   - Generalized Polygon
-        *
-        * How would we manage the addition of new Shapes?
-        *
-        * A common approach is to make use of the Factory Model.
-        * This Model exists in a number of languages--e.g.:
-        *   - C++
-        *   - Java
-        *   - Python
-        *   - PHP
-        *   - C#
-        *
-        * A class that contains static members is created.
-        * As new classes are created, the Factory Class is
-        * updated.
-        *
-        * In this example, our factory class is called ShapeFactory
-        * The ShapeFactory could be designed as a singleton class.
-        * Our ShapeFactory is simply a tracker--i.e., records are static
-        * and will be updated manually at compile time.
-        *
-        * The Singleton Class implementation may be discussed at a
-        * later date
-        */
+        System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
         // Examine the ShapeFactory
-        System.out.println(Utilities.heading("Available Shapes", 38, '*'));
+        System.out.println(heading("Available Shapes", 38, '*'));
 
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
-        System.out.println(Utilities.horizontalLine('-', 38));
+        System.out.println(horizontalLine('-', 38));
         System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());
 
         System.out.println();
@@ -97,16 +59,16 @@ public class RunShapes {
         ArrayList<Shape> shapes = readShapes(scanner);
 
         // Print all the shapes
-        System.out.println(Utilities.heading("Display All Shapes", 38, '*'));
+        System.out.println(heading("Display All Shapes", 38, '*'));
         printShapes(shapes);
 
         // Using an iterator
         System.out.println();
-        System.out.println(Utilities.heading("Display Shape Names", 38, '~'));
+        System.out.println(heading("Display Shape Names", 38, '~'));
         printShapeNames(shapes);
         System.out.println();
 
-        System.out.println(Utilities.heading("Display Largest Shape (Area)", 38, '~'));
+        System.out.println(heading("Display Largest Shape (Area)", 38, '~'));
         Shape largestShape = findLargestShapeByArea(shapes);
 
         //cout << largestShape << "\n"; // oops again
@@ -120,6 +82,8 @@ public class RunShapes {
      *
      * @param shapes container of Shapes
      * @param toAdd shape "reference" to add
+     *
+     * @deprecated
      */
     private static void addShape(ArrayList<Shape> shapes, Shape toAdd)
     {
@@ -208,7 +172,7 @@ public class RunShapes {
         Shape largestShape = it.next();
 
         while (it.hasNext()) {
-            //std::cerr << "\n" << *(*it) << "\n"; // debugging
+            // std::cerr << "\n" << *(*it) << "\n"; // C++ debugging
 
             Shape s = it.next();
 
