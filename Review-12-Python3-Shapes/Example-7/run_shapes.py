@@ -8,7 +8,6 @@ import sys
 
 from shapes import shape_factory
 
-
 PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
                    "Thomas J. Kennedy")  # Program Title
 

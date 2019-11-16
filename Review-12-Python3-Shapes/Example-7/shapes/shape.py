@@ -8,11 +8,8 @@ base for other (specialized) shapes.
 WIDTH_LABEL = 12  # Label Output Width
 WIDTH_VALUE = 24  # Value Output Width
 
-STR_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
-          "{:>" + str(WIDTH_VALUE) + "}\n"
-
-FPT_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
-          "{:>" + str(WIDTH_VALUE) + ".4f}\n"
+STR_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}}}\n"
+FPT_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}.4f}}\n"
 
 
 class Shape(metaclass=abc.ABCMeta):
@@ -67,6 +64,9 @@ class Shape(metaclass=abc.ABCMeta):
     def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
+
+        Raises:
+            NotImplemented Error if not overridden by subclass
         """
 
         raise NotImplementedError()
@@ -75,6 +75,9 @@ class Shape(metaclass=abc.ABCMeta):
     def __str__(self) -> str:
         """
         Print the shape
+
+        Raises:
+            NotImplemented Error if not overridden by subclass
         """
 
         return STR_FMT.format("Name", self.name)

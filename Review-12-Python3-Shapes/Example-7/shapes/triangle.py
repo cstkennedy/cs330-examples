@@ -1,7 +1,7 @@
 import copy
 import math
 
-from shapes.shape import (Shape, FPT_FMT)
+from shapes.shape import (Shape, FPT_FMT, STR_FMT)
 
 
 class Triangle(Shape):
@@ -90,7 +90,7 @@ class Triangle(Shape):
         Print the Triangle
         """
 
-        return (super(Triangle, self).__str__()
+        return (super().__str__()
                 + FPT_FMT.format("Side A", self.side_a)
                 + FPT_FMT.format("Side B", self.side_b)
                 + FPT_FMT.format("Side C", self.side_c)
@@ -166,7 +166,7 @@ class EquilateralTriangle(Triangle):
         Print the Equilateral Triangle
         """
 
-        return (super().__str__()
+        return (STR_FMT.format("Name", self.name)
                 + FPT_FMT.format("Side", self.side)
                 + FPT_FMT.format("Height", self.height)
                 + FPT_FMT.format("Perimeter", Triangle.perimeter(self))
@@ -266,7 +266,7 @@ class RightTriangle(Triangle):
         Generate a string representing the Right Triangle
         """
 
-        return (super().__str__()
+        return (STR_FMT.format("Name", self.name)
                 + FPT_FMT.format("Base", self.side_a)
                 + FPT_FMT.format("Height", self.side_b)
                 + FPT_FMT.format("Hypotenuse", self.side_c)
