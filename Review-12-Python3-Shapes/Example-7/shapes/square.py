@@ -34,16 +34,12 @@ class Square(Shape):
     def area(self):
         """
         Compute the area
-
-        :return: area
         """
         return self._side ** 2.0
 
     def perimeter(self):
         """
         Compute the perimeter
-
-        :return: perimeter
         """
 
         return 4 * self._side

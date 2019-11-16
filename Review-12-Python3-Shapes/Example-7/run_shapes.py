@@ -24,7 +24,7 @@ def main():
     if len(sys.argv) < 2:
         print("No input file provided.")
         print("Usage: {:} input_file".format(*sys.argv))
-        exit(1)
+        sys.exit(1)
 
     shapes_filename = sys.argv[1]
 

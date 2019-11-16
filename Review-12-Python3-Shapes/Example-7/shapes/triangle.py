@@ -56,8 +56,6 @@ class Triangle(Shape):
         and
 
         .. math:: Area = \\sqrt{ s(s-a)(s-b)(s-c) }
-
-        :return: area
         """
 
         semi_perimeter = self.perimeter() / 2.0
@@ -70,8 +68,6 @@ class Triangle(Shape):
     def perimeter(self):
         """
         Compute the perimeter
-
-        :return: perimeter
         """
 
         return self.side_a + self.side_b + self.side_c
@@ -126,8 +122,6 @@ class EquilateralTriangle(Triangle):
         Compute the height using
 
         .. math:: height = \\frac{5}{4}side
-
-        :return: height
         """
 
         return math.sqrt(1.25 * (self.side ** 2))
@@ -148,8 +142,6 @@ class EquilateralTriangle(Triangle):
         Compute the area using
 
         .. math:: Area=\\frac{\\sqrt{3}}{4}side^2
-
-        :return: the area
         """
 
         return EquilateralTriangle.ROOT_3_DIV_4 * self.side * self.side
@@ -188,8 +180,10 @@ class RightTriangle(Triangle):
 
         .. math:: hypotenuse = \\sqrt{base^2 + height^2}
 
-        :param base: the base of a Right Triangle
-        :param height: the height of a Right Triangle
+        Args:
+            base: the base of a Right Triangle
+
+            height: the height of a Right Triangle
 
         :return: hypotenuse of a right triangle
         """
@@ -197,9 +191,7 @@ class RightTriangle(Triangle):
 
     def __init__(self, base=1, height=1):
         """
-        Construct a RightTriangle
-        with base and height set to 1 by
-        default.
+        Construct a RightTriangle with base and height set to 1 by default.
         """
 
         self.side_a = base

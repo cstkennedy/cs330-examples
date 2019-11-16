@@ -39,10 +39,11 @@ def create(name):
     """
     Create a Shape
 
-    :param: name the shape to be created
+    Args:
+        name: the shape to be created
 
-    :return: A shape with the specified name
-       or null if no matching shape is found
+    Returns:
+        A shape with the specified name or null if no matching shape is found
     """
 
     if name in _known_shapes:
@@ -57,12 +58,12 @@ def create_from_dictionary(name, values):
 
     Args:
         name: the shape to be created
-        attributes: dictionary of values corresponding to the data needed
+
+        values: dictionary of values corresponding to the data needed
             to inialize a shape
 
     Returns:
-        A shape with the specified name or null if no matching shape is
-        found
+        A shape with the specified name or null if no matching shape is found
     """
 
     if name in _known_shapes:
@@ -75,7 +76,8 @@ def is_known(name):
     """
     Determine whether a given shape is known
 
-    :param: name the shape for which to query
+    Args:
+        name: the shape for which to query
     """
 
     return name in _known_shapes

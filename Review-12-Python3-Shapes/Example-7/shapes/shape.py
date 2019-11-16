@@ -1,9 +1,9 @@
-import abc
-
 """
 This module provides the Shape class and related constants which serve as the
 base for other (specialized) shapes.
 """
+
+import abc
 
 WIDTH_LABEL = 12  # Label Output Width
 WIDTH_VALUE = 24  # Value Output Width
@@ -16,15 +16,6 @@ class Shape(metaclass=abc.ABCMeta):
     """
     Shape in a 2-D Cartesian Plane
     """
-
-    # @classmethod for static
-
-    def __init__(self):
-        """
-        Shape Constructor
-        """
-
-        pass
 
     @property
     @abc.abstractmethod
