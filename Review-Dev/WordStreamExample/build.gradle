@@ -1,0 +1,114 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
+
+    id "checkstyle"
+    id "com.github.spotbugs" version "2.0.0"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    testCompile "org.hamcrest:hamcrest-library:1.3"
+}
+
+jar {
+    baseName = "IntStreamDemo"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs350.examples.IntStreamDemo"
+        )
+    }
+}
+
+run {
+    main = "edu.odu.cs.cs330.examples.IntStreamDemo"
+}
+
+application {
+    mainClassName = "edu.odu.cs.cs330.examples.IntStreamDemo"
+}
+
+test {
+    reports {
+        html.enabled = true
+    }
+}
+
+javadoc {
+    failOnError false
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+jacoco {
+    toolVersion = "0.8.0"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+// Check Style Config
+checkstyle {
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+// End Checkstyle config
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+
