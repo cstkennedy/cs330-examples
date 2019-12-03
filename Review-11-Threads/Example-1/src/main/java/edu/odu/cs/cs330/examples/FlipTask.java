@@ -38,6 +38,7 @@ public class FlipTask
     /**
      * Simulate coin flips.
      */
+    @Override
     public void run()
     {
         double rndDouble = 0;
@@ -45,7 +46,7 @@ public class FlipTask
         Random rGen = new Random();
 
         for (int i = 0; i < this.numTrials; i++) {
-            //rndDouble = Math.random(); // This is why - synchronization
+            // rndDouble = Math.random(); // This is why - synchronization
             rndDouble = rGen.nextDouble();
 
             if (rndDouble < 0.5) {
