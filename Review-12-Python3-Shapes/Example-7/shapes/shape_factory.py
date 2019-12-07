@@ -87,7 +87,7 @@ def list_known():
     """
     Print a list of known Shapes
     """
-    return "\n".join(["  " + name for name in _known_shapes])
+    return "\n".join([f"  {name:}" for name in _known_shapes])
 
 
 def number_known():
