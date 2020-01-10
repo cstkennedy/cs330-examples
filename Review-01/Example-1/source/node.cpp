@@ -8,26 +8,26 @@ Node::Node()
 }
 
 //------------------------------------------------------------------------------
-Node::Node( int data )
+Node::Node(int data)
 {
     this->data = data;
     this->next = nullptr;
 }
 
 //------------------------------------------------------------------------------
-bool Node::operator==( const Node &rhs ) const
+bool Node::operator==(const Node &rhs) const
 {
     return (
         this->data == rhs.data &&
         this->next == rhs.next
-    );
+   );
 }
 
 //------------------------------------------------------------------------------
-bool Node::operator!=( const Node &rhs ) const
+bool Node::operator!=(const Node &rhs) const
 {
     return (
         this->data != rhs.data ||
         this->next != rhs.next
-    );
+   );
 }

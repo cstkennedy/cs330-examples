@@ -120,7 +120,7 @@ LinkedList<int> generateList(int n)
         ll.push_back(randomInt());
     }
 
-    return ll;  // Force move semantics (instead of possible RVO)
+    return ll;  // Discuss how to force move semantics (instead of possible RVO)
 }
 
 //------------------------------------------------------------------------------

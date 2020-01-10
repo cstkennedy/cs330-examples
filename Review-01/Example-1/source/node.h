@@ -24,17 +24,17 @@ struct Node {
     /**
      * Construct a node given a piece of input data
      */
-    Node( int data );
+    Node(int data);
 
     /**
      * Compare two Nodes. Check for equivalence.
      */
-    bool operator==( const Node &rhs ) const;
+    bool operator==(const Node &rhs) const;
 
     /**
      * Compare two Nodes. Check for non-equivalence.
      */
-    bool operator!=( const Node &rhs ) const;
+    bool operator!=(const Node &rhs) const;
 };
 
 #endif
