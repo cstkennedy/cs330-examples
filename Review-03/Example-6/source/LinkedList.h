@@ -30,7 +30,7 @@ class LinkedList {
          * of this course.
          */
         template<bool is_const = true>
-        class Iterator{
+        class Iterator {
             public:
                 using N  = typename std::conditional<is_const,
                                                      const Node, Node>::type;
@@ -115,7 +115,9 @@ class LinkedList {
         }
 
         LinkedList(const LinkedList& src)
-            :LinkedList()
+            :head(nullptr),
+             tail(nullptr),
+             currentSize(0)
         {
             /*
             Node* it = src.head;
@@ -205,8 +207,6 @@ class LinkedList {
         {
             using std::swap;
             swap(*this, rhs);
-
-            return *this;
         }
 
         friend

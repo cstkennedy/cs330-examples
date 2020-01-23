@@ -20,9 +20,9 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House{
+class House {
     private:
-        using Collection = LinkedList<Room>;
+        using Collection = std::list<Room>;
 
     public:
         using iterator       = Collection::iterator;
@@ -33,9 +33,9 @@ class House{
          * Name of the house--e.g.,
          * Minecraft Beach House
          */
-        std::string name;
+        std::string      name;
 
-        Collection  rooms;
+        Collection rooms;
 
     public:
         /**

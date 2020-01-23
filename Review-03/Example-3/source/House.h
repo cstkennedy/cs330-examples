@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <utility>
 
 #include <cassert>
 
@@ -17,7 +18,7 @@
  */
 class House{
     public:
-        struct Node{
+        struct Node {
             Room  data;
             Node* next;
 
@@ -252,12 +253,22 @@ class House{
         /**
          * Assignment Operator
          */
-        House& operator=(const House &rhs);
+        House& operator=(House rhs);
 
         /**
          * Logical Equivalance Operator
          */
         bool operator==(const House &rhs) const;
+
+        /**
+         * Swap the contents of two `House`s
+         * <p>
+         * I am using a friend function here and only here (under protest)
+         * <p>
+         * [Refer here](http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
+         */
+        friend
+        void swap(House& lhs, House& rhs);
 };
 
 /**
@@ -300,11 +311,8 @@ bool House::operator==(const House &rhs) const
         rhsIt++;
     }
 
-    if (lhsIt == this->end() && rhsIt == rhs.end()) {
-        return true;
-    }
-
-    return false;
+    return lhsIt == this->end()
+        && rhsIt == rhs.end();
 }
 
 /**

@@ -7,7 +7,7 @@
 template <typename T>
 class LinkedList {
     private:
-        struct Node {
+        struct Node{
             T     data;
             Node* next;
 
@@ -30,7 +30,7 @@ class LinkedList {
          * of this course.
          */
         template<bool is_const = true>
-        class Iterator {
+        class Iterator{
             public:
                 using N  = typename std::conditional<is_const,
                                                      const Node, Node>::type;
@@ -115,9 +115,7 @@ class LinkedList {
         }
 
         LinkedList(const LinkedList& src)
-            :head(nullptr),
-             tail(nullptr),
-             currentSize(0)
+            :LinkedList()
         {
             /*
             Node* it = src.head;

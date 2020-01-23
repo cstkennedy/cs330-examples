@@ -1,92 +1,68 @@
 #include "House.h"
 
-
-//------------------------------------------------------------------------------
-House::Node::Node(Room d)
-    :data(d),
-     next(nullptr)
-{
-}
-
 //------------------------------------------------------------------------------
 House::House()
     :name("House"),
-     head(nullptr),
-     tail(nullptr)
+     rooms(nullptr)
 {
     currentSize = 0;
 }
 
 //------------------------------------------------------------------------------
 House::House(std::string name)
-    :name(name),
-     head(nullptr),
-     tail(nullptr)
+    :name(name)
 {
     currentSize = 0;
+    rooms       = nullptr;
 }
 
 //------------------------------------------------------------------------------
 House::House(const House &src)
     :name(src.name),
-     head(nullptr),
-     tail(nullptr),
-     currentSize(0)
+     currentSize(0),
+     rooms(nullptr)
 {
-    Node* it = src.head;
-
-    while (it != nullptr) {
-        this->addRoom(it->data);
-
-        it = it->next;
+    for (int i = 0; i < src.size(); i++) {
+        this->addRoom(src.rooms[i]);
     }
 }
 
 //------------------------------------------------------------------------------
 House::~House() {
-    // Deallocate the Linked List
-    Node* it = this->head;
-
-    while (it != nullptr) {
-        Node* prev = it;
-
-        it = it->next;
-        delete prev;
-    }
-    it = nullptr;
-
-    this->head = nullptr;
-    this->tail = nullptr;
-    // End Linked List Deallocation
+    delete[] rooms;
+    rooms = nullptr;
 }
 
 //------------------------------------------------------------------------------
 void House::addRoom(Room toAdd)
 {
-    Node* newNode = new Node(toAdd);
-
-    // If adding the first Node
-    if (head == nullptr) {
-        head        = newNode;
-        tail        = newNode;
+    if (currentSize == 0) {
+        rooms       = new Room[1];
         currentSize = 1;
 
-        // Why set newNode to null?
-        newNode     = nullptr;
+        rooms[0]    = toAdd;
 
+        // Stop here
         return;
     }
 
-    // Link the newNode to the end
-    // of the exiting list
-    tail->next = newNode;
+    // Create the new array
+    // Room *newRooms = new Room[currentSize + 1];
+    Room *newRooms = new Room[currentSize + 1];
 
-    // Update tail;
-    tail = tail->next;
-    // tail = newNode;
+    // Copy from the old array to the new array
+    for (int i = 0; i < currentSize; i++) {
+        newRooms[i] = rooms[i];
+    }
 
-    // Update the size
-    currentSize++;
+    // Delete the old array and
+    // update rooms to reference
+    // the new array
+    delete[] rooms;
+    rooms = newRooms;
+
+    // Add the new Room
+    rooms[currentSize++] = toAdd;
 }
 
 //------------------------------------------------------------------------------
@@ -97,25 +73,25 @@ size_t House::size() const {
 //------------------------------------------------------------------------------
 House::iterator House::begin()
 {
-    return iterator(head);
+    return &(rooms[0]);
 }
 
 //------------------------------------------------------------------------------
 House::const_iterator House::begin() const
 {
-    return const_iterator(head);
+    return &rooms[0];
 }
 
 //------------------------------------------------------------------------------
 House::iterator House::end()
 {
-    return iterator(nullptr);
+    return &rooms[currentSize];
 }
 
 //------------------------------------------------------------------------------
 House::const_iterator House::end() const
 {
-    return const_iterator(nullptr);
+    return &rooms[currentSize];
 }
 
 //------------------------------------------------------------------------------
@@ -149,34 +125,18 @@ void House::display(std::ostream& outs) const
     outs << "Avg Room Cost: $ " << avg   << "\n";
 }
 
-
 //------------------------------------------------------------------------------
-House& House::operator=(const House& rhs)
+House& House::operator=(const House &rhs)
 {
     if (this != &rhs) {
-        // Deallocate the Linked List
-        Node* it = this->head;
+        delete[] rooms;
 
-        while (it != nullptr) {
-            Node* prev = it;
+        this->name        = rhs.name;
+        this->currentSize = 0;
+        this->rooms       = nullptr;
 
-            it = it->next;
-            delete prev;
-        }
-        it = nullptr;
-
-        this->head = nullptr;
-        this->tail = nullptr;
-        // End Linked List Deallocation
-
-        this->name = rhs.name;
-
-        // Reuse it
-        it = rhs.head;
-
-        while (it != nullptr) {
-            this->addRoom(it->data);
-            it = it->next;
+        for (int i = 0; i < rhs.size(); i++) {
+            this->addRoom(rhs.rooms[i]);
         }
     }
 

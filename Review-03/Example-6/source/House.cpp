@@ -1,3 +1,8 @@
+#include <utility>
+#include <algorithm>
+#include <numeric>
+#include <iterator>
+
 #include "House.h"
 
 //------------------------------------------------------------------------------
@@ -52,23 +57,13 @@ void House::display(std::ostream& outs) const
 {
     outs << "--------" << this->name << "--------" << "\n";
 
-    // What type of iterator am I using--i.e.,
-    // iterator or const_iterator?
+    std::copy(begin(), end(), std::ostream_iterator<Room>(outs));
 
-    // Print the rooms
-    for (const Room& prtRoom : rooms) {
-        outs << prtRoom;
-    }
-
-    // Compute and print the total
-    double                avg   = 0;
-    double                total = 0;
-
-    for (const Room& room : rooms) {
-        total += room.flooringCost();
-    }
-
-    avg = total / this->size();
+    double total = std::accumulate(rooms.begin(), rooms.end(), 0.0,
+                                   [](double t, const Room& rm) {
+                                       return t + rm.flooringCost();
+                                   });
+    double avg   = total / this->size();
 
     outs << "\n";
     outs << "------------------------------";

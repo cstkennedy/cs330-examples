@@ -7,7 +7,6 @@
 #include <cmath>
 #include <string>
 #include <utility>
-#include <algorithm>
 
 #include "utilities.h"
 
@@ -19,7 +18,7 @@ using namespace std;
 /**
  * Build our example house
  */
-void buildHouse(House& house);
+void buildHouse(House &house);
 
 /**
  * Take a room and change the flooring
@@ -62,8 +61,6 @@ int main()
 
     cout << house;
 
-    cout << duplicateHouse << "\n";
-
     return 0;
 }
 
@@ -71,17 +68,24 @@ int main()
 void buildHouse(House &house)
 {
     // Add the Laundry Room
-    house.addRoom(Room("Laundry Room",
-                       Room::DimensionSet(8, 4), 1.95, "Laminate"));
+    house.addRoom(
+        Room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate")
+    );
 
     // Add the Kitchen
     house.addRoom(
-        Room("Kitchen", Room::DimensionSet(20 , 12), 3.87, "Tile")
+        Room("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile")
     );
 
     // Add the Storage Room
-    house.addRoom(Room("Storage Room",
-                       Room::DimensionSet(16, 16), 4.39, "Birch Wood"));
+    house.addRoom(
+        Room(
+            "Storage Room",
+            Room::DimensionSet(16, 16),
+            4.39,
+            "Birch Wood"
+        )
+    );
 }
 
 //------------------------------------------------------------------------------
@@ -91,22 +95,11 @@ House upgradeFlooring(House original)
 
     // What if we decide to use the same type of
     // Flooring in every room?
-    /*
     for (Room& room : modified) {
         room.setFlooring("Stone Bricks", 12.97);
     }
-    */
-    std::for_each(modified.begin(), modified.end(),
-                  [](Room& room) {
-                      room.setFlooring("Stone Bricks", 12.97);
-                  });
 
     modified.setName("After Stone Bricks");
 
     return modified;
 }
-
-/*
-void doStuff(Room& room) {
-    room.setFlooring("Stone Bricks", 12.97);
-}*/

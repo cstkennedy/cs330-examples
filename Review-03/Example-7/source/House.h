@@ -12,7 +12,6 @@
 #include "LinkedList.h"
 
 #include <vector>
-#include <list>
 
 /**
  * A House is composed of zero or more Room objects.
@@ -20,9 +19,9 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House{
+class House {
     private:
-        using Collection = std::list<Room>;
+        using Collection = LinkedList<Room>;
 
     public:
         using iterator       = Collection::iterator;

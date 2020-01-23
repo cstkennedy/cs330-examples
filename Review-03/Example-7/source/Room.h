@@ -52,7 +52,7 @@ class Room {
          * One linear dimension. This can be one of
          * length, width, or height
          */
-        typedef double Dimension;
+        using Dimension = double;
 
         /**
          * Container for length and width.
@@ -335,5 +335,27 @@ std::ostream& operator<<(std::ostream &outs, const Room &prt)
     prt.display(outs);
 
     return outs;
+}
+
+//------------------------------------------------------------------------------
+inline
+std::istream& operator>>(std::istream &ins, Room& rd)
+{
+    std::string name;
+    double      l, h;
+    double      cost;
+    std::string flooring;
+
+    ins >> std::ws;
+    getline(ins, name, ';');
+    ins >> l >> h >> cost;
+
+    ins >> std::ws;
+    getline(ins, flooring);
+    ins >> std::ws;
+
+    rd = Room(name, Room::DimensionSet(l, h), cost, flooring);
+
+    return ins;
 }
 #endif

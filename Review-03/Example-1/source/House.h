@@ -4,14 +4,8 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include <utility>
-
-#include <cassert>
 
 #include "Room.h"
-#include "LinkedList.h"
-
-#include <vector>
 
 /**
  * A House is composed of zero or more Room objects.
@@ -19,13 +13,21 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House {
-    private:
-        using Collection = LinkedList<Room>;
-
+class House{
     public:
-        using iterator       = Collection::iterator;
-        using const_iterator = Collection::const_iterator;
+        /**
+         * A standard C++ STL style iterator.
+         * <p>
+         * Recall the rules on Class naming and the STL.
+         */
+         typedef Room*       iterator;
+
+        /**
+         * A standard C++ STL style iterator.
+         * <p>
+         * Recall the rules on Class naming and the STL.
+         */
+         typedef const Room* const_iterator;
 
     private:
         /**
@@ -34,7 +36,16 @@ class House {
          */
         std::string      name;
 
-        Collection rooms;
+        /**
+         * Container of Rooms
+         */
+        Room*            rooms;
+
+        /**
+         * Current size of the house--i.e.,
+         * current (actual) number of rooms
+         */
+        int              currentSize;
 
     public:
         /**
@@ -47,6 +58,16 @@ class House {
          * Construct a House with a specified name
          */
         House(std::string name);
+
+        /**
+         * Copy Constructor
+         */
+        House(const House &src);
+
+        /**
+         * Destructor
+         */
+        ~House();
 
         /**
          * Add a Room
@@ -105,36 +126,37 @@ class House {
         void display(std::ostream& outs) const;
 
         /**
+         * Assignment Operator
+         */
+        House& operator=(const House &rhs);
+
+        /**
          * Logical Equivalance Operator
          */
         bool operator==(const House &rhs) const;
-
-        /**
-         * Swap the contents of two `House`s
-         * <p>
-         * I am using a friend function here and only here (under protest)
-         * <p>
-         * [Refer here](http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
-         */
-        friend
-        void swap(House& lhs, House& rhs);
 };
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 void House::setName(std::string newName)
 {
     this->name = newName;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 std::string House::getName() const
 {
     return (*this).name;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 bool House::operator==(const House &rhs) const
 {
@@ -154,11 +176,16 @@ bool House::operator==(const House &rhs) const
         rhsIt++;
     }
 
+    /*
     if (lhsIt == this->end() && rhsIt == rhs.end()) {
         return true;
     }
 
     return false;
+    */
+
+    return lhsIt == this->end()
+        && rhsIt == rhs.end();
 }
 
 /**
@@ -176,5 +203,6 @@ std::ostream& operator<<(std::ostream &outs, const House &prt)
 
     return outs;
 }
+
 
 #endif

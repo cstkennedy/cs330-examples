@@ -7,6 +7,10 @@
 #include <cmath>
 #include <string>
 #include <utility>
+#include <algorithm>
+#include <functional>
+#include <numeric>
+#include <iterator>
 
 #include "utilities.h"
 
@@ -18,7 +22,7 @@ using namespace std;
 /**
  * Build our example house
  */
-void buildHouse(House &house);
+void buildHouse(House& house);
 
 /**
  * Take a room and change the flooring
@@ -28,6 +32,12 @@ void buildHouse(House &house);
  * @return House with the updated flooring
  */
 House upgradeFlooring(House original);
+
+inline
+double discountFlooring(const Room& r)
+{
+    return 0.90 * r.flooringCost();
+}
 
 /**
  * Compute the area of a room and the cost of
@@ -59,18 +69,59 @@ int main()
          << "\n"
          << "\n";
 
-    cout << house;
+    cout << house          << "\n";
+    cout << duplicateHouse << "\n";
+
+    // Get all the flooring costs with a 10% discount
+    vector<double> costs(duplicateHouse.size());
+    std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
+                   discountFlooring);
+
+    /*for (const Room& rm : duplicateHouse) {
+        double cost = 0.9 * rm.flooringCost();
+        costs.push_back(cost);
+    }*/
+
+    // Print the discounted prices
+    /*
+    for (auto c : costs) {
+        std::cout << c << "\n";
+    }*/
+
+    // std::ostream_iterator<double> outIt(std::cout, "\n");
+    std::copy(costs.begin(), costs.end(),
+              std::ostream_iterator<double>(std::cout, "\n"));
+
+    // Print the sum, min, max -> D.R.Y!
+    cout << "Total: "
+         << std::accumulate(costs.begin(), costs.end(), 0.0, std::plus<double>())
+         << "\n";
+    cout << "Min: "
+         << *std::min_element(costs.begin(), costs.end())
+         << "\n"
+         << "Max: "
+         << *std::max_element(costs.begin(), costs.end())
+         << "\n";
+
+    // I would probably use minmax_element and auto
+    /*
+    std::pair<std::vector<double>::const_iterator,
+              std::vector<double>::const_iterator> extremes = std::minmax_element(costs.begin(), costs.end());
+    */
+    auto extremes = std::minmax_element(costs.begin(), costs.end());
+
+    cout << "Min: " << *(extremes.first)  << "\n"
+         << "Max: " << *(extremes.second) << "\n";
 
     return 0;
 }
 
 //------------------------------------------------------------------------------
-void buildHouse(House &house)
+void buildHouse(House& house)
 {
     // Add the Laundry Room
-    house.addRoom(
-        Room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate")
-    );
+    house.addRoom(Room("Laundry Room",
+                       Room::DimensionSet(8, 4), 1.95, "Laminate"));
 
     // Add the Kitchen
     house.addRoom(
@@ -78,14 +129,8 @@ void buildHouse(House &house)
     );
 
     // Add the Storage Room
-    house.addRoom(
-        Room(
-            "Storage Room",
-            Room::DimensionSet(16, 16),
-            4.39,
-            "Birch Wood"
-        )
-    );
+    house.addRoom(Room("Storage Room",
+                       Room::DimensionSet(16, 16), 4.39, "Birch Wood"));
 }
 
 //------------------------------------------------------------------------------
@@ -93,11 +138,10 @@ House upgradeFlooring(House original)
 {
     House modified = original;
 
-    // What if we decide to use the same type of
-    // Flooring in every room?
-    for (Room& room : modified) {
-        room.setFlooring("Stone Bricks", 12.97);
-    }
+    std::for_each(modified.begin(), modified.end(),
+                  [](Room& room) {
+                      room.setFlooring("Stone Bricks", 12.97);
+                  });
 
     modified.setName("After Stone Bricks");
 

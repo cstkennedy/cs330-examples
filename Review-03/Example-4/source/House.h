@@ -4,10 +4,15 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <utility>
 
 #include <cassert>
 
 #include "Room.h"
+#include "LinkedList.h"
+
+#include <vector>
+#include <list>
 
 /**
  * A House is composed of zero or more Room objects.
@@ -16,160 +21,21 @@
  * iterator interface.
  */
 class House{
+    private:
+        using Collection = LinkedList<Room>;
+
     public:
-        struct Node{
-            Room  data;
-            Node* next;
-
-            /**
-             * Node Constructor
-             */
-            Node(Room d);
-        };
-
-        /**
-         * A standard C++ STL style iterator.
-         * <p>
-         * Recall the rules on Class naming and the STL.
-         * <p>
-         * Note I have relaxed my rule regarding definitions
-         * within class declarations.
-         * <p>
-         * These are rudimentary iterators. There are a number
-         * of additions needed before we can require this complete--e.g.,
-         * operator-> and iterator traits. The latter is beyond the scope
-         * of this course.
-         */
-        struct iterator{
-            private:
-                Node* pseudoPointer;
-
-            public:
-                iterator()
-                    :pseudoPointer(nullptr)
-                {
-                }
-
-                iterator(Node* node)
-                    :pseudoPointer(node)
-                {
-                }
-
-                Room& operator*() const
-                {
-                    assert(pseudoPointer != nullptr);
-                    return pseudoPointer->data;
-                }
-
-                iterator operator++(int v)
-                {
-                    iterator temp(this->pseudoPointer);
-
-                    this->pseudoPointer = pseudoPointer->next;
-
-                    return temp;
-                }
-
-                iterator operator++()
-                {
-                    this->pseudoPointer = pseudoPointer->next;
-
-                    return *this;
-                }
-
-                bool operator== (const iterator &rhs) const
-                {
-                    return this->pseudoPointer == rhs.pseudoPointer;
-                }
-
-                bool operator!= (const iterator &rhs) const
-                {
-                    return this->pseudoPointer != rhs.pseudoPointer;
-                }
-        };
-
-        /**
-         * A standard C++ STL style const_iterator.
-         * <p>
-         * Recall the rules on Class naming and the STL.
-         */
-        struct const_iterator{
-            private:
-                const Node* pseudoPointer;
-
-            public:
-                const_iterator()
-                    :pseudoPointer(nullptr)
-                {
-                }
-
-                const_iterator(const Node* node)
-                    :pseudoPointer(node)
-                {
-                }
-
-                const Room& operator*()
-                {
-                    assert(pseudoPointer != nullptr);
-                    return pseudoPointer->data;
-                }
-
-                const_iterator operator++(int v)
-                {
-                    const_iterator ctemp(this->pseudoPointer);
-
-                    this->pseudoPointer = pseudoPointer->next;
-
-                    return ctemp;
-                }
-
-                const_iterator operator++()
-                {
-                    this->pseudoPointer = pseudoPointer->next;
-
-                    return *this;
-                }
-
-                bool operator== (const const_iterator &rhs) const
-                {
-                    return this->pseudoPointer == rhs.pseudoPointer;
-                }
-
-                bool operator!= (const const_iterator &rhs) const
-                {
-                    return this->pseudoPointer != rhs.pseudoPointer;
-                }
-        };
+        using iterator       = Collection::iterator;
+        using const_iterator = Collection::const_iterator;
 
     private:
         /**
          * Name of the house--e.g.,
          * Minecraft Beach House
          */
-        std::string      name;
+        std::string name;
 
-        /**
-         * Container of Rooms
-         * <p>
-         * This is a pointer to the head (first)
-         * Node
-         */
-        Node*            head;
-
-        /**
-         * Container of Rooms
-         * <p>
-         * This is a pointer to the tail (last)
-         * Node
-         */
-        Node*            tail;
-
-        /**
-         * Current size of the house--i.e.,
-         * current (actual) number of rooms
-         */
-        int              currentSize;
-
+        Collection  rooms;
 
     public:
         /**
@@ -182,16 +48,6 @@ class House{
          * Construct a House with a specified name
          */
         House(std::string name);
-
-        /**
-         * Copy Constructor
-         */
-        House(const House &src);
-
-        /**
-         * Destructor
-         */
-        ~House();
 
         /**
          * Add a Room
@@ -250,37 +106,36 @@ class House{
         void display(std::ostream& outs) const;
 
         /**
-         * Assignment Operator
-         */
-        House& operator=(const House &rhs);
-
-        /**
          * Logical Equivalance Operator
          */
         bool operator==(const House &rhs) const;
+
+        /**
+         * Swap the contents of two `House`s
+         * <p>
+         * I am using a friend function here and only here (under protest)
+         * <p>
+         * [Refer here](http://stackoverflow.com/questions/3279543/what-is-the-copy-and-swap-idiom)
+         */
+        friend
+        void swap(House& lhs, House& rhs);
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void House::setName(std::string newName)
 {
     this->name = newName;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 std::string House::getName() const
 {
     return (*this).name;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 bool House::operator==(const House &rhs) const
 {
@@ -322,6 +177,5 @@ std::ostream& operator<<(std::ostream &outs, const House &prt)
 
     return outs;
 }
-
 
 #endif

@@ -4,23 +4,12 @@
 #include <utility>
 #include <cassert>
 
-#include "NaivePool.h"
-
 template <typename T>
 class LinkedList {
     private:
         struct Node {
             T     data;
             Node* next;
-
-            /**
-             * Default contructor is required for the NaivePool to work.
-             */
-            Node()
-             :next(nullptr)
-            {
-            }
-
 
             Node(T d)
             :data(d),
@@ -39,15 +28,9 @@ class LinkedList {
          * of additions needed before we can claim this is complete--e.g.,
          * operator-> and iterator traits. The latter is beyond the scope
          * of this course.
-         *
-         * Note, I (R)ead (T)he (F)un (M)anual on pre C++-17 iterator traits
-         * <https://en.cppreference.com/w/cpp/iterator/iterator> and tags
-         * <https://en.cppreference.com/w/cpp/iterator/iterator_tags>
          */
         template<bool is_const = true>
-        class Iterator : public std::iterator<std::forward_iterator_tag,
-                                              typename std::conditional<is_const, const T, T>::type>
-        {
+        class Iterator{
             public:
                 using N  = typename std::conditional<is_const,
                                                      const Node, Node>::type;
@@ -105,8 +88,6 @@ class LinkedList {
         using const_iterator = Iterator<true>;
 
     private:
-        using NodePool = NaivePool<Node>;
-
         /**
          * This is a pointer to the head (first)
          * Node
@@ -125,11 +106,6 @@ class LinkedList {
          */
         int           currentSize;
 
-        /**
-         * Pool that orchestrates Node allocation and deletion.
-         */
-        NodePool memPool;
-
     public:
         LinkedList()
             :head(nullptr),
@@ -139,10 +115,7 @@ class LinkedList {
         }
 
         LinkedList(const LinkedList& src)
-            :head(nullptr),
-             tail(nullptr),
-             currentSize(0),
-             memPool(src.currentSize)
+            :LinkedList()
         {
             /*
             Node* it = src.head;
@@ -152,7 +125,6 @@ class LinkedList {
                 it = it->next;
             }
             */
-
             for (const T& src_data : src) {
                 this->push_back(src_data);
             }
@@ -161,14 +133,24 @@ class LinkedList {
         ~LinkedList()
         {
             // Deallocate the Linked List
+            Node* it = this->head;
+
+            while (it != nullptr) {
+                Node* prev = it;
+
+                it = it->next;
+                delete prev;
+            }
+            it = nullptr;
+
+            this->head = nullptr;
+            this->tail = nullptr;
             // End Linked List Deallocation
         }
 
         void push_back(T toAdd)
         {
-            // Node* newNode = new Node(toAdd);
-            Node* newNode = memPool.getNext();
-            newNode->data = toAdd;  // Mistake -> forgot to assign toAdd
+            Node* newNode = new Node(toAdd);
 
             // If adding the first Node
             if (head == nullptr) {
@@ -223,14 +205,14 @@ class LinkedList {
         {
             using std::swap;
             swap(*this, rhs);
+
+            return *this;
         }
 
         friend
         void swap(LinkedList<T>& lhs, LinkedList<T>& rhs)
         {
             using std::swap;
-
-            swap(lhs.memPool, rhs.memPool);
 
             swap(lhs.head, rhs.head);
             swap(lhs.tail, rhs.tail);

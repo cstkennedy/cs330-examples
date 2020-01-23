@@ -18,15 +18,14 @@ const std::string Room::UNITS = "ft";
 //------------------------------------------------------------------------------
 
 Room::Flooring::Flooring()
-    :unitCost(1.00),
-     type("Generic")
+    :Flooring("Generic", 1.00)
 {
 }
 
 //------------------------------------------------------------------------------
 Room::Flooring::Flooring(std::string n, Cost c)
-    :unitCost(c),
-     type(n)
+    :type(n),
+     unitCost(c)
 {
 }
 
@@ -46,22 +45,14 @@ Room::DimensionSet::DimensionSet(Dimension l, Dimension w)
 
 //------------------------------------------------------------------------------
 Room::Room()
-    :name("Generic"),
-     flooring(),
-     dimensions()
+    :name("Generic")
 {
-    // this->flooring.type     = "Generic";
-    // this->flooring.unitCost = 1;
 }
 
 //------------------------------------------------------------------------------
 Room::Room(Dimension l, Dimension w, Cost c)
-    :name("Generic"),
-     flooring("Generic", c),
-     dimensions(l, w)
+    :Room("Generic", l, w, c)
 {
-    // flooring.type     = "Generic";
-    // flooring.unitCost = c;
 }
 
 
@@ -71,13 +62,14 @@ Room::Room(std::string n, Dimension l, Dimension w, Cost c)
      flooring("Generic", c),
      dimensions(l, w)
 {
+    // Wreorder as a topic for discussion
 }
 
 //------------------------------------------------------------------------------
 Room::Room(std::string n, DimensionSet d, Cost c, std::string fn)
-    :name(n),
+    :dimensions(d),
      flooring(fn, c),
-     dimensions(d)
+     name(n)
 {
 }
 

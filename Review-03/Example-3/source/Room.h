@@ -52,7 +52,7 @@ class Room {
          * One linear dimension. This can be one of
          * length, width, or height
          */
-        using Dimension = double;
+        typedef double Dimension;
 
         /**
          * Container for length and width.
@@ -222,7 +222,7 @@ class Room {
          *
          * @param prt Room for which to print the summary
          */
-        void display(std::ostream& outs) const;
+        void display(std::ostream &outs) const;
 
         /**
          * Logical Equivalence Operator
@@ -230,7 +230,7 @@ class Room {
          * This is the member function implementation.
          * This operator can be implemented as a non-member function.
          */
-        bool operator==(const Room& rhs) const;
+        bool operator==(const Room &rhs) const;
 
         /**
          * Less-Than (Comes-Before) Operator.
@@ -240,59 +240,75 @@ class Room {
          * This is the member function implementation.
          * This operator can be implemented as a non-member function.
          */
-        bool operator<(const Room& rhs) const;
+        bool operator<(const Room &rhs) const;
 };
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 void Room::DimensionSet::setLength(Dimension v)
 {
     this->length = v;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 Room::Dimension Room::DimensionSet::getLength() const
 {
     return this->length;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 void Room::DimensionSet::setWidth(Dimension v)
 {
     this->width = v;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 Room::Dimension Room::DimensionSet::getWidth() const
 {
     return this->width;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 void Room::setName(std::string newName)
 {
     this->name = newName;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 std::string Room::getName() const
 {
     return this->name;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 const Room::Flooring& Room::getFlooring() const
 {
     return this->flooring;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 void Room::setFlooring(std::string t, Cost c)
 {
@@ -300,21 +316,27 @@ void Room::setFlooring(std::string t, Cost c)
     flooring.unitCost = c;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 const Room::DimensionSet& Room::getDimensions() const
 {
     return this->dimensions;
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 double Room::area() const
 {
     return (dimensions.getWidth() * dimensions.getLength());
 }
 
-//------------------------------------------------------------------------------
+/**
+ *
+ */
 inline
 Cost Room::flooringCost() const
 {
@@ -335,27 +357,5 @@ std::ostream& operator<<(std::ostream &outs, const Room &prt)
     prt.display(outs);
 
     return outs;
-}
-
-//------------------------------------------------------------------------------
-inline
-std::istream& operator>>(std::istream &ins, Room& rd)
-{
-    std::string name;
-    double      l, h;
-    double      cost;
-    std::string flooring;
-
-    ins >> std::ws;
-    getline(ins, name, ';');
-    ins >> l >> h >> cost;
-
-    ins >> std::ws;
-    getline(ins, flooring);
-    ins >> std::ws;
-
-    rd = Room(name, Room::DimensionSet(l, h), cost, flooring);
-
-    return ins;
 }
 #endif
