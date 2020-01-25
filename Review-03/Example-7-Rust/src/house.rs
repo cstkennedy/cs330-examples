@@ -160,10 +160,15 @@ impl PartialEq for House {
             }
         }
 
+        /*
         if lhs_room == None && rhs_room == None {
             return true;
         }
 
         false
+        */
+
+        return lhs_room == None
+            && rhs_room == None
     }
 }

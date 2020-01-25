@@ -135,7 +135,7 @@ impl Default for Room {
     }
 }
 
-impl Display for Room {    
+impl Display for Room {
     #[allow(unused_must_use)]
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "Room ({})", self.name);
