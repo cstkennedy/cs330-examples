@@ -21,7 +21,7 @@
  * iterator interface.
  */
 class House {
-    private:
+
         using Collection = LinkedList<Room>;
 
     public:

@@ -70,12 +70,14 @@ void House::display(std::ostream& outs) const
     std::copy(begin(), end(), outs_it);
 
     // Compute and print the total
-    /*double total = 0;
+    /*
+    double total = 0;
     std::for_each(rooms.begin(), rooms.end(),
                   [&total](const Room& rm)
                   {
                       total += rm.flooringCost();
-                  });*/
+                  });
+    */
 
     double total = std::accumulate(rooms.begin(), rooms.end(), 0.0,
                                    [](double t, const Room& rm) -> double
@@ -90,6 +92,32 @@ void House::display(std::ostream& outs) const
 
     outs << "Total Cost   : $ " << total << "\n";
     outs << "Avg Room Cost: $ " << avg   << "\n";
+}
+
+//------------------------------------------------------------------------------
+bool House::operator==(const House &rhs) const
+{
+    if (this->name != rhs.name) {
+        return false;
+    }
+
+    const_iterator lhsIt = this->begin();
+    const_iterator rhsIt = rhs.begin();
+
+    while (lhsIt != this->end() && rhsIt != rhs.end()) {
+        if (*lhsIt != *rhsIt) {
+            return false;
+        }
+
+        lhsIt++;
+        rhsIt++;
+    }
+
+    if (lhsIt == this->end() && rhsIt == rhs.end()) {
+        return true;
+    }
+
+    return false;
 }
 
 //------------------------------------------------------------------------------
