@@ -13,7 +13,7 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House{
+class House {
     public:
         /**
          * A standard C++ STL style iterator.
@@ -128,7 +128,7 @@ class House{
         /**
          * Assignment Operator
          */
-        House& operator=(const House &rhs);
+        House& operator=(House rhs);
 
         /**
          * Logical Equivalance Operator

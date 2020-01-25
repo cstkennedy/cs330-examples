@@ -68,7 +68,7 @@ int main()
 }
 
 //------------------------------------------------------------------------------
-void buildHouse(House &house)
+void buildHouse(House& house)
 {
     // Add the Laundry Room
     house.addRoom(Room("Laundry Room",
@@ -76,7 +76,7 @@ void buildHouse(House &house)
 
     // Add the Kitchen
     house.addRoom(
-        Room("Kitchen", Room::DimensionSet(20 , 12), 3.87, "Tile")
+        Room("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile")
     );
 
     // Add the Storage Room

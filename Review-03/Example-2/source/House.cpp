@@ -10,11 +10,8 @@ House::Node::Node(Room d)
 
 //------------------------------------------------------------------------------
 House::House()
-    :name("House"),
-     head(nullptr),
-     tail(nullptr)
+    :House("House")
 {
-    currentSize = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -28,10 +25,7 @@ House::House(std::string name)
 
 //------------------------------------------------------------------------------
 House::House(const House &src)
-    :name(src.name),
-     head(nullptr),
-     tail(nullptr),
-     currentSize(0)
+    :House(src.name)
 {
     Node* it = src.head;
 

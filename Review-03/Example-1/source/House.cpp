@@ -18,9 +18,7 @@ House::House(std::string name)
 
 //------------------------------------------------------------------------------
 House::House(const House &src)
-    :name(src.name),
-     currentSize(0),
-     rooms(nullptr)
+    :House(src.name)
 {
     for (int i = 0; i < src.size(); i++) {
         this->addRoom(src.rooms[i]);
@@ -126,19 +124,11 @@ void House::display(std::ostream& outs) const
 }
 
 //------------------------------------------------------------------------------
-House& House::operator=(const House &rhs)
+House& House::operator=(House rhs)
 {
-    if (this != &rhs) {
-        delete[] rooms;
-
-        this->name        = rhs.name;
-        this->currentSize = 0;
-        this->rooms       = nullptr;
-
-        for (int i = 0; i < rhs.size(); i++) {
-            this->addRoom(rhs.rooms[i]);
-        }
-    }
+    std::swap(this->name, rhs.name);
+    std::swap(this->rooms, rhs.rooms);
+    std::swap(this->currentSize, rhs.currentSize);
 
     return *this;
 }
