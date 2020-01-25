@@ -35,7 +35,7 @@ class House {
          */
         std::string name;
 
-        Collection  rooms;
+        Collection rooms;
 
     public:
         /**

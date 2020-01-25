@@ -33,7 +33,7 @@ class House {
          * Name of the house--e.g.,
          * Minecraft Beach House
          */
-        std::string      name;
+        std::string name;
 
         Collection rooms;
 
@@ -133,33 +133,6 @@ inline
 std::string House::getName() const
 {
     return (*this).name;
-}
-
-//------------------------------------------------------------------------------
-inline
-bool House::operator==(const House &rhs) const
-{
-    if (this->name != rhs.name) {
-        return false;
-    }
-
-    const_iterator lhsIt = this->begin();
-    const_iterator rhsIt = rhs.begin();
-
-    while (lhsIt != this->end() && rhsIt != rhs.end()) {
-        if (*lhsIt != *rhsIt) {
-            return false;
-        }
-
-        lhsIt++;
-        rhsIt++;
-    }
-
-    if (lhsIt == this->end() && rhsIt == rhs.end()) {
-        return true;
-    }
-
-    return false;
 }
 
 /**
