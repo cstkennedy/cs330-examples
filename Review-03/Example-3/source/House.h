@@ -20,7 +20,7 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House{
+class House {
     private:
         using Collection = LinkedList<Room>;
 
@@ -139,6 +139,8 @@ std::string House::getName() const
 inline
 bool House::operator==(const House &rhs) const
 {
+    // **The compiler most likely ignored the inline keyword**
+
     if (this->name != rhs.name) {
         return false;
     }
