@@ -27,17 +27,16 @@ def main():
     # Upgrade the flooring in a second duplicate house
     duplicate_house = upgrade_flooring(house)
 
-    """
     # cout.setf(ios::boolalpha)
-    cout << "\n"
-         << "house == duplicateHouse   -> "
-         << (house == duplicateHouse)
-         << "\n"
-         << "&house == &duplicateHouse -> "
-         << (&house == &duplicateHouse)
-         << "\n"
-         << "\n"
-    """
+    # cout << "\n"
+    #      << "house == duplicateHouse   -> "
+    #      << (house == duplicateHouse)
+    #      << "\n"
+    #      << "&house == &duplicateHouse -> "
+    #      << (&house == &duplicateHouse)
+    #      << "\n"
+    #      << "\n"
+
     print("house == duplicate_house -> {}".format(house == duplicate_house))
     print("&house == &duplicate_house -> {}".format(house is duplicate_house))
     print()
@@ -45,33 +44,29 @@ def main():
     print(house)
     print(duplicate_house)
 
-    """
     # Get all the flooring costs with a 10% discount
-    vector<double> costs(duplicateHouse.size())
-    std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
-                   discountFlooring)
-    """
-    costs = [discount_flooring(r) for r in duplicate_house]
+    # vector<double> costs(duplicateHouse.size())
+    # std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
+    #                discountFlooring)
 
-    """
-    std::copy(costs.begin(), costs.end(),
-              std::ostream_iterator<double>(std::cout, "\n"))
-    """
+    costs = [discount_flooring(room) for room in duplicate_house]
+
+    # std::copy(costs.begin(), costs.end(),
+    #           std::ostream_iterator<double>(std::cout, "\n"))
+
     for room_cost in costs:
         print(f"{room_cost:.2f}")
 
-    """
     # Print the sum, min, max -> D.R.Y!
-    cout << "Total: "
-         << std::accumulate(costs.begin(), costs.end(), 0.0, std::plus<double>())
-         << "\n"
-    cout << "Min: "
-         << *std::min_element(costs.begin(), costs.end())
-         << "\n"
-         << "Max: "
-         << *std::max_element(costs.begin(), costs.end())
-         << "\n"
-    """
+    # cout << "Total: "
+    #      << std::accumulate(costs.begin(), costs.end(), 0.0, std::plus<double>())
+    #      << "\n"
+    # cout << "Min: "
+    #      << *std::min_element(costs.begin(), costs.end())
+    #      << "\n"
+    #      << "Max: "
+    #      << *std::max_element(costs.begin(), costs.end())
+    #      << "\n"
 
     total = sum(costs)
     min_c = min(costs)
@@ -129,7 +124,7 @@ def upgrade_flooring(original: House) -> House:
     return modified
 
 
-def discount_flooring(r: Room) -> float:
+def discount_flooring(a_room: Room) -> float:
     """
     Take a room, discount the flooring cost by 90%.
 
@@ -138,7 +133,7 @@ def discount_flooring(r: Room) -> float:
         Discounted flooring cost
     """
 
-    return 0.90 * r.flooring_cost()
+    return 0.90 * a_room.flooring_cost()
 
 
 if __name__ == "__main__":
