@@ -1,11 +1,11 @@
-import typing
-
 from dataclasses import dataclass
+
 
 class Flooring:
     def __init__(self, type_n: str = "Generic", unit_c: float = 1.0):
         self.type_name = type_n
-        self.unit_cost = unit_c
+        self.unit_cost = float(unit_c)
+
 
 @dataclass
 class DimensionSet:
@@ -20,6 +20,27 @@ class Room:
         self.__dimensions = DimensionSet()
         self.__flooring = Flooring()
 
+    @property
+    def name(self):
+        """
+        Get the name using a property.
+
+        @property must come before @...setter...
+        """
+
+        return self.__name
+
+    @name.setter
+    def name(self, nme: str):
+        """
+        Set the name using a setter.
+
+        # Arguments
+
+         * `nme` - new Room name
+        """
+
+        self.__name = nme
 
     def with_name(self, nme: str):
         """
@@ -30,10 +51,9 @@ class Room:
 
         """
 
-        self.__name = nme;
+        self.__name = nme
 
         return self
-
 
     def with_flooring(self, nme: str, unit_c: float):
         """
@@ -45,11 +65,10 @@ class Room:
 
         """
 
-        self.__flooring.type_name = nme;
-        self.__flooring.unit_cost = unit_c;
+        self.__flooring.type_name = nme
+        self.__flooring.unit_cost = unit_c
 
         return self
-
 
     def with_dimensions(self, l: float, w: float):
         """
@@ -61,11 +80,10 @@ class Room:
 
         """
 
-        self.__dimensions.length = l;
-        self.__dimensions.width = w;
+        self.__dimensions.length = l
+        self.__dimensions.width = w
 
         return self
-
 
     def set_flooring(self, nme: str, unit_c: float):
         """
@@ -78,17 +96,14 @@ class Room:
         """
 
         self.__flooring.type_name = nme
-        self.__flooring.unit_cost = unit_c;
-
+        self.__flooring.unit_cost = unit_c
 
     def area(self) -> float:
         """
         Compute the area of flooring for a room.
         """
 
-        return self.__dimensions.width * self.__dimensions.length
-
-
+        return float(self.__dimensions.width) * self.__dimensions.length
 
     def flooring_cost(self) -> float:
         """
@@ -97,31 +112,26 @@ class Room:
 
         return self.area() * self.__flooring.unit_cost
 
-
     def __str__(self) -> str:
 
-        return ("Room ({})\n".format(self.__name)) \
-             + ("  {:<6}: {:>8.1f}\n".format("Length", float(self.__dimensions.length))) \
-             + ("  {:<6}: {:>8.1f}\n".format("Width", float(self.__dimensions.width))) \
-             + ("  {:<6}: {:>8.1f}\n".format("Area", float(self.area()))) \
-             + ("\n") \
-             + ("  Flooring  : {}\n".format(self.__flooring.type_name)) \
-             + ("  Unit Cost : $ {:>8.2f}\n".format(float(self.__flooring.unit_cost))) \
-             + ("  Total Cost: $ {:>8.2f}\n".format(float(self.flooring_cost()))) \
-
+        return f"Room ({self.name})\n" \
+             + "  {:<6}: {:>8.1f}\n".format("Length", float(self.__dimensions.length)) \
+             + "  {:<6}: {:>8.1f}\n".format("Width", float(self.__dimensions.width)) \
+             + "  {:<6}: {:>8.1f}\n".format("Area", self.area()) \
+             + "\n" \
+             + "  Flooring  : {}\n".format(self.__flooring.type_name) \
+             + "  Unit Cost : $ {:>8.2f}\n".format(self.__flooring.unit_cost) \
+             + "  Total Cost: $ {:>8.2f}\n".format(self.flooring_cost()) \
 
     def __lt__(self, rhs) -> bool:
 
-        if self.__name == rhs.name:
-            self.area() < rhs.area()
+        if self.name == rhs.name:
+            return self.area() < rhs.area()  # pylint caught the missing return
 
-        return self.__name < rhs.__name
-
+        return self.name < rhs.name
 
     def __eq__(self, rhs) -> bool:
         if not isinstance(rhs, Room):
             return False
 
-        return (self.name == (rhs.name)
-            and self.area() == rhs.area())
-
+        return self.name == (rhs.name) and self.area() == rhs.area()
