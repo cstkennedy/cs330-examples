@@ -4,8 +4,15 @@ from dataclasses import dataclass
 class Flooring:
     def __init__(self, type_n: str = "Generic", unit_c: float = 1.0):
         self.type_name = type_n
-        self.unit_cost = float(unit_c)
+        self.unit_cost = unit_c
 
+    @property
+    def unit_cost(self) -> float:
+        return self.__unit_cost
+
+    @unit_cost.setter
+    def unit_cost(self, uc: float):
+        self.__unit_cost = float(uc)
 
 @dataclass
 class DimensionSet:
@@ -29,18 +36,6 @@ class Room:
         """
 
         return self.__name
-
-    @name.setter
-    def name(self, nme: str):
-        """
-        Set the name using a setter.
-
-        # Arguments
-
-         * `nme` - new Room name
-        """
-
-        self.__name = nme
 
     def with_name(self, nme: str):
         """
@@ -119,9 +114,9 @@ class Room:
              + "  {:<6}: {:>8.1f}\n".format("Width", float(self.__dimensions.width)) \
              + "  {:<6}: {:>8.1f}\n".format("Area", self.area()) \
              + "\n" \
-             + "  Flooring  : {}\n".format(self.__flooring.type_name) \
-             + "  Unit Cost : $ {:>8.2f}\n".format(self.__flooring.unit_cost) \
-             + "  Total Cost: $ {:>8.2f}\n".format(self.flooring_cost()) \
+             + f"  Flooring  : {self.__flooring.type_name}\n" \
+             + f"  Unit Cost : $ {self.__flooring.unit_cost:>8.2f}\n" \
+             + "  Total Cost: $ {:>8.2f}\n".format(self.flooring_cost())
 
     def __lt__(self, rhs) -> bool:
 

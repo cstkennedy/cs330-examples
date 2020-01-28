@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 import copy
 
 from room import Room
@@ -98,9 +100,10 @@ def build_house(house: House):
 
     house.add_room(kitchen)
 
-    house.add_room(Room().with_name("Storage Room")
-                         .with_dimensions(16, 16)
-                         .with_flooring("Birch Wood", 4.39))
+    house.add_room(Room()
+                   .with_name("Storage Room")
+                   .with_dimensions(16, 16)
+                   .with_flooring("Birch Wood", 4.39))
 
 
 def upgrade_flooring(original: House) -> House:
