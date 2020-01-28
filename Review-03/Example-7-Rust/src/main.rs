@@ -19,7 +19,7 @@ use room_renovation::house::{House};
 /// <p>
 /// Let us Review the use of reference and pointer variables.
 /// <p>
-/// We will used these when we implement the iterator interface.
+/// We will use these when we implement the iterator interface.
 ///
 #[cfg_attr(tarpaulin, skip)]
 fn main() {
