@@ -2,7 +2,8 @@ MAINPROG=updateRoom
 
 SOURCES:=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
-FLAGS=-std=c++17 -fsanitize=leak,address -Wall -Wpedantic -fuse-ld=gold -O3
+FLAGS=-std=c++17 -fsanitize=leak,address -Wall -Wpedantic -fuse-ld=gold \
+	  -fprofile-arcs -ftest-coverage -g -O0 # This line is for gcovr/profiling
 
 all: $(SOURCES) $(MAINPROG)
 
