@@ -44,6 +44,7 @@ you are not required (or expected) to apply this material on Assignment 1.
     * I discussed the `-fsanitize` compilation flag and using the compiler to
       detect memory leaks.
   * **Example 5** is a preview of what we will have at the end of Review 03.
+  * **Example 6** is a preview of what we will have at the end of Review 03.
 
 All source code is available in \ExampleZip{Review-01.zip}. This Review is
 split into three (3) recordings:
@@ -51,6 +52,8 @@ split into three (3) recordings:
   - [Part 1 (in which I discuss Examples 1 & 2)](https://youtu.be/WwHUr1N2z7A).
   - [Part 2 (in which I discuss Example 3)](https://youtu.be/zuD8Oc4v22c).
   - [Part 3 (in which I discuss Example 4)](https://youtu.be/sBKR0KOG3fc).
+  - [Part 4 (in which I cover Examples 5 & 6)](https://youtu.be/Ia8xUbjOei0)
+
 
 
 # Review 2: Well Defined Interfaces
@@ -72,21 +75,29 @@ is located [here](https://youtu.be/dWcPTtZl6Gs). _Note that this is the Fall
 2017 recording._
 
 
+---
+
+# Updates in Progress
+
+Everything below this point will be updated/tweaked.
+
+
 # Review 3: Seperation of Concerns (And No Memory Leaks)
 
-This example takes the Linked List and Dynamic Array examples from
-Review 02 and incorporates the Big-3 (Examples 1 to 4). Example 5 covers the
-`Copy-and-Swap` implementation of the assignment operator.
+  - Examples 1 & 2 take the Linked List and Dynamic Array examples from Review
+    02 and incorporate the Big-3, using the `Copy-and-Swap` implementation of
+    the assignment operator.
 
-Examples 6 through 8 cover how to generalize our code with: template tricks, and
-iterators.
+  - Examples 3 through 5 cover how to generalize our code with: template
+    tricks, and iterators.
 
-All source code is available in \ExampleZip{Review-03.zip}. The recorded
-review is split into three parts:
+  - Example 6 is *the fun part*.
 
-  1. [Part 1](https://youtu.be/hi7rGZ4gWlw) - Examples 1 through 4.
-  2. [Part 2](https://youtu.be/wmv6MgQSWpY) - Example 5 (review) through Example 8.
-  2. Part 3 (TBA) - Example 9 & Example 9 (Rust Version).
+The recorded review is split into three parts:
+
+  1. Part 1 (to be recorded) - Examples 1 through 2.
+  2. Part 2 (to be recorded) -  Example 3 (review) through Example 4.
+  2. Part 3 (to be recorded) - Example 6 & Example 7 (Rust Version).
 
 ---
 
