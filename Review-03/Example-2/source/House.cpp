@@ -37,7 +37,8 @@ House::House(const House &src)
 }
 
 //------------------------------------------------------------------------------
-House::~House() {
+House::~House()
+{
     // Deallocate the Linked List
     Node* it = this->head;
 
@@ -84,7 +85,8 @@ void House::addRoom(Room toAdd)
 }
 
 //------------------------------------------------------------------------------
-size_t House::size() const {
+size_t House::size() const
+{
     return currentSize;
 }
 

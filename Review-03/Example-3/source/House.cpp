@@ -19,7 +19,8 @@ void House::addRoom(Room toAdd)
 }
 
 //------------------------------------------------------------------------------
-size_t House::size() const {
+size_t House::size() const
+{
     return rooms.size();
 }
 
@@ -56,7 +57,7 @@ void House::display(std::ostream& outs) const
     // iterator or const_iterator?
 
     // Print the rooms
-    for (const Room& prtRoom : rooms) {
+    for (const Room& prtRoom : *this) {
         outs << prtRoom;
     }
 
@@ -64,7 +65,7 @@ void House::display(std::ostream& outs) const
     double                avg   = 0;
     double                total = 0;
 
-    for (const Room& room : rooms) {
+    for (const Room& room : *this) {
         total += room.flooringCost();
     }
 

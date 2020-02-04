@@ -24,7 +24,8 @@ void House::addRoom(Room toAdd)
 }
 
 //------------------------------------------------------------------------------
-size_t House::size() const {
+size_t House::size() const
+{
     return rooms.size();
 }
 

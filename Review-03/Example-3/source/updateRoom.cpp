@@ -60,7 +60,7 @@ int main()
          << "\n"
          << "\n";
 
-    cout << house;
+    cout << house << "\n";
 
     cout << duplicateHouse << "\n";
 

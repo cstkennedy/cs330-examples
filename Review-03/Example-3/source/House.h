@@ -21,7 +21,7 @@
  * iterator interface.
  */
 class House {
-
+    private:
         using Collection = LinkedList<Room>;
 
     public:
@@ -35,7 +35,7 @@ class House {
          */
         std::string name;
 
-        Collection  rooms;
+        Collection rooms;
 
     public:
         /**

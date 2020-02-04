@@ -39,7 +39,7 @@ void buildHouse(std::istream& ins, House& house);
 House upgradeFlooring(House original);
 
 /**
- * Compute the discounting flooring price for a single Room.
+ * Compute the discounted flooring price for a single Room.
  *
  * @param r room to examine
  */

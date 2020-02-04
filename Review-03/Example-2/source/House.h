@@ -271,27 +271,21 @@ class House {
         void swap(House& lhs, House& rhs);
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void House::setName(std::string newName)
 {
     this->name = newName;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 std::string House::getName() const
 {
     return (*this).name;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 bool House::operator==(const House &rhs) const
 {
