@@ -41,9 +41,8 @@ class Room:
         """
         Set the name using the builder pattern.
 
-        # Arguments
-         * `nme` - room name
-
+        Args:
+            nme: room name
         """
 
         self.__name = nme
@@ -54,9 +53,9 @@ class Room:
         """
         Set the Flooring using the builder pattern.
 
-        # Arguments
-         * `nme` - flooring type name
-         * `unit_c` - unit cost
+        Args
+            nme: flooring type name
+            unit_c: unit cost
 
         """
 
@@ -69,9 +68,9 @@ class Room:
         """
         Set the Flooring using the builder pattern.
 
-        # Arguments
-         * `l` - length
-         * `w` - width
+        Args:
+            l: length
+            w: width
 
         """
 
@@ -84,9 +83,9 @@ class Room:
         """
         Set the flooring.
 
-        # Arguments
-         * `nme` - flooring type name
-         * `unit_c` - unit cost
+        Args:
+            nme: flooring type name
+            unit_c: unit cost
 
         """
 

@@ -10,9 +10,9 @@ def main():
     """
     Compute the area of a room and the cost of
     flooring for the room
-    <p>
+
     Let us Review the use of reference and pointer variables.
-    <p>
+
     We will use these when we implement the iterator interface.
     """
 
@@ -105,11 +105,10 @@ def upgrade_flooring(original: House) -> House:
     """
     Take a room and change the flooring
 
-    # Arguments
+    Args:
+        original: House to change
 
-      * `original` House to change
-
-    # Returns
+    Returns:
         House with the updated flooring
     """
 
@@ -128,8 +127,7 @@ def discount_flooring(a_room: Room) -> float:
     """
     Take a room, discount the flooring cost by 90%.
 
-    # Returns
-
+    Returns:
         Discounted flooring cost
     """
 

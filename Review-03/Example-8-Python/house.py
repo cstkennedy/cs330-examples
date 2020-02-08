@@ -29,9 +29,8 @@ class House:
         """
         Set the name using a setter.
 
-        # Arguments
-
-         * `nme` - new House name
+        Args:
+            nme: new House name
         """
 
         self.__name = nme
@@ -40,9 +39,8 @@ class House:
         """
         Add another room to this House.
 
-        # Arguments
-
-         * `to_add` - new Room to add
+        Args:
+            to_add: new Room to add
         """
 
         self.__rooms.append(to_add)
