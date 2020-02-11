@@ -14,6 +14,7 @@ class Flooring:
     def unit_cost(self, uc: float):
         self.__unit_cost = float(uc)
 
+
 @dataclass
 class DimensionSet:
     length: float = 1.0
