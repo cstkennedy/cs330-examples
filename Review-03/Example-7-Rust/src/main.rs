@@ -149,7 +149,7 @@ fn build_house(house: &mut House) {
 ///
 /// # Arguments
 ///
-///   * `original` House to change
+///   * `original` - House to change
 ///
 /// # Returns
 ///
