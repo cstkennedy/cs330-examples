@@ -71,7 +71,8 @@ OutputIt transform_if(InputIt itInputStart,
             *itOutput++ = transformOperation(*itInputStart);
         }
 
-        itInputStart++;
+        // itInputStart++;
+        ++itInputStart;  // Pre-increment avoids a temporary copy.
     }
 
     return itOutput;
@@ -122,7 +123,7 @@ int main(int argc, char** argv)
     printShapes(cout, shapes);
 
     cout << generateHeading<'~', 38>("Display Shape Names");
-    // printShapeNames(cout, shapes);
+    // printShapeNames(cout, shapes);  // Should I keep this?
     std::transform(shapes.begin(), shapes.end(),
                    std::ostream_iterator<std::string>(cout, "\n"),
                    [](const unique_ptr<Shape>& shp) -> std::string {
@@ -153,6 +154,7 @@ int main(int argc, char** argv)
               [](const auto& lhs, const auto& rhs) {
                   return (lhs)->name() < (rhs)->name();
               });
+
     printShapes(cout, shapes);
 
     return 0;

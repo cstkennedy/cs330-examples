@@ -46,7 +46,7 @@ class RightTriangle: public Triangle{
          *
          * @param src the RightTriangle to copy
          */
-        RightTriangle(const RightTriangle &src) = default;
+        RightTriangle(const RightTriangle& src) = default;
 
         /**
          * Deconstruct the RightTriangle

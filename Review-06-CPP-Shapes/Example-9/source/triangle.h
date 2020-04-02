@@ -40,7 +40,7 @@ class Triangle: public Shape {
          *
          * @param src the Triangle to copy
          */
-        Triangle(const Triangle &src) = default;
+        Triangle(const Triangle& src) = default;
 
         /**
          * Deconstruct a Triangle
