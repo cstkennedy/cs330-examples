@@ -4,7 +4,7 @@
 #include "shapeFactory.h"
 #include <algorithm>
 
-ShapeFactory::ShapePair ShapeFactory::_known_shapes[] = {
+ShapeFactory::ShapePair ShapeFactory::_KNOWN_SHAPES[] = {
     {"Triangle" ,            std::unique_ptr<Shape>(new Triangle())           },
     {"Right Triangle" ,      std::unique_ptr<Shape>(new RightTriangle())      },
     {"Equilateral Triangle", std::unique_ptr<Shape>(new EquilateralTriangle())},
@@ -15,15 +15,16 @@ ShapeFactory::ShapePair ShapeFactory::_known_shapes[] = {
 //------------------------------------------------------------------------------
 Shape* ShapeFactory::createShape(std::string_view name)
 {
-    const auto pair_it = std::find_if(begin(ShapeFactory::_known_shapes),
-                                      end(ShapeFactory::_known_shapes),
+    const auto pair_it = std::find_if(begin(ShapeFactory::_KNOWN_SHAPES),
+                                      end(ShapeFactory::_KNOWN_SHAPES),
                                       [name](const ShapePair& pair) -> bool {
                                           return (pair.first == name);
                                       });
 
-    if (pair_it != end(ShapeFactory::_known_shapes)) {
+    if (pair_it != end(ShapeFactory::_KNOWN_SHAPES)) {
         const auto& [name, model_shape] = *pair_it;
         return model_shape->clone();
+        // return (*pair_it).second->clone();
     }
 
     // A shape with the given name could not be found
@@ -33,17 +34,17 @@ Shape* ShapeFactory::createShape(std::string_view name)
 //------------------------------------------------------------------------------
 bool ShapeFactory::isKnown(std::string_view name)
 {
-    return std::find_if(begin(ShapeFactory::_known_shapes),
-                        end(ShapeFactory::_known_shapes),
+    return std::find_if(begin(ShapeFactory::_KNOWN_SHAPES),
+                        end(ShapeFactory::_KNOWN_SHAPES),
                         [&name](const ShapePair& pair) -> bool {
                             return (pair.first == name);
-                        }) != std::end(_known_shapes);
+                        }) != std::end(_KNOWN_SHAPES);
 }
 
 //------------------------------------------------------------------------------
 void ShapeFactory::listKnown(std::ostream &outs)
 {
-    for (const auto& [name, model_shape] : ShapeFactory::_known_shapes) {
+    for (const auto& [name, model_shape] : ShapeFactory::_KNOWN_SHAPES) {
         outs << " " << name << "\n";
     }
 }
@@ -51,7 +52,7 @@ void ShapeFactory::listKnown(std::ostream &outs)
 //------------------------------------------------------------------------------
 int ShapeFactory::numberKnown()
 {
-    return (end(_known_shapes) - begin(_known_shapes));
+    return (end(_KNOWN_SHAPES) - begin(_KNOWN_SHAPES));
 }
 
 //------------------------------------------------------------------------------
@@ -59,7 +60,7 @@ std::istream& operator>>(std::istream& ins, Shape*& rd)
 {
     std::string     name;
 
-    // Read name (key) and create the appropiate Shape
+    // Read name (key) and create the appropriate Shape
     getline(ins, name, ';');
     rd = ShapeFactory::createShape(name);
 

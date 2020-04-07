@@ -30,7 +30,7 @@ class ShapeFactory{
          */
         using ShapePair = std::pair<std::string_view, std::unique_ptr<Shape>>;
 
-        static ShapePair _known_shapes[];  ///< Listing of known shapes
+        static ShapePair _KNOWN_SHAPES[];  ///< Listing of known shapes
 
     public:
         /**

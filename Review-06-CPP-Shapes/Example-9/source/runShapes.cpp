@@ -38,7 +38,8 @@ ShapeCollection readShapes(std::istream& ins);
  * Print shapes from a `ShapeCollection` to a
  * specified output stream
  */
-void printShapes(std::ostream& outs, const ShapeCollection& toPrint);
+// void printShapes(std::ostream& outs, const ShapeCollection& toPrint);
+ostream& operator<<(std::ostream& outs, const ShapeCollection& toPrint);
 
 /**
  * Print shape names for all `Shape`s in a `ShapeCollection` to a
@@ -120,7 +121,8 @@ int main(int argc, char** argv)
 
     // Print all the shapes
     cout << generateHeading<'~', 38>("Display All Shapes");
-    printShapes(cout, shapes);
+    // printShapes(cout, shapes);
+    cout << shapes;
 
     cout << generateHeading<'~', 38>("Display Shape Names");
     // printShapeNames(cout, shapes);  // Should I keep this?
@@ -138,6 +140,9 @@ int main(int argc, char** argv)
                           [](const auto& lhs, const auto& rhs) {
                               return (lhs)->area() < (rhs)->area();
                           });
+
+    // const unique_ptr<Shape>& data = *it;
+    // cout << *data << "\n";
     cout << *(*it) << "\n";
 
     //--------------------------------------------------------------------------
@@ -155,7 +160,8 @@ int main(int argc, char** argv)
                   return (lhs)->name() < (rhs)->name();
               });
 
-    printShapes(cout, shapes);
+    // printShapes(cout, shapes);
+    cout << shapes;
 
     return 0;
 }
@@ -188,7 +194,7 @@ ShapeCollection readShapes(std::istream& ins)
                  [](Shape* rawPtr) -> bool {
                      return rawPtr != nullptr;
                  },
-                 [](Shape* rawPtr) {
+                 [](Shape* rawPtr) -> std::unique_ptr<Shape> {
                      return std::unique_ptr<Shape>(rawPtr);
                  });
 
@@ -206,7 +212,8 @@ std::ostream& operator<<(std::ostream& outs, const unique_ptr<Shape>& prt)
 }
 
 //------------------------------------------------------------------------------
-void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
+// void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
+ostream& operator<<(std::ostream& outs, const ShapeCollection& toPrint)
 {
     /*
     for (const std::unique_ptr<Shape>& s : toPrint) {
@@ -217,6 +224,8 @@ void printShapes(std::ostream& outs, const ShapeCollection& toPrint)
 
     std::copy(toPrint.begin(), toPrint.end(),
               std::ostream_iterator<unique_ptr<Shape>>(outs, "\n"));
+
+    return outs;
 }
 
 //------------------------------------------------------------------------------
