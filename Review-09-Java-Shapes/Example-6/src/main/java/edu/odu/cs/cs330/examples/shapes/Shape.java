@@ -44,47 +44,11 @@ public abstract class Shape implements Cloneable {
     }
 
     /**
-     * Geometric Name of the 2-D Figure.
-     */
-    protected String _name;
-
-    /**
-     * Default Shape Constructor.
-     */
-    public Shape()
-    {
-        this._name = "Shape";
-    }
-
-    /**
-     * Shape Constructor.
-     *
-     * @param name the desired Shape name
-     */
-    public Shape(String name)
-    {
-        this._name = name;
-    }
-
-    /**
      * Return the name.
      *
      * @return shape name
      */
-    public String name()
-    {
-        return this._name;
-    }
-
-    /**
-     * Modify the name.
-     *
-     * @param _name new Shape name
-     */
-    protected void name(String _name)
-    {
-        this._name = _name;
-    }
+    abstract public String name();
 
     /**
      * Compute the area.
@@ -115,7 +79,7 @@ public abstract class Shape implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this._name);
+        return String.format(FMT_STR, "Name", this.name());
     }
 }
 

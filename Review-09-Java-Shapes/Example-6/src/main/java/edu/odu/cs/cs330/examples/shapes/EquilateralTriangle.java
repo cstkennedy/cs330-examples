@@ -32,8 +32,6 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
      */
     public EquilateralTriangle(double side)
     {
-        this._name = "Equilateral Triangle";
-
         this.side(side);
     }
 
@@ -44,8 +42,6 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
      */
     public EquilateralTriangle(EquilateralTriangle src)
     {
-        this._name = src._name;
-
         this.side(src.side());
     }
 
@@ -57,9 +53,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
      */
     public double height()
     {
-        return Math.sqrt(
-              1.25 * (side() * side())
-     );
+        return Math.sqrt(1.25 * (side() * side()));
     }
 
     /**
@@ -82,6 +76,12 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
         _side_a = s;
         _side_b = s;
         _side_c = s;
+    }
+
+    @Override
+    public String name()
+    {
+        return "Equilateral Triangle";
     }
 
     /**
@@ -122,7 +122,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this._name)
+        return String.format(FMT_STR, "Name", this.name())
              + String.format(FMT_DBL, "Side", this._side_a)
              + String.format(FMT_DBL, "Height", this.height())
              + String.format(FMT_DBL, "Perimeter", this.perimeter())

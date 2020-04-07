@@ -31,7 +31,6 @@ public class Square extends Shape implements Cloneable {
      */
     public Square(double s)
     {
-        super("Square");
         _side = s;
     }
 
@@ -42,8 +41,7 @@ public class Square extends Shape implements Cloneable {
      */
     public Square(Square src)
     {
-        super("Square");
-        this._side = src._side;
+        this(src._side);
     }
 
     /**
@@ -64,6 +62,12 @@ public class Square extends Shape implements Cloneable {
     public void side(double s)
     {
         _side = s;
+    }
+
+    @Override
+    public String name()
+    {
+        return "Square";
     }
 
     @Override

@@ -23,7 +23,7 @@ public class ShapeIterator implements Iterator<Shape>
     private Shape queued;
 
     /**
-     * Construct a ShepIterator of an input buffer.
+     * Construct a ShapeIterator over an input buffer.
      *
      * @param buffer shape data buffer
      */
@@ -92,10 +92,7 @@ public class ShapeIterator implements Iterator<Shape>
         try {
             queued = readNext();
         }
-        catch (IOException exp) {
-            queued = null;
-        }
-        catch (CloneNotSupportedException exp) {
+        catch (IOException | CloneNotSupportedException exp) {
             queued = null;
         }
 

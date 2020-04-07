@@ -45,8 +45,6 @@ public class Triangle extends Shape implements Cloneable {
      */
     public Triangle(double _side_a, double _side_b, double _side_c)
     {
-        super("Triangle");
-
         this._side_a = _side_a;
         this._side_b = _side_b;
         this._side_c = _side_c;
@@ -59,8 +57,6 @@ public class Triangle extends Shape implements Cloneable {
      */
     public Triangle(Triangle src)
     {
-        super("Triangle");
-
         this._side_a = src._side_a;
         this._side_b = src._side_b;
         this._side_c = src._side_c;
@@ -126,6 +122,12 @@ public class Triangle extends Shape implements Cloneable {
         this._side_c = side;
     }
 
+    @Override
+    public String name()
+    {
+        return "Triangle";
+    }
+
     /**
      * Compute the area using Heron's Formula.
      * Use @f$ s = \frac{1}{2}Perimeter @f$ and
@@ -176,7 +178,7 @@ public class Triangle extends Shape implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this._name)
+        return String.format(FMT_STR, "Name", this.name())
              + String.format(FMT_DBL, "Side A", this._side_a)
              + String.format(FMT_DBL, "Side B", this._side_b)
              + String.format(FMT_DBL, "Side C", this._side_c)

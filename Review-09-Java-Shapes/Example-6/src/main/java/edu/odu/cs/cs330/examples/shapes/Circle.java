@@ -41,7 +41,6 @@ public class Circle extends Shape implements Cloneable {
      */
     public Circle(double r)
     {
-        this._name   = "Circle";
         this._radius = r;
     }
 
@@ -52,7 +51,6 @@ public class Circle extends Shape implements Cloneable {
      */
     public Circle(Circle src)
     {
-        this._name   = src._name;
         this._radius = src._radius;
     }
 
@@ -80,6 +78,12 @@ public class Circle extends Shape implements Cloneable {
     public double diameter()
     {
         return 2 * _radius;
+    }
+
+    @Override
+    public String name()
+    {
+        return "Circle";
     }
 
     /**
@@ -130,7 +134,7 @@ public class Circle extends Shape implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this._name)
+        return String.format(FMT_STR, "Name", this.name())
              + String.format(FMT_DBL, "Radius", this.radius())
              + String.format(FMT_DBL, "Diameter", this.diameter())
              + String.format(FMT_DBL, "Perimeter", this.perimeter())

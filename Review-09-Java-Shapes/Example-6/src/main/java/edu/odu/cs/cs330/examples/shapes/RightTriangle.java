@@ -47,8 +47,6 @@ public class RightTriangle extends Triangle implements Cloneable {
      */
     public RightTriangle(double base, double height)
     {
-        this._name   = "Right Triangle";
-
         this._side_a = base;
         this._side_b = height;
         this._side_c = RightTriangle.computeHypotenuse(_side_a, _side_b);
@@ -61,8 +59,6 @@ public class RightTriangle extends Triangle implements Cloneable {
      */
     public RightTriangle(RightTriangle src)
     {
-        this._name   = src._name;
-
         this._side_a = src._side_a;
         this._side_b = src._side_b;
         this._side_c = src._side_c;
@@ -122,6 +118,12 @@ public class RightTriangle extends Triangle implements Cloneable {
         return _side_c;
     }
 
+    @Override
+    public String name()
+    {
+        return "Right Triangle";
+    }
+
     /**
      * Compute the area using
      * @f$ Area = \frac{1}{2}*base*height @f$.
@@ -163,7 +165,7 @@ public class RightTriangle extends Triangle implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this._name)
+        return String.format(FMT_STR, "Name", this.name())
              + String.format(FMT_DBL, "Base", this.base())
              + String.format(FMT_DBL, "Height", this.height())
              + String.format(FMT_DBL, "Hypotenuse", this.hypotenuse())

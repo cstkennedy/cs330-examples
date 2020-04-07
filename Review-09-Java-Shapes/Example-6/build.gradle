@@ -53,6 +53,11 @@ test {
     reports {
         html.enabled = true
     }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
 }
 
 javadoc {
@@ -101,6 +106,7 @@ jacocoTestReport {
 
 // Check Style Config
 checkstyle {
+    toolVersion '8.2'
     ignoreFailures = true
     showViolations = false
 }
@@ -114,6 +120,7 @@ checkstyleTest.enabled = false
 // End Checkstyle config
 
 pmd {
+    toolVersion = "6.21.0"
     ignoreFailures = true
     ruleSets = [
         "category/java/bestpractices.xml",
