@@ -1,10 +1,13 @@
-package edu.odu.cs.cs330.examples.shapes;
+package edu.odu.cs.cs330.examples.shapes.io;
 
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 
 import java.util.Iterator;
+
+import edu.odu.cs.cs330.examples.shapes.Shape;
+import edu.odu.cs.cs330.examples.shapes.ShapeFactory;
 
 /**
  * Iterator over a buffer of Shape objects. This iterator stops when

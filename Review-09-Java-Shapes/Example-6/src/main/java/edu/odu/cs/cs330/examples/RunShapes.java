@@ -18,7 +18,8 @@ import static edu.odu.cs.tkennedy.utilities.Utilities.projectHeading;
 // import edu.odu.cs.cs330.examples.shapes.*;
 import edu.odu.cs.cs330.examples.shapes.Shape;
 import edu.odu.cs.cs330.examples.shapes.ShapeFactory;
-import edu.odu.cs.cs330.examples.shapes.ShapeIterator;
+
+import edu.odu.cs.cs330.examples.shapes.io.ShapeIterator;
 
 /**
  * This is the Java version of the previous C++ Shapes Inheritance Example.
