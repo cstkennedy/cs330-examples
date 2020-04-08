@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2018
+// CS 330 Fall 2020
 
 package edu.odu.cs.cs330.examples.shapes;
 
@@ -75,6 +75,20 @@ public abstract class Shape implements Cloneable {
      * @param scanner the input stream--scanner in this example
      */
     public abstract void read(Scanner scanner);
+
+    /**
+     * The number of dimensions (double values) that need to be *read*.
+     *
+     * @return number of required double values
+     */
+    public abstract int numDims();
+
+    /**
+     * Update dimensions based on an array of double values.
+     *
+     * @param dims double values that represent dimensions.
+     */
+    public abstract void createFromDims(double[] dims);
 
     @Override
     public String toString()

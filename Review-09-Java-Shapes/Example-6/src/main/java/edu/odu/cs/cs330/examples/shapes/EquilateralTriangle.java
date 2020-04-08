@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2018
+// CS 330 Fall 2020
 
 package edu.odu.cs.cs330.examples.shapes;
 
@@ -114,6 +114,18 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     public void read(Scanner scanner)
     {
         this.side(scanner.nextDouble());
+    }
+
+    @Override
+    public int numDims()
+    {
+        return 1;
+    }
+
+    @Override
+    public void createFromDims(double[] dims)
+    {
+        this.side(dims[0]);
     }
 
     /**

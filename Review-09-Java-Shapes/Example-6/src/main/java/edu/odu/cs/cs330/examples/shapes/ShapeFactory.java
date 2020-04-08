@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2018
+// CS 330 Fall 2020
 
 package edu.odu.cs.cs330.examples.shapes;
 
@@ -12,7 +12,7 @@ public class ShapeFactory {
     /**
      * Listing of known shapes.
      */
-    private static Shape[] _known_shapes = new Shape[] {
+    private static final Shape[] _KNOWN_SHAPES = new Shape[] {
         new Triangle(),
         new RightTriangle(),
         new EquilateralTriangle(),
@@ -34,7 +34,7 @@ public class ShapeFactory {
     public static Shape createShape(String name)
         throws CloneNotSupportedException
     {
-        for (Shape shape : _known_shapes) {
+        for (Shape shape : _KNOWN_SHAPES) {
             if (shape.name().equals(name)) {
                 return (Shape) shape.clone();
             }
@@ -52,7 +52,7 @@ public class ShapeFactory {
      */
     public static boolean isKnown(String name)
     {
-        for (Shape shape : _known_shapes) {
+        for (Shape shape : _KNOWN_SHAPES) {
             if (shape.name().equals(name)) {
                 return true;
             }
@@ -70,7 +70,7 @@ public class ShapeFactory {
     {
         StringBuilder bld = new StringBuilder();
 
-        for (Shape shape : _known_shapes) {
+        for (Shape shape : _KNOWN_SHAPES) {
             bld.append(shape.name() + "\n");
         }
 
@@ -84,6 +84,6 @@ public class ShapeFactory {
      */
     public static int numberKnown()
     {
-        return _known_shapes.length;
+        return _KNOWN_SHAPES.length;
     }
 }

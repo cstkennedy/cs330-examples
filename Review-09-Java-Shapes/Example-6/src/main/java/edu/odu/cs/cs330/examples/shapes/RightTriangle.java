@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2018
+// CS 330 Fall 2020
 
 package edu.odu.cs.cs330.examples.shapes;
 
@@ -155,6 +155,21 @@ public class RightTriangle extends Triangle implements Cloneable {
     {
         this.base(scanner.nextDouble());
         this.height(scanner.nextDouble());
+
+        this._side_c = computeHypotenuse(this.base(), this.height());
+    }
+
+    @Override
+    public int numDims()
+    {
+        return 2;
+    }
+
+    @Override
+    public void createFromDims(double[] dims)
+    {
+        this.base(dims[0]);
+        this.height(dims[1]);
 
         this._side_c = computeHypotenuse(this.base(), this.height());
     }

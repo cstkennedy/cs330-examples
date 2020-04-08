@@ -77,7 +77,14 @@ public class ShapeIterator implements Iterator<Shape>
             if (shp != null) {
                 lineScanner = new Scanner(line.substring(sIndex + 1,
                                                          line.length()));
-                shp.read(lineScanner);
+                final int numDoubles = shp.numDims();
+                double[] dims = new double[numDoubles];
+
+                for (int i = 0; i < numDoubles; i++) {
+                    dims[i] = lineScanner.nextDouble();
+                }
+
+                shp.createFromDims(dims);
             }
             else {
                 line = theBuffer.readLine();
