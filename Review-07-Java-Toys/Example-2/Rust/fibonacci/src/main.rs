@@ -44,7 +44,7 @@ fn main() {
     println!("{:>2}: {:10}", 1, fm2);
     println!("{:>2}: {:10}", 2, fm1);
 
-    // Fhe first 2 numbers were already output
+    // The first 2 numbers were already output
     for i in 3..(index + 1) {
         let f   = fm1 + fm2;
         fm2 = fm1;
