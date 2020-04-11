@@ -4,7 +4,7 @@ This is set of Java Shape classes used as a case study for inheritance in Java.
 Topics include:
 
   - virtual methods
-  - pure virtual (i.e, abstract) methods
+  - pure virtual (i.e., abstract) methods
   - dynamic binding
   - subtyping
   - interfaces
