@@ -21,10 +21,10 @@ The examples can be run through Gradle using `./gradlew run`. This will:
 
   1. compile the Java source code
   2. build a Jar file
-  3. run the compiled code with all necessary command line argument.
+  3. run the compiled code with all necessary command line arguments
 
 ## Reports & Project Website
 
-Example 6 includes JBake as a Gradle plugin. Run `./gradlew jbake` to generate
+Example 6 includes JBake as a Gradle plugin. Run `./gradlew bake` to generate
 a static website with documentation and reports. Open `build/jbake/home.html`
 in your web browser.
