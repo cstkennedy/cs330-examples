@@ -17,6 +17,9 @@ plugins {
 
     id "org.ysb33r.doxygen" version "0.5"
     id "org.jbake.site" version "5.0.0"
+
+    // Split Integration Tests from Unit Tests
+    id "org.unbroken-dome.test-sets" version "3.0.1"
 }
 
 sourceCompatibility = 1.8
@@ -60,6 +63,17 @@ test {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 }
+
+// Set up Integration Tests
+testSets {
+    integrationTest
+}
+
+check.dependsOn integrationTest
+
+//------------------------------------------------------------------------------
+// Documentation Tools
+//------------------------------------------------------------------------------
 
 javadoc {
     failOnError false
@@ -118,6 +132,7 @@ tasks.withType(Checkstyle) {
     }
 }
 checkstyleTest.enabled = false
+checkstyleIntegrationTest.enabled = false
 // End Checkstyle config
 
 pmd {
@@ -137,7 +152,9 @@ pmd {
 // JBake Configuration
 //------------------------------------------------------------------------------
 task reports (dependsOn: ["javadoc", "doxygen",
-                          "check", "jacocoTestReport", "projectReport"]) {
+                          "check",
+                          "jacocoTestReport", "jacocoIntegrationTestReport",
+                          "projectReport"]) {
 
     description "Generate all reports and documentation for this project"
 }
