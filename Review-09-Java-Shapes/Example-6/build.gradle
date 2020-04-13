@@ -105,6 +105,7 @@ spotbugsMain {
 }
 
 spotbugsTest.enabled = false
+spotbugsIntegrationTest.enabled = false
 // End SpotBugs config
 
 jacoco {
@@ -147,6 +148,8 @@ pmd {
     ]
 }
 
+pmdTest.enabled=false
+pmdIntegrationTest.enabled=false
 
 //------------------------------------------------------------------------------
 // JBake Configuration
