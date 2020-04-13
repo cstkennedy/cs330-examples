@@ -42,7 +42,7 @@
             </a>
         </li>
         <li>
-            <a href="<#if (content.rootpath)??>${content.rootpath}<#else></#if>coverage.html">
+            <a href="<#if (content.rootpath)??>${content.rootpath}<#else></#if>coverageIntegration.html">
                 Integration Test Coverage
             </a>
         </li>
