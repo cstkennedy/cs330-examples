@@ -92,7 +92,7 @@ public class TestCircle {
 
         assertThat(aCopy, is(not(sameInstance(this.fancy))));
 
-        // I really should have public defiened __eq__
+        // I really should have public defined __eq__
         assertThat(aCopy.radius(), closeTo(this.fancy.radius(), 0.001));
     }
 

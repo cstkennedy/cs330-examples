@@ -179,13 +179,4 @@ public class TestShapeIterator {
         assertThat(sIterator.next(), is(nullValue()));
         assertThat(sIterator.hasNext(), is(false));
     }
-
-    /*
-Triangle; 4 4 4
-Right Triangle; 4 5
-Equilateral Triangle; 3
-Square; 9
-Circle; 5
-1337 Haxor; 1 lol i broke it
-*/
 }
