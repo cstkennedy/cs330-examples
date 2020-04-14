@@ -120,6 +120,35 @@ jacocoTestReport {
     }
 }
 
+task mergeCoverageReports(type: JacocoMerge) {
+    executionData = layout.files(["build/jacoco/test.exec",
+                                  "build/jacoco/integrationTest.exec"])
+
+    destinationFile = "build/jacoco/merged.exec" as File
+
+
+}
+
+/*
+ * This task is based on HenrikBaerbak's example at
+ * <https://discuss.gradle.org/t/merge-jacoco-coverage-reports-for-multiproject-setups/12100/10>
+ */
+task mergedJacocoReportHTML (type: JacocoReport) {
+    dependsOn(mergeCoverageReports)
+
+    additionalSourceDirs.from = files(sourceSets.main.allSource.srcDirs)
+    sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
+    classDirectories.from = files(sourceSets.main.output)
+
+    executionData.from = files("build/jacoco/merged.exec" as File)
+
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+
 // Check Style Config
 checkstyle {
     toolVersion "8.2"
@@ -156,7 +185,9 @@ pmdIntegrationTest.enabled=false
 //------------------------------------------------------------------------------
 task reports (dependsOn: ["javadoc", "doxygen",
                           "check",
-                          "jacocoTestReport", "jacocoIntegrationTestReport",
+                          "jacocoTestReport",
+                          "jacocoIntegrationTestReport",
+                          "mergedJacocoReportHTML",
                           "projectReport"]) {
 
     description "Generate all reports and documentation for this project"
