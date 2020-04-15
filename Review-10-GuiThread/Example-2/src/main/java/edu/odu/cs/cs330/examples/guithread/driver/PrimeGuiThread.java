@@ -1,7 +1,10 @@
 package edu.odu.cs.cs330.examples.guithread.driver;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import edu.odu.cs.cs350.examples.numbers.PrimeGenerator;
@@ -15,6 +18,27 @@ import edu.odu.cs.cs350.examples.numbers.PrimeGenerator;
  * primes is generated--e.g., 100000.
  */
 public class PrimeGuiThread extends JFrame {
+
+    private JPanel      inputPanel;   ///< Panel containing all input elements
+    private JPanel      summaryPanel; ///< Panel containing all output elements
+
+    private JTextField  lastField;    ///< Output Field - Last--i.e., largest-- prime generated
+    private JLabel      lastLabel;    ///< Label - Last--i.e., largest-- prime generated
+
+    private JTextField  toGenField;   ///< Input Field - # primes to generate
+    private JLabel      toGenLabel;   ///< Label - # primes to generate
+
+    private JTextArea   logArea;      ///< Output - all generated prime numbers
+    private JScrollPane logPane;      ///< Make logArea scrollable
+
+    private JButton     startButton;  ///< Control - start generation
+    private JButton     stopButton;   ///< Halt - stop generation
+
+    /**
+     * Worker Thread - Wrapper for Prime Generation.
+     */
+    private PrimeWorker worker;
+
     /**
      * This worker class contains all the logic for generating primes.
      * <p>
@@ -22,10 +46,21 @@ public class PrimeGuiThread extends JFrame {
      */
     private class PrimeWorker implements Runnable
     {
-        // Data--i.e., computation--elements
-        private PrimeGenerator primeGenerator; ///< Instance of BruteForce prime # generator
-        private int        toGenerate;     ///< Number of primes to generate
-        private boolean    stop;           ///< Flag - set to false when stopButton is clicked
+        /**
+         * An instance of Bruteforce Prime Number Generator.
+         */
+        private PrimeGenerator primeGenerator;
+
+        /**
+         * The number of primes to be generated.
+         */
+        private int toGenerate;     ///< Number of primes to generate
+
+        /**
+         * Flag that is set to false when stopButton has been clicked (and
+         * generation needs to be stopped).
+         */
+        private boolean stop;
 
         /**
          * Construct a new Worker Instance.
@@ -88,79 +123,54 @@ public class PrimeGuiThread extends JFrame {
         }
     }
 
-    // Interface Elements
-    private JPanel      inputPanel;   ///< Panel containing all input elements
-    private JPanel      summaryPanel; ///< Panel containing all output elements
-
-    private JTextField  lastField;    ///< Output Field - Last--i.e., largest-- prime generated
-    private JLabel      lastLabel;    ///< Label - Last--i.e., largest-- prime generated
-
-    private JTextField  toGenField;   ///< Input Field - # primes to generate
-    private JLabel      toGenLabel;   ///< Label - # primes to generate
-
-    private JTextArea   logArea;      ///< Output - all generated prime numbers
-
-    private JButton     startButton;  ///< Control - start generation
-    private JButton     stopButton;   ///< Halt - stop generation
-
-    /**
-     * Worker Thread - Wrapper for Prime Generation.
-     */
-    private PrimeWorker worker;
-
     /**
      * The constructor for the GUI.
      */
-    public PrimeGuiThread() {
+    public PrimeGuiThread()
+    {
         super("Prime Generator");
         setLocation(50, 75);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container cp = getContentPane();
 
-        // Initialize Interface Elements
-        inputPanel   = new JPanel();
-        summaryPanel = new JPanel();
+        setUpInputPanel();
+        setUpLogArea();
+        setUpSummaryPanel();
 
-        lastField    = new JTextField(20);
-        lastLabel    = new JLabel("Last Prime:");
+        // Setup and add to the Main Container
+        cp.setLayout(new BorderLayout());
 
-        toGenField   = new JTextField(10);
-        toGenLabel   = new JLabel("# Primes:");
+        cp.add(inputPanel, BorderLayout.NORTH);
+        cp.add(summaryPanel, BorderLayout.SOUTH);
 
-        // Disable lastField --i.e., use exclusively for output
-        lastField.setEnabled(false);
+        cp.add(logPane, BorderLayout.CENTER);
 
-        startButton  = new JButton("Start");
-        stopButton   = new JButton("Stop");
+        // Package Everything
+        pack();
+    }
 
-        // Initialize Text Area
-        logArea      = new JTextArea("", 10, 20);
+    /**
+     * Set up Input Panel, including buttons and button click events.
+     */
+    void setUpInputPanel()
+    {
+        inputPanel  = new JPanel();
 
-        logArea.setEditable(false);
-        JScrollPane logPane = new JScrollPane(
-            logArea,
-            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
-        );
+        toGenField  = new JTextField(10);
+        toGenLabel  = new JLabel("# Primes:");
 
-        // Set Panel Layouts
+        startButton = new JButton("Start");
+        stopButton  = new JButton("Stop");
+
         inputPanel.setLayout(new FlowLayout());
-        summaryPanel.setLayout(new FlowLayout());
 
-        // Populate the Input Panel
         inputPanel.add(toGenLabel);
         inputPanel.add(toGenField);
         inputPanel.add(startButton);
         inputPanel.add(stopButton);
 
-        // Populate the summary Panel
-        summaryPanel.add(lastLabel);
-        summaryPanel.add(lastField);
-
         // Add Action Listeners to the Buttons
-
-        // Add start button Listener
         startButton.addActionListener(
             new ActionListener() {
                 @Override
@@ -189,7 +199,6 @@ public class PrimeGuiThread extends JFrame {
             }
         );
 
-        // Add stop button Listener
         stopButton.addActionListener(
             (ActionEvent e) -> {
                 if (worker != null) {
@@ -198,20 +207,42 @@ public class PrimeGuiThread extends JFrame {
             }
         );
 
-        // Setup and add to the Main Container
-        cp.setLayout(new BorderLayout());
-
-        cp.add(inputPanel, BorderLayout.NORTH);
-        cp.add(summaryPanel, BorderLayout.SOUTH);
-
-        cp.add(logPane, BorderLayout.CENTER);
-
-        // Package Everything
-        pack();
-
         // Initialize button states
         startButton.setEnabled(true);
         stopButton.setEnabled(false);
+    }
+
+    /**
+     * Set up the scrollable log area/panel.
+     */
+    void setUpLogArea()
+    {
+        logArea = new JTextArea("", 10, 20);
+
+        logArea.setEditable(false);
+        logPane = new JScrollPane(logArea,
+                                  JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                                  JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+    }
+
+    /**
+     * Set up the Summary Panel.
+     */
+    void setUpSummaryPanel()
+    {
+        summaryPanel = new JPanel();
+
+        lastField    = new JTextField(20);
+        lastLabel    = new JLabel("Last Prime:");
+
+        // Disable lastField --i.e., use exclusively for output
+        lastField.setEnabled(false);
+
+        summaryPanel.setLayout(new FlowLayout());
+
+        summaryPanel.add(lastLabel);
+        summaryPanel.add(lastField);
     }
 
     /**
