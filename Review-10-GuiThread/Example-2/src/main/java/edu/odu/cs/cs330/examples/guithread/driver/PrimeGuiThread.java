@@ -72,7 +72,7 @@ public class PrimeGuiThread extends JFrame {
         {
             primeGenerator = new PrimeGenerator();
 
-            toGenerate     = numPrimes;
+            toGenerate     = numPrimes - 2; // The -2 is a Worker responsibility
             stop           = false;
         }
 
@@ -172,30 +172,22 @@ public class PrimeGuiThread extends JFrame {
 
         // Add Action Listeners to the Buttons
         startButton.addActionListener(
-            new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    int numPrimes;
+            (ActionEvent e) -> {
+                int numPrimes;
 
-                    try {
-                        numPrimes = Integer.parseInt(toGenField.getText());
-                    }
-                    catch (NumberFormatException exc) {
-                        numPrimes = 10;
-                        toGenField.setText("" + numPrimes);
-                    }
-
-                    numPrimes -= 2;
-
-                    clear();
-                    toggleButtons();
-
-                    worker = new PrimeWorker(numPrimes);
-                    new Thread(worker).start();
-
-                    //toggleButtons();
+                try {
+                    numPrimes = Integer.parseInt(toGenField.getText());
                 }
+                catch (NumberFormatException exc) {
+                    numPrimes = 10;
+                    toGenField.setText("" + numPrimes);
+                }
+
+                clear();
+                toggleButtons();
+
+                worker = new PrimeWorker(numPrimes);
+                new Thread(worker).start();
             }
         );
 
