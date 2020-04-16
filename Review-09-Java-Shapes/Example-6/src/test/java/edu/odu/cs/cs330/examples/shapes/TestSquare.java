@@ -89,7 +89,7 @@ public class TestSquare {
 
         assertThat(aCopy, is(not(sameInstance(this.fancy))));
 
-        // I really should have public voidined __eq__
+        // I really should have defined __eq__
         assertThat(aCopy.side(), closeTo(this.fancy.side(), 0.001));
     }
 

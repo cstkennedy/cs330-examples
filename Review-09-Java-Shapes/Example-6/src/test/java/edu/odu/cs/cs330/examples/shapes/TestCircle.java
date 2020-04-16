@@ -81,7 +81,7 @@ public class TestCircle {
     public void testPerimeter()
     {
         assertThat(this.generic.perimeter(),
-                  closeTo(2 * Math.PI * this.generic.radius(), 0.05));
+                   closeTo(2 * Math.PI * this.generic.radius(), 0.05));
 
         assertThat(this.fancy.perimeter(),
                    closeTo(2 * Math.PI * this.fancy.radius(), 0.05));

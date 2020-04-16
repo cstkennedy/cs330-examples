@@ -82,7 +82,7 @@ public class RunShapes {
 
         // Print all the shapes
         System.out.println(heading("Display Shape Names", H_WIDTH, '*'));
-        //printShapes(shapes);
+        //printShapeNames(shapes);
         shapes.stream()
             .map(Shape::name)
             .forEach(System.out::println);
@@ -103,8 +103,8 @@ public class RunShapes {
 
         System.out.println(heading("Display Smallest Shape (Perimeter)", H_WIDTH, '~'));
         Shape smallestShape = shapes.parallelStream()
-                                .min(Comparator.comparing(Shape::perimeter))
-                                .get();
+                            .min(Comparator.comparing(Shape::perimeter))
+                            .get();
         System.out.println(smallestShape);
     }
 

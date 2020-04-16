@@ -73,6 +73,10 @@ public abstract class Shape implements Cloneable {
      * Read the shape.
      *
      * @param scanner the input stream--scanner in this example
+     *
+     * @deprecated {@link #numDims() numDims} and
+     * {@link #createFromDims(double[]) createFromDims} should be used instead
+     * of read.
      */
     public abstract void read(Scanner scanner);
 

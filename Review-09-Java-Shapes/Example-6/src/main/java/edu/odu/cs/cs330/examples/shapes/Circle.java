@@ -138,7 +138,6 @@ public class Circle extends Shape implements Cloneable {
     public void createFromDims(double[] dims)
     {
         this._radius = dims[0];
-
     }
 
     /**
