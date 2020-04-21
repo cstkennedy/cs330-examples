@@ -39,8 +39,10 @@ def main():
         print(f"{index:3d} is not between 3 and 200\n")
         exit(1)
 
+    # Think of the tuple (idx, f) as std::pair<int, long>
+
     for idx, f in enumerate(fibonacci_sequence(index), start=1):
-        print(f"{idx:>2d}: {f:10d}")
+        print(f"{idx:>3d}: {f:10d}")
 
 
 if __name__ == "__main__":
