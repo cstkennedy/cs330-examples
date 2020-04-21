@@ -215,7 +215,6 @@ public class PrimeGuiThread extends JFrame {
         logPane = new JScrollPane(logArea,
                                   JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                                   JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
     }
 
     /**

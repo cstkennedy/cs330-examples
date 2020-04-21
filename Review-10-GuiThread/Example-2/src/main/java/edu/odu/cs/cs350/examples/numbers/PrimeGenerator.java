@@ -164,6 +164,7 @@ public class PrimeGenerator implements Iterable<Integer> {
     @Override
     public String toString()
     {
+        /*
         StringBuilder bld = new StringBuilder();
 
         bld.append(primes.get(0));
@@ -173,5 +174,11 @@ public class PrimeGenerator implements Iterable<Integer> {
         }
 
         return bld.toString();
+        */
+
+        return this.primes
+            .stream()
+            .map(p -> p.toString())
+            .collect(java.util.stream.Collectors.joining(", ", "", ""));
     }
 }
