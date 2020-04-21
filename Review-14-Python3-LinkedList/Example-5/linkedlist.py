@@ -1,11 +1,22 @@
+"""
+This is an example Python Linked List that demonstrates:
+
+  - iterators
+  - Abstract Base Classes with the collections.abc module
+  - deep copies with the copy module
+  - data classes
+  - properties
+  - deocrators
+"""
+
 import copy
 
-from collections.abc import (Iterator, Iterable)
+import collections.abc as abc
 from dataclasses import dataclass
 from typing import (Any)
 
 
-class LinkedList(Iterable):
+class LinkedList(abc.Iterable):
     """
     The LinkedList (LL) is a wrapper for three items.
      - Head pointer
@@ -34,7 +45,7 @@ class LinkedList(Iterable):
         data: Any = 0
         next: "Node" = None
 
-    class Iterator(Iterator):
+    class Iterator(abc.Iterator):
         """
         A special purpose Linked List Iterator
         """
@@ -54,6 +65,10 @@ class LinkedList(Iterable):
 
         @property
         def current_node(self):
+            """
+            Retrieve the value in this node (or None if the Node is empty).
+            """
+
             return self.__current_node
 
     def __init__(self):
@@ -83,6 +98,14 @@ class LinkedList(Iterable):
             self.__tail = new_node
 
         self.__nodes += 1
+
+    def __deepcopy__(self, memo):
+        clone = LinkedList()
+
+        for datum in self:
+            clone.append(copy.deepcopy(datum, memo))
+
+        return clone
 
     def __len__(self):
         return self.__nodes
