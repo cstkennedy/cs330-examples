@@ -1,5 +1,3 @@
-import copy
-
 from collections.abc import (Iterator, Iterable)
 
 class LinkedList(Iterable):
@@ -15,7 +13,7 @@ class LinkedList(Iterable):
     In this version, the LinkedList has been converted to a proper class
     """
 
-    class Node(object):
+    class Node:
         """
         The Node class is the atom--smallest base component--of a Linked List.
         An array element can viewed as its analog.
@@ -107,5 +105,5 @@ class LinkedList(Iterable):
         with an index.
         """
 
-        return "\n".join([f"Node # {index:>4} - {data:>4}"
-                          for index, data in enumerate(self)])
+        return "\n".join((f"Node # {index:>4} - {data:>4}"
+                          for index, data in enumerate(self)))

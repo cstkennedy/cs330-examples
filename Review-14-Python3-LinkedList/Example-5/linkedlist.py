@@ -119,5 +119,5 @@ class LinkedList(abc.Iterable):
         with an index.
         """
 
-        return "\n".join([f"Node # {index:>4} - {data:>4}"
-                          for index, data in enumerate(self)])
+        return "\n".join((f"Node # {index:>4} - {data:>4}"
+                          for index, data in enumerate(self)))

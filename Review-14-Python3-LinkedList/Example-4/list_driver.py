@@ -32,20 +32,20 @@ def main():
     try:
         to_generate = int(sys.argv[2])
 
-    except (IndexError, ValueError) as e:
+    except (IndexError, ValueError) as err:
         to_generate = 10
 
     # Print the program heading
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
-        print("{:^80}".format(line))
+        print(f"{line:^80}")
 
     print("-" * 80)
 
     # Create a Linked List
     random_ints = LinkedList()
-    for i in range(0, to_generate):
+    for _ in range(0, to_generate):
         random_ints.append(random.randint(MIN, MAX))
 
     print(random_ints)

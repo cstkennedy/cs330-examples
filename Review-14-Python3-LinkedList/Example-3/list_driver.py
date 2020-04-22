@@ -32,7 +32,7 @@ def main():
     try:
         to_generate = int(sys.argv[2])
 
-    except (IndexError, ValueError) as e:
+    except (IndexError, ValueError) as err:
         to_generate = 10
 
     # Print the program heading
@@ -45,7 +45,8 @@ def main():
 
     # Create a Linked List
     random_ints = LinkedList()
-    for i in range(0, to_generate):
+    #  for i in range(0, to_generate):
+    for _ in range(0, to_generate):
         random_ints.append(random.randint(MIN, MAX))
 
     print(random_ints)

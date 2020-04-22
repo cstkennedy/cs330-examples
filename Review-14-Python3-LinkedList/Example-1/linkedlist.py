@@ -1,7 +1,6 @@
-import copy
 
-
-class LinkedList(object):
+#  class LinkedList(object):
+class LinkedList:
     """
     The LinkedList (LL) is a wrapper for three items.
      - Head pointer
@@ -14,7 +13,7 @@ class LinkedList(object):
     In this version, the LinkedList has been converted to a proper class
     """
 
-    class Node(object):
+    class Node:
         """
         The Node class is the atom--smallest base component--of a Linked List.
         An array element can viewed as its analog.
@@ -33,8 +32,8 @@ class LinkedList(object):
         Construct an empty Linked List
         """
 
-        self.__head  = None
-        self.__tail  = None
+        self.__head = None
+        self.__tail = None
         self.__nodes = 0
 
     def append(self, to_add):
