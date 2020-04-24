@@ -75,14 +75,10 @@ is located [here](https://youtu.be/dWcPTtZl6Gs). _Note that this is the Fall
 2017 recording._
 
 
----
+# Review 3: Separation of Concerns (And No Memory Leaks)
 
-# Updates in Progress
-
-Everything below this point will be updated/tweaked.
-
-
-# Review 3: Seperation of Concerns (And No Memory Leaks)
+This discussion takes the iterator examples from Review 02 and incorporates the
+Big-3 from Review 01 (to prevent memory leaks).
 
   - Examples 1 & 2 take the Linked List and Dynamic Array examples from Review
     02 and incorporate the Big-3, using the `Copy-and-Swap` implementation of
@@ -95,11 +91,14 @@ Everything below this point will be updated/tweaked.
 
 The recorded review is split into three parts:
 
-  1. Part 1 (to be recorded) - Examples 1 through 2.
-  2. Part 2 (to be recorded) -  Example 3 (review) through Example 4.
-  2. Part 3 (to be recorded) - Example 6 & Example 7 (Rust Version).
+  1. [Part 1](https://youtu.be/inUskhq0SHo) - Examples 1 and 2.
+  2. [Part 2](https://youtu.be/5-f_ej3cUJg) - Example 3 (review) through Example 5.
+  2. [Part 3](https://youtu.be/s_1-4G8Gl4c) - Example 6.
+  2. Part 4 (to be recorded) - Example 7 & Example 8 (Rust & Python Versions).
 
----
+All source code is available in \ExampleZip{Review-03.zip}.
+
+
 
 # Review 4: Design, Tools, and Testing
 
@@ -127,13 +126,6 @@ The notes are available [here](doc:classChecklistsAndPlantUML).
 The recorded discussion is available [here](https://youtu.be/GybR1wL_zzQ).
 
 
-## Proper Object Oriented Design and Analysis
-
-The proper way to [**plan**](doc:designDiscussion) with objected oriented analysis.
-
-The recorded discussion is available [here](https://youtu.be/sO86E30pxh0).
-
-
 ## Design: The CS 250 Way
 
 ADTs & Top-Down Design - This is a revisiting of the approach taken for the CS
@@ -144,6 +136,13 @@ ADTs & Top-Down Design - This is a revisiting of the approach taken for the CS
  - **This is not true design**. It is **motivation for a more formal methodology.**
 
 The recorded discussion is available [here](https://youtu.be/j2Y_Q3rVLsY).
+
+
+## Proper Object Oriented Design and Analysis
+
+The proper way to [**plan**](doc:designDiscussion) with objected oriented analysis.
+
+The recorded discussion is available [here](https://youtu.be/sO86E30pxh0).
 
 
 ## Testing: C++, JUnit, Pyunit
@@ -173,6 +172,15 @@ whiteboard periodically during lecture.
   These examples cover the basics of inheritance in C++, including mechanics,
   methodologies, and design paradigms. This discussion is split into four parts:
 
+\bSidebar
+
+After recording parts 1 through 4, I made some *style* tweaks to the code for
+Examples 1 through 8. These tweaks dealt with code style (e.g., keeping
+lines under 80 characters, spaces around operators, and spaces before
+brackets).
+
+\eSidebar
+
   1. [Part 1](https://youtu.be/ZeM1OcxJcsA) (Example 1) focuses on:
     * Virtual Functions
     * Pure Virtual Functions
@@ -184,9 +192,21 @@ whiteboard periodically during lecture.
      interfaces.
   4. [Part 4](https://youtu.be/E2SF6gmpG7Q) (Examples 7 through 8) revisits
      `ShapeFactory`, iterators, and lambda functions.
+  5. *Part 5 (to be recorded/added) (Example 9)* covers a few modern C++
+     additions, including:
+    -  tuple unpacking
+    - the `override` keyword
+    - `string_views`
+    - `constexpr`
 
   All source code is available in \ExampleZip{Review-06-CPP-Shapes.zip}.
 
+
+---
+
+# Updates in Progress
+
+Everything below this point will be updated/tweaked.
 
 
 # Review 7: Switching to Java
