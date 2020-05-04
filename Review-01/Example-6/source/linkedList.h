@@ -217,6 +217,8 @@ class LinkedList {
         {
             using std::swap;
             swap(*this, rhs);
+
+            return *this;
         }
 
         friend
