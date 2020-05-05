@@ -3,7 +3,7 @@ extern crate ordered_float;
 extern crate itertools;
 
 use ordered_float::OrderedFloat;
-use itertools::Itertools;
+use itertools::{Itertools,MinMaxResult};
 
 // use std::io::BufReader;
 // use std::fs::File;
@@ -71,6 +71,11 @@ fn main() {
     }
 
     /*
+    costs.iter()
+        .for_each(|room_cost| println!("{:.2}", room_cost));
+    */
+
+    /*
     // Print the sum, min, max -> D.R.Y!
     cout << "Total: "
          << std::accumulate(costs.begin(), costs.end(), 0.0, std::plus<double>())
@@ -103,11 +108,20 @@ fn main() {
          << "Max: " << *(extremes.second) << "\n";
     */
     match costs.iter().minmax_by_key(|c| OrderedFloat(**c)) {
-        itertools::MinMaxResult::MinMax(ex_min, ex_max) => {
+        MinMaxResult::MinMax(ex_min, ex_max) => {
             println!("Min  : {:.2}", ex_min);
             println!("Max  : {:.2}", ex_max);
         },
         _ => {}
+    }
+
+    println!();
+
+    // Demo "if let" syntax
+    if let MinMaxResult::MinMax(ex_min, ex_max) =
+        costs.iter().minmax_by_key(|c| OrderedFloat(**c)) {
+            println!("Min  : {:.2}", ex_min);
+            println!("Max  : {:.2}", ex_max);
     }
 }
 
@@ -158,9 +172,14 @@ fn build_house(house: &mut House) {
 fn upgrade_flooring(original: &House) -> House {
     let mut modified = original.clone();
 
+    /*
     for room in modified.iter_mut() {
         room.set_flooring("Stone Bricks", 12.97);
     }
+    */
+
+    modified.iter_mut()
+        .for_each(|room| room.set_flooring("Stone Bricks", 12.97));
 
     modified.set_name("After Stone Bricks");
 
