@@ -21,7 +21,7 @@
 using namespace std;
 using namespace utilities;
 
-const std::array<string_view, 2> PROGRAM_HEADING = {
+constexpr std::array<string_view, 2> PROGRAM_HEADING = {
     "Objects & Inheritance: 2-D Shapes",
     "Thomas J. Kennedy"
 };  ///< Program Title

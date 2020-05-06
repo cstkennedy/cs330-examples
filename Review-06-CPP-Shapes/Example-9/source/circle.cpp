@@ -5,9 +5,6 @@
 
 #include "circle.h"
 
-const double Circle::PI  = 3.14159265359;
-const double Circle::TAU = 2 * PI;
-
 //------------------------------------------------------------------------------
 Circle::Circle()
     :Shape("Circle"),

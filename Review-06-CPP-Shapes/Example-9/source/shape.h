@@ -12,8 +12,8 @@
  */
 class Shape {
     protected:
-        static const int WIDTH_LABEL;  ///< Label Output Width
-        static const int WIDTH_VALUE;  ///< Value Output Width
+        static constexpr int WIDTH_LABEL = 12;  ///< Label Output Width
+        static constexpr int WIDTH_VALUE = 24;  ///< Value Output Width
 
         std::string _name;             ///< Geometric Name of the 2-D Figure
 

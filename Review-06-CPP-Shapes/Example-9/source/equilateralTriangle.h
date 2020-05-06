@@ -15,7 +15,7 @@
  */
 class EquilateralTriangle: public Triangle {
     private:
-        static const double ROOT_3_DIV_4;  ///< @f$ \frac{\sqrt{3}}{4} @f$
+        static constexpr double ROOT_3_DIV_4 = sqrt(3.0) / 4.0;  ///< @f$ \frac{\sqrt{3}}{4} @f$
 
     public:
         /**

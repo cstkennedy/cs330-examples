@@ -13,7 +13,7 @@
 //------------------------------------------------------------------------------
 class RightTriangle: public Triangle{
     private:
-        static const double ONE_HALF;  ///< @f$ \frac{2}{2} @f$
+        static constexpr double ONE_HALF = 0.5;  ///< @f$ \frac{2}{2} @f$
 
         /**
          * Compute the hyptoenuse using:

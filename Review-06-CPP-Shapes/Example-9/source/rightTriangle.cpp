@@ -5,8 +5,6 @@
 
 #include "rightTriangle.h"
 
-const double RightTriangle::ONE_HALF = (1.0 / 2.0);
-
 //------------------------------------------------------------------------------
 RightTriangle::RightTriangle()
     :Triangle()
