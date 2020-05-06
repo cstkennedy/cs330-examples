@@ -5,8 +5,6 @@
 
 #include "equilateralTriangle.h"
 
-const double EquilateralTriangle::ROOT_3_DIV_4 = sqrt(3) / 4;
-
 //------------------------------------------------------------------------------
 EquilateralTriangle::EquilateralTriangle()
     :EquilateralTriangle(1)

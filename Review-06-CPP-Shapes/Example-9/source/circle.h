@@ -14,8 +14,8 @@
  */
 class Circle: public Shape {
     private:
-        static const double PI;   ///< @f$ \pi @f$
-        static const double TAU;  ///< @f$ \tau = 2\pi @f$
+        static constexpr double PI  = 3.14159265359;
+        static constexpr double TAU = 2 * PI;
 
         double _radius;  ///< Length of the radius
 

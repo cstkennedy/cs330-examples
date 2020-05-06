@@ -17,7 +17,7 @@
  * A collection of useful utilities.
  */
 namespace utilities {
-    const int W_WIDTH = 70;  ///< Width of the terminal window
+    constexpr int W_WIDTH = 70;  ///< Width of the terminal window
 
     // TJK - Removed input utility functions
     // TJK - Removed Number string title utility function
