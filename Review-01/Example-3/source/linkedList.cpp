@@ -1,11 +1,11 @@
 #include "linkedList.h"
 
 //------------------------------------------------------------------------------
- LinkedList::Node::Node()
- {
-    this->data = 0;
-    this->next = nullptr;
- }
+LinkedList::Node::Node()
+{
+   this->data = 0;
+   this->next = nullptr;
+}
 
 //------------------------------------------------------------------------------
 LinkedList::Node::Node(int data)
