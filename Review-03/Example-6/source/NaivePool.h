@@ -68,6 +68,11 @@ class NaivePool {
             delete[] thePools;
         }
 
+        /*
+         * I am technically violating the rule of the Big-3 by not overloading
+         * the assignment operator.
+         */
+
         /**
          * Return a read/write pointer to the next available memory block.
          */
