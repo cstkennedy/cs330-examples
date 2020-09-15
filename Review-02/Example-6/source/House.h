@@ -18,7 +18,7 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House{
+class House {
     public:
         /**
          * A standard C++ STL style iterator.

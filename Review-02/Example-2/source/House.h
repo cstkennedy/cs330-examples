@@ -13,7 +13,7 @@
  * This class serves as our demonstration of the STL
  * iterator interface.
  */
-class House{
+class House {
     public:
 
     private:
