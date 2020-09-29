@@ -14,4 +14,8 @@ $(MAINPROG): $(OBJECTS)
 	g++ $(FLAGS) -c $< -o $@
 
 clean:
-	rm *.o $(MAINPROG)
+	rm *.o $(MAINPROG) *.gcov *.gcda *.gcno
+
+coverage: $(MAINPROG)
+	./$(MAINPROG)
+	gcov -r $(MAINPROG)
