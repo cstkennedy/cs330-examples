@@ -71,7 +71,7 @@ impl Room {
     /// # Arguments
     ///  * `nme` - room name
     ///
-    pub fn with_name(&mut self, nme: &str) -> &mut Self {
+    pub fn with_name(mut self, nme: &str) -> Self {
         self.name = nme.to_string();
 
         self
@@ -83,7 +83,7 @@ impl Room {
     ///  * `nme` - flooring type name
     ///  * `unit_c` - unit cost
     ///
-    pub fn with_flooring(&mut self, nme: &str, unit_c: f64) -> &mut Self {
+    pub fn with_flooring(mut self, nme: &str, unit_c: f64) -> Self {
         self.flooring.type_name = nme.to_string();
         self.flooring.unit_cost = unit_c;
 
@@ -96,7 +96,7 @@ impl Room {
     ///  * `l` - length
     ///  * `w` - width
     ///
-    pub fn with_dimensions(&mut self, l: f64, w: f64) -> &mut Self {
+    pub fn with_dimensions(mut self, l: f64, w: f64) -> Self {
         self.dimensions.length = l;
         self.dimensions.width = w;
 

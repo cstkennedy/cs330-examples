@@ -143,8 +143,8 @@ fn build_house(house: &mut House) {
     let kitchen = Room::default()
         .with_name("Kitchen")
         .with_dimensions(20f64, 12f64)
-        .with_flooring("Tile", 3.87f64)
-        .to_owned();
+        .with_flooring("Tile", 3.87f64);
+        // .to_owned();
 
     house.add_room(kitchen);
 
@@ -153,7 +153,7 @@ fn build_house(house: &mut House) {
             .with_name("Storage Room")
             .with_dimensions(16f64, 16f64)
             .with_flooring("Birch Wood", 4.39f64)
-            .to_owned()
+            // .to_owned()
     );
 
 }

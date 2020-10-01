@@ -29,7 +29,7 @@ impl House {
     ///
     ///  * `nme` - new House name
     ///
-    pub fn with_name(&mut self, nme: &str) -> &mut Self {
+    pub fn with_name(mut self, nme: &str) -> Self {
         self.name = nme.to_string();
         self
     }
