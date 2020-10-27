@@ -21,7 +21,7 @@ class Shape {
          * Modify the name
          *
          * @param _name new Shape name
-         * @return shape name
+         * @return shape name - copy-and-paste error
          */
         void name(std::string _name);
 
