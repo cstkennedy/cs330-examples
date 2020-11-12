@@ -8,5 +8,4 @@ namespace utilities {
     {
         return std::abs(rhs - lhs) < threshold;
     }
-
 }
