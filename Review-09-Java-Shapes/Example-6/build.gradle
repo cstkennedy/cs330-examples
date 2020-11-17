@@ -183,7 +183,7 @@ pmdIntegrationTest.enabled=false
 //------------------------------------------------------------------------------
 // JBake Configuration
 //------------------------------------------------------------------------------
-task reports (dependsOn: ["javadoc", "doxygen",
+task reports (dependsOn: ["javadoc",
                           "check",
                           "jacocoTestReport",
                           "jacocoIntegrationTestReport",
@@ -199,11 +199,13 @@ task copyJDocs (type: Copy) {
     dependsOn "javadoc"
 }
 
+/*
 task copyDoxygen (type: Copy) {
     from "build/doxygen"
     into "build/tmp/website/assets/doxygen"
     dependsOn "doxygen"
 }
+*/
 
 task copyReports (type: Copy) {
     from "build/reports"
@@ -234,7 +236,7 @@ jbake {
 }
 
 // Ensure all Copy and JBake build tasks run
-task setupWebsite (dependsOn: ["buildHomePage", "copyReports", "copyJDocs", "copyDoxygen"]){
+task setupWebsite (dependsOn: ["buildHomePage", "copyReports", "copyJDocs"]){
 }
 
 bake.dependsOn "setupWebsite"
