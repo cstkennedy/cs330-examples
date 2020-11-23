@@ -63,7 +63,7 @@ public class RunShapes {
         }
         catch (FileNotFoundException e) {
             System.out.println("File (" + args[0] + ") could not be opened.");
-            System.exit(1);
+            System.exit(2);
         }
 
         // Print main program heading

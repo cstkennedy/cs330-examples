@@ -21,12 +21,12 @@ public class ShapeFactory {
     };
 
     /**
-     *  Create a Shape.
+     * Create a Shape.
      *
-     *  @param name the shape to be created
+     * @param name the shape to be created
      *
-     *  @return A shape with the specified name
-     *      or null if no matching shape is found
+     * @return A shape with the specified name
+     *     or null if no matching shape is found
      *
      * @throws CloneNotSupportedException if a mdoel shape is found and the
      *     copy (i.e., clone) operation fails
@@ -62,7 +62,7 @@ public class ShapeFactory {
     }
 
     /**
-     *  Print a list of known Shapes.
+     * Print a list of known Shapes.
      *
      * @return a string containing a newline delimited list of know shape names
      */
