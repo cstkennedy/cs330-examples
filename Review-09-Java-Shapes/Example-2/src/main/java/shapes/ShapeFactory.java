@@ -99,7 +99,7 @@ public class ShapeFactory
         StringBuilder bld = new StringBuilder();
 
         for (ShapePair pair : _known_shapes) {
-            bld.append(pair);
+            bld.append(pair);  // Note: Implicit call to pair.toString()
         }
 
         return bld.toString();
