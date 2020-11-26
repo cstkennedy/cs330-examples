@@ -11,6 +11,7 @@ WIDTH_VALUE = 24  # Value Output Width
 STR_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}}}\n"
 FPT_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}.4f}}\n"
 
+
 class Shape(metaclass=abc.ABCMeta):
     """
     Shape in a 2-D Cartesian Plane

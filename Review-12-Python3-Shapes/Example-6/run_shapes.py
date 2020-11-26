@@ -45,8 +45,8 @@ def main():
     print("{:>2} shapes available.".format(shape_factory.number_known()))
     print()
 
-    # The list needs to be intialzed outside the "with" closure
-    shapes = list()
+    # The list needs to be intialized outside the "with" closure
+    shapes = []  # Create an empty list (prefer `[]` over `list()`)
 
     with open(shapes_filename, "r") as shapes_in:
         for line in shapes_in:
@@ -59,7 +59,7 @@ def main():
             shapes.append(shape_factory.create_from_dictionary(name, values))
 
     # Remove all `None` entries with a list comprehension
-    shapes = [s for s in shapes if s is not None]
+    shapes = [shp for shp in shapes if shp is not None]
 
     # Print all the shapes
     print("~" * 38)
