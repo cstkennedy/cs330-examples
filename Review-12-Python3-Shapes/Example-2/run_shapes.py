@@ -1,18 +1,11 @@
 #! /usr/bin/env python3
 
-# Programmer : Thomas Kennedy
-
-# Note how I did not translate my
-# utilities library that I wrote
-# for the C++ and Java versions
-
-# import utilities.Utilities;
+# Programmer : Thomas J. Kennedy
 
 from shapes import *
 
-
-PROGRAM_HEADING = ["Objects & Inheritance: 2-D Shapes",
-                   "Thomas J. Kennedy"]  # Program Title
+PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
+                   "Thomas J. Kennedy")  # Program Title
 
 
 def main():
@@ -28,7 +21,7 @@ def main():
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
-        print("{:^80}".format(line))
+        print(f"{line:^80}")
 
     print("-" * 80)
 
@@ -70,11 +63,10 @@ def main():
     #
 
     # Examine the ShapeFactory
-    print("*" * 38)
+    print("~" * 38)
     print("{:^38}".format("Available Shapes"))
-    print("*" * 38)
+    print("~" * 38)
 
-    # List the available shapes
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
@@ -102,12 +94,12 @@ def main():
     print()
 
     # Print all the shapes
-    print("*" * 38)
+    print("~" * 38)
     print("{:^38}".format("Display All Shapes"))
-    print("*" * 38)
+    print("~" * 38)
 
-    for s in shapes:
-        print(s)
+    for shp in shapes:
+        print(shp)
 
 
 if __name__ == "__main__":

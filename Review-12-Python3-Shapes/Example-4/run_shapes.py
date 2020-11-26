@@ -2,20 +2,14 @@
 
 # Programmer : Thomas J. Kennedy
 
-# Note how I did not translate my
-# utilities library that I wrote
-# for the C++ and Java versions
-
-# import utilities.Utilities;
+import json
+import pickle
+import sys
 
 from shapes import *
 
-import pickle
-import sys
-import json
-
-PROGRAM_HEADING = ["Objects & Inheritance: 2-D Shapes",
-                   "Thomas J. Kennedy"]  # Program Title
+PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
+                   "Thomas J. Kennedy")  # Program Title
 
 
 def main():
@@ -34,11 +28,10 @@ def main():
 
     shapes_filename = sys.argv[1]
 
-    # Print Program Heading
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
-        print("{:^80}".format(line))
+        print(f"{line:^80}")
 
     print("-" * 80)
 
@@ -47,7 +40,6 @@ def main():
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
 
-    # List the available shapes
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
@@ -57,7 +49,7 @@ def main():
 
     # print(ShapeFactory.create_from_dictionary("Circle", {"radius": 4}))
 
-    # The list needs to be intialzed outside the "with" closure
+    # The list needs to be intialized outside the "with" closure
     shapes = []  # Create an empty list (prefer `[]` over `list()`)
 
     # shapes_in = open(shapes_filename, "r")
@@ -89,14 +81,14 @@ def main():
     print("{:^38}".format("Display All Shapes"))
     print("~" * 38)
 
-    for s in shapes:
-        print(s)
+    for shp in shapes:
+        print(shp)
 
     # for s in shapes:
     #     print(pickle.dumps(s, 0))
 
-    # for s in shapes:
-    #     name = s.__dict__["_name"]
+    # for shp in shapes:
+    #     name = shp.__dict__["_name"]
     #     attribs = {key: s.__dict__[key] for key in s.__dict__ if key != "_name"}
     #     print(attribs)
 
@@ -104,5 +96,5 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except FileNotFoundError as e:
-        print(e)
+    except FileNotFoundError as err:
+        print(err)

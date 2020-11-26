@@ -2,20 +2,14 @@
 
 # Programmer : Thomas J. Kennedy
 
-# Note how I did not translate my
-# utilities library that I wrote
-# for the C++ and Java versions
-
-# import utilities.Utilities;
+import json
+import pickle
+import sys
 
 from shapes import *
 
-import pickle
-import sys
-import json
-
-PROGRAM_HEADING = ["Objects & Inheritance: 2-D Shapes",
-                   "Thomas J. Kennedy"]  # Program Title
+PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
+                   "Thomas J. Kennedy")  # Program Title
 
 
 def main():
@@ -34,11 +28,10 @@ def main():
 
     shapes_filename = sys.argv[1]
 
-    # Print Program Heading
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
-        print("{:^80}".format(line))
+        print(f"{line:^80}")
 
     print("-" * 80)
 
@@ -47,14 +40,13 @@ def main():
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
 
-    # List the available shapes
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
-    # The list needs to be intialzed outside the "with" closure
-    shapes = list()
+    # The list needs to be intialized outside the "with" closure
+    shapes = []  # Create an empty list (prefer `[]` over `list()`)
 
     with open(shapes_filename, "r") as shapes_in:
         for line in shapes_in:
@@ -74,15 +66,15 @@ def main():
     print("{:^38}".format("Display All Shapes"))
     print("~" * 38)
 
-    for s in shapes:
-        print(s)
+    for shp in shapes:
+        print(shp)
 
     out_filename = "coolPickles.dat"
 
     with open(out_filename, "wb") as pickle_file:
         # LOL Nope
-        # for s in shapes:
-        #     pickle.dump(s, pickle_file)
+        # for shp in shapes:
+        #     pickle.dump(shp, pickle_file)
 
         # One line, full data structure
         pickle.dump(shapes, pickle_file)
@@ -90,17 +82,17 @@ def main():
     with open(out_filename, "rb") as pickle_file:
         rebuilt_shapes = pickle.load(pickle_file)
 
-    # Print all the reBuilt shapes
+    # Print all the rebuilt shapes
     print("~" * 38)
     print("{:^38}".format("Display Re-Built Shapes"))
     print("~" * 38)
 
-    for s in rebuilt_shapes:
-        print(s)
+    for shp in rebuilt_shapes:
+        print(shp)
 
 
 if __name__ == "__main__":
     try:
         main()
-    except FileNotFoundError as e:
-        print(e)
+    except FileNotFoundError as err:
+        print(err)

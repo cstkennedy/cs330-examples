@@ -73,8 +73,8 @@ def main():
 
     with open(out_filename, "wb") as pickle_file:
         # LOL Nope
-        # for s in shapes:
-        #     pickle.dump(s, pickle_file)
+        # for shp in shapes:
+        #     pickle.dump(shp, pickle_file)
 
         # One line, full data structure
         pickle.dump(shapes, pickle_file)

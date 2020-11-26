@@ -6,8 +6,7 @@ import json
 import pickle
 import sys
 
-from shapes import *
-from shapes import shape_factory as ShapeFactory
+import shapes.shape_factory as shape_factory
 
 PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
                    "Thomas J. Kennedy")  # Program Title
@@ -41,9 +40,9 @@ def main():
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
 
-    print(ShapeFactory.list_known())
+    print(shape_factory.list_known())
     print("-" * 38)
-    print("{:>2} shapes available.".format(ShapeFactory.number_known()))
+    print("{:>2} shapes available.".format(shape_factory.number_known()))
     print()
 
     # The list needs to be intialzed outside the "with" closure
@@ -57,7 +56,7 @@ def main():
 
             values = json.loads(values)
 
-            shapes.append(ShapeFactory.create_from_dictionary(name, values))
+            shapes.append(shape_factory.create_from_dictionary(name, values))
 
     # Remove all `None` entries with a list comprehension
     shapes = [s for s in shapes if s is not None]
@@ -74,8 +73,8 @@ def main():
 
     with open(out_filename, "wb") as pickle_file:
         # LOL Nope
-        # for s in shapes:
-        #     pickle.dump(s, pickle_file)
+        # for shp in shapes:
+        #     pickle.dump(shp, pickle_file)
 
         # One line, full data structure
         pickle.dump(shapes, pickle_file)
