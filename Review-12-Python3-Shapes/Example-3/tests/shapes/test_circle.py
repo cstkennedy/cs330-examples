@@ -2,7 +2,7 @@ from hamcrest import *
 import unittest
 
 from shapes.Circle import Circle
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 
 import copy
 
@@ -71,15 +71,15 @@ class TestCircle(unittest.TestCase):
         assert_that(fancy_str, ends_with("\n"))
 
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Perimeter",
+                    contains_string(FPT_FMT.format("Perimeter",
                                                          self.fancy.perimeter())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Area",
+                    contains_string(FPT_FMT.format("Area",
                                                          self.fancy.area())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Radius",
+                    contains_string(FPT_FMT.format("Radius",
                                                          self.fancy.radius)))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Diameter",
+                    contains_string(FPT_FMT.format("Diameter",
                                                          self.fancy.diameter)))
         assert_that(fancy_str, ends_with("\n"))

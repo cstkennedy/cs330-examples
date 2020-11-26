@@ -3,6 +3,7 @@ import unittest
 
 from shapes.EquilateralTriangle import EquilateralTriangle
 from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 
 import math
 import copy
@@ -65,12 +66,12 @@ class TestEquilateralTriangle(unittest.TestCase):
         assert_that(fancy_str, starts_with("Name"))
         assert_that(fancy_str, contains_string("Equilateral Triangle"))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Perimeter",
+                    contains_string(FPT_FMT.format("Perimeter",
                                                          self.fancy.perimeter())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Area",
+                    contains_string(FPT_FMT.format("Area",
                                                          self.fancy.area())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Side",
+                    contains_string(FPT_FMT.format("Side",
                                                          self.fancy.side)))
         assert_that(fancy_str, ends_with("\n"))

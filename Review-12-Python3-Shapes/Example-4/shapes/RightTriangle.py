@@ -1,7 +1,7 @@
 import math
 import copy
 
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 from shapes.Triangle import Triangle
 
 
@@ -89,8 +89,8 @@ class RightTriangle(Triangle):
         """
 
         return (super(Triangle, self).__str__()
-                + Shape.FPT_FMT.format("Base", self.side_a)
-                + Shape.FPT_FMT.format("Height", self.side_b)
-                + Shape.FPT_FMT.format("Hypotenuse", self.side_c)
-                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
-                + Shape.FPT_FMT.format("Area", self.area()))
+                + FPT_FMT.format("Base", self.side_a)
+                + FPT_FMT.format("Height", self.side_b)
+                + FPT_FMT.format("Hypotenuse", self.side_c)
+                + FPT_FMT.format("Perimeter", self.perimeter())
+                + FPT_FMT.format("Area", self.area()))

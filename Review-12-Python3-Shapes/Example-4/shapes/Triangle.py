@@ -1,6 +1,6 @@
 import copy
 
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 
 
 class Triangle(Shape):
@@ -78,8 +78,8 @@ class Triangle(Shape):
         """
 
         return (super(Triangle, self).__str__()
-                + Shape.FPT_FMT.format("Side A", self.side_a)
-                + Shape.FPT_FMT.format("Side B", self.side_b)
-                + Shape.FPT_FMT.format("Side C", self.side_c)
-                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
-                + Shape.FPT_FMT.format("Area", self.area()))
+                + FPT_FMT.format("Side A", self.side_a)
+                + FPT_FMT.format("Side B", self.side_b)
+                + FPT_FMT.format("Side C", self.side_c)
+                + FPT_FMT.format("Perimeter", self.perimeter())
+                + FPT_FMT.format("Area", self.area()))

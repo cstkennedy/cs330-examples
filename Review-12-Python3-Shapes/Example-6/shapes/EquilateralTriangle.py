@@ -1,7 +1,7 @@
 import math
 import copy
 
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 from shapes.Triangle import Triangle
 
 
@@ -65,7 +65,7 @@ class EquilateralTriangle(Triangle):
         """
 
         return (super(Triangle, self).__str__()
-                + Shape.FPT_FMT.format("Side", self.side)
-                + Shape.FPT_FMT.format("Height", self.height)
-                + Shape.FPT_FMT.format("Perimeter", Triangle.perimeter(self))
-                + Shape.FPT_FMT.format("Area", self.area()))
+                + FPT_FMT.format("Side", self.side)
+                + FPT_FMT.format("Height", self.height)
+                + FPT_FMT.format("Perimeter", Triangle.perimeter(self))
+                + FPT_FMT.format("Area", self.area()))

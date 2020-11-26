@@ -1,7 +1,7 @@
 import math
 import copy
 
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 
 
 class Circle(Shape):
@@ -62,7 +62,7 @@ class Circle(Shape):
         """
 
         return (super(Circle, self).__str__()
-                + Shape.FPT_FMT.format("Radius", self.radius)
-                + Shape.FPT_FMT.format("Diameter", self.diameter)
-                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
-                + Shape.FPT_FMT.format("Area", self.area()))
+                + FPT_FMT.format("Radius", self.radius)
+                + FPT_FMT.format("Diameter", self.diameter)
+                + FPT_FMT.format("Perimeter", self.perimeter())
+                + FPT_FMT.format("Area", self.area()))

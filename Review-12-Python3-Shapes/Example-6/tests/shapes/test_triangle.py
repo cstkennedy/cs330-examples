@@ -2,7 +2,7 @@ from hamcrest import *
 import unittest
 
 from shapes.Triangle import Triangle
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 
 import math
 import copy
@@ -102,18 +102,18 @@ class TestTriangle(unittest.TestCase):
         assert_that(fancy_str, starts_with("Name"))
         assert_that(fancy_str, contains_string("Triangle"))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Perimeter",
+                    contains_string(FPT_FMT.format("Perimeter",
                                                          self.fancy.perimeter())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Area",
+                    contains_string(FPT_FMT.format("Area",
                                                          self.fancy.area())))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Side A",
+                    contains_string(FPT_FMT.format("Side A",
                                                          self.fancy.side_a)))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Side B",
+                    contains_string(FPT_FMT.format("Side B",
                                                          self.fancy.side_b)))
         assert_that(fancy_str,
-                    contains_string(Shape.FPT_FMT.format("Side C",
+                    contains_string(FPT_FMT.format("Side C",
                                                          self.fancy.side_c)))
         assert_that(fancy_str, ends_with("\n"))

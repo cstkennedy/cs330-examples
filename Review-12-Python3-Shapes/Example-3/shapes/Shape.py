@@ -1,18 +1,20 @@
-import copy
+"""
+This module provides the Shape class and related constants which serve as the
+base for other (specialized) shapes.
+"""
 
+import abc
 
-class Shape(object):
+WIDTH_LABEL = 12  # Label Output Width
+WIDTH_VALUE = 24  # Value Output Width
+
+STR_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}}}\n"
+FPT_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}.4f}}\n"
+
+class Shape(metaclass=abc.ABCMeta):
     """
     Shape in a 2-D Cartesian Plane
     """
-    WIDTH_LABEL = 12  # Label Output Width
-    WIDTH_VALUE = 24  # Value Output Width
-
-    STR_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
-              "{:>" + str(WIDTH_VALUE) + "}\n"
-
-    FPT_FMT = "{:<" + str(WIDTH_LABEL) + "}:" + \
-              "{:>" + str(WIDTH_VALUE) + ".4f}\n"
 
     # @classmethod for static
 
@@ -38,34 +40,46 @@ class Shape(object):
 
         self._name = _name
 
-    def area(self):
+    @abc.abstractmethod
+    def area(self) -> float:
         """
         Compute the area
 
-        :return: area
+        Raises:
+            NotImplemented Error if not overridden by subclass
         """
 
         raise NotImplementedError()
 
-    def perimeter(self):
+    @abc.abstractmethod
+    def perimeter(self) -> float:
         """
         Compute the perimeter
 
-        :return: perimeter
+        Raises:
+            NotImplemented Error if not overridden by subclass
         """
 
         raise NotImplementedError()
 
+    @abc.abstractmethod
     def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
+
+        Raises:
+            NotImplemented Error if not overridden by subclass
         """
 
         raise NotImplementedError()
 
-    def __str__(self):
+    @abc.abstractmethod
+    def __str__(self) -> str:
         """
         Print the shape
+
+        Raises:
+            NotImplemented Error if not overridden by subclass
         """
 
-        return Shape.STR_FMT.format("Name", self._name)
+        return STR_FMT.format("Name", self.name)

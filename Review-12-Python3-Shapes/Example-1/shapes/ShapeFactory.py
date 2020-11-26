@@ -8,12 +8,12 @@ from shapes.RightTriangle import RightTriangle
 from shapes.EquilateralTriangle import EquilateralTriangle
 
 
-class ShapeFactory(object):
+class ShapeFactory:
     """
     The Shape Creating Wizard
     """
 
-    class ShapePair(object):
+    class ShapePair:
         """
         Name Shape Pair 2-tuple(name, model)
 

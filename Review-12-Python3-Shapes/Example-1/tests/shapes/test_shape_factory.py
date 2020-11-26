@@ -1,7 +1,7 @@
 from hamcrest import *
 import unittest
 
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 from shapes.ShapeFactory import ShapeFactory
 
 import copy

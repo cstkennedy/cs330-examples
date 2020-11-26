@@ -1,6 +1,6 @@
 import copy
 
-from shapes.Shape import Shape
+from shapes.Shape import (Shape, FPT_FMT)
 
 
 class Square(Shape):
@@ -54,6 +54,6 @@ class Square(Shape):
         """
 
         return (super(Square, self).__str__()
-                + Shape.FPT_FMT.format("Side", self.side)
-                + Shape.FPT_FMT.format("Perimeter", self.perimeter())
-                + Shape.FPT_FMT.format("Area", self.area()))
+                + FPT_FMT.format("Side", self.side)
+                + FPT_FMT.format("Perimeter", self.perimeter())
+                + FPT_FMT.format("Area", self.area()))
