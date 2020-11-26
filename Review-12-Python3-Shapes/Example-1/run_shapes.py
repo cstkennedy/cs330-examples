@@ -130,9 +130,9 @@ def main():
     #
 
     # Examine the ShapeFactory
-    print("*" * 38)
+    print("~" * 38)
     print("{:^38}".format("Available Shapes"))
-    print("*" * 38)
+    print("~" * 38)
 
     # List the available shapes
     print(ShapeFactory.list_known())
@@ -169,13 +169,13 @@ def main():
     print()
 
     # Print all the shapes
-    print("*" * 38)
+    print("~" * 38)
     print("{:^38}".format("Display All Shapes"))
-    print("*" * 38)
+    print("~" * 38)
 
-    # for (Shape s : shapes)
-    for s in shapes:
-        print(s)
+    # for (Shape shp : shapes)
+    for shp in shapes:
+        print(shp)
 
 
 if __name__ == "__main__":
