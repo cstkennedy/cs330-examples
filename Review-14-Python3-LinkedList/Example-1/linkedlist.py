@@ -9,8 +9,6 @@ class LinkedList:
 
     Only the head pointer is necessary, the latter three items are
     included for convenience.
-
-    In this version, the LinkedList has been converted to a proper class
     """
 
     class Node:

@@ -6,10 +6,11 @@ import copy
 
 from linkedlist import LinkedList
 
-PROGRAM_HEADING = ["Linked List Review", "Thomas J. Kennedy"]
+# Tuples are immutable
+PROGRAM_HEADING = ("Linked List Review", "Thomas J. Kennedy")
 
-MIN = -10  # Lower bound for number generation
-MAX =  10  # Upper bound for number generation
+MIN: int = -10  # Lower bound for number generation
+MAX: int = +10  # Upper bound for number generation
 
 
 def main():
@@ -24,7 +25,7 @@ def main():
     try:
         random.seed(int(sys.argv[1]))
 
-    except IndexError:
+    except IndexError as _err:
         pass
 
     # If a node count was passed from the command line,
@@ -39,13 +40,12 @@ def main():
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
-        print("{:^80}".format(line))
+        print(f"{line:^80}")
 
     print("-" * 80)
 
     # Create a Linked List
     random_ints = LinkedList()
-    #  for i in range(0, to_generate):
     for _ in range(0, to_generate):
         random_ints.append(random.randint(MIN, MAX))
 

@@ -1,3 +1,5 @@
+import copy
+
 from collections.abc import (Iterator, Iterable)
 
 class LinkedList(Iterable):
@@ -9,8 +11,6 @@ class LinkedList(Iterable):
 
     Only the head pointer is necessary, the latter three items are
     included for convenience.
-
-    In this version, the LinkedList has been converted to a proper class
     """
 
     class Node:
@@ -27,6 +27,22 @@ class LinkedList(Iterable):
             self.__data = data
             self.__next = next
 
+        @property
+        def data(self):
+            return self.__data
+
+        @data.setter
+        def data(self, data):
+            self.__data = data
+
+        @property
+        def next(self):
+            return self.__next
+
+        @next.setter
+        def next(self, nxt):
+            self.__next = nxt
+
     class Iterator(Iterator):
         """
         A special purpose Linked List Iterator
@@ -39,11 +55,15 @@ class LinkedList(Iterable):
             if self.__current_node is None:
                 raise StopIteration
 
-            next_val = (self.__current_node)._Node__data
+            next_val = (self.current_node).data
 
-            self.__current_node = self.__current_node._Node__next
+            self.__current_node = (self.current_node).next
 
             return next_val
+
+        @property
+        def current_node(self):
+            return self.__current_node
 
     def __init__(self):
         """
@@ -68,10 +88,18 @@ class LinkedList(Iterable):
             self.__tail = new_node
 
         else:
-            (self.__tail)._Node__next = new_node
+            (self.__tail).next = new_node
             self.__tail = new_node
 
         self.__nodes += 1
+
+    def __deepcopy__(self, memo):
+        clone = LinkedList()
+
+        for datum in self:
+            clone.append(copy.deepcopy(datum, memo))
+
+        return clone
 
     def __len__(self):
         return self.__nodes
@@ -84,9 +112,6 @@ class LinkedList(Iterable):
         Iterate through the LinkedList and print each individual Node
         with an index.
         """
-
-        #  return "\n".join([f"Node # {index:>4} - {data:>4}"
-                          #  for index, data in enumerate(self)])
 
         return "\n".join((f"Node # {index:>4} - {data:>4}"
                           for index, data in enumerate(self)))

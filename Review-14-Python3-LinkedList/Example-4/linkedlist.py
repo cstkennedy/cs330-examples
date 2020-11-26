@@ -1,6 +1,22 @@
-from collections.abc import (Iterator, Iterable)
+"""
+This is an example Python Linked List that demonstrates:
 
-class LinkedList(Iterable):
+  - iterators
+  - Abstract Base Classes with the collections.abc module
+  - deep copies with the copy module
+  - data classes
+  - properties
+  - deocrators
+"""
+
+import copy
+
+import collections.abc as abc
+from dataclasses import dataclass
+from typing import (Any)
+
+
+class LinkedList(abc.Iterable):
     """
     The LinkedList (LL) is a wrapper for three items.
      - Head pointer
@@ -9,10 +25,9 @@ class LinkedList(Iterable):
 
     Only the head pointer is necessary, the latter three items are
     included for convenience.
-
-    In this version, the LinkedList has been converted to a proper class
     """
 
+    @dataclass
     class Node:
         """
         The Node class is the atom--smallest base component--of a Linked List.
@@ -21,34 +36,19 @@ class LinkedList(Iterable):
         For simplicity in this example, the Node will store an integers as
         data. In a later example, methods for generalizing this--through use of
         templates--will be utilized.
+
+        This version makes use of the new Python data class feature.
         """
 
-        def __init__(self, data=0, next=None):
-            self.__data = data
-            self.__next = next
+        data: Any = 0
+        next: "Node" = None
 
-        @property
-        def data(self):
-            return self.__data
-
-        @data.setter
-        def data(self, data):
-            self.__data = data
-
-        @property
-        def next(self):
-            return self.__next
-
-        @next.setter
-        def next(self, nxt):
-            self.__next = nxt
-
-    class Iterator(Iterator):
+    class Iterator(abc.Iterator):
         """
         A special purpose Linked List Iterator
         """
 
-        def __init__(self, node):
+        def __init__(self, node: "Node"):
             self.__current_node = node
 
         def __next__(self):
@@ -63,6 +63,10 @@ class LinkedList(Iterable):
 
         @property
         def current_node(self):
+            """
+            Retrieve the value in this node (or None if the Node is empty).
+            """
+
             return self.__current_node
 
     def __init__(self):
@@ -70,11 +74,11 @@ class LinkedList(Iterable):
         Construct an empty Linked List
         """
 
-        self.__head = None
-        self.__tail = None
-        self.__nodes = 0
+        self.__head: "Node" = None
+        self.__tail: "Node" = None
+        self.__nodes: int = 0
 
-    def append(self, to_add):
+    def append(self, to_add: Any):
         """
         Add a Node at the end of the list
         """
@@ -92,6 +96,14 @@ class LinkedList(Iterable):
             self.__tail = new_node
 
         self.__nodes += 1
+
+    def __deepcopy__(self, memo):
+        clone = LinkedList()
+
+        for datum in self:
+            clone.append(copy.deepcopy(datum, memo))
+
+        return clone
 
     def __len__(self):
         return self.__nodes

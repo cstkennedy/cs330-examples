@@ -6,39 +6,10 @@ import copy
 
 from linkedlist import LinkedList
 
-PROGRAM_HEADING = [
-    "Linked List Review",
-    "Thomas J. Kennedy"
-]
-
+PROGRAM_HEADING = ["Linked List Review", "Thomas J. Kennedy"]
 
 MIN = -10  # Lower bound for number generation
 MAX =  10  # Upper bound for number generation
-
-
-def random_int(min=MIN, max=MAX):
-    """
-    Generate a random integer in the range min, max.
-    Default to MIN and MAX
-    """
-
-    return random.randint(min, max)
-
-
-def generate_list(n):
-    """
-    Generate a Linked List of random integers
-
-    :param n: number of integers to generate
-    """
-
-    ll = LinkedList()
-
-    # Generate a Linked List (LL) of n Nodes
-    for i in range(0, n):
-        ll.append(random_int())
-
-    return ll
 
 
 def main():
@@ -61,7 +32,7 @@ def main():
     try:
         to_generate = int(sys.argv[2])
 
-    except (IndexError, ValueError) as e:
+    except (IndexError, ValueError) as _err:
         to_generate = 10
 
     # Print the program heading
@@ -73,7 +44,11 @@ def main():
     print("-" * 80)
 
     # Create a Linked List
-    random_ints = generate_list(to_generate)
+    random_ints = LinkedList()
+    #  for i in range(0, to_generate):
+    for _ in range(0, to_generate):
+        random_ints.append(random.randint(MIN, MAX))
+
     print(random_ints)
 
     print("*" * 80)
@@ -92,7 +67,6 @@ def main():
     print("#" * 80)
 
     for idx, value in enumerate(random_ints):
-        # print("Node # {:>4} - {:>4}".format(idx, value))
         print(f"Node # {idx:>4} - {value:>4}")
 
 
