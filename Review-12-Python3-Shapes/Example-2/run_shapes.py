@@ -25,43 +25,6 @@ def main():
 
     print("-" * 80)
 
-    # What happens when the number of shapes is non-trivial?
-    #
-    # Suppose we were to expand our Shape hierarchy to include
-    # the following shapes:
-    #   - Isosceles Triangle
-    #   - Circle
-    #   - Ellipse
-    #   - Rectangle
-    #   - Square
-    #   - Rhombus
-    #   - Parallelogram
-    #   - Kite
-    #   - Generalized Polygon
-    #
-    # How would we manage the addition of new Shapes?
-    #
-    # A common approach is to make use of the Factory Model.
-    # This Model exists in a number of languages--e.g.:
-    #   - C++
-    #   - Java
-    #   - Python
-    #   - PHP
-    #   - C#
-    #
-    # A class that contains static members is created.
-    # As new classes are created, the Factory Class is
-    # updated.
-    #
-    # In this example, our factory class is called ShapeFactory
-    # The ShapeFactory could be designed as a singleton class.
-    # Our ShapeFactory is simply a tracker--i.e., records are static
-    # and will be updated manually at compile time.
-    #
-    # The Singleton Class implementation may be discussed at a
-    # later date
-    #
-
     # Examine the ShapeFactory
     print("~" * 38)
     print("{:^38}".format("Available Shapes"))

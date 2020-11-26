@@ -18,11 +18,26 @@ class ShapeFactory(object):
     # kind of data structure
 
     _known_shapes = {
-        "Triangle": Triangle(),
-        "Right Triangle": RightTriangle(),
-        "Equilateral Triangle": EquilateralTriangle(),
-        "Square": Square(),
-        "Circle": Circle()
+        "Triangle": (
+            Triangle(),
+            lambda a, b, c: Triangle(a, b, c)
+        ),
+        "Right Triangle": (
+            RightTriangle(),
+            lambda base, height: RightTriangle(base, height)
+        ),
+        "Equilateral Triangle": (
+            EquilateralTriangle(),
+            lambda side: EquilateralTriangle(side)
+        ),
+        "Square": (
+            Square(),
+            lambda side: Square(side)
+        ),
+        "Circle": (
+            Circle(),
+            lambda radius: Circle(radius)
+        )
     }  # _Dictionary_ of known shapes
 
     @staticmethod
@@ -37,7 +52,25 @@ class ShapeFactory(object):
         """
 
         if name in ShapeFactory._known_shapes:
-            return copy.deepcopy(ShapeFactory._known_shapes[name])
+            return copy.deepcopy(ShapeFactory._known_shapes[name][0])
+
+        return None
+
+    @staticmethod
+    def create_from_dictionary(name, values):
+        """
+        Create a Shape
+
+        :param name: the shape to be created
+        :param attributes: dictionary of values corresponding
+            to the data needed to inialize a shape
+
+        :return: A shape with the specified name
+           or null if no matching shape is found
+        """
+
+        if name in ShapeFactory._known_shapes:
+            return ShapeFactory._known_shapes[name][1](**values)
 
         return None
 

@@ -53,7 +53,7 @@ class ShapeFactory:
         return None
 
     @staticmethod
-    def isKnown(name):
+    def is_known(name):
         """
         Determine whether a given shape is known
 

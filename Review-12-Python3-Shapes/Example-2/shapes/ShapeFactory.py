@@ -8,7 +8,7 @@ from shapes.RightTriangle import RightTriangle
 from shapes.EquilateralTriangle import EquilateralTriangle
 
 
-class ShapeFactory(object):
+class ShapeFactory:
     """
     The Shape Creating Wizard
     """
@@ -36,9 +36,8 @@ class ShapeFactory(object):
            or null if no matching shape is found
         """
 
-        for label, model in ShapeFactory._known_shapes.items():
-            if label == name:
-                return copy.deepcopy(model)
+        if name in ShapeFactory._known_shapes:
+            return copy.deepcopy(ShapeFactory._known_shapes[name])
 
         return None
 
@@ -50,11 +49,7 @@ class ShapeFactory(object):
         :param: name the shape for which to query
         """
 
-        for label, model in ShapeFactory._known_shapes.items():
-            if label == name:
-                return True
-
-        return False
+        return (name in ShapeFactory._known_shapes)
 
     @staticmethod
     def list_known():

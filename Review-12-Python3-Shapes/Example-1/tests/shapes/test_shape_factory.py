@@ -43,14 +43,14 @@ class TestShapeFactory(unittest.TestCase):
         Create a known valid Shape
         """
 
-        assert_that(ShapeFactory.isKnown("Circle"), is_(True))
+        assert_that(ShapeFactory.is_known("Circle"), is_(True))
 
     def test_is_known_failure(self):
         """
         Try to create a known invalid Shape
         """
 
-        assert_that(ShapeFactory.isKnown("Lol Nope"), is_(False))
+        assert_that(ShapeFactory.is_known("Lol Nope"), is_(False))
 
     def test_list_known(self):
         known_str = ShapeFactory.list_known()

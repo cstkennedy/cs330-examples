@@ -1,8 +1,8 @@
 from hamcrest import *
 import unittest
 
-from shapes.Square import Square
-from shapes.Shape import (Shape, FPT_FMT)
+from shapes.square import Square
+from shapes.shape import (Shape, FPT_FMT)
 
 import copy
 
@@ -36,6 +36,7 @@ class TestSquare(unittest.TestCase):
         a_square.side = 7.39
 
         assert_that(a_square.side, close_to(7.39, 1e-8))
+        assert_that(a_square.name, equal_to("Square"))
 
     def test_area(self):
         assert_that(self.generic.area(),
@@ -66,11 +67,11 @@ class TestSquare(unittest.TestCase):
         assert_that(fancy_str, contains_string("Square"))
         assert_that(fancy_str,
                     contains_string(FPT_FMT.format("Perimeter",
-                                                         self.fancy.perimeter())))
+                                                   self.fancy.perimeter())))
         assert_that(fancy_str,
                     contains_string(FPT_FMT.format("Area",
-                                                         self.fancy.area())))
+                                                   self.fancy.area())))
         assert_that(fancy_str,
                     contains_string(FPT_FMT.format("Side",
-                                                         self.fancy.side)))
+                                                   self.fancy.side)))
         assert_that(fancy_str, ends_with("\n"))

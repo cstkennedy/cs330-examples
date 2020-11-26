@@ -2,6 +2,10 @@
 
 # Programmer : Thomas J. Kennedy
 
+import json
+import pickle
+import sys
+
 from shapes import *
 
 PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
@@ -17,7 +21,13 @@ def main():
     The "if __name__" line below determines what runs
     """
 
-    # Print Program Heading
+    if len(sys.argv) < 2:
+        print("No input file provided.")
+        print("Usage: {:} input_file".format(*sys.argv))
+        exit(1)
+
+    shapes_filename = sys.argv[1]
+
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
@@ -35,26 +45,36 @@ def main():
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
-    # Create 5 "Random" Shapes
-    shapes = [ShapeFactory.create("Triangle"),
-              ShapeFactory.create("Right Triangle"),
-              ShapeFactory.create("Equilateral Triangle"),
-              ShapeFactory.create("Square"),
-              ShapeFactory.create("Circle"),
-              ShapeFactory.create("1337 Haxor")]
+    # makeCircle = lambda attribs : Circle(**attribs)
 
-    size = len(shapes)  # original size of the list
+    # print(ShapeFactory.create_from_dictionary("Circle", {"radius": 4}))
+
+    # The list needs to be intialized outside the "with" closure
+    shapes = []  # Create an empty list (prefer `[]` over `list()`)
+
+    # shapes_in = open(shapes_filename, "r")
+    with open(shapes_filename, "r") as shapes_in:
+        for line in shapes_in:
+
+            line = line.strip()  # Strip leading/trailing whitespace
+            # print(line)
+
+            line = line.split(";")  # Split on ";"
+            # print(line)
+
+            name, values = line  # Unpack the list
+            # print(name)
+            # print(values)
+            values = values.strip()
+
+            # print(values)
+            values = json.loads(values)
+            # print(values)
+
+            shapes.append(ShapeFactory.create_from_dictionary(name, values))
 
     # Remove all `None` entries with a list comprehension
-    shapes = [s for s in shapes if s]
-
-    print("*" * 38)
-    print("{:^38}".format("Shapes That Exist"))
-    print("*" * 38)
-    print("{:<24}: {:>4}".format("Original Size", size))
-    print("{:<24}: {:>4}".format("Invalid Shapes", (size - len(shapes))))
-    print("{:<24}: {:>4}".format("New Size", len(shapes)))
-    print()
+    shapes = [s for s in shapes if s is not None]
 
     # Print all the shapes
     print("~" * 38)
@@ -64,6 +84,17 @@ def main():
     for shp in shapes:
         print(shp)
 
+    # for s in shapes:
+    #     print(pickle.dumps(s, 0))
+
+    # for shp in shapes:
+    #     name = shp.__dict__["_name"]
+    #     attribs = {key: s.__dict__[key] for key in s.__dict__ if key != "_name"}
+    #     print(attribs)
+
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except FileNotFoundError as err:
+        print(err)

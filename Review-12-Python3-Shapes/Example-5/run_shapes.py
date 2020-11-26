@@ -45,8 +45,8 @@ def main():
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
-    # The list needs to be intialized outside the "with" closure
-    shapes = []  # Create an empty list (prefer `[]` over `list()`)
+    # The list needs to be intialzed outside the "with" closure
+    shapes = list()
 
     with open(shapes_filename, "r") as shapes_in:
         for line in shapes_in:
@@ -89,6 +89,20 @@ def main():
 
     for shp in rebuilt_shapes:
         print(shp)
+
+    print("~" * 38)
+    print("{:^38}".format("Display Largest Shape (Area)"))
+    print("~" * 38)
+
+    largest_shape = max(rebuilt_shapes, key=lambda shape: shape.area())
+    print(largest_shape)
+
+    print("~" * 38)
+    print("{:^38}".format("Display Smallest Shape (Perimeter)"))
+    print("~" * 38)
+
+    smallest_shape = min(rebuilt_shapes, key=lambda shape: shape.perimeter())
+    print(smallest_shape)
 
 
 if __name__ == "__main__":
