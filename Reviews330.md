@@ -94,7 +94,7 @@ The recorded review is split into three parts:
   1. [Part 1](https://youtu.be/inUskhq0SHo) - Examples 1 and 2.
   2. [Part 2](https://youtu.be/5-f_ej3cUJg) - Example 3 (review) through Example 5.
   2. [Part 3](https://youtu.be/s_1-4G8Gl4c) - Example 6.
-  2. Part 4 (to be recorded) - Example 7 & Example 8 (Rust & Python Versions).
+  2. [Part 4](https://odu.zoom.us/rec/play/LZzOG7Yg89qTTBfkGhwQ3fgb5ndEhg3wk95KLkCzKELFXwEeEnZBjPYBFybpJiFhPbwS9XL1vj4LyASR.3uTf_KtFzWvm5QIQ) - Example 7 & Example 8 (Rust & Python Versions).
 
 All source code is available in \ExampleZip{Review-03.zip}.
 
@@ -192,7 +192,7 @@ brackets).
      interfaces.
   4. [Part 4](https://youtu.be/E2SF6gmpG7Q) (Examples 7 through 8) revisits
      `ShapeFactory`, iterators, and lambda functions.
-  5. *Part 5 (to be recorded/added) (Example 9)* covers a few modern C++
+  5. [Part 5 (Zoom Lecture Recording)](https://odu.zoom.us/rec/share/zghIRrHbif183pvL8xRNfTzcjk8joqgmVKtxhp4i36T-NAQjDdBuVNmIF7G9W8w.bOq3D9iTwbLmxFv4) (Example 9)* covers a few modern C++
      additions, including:
     -  tuple unpacking
     - the `override` keyword
@@ -201,12 +201,6 @@ brackets).
 
   All source code is available in \ExampleZip{Review-06-CPP-Shapes.zip}.
 
-
----
-
-# Updates in Progress
-
-Everything below this point will be updated/tweaked.
 
 
 # Review 7: Switching to Java
@@ -271,10 +265,19 @@ Java code written as a transition into Java from C++. Emphasis is placed on the
 mechanics of Java--as they parallel C++. (Yes, this means **I have been sloppy
 with decorators**)
 
+\bSidebar
+
+If you are curious about JBake... [take a look at my CS 350
+lecture](https://www.cs.odu.edu/~tkennedy/cs350/latest/Public/codeDocumentationJBake/index.html).
+
+\eSidebar
+
+
   This discussion is split into two parts:
 
   1. [Part 1](https://youtu.be/_Qxt3yTuJOU) - Example 1 to Example 3
-  2. [Part 2](https://youtu.be/XKmfxGRj7vM) - Example 4 to Example 6
+  2. [Part 2](https://youtu.be/PIPNWUCqwlk) - Example 4 to Example 5
+  2. [Part 3](https://youtu.be/YE-Pu1ELoi4) - Example 6
 
 
 All source code is available in \ExampleZip{Review-09-Java-Shapes.zip}.
@@ -302,6 +305,14 @@ Pools.
 
 The recording is located [here](https://youtu.be/2AJAWSDhqb4). All source code
 is available in \ExampleZip{Review-11-Threads.zip}.
+
+
+---
+
+# Updates in Progress
+
+Everything below this point will be updated/tweaked.
+
 
 
 # Review 12 Python Shapes (Will be Updated)
