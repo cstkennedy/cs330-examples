@@ -1,6 +1,3 @@
-
-# Review 7: Switching to Java
-
 This discussion is split into two parts:
 
   * Part 1 is available [here](https://youtu.be/IMGWyvyVxOE).

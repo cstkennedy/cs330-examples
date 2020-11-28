@@ -99,7 +99,6 @@ The recorded review is split into three parts:
 All source code is available in \ExampleZip{Review-03.zip}.
 
 
-
 # Review 4: Design, Tools, and Testing
 
 In CS 250, you built a semester project. You went through a fairly contrived process:
@@ -328,7 +327,7 @@ The recorded **(Fall 2017)** discussion is available
 \ExampleZip{Review-12-Python3-Shapes.zip}.
 
 
-# Review 13 More Python!
+# Review 13: More Python!
 
 This is a discussion of selected examples from previous reviews re-implemented
 in Python 3. We will briefly discuss:
@@ -343,7 +342,7 @@ The recorded discussion is available [here](https://youtu.be/i21FRLYxrZc). All
 source code is available in \ExampleZip{Review-13-Python3-Toys.zip}.
 
 
-# Review 14 Python Linked List!
+# Review 14: Python Linked List!
 
 This is a revisiting of our first [example](#review-1-linked-lists), but in
 Python! While revisiting Linked Lists, in the context of Python 3, we
