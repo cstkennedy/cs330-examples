@@ -6,7 +6,7 @@ This is an example Python Linked List that demonstrates:
   - deep copies with the copy module
   - data classes
   - properties
-  - deocrators
+  - decorators
 """
 
 import copy
