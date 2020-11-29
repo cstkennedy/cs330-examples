@@ -8,4 +8,4 @@ revisiting Linked Lists, in the context of Python 3, we will briefly discuss:
   - Name Mangling
   - `pydoc`
 
-The recorded discussion is available [here](https://youtu.be/7XmqiqbQD6M).
+The recorded discussion is available [here](https://youtu.be/mtP36TTnuhs).
