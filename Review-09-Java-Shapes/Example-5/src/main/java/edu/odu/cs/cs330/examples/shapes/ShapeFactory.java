@@ -28,7 +28,7 @@ public class ShapeFactory {
      * @return A shape with the specified name
      *     or null if no matching shape is found
      *
-     * @throws CloneNotSupportedException if a mdoel shape is found and the
+     * @throws CloneNotSupportedException if a model shape is found and the
      *     copy (i.e., clone) operation fails
      */
     public static Shape createShape(String name)
