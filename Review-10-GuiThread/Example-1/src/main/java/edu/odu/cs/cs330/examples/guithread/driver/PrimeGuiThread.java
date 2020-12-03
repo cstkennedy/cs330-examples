@@ -191,7 +191,8 @@ public class PrimeGuiThread extends JFrame {
         stopButton.addActionListener(
             new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e)
+                {
                     if (worker != null) {
                         worker.halt();
                     }

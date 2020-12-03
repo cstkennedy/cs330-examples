@@ -15,10 +15,10 @@ plugins {
     id "jacoco"
     id "pmd"
 
-    id "org.ysb33r.doxygen" version "0.5"
+    // id "org.ysb33r.doxygen" version "0.5"
 }
 
-apply plugin: "org.ysb33r.doxygen"
+// apply plugin: "org.ysb33r.doxygen"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -28,6 +28,7 @@ repositories {
 }
 
 // Configure Doxygen task
+/*
 doxygen {
     generate_html true
 
@@ -37,6 +38,7 @@ doxygen {
     //source new File(projectDir,"src/test/java")
     outputDir new File(buildDir,"docs")
 }
+*/
 
 /**
  * Build cmdline jar
@@ -93,7 +95,7 @@ task deploy(dependsOn: [
             jarCmd,
             jarGui,
             jarThd,
-            doxygen,
+            // doxygen,
             javadoc]){
 }
 

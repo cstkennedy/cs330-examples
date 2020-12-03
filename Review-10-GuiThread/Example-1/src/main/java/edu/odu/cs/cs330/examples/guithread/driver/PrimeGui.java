@@ -144,7 +144,7 @@ public class PrimeGui extends JFrame {
         summaryPanel.add(lastLabel);
         summaryPanel.add(lastField);
 
-        //Add Action Listeners to the Buttons
+        // Add Action Listeners to the Buttons
 
         // Add start button Listener
         startButton.addActionListener(
