@@ -104,6 +104,13 @@ def main():
     smallest_shape = min(rebuilt_shapes, key=lambda shape: shape.perimeter())
     print(smallest_shape)
 
+    sorted_shapes = sorted(rebuilt_shapes, key=lambda shape: shape.name)
+
+    print("#" * 80)
+    print(sorted_shapes)
+    for shp in sorted_shapes:
+        print(shp)
+
 
 if __name__ == "__main__":
     try:

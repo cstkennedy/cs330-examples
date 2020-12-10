@@ -31,6 +31,7 @@ class Shape(metaclass=abc.ABCMeta):
     def name(self):
         return self._name
 
+
     @name.setter
     def name(self, _name):
         """
@@ -38,8 +39,8 @@ class Shape(metaclass=abc.ABCMeta):
 
         :param: _name new Shape name
         """
-
         self._name = _name
+
 
     @abc.abstractmethod
     def area(self) -> float:

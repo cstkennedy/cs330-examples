@@ -11,7 +11,7 @@ from shapes.square import Square
 from shapes.triangle import (Triangle, RightTriangle, EquilateralTriangle)
 
 
-_known_shapes = {
+_KNOWN_SHAPES = {
     "Triangle": (
         Triangle(),
         lambda a, b, c: Triangle(a, b, c)
@@ -46,8 +46,8 @@ def create(name):
         A shape with the specified name or null if no matching shape is found
     """
 
-    if name in _known_shapes:
-        return copy.deepcopy(_known_shapes[name][0])
+    if name in _KNOWN_SHAPES:
+        return copy.deepcopy(_KNOWN_SHAPES[name][0])
 
     return None
 
@@ -66,8 +66,8 @@ def create_from_dictionary(name, values):
         A shape with the specified name or null if no matching shape is found
     """
 
-    if name in _known_shapes:
-        return _known_shapes[name][1](**values)
+    if name in _KNOWN_SHAPES:
+        return _KNOWN_SHAPES[name][1](**values)
 
     return None
 
@@ -80,14 +80,14 @@ def is_known(name):
         name: the shape for which to query
     """
 
-    return name in _known_shapes
+    return name in _KNOWN_SHAPES
 
 
 def list_known():
     """
     Print a list of known Shapes
     """
-    return "\n".join([f"  {name:}" for name in _known_shapes])
+    return "\n".join([f"  {name:}" for name in _KNOWN_SHAPES])
 
 
 def number_known():
@@ -95,4 +95,4 @@ def number_known():
     Determine the number of known Shapes
     """
 
-    return len(_known_shapes)
+    return len(_KNOWN_SHAPES)

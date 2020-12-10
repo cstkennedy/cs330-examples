@@ -153,7 +153,7 @@ def main():
     # Remove all `None` entries with a list comprehension
     shapes = [s for s in shapes if s]
 
-    # tempList = list()
+    # tempList = []
     # for s in shapes:
     #     #if s not None:
     #     if s:

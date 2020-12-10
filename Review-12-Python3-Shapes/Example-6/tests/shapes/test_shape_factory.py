@@ -21,7 +21,7 @@ class TestShapeFactory(unittest.TestCase):
     """
 
     def setUp(self):
-        self.known_shapes = copy.deepcopy(shape_factory._known_shapes)
+        self.known_shapes = copy.deepcopy(shape_factory._KNOWN_SHAPES)
         self.number_known = len(self.known_shapes)
 
         self.known_names = ["Circle",

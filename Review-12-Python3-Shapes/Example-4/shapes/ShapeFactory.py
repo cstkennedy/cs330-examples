@@ -8,7 +8,7 @@ from shapes.RightTriangle import RightTriangle
 from shapes.EquilateralTriangle import EquilateralTriangle
 
 
-class ShapeFactory(object):
+class ShapeFactory:
     """
     The Shape Creating Wizard
     """
