@@ -4,5 +4,5 @@ one.
 
 This is a discussion of Python 3 in the context of OOP.
 
-The recorded **(Fall 2017)** discussion is available
-[here](https://youtu.be/tXQgB07XTZI).
+The recorded **(Fall 2020)** discussion is available
+[here](https://odu.zoom.us/rec/share/QDfa5OrYOTNQcG9BaJNv4m9dTd5GbHCQ1ZCkFuKVTHf0tyeFlLP1Vr6KnkR9gsa8.oBGZOIl4c0rn-4mG).
