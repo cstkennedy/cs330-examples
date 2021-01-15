@@ -9,8 +9,8 @@ tweak existing materials and add additional materials throughout the semester.
 
 ---
 
-If you are logged into `atria.cs.odu.edu` or `sirius.cs.odu.edu` you can copy
-the zip files from
+If you are logged into one of the CS Linux servers you can copy the zip files
+from
 
 > `/home/tkennedy/Public/cs330`.
 
@@ -55,6 +55,8 @@ split into three (3) recordings:
   - [Part 4 (in which I cover Examples 5 & 6)](https://youtu.be/Ia8xUbjOei0)
 
 
+All source code is available in [Review-01-Linked-Lists.zip](./Review-01-Linked-Lists.zip)
+
 
 # Review 2: Well Defined Interfaces
 
@@ -70,9 +72,11 @@ Examples 1 through 7 were the focus. Example 8 served to motivate the need for,
 based on the data-structure, a formal iterator implementation. We will revisit
 the Big-3 in Review 03 (i.e., add iterators to memory-leak free codes).
 
-All source code is available in \ExampleZip{Review-02.zip}. The recorded review
-is located [here](https://youtu.be/dWcPTtZl6Gs). _Note that this is the Fall
-2017 recording._
+The recorded review is located [here](https://youtu.be/dWcPTtZl6Gs). _Note that
+this is the Fall 2017 recording._
+
+
+All source code is available in [Review-02-Well-Defined-Interfaces.zip](./Review-02-Well-Defined-Interfaces.zip)
 
 
 # Review 3: Separation of Concerns (And No Memory Leaks)
@@ -96,10 +100,11 @@ The recorded review is split into three parts:
   2. [Part 3](https://youtu.be/s_1-4G8Gl4c) - Example 6.
   2. [Part 4](https://odu.zoom.us/rec/play/LZzOG7Yg89qTTBfkGhwQ3fgb5ndEhg3wk95KLkCzKELFXwEeEnZBjPYBFybpJiFhPbwS9XL1vj4LyASR.3uTf_KtFzWvm5QIQ) - Example 7 & Example 8 (Rust & Python Versions).
 
-All source code is available in \ExampleZip{Review-03.zip}.
+
+All source code is available in [Review-03-Separation-of-Concerns.zip](./Review-03-Separation-of-Concerns.zip)
 
 
-# Review 4: Design, Tools, and Testing
+# Review 4: Design, Tools, & Testing
 
 In CS 250, you built a semester project. You went through a fairly contrived process:
 
@@ -155,21 +160,25 @@ The recorded review is split into two parts:
   2. [Part 2](https://youtu.be/QPL927bYs7I) - Example 6 (Python 3).
 
 
+All source code is available in [Review-04.zip](./Review-04.zip)
+
+
 # Review 5: Pointer Mechanics
 
 This set of examples reviews the mechanics of pointers. This is a review of
 value-type, reference-type, and pointer-type variables as discussed on the
 whiteboard periodically during lecture.
 
-  All source code is available in \ExampleZip{Review-05-Pointer-Review.zip}.
+The recorded discussion is available [here](https://youtu.be/3BxfxTSO2U4).
 
-  The recorded discussion is available [here](https://youtu.be/3BxfxTSO2U4).
+
+All source code is available in [Review-05-Pointer-Mechanics.zip](./Review-05-Pointer-Mechanics.zip)
 
 
 # Review 6: Inheritance in C++ (C++ Shapes)
 
-  These examples cover the basics of inheritance in C++, including mechanics,
-  methodologies, and design paradigms. This discussion is split into four parts:
+These examples cover the basics of inheritance in C++, including mechanics,
+methodologies, and design paradigms. This discussion is split into four parts:
 
 \bSidebar
 
@@ -198,13 +207,13 @@ brackets).
     - `string_views`
     - `constexpr`
 
-  All source code is available in \ExampleZip{Review-06-CPP-Shapes.zip}.
 
+All source code is available in [Review-06-CPP-Shapes.zip](./Review-06-CPP-Shapes.zip)
 
 
 # Review 7: Switching to Java
 
-  This Review is split into two parts:
+This discussion is split into two parts:
 
   * Part 1 is available [here](https://youtu.be/IMGWyvyVxOE).
     * Example 1 - An example of reading keyboard input using the Java `Scanner`
@@ -222,7 +231,8 @@ brackets).
       - For the **truly curious**, you can access my CS 350 Review Materials
         [here](doc:Reviews350)
 
-  All source code is available in \ExampleZip{Review-07-Java-Toys.zip}.
+
+All source code is available in [Review-07-Switching-to-Java.zip](./Review-07-Switching-to-Java.zip)
 
 
 # Review 8: Modeling Object Oriented Program Flow
@@ -251,7 +261,10 @@ an objected oriented domain model.
 The recorded discussion is available [here](https://youtu.be/hlGoVWsb8Y4).
 
 
-# Review 9: Java Inheritance
+All source code is available in [Review-08-UML-Sequence-Diagrams.zip](./Review-08-UML-Sequence-Diagrams.zip)
+
+
+# Review 9: Java Inheritance (Java Shapes)
 
 This a Java version of the
 [C++ Shapes Discussion](#review-6-inheritance-in-c-c-shapes-). These examples
@@ -271,20 +284,19 @@ lecture](https://www.cs.odu.edu/~tkennedy/cs350/latest/Public/codeDocumentationJ
 
 \eSidebar
 
-
-  This discussion is split into two parts:
+This discussion is split into three parts:
 
   1. [Part 1](https://youtu.be/_Qxt3yTuJOU) - Example 1 to Example 3
   2. [Part 2](https://youtu.be/PIPNWUCqwlk) - Example 4 to Example 5
   2. [Part 3](https://youtu.be/YE-Pu1ELoi4) - Example 6
 
 
-All source code is available in \ExampleZip{Review-09-Java-Shapes.zip}.
+All source code is available in [Review-09-Java-Shapes.zip](./Review-09-Java-Shapes.zip)
 
 
 # Review 10: Java GUI & Thread Discussion
 
-This Review Session was a discussion of GUIs using the javax.swing library.
+This is a discussion of GUIs using the javax.swing library.
 Topics included:
 
   - Prime Number Generation
@@ -293,28 +305,24 @@ Topics included:
   - Immediate Classes
   - A Basic Thread
 
-The recording is located [here](https://youtu.be/HAhLTNlXL3o). All source code
-is available in \ExampleZip{Review-10-GuiThread.zip}.
+The recording is located [here](https://youtu.be/HAhLTNlXL3o).
+
+
+All source code is available in [Review-10-GuiThread.zip](./Review-10-GuiThread.zip)
 
 
 # Review 11: Java Thread & ThreadPool Discussion
 
-This was a discussion of Runnable objects in the context of Threads and Thread
+This is a discussion of Runnable objects in the context of Threads and Thread
 Pools.
 
-The recording is located [here](https://youtu.be/2AJAWSDhqb4). All source code
-is available in \ExampleZip{Review-11-Threads.zip}.
+The recording is located [here](https://youtu.be/2AJAWSDhqb4).
 
 
----
-
-# Updates in Progress
-
-Everything below this point will be updated/tweaked.
+All source code is available in [Review-11-Threads.zip](./Review-11-Threads.zip)
 
 
-
-# Review 12 Python Shapes (Will be Updated)
+# Review 12: Python Shapes
 
 **This discussion will be updated after the live discussion during on 22 April
 and 25 April.** I recommend you watch Reviews 13 and 14, then come back to this
@@ -322,9 +330,11 @@ one.
 
 This is a discussion of Python 3 in the context of OOP.
 
-The recorded **(Fall 2017)** discussion is available
-[here](https://youtu.be/tXQgB07XTZI). All source code is available in
-\ExampleZip{Review-12-Python3-Shapes.zip}.
+The recorded **(Fall 2020)** discussion is available
+[here](https://odu.zoom.us/rec/share/QDfa5OrYOTNQcG9BaJNv4m9dTd5GbHCQ1ZCkFuKVTHf0tyeFlLP1Vr6KnkR9gsa8.oBGZOIl4c0rn-4mG).
+
+
+All source code is available in [Review-12-Python3-Shapes.zip](./Review-12-Python3-Shapes.zip)
 
 
 # Review 13: More Python!
@@ -338,15 +348,16 @@ in Python 3. We will briefly discuss:
   - `enumerate`
   - `pydoc`
 
-The recorded discussion is available [here](https://youtu.be/i21FRLYxrZc). All
-source code is available in \ExampleZip{Review-13-Python3-Toys.zip}.
+The recorded discussion is available [here](https://youtu.be/i21FRLYxrZc).
+
+
+All source code is available in [Review-13-Python3-Toys.zip](./Review-13-Python3-Toys.zip)
 
 
 # Review 14: Python Linked List!
 
-This is a revisiting of our first [example](#review-1-linked-lists), but in
-Python! While revisiting Linked Lists, in the context of Python 3, we
-will briefly discuss:
+This is a revisiting of our first [example](../Review-01), but in Python! While
+revisiting Linked Lists, in the context of Python 3, we will briefly discuss:
 
   - Iterators
   - Deep Copy
@@ -355,7 +366,7 @@ will briefly discuss:
   - Name Mangling
   - `pydoc`
 
-The recorded discussion is available [here](https://youtu.be/7XmqiqbQD6M). All
-source code is available in \ExampleZip{Review-14-Python3-LinkedList.zip}.
+The recorded discussion is available [here](https://youtu.be/mtP36TTnuhs).
 
 
+All source code is available in [Review-14-Python3-LinkedList.zip](./Review-14-Python3-LinkedList.zip)
