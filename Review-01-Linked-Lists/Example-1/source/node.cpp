@@ -20,7 +20,7 @@ bool Node::operator==(const Node &rhs) const
     return (
         this->data == rhs.data &&
         this->next == rhs.next
-   );
+    );
 }
 
 //------------------------------------------------------------------------------
@@ -29,5 +29,5 @@ bool Node::operator!=(const Node &rhs) const
     return (
         this->data != rhs.data ||
         this->next != rhs.next
-   );
+    );
 }
