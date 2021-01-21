@@ -27,7 +27,7 @@ you are not required (or expected) to apply this material on Assignment 1.
   * **Example 6** is a preview of what we will have at the end of Review 03.
 
 All source code is available in \ExampleZip{Review-01.zip}. This Review is
-split into three (3) recordings:
+split into four (4) recordings:
 
   - [Part 1 (in which I discuss Examples 1 & 2)](https://youtu.be/WwHUr1N2z7A).
   - [Part 2 (in which I discuss Example 3)](https://youtu.be/zuD8Oc4v22c).
