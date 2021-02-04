@@ -84,12 +84,12 @@ class LinkedList {
                     return *this;
                 }
 
-                bool operator== (const Iterator &rhs) const
+                bool operator==(const Iterator &rhs) const
                 {
                     return this->pseudoPointer == rhs.pseudoPointer;
                 }
 
-                bool operator!= (const Iterator &rhs) const
+                bool operator!=(const Iterator &rhs) const
                 {
                     return this->pseudoPointer != rhs.pseudoPointer;
                 }
