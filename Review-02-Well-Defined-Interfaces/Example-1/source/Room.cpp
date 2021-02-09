@@ -147,7 +147,7 @@ bool Room::operator==(const Room &rhs) const
 bool Room::operator<(const Room &rhs) const
 {
     if (this->name == rhs.name) {
-        return this->area() == rhs.area();
+        return this->area() == rhs.area();  // Should be "<" not "=="
     }
 
     return this->name < rhs.name;
