@@ -46,8 +46,8 @@ you are not required (or expected) to apply this material on Assignment 1.
   * **Example 5** is a preview of what we will have at the end of Review 03.
   * **Example 6** is a preview of what we will have at the end of Review 03.
 
-All source code is available in \ExampleZip{Review-01.zip}. This Review is
-split into three (3) recordings:
+All source code is available in \ExampleZip{Review-01-Linked-Lists.zip}. This Review is
+split into four (4) recordings:
 
   - [Part 1 (in which I discuss Examples 1 & 2)](https://youtu.be/WwHUr1N2z7A).
   - [Part 2 (in which I discuss Example 3)](https://youtu.be/zuD8Oc4v22c).
@@ -284,7 +284,7 @@ lecture](https://www.cs.odu.edu/~tkennedy/cs350/latest/Public/codeDocumentationJ
 
 \eSidebar
 
-This discussion is split into three parts:
+This discussion is split into two parts:
 
   1. [Part 1](https://youtu.be/_Qxt3yTuJOU) - Example 1 to Example 3
   2. [Part 2](https://youtu.be/PIPNWUCqwlk) - Example 4 to Example 5
@@ -370,3 +370,15 @@ The recorded discussion is available [here](https://youtu.be/mtP36TTnuhs).
 
 
 All source code is available in [Review-14-Python3-LinkedList.zip](./Review-14-Python3-LinkedList.zip)
+
+
+# Review 99: Lecture Snippets
+
+This is not a formal set of examples. Each piece of code comes from an informal
+lecture discussion. 
+
+  - `array-discussion` - brief review of array "resizing" from CS 250
+  - `template-discussion` - brief overview/review of template functions  
+
+
+All source code is available in [Review-99-Lecture-Snippets.zip](./Review-99-Lecture-Snippets.zip)
