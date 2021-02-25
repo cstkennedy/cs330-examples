@@ -9,21 +9,58 @@
 
 using namespace std;
 
+
+/**
+ * Search for a name
+ *
+ * @tparam Iterator type of iterator (dependent on data structure)
+ *
+ * @param start where to begin the search
+ * @param end where to end the search
+ * @param thingToFind name to locate
+ *
+ * @returns postion of a match or end if no match was found
+ */
+template<class Iterator>
+Iterator findName(Iterator start, Iterator end, const string thingToFind)
+{
+    Iterator searchIt = start;
+
+    while (searchIt != end) {
+        // Look at the current name (*searchIt) and
+        // compare to the name to find (thingToFind)
+        if (*searchIt == thingToFind) {
+            return searchIt;
+        }
+        ++searchIt;
+    }
+
+    return end;
+}
+
+using Collection = std::vector<string>;
+
 int main(int argc, char** argv)
 {
     cout << "--------Start Example--------" << '\n';
 
-    list<string> names = {"Thomas", "Jay", "Steve", "Janet", "Ravi"};
+    Collection names = {"Thomas", "Jay", "Steve", "Janet", "Ravi"};
 
-    // for (int i = 0; i < names.size(); i++) {
-        // cout << "  - " << names[i] << '\n';
-    // }
+    // Can only be used with vectors
+    /*
+    for (int i = 0; i < names.size(); i++) {
+        cout << "  - " << names[i] << '\n';
+    }
+    */
 
+    cout << "---------While Loop Example----------" << '\n';
 
-    cout << "--------While Loop Example--------" << '\n';
-    list<string>::const_iterator it = names.begin();
+    Collection::const_iterator it = names.begin();
 
     while (it != names.end()) {
+        // Dereference
+        // Node: it->data
+        // Iterator: *it (* is called the dereference operator)
         cout << "  - " << *it << '\n';
 
         ++it;
@@ -34,7 +71,10 @@ int main(int argc, char** argv)
         cout << "  - " << n << '\n';
     }
 
-    cout << "--------Add a Name--------" << '\n';
+    //--------------------------------------------------------------------------
+    // Add a name - push_back demo
+    //--------------------------------------------------------------------------
+    cout << "-------------Add a Name--------------" << '\n';
     string newName = "Hill";
     names.push_back(newName);
 
@@ -42,18 +82,42 @@ int main(int argc, char** argv)
         cout << "  - " << n << '\n';
     }
 
-    cout << "--------Add a Name--------" << '\n';
-    string isItThere = "Thomas";
+    //--------------------------------------------------------------------------
+    // Search for a name
+    //--------------------------------------------------------------------------
+    cout << "----------Search for a Name----------" << '\n';
+    string thingToFind = "Thomas";
 
-    list<string>::const_iterator sIt = names.begin();
+    // Original non-function search
+    /*
+    Collection::const_iterator searchIt = names.begin();
 
-    while (sIt != names.end()) {
-        if (*sIt == isItThere) {
+    while (searchIt != names.end()) {
+        // Look at the current name (*searchIt) and
+        // compare to the name to find (thingToFind)
+        if (*searchIt == thingToFind) {
             cout << "Found a Match" << "\n";
         }
-        ++sIt;
+        ++searchIt;
+    }
+    */
+
+    const auto foundIt = findName(names.begin(), names.end(), "Andrey");
+
+    if (foundIt == names.end()) {
+        cout << "No match was found" << "\n";
+    }
+    else {
+        cout << "Found a Match" << "\n";
     }
 
+    const bool wasFound = std::find(names.begin(), names.end(), "Steve") != names.end();
+    if (wasFound) {
+        cout << "Found a Match" << "\n";
+    }
+    else {
+        cout << "No match was found" << "\n";
+    }
 
     return 0;
 }
