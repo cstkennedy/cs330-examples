@@ -129,7 +129,7 @@ ShapeCollection readShapes(std::istream& ins)
         ins >> ws;
     }
 
-    cout << collection << "\n";
+    cerr << collection << "\n";
 
     return collection;
 }
