@@ -63,7 +63,7 @@ std::istream& operator>>(std::istream& ins, Shape*& rd)
 {
     std::string     name;
 
-    // Read name (key) and create the appropiate Shape
+    // Read name (key) and create the appropriate Shape
     getline(ins, name, ';');
     rd = ShapeFactory::createShape(name);
 

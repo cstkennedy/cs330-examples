@@ -178,16 +178,14 @@ ShapeCollection readShapes(std::istream& ins)
     //
     // std::copy_if would copy raw pointers, not unique pointers.
     //
-    // To get our desired result we would need a copy-if folowed by a transform.
+    // To get our desired result we would need a copy-if followed by a transform.
     //
-    /*
     for_each(it, end,
              [&collection](Shape* s) {
                   if (s != nullptr) {
                       collection.emplace_back(s);
                   }
              });
-    */
 
     transform_if(it, end,
                  std::back_inserter(collection),
