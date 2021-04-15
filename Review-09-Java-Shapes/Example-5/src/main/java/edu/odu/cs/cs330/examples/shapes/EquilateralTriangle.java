@@ -59,7 +59,7 @@ public class EquilateralTriangle extends Triangle implements Cloneable {
     {
         return Math.sqrt(
               1.25 * (side() * side())
-     );
+        );
     }
 
     /**
