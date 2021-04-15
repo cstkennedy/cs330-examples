@@ -80,10 +80,10 @@ public class Square extends Shape
     @Override
     public String toString()
     {
-       return super.toString()
-            + String.format(FPT_FMT, "Side", this._side)
-            + String.format(FPT_FMT, "Perimeter", this.perimeter())
-            + String.format(FPT_FMT, "Area", this.area());
+        return super.toString()
+             + String.format(FPT_FMT, "Side", this._side)
+             + String.format(FPT_FMT, "Perimeter", this.perimeter())
+             + String.format(FPT_FMT, "Area", this.area());
     }
 }
 
