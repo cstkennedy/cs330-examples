@@ -25,7 +25,7 @@ public class ShapeFactory {
 
     /**
      * ShapeFactory is a collection of static functions. There is no reason to
-     * instantiate an ShapeFactory object.
+     * instantiate a ShapeFactory object.
      */
     private ShapeFactory()
     {
