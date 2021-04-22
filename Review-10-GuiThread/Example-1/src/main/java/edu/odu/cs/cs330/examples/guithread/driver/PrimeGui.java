@@ -24,7 +24,7 @@ public class PrimeGui extends JFrame {
         // Data--i.e., computation--elements
         private BruteForce primeGenerator; ///< Instance of BruteForce prime # generator
         private int        toGenerate;     ///< Number of primes to generate
-        private boolean    stop;           ///< Flag - set to false when stopButton is clicked
+        private boolean    stop;           ///< Flag - set to true when stopButton is clicked
 
         /**
          * Construct a new Worker Instance.
