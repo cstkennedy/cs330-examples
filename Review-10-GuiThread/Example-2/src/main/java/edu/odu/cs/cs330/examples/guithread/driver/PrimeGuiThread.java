@@ -54,7 +54,7 @@ public class PrimeGuiThread extends JFrame {
         /**
          * The number of primes to be generated.
          */
-        private int toGenerate;     ///< Number of primes to generate
+        private int toGenerate;
 
         /**
          * Flag that is set to false when stopButton has been clicked (and
