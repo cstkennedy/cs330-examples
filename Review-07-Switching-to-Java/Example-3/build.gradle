@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -8,7 +8,7 @@ plugins {
     id "java"
     id "eclipse"
 
-    id "com.github.spotbugs" version "2.0.0"
+    id "com.github.spotbugs" version "4.6.2"
     id "project-report"
     id "jacoco"
     id "pmd"
@@ -18,16 +18,16 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    testCompile "junit:junit:4.12"
-    testCompile "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.hamcrest:hamcrest-library:1.3"
 }
 
 jar {
-    baseName = 'EnrollStudents'
+    archiveBaseName = 'EnrollStudents'
     manifest {
         attributes(
           'Main-Class': 'edu.odu.cs.cs330.examples.EnrollStudents'

@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
@@ -10,23 +10,23 @@ plugins {
     id "eclipse"
 
     id "checkstyle"
-    id "com.github.spotbugs" version "2.0.0"
+    id "com.github.spotbugs" version "4.6.2"
     id "project-report"
     id "jacoco"
     id "pmd"
 
     id "org.ysb33r.doxygen" version "0.5"
-    id "org.jbake.site" version "5.0.0"
+    id "org.jbake.site" version "5.5.0"
 
     // Split Integration Tests from Unit Tests
-    id "org.unbroken-dome.test-sets" version "3.0.1"
+    id "org.unbroken-dome.test-sets" version "4.0.0"
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -50,7 +50,7 @@ run {
 }
 
 application {
-    mainClassName = "edu.odu.cs.cs330.examples.RunShapes"
+    mainClass = "edu.odu.cs.cs330.examples.RunShapes"
 }
 
 test {
@@ -151,7 +151,7 @@ task mergedJacocoReportHTML (type: JacocoReport) {
 
 // Check Style Config
 checkstyle {
-    toolVersion "8.2"
+    toolVersion "8.42"
     ignoreFailures = true
     showViolations = false
 }

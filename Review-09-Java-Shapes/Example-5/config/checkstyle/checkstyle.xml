@@ -79,6 +79,8 @@
     <!--   <property name="fileExtensions" value="java"/> -->
     <!-- </module> -->
 
+    <module name="LineLength"/>
+
     <module name="TreeWalker">
 
         <!-- Checks for Javadoc comments.                     -->
@@ -93,7 +95,9 @@
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
-        <module name="MemberName"/>
+        <module name="MemberName">
+            <property name="format" value="(^[a-z_]([a-z0-9]+[_])*[a-z0-9]+$)|(^[a-z][a-zA-Z0-9]*$)"/>
+        </module>
         <module name="MethodName"/>
         <module name="PackageName"/>
         <module name="ParameterName"/>
@@ -111,7 +115,7 @@
 
         <!-- Checks for Size Violations.                    -->
         <!-- See http://checkstyle.sf.net/config_sizes.html -->
-        <module name="LineLength"/>
+
         <module name="MethodLength"/>
         <module name="ParameterNumber"/>
 
