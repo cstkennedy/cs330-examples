@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import edu.odu.cs.cs350.examples.numbers.PrimeGenerator;
+import edu.odu.cs.cs330.examples.guithread.driver.PrimeOutputPanel;
 
 /**
  * A simple GUI driver for generator.prime.BruteForce.
@@ -32,77 +33,6 @@ public class PrimeGuiThread extends JFrame {
      * Worker Thread - Wrapper for Prime Generation.
      */
     private PrimeWorker worker;
-
-    public class PrimeOutputPanel extends JPanel
-    {
-        private JPanel      summaryPanel; ///< Panel containing all output elements
-
-        private JTextField  lastField;    ///< Output Field - Last--i.e., largest-- prime generated
-        private JLabel      lastLabel;    ///< Label - Last--i.e., largest-- prime generated
-        
-        private JTextArea   logArea;      ///< Output - all generated prime numbers
-        private JScrollPane logPane;      ///< Make logArea scrollable
-
-        public PrimeOutputPanel()
-        {
-
-        }
-
-        /**
-         * Set up the scrollable log area/panel.
-         */
-        void setUpLogArea()
-        {
-            logArea = new JTextArea("", 10, 20);
-
-            logArea.setEditable(false);
-            logPane = new JScrollPane(logArea,
-                                      JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                                      JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        }
-
-        /**
-         * Set up the Summary Panel.
-         */
-        void setUpSummaryPanel()
-        {
-            summaryPanel = new JPanel();
-
-            lastField    = new JTextField(20);
-            lastLabel    = new JLabel("Last Prime:");
-
-            // Disable lastField --i.e., use exclusively for output
-            lastField.setEnabled(false);
-
-            summaryPanel.setLayout(new FlowLayout());
-
-            summaryPanel.add(lastLabel);
-            summaryPanel.add(lastField);
-        }
-
-        public void renderResults(boolean stopped, int numberOfPrimes, int lastPrime, String completeOutput)
-        {
-            // Update GUI elements
-            lastField.setText("" + lastPrime);
-
-            StringBuilder bld = new StringBuilder();
-
-            // If generation was stopped early--i.e., interrupted--
-            // Prepend a message indicating the number of primes that
-            // were generated.
-            if (stopped) {
-                bld.append("Prime Generation Halted\n");
-                bld.append("# Generated: ");
-                bld.append(numberOfPrimes);
-                bld.append('\n');
-            }
-
-            bld.append(completeOutput);
-
-            logArea.setText(bld.toString());
-
-        }
-    }
 
     /**
      * This worker class contains all the logic for generating primes.
@@ -158,10 +88,8 @@ public class PrimeGuiThread extends JFrame {
                 this.primeGenerator.toString()
             );
 
-            toggleButtons();
+            PrimeGuiThread.this.toggleButtons();
         }
-
-
 
         /**
          * Halt the prime number generation.
@@ -183,17 +111,14 @@ public class PrimeGuiThread extends JFrame {
 
         Container cp = getContentPane();
 
+        outputPanel = new PrimeOutputPanel();
         setUpInputPanel();
-        setUpLogArea();
-        setUpSummaryPanel();
 
         // Setup and add to the Main Container
         cp.setLayout(new BorderLayout());
-
         cp.add(inputPanel, BorderLayout.NORTH);
-        cp.add(summaryPanel, BorderLayout.SOUTH);
 
-        cp.add(logPane, BorderLayout.CENTER);
+        cp.add(outputPanel, BorderLayout.CENTER);
 
         // Package Everything
         pack();
@@ -232,8 +157,8 @@ public class PrimeGuiThread extends JFrame {
                     toGenField.setText("" + numPrimes);
                 }
 
-                clear();
-                toggleButtons();
+                outputPanel.clear();
+                this.toggleButtons();
 
                 worker = new PrimeWorker(numPrimes);
                 new Thread(worker).start();
@@ -253,7 +178,6 @@ public class PrimeGuiThread extends JFrame {
         stopButton.setEnabled(false);
     }
 
-
     /**
      * Toggle start button and stop button states.
      */
@@ -267,18 +191,6 @@ public class PrimeGuiThread extends JFrame {
             startButton.setEnabled(true);
             stopButton.setEnabled(false);
         }
-    }
-
-    /**
-     * Clear previous output.
-     */
-    void clear()
-    {
-        //logArea.setText(new String());
-        //lastField.setText(new String());
-
-        logArea.setText("");
-        lastField.setText("");
     }
 
     /**
