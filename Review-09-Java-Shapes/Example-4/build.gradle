@@ -15,7 +15,7 @@ plugins {
     id "jacoco"
     id "pmd"
 
-    id "org.ysb33r.doxygen" version "0.5"
+    // id "org.ysb33r.doxygen" version "0.5"
 }
 
 sourceCompatibility = 1.8
@@ -58,7 +58,7 @@ test {
 javadoc {
     failOnError false
 }
-
+/*
 doxygen {
     generate_html true
 
@@ -68,7 +68,7 @@ doxygen {
     //source new File(projectDir, "src/test/java")
     outputDir new File(buildDir, "docs")
 }
-
+*/
 //------------------------------------------------------------------------------
 // Analysis Tools
 //------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ spotbugsTest.enabled = false
 // End SpotBugs config
 
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = "0.8.7"
 }
 
 jacocoTestReport {

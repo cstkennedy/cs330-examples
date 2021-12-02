@@ -9,12 +9,11 @@ plugins {
     id "application"
     id "eclipse"
 
+    id "checkstyle"
     id "com.github.spotbugs" version "4.6.2"
     id "project-report"
     id "jacoco"
     id "pmd"
-
-    // id "org.ysb33r.doxygen" version "0.5"
 }
 
 sourceCompatibility = 1.8
@@ -30,26 +29,23 @@ dependencies {
 }
 
 jar {
-    archiveBaseName = "RunShapes"
+    archiveBaseName = "GeneratePrimes"
 
     manifest {
         attributes(
-            "Main-Class": "RunShapes"
+            "Main-Class": "edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread"
         )
     }
-}
-
-run {
-    main = "RunShapes"
-}
-
-application {
-    mainClass = "RunShapes"
 }
 
 test {
     reports {
         html.enabled = true
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 }
 
@@ -57,17 +53,9 @@ javadoc {
     failOnError false
 }
 
-/*
-doxygen {
-    generate_html true
-
-    template "documentation.config"
-
-    source new File(projectDir, "src/main/java")
-    //source new File(projectDir, "src/test/java")
-    outputDir new File(buildDir, "docs")
+task deploy(dependsOn: [
+            javadoc]){
 }
-*/
 
 //------------------------------------------------------------------------------
 // Analysis Tools
@@ -98,6 +86,20 @@ jacocoTestReport {
         csv.enabled true
     }
 }
+
+// Check Style Config
+checkstyle {
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+// End Checkstyle config
 
 pmd {
     ignoreFailures = true

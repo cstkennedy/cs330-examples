@@ -35,20 +35,20 @@ public class ShapeIterator implements Iterator<Shape>
         this.theBuffer = buffer;
 
         try {
-            queued = readNext();
+            this.queued = readNext();
         }
         catch (IOException exp) {
-            queued = null;
+            this.queued = null;
         }
         catch (CloneNotSupportedException exp) {
-            queued = null;
+            this.queued = null;
         }
     }
 
     @Override
     public boolean hasNext()
     {
-        return queued != null;
+        return this.queued != null;
     }
 
     /**
@@ -95,13 +95,13 @@ public class ShapeIterator implements Iterator<Shape>
     @Override
     public Shape next()
     {
-        Shape shp = queued;
+        Shape shp = this.queued;
 
         try {
-            queued = readNext();
+            this.queued = readNext();
         }
         catch (IOException | CloneNotSupportedException exp) {
-            queued = null;
+            this.queued = null;
         }
 
         return shp;

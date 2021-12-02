@@ -90,7 +90,7 @@ class ShapeFactory {
 };
 
 /**
- * Create the appropriate Item class--e.g., Tool, Armour or Consumable.
+ * Create the appropriate Shape class.
  *
  * How is **inheritance** used?
  */

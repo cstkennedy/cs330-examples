@@ -11,7 +11,7 @@ import java.util.Iterator;
  * <p>
  * There exist far more appropriate methods to identify prime numbers.
  */
-public class PrimeGenerator implements Iterable<Integer> {
+public class PrimeGenerator implements Iterable<Integer>, Cloneable {
     /**
      * Ordered list of known primes.
      */
@@ -41,6 +41,40 @@ public class PrimeGenerator implements Iterable<Integer> {
         primes = new ArrayList(knownPrimes);
     }
 
+    @Override
+    public PrimeGenerator clone()
+    {
+        return new PrimeGenerator(this.primes);
+    }
+
+    /**
+     * Check a number against list of known primes.
+     *
+     * @param n number to check
+     *
+     * @return true if the number is prime and false otherwise
+     */
+    private boolean isNumberPrime(int n)
+    {
+        Iterator<Integer> li = this.primes.iterator();
+
+            // While the list of primes has not yet been exhausted
+            // Check for divisibility by the next element--i.e.,
+            // if nextPrime %p == 0 for any p, discard nextPrime
+            while (li.hasNext()) {
+                // Retrieve the next prime, p, from
+                // the list of primes, primes
+                int p = li.next().intValue();
+
+                // Is the number prime?
+                if (n % p == 0) {
+                    return false;
+                }
+            }
+
+            return true;
+    }
+
     /**
      * Generate the next prime number.
      */
@@ -52,28 +86,11 @@ public class PrimeGenerator implements Iterable<Integer> {
         // true once a prime number has been identified
         boolean prime = false;
 
-        // Iterate of all existing known prime numbers
         // halt when a prime number has been identified
         while (!prime) {
-            // Start at the beginning of the primes list
-            ListIterator<Integer> li = primes.listIterator();
-
             // Guess the next prime
-            // Assume the number is not prime
             nextPrime += 2;
-            prime = true;
-
-            // While the list of primes has not yet been exhausted
-            // Check for divisibility by the next element--i.e.,
-            // if nextPrime %p == 0 for any p, discard nextPrime
-            while (li.hasNext() && prime) {
-                // Retrieve the next prime, p, from
-                // the list of primes, primes
-                int p = li.next().intValue();
-
-                // Is the number prime?
-                prime = nextPrime % p != 0;
-            }
+            prime = isNumberPrime(nextPrime);
         }
 
         // record the new prime number
@@ -179,6 +196,6 @@ public class PrimeGenerator implements Iterable<Integer> {
         return this.primes
             .stream()
             .map(p -> p.toString())
-            .collect(java.util.stream.Collectors.joining(", ", "", ""));
+            .collect(java.util.stream.Collectors.joining("\n", "", ""));
     }
 }
