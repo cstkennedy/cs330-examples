@@ -9,6 +9,7 @@ This is an example Python Linked List that demonstrates:
   - decorators
 """
 
+from __future__ import annotations
 import copy
 
 import collections.abc as abc
@@ -41,14 +42,14 @@ class LinkedList(abc.Iterable):
         """
 
         data: Any = 0
-        next: "Node" = None
+        next: Node = None
 
     class Iterator(abc.Iterator):
         """
         A special purpose Linked List Iterator
         """
 
-        def __init__(self, node: "Node"):
+        def __init__(self, node: Node):
             self.__current_node = node
 
         def __next__(self):

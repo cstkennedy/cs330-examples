@@ -1,0 +1,65 @@
+--------House--------
+
+Room (Laundry Room)
+  Length:      8 ft
+  Width :      4 ft
+  Area  :     32 sq ft
+
+  Flooring  : Laminate
+  Unit Cost : $     1.95
+  Total Cost: $    62.40
+
+Room (Kitchen)
+  Length:     20 ft
+  Width :     12 ft
+  Area  :    240 sq ft
+
+  Flooring  : Tile
+  Unit Cost : $     3.87
+  Total Cost: $   928.80
+
+Room (Storage Room)
+  Length:     16 ft
+  Width :     16 ft
+  Area  :    256 sq ft
+
+  Flooring  : Birch Wood
+  Unit Cost : $     4.39
+  Total Cost: $  1123.84
+
+------------------------------
+Total Cost   : $ 21154
+Avg Room Cost: $ 7051
+
+--------After Stone Bricks--------
+
+Room (Laundry Room)
+  Length:      8 ft
+  Width :      4 ft
+  Area  :     32 sq ft
+
+  Flooring  : Stone Bricks
+  Unit Cost : $    12.97
+  Total Cost: $   4154
+
+Room (Kitchen)
+  Length:     20 ft
+  Width :     12 ft
+  Area  :    240 sq ft
+
+  Flooring  : Stone Bricks
+  Unit Cost : $    12.97
+  Total Cost: $  3112.80
+
+Room (Storage Room)
+  Length:     16 ft
+  Width :     16 ft
+  Area  :    256 sq ft
+
+  Flooring  : Stone Bricks
+  Unit Cost : $    12.97
+  Total Cost: $  3320.32
+
+------------------------------
+Total Cost   : $ 6848.16
+Avg Room Cost: $ 2282.72
