@@ -1,0 +1,6 @@
+[run]
+omit =
+    /usr/*,
+    tests/*,
+    shapes/__init__.py
+    .tox/*
