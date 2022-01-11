@@ -78,7 +78,6 @@ public class PrimeOutputPanel extends JPanel
         bld.append(completeOutput);
 
         logArea.setText(bld.toString());
-
     }
 
     /**

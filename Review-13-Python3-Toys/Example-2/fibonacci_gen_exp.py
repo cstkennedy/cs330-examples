@@ -8,7 +8,7 @@ def fibonacci_sequence(sequence_length):
     1 1 2 3 5 8 13 21 34...
 
     The user must enter a number no smaller than 3 and
-    no greater than 20
+    no greater than 200
     """
 
     # De-Morgan's Law

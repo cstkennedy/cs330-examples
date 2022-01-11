@@ -9,6 +9,8 @@ This is an example Python Linked List that demonstrates:
   - decorators
 """
 
+from __future__ import annotations
+
 import copy
 
 import collections.abc as abc
@@ -41,14 +43,14 @@ class LinkedList(abc.Iterable):
         """
 
         data: Any = 0
-        next: "Node" = None
+        next: Node = None
 
     class Iterator(abc.Iterator):
         """
         A special purpose Linked List Iterator
         """
 
-        def __init__(self, node: "Node"):
+        def __init__(self, node: Node):
             self.__current_node = node
 
         def __next__(self):
@@ -62,7 +64,7 @@ class LinkedList(abc.Iterable):
             return next_val
 
         @property
-        def current_node(self):
+        def current_node(self) -> LinkedList.Node:
             """
             Retrieve the value in this node (or None if the Node is empty).
             """
@@ -74,11 +76,11 @@ class LinkedList(abc.Iterable):
         Construct an empty Linked List
         """
 
-        self.__head: "Node" = None
-        self.__tail: "Node" = None
+        self.__head: Node = None
+        self.__tail: Node = None
         self.__nodes: int = 0
 
-    def append(self, to_add: Any):
+    def append(self, to_add: Any) -> None:
         """
         Add a Node at the end of the list
         """
@@ -97,7 +99,7 @@ class LinkedList(abc.Iterable):
 
         self.__nodes += 1
 
-    def __deepcopy__(self, memo):
+    def __deepcopy__(self, memo) -> LinkedList:
         clone = LinkedList()
 
         for datum in self:
@@ -105,13 +107,13 @@ class LinkedList(abc.Iterable):
 
         return clone
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.__nodes
 
-    def __iter__(self):
+    def __iter__(self) -> LinkedList.Iterator:
         return LinkedList.Iterator(self.__head)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Iterate through the LinkedList and print each individual Node
         with an index.
