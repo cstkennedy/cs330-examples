@@ -72,6 +72,7 @@ int main()
         double                avg   = 0;
         double                total = 0;
 
+        // for (every const Room& room in house) {
         for (const Room& room : house) {
             total += room.flooringCost();
         }

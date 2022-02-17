@@ -54,6 +54,14 @@ double discountFlooring(const Room& r, const double percent)
     return scale * r.flooringCost();
 }
 
+/*
+inline
+double discountFlooring(const Room& r)
+{
+    return discountFlooring(r, 0.1);
+}
+*/
+
 /**
  * Compute the area of a room and the cost of
  * flooring for the room

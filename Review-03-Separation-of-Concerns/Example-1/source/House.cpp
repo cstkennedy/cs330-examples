@@ -23,6 +23,12 @@ House::House(const House &src)
     for (int i = 0; i < src.size(); i++) {
         this->addRoom(src.rooms[i]);
     }
+
+	/*
+	for (const Room& srcRoom : src) {
+		this->addRoom(srcRoom);
+	}
+	*/
 }
 
 //------------------------------------------------------------------------------

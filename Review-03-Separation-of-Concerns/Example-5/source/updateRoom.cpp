@@ -157,6 +157,13 @@ void buildHouse(std::istream& ins, House& house)
         house.addRoom(Room(name, Room::DimensionSet(l,h), cost, flooring));
     }*/
 
+    /*
+    Room aRoom;
+
+    while (ins >> aRoom) {
+       house.addRoom(aRoom);
+    }*/
+
     std::istream_iterator<Room> ins_it(ins);
     std::istream_iterator<Room> ins_end;
 
