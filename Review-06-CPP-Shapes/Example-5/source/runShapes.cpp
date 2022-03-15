@@ -30,7 +30,6 @@ typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTr
  */
 ShapeCollection readShapes(std::istream& ins);
 
-
 /**
  * This program accepts command line
  * arguments
@@ -46,7 +45,7 @@ int main(int argc, char** argv)
     ifstream shapesFile(argv[1]);
 
     if (!shapesFile) {
-        cout << "Error: " << argv[1] << "could not be opened" << "\n";
+        cout << "Error: " << argv[1] << " could not be opened" << "\n";
         return 2;
     }
 
@@ -97,7 +96,7 @@ ShapeCollection readShapes(std::istream& ins)
         ins >> ws;
     }
 
-    cout << collection << "\n";
+    cerr << collection << "\n";
 
     return collection;
 }
