@@ -16,11 +16,11 @@ jar: $(OBJECTS)
 $(MAINPROG): $(OBJECTS)
 	javac $(FLAGS) $(OBJECTS) $@
 
-.java.class:shape.class
+.java.class:
 	javac $(FLAGS) $<
 
 clean:
 	rm *.class $(MAINPROG).jar
 
 run:
-	java -jar $(MAINPROG).jar 
+	java -jar $(MAINPROG).jar
