@@ -14,7 +14,7 @@
  * @param count number of times to print
  */
 template<typename T>
-void printMultipleTimes(const T value, const int count)
+void printMultipleTimes(const T& value, const int count)
 {
     for (int i = 0; i < count - 1; i++) {
         std::cout << value << ' ';
