@@ -1,4 +1,4 @@
-This is a revisiting of our first [example](../Review-01), but in Python! While
+This is a revisiting of our first [example](../Review-01-Linked-Lists), but in Python! While
 revisiting Linked Lists, in the context of Python 3, we will briefly discuss:
 
   - Iterators

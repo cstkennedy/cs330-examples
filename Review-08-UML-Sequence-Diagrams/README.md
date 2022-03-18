@@ -5,11 +5,8 @@ messages being passed) between *objects*.
 ## Whirlwind Introduction to UML Sequence Diagrams
 
 We will start with a whirlwind introduction to UML Sequence diagrams in the
-context of the [C++ Shapes Examples](#review-6-inheritance-in-c-c-shapes-)
+context of the [C++ Shapes Examples](../Review-06-CPP-Shapes)
 (specifically Example 7 and Example 8).
-
-The diagrams and markup to generate them is available in
-\ExampleZip{Review-08-UML-Sequence-Diagrams.zip}
 
 The recorded discussion is available [here](https://youtu.be/PusrbfgFfDI).
 
