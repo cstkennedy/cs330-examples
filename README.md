@@ -8,5 +8,5 @@ To obtain a copy of the examples, either:
 
   1. [Download this zip file](https://github.com/cstkennedy/cs330-examples/archive/refs/heads/master.zip)
   2. [Clone the repository from
-     GitHub](git@github.com:cstkennedy/cs330-examples.git) and `checkout` the
+     GitHub](https://github.com/cstkennedy/cs330-examples) and `checkout` the
      master branch
