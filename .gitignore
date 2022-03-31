@@ -5,7 +5,7 @@
 **.zip
 **.class
 **.jar
-!**gradle/wrapper/*.jar
+!**gradle-wrapper.jar
 **.pyc
 **/docs
 
