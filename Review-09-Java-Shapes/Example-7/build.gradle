@@ -1,0 +1,242 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
+
+    id "checkstyle"
+    id "com.github.spotbugs" version "4.6.2"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+
+    id "org.ysb33r.doxygen" version "0.5"
+    id "org.jbake.site" version "5.5.0"
+
+    // Split Integration Tests from Unit Tests
+    id "org.unbroken-dome.test-sets" version "4.0.0"
+}
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.hamcrest:hamcrest-library:1.3"
+}
+
+jar {
+    archiveBaseName = "RunShapes"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs330.examples.RunShapes"
+        )
+    }
+}
+
+run {
+    main = "edu.odu.cs.cs330.examples.RunShapes"
+    args = ["src/main/resources/inputShapes.txt", "2"]
+}
+
+application {
+    mainClass = "edu.odu.cs.cs330.examples.RunShapes"
+}
+
+test {
+    reports {
+        html.enabled = true
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+// Set up Integration Tests
+testSets {
+    integrationTest
+}
+
+check.dependsOn integrationTest
+
+//------------------------------------------------------------------------------
+// Documentation Tools
+//------------------------------------------------------------------------------
+
+javadoc {
+    failOnError false
+}
+
+doxygen {
+    generate_html true
+
+    template "config/documentation.config"
+
+    source new File(projectDir, "src/main/java")
+    //source new File(projectDir, "src/test/java")
+    outputDir new File(buildDir, "doxygen")
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+spotbugsIntegrationTest.enabled = false
+// End SpotBugs config
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+task mergeCoverageReports(type: JacocoMerge) {
+    executionData = layout.files(["build/jacoco/test.exec",
+                                  "build/jacoco/integrationTest.exec"])
+
+    destinationFile = "build/jacoco/merged.exec" as File
+
+
+}
+
+/*
+ * This task is based on HenrikBaerbak's example at
+ * <https://discuss.gradle.org/t/merge-jacoco-coverage-reports-for-multiproject-setups/12100/10>
+ */
+task mergedJacocoReportHTML (type: JacocoReport) {
+    dependsOn(mergeCoverageReports)
+
+    additionalSourceDirs.from = files(sourceSets.main.allSource.srcDirs)
+    sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
+    classDirectories.from = files(sourceSets.main.output)
+
+    executionData.from = files("build/jacoco/merged.exec" as File)
+
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+
+// Check Style Config
+checkstyle {
+    toolVersion "8.42"
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+checkstyleIntegrationTest.enabled = false
+// End Checkstyle config
+
+pmd {
+    toolVersion = "6.21.0"
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+pmdTest.enabled=false
+pmdIntegrationTest.enabled=false
+
+//------------------------------------------------------------------------------
+// JBake Configuration
+//------------------------------------------------------------------------------
+task reports (dependsOn: ["javadoc",
+                          "check",
+                          "jacocoTestReport",
+                          "jacocoIntegrationTestReport",
+                          "mergedJacocoReportHTML",
+                          "projectReport"]) {
+
+    description "Generate all reports and documentation for this project"
+}
+
+task copyJDocs (type: Copy) {
+    from "build/docs"
+    into "build/tmp/website/assets"
+    dependsOn "javadoc"
+}
+
+/*
+task copyDoxygen (type: Copy) {
+    from "build/doxygen"
+    into "build/tmp/website/assets/doxygen"
+    dependsOn "doxygen"
+}
+*/
+
+task copyReports (type: Copy) {
+    from "build/reports"
+    into "build/tmp/website/assets"
+    dependsOn "reports"
+}
+
+task copyJbakeTemplates (type: Copy) {
+    from "src/jbake"
+    into "build/tmp/website"
+}
+
+// Combine home0.md and the project README.md into a single homepage
+task buildHomePage (dependsOn: copyJbakeTemplates) {
+    inputs.files ( "build/tmp/website/content/home0.md", "../README.md")
+    outputs.file ("build/tmp/website/content/home.md")
+    doLast  {
+        outputs.files.singleFile.withOutputStream { out ->
+            for (file in inputs.files) file.withInputStream {
+                out << it << '\n'
+            }
+        }
+    }
+}
+
+jbake {
+     srcDirName = "build/tmp/website"
+}
+
+// Ensure all Copy and JBake build tasks run
+task setupWebsite (dependsOn: ["buildHomePage", "copyReports", "copyJDocs"]){
+}
+
+bake.dependsOn "setupWebsite"
