@@ -58,21 +58,21 @@ public class PrimeGenerator implements Iterable<Integer>, Cloneable {
     {
         Iterator<Integer> li = this.primes.iterator();
 
-            // While the list of primes has not yet been exhausted
-            // Check for divisibility by the next element--i.e.,
-            // if nextPrime %p == 0 for any p, discard nextPrime
-            while (li.hasNext()) {
-                // Retrieve the next prime, p, from
-                // the list of primes, primes
-                int p = li.next().intValue();
+        // While the list of primes has not yet been exhausted
+        // Check for divisibility by the next element--i.e.,
+        // if nextPrime %p == 0 for any p, discard nextPrime
+        while (li.hasNext()) {
+            // Retrieve the next prime, p, from
+            // the list of primes, primes
+            int p = li.next().intValue();
 
-                // Is the number prime?
-                if (n % p == 0) {
-                    return false;
-                }
+            // Is the number prime?
+            if (n % p == 0) {
+                return false;
             }
+        }
 
-            return true;
+        return true;
     }
 
     /**
