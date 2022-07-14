@@ -189,7 +189,6 @@ public class PrimeGuiThread extends JFrame {
         pack();
     }
 
-
     /**
      * The main function.
      *
