@@ -45,7 +45,7 @@ run {
 }
 
 application {
-    mainClass = "RunShapes"
+    mainClass = "edu.odu.cs.cs330.examples.RunShapes"
 }
 
 test {
