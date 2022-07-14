@@ -58,8 +58,10 @@ application {
     mainClass = "edu.odu.cs.cs330.examples.RunShapes"
 }
 
-test {
+// Apply common settings for both test (unit test) and integration test tasks
+tasks.withType(Test) {
     useJUnitPlatform()
+
     reports {
         html.enabled = true
     }
@@ -68,7 +70,9 @@ test {
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
+}
 
+test {
     finalizedBy jacocoTestReport
 }
 
@@ -79,10 +83,6 @@ testSets {
 
 integrationTest {
     finalizedBy jacocoIntegrationTestReport
-}
-
-tasks.withType(Test) {
-    useJUnitPlatform()
 }
 
 check.dependsOn integrationTest

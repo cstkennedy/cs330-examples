@@ -7,31 +7,36 @@ buildscript {
 plugins {
     id "java"
     id "application"
-    id "eclipse"
 
-    id "checkstyle"
     id "com.github.spotbugs" version "4.6.2"
     id "project-report"
     id "jacoco"
     id "pmd"
+    id "checkstyle"
 
-    id "org.ysb33r.doxygen" version "0.5"
+    // id "org.ysb33r.doxygen" version "0.5"
     id "org.jbake.site" version "5.5.0"
 
     // Split Integration Tests from Unit Tests
     id "org.unbroken-dome.test-sets" version "4.0.0"
+
+    // CLI Report on Merged Jacoco Coverage Data
+    id 'org.barfuin.gradle.jacocolog' version '2.0.0'
 }
 
-sourceCompatibility = 1.11
-targetCompatibility = 1.11
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation "junit:junit:4.12"
-    testImplementation "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
 }
 
 jar {
@@ -53,7 +58,10 @@ application {
     mainClass = "edu.odu.cs.cs330.examples.RunShapes"
 }
 
-test {
+// Apply common settings for both test (unit test) and integration test tasks
+tasks.withType(Test) {
+    useJUnitPlatform()
+
     reports {
         html.enabled = true
     }
@@ -64,9 +72,17 @@ test {
     }
 }
 
+test {
+    finalizedBy jacocoTestReport
+}
+
 // Set up Integration Tests
 testSets {
     integrationTest
+}
+
+integrationTest {
+    finalizedBy jacocoIntegrationTestReport
 }
 
 check.dependsOn integrationTest
@@ -79,6 +95,7 @@ javadoc {
     failOnError false
 }
 
+/*
 doxygen {
     generate_html true
 
@@ -88,6 +105,7 @@ doxygen {
     //source new File(projectDir, "src/test/java")
     outputDir new File(buildDir, "doxygen")
 }
+*/
 
 //------------------------------------------------------------------------------
 // Analysis Tools
@@ -120,13 +138,16 @@ jacocoTestReport {
     }
 }
 
-task mergeCoverageReports(type: JacocoMerge) {
-    executionData = layout.files(["build/jacoco/test.exec",
-                                  "build/jacoco/integrationTest.exec"])
+task mergeCoverageReports(type: JacocoMerge, 
+    dependsOn: ["test", "integrationTest", "jacocoTestReport", "jacocoIntegrationTestReport"])
+{
+
+    // executionData = layout.files(["build/jacoco/test.exec",
+                                  // "build/jacoco/integrationTest.exec"])
+
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
     destinationFile = "build/jacoco/merged.exec" as File
-
-
 }
 
 /*
@@ -140,7 +161,7 @@ task mergedJacocoReportHTML (type: JacocoReport) {
     sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
     classDirectories.from = files(sourceSets.main.output)
 
-    executionData.from = files("build/jacoco/merged.exec" as File)
+    executionData.from = fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
     reports {
         xml.enabled false

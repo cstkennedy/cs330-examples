@@ -1,13 +1,14 @@
 package edu.odu.cs.cs330.examples.shapes.io;
 
-import org.junit.FixMethodOrder;
-import org.junit.runners.MethodSorters;
-import org.junit.Test;
-import org.junit.Before;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import org.hamcrest.core.IsNull;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
@@ -29,7 +30,7 @@ import edu.odu.cs.cs330.examples.shapes.*;
  *
  * 1 Test per mutator
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.MethodName.class)
 public class TestShapeIterator {
 
     final String CIRCLE_INPUT = "Circle; 5";
@@ -39,7 +40,7 @@ public class TestShapeIterator {
     final String TRIANGLE_INPUT = "Triangle; 5 7 9";
     final String INVALID_INPUT = "1337 Haxor; 1 lol i broke it";
 
-    @Before
+    @BeforeEach
     public void setUp()
     {
     }
