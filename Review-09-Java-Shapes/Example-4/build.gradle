@@ -7,27 +7,26 @@ buildscript {
 plugins {
     id "java"
     id "application"
-    id "eclipse"
 
-    id "checkstyle"
     id "com.github.spotbugs" version "4.6.2"
     id "project-report"
     id "jacoco"
     id "pmd"
-
-    // id "org.ysb33r.doxygen" version "0.5"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation "junit:junit:4.12"
-    testImplementation "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
 }
 
 jar {
@@ -50,25 +49,22 @@ application {
 }
 
 test {
+    useJUnitPlatform()
     reports {
         html.enabled = true
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
     }
 }
 
 javadoc {
     failOnError false
 }
-/*
-doxygen {
-    generate_html true
 
-    template "documentation.config"
 
-    source new File(projectDir, "src/main/java")
-    //source new File(projectDir, "src/test/java")
-    outputDir new File(buildDir, "docs")
-}
-*/
 //------------------------------------------------------------------------------
 // Analysis Tools
 //------------------------------------------------------------------------------
@@ -88,7 +84,7 @@ spotbugsTest.enabled = false
 // End SpotBugs config
 
 jacoco {
-    toolVersion = "0.8.7"
+    toolVersion = "0.8.8"
 }
 
 jacocoTestReport {
@@ -98,20 +94,6 @@ jacocoTestReport {
         csv.enabled true
     }
 }
-
-// Check Style Config
-checkstyle {
-    ignoreFailures = true
-    showViolations = false
-}
-
-tasks.withType(Checkstyle) {
-    reports {
-        html.destination project.file("build/reports/checkstyle/main.html")
-    }
-}
-checkstyleTest.enabled = false
-// End Checkstyle config
 
 pmd {
     ignoreFailures = true
