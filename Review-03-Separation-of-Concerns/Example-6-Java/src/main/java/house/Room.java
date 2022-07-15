@@ -6,11 +6,11 @@ package house;
  * a grouping of attributes (variables)
  * that describe a Room
  */
-class Room {
+public class Room implements Cloneable {
     /**
      * Units of length--e.g., meters
      */
-    public static final String UNITS = "meters";
+    public static final String UNITS = "ft";
 
     /**
      * Flooring Record for a Room. Note
@@ -53,7 +53,7 @@ class Room {
      * <p>
      * Note that this is now a proper class.
      */
-    public class DimensionSet {
+    public static class DimensionSet {
         private double  length;
         private double   width;
 
@@ -98,7 +98,7 @@ class Room {
          *
          * @param v replacement value
          */
-        void setWidth(double v)
+        public void setWidth(double v)
         {
             this.width = v;
         }
@@ -132,6 +132,7 @@ class Room {
      */
     public Room()
     {
+        this(1, 1, 1);
     }
 
     /**
@@ -144,6 +145,7 @@ class Room {
      */
     public Room(double l, double w, double c)
     {
+        this("Generic", l, w, c);
     }
 
     /**
@@ -157,6 +159,10 @@ class Room {
      */
     public Room(String n, double l, double w, double c)
     {
+        this.name = n;
+        this.dimensions = new DimensionSet(l, w);
+        this.flooring = new Flooring();
+        this.flooring.unitCost = c;
     }
 
     /**
@@ -170,6 +176,9 @@ class Room {
      */
     public Room(String n, DimensionSet d, double c, String fn)
     {
+        this.name = n;
+        this.dimensions = d;
+        this.flooring = new Flooring(fn, c);
     }
 
     /**
@@ -258,10 +267,11 @@ class Room {
     @Override
     public String toString()
     {
-        return String.format("Room(%s)%n", this.name)
+        return String.format("Room (%s)%n", this.name)
              + String.format("  Length: %.1f %s%n", this.dimensions.getLength(), Room.UNITS)
-             + String.format("  Width: %.1f %s%n", this.dimensions.getWidth(), Room.UNITS)
-             + String.format("  Area: %.1f sq %s%n", this.area(), Room.UNITS)
+             + String.format("  Width : %.1f %s%n", this.dimensions.getWidth(), Room.UNITS)
+             + String.format("  Area  : %.1f sq %s%n", this.area(), Room.UNITS)
+             + String.format("%n")
              + String.format("  Flooring   : %s%n", this.flooring.type)
              + String.format("  Unit Cost  : $ %8.2f%n", this.flooring.unitCost)
              + String.format("  Total Cost : $ %8.2f%n", this.flooringCost());
@@ -285,25 +295,19 @@ class Room {
         return this.name.equals(rhsRoom.name)
             && this.area() == rhsRoom.area();
     }
+
+    public Room clone()
+    {
+        Room cpy = new Room();
+        cpy.setName(this.name);
+        cpy.setDimensions(this.dimensions.getLength(), this.dimensions.getWidth());
+        cpy.setFlooring(this.flooring.type, this.flooring.unitCost);
+
+        return cpy;
+    }
 }
 
-
-/**
- * Room Stream Insertion (Output) Operator
- *
- * This is often written as a wrapper for a
- * display or print function.
- * <p>
- * This operator can *NOT* be implemented as a member function.
- *
-inline
-std::ostream& operator<<(std::ostream &outs, const Room &prt)
-{
-    prt.display(outs);
-
-    return outs;
-}
-
+/*
 //------------------------------------------------------------------------------
 inline
 std::istream& operator>>(std::istream &ins, Room& rd)

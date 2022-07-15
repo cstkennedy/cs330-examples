@@ -2,7 +2,7 @@ package containers;
 
 import java.util.Iterator;
 
-class LinkedList<T> implements Iterable<T>, Cloneable {
+public class LinkedList<T> implements Iterable<T>, Cloneable {
     private class Node<T> {
         T     data;
         Node  next;
