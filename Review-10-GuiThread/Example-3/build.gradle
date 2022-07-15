@@ -16,16 +16,19 @@ plugins {
     id "pmd"
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation "junit:junit:4.12"
-    testImplementation "org.hamcrest:hamcrest-library:1.3"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
 }
 
 jar {
@@ -39,6 +42,7 @@ jar {
 }
 
 test {
+    useJUnitPlatform()
     reports {
         html.enabled = true
     }

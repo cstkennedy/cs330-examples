@@ -26,19 +26,23 @@ repositories {
 }
 
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
-    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
-    testImplementation "org.hamcrest:hamcrest-library:2.2"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
 }
 
 jar {
-    archiveBaseName = "GeneratePrimes"
+    archiveBaseName = "UpdateRoom"
 
     manifest {
         attributes(
-            "Main-Class": "edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread"
+            "Main-Class": "UpdateRoom"
         )
     }
+}
+
+run {
+    mainClass = "UpdateRoom"
 }
 
 test {
@@ -57,8 +61,20 @@ javadoc {
     failOnError false
 }
 
-task deploy(dependsOn: [
-            javadoc]){
+task deploy(dependsOn: [jar, javadoc, check]) {
+
+}
+
+jacoco {
+    toolVersion = "0.8.4"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
 }
 
 //------------------------------------------------------------------------------
