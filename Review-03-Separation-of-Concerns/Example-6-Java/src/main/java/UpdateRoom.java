@@ -9,10 +9,39 @@ import house.House;
 
 public class UpdateRoom
 {
-
     public static final String ROOM_DATA = "Laundry Room; 8 4 1.95 Laminate\n"
             + "Kitchen; 20 12 3.87 Tile\n"
             + "Storage Room; 16 16 4.39 Birch Wood";
+
+    /**
+     * Extract Room information from a string
+     *
+     * @param theString input string containg the data for exactly one Room.
+     *
+     * @return intialized Room object
+     */
+    public static Room extractRoomFrom(String theString)
+    {
+        int idxSemicolon = theString.indexOf(';');
+
+        String name = theString.substring(0, idxSemicolon);
+        String theRest = theString.substring(idxSemicolon + 1, theString.length());
+
+        Scanner scnr = new Scanner(theRest);
+
+        double length = scnr.nextDouble();
+        double width = scnr.nextDouble();
+        double unitCost = scnr.nextDouble();
+        String type = scnr.nextLine();
+
+        Room aRoom = new Room(name,
+                              new Room.DimensionSet(length, width),
+                              unitCost,
+                              type);
+
+        return aRoom;
+
+    }
 
     /**
      * Build our example house
@@ -23,21 +52,7 @@ public class UpdateRoom
         String line;
 
         while ((line = reader.readLine()) != null) {
-            int idxSemicolon = line.indexOf(';');
-
-            String name = line.substring(0, idxSemicolon);
-            String theRest = line.substring(idxSemicolon + 1, line.length());
-
-            Scanner withinLineScanner = new Scanner(theRest);
-            double length = withinLineScanner.nextDouble();
-            double width = withinLineScanner.nextDouble();
-            double unitCost = withinLineScanner.nextDouble();
-            String type = withinLineScanner.nextLine();
-
-            Room aRoom = new Room(name,
-                                  new Room.DimensionSet(length, width),
-                                  unitCost,
-                                  type);
+            Room aRoom = extractRoomFrom(line);
 
             house.addRoom(aRoom);
         }
