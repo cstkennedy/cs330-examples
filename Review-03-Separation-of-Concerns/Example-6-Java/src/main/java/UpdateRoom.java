@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Iterator;
 
 import house.Room;
 import house.House;
@@ -115,6 +116,19 @@ public class UpdateRoom
         System.out.println(house);
         System.out.println();
         System.out.println(duplicateHouse);
+        System.out.println();
+
+        double[] costs = new double[duplicateHouse.size()];
+
+        Iterator<Room> it = duplicateHouse.iterator();
+        for (int i = 0; i < duplicateHouse.size(); ++i) {
+            costs[i] = discountFlooring(it.next(), 0.1);
+        }
+
+        for (double cost : costs) {
+            System.out.printf("%.2f%n", cost);
+        }
+
         /*
 
         // Get all the flooring costs with a 10% discount

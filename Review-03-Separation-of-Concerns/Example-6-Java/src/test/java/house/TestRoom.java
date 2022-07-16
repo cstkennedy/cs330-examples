@@ -25,6 +25,8 @@ import java.util.Iterator;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class TestRoom
 {
+    private static final Room DEFAULT_ROOM = new Room();
+
     @Test
     public void testDefaultConstructor()
     {
@@ -38,6 +40,13 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(1.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(1.0, 1e-6));
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, equalTo(DEFAULT_ROOM));
+
+        String roomAsString = rm.toString();
+        assertThat(roomAsString, containsString("Generic"));
+        assertThat(roomAsString, containsString("1.0")); // length, width, & unit cost
+        assertThat(roomAsString, containsString("Generic")); // flooring type
     }
 
     @Test
@@ -53,6 +62,8 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(10.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(270.0, 1e-6));
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, is(not(equalTo(DEFAULT_ROOM))));
     }
 
     @Test
@@ -68,6 +79,15 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(600.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(6000, 1e-6));
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, is(not(equalTo(DEFAULT_ROOM))));
+
+        String roomAsString = rm.toString();
+        assertThat(roomAsString, containsString("Garage Workshop"));
+        assertThat(roomAsString, containsString("20.0")); // length
+        assertThat(roomAsString, containsString("30.0")); // width
+        assertThat(roomAsString, containsString("10.0")); // unit cost
+        assertThat(roomAsString, containsString("Generic")); // flooring type
     }
 
     @Test
@@ -83,6 +103,15 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(1200.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(12000, 1e-6));
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, is(not(equalTo(DEFAULT_ROOM))));
+
+        String roomAsString = rm.toString();
+        assertThat(roomAsString, containsString("Dream Garage Workshop"));
+        assertThat(roomAsString, containsString("40.0")); // length
+        assertThat(roomAsString, containsString("30.0")); // width
+        assertThat(roomAsString, containsString("10.0")); // unit cost
+        assertThat(roomAsString, containsString("Generic")); // flooring type
     }
 
     @Test
@@ -101,6 +130,15 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(1200.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(24000, 1e-6));
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, is(not(equalTo(DEFAULT_ROOM))));
+
+        String roomAsString = rm.toString();
+        assertThat(roomAsString, containsString("Dream Garage Workshop v2"));
+        assertThat(roomAsString, containsString("40.0")); // length
+        assertThat(roomAsString, containsString("30.0")); // width
+        assertThat(roomAsString, containsString("20.0")); // unit cost
+        assertThat(roomAsString, containsString("High-End Epoxy")); // flooring type
     }
 
     @Test
@@ -117,6 +155,13 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(1.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(1.0, 1e-6));
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, is(not(equalTo(DEFAULT_ROOM))));
+
+        String roomAsString = rm.toString();
+        assertThat(roomAsString, containsString("Linen Closet"));
+        assertThat(roomAsString, containsString("1.0")); // length, width, & unit cost
+        assertThat(roomAsString, containsString("Generic")); // flooring type
     }
 
     @Test
@@ -133,6 +178,14 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(6.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(6.0, 1e-6));
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, is(not(equalTo(DEFAULT_ROOM))));
+
+        String roomAsString = rm.toString();
+        assertThat(roomAsString, containsString("Generic"));
+        assertThat(roomAsString, containsString("2.0")); // length
+        assertThat(roomAsString, containsString("3.0")); // width
+        assertThat(roomAsString, containsString("1.0")); // unit cost
     }
 
     @Test
@@ -149,5 +202,40 @@ public class TestRoom
 
         assertThat(rm.area(), closeTo(1.0, 1e-6));
         assertThat(rm.flooringCost(), closeTo(1.5, 1e-6));
+
+        // Unit Cost and Flooring Type do not have any impact on two Room
+        // objects being equal
+        assertThat(rm, equalTo(rm));
+        assertThat(rm, is(equalTo(DEFAULT_ROOM)));
+
+        String roomAsString = rm.toString();
+        assertThat(roomAsString, containsString("Generic"));
+        assertThat(roomAsString, containsString("1.0")); // length & width
+        assertThat(roomAsString, containsString("1.5")); // unit cost
+        assertThat(roomAsString, containsString("Tile")); // flooring type
+    }
+
+    @Test
+    public void testClone()
+    {
+        Room rm = new Room("Dream Garage Workshop v2",
+                           new Room.DimensionSet(40.0, 30.0),
+                           20.0,
+                           "High-End Epoxy");
+
+        Room copyGarage = rm.clone();
+
+        assertThat(copyGarage.getName(), equalTo("Dream Garage Workshop v2"));
+        assertThat(copyGarage.getDimensions().getLength(), closeTo(40.0, 1e-6));
+        assertThat(copyGarage.getDimensions().getWidth(), closeTo(30.0, 1e-6));
+        assertThat(copyGarage.getFlooring().type, equalTo("High-End Epoxy"));
+        assertThat(copyGarage.getFlooring().unitCost, closeTo(20.0, 1e-6));
+
+        assertThat(copyGarage.area(), closeTo(1200.0, 1e-6));
+        assertThat(copyGarage.flooringCost(), closeTo(24000, 1e-6));
+        assertThat(copyGarage, equalTo(rm));
+        assertThat(copyGarage, is(not(equalTo(DEFAULT_ROOM))));
+
+        assertThat(rm.toString(), equalTo(copyGarage.toString()));
     }
 }
