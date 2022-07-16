@@ -111,7 +111,7 @@ public class House implements Iterable<Room>
             Room lhsRoom = lhsIt.next();
             Room rhsRoom = rhsIt.next();
 
-            if (lhsRoom.equals(rhsRoom)) {
+            if (!lhsRoom.equals(rhsRoom)) {
                 return false;
             }
         }

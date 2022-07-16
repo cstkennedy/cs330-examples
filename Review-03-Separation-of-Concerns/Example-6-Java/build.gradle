@@ -48,7 +48,7 @@ run {
 test {
     useJUnitPlatform()
     reports {
-        html.enabled = true
+        html.required = true
     }
     ignoreFailures = true
 
@@ -73,9 +73,9 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
+        html.required = true
+        xml.required = true
+        csv.required = true
     }
 }
 
