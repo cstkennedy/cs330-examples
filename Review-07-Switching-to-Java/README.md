@@ -1,17 +1,25 @@
-This discussion is split into two parts:
+# Part 1
 
-  * Part 1 is available [here](https://youtu.be/IMGWyvyVxOE).
-    * Example 1 - An example of reading keyboard input using the Java `Scanner`
-      class.
-    * Example 2 - An example in which the Fibonacci Sequence is computed. This
-      example includes C++ and Java examples. Note the Python 3 example is
-      included for comparison. You will not be tested on Python.
-  * Part 2 is available [here](https://youtu.be/C8lobDIZUoY).
-    * Example 3 - An example of a CS 250 level Objected Oriented Program in
-      Java (instead of C++).
-      - This includes a brief discussion of Gradle and JUnit as topics of
-        interest.
-      - Gradle and JUnit are CS 350 topics that are related to CS 330. You will
-        not be graded on Gradle or JUnit in CS 330.
-      - For the **truly curious**, you can access my CS 350 Review Materials
-        [here](doc:Reviews350)
+Part 1 covers `Example-1` and the different versions of `Example-2`
+
+The Part 1 recording is available [here](https://youtu.be/IMGWyvyVxOE).
+
+  - Example 1 - An example of reading keyboard input using the Java `Scanner`
+    class.
+  - Example 2 - An example in which the Fibonacci Sequence is computed. This
+    example includes C++, Java, Python, and Rust examples. 
+
+
+# Part 2
+
+The Part 2 recording is available [here](https://youtu.be/C8lobDIZUoY).
+
+Example 3 is an example of a CS 250 level Objected Oriented Program in Java
+(instead of C++).
+
+  - This includes a brief discussion of Gradle and JUnit as topics of
+    interest.
+  - Gradle and JUnit are CS 350 topics that are related to CS 330. You will
+    not be graded on Gradle or JUnit in CS 330.
+  - For the **truly curious**, you can access my CS 350 Review Materials
+    [here](https://github.com/cstkennedy/cs350-examples)
