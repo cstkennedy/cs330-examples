@@ -82,8 +82,6 @@ jacocoTestReport {
 //------------------------------------------------------------------------------
 // Analysis Tools
 //------------------------------------------------------------------------------
-
-// SpotBugs
 spotbugsMain {
     ignoreFailures = true
     effort = "max"
@@ -95,21 +93,7 @@ spotbugsMain {
 }
 
 spotbugsTest.enabled = false
-// End SpotBugs config
 
-jacoco {
-    toolVersion = "0.8.5"
-}
-
-jacocoTestReport {
-    reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
-    }
-}
-
-// Check Style Config
 checkstyle {
     ignoreFailures = true
     showViolations = false
@@ -121,7 +105,6 @@ tasks.withType(Checkstyle) {
     }
 }
 checkstyleTest.enabled = false
-// End Checkstyle config
 
 pmd {
     ignoreFailures = true
@@ -133,5 +116,3 @@ pmd {
         "category/java/performance.xml"
     ]
 }
-
-

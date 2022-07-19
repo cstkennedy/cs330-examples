@@ -1,6 +1,8 @@
 package house;
 
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.ArrayList;
 import containers.LinkedList;
 
 /**
@@ -17,7 +19,8 @@ public class House implements Iterable<Room>
      */
     private String name;
 
-    private LinkedList rooms;
+    // private Collection<Room> rooms;
+    private LinkedList<Room> rooms;
 
     /**
      * Construct a House with a
@@ -26,7 +29,8 @@ public class House implements Iterable<Room>
     public House()
     {
         this.name = "Generic";
-        this.rooms = new LinkedList();
+        this.rooms = new LinkedList<>();
+        // this.rooms = new ArrayList<>();
     }
 
     /**
@@ -35,7 +39,8 @@ public class House implements Iterable<Room>
     public House(String name)
     {
         this.name = name;
-        this.rooms = new LinkedList();
+        this.rooms = new LinkedList<>();
+        // this.rooms = new ArrayList<>();
     }
 
     /**

@@ -77,19 +77,6 @@ public class LinkedList<T> implements Iterable<T>, Cloneable {
         this.currentSize = 0;
     }
 
-    /*
-    LinkedList(const LinkedList& src)
-        :head(nullptr),
-         tail(nullptr),
-         currentSize(0),
-         memPool(src.currentSize)
-    {
-        for (const T& src_data : src) {
-            this.push_back(src_data);
-        }
-    }
-    */
-
     public void add(T toAdd)
     {
         Node newNode = new Node(toAdd);

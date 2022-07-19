@@ -3,6 +3,7 @@ import java.io.StringReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Iterator;
+import java.util.Arrays;
 
 import house.Room;
 import house.House;
@@ -14,11 +15,11 @@ public class UpdateRoom
             + "Storage Room; 16 16 4.39 Birch Wood";
 
     /**
-     * Extract Room information from a string
+     * Extract Room information from a string.
      *
-     * @param theString input string containg the data for exactly one Room.
+     * @param theString input string containing the data for exactly one Room
      *
-     * @return intialized Room object
+     * @return initialized Room object
      */
     public static Room extractRoomFrom(String theString)
     {
@@ -40,15 +41,16 @@ public class UpdateRoom
                               type);
 
         return aRoom;
-
     }
 
     /**
-     * Build our example house
+     * Build our example house.
      */
-    static void buildHouse(BufferedReader reader, House house)
+    public static void buildHouse(BufferedReader reader, House house)
         throws IOException
     {
+        // BufferedReader input loop
+        /*
         String line;
 
         while ((line = reader.readLine()) != null) {
@@ -56,6 +58,16 @@ public class UpdateRoom
 
             house.addRoom(aRoom);
         }
+        */
+
+        // BufferedReader using a "stream"
+        reader.lines()
+                .map((String line) -> {
+                    return extractRoomFrom(line);
+                })
+                .forEach((Room aRoom) -> {
+                    house.addRoom(aRoom);
+                });
     }
 
     /**
@@ -65,7 +77,7 @@ public class UpdateRoom
      *
      * @return House with the updated flooring
      */
-    static House upgradeFlooring(House original)
+    public static House upgradeFlooring(House original)
     {
         House modified = new House();
         modified.setName("After Stone Bricks");
@@ -88,7 +100,7 @@ public class UpdateRoom
      *
      * @pre 0 <= percent && percent <= 1
      */
-    static double discountFlooring(Room r, double percent)
+    public static double discountFlooring(Room r, double percent)
     {
         final double scale = 1 - percent;
 
@@ -106,18 +118,29 @@ public class UpdateRoom
     public static void main(String... args)
         throws IOException
     {
-        // Construct, build, and print a house
-        House house = new House();
+        //----------------------------------------------------------------------
+        // Set up input variables
+        //----------------------------------------------------------------------
+        StringReader inputStringReader = new StringReader(ROOM_DATA);
+        BufferedReader fakeInputFile = new BufferedReader(inputStringReader);
 
-        BufferedReader fakeInputFile = new BufferedReader(new StringReader(ROOM_DATA));
+        //----------------------------------------------------------------------
+        // Construct, build, and print a house
+        //----------------------------------------------------------------------
+        House house = new House();
         buildHouse(fakeInputFile, house);
 
         System.out.println(house);
         System.out.println();
 
+        //----------------------------------------------------------------------
         // Upgrade the flooring in a second duplicate house
+        //----------------------------------------------------------------------
         House duplicateHouse = upgradeFlooring(house);
 
+        //----------------------------------------------------------------------
+        // Demo "equals" method and object variables
+        //----------------------------------------------------------------------
         System.out.printf(
             "house == duplicateHouse     -> %b%n",
              (house.equals(duplicateHouse))
@@ -133,6 +156,9 @@ public class UpdateRoom
         System.out.println(duplicateHouse);
         System.out.println();
 
+        //----------------------------------------------------------------------
+        // Create, populate, and output an array of room costs
+        //----------------------------------------------------------------------
         double[] costs = new double[duplicateHouse.size()];
 
         Iterator<Room> it = duplicateHouse.iterator();
@@ -144,43 +170,16 @@ public class UpdateRoom
             System.out.printf("%.2f%n", cost);
         }
 
-        /*
+        //----------------------------------------------------------------------
+        // Compute and output cost statistics
+        //----------------------------------------------------------------------
+        double total = Arrays.stream(costs).sum();
+        double min = Arrays.stream(costs).min().getAsDouble();
+        double max = Arrays.stream(costs).max().getAsDouble();
 
-        // Get all the flooring costs with a 10% discount
-        auto discountFunc = std::bind(discountFlooring, std::placeholders::_1, 0.1);
-
-        vector<double> costs(duplicateHouse.size());
-        std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
-                       discountFunc);
-
-        std::copy(costs.begin(), costs.end(),
-                  std::ostream_iterator<double>(std::cout, "\n"));
-
-        // Print the sum, min, max -> D.R.Y!
-        cout << "Total: "
-             << std::accumulate(costs.begin(), costs.end(), 0.0, std::plus<double>())
-             << "\n";
-        cout << "Min: "
-             << *std::min_element(costs.begin(), costs.end())
-             << "\n"
-             << "Max: "
-             << *std::max_element(costs.begin(), costs.end())
-             << "\n";
-        */
-
-        // I would probably use minmax_element and auto
-        /*
-        std::pair<std::vector<double>::const_iterator,
-                  std::vector<double>::const_iterator> extremes = std::minmax_element(costs.begin(), costs.end());
-        */
-
-        /*
-        auto extremes = std::minmax_element(costs.begin(), costs.end());
-
-        cout << "Min: " << *(extremes.first)  << "\n"
-             << "Max: " << *(extremes.second) << "\n";
-
-        return 0;
-        */
+        System.out.println();
+        System.out.printf("Total: %10.2f%n", total);
+        System.out.printf("Min  : %10.2f%n", min);
+        System.out.printf("Max  : %10.2f%n", max);
     }
 }
