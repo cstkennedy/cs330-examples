@@ -8,20 +8,18 @@ plugins {
     id "java"
     id "application"
 
-    id "com.github.spotbugs" version "4.6.2"
-    id "project-report"
     id "jacoco"
-    id "pmd"
-    id "checkstyle"
+    id "org.barfuin.gradle.jacocolog" version "2.0.0"
 
-    // id "org.ysb33r.doxygen" version "0.5"
+    id "pmd"
+    id "com.github.spotbugs" version "4.6.2"
+    id "checkstyle"
+    id "project-report"
+
     id "org.jbake.site" version "5.5.0"
 
     // Split Integration Tests from Unit Tests
     id "org.unbroken-dome.test-sets" version "4.0.0"
-
-    // CLI Report on Merged Jacoco Coverage Data
-    id 'org.barfuin.gradle.jacocolog' version '2.0.0'
 }
 
 java {
@@ -34,8 +32,11 @@ repositories {
 }
 
 dependencies {
+    // Everything in src/main (production code).
+    // implementation ...
+
+    // Everything in src/test (test code)
     testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
-    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
     testImplementation "org.hamcrest:hamcrest-library:2.2"
 }
 
@@ -50,7 +51,7 @@ jar {
 }
 
 run {
-    main = "edu.odu.cs.cs330.examples.RunShapes"
+    mainClass = "edu.odu.cs.cs330.examples.RunShapes"
     args = ["src/main/resources/inputShapes.txt", "2"]
 }
 
@@ -63,7 +64,7 @@ tasks.withType(Test) {
     useJUnitPlatform()
 
     reports {
-        html.enabled = true
+        html.required = true
     }
     ignoreFailures = true
 
@@ -88,43 +89,27 @@ integrationTest {
 check.dependsOn integrationTest
 
 //------------------------------------------------------------------------------
-// Documentation Tools
+// Documentation Tool(s)
 //------------------------------------------------------------------------------
-
 javadoc {
     failOnError false
 }
 
-/*
-doxygen {
-    generate_html true
-
-    template "config/documentation.config"
-
-    source new File(projectDir, "src/main/java")
-    //source new File(projectDir, "src/test/java")
-    outputDir new File(buildDir, "doxygen")
-}
-*/
-
 //------------------------------------------------------------------------------
-// Analysis Tools
+// Analysis Tool(s)
 //------------------------------------------------------------------------------
-
-// SpotBugs
 spotbugsMain {
     ignoreFailures = true
     effort = "max"
     reportLevel = "medium"
     reports {
-       xml.enabled = false
-       html.enabled = true
+       xml.required = false
+       html.required = true
     }
 }
 
 spotbugsTest.enabled = false
 spotbugsIntegrationTest.enabled = false
-// End SpotBugs config
 
 jacoco {
     toolVersion = "0.8.5"
@@ -132,31 +117,19 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
+        html.required = true
+        xml.required = true
+        csv.required = true
     }
-}
-
-task mergeCoverageReports(type: JacocoMerge, 
-    dependsOn: ["test", "integrationTest", "jacocoTestReport", "jacocoIntegrationTestReport"])
-{
-
-    // executionData = layout.files(["build/jacoco/test.exec",
-                                  // "build/jacoco/integrationTest.exec"])
-
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    destinationFile = "build/jacoco/merged.exec" as File
 }
 
 /*
  * This task is based on HenrikBaerbak's example at
  * <https://discuss.gradle.org/t/merge-jacoco-coverage-reports-for-multiproject-setups/12100/10>
  */
-task mergedJacocoReportHTML (type: JacocoReport) {
-    dependsOn(mergeCoverageReports)
-
+task mergedJacocoReportHTML (type: JacocoReport,
+    dependsOn: ["test", "integrationTest", "jacocoTestReport", "jacocoIntegrationTestReport"])
+{
     additionalSourceDirs.from = files(sourceSets.main.allSource.srcDirs)
     sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
     classDirectories.from = files(sourceSets.main.output)
@@ -170,7 +143,6 @@ task mergedJacocoReportHTML (type: JacocoReport) {
     }
 }
 
-// Check Style Config
 checkstyle {
     toolVersion "8.42"
     ignoreFailures = true
@@ -182,9 +154,14 @@ tasks.withType(Checkstyle) {
         html.destination project.file("build/reports/checkstyle/main.html")
     }
 }
-checkstyleTest.enabled = false
-checkstyleIntegrationTest.enabled = false
-// End Checkstyle config
+
+checkstyleTest {
+    enabled = false
+}
+
+checkstyleIntegrationTest {
+    enabled = false
+}
 
 pmd {
     toolVersion = "6.21.0"
@@ -198,8 +175,13 @@ pmd {
     ]
 }
 
-pmdTest.enabled=false
-pmdIntegrationTest.enabled=false
+pmdTest {
+    enabled = false
+}
+
+pmdIntegrationTest {
+    enabled = false
+}
 
 //------------------------------------------------------------------------------
 // JBake Configuration
@@ -219,14 +201,6 @@ task copyJDocs (type: Copy) {
     into "build/tmp/website/assets"
     dependsOn "javadoc"
 }
-
-/*
-task copyDoxygen (type: Copy) {
-    from "build/doxygen"
-    into "build/tmp/website/assets/doxygen"
-    dependsOn "doxygen"
-}
-*/
 
 task copyReports (type: Copy) {
     from "build/reports"
