@@ -1,5 +1,5 @@
 
-# C++ Varialbe Types (Quick Review)
+# C++ Variable Types (Quick Review)
 
   - pointer-type variable (e.g., Book* book_ptr)
   - reference-type variable (e.g., Book& book_rfc)
@@ -24,7 +24,7 @@
   - const correctness
   - Big-3 (Copy Constructor, Destructor, Assignment Operator)
 
-# Polymorphism and ABstract Base Classes
+# Polymorphism and Abstract Base Classes
 
   - Inheritance
   - Subtyping
