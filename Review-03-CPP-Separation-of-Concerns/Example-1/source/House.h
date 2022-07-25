@@ -136,27 +136,21 @@ class House {
         bool operator==(const House &rhs) const;
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void House::setName(std::string newName)
 {
     this->name = newName;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 std::string House::getName() const
 {
     return (*this).name;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 bool House::operator==(const House &rhs) const
 {
