@@ -1,16 +1,6 @@
 During this Review, I discussed Linked Lists and addressed questions usually
 received via email and during office hours.
 
-\bSidebar
-
-Note that while there is an Example 5, it will not be discussed in detail...
-yet.
-
-Example 6 will cover Memory Pools as a topic of interest. Just like Example 5,
-you are not required (or expected) to apply this material on Assignment 1.
-
-\eSidebar
-
   * **Example 1** was an implementation of Linked Lists similar to what one would
     see at the end of CS 250.
     * I briefly discussed command line arguments during this example.
@@ -23,12 +13,9 @@ you are not required (or expected) to apply this material on Assignment 1.
     * I started with a brief review of how to explore an unfamiliar code.
     * I discussed the `-fsanitize` compilation flag and using the compiler to
       detect memory leaks.
-  * **Example 5** is a preview of what we will have at the end of Review 03.
-  * **Example 6** is a preview of what we will have at the end of Review 03.
 
-This Review is split into four (4) recordings:
+This Review is split into four (3) recordings:
 
   - [Part 1 (in which I discuss Examples 1 & 2)](https://youtu.be/WwHUr1N2z7A).
   - [Part 2 (in which I discuss Example 3)](https://youtu.be/zuD8Oc4v22c).
   - [Part 3 (in which I discuss Example 4)](https://youtu.be/sBKR0KOG3fc).
-  - [Part 4 (in which I cover Examples 5 & 6)](https://youtu.be/Ia8xUbjOei0)
