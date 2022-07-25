@@ -1,8 +1,23 @@
+"""
+This is an example Python Linked List that demonstrates:
+
+  - iterators
+  - Abstract Base Classes with the collections.abc module
+  - deep copies with the copy module
+  - data classes
+  - properties
+  - decorators
+"""
+
+from __future__ import annotations
+
 import copy
 
-from collections.abc import (Iterator, Iterable)
+import collections.abc as abc
+from typing import (Any)
 
-class LinkedList(Iterable):
+
+class LinkedList(abc.Iterable):
     """
     The LinkedList (LL) is a wrapper for three items.
      - Head pointer
@@ -27,12 +42,12 @@ class LinkedList(Iterable):
             self.__data = data
             self.__next = next
 
-    class Iterator(Iterator):
+    class Iterator(abc.Iterator):
         """
         A special purpose Linked List Iterator
         """
 
-        def __init__(self, node):
+        def __init__(self, node: Node):
             self.__current_node = node
 
         def __next__(self):
@@ -50,11 +65,11 @@ class LinkedList(Iterable):
         Construct an empty Linked List
         """
 
-        self.__head = None
-        self.__tail = None
-        self.__nodes = 0
+        self.__head: Node = None
+        self.__tail: Node = None
+        self.__nodes: int = 0
 
-    def append(self, to_add):
+    def append(self, to_add: Any) -> None:
         """
         Add a Node at the end of the list
         """
@@ -73,7 +88,7 @@ class LinkedList(Iterable):
 
         self.__nodes += 1
 
-    def __deepcopy__(self, memo):
+    def __deepcopy__(self, memo) -> LinkedList:
         clone = LinkedList()
 
         for datum in self:
@@ -81,13 +96,13 @@ class LinkedList(Iterable):
 
         return clone
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.__nodes
 
-    def __iter__(self):
+    def __iter__(self) -> LinkedList.Iterator:
         return LinkedList.Iterator(self.__head)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Iterate through the LinkedList and print each individual Node
         with an index.

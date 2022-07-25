@@ -1,3 +1,13 @@
+"""
+This is an example Python Linked List that demonstrates:
+
+  - iterators
+  - Abstract Base Classes with the collections.abc module
+  - deep copies with the copy module
+  - data classes
+  - properties
+  - decorators
+"""
 
 #  class LinkedList(object):
 class LinkedList:
