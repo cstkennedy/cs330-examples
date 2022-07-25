@@ -111,18 +111,14 @@ class House {
 
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void House::setName(std::string newName)
 {
     this->name = newName;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 std::string House::getName() const
 {

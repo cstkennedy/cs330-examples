@@ -243,72 +243,56 @@ class Room {
         bool operator<(const Room &rhs) const;
 };
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void Room::DimensionSet::setLength(Dimension v)
 {
     this->length = v;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 Room::Dimension Room::DimensionSet::getLength() const
 {
     return this->length;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void Room::DimensionSet::setWidth(Dimension v)
 {
     this->width = v;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 Room::Dimension Room::DimensionSet::getWidth() const
 {
     return this->width;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void Room::setName(std::string newName)
 {
     this->name = newName;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 std::string Room::getName() const
 {
     return this->name;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 const Room::Flooring& Room::getFlooring() const
 {
     return this->flooring;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 void Room::setFlooring(std::string t, Cost c)
 {
@@ -316,27 +300,21 @@ void Room::setFlooring(std::string t, Cost c)
     flooring.unitCost = c;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 const Room::DimensionSet& Room::getDimensions() const
 {
     return this->dimensions;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 double Room::area() const
 {
     return (dimensions.getWidth() * dimensions.getLength());
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 inline
 Cost Room::flooringCost() const
 {
