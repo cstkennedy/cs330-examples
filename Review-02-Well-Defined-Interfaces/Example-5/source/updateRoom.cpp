@@ -44,7 +44,7 @@ int main()
             Room::DimensionSet(16, 16),
             4.39,
             "Birch Wood"
-       )
+        )
     );
 
     cout << house;

@@ -88,7 +88,7 @@ int main()
     }
 
     // What if we decide to use the same type of
-    // Flooring in every room
+    // Flooring in every room?
     for (Room& room : house) {
         room.setFlooring("Stone Bricks", 12.97);
     }

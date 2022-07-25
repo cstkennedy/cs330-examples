@@ -29,13 +29,23 @@ int main()
 
     // Add the Laundry Room
     house.addRoom(
-        Room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate"));
+        Room("Laundry Room", Room::DimensionSet(8, 4), 1.95, "Laminate")
+    );
 
     // Add the Kitchen
-    house.addRoom(Room("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile"));
+    house.addRoom(
+        Room("Kitchen", Room::DimensionSet(20, 12), 3.87, "Tile")
+    );
 
     // Add the Storage Room
-    house.addRoom(Room("Storage Room", Room::DimensionSet(16, 16), 4.39, "Birch Wood"));
+    house.addRoom(
+        Room(
+            "Storage Room",
+            Room::DimensionSet(16, 16),
+            4.39,
+            "Birch Wood"
+        )
+    );
 
     cout << house;
 
