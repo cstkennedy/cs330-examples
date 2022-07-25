@@ -1,0 +1,48 @@
+@startuml
+autoactivate on
+hide footbox
+skinparam sequenceParticipant underline
+
+title Java RunShapes "read" Function With Iterators
+
+participant ":RunShapes" as rs
+activate rs
+
+participant "buffer:BufferedReader" as buffer
+
+create "collection:List<Shape>" as collection
+rs -> collection: new
+return
+
+create "it:Iterator<Shape>" as it
+rs -> it: new ShapeIterator(buffer)
+return
+
+participant ":ShapeFactory" as sf
+
+loop it.hasNext()
+    rs -> it: next() [dereference & iterate]
+        it->it: readNext()
+            it -> sf: createShape(name) [assume "name" is known]
+                create "shp: Shape" as shp
+                sf-> shp: new()
+                return
+            return shp [assume shp != null]
+
+            it->it: initShapeFromDims(shp, lineScanner)
+            it->shp: createFromDims(dims) ["dims" is a double[]]
+            return
+            return shp
+        return shp
+    return  shp
+    opt shp is not null
+        rs -> collection: add(shp)
+        return
+    end
+end
+
+rs -> it !!: delete
+deactivate rs
+
+@enduml
+
