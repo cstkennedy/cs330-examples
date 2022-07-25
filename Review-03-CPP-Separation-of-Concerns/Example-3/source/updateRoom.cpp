@@ -22,7 +22,7 @@ using namespace std;
 void buildHouse(House& house);
 
 /**
- * Take a room and change the flooring
+ * Take a house and change the flooring
  *
  * @param original House to change
  *

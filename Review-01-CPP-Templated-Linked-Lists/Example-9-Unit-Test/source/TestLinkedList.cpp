@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <functional>
 
-#include "utilities.h"
+// #include "utilities.h"
 
 #include "bodgeUnitTest.h"
 #include "LinkedList.h"
@@ -17,7 +17,7 @@
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-//  Inventory - Unit Tests - Test Functions
+//  Linked List - Unit Tests - Test Functions
 //-----------------------------------------------------------------------------
 bool testDefaultConstructor()
 {

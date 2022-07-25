@@ -30,7 +30,7 @@ Storage Room; 16 16 4.39 Birch Wood)";
 void buildHouse(std::istream& ins, House& house);
 
 /**
- * Take a room and change the flooring
+ * Take a house and change the flooring
  *
  * @param original House to change
  *
@@ -172,7 +172,6 @@ void buildHouse(std::istream& ins, House& house)
 
         ins_it++;
     }
-
 }
 
 //------------------------------------------------------------------------------

@@ -6,7 +6,6 @@
 #include <iostream>
 #include <string>
 
-#include "utilities.h"
 #include "bodgeUnitTest.h"
 
 /**

@@ -15,4 +15,3 @@ The recorded review is split into three parts:
   1. [Part 1](https://youtu.be/inUskhq0SHo) - Examples 1 and 2.
   2. [Part 2](https://youtu.be/5-f_ej3cUJg) - Example 3 (review) through Example 5.
   2. [Part 3](https://youtu.be/s_1-4G8Gl4c) - Example 6.
-  2. [Part 4](https://odu.zoom.us/rec/play/LZzOG7Yg89qTTBfkGhwQ3fgb5ndEhg3wk95KLkCzKELFXwEeEnZBjPYBFybpJiFhPbwS9XL1vj4LyASR.3uTf_KtFzWvm5QIQ) - Example 7 & Example 8 (Rust & Python Versions).
