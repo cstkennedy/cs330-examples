@@ -10,7 +10,7 @@
  *  - Tail pointer
  *  - Node counter (cardinality)
  *
- * Only the head pointer is necessary, the latter three items are
+ * Only the head pointer is necessary, the latter ~~three~~ two items are
  * included for convenience.
  * <p>
  * In this version, the LinkedList has been converted to a proper class
@@ -69,12 +69,12 @@ class LinkedList {
         /**
          * Add a Node at the beginning of the list
          */
-        void prependNode(int to_add);
+        void prependNode( int to_add );
 
         /**
          * Add a Node at the end of the list
          */
-        void appendNode(int to_add);
+        void appendNode( int to_add );
 
         /**
          * Return the number of nodes

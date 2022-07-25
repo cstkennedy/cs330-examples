@@ -3,8 +3,8 @@
 //------------------------------------------------------------------------------
 LinkedList::Node::Node()
 {
-   this->data = 0;
-   this->next = nullptr;
+    this->data = 0;
+    this->next = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -141,6 +141,7 @@ void LinkedList::appendNode(int to_add)
 
     // Store the "to_add" data within the node
     new_node = new Node(to_add);
+
     // This node exists for memory leak demos
     // Node* leak_node = new Node(to_add);
 
@@ -152,7 +153,7 @@ void LinkedList::appendNode(int to_add)
         this->head = new_node;
         this->tail = new_node;
     }
-    else{
+    else {
         // Add the new node to the this
         // What happens on the following two lines
         (this->tail)->next = new_node;

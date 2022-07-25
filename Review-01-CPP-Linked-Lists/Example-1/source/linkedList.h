@@ -61,7 +61,7 @@ class LinkedList {
  * with an index.
  */
 inline
-std::ostream& operator<<( std::ostream &outs, const LinkedList &prt )
+std::ostream& operator<<(std::ostream &outs, const LinkedList &prt)
 {
     prt.display(outs);
 

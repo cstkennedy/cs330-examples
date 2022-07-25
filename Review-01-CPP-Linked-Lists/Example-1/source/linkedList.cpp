@@ -19,7 +19,7 @@ LinkedList::~LinkedList()
     this_iterator = this->head;
 
     // iterate through the this and delete each node
-    while( this_iterator != nullptr  ){
+    while (this_iterator != nullptr) {
         to_delete = this_iterator;
 
         // move to next node
@@ -42,7 +42,7 @@ LinkedList::~LinkedList()
 }
 
 //------------------------------------------------------------------------------
-void LinkedList::prependNode( int to_add )
+void LinkedList::prependNode(int to_add)
 {
     // Create a new Node
     // Note what actually occurs on the next line
@@ -55,8 +55,8 @@ void LinkedList::prependNode( int to_add )
     // Consider how you would write this expression
     // using head or tail
     //
-    if( this->nodes == 0 ){
-        appendNode( to_add );
+    if (this->nodes == 0) {
+        appendNode(to_add);
         return;
     }
 
@@ -66,10 +66,10 @@ void LinkedList::prependNode( int to_add )
     // Think about the preceding lines and dangling
     // pointers
     //
-    new_node = new Node( to_add );
+    new_node = new Node(to_add);
 
     // Setup the new node
-    new_node->next = ( this->head );
+    new_node->next = (this->head);
     this->head = new_node;
 
     // Increase the number of nodes
@@ -82,24 +82,24 @@ void LinkedList::prependNode( int to_add )
 }
 
 //------------------------------------------------------------------------------
-void LinkedList::appendNode( int to_add )
+void LinkedList::appendNode(int to_add)
 {
     // Create a new Node
     // Note what actually occurs on the next line
     Node *new_node = nullptr;
 
     // Store the "to_add" data within the node
-    new_node = new Node( to_add );
+    new_node = new Node(to_add);
 
     // Handle the case where the first node is added
-    if(this->head == nullptr){
+    if (this->nodes == 0) {
         // this->head = this->tail = new_node;
         // Note the above line is it any different
         // from the next two lines?
         this->head = new_node;
         this->tail = new_node;
     }
-    else {
+    else{
         // Add the new node to the this
         // What happens on the following two lines
         (this->tail)->next = new_node;
@@ -124,11 +124,10 @@ int LinkedList::size() const
 //------------------------------------------------------------------------------
 void LinkedList::display(std::ostream& outs) const
 {
+    int index = 0;   // Used to output ids
     Node* it  = this->head;
 
-    int index = 0;
-
-    while ( it != nullptr ) {
+    while (it != nullptr) {
         outs << "Node # " << std::right << std::setw(4) << index
              << " - "     << std::right << std::setw(4) << it->data
              << "\n";

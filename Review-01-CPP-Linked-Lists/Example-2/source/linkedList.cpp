@@ -53,8 +53,8 @@ LinkedList::LinkedList()
 //------------------------------------------------------------------------------
 LinkedList::~LinkedList()
 {
-    Node *this_iterator = nullptr;   // Loop control pointer
-    Node *to_delete     = nullptr;   // Node to delete
+    Node *this_iterator = nullptr;  // Loop control pointer
+    Node *to_delete     = nullptr;  // Node to delete
 
     // start at the beginning of the this
     this_iterator = this->head;
@@ -75,6 +75,10 @@ LinkedList::~LinkedList()
         // a non-academic exercise
         std::cerr << "Deleting Node" << "\n";
     }
+
+    // Such output would not be included in
+    // a non-academic exercise
+    std::cerr << "Deleted List" << "\n";
 
     // Are these three lines necessary?
     head  = nullptr;
