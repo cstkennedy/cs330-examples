@@ -1,4 +1,3 @@
-// CS 330 Fall 2019
 // Review Example 1: Linked List Review
 
 #include <iostream>

@@ -1,4 +1,3 @@
-// CS 330 Fall 2016
 // Review Example 1: Linked List Review
 
 #include <iostream>
@@ -40,7 +39,7 @@ int main(int argc, char** argv)
     LinkedList* random_ints = nullptr;  // List of random integers
 
     int         seed        = 0;  // Seed for random number generation
-    int         to_generate;      // Number of nodes to generate
+    int         toGenerate  = 0;  // Number of nodes to generate
 
     // If a seed was passed from the command line,
     // parse it. Otherwise default to ctime
@@ -54,10 +53,10 @@ int main(int argc, char** argv)
     // If a node  count was passed from the command line,
     // parse it. Otherwise default to 10
     if (argc >= 3) {
-        to_generate = atoi(argv[2]);
+        toGenerate = atoi(argv[2]);
     }
     else {
-        to_generate = 10;
+        toGenerate = 10;
     }
 
     srand(seed);
@@ -69,7 +68,7 @@ int main(int argc, char** argv)
     random_ints = new LinkedList();
 
     // Generate a Linked List (LL) of 10 Nodes
-    for (int i = 0; i < to_generate; i++) {
+    for (int i = 0; i < toGenerate; i++) {
         random_ints->appendNode(randomInt());
     }
 
