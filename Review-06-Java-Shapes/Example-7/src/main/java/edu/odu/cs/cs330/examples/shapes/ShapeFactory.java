@@ -67,7 +67,7 @@ public class ShapeFactory {
     }
 
     /**
-     *  Print a list of known Shapes.
+     * Print a list of known Shapes.
      *
      * @return a string containing a newline delimited list of known shape names
      */

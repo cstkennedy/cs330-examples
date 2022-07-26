@@ -1,17 +1,18 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
 
 package shapes;
 
 import java.lang.StringBuilder;
 
 /**
- * The Shape Creating Wizard
+ * The Shape Creating Wizard.
+ *
+ * @author Thomas J Kennedy
  */
 public class ShapeFactory
 {
     /**
-     * Name Shape Pair 2-tuple(name, model).
+     * Name Shape Pair 2-tuple(name, model)
      */
     private static class ShapePair
     {
@@ -19,7 +20,7 @@ public class ShapeFactory
         public Shape  _model; ///< Model of the shape to clone
 
         /**
-         * Default Constructor - Used as sentinel.
+         * Default Constructor - Used as sentinel
          */
         public ShapePair()
         {
@@ -28,7 +29,7 @@ public class ShapeFactory
         }
 
         /**
-         * Non-Default Constructor.
+         * Non-Default Constructor
          *
          * @param name the name of a shape
          * @param shape a cloneable shape
@@ -40,7 +41,7 @@ public class ShapeFactory
         }
 
         /**
-         * Print the ShapePair.
+         * Print the ShapePair
          */
         public String toString()
         {
@@ -57,12 +58,15 @@ public class ShapeFactory
     }; ///< Listing of known shapes
 
     /**
-     *  Create a Shape.
+     * Create a Shape.
      *
-     *  @param name the shape to be created
+     * @param name the shape to be created
      *
-     *  @return A shape with the specified name
-     *      or null if no matching shape is found
+     * @return A shape with the specified name
+     *     or null if no matching shape is found
+     *
+     * @throws CloneNotSupportedException if a model shape is found and the
+     *     copy (i.e., clone) operation fails
      */
     public static Shape createShape(String name)
     {
@@ -76,9 +80,11 @@ public class ShapeFactory
     }
 
     /**
-     *  Determine whether a given shape is known.
+     * Determine whether a given shape is known.
      *
-     *  @param name the shape for which to query
+     * @param name the shape for which to query
+     *
+     * @return true if the specified name corresponds to a known shape
      */
     public static boolean isKnown(String name)
     {
@@ -92,7 +98,9 @@ public class ShapeFactory
     }
 
     /**
-     *  Print a list of known Shapes.
+     * Print a list of known Shapes.
+     *
+     * @return a string containing a newline delimited list of know shape names
      */
     public static String listKnown()
     {

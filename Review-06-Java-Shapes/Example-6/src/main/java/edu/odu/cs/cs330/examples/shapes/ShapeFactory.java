@@ -15,7 +15,7 @@ public class ShapeFactory {
     /**
      * Listing of known shapes.
      */
-    private static final Map<String, Shape> _KNOWN_SHAPES = new LinkedHashMap<String, Shape>() {{
+    private static final Map<String, Shape> _KNOWN_SHAPES = new LinkedHashMap<>() {{
         put("Triangle", new Triangle());
         put("Right Triangle", new RightTriangle());
         put("Equilateral Triangle", new EquilateralTriangle());
@@ -50,7 +50,8 @@ public class ShapeFactory {
             return null;
         }
 
-        return (Shape) _KNOWN_SHAPES.get(name).clone();
+        final Shape modelShape = _KNOWN_SHAPES.get(name);
+        return (Shape) modelShape.clone();
     }
 
     /**
@@ -66,7 +67,7 @@ public class ShapeFactory {
     }
 
     /**
-     *  Print a list of known Shapes.
+     * Print a list of known Shapes.
      *
      * @return a string containing a newline delimited list of known shape names
      */

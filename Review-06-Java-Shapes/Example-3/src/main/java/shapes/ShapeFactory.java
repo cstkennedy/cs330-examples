@@ -1,16 +1,16 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
 
 package shapes;
 
 import java.lang.StringBuilder;
 
 /**
- * The Shape Creating Wizard
+ * The Shape Creating Wizard.
+ *
+ * @author Thomas J Kennedy
  */
 public class ShapeFactory
 {
-
     /**
      * Name Shape Pair 2-tuple(name, model)
      */
@@ -58,12 +58,15 @@ public class ShapeFactory
     }; ///< Listing of known shapes
 
     /**
-     *  Create a Shape
+     * Create a Shape.
      *
-     *  @param name the shape to be created
+     * @param name the shape to be created
      *
-     *  @return A shape with the specified name
-     *      or null if no matching shape is found
+     * @return A shape with the specified name
+     *     or null if no matching shape is found
+     *
+     * @throws CloneNotSupportedException if a model shape is found and the
+     *     copy (i.e., clone) operation fails
      */
     public static Shape createShape(String name)
     {
@@ -77,9 +80,11 @@ public class ShapeFactory
     }
 
     /**
-     *  Determine whether a given shape is known
+     * Determine whether a given shape is known.
      *
-     *  @param name the shape for which to query
+     * @param name the shape for which to query
+     *
+     * @return true if the specified name corresponds to a known shape
      */
     public static boolean isKnown(String name)
     {
@@ -93,21 +98,23 @@ public class ShapeFactory
     }
 
     /**
-     *  Print a list of known Shapes
+     * Print a list of known Shapes.
+     *
+     * @return a string containing a newline delimited list of know shape names
      */
     public static String listKnown()
     {
         StringBuilder bld = new StringBuilder();
 
         for (ShapePair pair : _known_shapes) {
-            bld.append(pair);
+            bld.append(pair);  // Note: Implicit call to pair.toString()
         }
 
         return bld.toString();
     }
 
     /**
-     *  Determine the number of known Shapes
+     *  Determine the number of known Shapes.
      *
      *  @return the number of known shapes
      */
