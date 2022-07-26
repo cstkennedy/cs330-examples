@@ -106,7 +106,7 @@ public class RunShapes {
      * @param shapes container of Shapes
      * @param toAdd shape "reference" to add
      *
-     * @Deprecated Check explicitly for null values
+     * @deprecated Check explicitly for null values
      */
     private static void addShape(List<Shape> shapes, Shape toAdd)
     {

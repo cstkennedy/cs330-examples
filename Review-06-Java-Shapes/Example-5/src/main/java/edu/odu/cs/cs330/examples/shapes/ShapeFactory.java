@@ -2,6 +2,9 @@
 
 package edu.odu.cs.cs330.examples.shapes;
 
+import java.util.Map;
+import java.util.LinkedHashMap;
+
 /**
  * The Shape Creating Wizard.
  *
@@ -11,16 +14,25 @@ public class ShapeFactory {
     /**
      * Listing of known shapes.
      */
-    private static Shape[] _known_shapes = new Shape[] {
-        new Triangle(),
-        new RightTriangle(),
-        new EquilateralTriangle(),
-        new Square(),
-        new Circle()
-    };
+    private static final Map<String, Shape> _KNOWN_SHAPES = new LinkedHashMap<>() {{
+        put("Triangle", new Triangle());
+        put("Right Triangle", new RightTriangle());
+        put("Equilateral Triangle", new EquilateralTriangle());
+        put("Square", new Square());
+        put("Circle", new Circle());
+    }};
 
     /**
-     * Create a Shape.
+     * ShapeFactory is a collection of static functions. There is no reason to
+     * instantiate a ShapeFactory object.
+     */
+    private ShapeFactory()
+    {
+        // do not allow ShapeFactory to be instantiated.
+    }
+
+    /**
+     *  Create a Shape.
      *
      * @param name the shape to be created
      *
@@ -33,13 +45,12 @@ public class ShapeFactory {
     public static Shape createShape(String name)
         throws CloneNotSupportedException
     {
-        for (Shape shape : _known_shapes) {
-            if (shape.name().equals(name)) {
-                return (Shape) shape.clone();
-            }
+        if (!isKnown(name)) {
+            return null;
         }
 
-        return null;
+        final Shape modelShape = _KNOWN_SHAPES.get(name);
+        return (Shape) modelShape.clone();
     }
 
     /**
@@ -51,29 +62,29 @@ public class ShapeFactory {
      */
     public static boolean isKnown(String name)
     {
-        for (Shape shape : _known_shapes) {
-            if (shape.name().equals(name)) {
-                return true;
-            }
-        }
-
-        return false;
+        return _KNOWN_SHAPES.containsKey(name);
     }
 
     /**
      * Print a list of known Shapes.
      *
-     * @return a string containing a newline delimited list of know shape names
+     * @return a string containing a newline delimited list of known shape names
      */
     public static String listKnown()
     {
+        /*
         StringBuilder bld = new StringBuilder();
 
-        for (Shape shape : _known_shapes) {
-            bld.append(shape.name() + "\n");
+        for (String name : _KNOWN_SHAPES.keySet()) {
+            bld.append(name + "\n");
         }
 
         return bld.toString();
+        */
+
+        return _KNOWN_SHAPES.keySet()
+            .stream()
+            .collect(java.util.stream.Collectors.joining("\n", "", "\n"));
     }
 
     /**
@@ -83,6 +94,6 @@ public class ShapeFactory {
      */
     public static int numberKnown()
     {
-        return _known_shapes.length;
+        return _KNOWN_SHAPES.size();
     }
 }
