@@ -10,25 +10,40 @@ import static utilities.Utilities.horizontalLine;
 import shapes.*;
 
 
+/**
+ * This is the Java version of the previous C++ Shapes Inheritance Example.
+ *
+ * @author Thomas J Kennedy
+ */
 public class RunShapes {
-    static final String[] PROGRAM_HEADING = {
+    /**
+     * This is the Program Title.
+     */
+    private static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
-        "Thomas Kennedy"
-    };  ///< Program Title
+        "Thomas J. Kennedy"
+    };
 
+    /**
+     * The default heading width.
+     */
+    private static final int H_WIDTH = 38;
+
+    /**
+     * This is the main function.
+     */
     public static void main(String[] args)
     {
         // Print main program heading
         System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
         // Examine the ShapeFactory
-        System.out.println(heading("Available Shapes", 38, '*'));
+        System.out.println(heading("Available Shapes", H_WIDTH, '*'));
 
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
-        System.out.println(horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());
-
+        System.out.println(horizontalLine('-', H_WIDTH));
+        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
         System.out.println();
 
         // Create 5 "Random" Shapes
@@ -44,7 +59,7 @@ public class RunShapes {
 
         size = shapes.size();
 
-        System.out.println(heading("Shapes That Exist", 38, '*'));
+        System.out.println(heading("Shapes That Exist", H_WIDTH, '*'));
         System.out.printf("%-24s: %4d\n", "Original Size", size);
         System.out.printf("%-24s: %4d\n", "Invalid Shapes", (size - shapes.size()));
         System.out.printf("%-24s: %4d\n", "New Size", shapes.size());
@@ -52,7 +67,7 @@ public class RunShapes {
         System.out.println();
 
         // Print all the shapes
-        System.out.println(heading("Display All Shapes", 38, '*'));
+        System.out.println(heading("Display All Shapes", H_WIDTH, '*'));
 
         for (Shape s : shapes) {
             System.out.println(s);
@@ -61,7 +76,7 @@ public class RunShapes {
         // Using an iterator
 
         System.out.println();
-        System.out.println(horizontalLine('~', 38));
+        System.out.println(horizontalLine('~', H_WIDTH));
 
         // C++ Container<Shape*>::iterator it = shapes.begin()
         Iterator<Shape> it = shapes.iterator();

@@ -32,9 +32,14 @@ public class RunShapes {
     };
 
     /**
+     * The default heading width.
+     */
+    private static final int H_WIDTH = 38;
+
+    /**
      * This is the main function.
      *
-     * @param args[0] input filename
+     * @param args args[0] must specify the filename of a valid shape text file
      *
      * @throws CloneNotSupportedException if a Shape subclass can
      *     not be copied.
@@ -42,10 +47,9 @@ public class RunShapes {
     public static void main(String[] args)
         throws CloneNotSupportedException
     {
+        // Command line argument and File validation
         BufferedReader shapesFile = null;
         try {
-            // index is zero because java does command line arguments
-            // the wrong way
             shapesFile = new BufferedReader(new FileReader(args[0]));
         }
         catch (ArrayIndexOutOfBoundsException e) {
@@ -58,19 +62,16 @@ public class RunShapes {
         }
 
         // Print main program heading
-        System.out.println(
-            Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
-        );
+        System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
+        //----------------------------------------------------------------------
         // Examine the ShapeFactory
-        System.out.println(heading("Available Shapes", 38, '*'));
+        System.out.println(heading("Available Shapes", H_WIDTH, '*'));
 
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
-        System.out.println(horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.%n",
-                          ShapeFactory.numberKnown());
-
+        System.out.println(horizontalLine('-', H_WIDTH));
+        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
         System.out.println();
 
         // Create 5 "Random" Shapes
@@ -81,7 +82,7 @@ public class RunShapes {
         List<Shape> shapes = readShapes(scanner);
 
         // Print all the shapes
-        System.out.println(heading("Display All Shapes", 38, '*'));
+        System.out.println(heading("Display All Shapes", H_WIDTH, '*'));
         printShapes(shapes);
 
         // Using an iterator
@@ -105,7 +106,7 @@ public class RunShapes {
      * @param shapes container of Shapes
      * @param toAdd shape "reference" to add
      *
-     * @deprecated Check explicitly for null values
+     * @Deprecated Check explicitly for null values
      */
     private static void addShape(List<Shape> shapes, Shape toAdd)
     {

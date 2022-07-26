@@ -15,25 +15,48 @@ import static utilities.Utilities.horizontalLine;
 
 import shapes.*;
 
-public class RunShapes {
-    static final String[] PROGRAM_HEADING = {
-        "Objects & Inheritance: 2-D Shapes",
-        "Thomas Kennedy"
-    };  ///< Program Title
 
+/**
+ * This is the Java version of the previous C++ Shapes Inheritance Example.
+ *
+ * @author Thomas J Kennedy
+ */
+public class RunShapes {
+    /**
+     * This is the Program Title.
+     */
+    private static final String[] PROGRAM_HEADING = {
+        "Objects & Inheritance: 2-D Shapes",
+        "Thomas J. Kennedy"
+    };
+
+    /**
+     * The default heading width.
+     */
+    private static final int H_WIDTH = 38;
+
+    /**
+     * This is the main function.
+     *
+     * @param args args[0] must specify the filename of a valid shape text file
+     *
+     * @throws CloneNotSupportedException if a Shape subclass can
+     *     not be copied.
+     */
     public static void main(String[] args)
     {
+        // Command line argument and File validation
         BufferedReader shapesFile = null;
         try {
             // index is zero because java does command line arguments
             // the wrong way
             shapesFile = new BufferedReader(new FileReader(args[0]));
         }
-        catch(ArrayIndexOutOfBoundsException e) {
+        catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Usage: java -jar {jarfile} {inputTextFile}");
             System.exit(1);
         }
-        catch(FileNotFoundException e) {
+        catch (FileNotFoundException e) {
             System.out.println("File (" + args[0] + ") could not be opened.");
             System.exit(2);
         }
@@ -41,14 +64,14 @@ public class RunShapes {
         // Print main program heading
         System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
+        //----------------------------------------------------------------------
         // Examine the ShapeFactory
-        System.out.println(heading("Available Shapes", 38, '*'));
+        System.out.println(heading("Available Shapes", H_WIDTH, '*'));
 
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
-        System.out.println(horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());
-
+        System.out.println(horizontalLine('-', H_WIDTH));
+        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
         System.out.println();
 
         // Create 5 "Random" Shapes
@@ -59,7 +82,7 @@ public class RunShapes {
         ArrayList<Shape> shapes = readShapes(scanner);
 
         // Print all the shapes
-        System.out.println(heading("Display All Shapes", 38, '*'));
+        System.out.println(heading("Display All Shapes", H_WIDTH, '*'));
         printShapes(shapes);
 
         // Using an iterator
@@ -83,7 +106,7 @@ public class RunShapes {
      * @param shapes container of Shapes
      * @param toAdd shape "reference" to add
      *
-     * @deprecated
+     * @Deprecated Check explicitly for null values
      */
     private static void addShape(ArrayList<Shape> shapes, Shape toAdd)
     {
@@ -94,22 +117,28 @@ public class RunShapes {
 
     /**
      * Read shapes from an input stream
-     * and construct a `ArrayList<Shape>` object
+     * and construct an `ArrayList<Shape>` object.
+     *
+     * @param scanner input source
+     *
+     * @return collection of read-in shapes
+     *
+     * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
+     *     model shape
      */
     private static ArrayList<Shape> readShapes(Scanner scanner)
     {
         ArrayList<Shape> collection = new ArrayList<Shape>();
 
         while (scanner.hasNextLine()) {
-            String  line = scanner.nextLine();
+            String line   = scanner.nextLine();
 
             //String name = inLineScanner.next();
             int    sIndex = line.indexOf(';', 0);
             String name   = line.substring(0, sIndex); // [0, sIndex)
 
-            Scanner lineScanner = new Scanner(
-                line.substring(sIndex + 1, line.length())
-            );
+            Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
+                                                             line.length()));
 
             //System.out.println(line);
             //System.out.println(name);
@@ -122,11 +151,11 @@ public class RunShapes {
                 // Let us skip the call to addShape
                 collection.add(s);
             }
-            else {
+            //else {
                 // Ignore inLineScanner and line
                 // they will cease to exist
                 // after this loop iteration
-            }
+            //}
         }
 
         return collection;
@@ -146,7 +175,7 @@ public class RunShapes {
      * Print shape names for all `Shape`s in a `ArrayList<Shape>` to a
      * specified output stream
      */
-    static void printShapeNames(ArrayList<Shape> toPrint)
+    private static void printShapeNames(ArrayList<Shape> toPrint)
     {
         // C++ Container<Shape*>::iterator it = shapes.begin()
         Iterator<Shape> it = toPrint.iterator();
@@ -163,7 +192,7 @@ public class RunShapes {
      *
      * @return an iterator at the position of the largest `Shape`
      */
-    static Shape findLargestShapeByArea(ArrayList<Shape> collection)
+    private static Shape findLargestShapeByArea(ArrayList<Shape> collection)
     {
         Iterator<Shape> it = collection.iterator();
 

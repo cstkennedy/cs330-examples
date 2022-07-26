@@ -2,11 +2,22 @@ import utilities.Utilities;
 import shapes.*;
 
 public class RunShapes {
-    static final String[] PROGRAM_HEADING = {
+    /**
+     * This is the Program Title.
+     */
+    private static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
-        "Thomas Kennedy"
-    };  ///< Program Title
+        "Thomas J. Kennedy"
+    };
 
+    /**
+     * The default heading width.
+     */
+    private static final int H_WIDTH = 38;
+
+    /**
+     * This is the main function.
+     */
     public static void main(String[] args)
     {
         // --Erroneous C++ Variable Declarations--
@@ -66,7 +77,7 @@ public class RunShapes {
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(Utilities.horizontalLine('-', 38));
-        System.out.printf("%2d shapes available.\n", ShapeFactory.numberKnown());
+        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
 
         System.out.println();
 

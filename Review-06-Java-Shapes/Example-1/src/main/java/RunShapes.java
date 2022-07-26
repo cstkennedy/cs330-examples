@@ -4,21 +4,24 @@ import utilities.Utilities;
 import shapes.*;
 
 public class RunShapes {
-    static final String[] PROGRAM_HEADING = {
+    /**
+     * This is the Program Title.
+     */
+    private static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
-        "Thomas Kennedy"
-    };  ///< Program Title
+        "Thomas J. Kennedy"
+    };
 
     public static void main(String[] arg)
     {
         // --Erroneous C++ Variable Declarations--
         // --Valid Java Variable Declarations--
-        Shape               shape   = null; // Declare an "instance" of Shape
-        Shape[]             shapes  = null; // Declare an Array of Shapes
+        Shape               shape  = null; // Declare an "instance" of Shape
+        Shape[]             shapes = null; // Declare an Array of Shapes
 
-        Triangle            tri     = null;
-        RightTriangle       rhtTri  = null;
-        EquilateralTriangle eqlTri  = null;
+        Triangle            tri    = null;
+        RightTriangle       rhtTri = null;
+        EquilateralTriangle eqlTri = null;
 
         // ShapeFactory Discussion
         int size = 0;

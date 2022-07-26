@@ -51,10 +51,9 @@ public class RunShapes {
     public static void main(String[] args)
         throws CloneNotSupportedException
     {
+        // Command line argument and File validation
         BufferedReader shapesFile = null;
         try {
-            // index is zero because java does command line arguments
-            // the wrong way
             shapesFile = new BufferedReader(new FileReader(args[0]));
         }
         catch (ArrayIndexOutOfBoundsException e) {
@@ -122,7 +121,7 @@ public class RunShapes {
     private static List<Shape> readShapes(BufferedReader buffer)
         throws CloneNotSupportedException
     {
-        List<Shape> collection = new ArrayList<Shape>();
+        List<Shape> collection = new ArrayList<>();
 
         Iterator<Shape> it = new ShapeIterator(buffer);
 
