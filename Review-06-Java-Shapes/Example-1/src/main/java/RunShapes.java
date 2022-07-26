@@ -12,7 +12,15 @@ public class RunShapes {
         "Thomas J. Kennedy"
     };
 
-    public static void main(String[] arg)
+    /**
+     * The default heading width.
+     */
+    private static final int H_WIDTH = 38;
+
+    /**
+     * This is the main function.
+     */
+    public static void main(String[] args)
     {
         // --Erroneous C++ Variable Declarations--
         // --Valid Java Variable Declarations--
@@ -43,17 +51,17 @@ public class RunShapes {
         */
 
         System.out.println(
-            Utilities.seperatedHeading("Display a Right Triangle (rhtTri)", 38, '-')
+            Utilities.seperatedHeading("Display a Right Triangle (rhtTri)", H_WIDTH, '-')
         );
         System.out.println(rhtTri);
 
         System.out.println(
-            Utilities.seperatedHeading("Display a Right Triangle (tri)", 38, '-')
+            Utilities.seperatedHeading("Display a Right Triangle (tri)", H_WIDTH, '-')
         );
         System.out.println(tri);
 
         System.out.println(
-            Utilities.seperatedHeading("Display a Right Triangle (shape)", 38, '-')
+            Utilities.seperatedHeading("Display a Right Triangle (shape)", H_WIDTH, '-')
         );
         System.out.println(shape);
 
@@ -72,24 +80,18 @@ public class RunShapes {
         shape  = eqlTri; // Point shape to rhtTri
 
         System.out.println(
-            Utilities.seperatedHeading("Display an Eql. Triangle (eqlTri)", 38, '-')
+            Utilities.seperatedHeading("Display an Eql. Triangle (eqlTri)", H_WIDTH, '-')
         );
         System.out.println(eqlTri);
 
         System.out.println(
-            Utilities.seperatedHeading("Display an Eql. Triangle (tri)", 38, '-')
+            Utilities.seperatedHeading("Display an Eql. Triangle (tri)", H_WIDTH, '-')
         );
         System.out.println(tri);
 
         System.out.println(
-            Utilities.seperatedHeading("Display an Eql. Triangle (shape)", 38, '-')
+            Utilities.seperatedHeading("Display an Eql. Triangle (shape)", H_WIDTH, '-')
         );
         System.out.println(shape);
-
-        // Divide Output - Separate ShapeFactory Output
-        System.out.println(
-            Utilities.horizontalLine('~', Utilities.W_WIDTH)
-        );
-        System.out.println();
     }
 }
