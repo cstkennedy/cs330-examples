@@ -156,12 +156,12 @@ public class Triangle extends Shape
     @Override
     public String toString()
     {
-        return String.format(STR_FMT, "Name", this._name)
-             + String.format(FPT_FMT, "Side A", this._side_a)
-             + String.format(FPT_FMT, "Side B", this._side_b)
-             + String.format(FPT_FMT, "Side C", this._side_c)
-             + String.format(FPT_FMT, "Perimeter", this.perimeter())
-             + String.format(FPT_FMT, "Area", this.area());
+        return String.format(FMT_STR, "Name", this._name)
+             + String.format(FMT_DBL, "Side A", this._side_a)
+             + String.format(FMT_DBL, "Side B", this._side_b)
+             + String.format(FMT_DBL, "Side C", this._side_c)
+             + String.format(FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(FMT_DBL, "Area", this.area());
     }
 }
 

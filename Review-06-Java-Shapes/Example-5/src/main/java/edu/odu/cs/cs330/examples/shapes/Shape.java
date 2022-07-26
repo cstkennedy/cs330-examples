@@ -1,5 +1,4 @@
 // Thomas Kennedy
-// CS 330 Fall 2018
 
 package edu.odu.cs.cs330.examples.shapes;
 
@@ -13,35 +12,19 @@ import java.util.Scanner;
 public abstract class Shape implements Cloneable {
 
     /**
-     * Label Output Width.
+     * Base for Shape formatting strings.
      */
-    protected static final int WIDTH_LABEL = 12;
-
-    /**
-     * Value Output Width.
-     */
-    protected static final int WIDTH_VALUE = 24;
+    protected static final String FMT_BASE = "%-12s: %24";
 
     /**
      * The string-value format string.
      */
-    protected static final String FMT_STR = getFormat("s%n");
+    protected static final String FMT_STR = FMT_BASE + "s%n";
 
     /**
      * The double-value format string.
      */
-    protected static final String FMT_DBL = getFormat(".4f%n");
-
-    /**
-     * Generate the format string for a label-value pair.
-     *
-     * @param value_format trailing portion of a format String
-     * @return complete label-value format String
-     */
-    protected static String getFormat(String value_format)
-    {
-        return "%-" + WIDTH_LABEL + "s: %" + WIDTH_VALUE + value_format;
-    }
+    protected static final String FMT_DBL = FMT_BASE + ".4f%n";
 
     /**
      * Geometric Name of the 2-D Figure.
@@ -80,6 +63,7 @@ public abstract class Shape implements Cloneable {
      * Modify the name.
      *
      * @param _name new Shape name
+     * @return shape name
      */
     protected void name(String _name)
     {
@@ -115,7 +99,7 @@ public abstract class Shape implements Cloneable {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this._name);
+        return String.format(FMT_STR, "Name", this.name());
     }
 }
 

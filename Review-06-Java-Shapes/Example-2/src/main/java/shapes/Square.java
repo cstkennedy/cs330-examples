@@ -81,9 +81,9 @@ public class Square extends Shape
     public String toString()
     {
        return super.toString()
-            + String.format(FPT_FMT, "Side", this._side)
-            + String.format(FPT_FMT, "Perimeter", this.perimeter())
-            + String.format(FPT_FMT, "Area", this.area());
+            + String.format(FMT_DBL, "Side", this._side)
+            + String.format(FMT_DBL, "Perimeter", this.perimeter())
+            + String.format(FMT_DBL, "Area", this.area());
     }
 }
 
