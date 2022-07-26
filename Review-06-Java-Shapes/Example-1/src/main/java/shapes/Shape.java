@@ -4,40 +4,31 @@
 package shapes;
 
 /**
- * Shape in a 2-D Cartesian Plane
+ * Shape in a 2-D Cartesian Plane.
+ *
+ * @author Thomas J Kennedy
  */
-public abstract class Shape implements Cloneable
-{
-    protected static final int WIDTH_LABEL = 12; ///< Label Output Width
-    protected static final int WIDTH_VALUE = 24; ///< Value Output Width
+public abstract class Shape implements Cloneable {
 
     /**
-     * Format String for a label and Floating Point value
+     * Base for Shape formatting strings.
      */
-    protected static final String FPT_FMT = "%-" + WIDTH_LABEL + "s: "
-                                          + "%" + WIDTH_VALUE + ".4f%n";
+    protected static final String FMT_BASE = "%-12s: %24";
 
     /**
-     * Format String for a label and String value
+     * The string-value format string.
      */
-    protected static final String STR_FMT = "%-" + WIDTH_LABEL + "s: "
-                                          + "%" + WIDTH_VALUE + "s%n";
+    protected static final String FMT_STR = FMT_BASE + "s%n";
 
     /**
-     * Generate the format string for a label-value pair
-     *
-     * @param value_format trailing portion of a format String
-     * @return complete label-value format String
+     * The double-value format string.
      */
-    protected static String getFormat(String value_format)
-    {
-        return "%-" + WIDTH_LABEL +"s: %" + WIDTH_VALUE + value_format;
-    }
+    protected static final String FMT_DBL = FMT_BASE + ".4f%n";
 
     protected String _name; ///< Geometric Name of the 2-D Figure
 
     /**
-     * Default Shape Constructor
+     * Default Shape Constructor.
      */
     public Shape()
     {
@@ -45,7 +36,7 @@ public abstract class Shape implements Cloneable
     }
 
     /**
-     * Shape Constructor
+     * Shape Constructor.
      *
      * @param name the desired Shape name
      */
@@ -55,7 +46,9 @@ public abstract class Shape implements Cloneable
     }
 
     /**
-     * Return the name
+     * Return the name.
+     *
+     * @return shape name
      */
     public String name()
     {
@@ -63,7 +56,7 @@ public abstract class Shape implements Cloneable
     }
 
     /**
-     * Modify the name
+     * Modify the name.
      *
      * @param _name new Shape name
      * @return shape name
@@ -74,14 +67,14 @@ public abstract class Shape implements Cloneable
     }
 
     /**
-     * Compute the area
+     * Compute the area.
      *
      * @return area
      */
     public abstract double area();
 
     /**
-     * Compute the perimeter
+     * Compute the perimeter.
      *
      * @return perimeter
      */
@@ -93,7 +86,7 @@ public abstract class Shape implements Cloneable
     @Override
     public String toString()
     {
-        return String.format(STR_FMT, "Name", this._name);
+        return String.format(FMT_STR, "Name", this.name());
 
         //return "Name: " + this_.name;
     }
