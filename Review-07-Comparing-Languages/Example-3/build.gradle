@@ -7,7 +7,7 @@ buildscript {
 plugins {
     id "java"
 
-    id "com.github.spotbugs" version "4.6.2"
+    id "com.github.spotbugs" version "5.0.9"
     id "project-report"
     id "jacoco"
     id "pmd"
