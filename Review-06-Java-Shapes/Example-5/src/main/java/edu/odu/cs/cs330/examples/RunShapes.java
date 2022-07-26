@@ -202,7 +202,7 @@ public class RunShapes {
         Shape largestShape = it.next();
 
         while (it.hasNext()) {
-            //std::cerr << "\n" << *(*it) << "\n"; // debugging
+            // std::cerr << "\n" << *(*it) << "\n"; // C++ debugging
 
             Shape s = it.next();
 

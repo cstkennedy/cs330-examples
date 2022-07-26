@@ -1,5 +1,6 @@
 //Programmer : Thomas Kennedy
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -44,12 +45,11 @@ public class RunShapes {
      *     not be copied.
      */
     public static void main(String[] args)
+        throws CloneNotSupportedException
     {
         // Command line argument and File validation
         BufferedReader shapesFile = null;
         try {
-            // index is zero because java does command line arguments
-            // the wrong way
             shapesFile = new BufferedReader(new FileReader(args[0]));
         }
         catch (ArrayIndexOutOfBoundsException e) {
@@ -75,11 +75,11 @@ public class RunShapes {
         System.out.println();
 
         // Create 5 "Random" Shapes
-        int              size   = 0; // original size of shapes container
+        //int              size   = 0; // original size of shapes container
 
         Scanner scanner = new Scanner(shapesFile);
 
-        ArrayList<Shape> shapes = readShapes(scanner);
+        List<Shape> shapes = readShapes(scanner);
 
         // Print all the shapes
         System.out.println(heading("Display All Shapes", H_WIDTH, '*'));
@@ -106,9 +106,9 @@ public class RunShapes {
      * @param shapes container of Shapes
      * @param toAdd shape "reference" to add
      *
-     * @Deprecated Check explicitly for null values
+     * @deprecated Check explicitly for null values
      */
-    private static void addShape(ArrayList<Shape> shapes, Shape toAdd)
+    private static void addShape(List<Shape> shapes, Shape toAdd)
     {
         if (toAdd != null) {
             shapes.add(toAdd);
@@ -126,7 +126,8 @@ public class RunShapes {
      * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
      *     model shape
      */
-    private static ArrayList<Shape> readShapes(Scanner scanner)
+    private static List<Shape> readShapes(Scanner scanner)
+        throws CloneNotSupportedException
     {
         ArrayList<Shape> collection = new ArrayList<Shape>();
 
@@ -164,7 +165,7 @@ public class RunShapes {
     /**
      * Print shapes from a `ArrayList<Shape>`
      */
-    private static void printShapes(ArrayList<Shape> toPrint)
+    private static void printShapes(List<Shape> toPrint)
     {
         for (Shape s : toPrint) {
             System.out.println(s);
@@ -175,7 +176,7 @@ public class RunShapes {
      * Print shape names for all `Shape`s in a `ArrayList<Shape>` to a
      * specified output stream
      */
-    private static void printShapeNames(ArrayList<Shape> toPrint)
+    private static void printShapeNames(List<Shape> toPrint)
     {
         // C++ Container<Shape*>::iterator it = shapes.begin()
         Iterator<Shape> it = toPrint.iterator();
@@ -192,7 +193,7 @@ public class RunShapes {
      *
      * @return an iterator at the position of the largest `Shape`
      */
-    private static Shape findLargestShapeByArea(ArrayList<Shape> collection)
+    private static Shape findLargestShapeByArea(List<Shape> collection)
     {
         Iterator<Shape> it = collection.iterator();
 
