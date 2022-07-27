@@ -70,6 +70,7 @@ public class RunShapes {
 
         //----------------------------------------------------------------------
         // Examine the ShapeFactory
+        //----------------------------------------------------------------------
         System.out.println(heading("Available Shapes", H_WIDTH, '*'));
 
         System.out.print(ShapeFactory.listKnown());

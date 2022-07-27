@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 
 import utilities.Utilities;
@@ -34,28 +35,41 @@ public class RunShapes {
      */
     public static void main(String[] args)
     {
+        //----------------------------------------------------------------------
         // Print main program heading
+        //----------------------------------------------------------------------
         System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
-        // Examine the ShapeFactory
-        System.out.println(heading("Available Shapes", H_WIDTH, '*'));
-
+        //----------------------------------------------------------------------
         // List the available shapes
+        //----------------------------------------------------------------------
+        System.out.println(heading("Available Shapes", H_WIDTH, '*'));
         System.out.print(ShapeFactory.listKnown());
         System.out.println(horizontalLine('-', H_WIDTH));
         System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
         System.out.println();
 
+        //----------------------------------------------------------------------
         // Create 5 "Random" Shapes
-        ArrayList<Shape> shapes = new ArrayList<Shape>();
-        int              size   = 0; // original size of shapes container
+        //----------------------------------------------------------------------
+        List<Shape> shapes = new ArrayList<Shape>();
+        int         size   = 0; // original size of shapes container
 
-        addShape(shapes, ShapeFactory.createShape("Triangle"));
-        addShape(shapes, ShapeFactory.createShape("Right Triangle"));
-        addShape(shapes, ShapeFactory.createShape("Equilateral Triangle"));
-        addShape(shapes, ShapeFactory.createShape("Square"));
-        addShape(shapes, ShapeFactory.createShape("Circle"));
-        addShape(shapes, ShapeFactory.createShape("1337 Haxor"));
+        String[] shapesToCreate = {
+            "Triangle",
+            "Right Triangle",
+            "Equilateral Triangle",
+            "Square",
+            "Circle",
+            "1337 Haxor"
+        };
+
+        for (String name : shapesToCreate) {
+            Shape toAdd = ShapeFactory.createShape(name);
+            if (toAdd != null) {
+                shapes.add(toAdd);
+            }
+        }
 
         size = shapes.size();
 
@@ -63,18 +77,20 @@ public class RunShapes {
         System.out.printf("%-24s: %4d\n", "Original Size", size);
         System.out.printf("%-24s: %4d\n", "Invalid Shapes", (size - shapes.size()));
         System.out.printf("%-24s: %4d\n", "New Size", shapes.size());
-
         System.out.println();
 
+        //----------------------------------------------------------------------
         // Print all the shapes
+        //----------------------------------------------------------------------
         System.out.println(heading("Display All Shapes", H_WIDTH, '*'));
 
         for (Shape s : shapes) {
             System.out.println(s);
         }
 
+        //----------------------------------------------------------------------
         // Using an iterator
-
+        //----------------------------------------------------------------------
         System.out.println();
         System.out.println(horizontalLine('~', H_WIDTH));
 
@@ -86,19 +102,6 @@ public class RunShapes {
             Shape s = it.next();
             System.out.println(s);
             // System.out.println(it.next());
-        }
-    }
-
-    /**
-     * Add a Shape iff it is not null
-     *
-     * @param shapes container of Shapes
-     * @param toAdd shape "reference" to add
-     */
-    private static void addShape(ArrayList<Shape> shapes, Shape toAdd)
-    {
-        if (toAdd != null) {
-            shapes.add(toAdd);
         }
     }
 }

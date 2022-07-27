@@ -31,15 +31,14 @@ public class RunShapes {
         RightTriangle       rhtTri = null;
         EquilateralTriangle eqlTri = null;
 
-        // ShapeFactory Discussion
-        int size = 0;
-
         // Print main program heading
         System.out.println(
             Utilities.projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH)
         );
 
+        //----------------------------------------------------------------------
         // Create one RightTriangle
+        //----------------------------------------------------------------------
         rhtTri  = new RightTriangle(1, 2);
 
         tri     = rhtTri; // Point tri to rhtTri
@@ -65,7 +64,9 @@ public class RunShapes {
         );
         System.out.println(shape);
 
+        //----------------------------------------------------------------------
         // Divide Output - Separate Right Triangle from Eql. Triangle
+        //----------------------------------------------------------------------
         System.out.println(
             Utilities.horizontalLine('~', Utilities.W_WIDTH)
         );

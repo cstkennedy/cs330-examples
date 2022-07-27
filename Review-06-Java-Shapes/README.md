@@ -22,6 +22,14 @@ This discussion is split into two parts:
   2. [Part 2](https://youtu.be/PIPNWUCqwlk) - Example 4 to Example 5
   2. [Part 3](https://youtu.be/YE-Pu1ELoi4) - Example 6
 
+  - **Example 1**
+  - **Example 2**
+  - **Example 3**
+  - **Example 4**
+  - **Example 5**
+  - **Example 6**
+  - **Example 7**
+
 ---
 
 # Overview

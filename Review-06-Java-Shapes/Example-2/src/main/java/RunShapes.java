@@ -1,6 +1,12 @@
 import utilities.Utilities;
 import shapes.*;
 
+
+/**
+ * This is the Java version of the previous C++ Shapes Inheritance Example.
+ *
+ * @author Thomas J Kennedy
+ */
 public class RunShapes {
     /**
      * This is the Program Title.
@@ -72,18 +78,19 @@ public class RunShapes {
         */
 
         // Examine the ShapeFactory
-        System.out.println(Utilities.heading("Available Shapes", 38, '*'));
+        System.out.println(Utilities.heading("Available Shapes", H_WIDTH, '*'));
 
+        //----------------------------------------------------------------------
         // List the available shapes
         System.out.print(ShapeFactory.listKnown());
-        System.out.println(Utilities.horizontalLine('-', 38));
+        System.out.println(Utilities.horizontalLine('-', H_WIDTH));
         System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
-
         System.out.println();
 
+        //----------------------------------------------------------------------
         // Create 5 "Random" Shapes
         size   = 6; // original size of the array
-        shapes = new Shape[ size ];
+        shapes = new Shape[size];
 
         shapes[0] = ShapeFactory.createShape("Triangle");
         shapes[1] = ShapeFactory.createShape("Right Triangle");
@@ -94,22 +101,24 @@ public class RunShapes {
 
         shapes = pruneNullPtr(shapes);
 
-        System.out.println(Utilities.heading("Shapes That Exist", 38, '*'));
+        System.out.println(Utilities.heading("Shapes That Exist", H_WIDTH, '*'));
         System.out.printf("%-24s: %4d\n", "Original Size", size);
         System.out.printf("%-24s: %4d\n", "Invalid Shapes", (size - shapes.length));
         System.out.printf("%-24s: %4d\n", "New Size", shapes.length);
 
         System.out.println();
 
+        //----------------------------------------------------------------------
         // Print all the shapes
-        System.out.println(Utilities.heading("Display All Shapes", 38, '*'));
+        //----------------------------------------------------------------------
+        System.out.println(Utilities.heading("Display All Shapes", H_WIDTH, '*'));
 
         for (Shape s : shapes) {
             System.out.println(s);
         }
     }
 
-    /*
+    /**
      * Prune the Non-Existent--i.e., null--shapes
      * from the array
      *

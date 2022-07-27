@@ -77,9 +77,7 @@ public class RunShapes {
         // Create 5 "Random" Shapes
         //int              size   = 0; // original size of shapes container
 
-        Scanner scanner = new Scanner(shapesFile);
-
-        List<Shape> shapes = readShapes(scanner);
+        List<Shape> shapes = readShapes(shapesFile);
 
         // Print all the shapes
         System.out.println(heading("Display All Shapes", H_WIDTH, '*'));
@@ -101,34 +99,20 @@ public class RunShapes {
     }
 
     /**
-     * Add a Shape iff it is not null
-     *
-     * @param shapes container of Shapes
-     * @param toAdd shape "reference" to add
-     *
-     * @deprecated Check explicitly for null values
-     */
-    private static void addShape(List<Shape> shapes, Shape toAdd)
-    {
-        if (toAdd != null) {
-            shapes.add(toAdd);
-        }
-    }
-
-    /**
      * Read shapes from an input stream
      * and construct an `ArrayList<Shape>` object.
      *
-     * @param scanner input source
+     * @param shapesFile input source
      *
      * @return collection of read-in shapes
      *
      * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
      *     model shape
      */
-    private static List<Shape> readShapes(Scanner scanner)
+    private static List<Shape> readShapes(BufferedReader shapesFile)
         throws CloneNotSupportedException
     {
+        Scanner scanner = new Scanner(shapesFile);
         ArrayList<Shape> collection = new ArrayList<Shape>();
 
         while (scanner.hasNextLine()) {
