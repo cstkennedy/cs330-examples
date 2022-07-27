@@ -83,15 +83,26 @@ public class RunShapes {
         // Print all the shapes
         System.out.println(heading("Display Shape Names", H_WIDTH, '*'));
         //printShapeNames(shapes);
+
+        for (Shape shp : shapes) {
+            System.out.println(shp.name());
+        }
+
+        /*
         shapes.stream()
             .map(Shape::name)
             .forEach(System.out::println);
+        */
 
-        // Using a stream
         System.out.println();
         System.out.println(heading("Display Shapes", H_WIDTH, '~'));
+        for (Shape shp : shapes) {
+            System.out.println(shp);
+        }
+        /*
         shapes.stream()
             .forEach(System.out::println);
+        */
 
         System.out.println();
 

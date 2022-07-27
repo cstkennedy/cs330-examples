@@ -72,6 +72,16 @@ public class ShapeFactory {
      */
     public static String listKnown()
     {
+        /*
+        StringBuilder bld = new StringBuilder();
+
+        for (String name : _KNOWN_SHAPES.keySet()) {
+            bld.append(name + "\n");
+        }
+
+        return bld.toString();
+        */
+
         return _KNOWN_SHAPES.keySet()
             .stream()
             .collect(java.util.stream.Collectors.joining("\n", "", "\n"));

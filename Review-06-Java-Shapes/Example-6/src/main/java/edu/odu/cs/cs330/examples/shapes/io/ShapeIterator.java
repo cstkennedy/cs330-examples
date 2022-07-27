@@ -63,7 +63,7 @@ public class ShapeIterator implements Iterator<Shape>
     private Shape readNext()
         throws IOException, CloneNotSupportedException
     {
-        String  line = theBuffer.readLine();
+        String line = theBuffer.readLine();
         Shape shp = null;
 
         while (shp == null && line != null) {
@@ -75,19 +75,29 @@ public class ShapeIterator implements Iterator<Shape>
             if (shp != null) {
                 Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
                                                                  line.length()));
-                final int numDoubles = shp.numDims();
-                double[] dims = new double[numDoubles];
 
-                for (int i = 0; i < numDoubles; ++i) {
-                    dims[i] = lineScanner.nextDouble();
-                }
-
-                shp.createFromDims(dims);
+                shp = initShapeFromDims(shp, lineScanner);
             }
             else {
                 line = theBuffer.readLine();
             }
         }
+
+        return shp;
+    }
+
+    /**
+     * T.B.W.
+     */
+    private Shape initShapeFromDims(Shape shp, Scanner snr)
+    {
+        double[] dims = new double[shp.numDims()];
+
+        for (int i = 0; i < dims.length; ++i) {
+            dims[i] = snr.nextDouble();
+        }
+
+        shp.createFromDims(dims);
 
         return shp;
     }

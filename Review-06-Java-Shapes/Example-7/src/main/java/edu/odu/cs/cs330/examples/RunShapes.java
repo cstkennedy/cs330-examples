@@ -70,6 +70,7 @@ public class RunShapes {
 
         //----------------------------------------------------------------------
         // Examine the ShapeFactory
+        //----------------------------------------------------------------------
         System.out.println(heading("Available Shapes", H_WIDTH, '*'));
 
         System.out.print(ShapeFactory.listKnown());
@@ -81,16 +82,27 @@ public class RunShapes {
 
         // Print all the shapes
         System.out.println(heading("Display Shape Names", H_WIDTH, '*'));
+        //printShapeNames(shapes);
+
         for (Shape shp : shapes) {
             System.out.println(shp.name());
         }
 
-        // Using a stream
+        /*
+        shapes.stream()
+            .map(Shape::name)
+            .forEach(System.out::println);
+        */
+
         System.out.println();
         System.out.println(heading("Display Shapes", H_WIDTH, '~'));
         for (Shape shp : shapes) {
             System.out.println(shp);
         }
+        /*
+        shapes.stream()
+            .forEach(System.out::println);
+        */
 
         System.out.println();
 
