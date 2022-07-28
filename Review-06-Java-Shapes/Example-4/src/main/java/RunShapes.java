@@ -68,8 +68,6 @@ public class RunShapes {
         // Examine the ShapeFactory
         //----------------------------------------------------------------------
         System.out.println(heading("Available Shapes", H_WIDTH, '*'));
-
-        // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(horizontalLine('-', H_WIDTH));
         System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
@@ -88,10 +86,6 @@ public class RunShapes {
 
         System.out.println(heading("Display Largest Shape (Area)", 38, '~'));
         Shape largestShape = findLargestShapeByArea(shapes);
-
-        //cout << largestShape << "\n"; // oops again
-        //cout << *largestShape << "\n";
-        //cout << *(*it) << "\n"; // skip the temporary Shape*
         System.out.println(largestShape);
     }
 
@@ -120,10 +114,8 @@ public class RunShapes {
 
             Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
                                                              line.length()));
-
-
-            //System.out.println(line);
-            //System.out.println(name);
+            // System.out.println(line);
+            // System.out.println(name);
 
             Shape s = ShapeFactory.createShape(name);
 
@@ -181,8 +173,6 @@ public class RunShapes {
         Shape largestShape = it.next();
 
         while (it.hasNext()) {
-            // std::cerr << "\n" << *(*it) << "\n"; // C++ debugging
-
             Shape s = it.next();
 
             if (s.area() > largestShape.area()) {
