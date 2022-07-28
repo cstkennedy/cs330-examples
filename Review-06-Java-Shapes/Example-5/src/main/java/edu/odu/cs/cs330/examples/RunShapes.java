@@ -66,16 +66,12 @@ public class RunShapes {
 
         //----------------------------------------------------------------------
         // Examine the ShapeFactory
+        //----------------------------------------------------------------------
         System.out.println(heading("Available Shapes", H_WIDTH, '*'));
-
-        // List the available shapes
         System.out.print(ShapeFactory.listKnown());
         System.out.println(horizontalLine('-', H_WIDTH));
         System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
         System.out.println();
-
-        // Create 5 "Random" Shapes
-        //int              size   = 0; // original size of shapes container
 
         List<Shape> shapes = readShapes(shapesFile);
 
@@ -84,17 +80,12 @@ public class RunShapes {
         printShapes(shapes);
 
         // Using an iterator
-        System.out.println();
         System.out.println(heading("Display Shape Names", 38, '~'));
         printShapeNames(shapes);
         System.out.println();
 
         System.out.println(heading("Display Largest Shape (Area)", 38, '~'));
         Shape largestShape = findLargestShapeByArea(shapes);
-
-        //cout << largestShape << "\n"; // oops again
-        //cout << *largestShape << "\n";
-        //cout << *(*it) << "\n"; // skip the temporary Shape*
         System.out.println(largestShape);
     }
 
@@ -118,29 +109,20 @@ public class RunShapes {
         while (scanner.hasNextLine()) {
             String line   = scanner.nextLine();
 
-            //String name = inLineScanner.next();
             int    sIndex = line.indexOf(';', 0);
             String name   = line.substring(0, sIndex); // [0, sIndex)
 
             Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
                                                              line.length()));
 
-            //System.out.println(line);
-            //System.out.println(name);
+
 
             Shape s = ShapeFactory.createShape(name);
 
             if (s != null) {
                 s.read(lineScanner);
-
-                // Let us skip the call to addShape
                 collection.add(s);
             }
-            //else {
-                // Ignore inLineScanner and line
-                // they will cease to exist
-                // after this loop iteration
-            //}
         }
 
         return collection;

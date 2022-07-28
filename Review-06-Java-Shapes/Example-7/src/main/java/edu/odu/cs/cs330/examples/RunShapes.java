@@ -72,7 +72,6 @@ public class RunShapes {
         // Examine the ShapeFactory
         //----------------------------------------------------------------------
         System.out.println(heading("Available Shapes", H_WIDTH, '*'));
-
         System.out.print(ShapeFactory.listKnown());
         System.out.println(horizontalLine('-', H_WIDTH));
         System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
@@ -123,19 +122,19 @@ public class RunShapes {
      * Read shapes from an input stream
      * and construct an `ArrayList<Shape>` object.
      *
-     * @param buffer input source
+     * @param shapesFile input source
      *
      * @return collection of read-in shapes
      *
      * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
      *     model shape
      */
-    private static List<Shape> readShapes(BufferedReader buffer)
+    private static List<Shape> readShapes(BufferedReader shapesFile)
         throws CloneNotSupportedException
     {
         List<Shape> collection = new ArrayList<>();
 
-        Iterator<Shape> it = new ShapeIterator(buffer);
+        Iterator<Shape> it = new ShapeIterator(shapesFile);
 
         while (it.hasNext()) {
             Shape shp = it.next();

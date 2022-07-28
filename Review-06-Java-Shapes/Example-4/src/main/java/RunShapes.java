@@ -82,7 +82,6 @@ public class RunShapes {
         printShapes(shapes);
 
         // Using an iterator
-        System.out.println();
         System.out.println(heading("Display Shape Names", 38, '~'));
         printShapeNames(shapes);
         System.out.println();
@@ -116,12 +115,12 @@ public class RunShapes {
         while (scanner.hasNextLine()) {
             String line   = scanner.nextLine();
 
-            //String name = inLineScanner.next();
             int    sIndex = line.indexOf(';', 0);
             String name   = line.substring(0, sIndex); // [0, sIndex)
 
             Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
                                                              line.length()));
+
 
             //System.out.println(line);
             //System.out.println(name);
@@ -130,8 +129,6 @@ public class RunShapes {
 
             if (s != null) {
                 s.read(lineScanner);
-
-                // Let us skip the call to addShape
                 collection.add(s);
             }
             //else {
