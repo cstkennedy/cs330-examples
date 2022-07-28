@@ -1,8 +1,5 @@
 # Overview
 
-This is set of Java Shape classes used as a case study for inheritance in Java.
-Topics include:
-
 These examples present many of the same **Object-Oriented** concepts... in the
 context of Java. This discussion includes some comparisons of C++ and Java.
 Topics include:
@@ -12,7 +9,7 @@ Topics include:
   - dynamic binding
   - subtyping
   - interfaces
-  - `@Override decorators`
+  - `@Override` decorators
   - lambda functions
   - Java's Stream API
   - Iterators
@@ -26,17 +23,34 @@ over.*
 
 This discussion is split into seven (7) examples:
 
-  1. [Part 1](https://youtu.be/_Qxt3yTuJOU) - Example 1 to Example 3
-  2. [Part 2](https://youtu.be/PIPNWUCqwlk) - Example 4 to Example 5
-  2. [Part 3](https://youtu.be/YE-Pu1ELoi4) - Example 6
+  - **Example 1**
+    - Basics of Polymorphism
+    - The recording is available at <https://youtu.be/rR4Ai2kHOR0>
 
-  - **Example 1** - Basics of Polymorphism
-  - **Example 2** - Factory Pattern and *Interfaces as a Contract*
-  - **Example 3** - Subtyping (e.g., `List` vs `ArrayList`) and Iterators
-  - **Example 4** - Input (`BufferedReader` and `Scanner`) and More Iterators
-  - **Example 5** - Shape `read` method and a *better* `ShapeFactory` implementation
-  - **Example 6** - `Stream` API, Lambda Functions, replacing `Shape.read`, and fixing `Shape.name`
-  - **Example 7** - Separation of Concerns & Interfaces
+  - **Example 2**
+    - Factory Pattern and *Interfaces as a Contract*
+    - The recording is available at <https://youtu.be/R3t0FecJfRA>
+
+  - **Example 3**
+    - Subtyping (e.g., `List` vs `ArrayList`) and Iterators
+    - The recording is available at <https://youtu.be/z6_FzDDBQGI>
+
+  - **Example 4** 
+    - Input (`BufferedReader` and `Scanner`), Shape `read` Method, and More
+      Iterators
+    - The recording is available at <>
+
+  - **Example 5**
+    - A *better* `ShapeFactory` implementation
+    - The recording is available at <>
+
+  - **Example 6**
+    - `Stream` API, Lambda Functions, replacing `Shape.read`, and fixing `Shape.name`
+    - The recording is available at <>
+
+  - **Example 7**
+    - Separation of Concerns & Interfaces
+    - The recording is available at <>
 
 
 # Running the Examples
