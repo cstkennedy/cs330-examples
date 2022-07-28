@@ -82,6 +82,7 @@ public class RunShapes {
 
         //----------------------------------------------------------------------
         // List the available shapes
+        //----------------------------------------------------------------------
         System.out.print(ShapeFactory.listKnown());
         System.out.println(Utilities.horizontalLine('-', H_WIDTH));
         System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
@@ -89,6 +90,7 @@ public class RunShapes {
 
         //----------------------------------------------------------------------
         // Create 5 "Random" Shapes
+        //----------------------------------------------------------------------
         size   = 6; // original size of the array
         shapes = new Shape[size];
 
@@ -105,7 +107,6 @@ public class RunShapes {
         System.out.printf("%-24s: %4d\n", "Original Size", size);
         System.out.printf("%-24s: %4d\n", "Invalid Shapes", (size - shapes.length));
         System.out.printf("%-24s: %4d\n", "New Size", shapes.length);
-
         System.out.println();
 
         //----------------------------------------------------------------------

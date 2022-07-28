@@ -91,8 +91,8 @@ public class RunShapes {
         //----------------------------------------------------------------------
         // Using an iterator
         //----------------------------------------------------------------------
-        System.out.println();
         System.out.println(horizontalLine('~', H_WIDTH));
+        System.out.println();
 
         // C++ Container<Shape*>::iterator it = shapes.begin()
         Iterator<Shape> it = shapes.iterator();
