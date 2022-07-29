@@ -38,11 +38,11 @@ This discussion is split into seven (7) examples:
   - **Example 4** 
     - Input (`BufferedReader` and `Scanner`), Shape `read` Method, and More
       Iterators
-    - The recording is available at <>
+    - The recording is available at <https://youtu.be/FteoxbG99Ic>
 
   - **Example 5**
-    - A *better* `ShapeFactory` implementation
-    - The recording is available at <>
+    - A *better* `ShapeFactory` implementation using a `LinkedHashMap<String, Shape>`
+    - The recording is available at <https://youtu.be/jf9OK0EH9bc>
 
   - **Example 6**
     - `Stream` API, Lambda Functions, replacing `Shape.read`, and fixing `Shape.name`

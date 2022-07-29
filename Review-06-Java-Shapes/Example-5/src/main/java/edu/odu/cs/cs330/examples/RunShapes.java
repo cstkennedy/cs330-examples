@@ -115,8 +115,6 @@ public class RunShapes {
             Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
                                                              line.length()));
 
-
-
             Shape s = ShapeFactory.createShape(name);
 
             if (s != null) {

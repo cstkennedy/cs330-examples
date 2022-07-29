@@ -32,7 +32,7 @@ public class ShapeFactory {
     }
 
     /**
-     *  Create a Shape.
+     * Create a Shape.
      *
      * @param name the shape to be created
      *
