@@ -3,8 +3,6 @@
 
 package edu.odu.cs.cs330.examples.shapes;
 
-import java.util.Scanner;
-
 /**
  * A Triangle with all sides set to the same length.
  *

@@ -3,8 +3,6 @@
 
 package edu.odu.cs.cs330.examples.shapes;
 
-import java.util.Scanner;
-
 /**
  * A Rectangle with 4 Equal Sides.
  *

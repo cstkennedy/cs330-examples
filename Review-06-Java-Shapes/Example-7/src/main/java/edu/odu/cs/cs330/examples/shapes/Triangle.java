@@ -3,8 +3,6 @@
 
 package edu.odu.cs.cs330.examples.shapes;
 
-import java.util.Scanner;
-
 /**
  * A Polygon with 3 Sides.
  *

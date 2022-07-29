@@ -76,7 +76,7 @@ public class ShapeIterator implements Iterator<Shape>
                 Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
                                                                  line.length()));
 
-                shp = initShapeFromDims(shp, lineScanner);
+                shp = this.initShapeFromDims(shp, lineScanner);
             }
             else {
                 line = theBuffer.readLine();

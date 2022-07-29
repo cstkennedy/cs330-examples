@@ -3,8 +3,6 @@
 
 package edu.odu.cs.cs330.examples.shapes;
 
-import java.util.Scanner;
-
 /**
  * An Ellipse with equivalent major and minor axes.
  *

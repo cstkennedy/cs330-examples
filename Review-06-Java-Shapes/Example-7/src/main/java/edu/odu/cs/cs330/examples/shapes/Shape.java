@@ -29,7 +29,7 @@ public abstract class Shape implements Cloneable {
      *
      * @return shape name
      */
-    abstract public String name();
+    public abstract String name();
 
     /**
      * Compute the area.

@@ -31,7 +31,7 @@ public abstract class Shape implements Cloneable {
      *
      * @return shape name
      */
-    abstract public String name();
+    public abstract String name();
 
     /**
      * Compute the area.
@@ -61,6 +61,7 @@ public abstract class Shape implements Cloneable {
      * {@link #createFromDims(double[]) createFromDims} should be used instead
      * of read.
      */
+    @Deprecated
     public abstract void read(Scanner scanner);
 
     /**

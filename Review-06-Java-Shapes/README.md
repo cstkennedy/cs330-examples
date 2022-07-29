@@ -45,12 +45,13 @@ This discussion is split into seven (7) examples:
     - The recording is available at <https://youtu.be/jf9OK0EH9bc>
 
   - **Example 6**
-    - `Stream` API, Lambda Functions, replacing `Shape.read`, and fixing `Shape.name`
-    - The recording is available at <>
+    - `Stream` API, Lambda Functions, fixing `Shape.name()`, and **replacing**
+      `Shape.read`
+    - The recording is available at <https://youtu.be/AxWPjXq2SF8>
 
   - **Example 7**
     - Separation of Concerns & Interfaces
-    - The recording is available at <>
+    - The recording is available at <https://youtu.be/SltynAF6UkY>
 
 
 # Running the Examples
@@ -58,8 +59,7 @@ This discussion is split into seven (7) examples:
 The examples can be run through Gradle using `./gradlew run`. This will:
 
   1. compile the Java source code
-  2. build a Jar file
-  3. run the compiled code with all necessary command line arguments
+  2. run the compiled code with all necessary command line arguments
 
 
 # Reports & Project Website
