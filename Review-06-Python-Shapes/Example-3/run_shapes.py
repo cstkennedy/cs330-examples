@@ -2,10 +2,6 @@
 
 # Programmer : Thomas J. Kennedy
 
-import json
-import pickle
-import sys
-
 from shapes import *
 
 PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
@@ -21,13 +17,7 @@ def main():
     The "if __name__" line below determines what runs
     """
 
-    if len(sys.argv) < 2:
-        print("No input file provided.")
-        print("Usage: {:} input_file".format(*sys.argv))
-        exit(1)
-
-    shapes_filename = sys.argv[1]
-
+    # Print Program Heading
     print("-" * 80)
 
     for line in PROGRAM_HEADING:
@@ -35,66 +25,151 @@ def main():
 
     print("-" * 80)
 
+    """
+    # --Erroneous C++ Variable Declarations--
+    # --Valid Java Variable Declarations--
+    Shape               shape   = null; # Declare an "instance" of Shape
+    Shape[]             shapes  = null; # Declare an Array of Shapes
+
+    Triangle            tri     = null;
+    RightTriangle       rht_tri  = null;
+    EquilateralTriangle eql_tri  = null;
+
+    # ShapeFactory Discussion
+    int size = 0;
+    """
+
+    # Create one RightTriangle
+    rht_tri = RightTriangle(1, 2)
+
+    tri = rht_tri  # Point tri to rht_tri
+    shape = rht_tri  # Point shape to rht_tri
+
+    # Is this a valid assignment?
+    eql_tri = rht_tri
+    # Yes, because Python is loosely typed.
+
+    print("{:^38}".format("Display a Right Triangle (rht_tri)"))
+    print("-" * 38)
+    print(rht_tri)
+
+    print("{:^38}".format("Display a Right Triangle (tri)"))
+    print("-" * 38)
+    print(tri)
+
+    print("{:^38}".format("Display a Right Triangle (shape)"))
+    print("-" * 38)
+    print(shape)
+
+    print('~' * 80)
+
+    # Create one Equilateral Triangle
+    eql_tri = EquilateralTriangle(8)
+
+    tri = eql_tri  # Point tri to rht_tri
+    shape = eql_tri  # Point shape to rht_tri
+
+    print("{:^38}".format("Display an Eql. Triangle (eql_tri)"))
+    print("-" * 38)
+    print(eql_tri)
+
+    print("{:^38}".format("Display an Eql. Triangle (tri)"))
+    print("-" * 38)
+    print(tri)
+
+    print("{:^38}".format("Display an Eql. Triangle (shape)"))
+    print("-" * 38)
+    print(shape)
+
+    # Divide Output - Separate ShapeFactory Output
+    print('~' * 80)
+    print('~' * 80)
+
+    # What happens when the number of shapes is non-trivial?
+    #
+    # Suppose we were to expand our Shape hierarchy to include
+    # the following shapes:
+    #   - Isosceles Triangle
+    #   - Circle
+    #   - Ellipse
+    #   - Rectangle
+    #   - Square
+    #   - Rhombus
+    #   - Parallelogram
+    #   - Kite
+    #   - Generalized Polygon
+    #
+    # How would we manage the addition of new Shapes?
+    #
+    # A common approach is to make use of the Factory Model.
+    # This Model exists in a number of languages--e.g.:
+    #   - C++
+    #   - Java
+    #   - Python
+    #   - PHP
+    #   - C#
+    #
+    # A class that contains static members is created.
+    # As new classes are created, the Factory Class is
+    # updated.
+    #
+    # In this example, our factory class is called ShapeFactory
+    # The ShapeFactory could be designed as a singleton class.
+    # Our ShapeFactory is simply a tracker--i.e., records are static
+    # and will be updated manually at compile time.
+    #
+    # The Singleton Class implementation may be discussed at a
+    # later date
+    #
+
+    #---------------------------------------------------------------------------
     # Examine the ShapeFactory
+    #---------------------------------------------------------------------------
     print("~" * 38)
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
-
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
-    # makeCircle = lambda attribs : Circle(**attribs)
+    # Create 5 "Random" Shapes
+    shapes = [ShapeFactory.create("Triangle"),
+              ShapeFactory.create("Right Triangle"),
+              ShapeFactory.create("Equilateral Triangle"),
+              ShapeFactory.create("Square"),
+              ShapeFactory.create("Circle"),
+              ShapeFactory.create("1337 Haxor")]
 
-    # print(ShapeFactory.create_from_dictionary("Circle", {"radius": 4}))
-
-    # The list needs to be intialized outside the "with" closure
-    shapes = []  # Create an empty list (prefer `[]` over `list()`)
-
-    # shapes_in = open(shapes_filename, "r")
-    with open(shapes_filename, "r") as shapes_in:
-        for line in shapes_in:
-
-            line = line.strip()  # Strip leading/trailing whitespace
-            # print(line)
-
-            line = line.split(";")  # Split on ";"
-            # print(line)
-
-            name, values = line  # Unpack the list
-            # print(name)
-            # print(values)
-            values = values.strip()
-
-            # print(values)
-            values = json.loads(values)
-            # print(values)
-
-            shapes.append(ShapeFactory.create_from_dictionary(name, values))
+    size = len(shapes)  # original size of the list
 
     # Remove all `None` entries with a list comprehension
-    shapes = [s for s in shapes if s is not None]
+    shapes = [s for s in shapes if s]
+
+    # tempList = []
+    # for s in shapes:
+    #     #if s not None:
+    #     if s:
+    #         tempList.append(s)
+    # shapes = tempList
+
+    print("*" * 38)
+    print("{:^38}".format("Shapes That Exist"))
+    print("*" * 38)
+    print("{:<24}: {:>4}".format("Original Size", size))
+    print("{:<24}: {:>4}".format("Invalid Shapes", (size - len(shapes))))
+    print("{:<24}: {:>4}".format("New Size", len(shapes)))
+    print()
 
     # Print all the shapes
     print("~" * 38)
     print("{:^38}".format("Display All Shapes"))
     print("~" * 38)
 
+    # for (Shape shp : shapes)
     for shp in shapes:
         print(shp)
 
-    # for s in shapes:
-    #     print(pickle.dumps(s, 0))
-
-    # for shp in shapes:
-    #     name = shp.__dict__["_name"]
-    #     attribs = {key: s.__dict__[key] for key in s.__dict__ if key != "_name"}
-    #     print(attribs)
-
 
 if __name__ == "__main__":
-    try:
-        main()
-    except FileNotFoundError as err:
-        print(err)
+    main()

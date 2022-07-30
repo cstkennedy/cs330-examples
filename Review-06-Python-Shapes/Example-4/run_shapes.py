@@ -35,26 +35,42 @@ def main():
 
     print("-" * 80)
 
+    #---------------------------------------------------------------------------
     # Examine the ShapeFactory
+    #---------------------------------------------------------------------------
     print("~" * 38)
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
-
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
+    # makeCircle = lambda attribs : Circle(**attribs)
+
+    # print(ShapeFactory.create_from_dictionary("Circle", {"radius": 4}))
+
     # The list needs to be intialized outside the "with" closure
     shapes = []  # Create an empty list (prefer `[]` over `list()`)
 
+    # shapes_in = open(shapes_filename, "r")
     with open(shapes_filename, "r") as shapes_in:
         for line in shapes_in:
-            # Split on ";" and Strip leading/trailing whitespace
-            # And Unpack the list
-            name, values = [part.strip() for part in line.split(";")]
 
+            line = line.strip()  # Strip leading/trailing whitespace
+            # print(line)
+
+            line = line.split(";")  # Split on ";"
+            # print(line)
+
+            name, values = line  # Unpack the list
+            # print(name)
+            # print(values)
+            values = values.strip()
+
+            # print(values)
             values = json.loads(values)
+            # print(values)
 
             shapes.append(ShapeFactory.create_from_dictionary(name, values))
 
@@ -69,26 +85,13 @@ def main():
     for shp in shapes:
         print(shp)
 
-    out_filename = "coolPickles.dat"
+    # for s in shapes:
+    #     print(pickle.dumps(s, 0))
 
-    with open(out_filename, "wb") as pickle_file:
-        # LOL Nope
-        # for shp in shapes:
-        #     pickle.dump(shp, pickle_file)
-
-        # One line, full data structure
-        pickle.dump(shapes, pickle_file)
-
-    with open(out_filename, "rb") as pickle_file:
-        rebuilt_shapes = pickle.load(pickle_file)
-
-    # Print all the rebuilt shapes
-    print("~" * 38)
-    print("{:^38}".format("Display Re-Built Shapes"))
-    print("~" * 38)
-
-    for shp in rebuilt_shapes:
-        print(shp)
+    # for shp in shapes:
+    #     name = shp.__dict__["_name"]
+    #     attribs = {key: s.__dict__[key] for key in s.__dict__ if key != "_name"}
+    #     print(attribs)
 
 
 if __name__ == "__main__":

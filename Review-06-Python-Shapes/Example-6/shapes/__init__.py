@@ -1,10 +1,8 @@
-"""
-This module provides a collection of 2-Dimensional Shapes.
-"""
+from shapes.Shape import Shape
+from shapes.Circle import Circle
+from shapes.Square import Square
+from shapes.Triangle import Triangle
+from shapes.RightTriangle import RightTriangle
+from shapes.EquilateralTriangle import EquilateralTriangle
 
-from shapes.shape import Shape
-from shapes.circle import Circle
-from shapes.square import Square
-from shapes.triangle import (Triangle, RightTriangle, EquilateralTriangle)
-
-import shapes.shape_factory
+from shapes.ShapeFactory import ShapeFactory
