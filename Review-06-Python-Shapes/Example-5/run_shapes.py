@@ -91,6 +91,27 @@ def main():
     for shp in rebuilt_shapes:
         print(shp)
 
+    print("~" * 38)
+    print("{:^38}".format("Display Largest Shape (Area)"))
+    print("~" * 38)
+
+    largest_shape = max(rebuilt_shapes, key=lambda shape: shape.area())
+    print(largest_shape)
+
+    print("~" * 38)
+    print("{:^38}".format("Display Smallest Shape (Perimeter)"))
+    print("~" * 38)
+
+    smallest_shape = min(rebuilt_shapes, key=lambda shape: shape.perimeter())
+    print(smallest_shape)
+
+    sorted_shapes = sorted(rebuilt_shapes, key=lambda shape: shape.name)
+
+    print("#" * 80)
+    print(sorted_shapes)
+    for shp in sorted_shapes:
+        print(shp)
+
 
 if __name__ == "__main__":
     try:

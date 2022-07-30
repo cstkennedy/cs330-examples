@@ -9,19 +9,16 @@ The recorded **(Fall 2020)** discussion is available
   - **Example 2**
     - Factory Pattern and *Interfaces as a Contract*
 
-  - **Example 3**
-    - **Removed**
-
-  - **Example 4** 
+  - **Example 3** 
     - Input (context managers, dictionaries, and `json` module)
       Iterators
 
-  - **Example 5**
+  - **Example 4**
     - `pickle` module and removing comments
 
-  - **Example 6**
+  - **Example 5**
     - `Iterators` `min`, `max`, `sorted`, and Lambda Functions
 
-  - **Example 7**
+  - **Example 6**
     - Making code more *Pythonic*
 
