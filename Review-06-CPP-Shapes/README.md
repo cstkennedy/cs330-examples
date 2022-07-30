@@ -64,6 +64,7 @@ brackets).
 
  - **Example 9**
     - Modern C++ additions, including:
+      - 'std::array`
       -  tuple unpacking
-      - `string_views`
+      - `string_view`
 
