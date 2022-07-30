@@ -1,11 +1,9 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include <iomanip>
 
 #include "rightTriangle.h"
-
-const double RightTriangle::ONE_HALF = (1.0 / 2.0);
 
 //------------------------------------------------------------------------------
 RightTriangle::RightTriangle()
@@ -24,21 +22,6 @@ RightTriangle::RightTriangle(double base, double height)
     this->_side_a = base;
     this->_side_b = height;
     this->_side_c = RightTriangle::computeHypotenuse(_side_a, _side_b);
-}
-
-//------------------------------------------------------------------------------
-RightTriangle::RightTriangle(const RightTriangle &src)
-{
-    this->_name   = src._name;
-
-    this->_side_a = src._side_a;
-    this->_side_b = src._side_b;
-    this->_side_c = src._side_c;
-}
-
-//------------------------------------------------------------------------------
-RightTriangle::~RightTriangle()
-{
 }
 
 //------------------------------------------------------------------------------

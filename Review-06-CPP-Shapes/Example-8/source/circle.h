@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef CIRCLE_H_INCLUDED
 #define CIRCLE_H_INCLUDED
@@ -14,8 +14,8 @@
  */
 class Circle: public Shape {
     private:
-        static const double PI;   ///< @f$ \pi @f$
-        static const double TAU;  ///< @f$ \tau = 2\pi @f$
+        static constexpr double PI  = 3.14159265359;
+        static constexpr double TAU = 2 * PI;
 
         double _radius;  ///< Length of the radius
 
@@ -37,12 +37,15 @@ class Circle: public Shape {
          *
          * @param src the Circle to copy
          */
-        Circle(const Circle &src);
+        Circle(const Circle &src) = default;
 
         /**
          * Circle Destructor
          */
-        virtual ~Circle();
+        virtual ~Circle() = default;
+
+        // Thank the compiler
+        Circle& operator=(const Circle& rhs) = default;
 
         /**
          * Return the radius length
@@ -66,33 +69,36 @@ class Circle: public Shape {
          *
          * @return area
          */
-        virtual double area() const;
+        double area() const override;
 
         /**
          * Compute the perimeter using @f$ 2 \pi r @f$
          *
          * @return perimeter
          */
-        virtual double perimeter() const;
+        double perimeter() const override;
 
         /**
          * Return a new duplicate Circle
          */
-        virtual Shape* clone() const;
+        Shape* clone() const override;
 
         /**
          * Print the Circle
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display(std::ostream &outs) const;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the Circle
          *
          * @param ins the input stream--i.e., source
+         *
+         * "virtual" is redundant if function is already declared as
+         * "override"
          */
-        virtual void read(std::istream &ins);
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------

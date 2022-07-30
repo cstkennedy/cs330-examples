@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef SQUARE_H_INCLUDED
 #define SQUARE_H_INCLUDED
@@ -34,12 +34,15 @@ class Square: public Shape {
          *
          * @param src the Square to copy
          */
-        Square(const Square &src);
+        Square(const Square& src) = default;
 
         /**
          * Square Destructor
          */
-        virtual ~Square();
+        virtual ~Square() = default;
+
+        // Let the compiler hook me up
+        Square& operator=(const Square& rhs) = default;
 
         /**
          * Return the side length
@@ -58,33 +61,33 @@ class Square: public Shape {
          *
          * @return area
          */
-        virtual double area() const;
+        double area() const override;
 
         /**
          * Compute the perimeter
          *
          * @return perimeter
          */
-        virtual double perimeter() const;
+        double perimeter() const override;
 
         /**
          * Return a new duplicate Square
          */
-        virtual Shape* clone() const;
+        Shape* clone() const override;
 
         /**
          * Print the Square
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display(std::ostream &outs) const;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the Square
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins);
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------

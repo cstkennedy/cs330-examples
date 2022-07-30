@@ -1,36 +1,21 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include <iomanip>
 
 #include "circle.h"
 
-const double Circle::PI  = 3.14159265359;
-const double Circle::TAU = 2 * PI;
-
 //------------------------------------------------------------------------------
 Circle::Circle()
+    :Shape("Circle"),
+     _radius(1)
 {
-    this->_name   = "Circle";
-    this->_radius = 1;
 }
 
 //------------------------------------------------------------------------------
 Circle::Circle(double r)
-{
-    this->_name   = "Circle";
-    this->_radius = r;
-}
-
-//------------------------------------------------------------------------------
-Circle::Circle(const Circle &src)
-{
-    this->_name   = src._name;
-    this->_radius = src._radius;
-}
-
-//------------------------------------------------------------------------------
-Circle::~Circle()
+    :Shape("Circle"),
+     _radius(r)
 {
 }
 

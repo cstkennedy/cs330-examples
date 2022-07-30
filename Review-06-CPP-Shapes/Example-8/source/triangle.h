@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef TRIANGLE_H_INCLUDED
 #define TRIANGLE_H_INCLUDED
@@ -40,12 +40,15 @@ class Triangle: public Shape {
          *
          * @param src the Triangle to copy
          */
-        Triangle(const Triangle &src);
+        Triangle(const Triangle& src) = default;
 
         /**
          * Deconstruct a Triangle
          */
-        virtual ~Triangle();
+        virtual ~Triangle() = default;
+
+        // Let the compiler write this...
+        Triangle& operator=(const Triangle& rhs) = default;
 
         /**
          * Length of side A
@@ -96,7 +99,7 @@ class Triangle: public Shape {
          *
          * @return the area
          */
-        virtual double area() const;
+        double area() const override;
 
         /**
          * Compute the perimeter
@@ -104,24 +107,24 @@ class Triangle: public Shape {
          *
          * @return the perimeter
          */
-        virtual double perimeter() const;
+        double perimeter() const override;
 
         /**
          * Return a new duplicate Triangle
          */
-        virtual Shape* clone() const;
+        Shape* clone() const override;
 
         /**
          * Print the Triangle
          */
-        virtual void display(std::ostream &outs) const;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the Triangle
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins);
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------

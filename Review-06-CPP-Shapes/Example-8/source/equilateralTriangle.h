@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef EQUILATERAL_TRIANGLE_H_INCLUDED
 #define EQUILATERAL_TRIANGLE_H_INCLUDED
@@ -15,7 +15,7 @@
  */
 class EquilateralTriangle: public Triangle {
     private:
-        static const double ROOT_3_DIV_4;  ///< @f$ \frac{\sqrt{3}}{4} @f$
+        static constexpr double ROOT_3_DIV_4 = sqrt(3.0) / 4.0;  ///< @f$ \frac{\sqrt{3}}{4} @f$
 
     public:
         /**
@@ -36,12 +36,15 @@ class EquilateralTriangle: public Triangle {
          *
          * @param src the EquilateralTriangle to copy
          */
-        EquilateralTriangle(const EquilateralTriangle &src);
+        EquilateralTriangle(const EquilateralTriangle &src) = default;
 
         /**
          * Deconstruct the EquilateralTriangle
          */
-        virtual ~EquilateralTriangle();
+        virtual ~EquilateralTriangle() = default;
+
+        // Let the compiler write this for me
+        EquilateralTriangle& operator=(const EquilateralTriangle& rhs) = default;
 
         /**
          * Compute the height using
@@ -71,24 +74,24 @@ class EquilateralTriangle: public Triangle {
          *
          * @return the area
          */
-        virtual double area() const;
+        double area() const override;
 
         /**
          * Return a new duplicate EquilateralTriangle
          */
-        virtual Shape* clone() const;
+        Shape* clone() const override;
 
         /*
          * Print the EquilateralTriangle
          */
-        virtual void display(std::ostream &outs) const;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the Equilateral Triangle
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins);
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------

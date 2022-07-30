@@ -50,7 +50,11 @@ brackets).
     - Shape `read` method
 
   - **Example 6** 
-    - **Removed**
+    - **Removed** & **Replaced** - Fixing the Shape classes with modern C++
+      - `override` keyword
+      - `constexpr`
+      - ` = default`
+      - ` = delete`
 
   - **Example 7**
     - Separation of Concerns & Interfaces
@@ -61,6 +65,5 @@ brackets).
  - **Example 9**
     - Modern C++ additions, including:
       -  tuple unpacking
-      - `override` keyword
       - `string_views`
-      - `constexpr`
+

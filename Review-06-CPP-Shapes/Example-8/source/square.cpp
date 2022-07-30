@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include <iomanip>
 
@@ -7,27 +7,14 @@
 
 //------------------------------------------------------------------------------
 Square::Square()
+    :Square(1)
 {
-    this->_name = "Square";
-    this->_side = 1;
 }
 
 //------------------------------------------------------------------------------
 Square::Square(double s)
-{
-    this->_name = "Square";
-    this->_side = s;
-}
-
-//------------------------------------------------------------------------------
-Square::Square(const Square &src)
-{
-    this->_name = src._name;
-    this->_side = src._side;
-}
-
-//------------------------------------------------------------------------------
-Square::~Square()
+    :Shape("Square"),
+     _side(s)
 {
 }
 

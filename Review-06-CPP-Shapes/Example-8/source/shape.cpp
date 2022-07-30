@@ -1,27 +1,13 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #include "shape.h"
 
 #include <iomanip>
 
-const int Shape::WIDTH_LABEL = 12;
-const int Shape::WIDTH_VALUE = 24;
-
-//------------------------------------------------------------------------------
-Shape::Shape()
-    :_name("Shape")
-{
-}
-
 //------------------------------------------------------------------------------
 Shape::Shape(std::string name)
     :_name(name)
-{
-}
-
-//------------------------------------------------------------------------------
-Shape::~Shape()
 {
 }
 

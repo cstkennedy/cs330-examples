@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef RIGHT_TRIANGLE_H_INCLUDED
 #define RIGHT_TRIANGLE_H_INCLUDED
@@ -13,7 +13,7 @@
 //------------------------------------------------------------------------------
 class RightTriangle: public Triangle{
     private:
-        static const double ONE_HALF;  ///< @f$ \frac{2}{2} @f$
+        static constexpr double ONE_HALF = 0.5;  ///< @f$ \frac{2}{2} @f$
 
         /**
          * Compute the hyptoenuse using:
@@ -46,12 +46,15 @@ class RightTriangle: public Triangle{
          *
          * @param src the RightTriangle to copy
          */
-        RightTriangle(const RightTriangle &src);
+        RightTriangle(const RightTriangle& src) = default;
 
         /**
          * Deconstruct the RightTriangle
          */
-        virtual ~RightTriangle();
+        virtual ~RightTriangle() = default;
+
+        // Let the compiler write this for me
+        RightTriangle& operator=(const RightTriangle& rhs) = default;
 
         /**
          * Return the base
@@ -90,30 +93,31 @@ class RightTriangle: public Triangle{
          *
          * @return the area
          */
-        virtual double area() const;
+        double area() const override;
 
         /**
          * Return a new duplicate RightTriangle
          */
-        virtual Shape* clone() const;
+        Shape* clone() const override;
 
         /**
          * Print the RightTriangle
          *
          * @param outs the output stream--i.e., destination
          */
-        virtual void display(std::ostream &outs) const;
+        void display(std::ostream &outs) const override;
 
         /**
          * Read the RightTriangle
          *
          * @param ins the input stream--i.e., source
          */
-        virtual void read(std::istream &ins);
+        void read(std::istream &ins) override;
 };
 
 //------------------------------------------------------------------------------
-inline double RightTriangle::computeHypotenuse(double base, double height)
+inline
+double RightTriangle::computeHypotenuse(double base, double height)
 {
     return sqrt((base * base) + (height * height));
 }

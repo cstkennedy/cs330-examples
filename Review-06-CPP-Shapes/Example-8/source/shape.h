@@ -1,5 +1,5 @@
 // Thomas Kennedy
-// CS 330 Fall 2014
+// CS 330 Fall 2019
 
 #ifndef SHAPE_H_INCLUDED
 #define SHAPE_H_INCLUDED
@@ -12,8 +12,8 @@
  */
 class Shape {
     protected:
-        static const int WIDTH_LABEL;  ///< Label Output Width
-        static const int WIDTH_VALUE;  ///< Value Output Width
+        static constexpr int WIDTH_LABEL = 12;  ///< Label Output Width
+        static constexpr int WIDTH_VALUE = 24;  ///< Value Output Width
 
         std::string _name;             ///< Geometric Name of the 2-D Figure
 
@@ -29,7 +29,7 @@ class Shape {
         /**
          * Default Shape Constructor
          */
-        Shape();
+        Shape() = delete;
 
         /**
          * Shape Constructor
@@ -41,7 +41,7 @@ class Shape {
         /**
          * Shape Destructor
          */
-        virtual ~Shape();
+        virtual ~Shape() = default;
 
         /**
          * Return the name
@@ -104,7 +104,8 @@ void Shape::name(std::string _name)
  *
  * @return the modified output stream
  */
-inline std::ostream& operator<< (std::ostream& outs, const Shape &prt)
+inline
+std::ostream& operator<< (std::ostream& outs, const Shape &prt)
 {
     prt.display(outs);
 
