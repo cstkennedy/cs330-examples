@@ -56,7 +56,7 @@ brackets).
     - Separation of Concerns & Interfaces
 
  - **Example 8**
-   - Replacing `ShapeCollection` with `std::vector` and smart pointers
+   - Replacing `ShapeCollection` with `std::vector` and smart pointers; updating `ShapeFactory`.
 
  - **Example 9**
     - Modern C++ additions, including:

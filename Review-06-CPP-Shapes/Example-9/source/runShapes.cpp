@@ -106,7 +106,6 @@ int main(int argc, char** argv)
 
     // Examine the ShapeFactory & list available shapes
     cout << generateHeading<'~', 38>("Available Shapes");
-
     ShapeFactory::listKnown(cout);
     cout << generateHorizontalLine<'-', 38>();
     cout << right << setw(2)

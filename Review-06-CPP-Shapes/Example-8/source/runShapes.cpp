@@ -135,8 +135,6 @@ ShapeCollection readShapes(std::istream& ins)
         ins >> ws;
     }
     */
-    // cout << collection << "\n";  // Not legal anymore
-
     std::istream_iterator<Shape*> it(ins);
     std::istream_iterator<Shape*> end;
     // Let us re-enact the Back-to-the-Future I Guitar Scene!
