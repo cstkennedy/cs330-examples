@@ -21,6 +21,14 @@ class ShapeFactory {
     private:
         /**
          * Name Shape Pair 2-tuple(name, model)
+         * <p>
+         * This should really have the Big-3 implemented.
+         * However, I worked around this by using reference
+         * variables in my for-each (range-based) for loops.
+         * <p>
+         * Such workarounds can, but should not, be done.
+         * <p>
+         * In this case, it serves as an academic discussion.
          */
         struct ShapePair {
             std::string _name;   ///< Name of the shape to clone
@@ -37,7 +45,7 @@ class ShapeFactory {
              * @param name the name of a shape
              * @param shape a cloneable shape
              */
-            ShapePair(std::string name, Shape* shape);
+            ShapePair(std::string name, Shape *shape);
 
             /**
              * Deconstruct a ShapePair
@@ -80,5 +88,12 @@ class ShapeFactory {
          */
         static int numberKnown();
 };
+
+/**
+ * Create the appropriate Shape class.
+ *
+ * How is **inheritance** used?
+ */
+std::istream& operator>>(std::istream& ins, Shape*& rd);
 
 #endif

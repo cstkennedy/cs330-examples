@@ -21,9 +21,6 @@ const string PROGRAM_HEADING[] = {
 
 const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri;  ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTriangle
-
 /**
  * Read shapes from an input stream
  * and construct a `ShapeCollection` object
@@ -76,8 +73,6 @@ int main(int argc, char** argv)
 
     // Examine the ShapeFactory
     printHeading(cout, "Available Shapes", 38, '~');
-
-    // List the available shapes
     ShapeFactory::listKnown(cout);
     printHorizontalLine(cout, '-', 38);
     cout << right << setw(2)
@@ -90,16 +85,16 @@ int main(int argc, char** argv)
     // Create 5 "Random" Shapes
     ShapeCollection shapes = readShapes(shapesFile);
 
-    // Demonstrate assertions (review)
-    // shapes.addShape(ShapeFactory::createShape("1337 Haxor"));
-
     // Print all the shapes
     printHeading(cout, "Display All Shapes", 38, '~');
-    // cout << shapes;
+    /*
+    for (const Shape* shape : shapes) {
+        cout << *shape << "\n";
+    }
+    */
     printShapes(cout, shapes);
 
     printHeading(cout, "Display Shape Names", 38, '~');
-    // cout << shapes;
     printShapeNames(cout, shapes);
 
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
@@ -118,7 +113,7 @@ int main(int argc, char** argv)
 ShapeCollection readShapes(std::istream& ins)
 {
     ShapeCollection collection;
-    Shape*          s;
+    Shape* s = nullptr;
 
     ins >> ws;
 
@@ -128,8 +123,6 @@ ShapeCollection readShapes(std::istream& ins)
         }
         ins >> ws;
     }
-
-    cerr << collection << "\n";
 
     return collection;
 }

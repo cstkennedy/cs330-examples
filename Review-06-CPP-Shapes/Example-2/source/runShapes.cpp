@@ -19,9 +19,6 @@ const string PROGRAM_HEADING[] = {
 
 const int HEADING_LINES = 2;  ///< Number of lines in Program Heading
 
-typedef RightTriangle       RhtTri;  ///< Convenient shorthand for RightTriangle
-typedef EquilateralTriangle EqlTri;  ///< Convenient shorthand for EquilateralTriangle
-
 /**
  * Prune the Non-Existent--i.e., nullptr--shapes
  * from the array
@@ -155,15 +152,13 @@ int main()
     return 0;
 }
 
-/**
- *
- */
+//------------------------------------------------------------------------------
 int pruneNullPtr(Shape** &shapes, int count)
 {
     int nonNull = 0;
 
     // Copy all non null pointers to a new array
-    Shape **pruned = new Shape*[ count ];
+    Shape** pruned = new Shape*[ count ];
 
     for (int i = 0; i < count; i++) {
         if (shapes[i] != nullptr) {

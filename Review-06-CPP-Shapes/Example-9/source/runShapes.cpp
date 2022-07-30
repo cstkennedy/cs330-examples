@@ -94,7 +94,7 @@ int main(int argc, char** argv)
     ifstream shapesFile(argv[1]);
 
     if (!shapesFile) {
-        cout << "Error: " << argv[1] << "could not be opened" << "\n";
+        cout << "Error: " << argv[1] << " could not be opened" << "\n";
         return 2;
     }
 
@@ -180,13 +180,14 @@ ShapeCollection readShapes(std::istream& ins)
     //
     // To get our desired result we would need a copy-if followed by a transform.
     //
+    /*
     for_each(it, end,
              [&collection](Shape* s) {
                   if (s != nullptr) {
                       collection.emplace_back(s);
                   }
              });
-
+    */
     transform_if(it, end,
                  std::back_inserter(collection),
                  [](Shape* rawPtr) -> bool {

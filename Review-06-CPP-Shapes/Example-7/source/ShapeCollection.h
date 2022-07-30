@@ -14,8 +14,8 @@
 class ShapeCollection {
     public:
         // Iterators (non-const and const)
-        typedef std::vector<Shape*>::iterator iterator;
-        typedef std::vector<Shape*>::const_iterator const_iterator;
+        using iterator = std::vector<Shape*>::iterator;
+        using const_iterator = std::vector<Shape*>::const_iterator;
 
     private:
         /**
@@ -111,11 +111,6 @@ class ShapeCollection {
         ShapeCollection& operator=(ShapeCollection rhs);
 
         /**
-         * Print all Shape Objects in the `ShapeCollection`
-         */
-        void display(std::ostream& outs) const;
-
-        /**
          * Swap the contents of two `ShapeCollection`s
          * <p>
          * I am using a friend function here and only here (under protest)
@@ -131,17 +126,6 @@ inline
 size_t ShapeCollection::size() const
 {
     return shapes.size();
-}
-
-/**
- * Stream Insertion (Colloquially the Output/cout Operator)
- */
-inline
-std::ostream& operator<<(std::ostream& outs, const ShapeCollection& prt)
-{
-    prt.display(outs);
-
-    return outs;
 }
 
 #endif

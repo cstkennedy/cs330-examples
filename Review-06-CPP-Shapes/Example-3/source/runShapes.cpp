@@ -35,56 +35,14 @@ int main()
 
     printProjectHeading(cout, PROGRAM_HEADING, HEADING_LINES);
 
-    /*
-    * What happens when the number of shapes is non-trivial?
-    *
-    * Suppose we were to expand our Shape hierarchy to include
-    * the following shapes:
-    *   - Isosceles Triangle
-    *   - Circle
-    *   - Ellipse
-    *   - Rectangle
-    *   - Square
-    *   - Rhombus
-    *   - Parallelogram
-    *   - Kite
-    *   - Generalized Polygon
-    *
-    * How would we manage the addition of new Shapes?
-    */
-
-    /*
-    * A common approach is to make use of the Factory Model.
-    * This Model exists in a number of languages--e.g.:
-    *   - C++
-    *   - Java
-    *   - Python
-    *   - PHP
-    *   - C#
-    */
-
-    /*
-    * A class that contains static members is created.
-    * As new classes are created, the Factory Class is
-    * updated.
-    *
-    * In this example, our factory class is called ShapeFactory
-    * The ShapeFactory could be designed as a singleton class.
-    * Our ShapeFactory is simply a tracker--i.e., records are static
-    * and will be updated manually at compile time.
-    *
-    * The Singleton Class implementation may be discussed at a
-    * later date
-    */
-
     // Examine the ShapeFactory
     printHeading(cout, "Available Shapes", 38, '~');
-
-    // List the available shapes
     ShapeFactory::listKnown(cout);
     printHorizontalLine(cout, '-', 38);
-    cout << right << setw(2) << ShapeFactory::numberKnown()
-                             << " shapes available." << "\n";
+    cout << right << setw(2)
+         << ShapeFactory::numberKnown()
+         << " shapes available."
+         << "\n";
 
     cout << "\n";
 
@@ -100,7 +58,9 @@ int main()
 
     // Print all the shapes
     printHeading(cout, "Display All Shapes", 38, '~');
-    cout << shapes;
+    for (const Shape* shape : shapes) {
+        cout << *shape << "\n";
+    }
 
     return 0;
 }

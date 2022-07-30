@@ -32,6 +32,30 @@ ShapeCollection::~ShapeCollection()
 }
 
 //------------------------------------------------------------------------------
+ShapeCollection::iterator ShapeCollection::begin()
+{
+    return (this->shapes).begin();
+}
+
+//------------------------------------------------------------------------------
+ShapeCollection::const_iterator ShapeCollection::begin() const
+{
+    return (this->shapes).begin();
+}
+
+//------------------------------------------------------------------------------
+ShapeCollection::iterator ShapeCollection::end()
+{
+    return (this->shapes).end();
+}
+
+//------------------------------------------------------------------------------
+ShapeCollection::const_iterator ShapeCollection::end() const
+{
+    return (this->shapes).end();
+}
+
+//------------------------------------------------------------------------------
 bool ShapeCollection::addShape(Shape* toAdd)
 {
     if (toAdd == nullptr) {
@@ -51,14 +75,6 @@ ShapeCollection& ShapeCollection::operator=(ShapeCollection rhs)
 }
 
 //------------------------------------------------------------------------------
-void ShapeCollection::display(std::ostream& outs) const
-{
-    for (const Shape* s : this->shapes) {
-        outs << *s << "\n";
-    }
-}
-
-
 void swap(ShapeCollection& lhs, ShapeCollection& rhs)
 {
     using std::swap;

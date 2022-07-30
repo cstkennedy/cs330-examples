@@ -73,8 +73,6 @@ int main(int argc, char** argv)
 
     // Examine the ShapeFactory
     printHeading(cout, "Available Shapes", 38, '~');
-
-    // List the available shapes
     ShapeFactory::listKnown(cout);
     printHorizontalLine(cout, '-', 38);
     cout << right << setw(2)
@@ -89,11 +87,9 @@ int main(int argc, char** argv)
 
     // Print all the shapes
     printHeading(cout, "Display All Shapes", 38, '~');
-    // cout << shapes;
     printShapes(cout, shapes);
 
     printHeading(cout, "Display Shape Names", 38, '~');
-    // cout << shapes;
     printShapeNames(cout, shapes);
 
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
@@ -128,7 +124,7 @@ ShapeCollection readShapes(std::istream& ins)
 {
     ShapeCollection collection;
     /*
-    Shape*          s;
+    Shape*          s = nullptr;
 
     ins >> ws;
 

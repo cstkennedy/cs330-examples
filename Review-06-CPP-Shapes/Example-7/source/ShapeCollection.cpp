@@ -1,6 +1,6 @@
 #include <utility>
 #include <algorithm>
-#include <cassert>
+
 #include "ShapeCollection.h"
 
 //------------------------------------------------------------------------------
@@ -58,7 +58,9 @@ ShapeCollection::const_iterator ShapeCollection::end() const
 //------------------------------------------------------------------------------
 bool ShapeCollection::addShape(Shape* toAdd)
 {
-    assert(toAdd != nullptr);
+    if (toAdd == nullptr) {
+        return false;
+    }
 
     shapes.push_back(toAdd);
     return true;
@@ -73,15 +75,6 @@ ShapeCollection& ShapeCollection::operator=(ShapeCollection rhs)
 }
 
 //------------------------------------------------------------------------------
-void ShapeCollection::display(std::ostream& outs) const
-{
-    for (const Shape* s : this->shapes) {
-        // assert(s != nullptr);
-        outs << *s << "\n";
-    }
-}
-
-
 void swap(ShapeCollection& lhs, ShapeCollection& rhs)
 {
     using std::swap;

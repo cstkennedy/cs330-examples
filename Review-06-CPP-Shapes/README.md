@@ -10,6 +10,8 @@ brackets).
 
 \eSidebar
 
+> Updated Examples 3, 4, and 5
+
   1. [Part 1](https://youtu.be/ZeM1OcxJcsA) (Example 1) focuses on:
     * Virtual Functions
     * Pure Virtual Functions
@@ -27,3 +29,38 @@ brackets).
     - the `override` keyword
     - `string_views`
     - `constexpr`
+
+# New Tweaks & Examples
+
+
+  - **Example 1**
+    - Basics of Polymorphism: Virtual Functions, Pure Virtual Functions, &
+      Dynamic Binding
+
+  - **Example 2**
+    - Factory Pattern and *Interfaces as a Contract*
+
+  - **Example 3**
+    - `ShapeCollection`, object lifetimes, & iterators
+
+  - **Example 4** 
+    - `operator>>`
+
+  - **Example 5**
+    - Shape `read` method
+
+  - **Example 6** 
+    - **Removed**
+
+  - **Example 7**
+    - Separation of Concerns & Interfaces
+
+ - **Example 8**
+   - Replacing `ShapeCollection` with `std::vector` and smart pointers
+
+ - **Example 9**
+    - Modern C++ additions, including:
+      -  tuple unpacking
+      - `override` keyword
+      - `string_views`
+      - `constexpr`

@@ -145,10 +145,5 @@ int main()
     // delete tri;    // Why can tri not be deleted?
     // delete shape;  // Why can shape not be deleted?
 
-    // Divide Output - Separate ShapeFactory Output
-    printHorizontalLine(cout, '~', W_WIDTH);
-    cout << "\n";
-    cout << "\n";
-
     return 0;
 }
