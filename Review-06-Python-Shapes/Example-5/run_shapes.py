@@ -35,11 +35,12 @@ def main():
 
     print("-" * 80)
 
+    #---------------------------------------------------------------------------
     # Examine the ShapeFactory
+    #---------------------------------------------------------------------------
     print("~" * 38)
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
-
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
@@ -59,7 +60,7 @@ def main():
             shapes.append(ShapeFactory.create_from_dictionary(name, values))
 
     # Remove all `None` entries with a list comprehension
-    shapes = [s for s in shapes if s is not None]
+    shapes = [shp for shp in shapes if shp is not None]
 
     # Print all the shapes
     print("~" * 38)

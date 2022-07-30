@@ -9,22 +9,19 @@ The recorded **(Fall 2020)** discussion is available
   - **Example 2**
     - Factory Pattern and *Interfaces as a Contract*
 
----
-
   - **Example 3**
-    - Subtyping (e.g., `List` vs `ArrayList`) and Iterators
+    - **Removed**
 
   - **Example 4** 
-    - Input (`BufferedReader` and `Scanner`), Shape `read` Method, and More
+    - Input (context managers, dictionaries, and `json` module)
       Iterators
 
   - **Example 5**
-    - A *better* `ShapeFactory` implementation using a `LinkedHashMap<String, Shape>`
+    - `pickle` module and removing comments
 
   - **Example 6**
-    - `Stream` API, Lambda Functions, fixing `Shape.name()`, and **replacing**
-      `Shape.read`
+    - `Iterators` `min`, `max`, `sorted`, and Lambda Functions
 
   - **Example 7**
-    - Separation of Concerns & Interfaces
+    - Making code more *Pythonic*
 

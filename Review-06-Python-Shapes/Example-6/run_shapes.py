@@ -35,11 +35,12 @@ def main():
 
     print("-" * 80)
 
+    #---------------------------------------------------------------------------
     # Examine the ShapeFactory
+    #---------------------------------------------------------------------------
     print("~" * 38)
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
-
     print(ShapeFactory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
@@ -103,6 +104,13 @@ def main():
 
     smallest_shape = min(rebuilt_shapes, key=lambda shape: shape.perimeter())
     print(smallest_shape)
+
+    sorted_shapes = sorted(rebuilt_shapes, key=lambda shape: shape.name)
+
+    print("#" * 80)
+    print(sorted_shapes)
+    for shp in sorted_shapes:
+        print(shp)
 
 
 if __name__ == "__main__":
