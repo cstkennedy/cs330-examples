@@ -55,9 +55,14 @@ def main():
             # And Unpack the list
             name, values = [part.strip() for part in line.split(";")]
 
-            values = json.loads(values)
+            values = values.strip()
 
-            shapes.append(ShapeFactory.create_from_dictionary(name, values))
+            try:
+                values = [float(val) for val in values.split()]
+                shapes.append(ShapeFactory.create_from_dimensions(name, values))
+
+            except ValueError as _err:
+                print(f"Skipped shape \"{name:}\" due to malformed line.", file=sys.stderr)
 
     # Remove all `None` entries with a list comprehension
     shapes = [shp for shp in shapes if shp is not None]

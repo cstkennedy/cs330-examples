@@ -46,9 +46,9 @@ def main():
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
-    # makeCircle = lambda attribs : Circle(**attribs)
+    # makeCircle = lambda attribs : Circle(*attribs)
 
-    # print(ShapeFactory.create_from_dictionary("Circle", {"radius": 4}))
+    # print(ShapeFactory.create_from_dimensions("Circle", [4]))
 
     # The list needs to be intialized outside the "with" closure
     shapes = []  # Create an empty list (prefer `[]` over `list()`)
@@ -69,13 +69,16 @@ def main():
             values = values.strip()
 
             # print(values)
-            values = json.loads(values)
-            # print(values)
+            try:
+                values = [float(val) for val in values.split()]
+                # print(values)
+                shapes.append(ShapeFactory.create_from_dimensions(name, values))
 
-            shapes.append(ShapeFactory.create_from_dictionary(name, values))
+            except ValueError as _err:
+                print(f"Skipped shape \"{name:}\" due to malformed line.", file=sys.stderr)
 
     # Remove all `None` entries with a list comprehension
-    shapes = [s for s in shapes if s is not None]
+    shapes = [shp for shp in shapes if shp is not None]
 
     # Print all the shapes
     print("~" * 38)

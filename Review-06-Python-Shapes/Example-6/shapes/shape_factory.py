@@ -52,7 +52,7 @@ def create(name):
     return None
 
 
-def create_from_dictionary(name, values):
+def create_from_dimensions(name, values):
     """
     Create a Shape
 
@@ -67,7 +67,7 @@ def create_from_dictionary(name, values):
     """
 
     if name in _KNOWN_SHAPES:
-        return _KNOWN_SHAPES[name][1](**values)
+        return _KNOWN_SHAPES[name][1](*values)
 
     return None
 

@@ -57,7 +57,7 @@ class ShapeFactory:
         return None
 
     @staticmethod
-    def create_from_dictionary(name, values):
+    def create_from_dimensions(name, values):
         """
         Create a Shape
 
@@ -70,7 +70,7 @@ class ShapeFactory:
         """
 
         if name in ShapeFactory._known_shapes:
-            return ShapeFactory._known_shapes[name][1](**values)
+            return ShapeFactory._known_shapes[name][1](*values)
 
         return None
 

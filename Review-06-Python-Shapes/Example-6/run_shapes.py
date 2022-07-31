@@ -41,7 +41,6 @@ def main():
     print("~" * 38)
     print("{:^38}".format("Available Shapes"))
     print("~" * 38)
-
     print(shape_factory.list_known())
     print("-" * 38)
     print("{:>2} shapes available.".format(shape_factory.number_known()))
@@ -56,9 +55,14 @@ def main():
             # And Unpack the list
             name, values = [part.strip() for part in line.split(";")]
 
-            values = json.loads(values)
+            values = values.strip()
 
-            shapes.append(shape_factory.create_from_dictionary(name, values))
+            try:
+                values = [float(val) for val in values.split()]
+                shapes.append(shape_factory.create_from_dimensions(name, values))
+
+            except ValueError as _err:
+                print(f"Skipped shape \"{name:}\" due to malformed line.", file=sys.stderr)
 
     # Remove all `None` entries with a list comprehension
     shapes = [shp for shp in shapes if shp is not None]
