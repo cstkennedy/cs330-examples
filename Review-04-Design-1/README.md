@@ -18,24 +18,5 @@ We will start by revisiting the C++ class checklist, mapping its parts into Java
 and Python 3. We will then revisit Review 03 (Example 6) and build UML Class
 diagrams with [PlantUML](http://plantuml.com/class-diagram).
 
-The notes are available [here](doc:classChecklistsAndPlantUML).
+The notes are available [here](https://www.cs.odu.edu/~tkennedy/cs330/latest/Public/classChecklistsAndPlantUML/).
 The recorded discussion is available [here](https://youtu.be/GybR1wL_zzQ).
-
-
-## Design: The CS 250 Way
-
-ADTs & Top-Down Design - This is a revisiting of the approach taken for the CS
-250 semester project.
-
- - The source code is available in \ExampleZip{Review-04.zip}
- - We will focus on **Examples 1 through 3**
- - **This is not true design**. It is **motivation for a more formal methodology.**
-
-The recorded discussion is available [here](https://youtu.be/j2Y_Q3rVLsY).
-
-
-## Proper Object Oriented Design and Analysis
-
-The proper way to [**plan**](doc:designDiscussion) with objected oriented analysis.
-
-The recorded discussion is available [here](https://youtu.be/sO86E30pxh0).
