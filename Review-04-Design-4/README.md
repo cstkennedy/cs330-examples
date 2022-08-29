@@ -1,6 +1,6 @@
-Earlier this semester we discussed _UML Class Diagrams_ which we used to model
-the things *(classes)* in a system. Now we need a method to capture flow (i.e.,
-messages being passed) between *objects*.
+Earlier we discussed *UML Class Diagrams* which we used to model the things
+*(classes)* in a system. Now we need a method to capture flow (i.e., messages
+being passed) between *objects*.
 
 ## Whirlwind Introduction to UML Sequence Diagrams
 
@@ -13,7 +13,7 @@ The recorded discussion is available [here](https://youtu.be/PusrbfgFfDI).
 
 ## Continuing Object Oriented Design and Analysis
 
-The proper way to [**continue (validate & refine)**](doc:designDiscussionPart2)
+The proper way to [**continue (validate & refine)**](https://www.cs.odu.edu/~tkennedy/cs330/latest/Public/designDiscussionPart2)
 an objected oriented domain model.
 
 The recorded discussion is available [here](https://youtu.be/hlGoVWsb8Y4).
