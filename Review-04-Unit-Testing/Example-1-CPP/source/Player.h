@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 
+#include "Strategy.h"
+
 /**
  * This is more a Player interface than a Player class.
  * <p>
@@ -12,16 +14,12 @@
  */
 class Player {
     private:
-        /**
-         * Message used to prompt a human player for a move
-         */
-        static std::string PROMPT_MSG;
-
         std::string name;
         char        symbol;
 
     public:
-        static const Player referenceCylon;
+        static const Player REFERENCE_CYLON;
+        static const std::string DEFAULT_NAME;
 
         /**
          * Checks whether a player is a placeholder or
@@ -34,12 +32,12 @@ class Player {
         static bool isGeneric(const Player& possibleCylon);
 
         /**
-         * Create a Player with a Generic name
+         * Create a Player with a Generic name and symbol set to '?'
          */
         Player();
 
         /**
-         * Create a Player with a selected name
+         * Create a Player with a selected name and symbol set to '?'
          *
          * @param n desired name
          */
@@ -58,11 +56,6 @@ class Player {
          * @pre (n.size() > 0)
          */
         void setName(std::string n);
-
-        /**
-         * Retrieve the next move
-         */
-        int nextMove();
 
         /**
          * Is this a Human Player?
@@ -88,6 +81,11 @@ class Player {
          * Change the player symbol
          */
         void setSymbol(char newSymbol);
+
+        /**
+         * Retrieve the next move
+         */
+        int nextMove(Strategy& theStrategy);
 };
 
 //------------------------------------------------------------------------------

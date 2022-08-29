@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include "Strategy.h"
+
 //------------------------------------------------------------------------------
 Game::Referee::Referee(const Board& b)
     :boardRef(b)
@@ -232,7 +234,7 @@ const Player& Game::getLoser() const
 {
     // Stalemate
     if (endedWithStalemate()) {
-        return Player::referenceCylon;
+        return Player::REFERENCE_CYLON;
     }
 
     // There was a win, figure out who lost
@@ -246,15 +248,17 @@ const Player& Game::getLoser() const
 //------------------------------------------------------------------------------
 bool Game::roundTurn(Player& player)
 {
+    KeyboardStrategy theStrategy(player.getName());
+
     int               move;
     Board::CellValue  sym;
 
-    move = player.nextMove();
+    move = player.nextMove(theStrategy);
     sym = player.getSymbol();
 
     // while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
     while (!ref.selectedCellIsEmpty(move)) {
-        move = player.nextMove();
+        move = player.nextMove(theStrategy);
         sym = player.getSymbol();
     }
     board.setCell(move, sym);

@@ -1,36 +1,26 @@
 #include "Player.h"
 
-std::string Player::PROMPT_MSG = "Enter your desired move (1-9): ";
-
-const Player Player::referenceCylon;
+const Player Player::REFERENCE_CYLON;
+const std::string Player::DEFAULT_NAME = "I. C. Generic";
 
 //------------------------------------------------------------------------------
 static bool isGeneric(const Player& possibleCylon)
 {
-    return possibleCylon == Player::referenceCylon;
+    return possibleCylon == Player::REFERENCE_CYLON;
 }
 
 //------------------------------------------------------------------------------
 Player::Player()
 {
-    name = "I. C. Generic";
+    name = Player::DEFAULT_NAME;
+    symbol = '?';
 }
 
 //------------------------------------------------------------------------------
 Player::Player(std::string n)
 {
     name = n;
-}
-
-//------------------------------------------------------------------------------
-int Player::nextMove()
-{
-    int choice;
-
-    std::cout << (name + ", " + Player::PROMPT_MSG);
-    std::cin >> choice;
-
-    return choice;
+    symbol = '?';
 }
 
 //------------------------------------------------------------------------------
@@ -43,5 +33,11 @@ bool Player::isHuman() const
 bool Player::isComputer() const
 {
     return false;
+}
+
+//------------------------------------------------------------------------------
+int Player::nextMove(Strategy& theStrategy)
+{
+    return theStrategy.nextMove();
 }
 

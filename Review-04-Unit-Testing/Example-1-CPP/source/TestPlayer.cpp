@@ -9,78 +9,58 @@
 
 #include "Player.h"
 
+#include "bodgeUnitTest.h"
+#include "utilities.h"
 
-/**
- * This is the Bodge-Unit-Testing... PseUdO-Framework
- *
- * Bodge - A clumsy or inelegant job, usually a temporary repair;
- * a patch, a repair. (From Wiktionary)
- */
 
-#define bodgeAssert(expression) \
-if (!(expression)) { \
-    std::cout << " FAILURE: "\
-              << __func__ << ":" << __LINE__\
-              << " -> (" << #expression << ")\n";\
-    return false;\
-}
-// End Macro
-
-// Unit Test Pseudo-Framework
-//------------------------------------------------------------------------------
-using UnitTestFunction = std::function<bool()>;
-using UnitTestPair = std::pair<UnitTestFunction, std::string>;
-
-void runTest(const UnitTestFunction& testFunction, std::string description)
-{
-    std::cout << (testFunction() ? "PASSED" : "FAILED")
-              << " -> " << description
-              << std::endl;
-}
-
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Unit Tests - Support Data
-//------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
 // Unit Tests - Test Functions
-//------------------------------------------------------------------------------
-/**
- * Helper function for testDisplay.
- *
- * Convert any type with an operator<< defined to a std::string
- */
-template<class T>
-std::string toStr(const T& thing)
+//-----------------------------------------------------------------------------
+bool testDefaultConstructor()
 {
-    std::ostringstream outs;
-    outs << thing;
+    Player some_person;
 
-    return outs.str();
-}
+    std::cout << some_person.getName() << '\n';
+    // std::cout << some_person.getSymbol() << '\n';
+    // std::cout << some_person.isHuman() << '\n';
+    // std::cout << some_person.isComputer() << '\n';
 
-bool testPlayerDefaultConstructor()
-{
-    Player tom("Tom");
+    /*
+    if (!some_person.isHuman()) {
+        std::cout << "Fail: Player is not human" << "\n";
+        return false;
+    }
+    */
 
-    bodgeAssert("Tom" == toStr(tom));
+    bodgeAssert(some_person.isHuman());
+
+    /*
+    if (some_person.isComputer()) {
+        std::cout << "Fail: Player is a Computer" << "\n";
+        return false;
+    }
+    */
+
+    bodgeAssert(!some_person.isComputer());
 
     return true;
 }
-
-// Where are the rest of the tests? This might
-// be worth an F... if I am lucky.
 
 //------------------------------------------------------------------------------
 int main(int argc, char** argv)
 {
     UnitTestPair tests[] = {
-        {testPlayerDefaultConstructor, "testPlayerDefaultConstructor"}
+        {testDefaultConstructor, "testDefaultConstructor"},
     };
-
     for (const UnitTestPair& testPair : tests) {
         runTest(testPair.first, testPair.second);
     }
 
     return 0;
 }
+
