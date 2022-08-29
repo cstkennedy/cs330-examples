@@ -9,7 +9,6 @@ fn main() {
     // Fibonaccci
     let mut fm2: u64 = 1;  // n-2 (previous previous) fibonacci number
     let mut fm1: u64 = 1;  // n-1 (previous) fibonacci number
-    let f: u64   = 0;  // current fibonacci number
 
     // Prompt the user
     print!("Generate how many numbers? ");
