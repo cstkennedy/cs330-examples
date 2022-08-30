@@ -1,3 +1,5 @@
+from examples.strategy import (Strategy, KeyboardStrategy)
+
 
 class Player(object):
     """
@@ -60,7 +62,7 @@ class Player(object):
 
         self._name = n
 
-    def next_move(self) -> str:
+    def next_move(self, the_strategy: Strategy) -> int:
         """
         Retrieve the next move.
 
@@ -69,9 +71,7 @@ class Player(object):
         @throws IOException if the move can not be retreived from the player.
         """
 
-        choice = int(input(self._name + ", " + Player.PROMPT_MSG))
-
-        return choice
+        return the_strategy.next_move()
 
     def is_human(self) -> bool:
         """

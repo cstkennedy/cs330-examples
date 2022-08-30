@@ -1,6 +1,7 @@
 from examples.player import Player
 from examples.board import Board
 from examples.referee import Referee
+from examples.strategy import (Strategy, KeyboardStrategy)
 
 from typing import Optional
 
@@ -136,13 +137,13 @@ class Game(object):
         """
         Get a player move, and update the board.
         """
-
-        move = player.next_move()
+        the_strategy = KeyboardStrategy(player.get_name())
+        move = player.next_move(the_strategy)
         sym = player.get_symbol()
 
         # while (board.get_cell(move) != 'X' && board.get_cell(move) != 'O') {
         while not self._ref.selected_cell_is_empty(move):
-            move = player.next_move()
+            move = player.next_move(the_strategy)
             sym = player.get_symbol()
 
         self._board.set_cell(move, sym)
