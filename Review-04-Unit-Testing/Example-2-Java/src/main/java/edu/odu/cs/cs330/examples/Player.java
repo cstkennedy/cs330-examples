@@ -1,7 +1,6 @@
 package edu.odu.cs.cs330.examples;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * This is more a Player interface than a Player class.
@@ -11,10 +10,6 @@ import java.util.Scanner;
  */
 class Player implements Cloneable
 {
-    /**
-     * Message used to prompt a human player for a move.
-     */
-    private static final String PROMPT_MSG = "Enter your desired move (1-9): ";
 
     /**
      * Name of a player.
@@ -93,17 +88,10 @@ class Player implements Cloneable
      *
      * @throws IOException if the move can not be retreived from the player.
      */
-    public int nextMove()
+    public int nextMove(Strategy theStrategy)
         throws IOException
     {
-        Scanner scnr = new Scanner(System.in);
-
-        int choice;
-
-        System.out.print(name + ", " + Player.PROMPT_MSG);
-        choice = scnr.nextInt();
-
-        return choice;
+        return theStrategy.nextMove();
     }
 
     /**

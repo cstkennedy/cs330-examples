@@ -158,15 +158,17 @@ public class Game
     private boolean roundTurn(Player player)
         throws IOException
     {
+        Strategy theStrategy = new KeyboardStrategy(player.getName());
+
         int   move;
         char  sym;
 
-        move = player.nextMove();
+        move = player.nextMove(theStrategy);
         sym  = player.getSymbol();
 
         //while (board.getCell(move) != 'X' && board.getCell(move) != 'O') {
         while (!ref.selectedCellIsEmpty(move)) {
-            move = player.nextMove();
+            move = player.nextMove(theStrategy);
             sym  = player.getSymbol();
         }
         board.setCell(move, sym);
