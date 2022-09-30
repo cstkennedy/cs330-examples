@@ -60,6 +60,7 @@ MANIFEST
 **/out-Rust.txt
 **/out-rust.txt
 **/out-cpp.txt
+**/ex*.txt
 
 # Gcovr rules
 **/source/*.html
