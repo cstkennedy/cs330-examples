@@ -123,12 +123,7 @@ public class UpdateRoom
     }
 
     /**
-     * Compute the area of a room and the cost of
-     * flooring for the room
-     * <p>
-     * Let us Review the use of reference and pointer variables.
-     * <p>
-     * We will use these when we implement the iterator interface.
+     * Compute the area of a room and the cost of flooring for the room.
      */
     public static void main(String... args)
         throws IOException
