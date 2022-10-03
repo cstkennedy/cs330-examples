@@ -9,34 +9,8 @@
 
 #include "Board.h"
 
-/**
- * This is the Bodge-Unit-Testing... PseUdO-Framework
- *
- * Bodge - A clumsy or inelegant job, usually a temporary repair;
- * a patch, a repair. (From Wiktionary)
- */
-
-#define bodgeAssert(expression) \
-if (!(expression)) { \
-    std::cout << " FAILURE: "\
-              << __func__ << ":" << __LINE__\
-              << " -> (" << #expression << ")\n";\
-    return false;\
-}
-// End Macro
-
-// Unit Test Pseudo-Framework
-//-----------------------------------------------------------------------------
-using UnitTestFunction = std::function<bool()>;
-using UnitTestPair = std::pair<UnitTestFunction, std::string>;
-
-
-void runTest(const UnitTestFunction& testFunction, std::string description)
-{
-    std::cout << (testFunction() ? "PASSED" : "FAILED")
-              << " -> " << description
-              << std::endl;
-}
+#include "utilities.h"
+#include "bodgeUnitTest.h"
 
 //-----------------------------------------------------------------------------
 // Unit Tests - Support Data
@@ -45,19 +19,6 @@ void runTest(const UnitTestFunction& testFunction, std::string description)
 //------------------------------------------------------------------------------
 // Unit Tests - Test Functions
 //------------------------------------------------------------------------------
-/**
- * Helper function for testDisplay.
- *
- * Convert any type with an operator<< defined to a std::string
- */
-template<class T>
-std::string toStr(const T& thing)
-{
-    std::ostringstream outs;
-    outs << thing;
-
-    return outs.str();
-}
 
 bool testBoardButPoorly()
 {
