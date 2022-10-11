@@ -1,14 +1,54 @@
 These examples cover the basics of inheritance in C++, including mechanics,
-methodologies, and design paradigms. This discussion is split into four parts:
+methodologies, and design paradigms. This discussion is split into nine parts:
 
-\bSidebar
 
-After recording parts 1 through 4, I made some *style* tweaks to the code for
-Examples 1 through 8. These tweaks dealt with code style (e.g., keeping
-lines under 80 characters, spaces around operators, and spaces before
-brackets).
+  - **Example 1**
+    - Basics of Polymorphism: Virtual Functions, Pure Virtual Functions, &
+      Dynamic Binding
+    - The recording is available at <https://youtu.be/ZeM1OcxJcsA>.
 
-\eSidebar
+  - **Example 2**
+    - Factory Pattern and *Interfaces as a Contract*
+    - The recording is available at <https://youtu.be/eqnVxtFiw0Q>.
+
+  - **Example 3**
+    - `ShapeCollection`, object lifetimes, & iterators
+    - The recording is available at <https://youtu.be/jdzwM0FMRc0>.
+
+  - **Example 4** 
+    - `operator>>`
+    - The recording is available at <https://youtu.be/LfqPXbcId80>.
+
+  - **Example 5**
+    - Shape `read` method
+    - The recording is available at <https://youtu.be/x5Z4gJFr4mY>.
+
+  - **Example 6** 
+    - **Removed** & **Replaced** - Fixing the Shape classes with modern C++
+      - `override` keyword
+      - `constexpr`
+      - ` = default`
+      - ` = delete`
+    - The recording is available at <https://youtu.be/Ycb4CaFNOz4>.
+
+  - **Example 7**
+    - Separation of Concerns & Interfaces
+    - The recording is available at <>.
+
+ - **Example 8**
+   - Replacing `ShapeCollection` with `std::vector` and smart pointers; updating `ShapeFactory`.
+    - The recording is available at <>.
+
+ - **Example 9**
+    - Modern C++ additions, including:
+      - `std::array`
+      -  tuple unpacking
+      - `string_view`
+    - The recording is available at <>.
+
+---
+
+# Old Recordings
 
 > Updated Examples 3, 4, and 5
 
@@ -32,39 +72,4 @@ brackets).
 
 # New Tweaks & Examples
 
-
-  - **Example 1**
-    - Basics of Polymorphism: Virtual Functions, Pure Virtual Functions, &
-      Dynamic Binding
-
-  - **Example 2**
-    - Factory Pattern and *Interfaces as a Contract*
-
-  - **Example 3**
-    - `ShapeCollection`, object lifetimes, & iterators
-
-  - **Example 4** 
-    - `operator>>`
-
-  - **Example 5**
-    - Shape `read` method
-
-  - **Example 6** 
-    - **Removed** & **Replaced** - Fixing the Shape classes with modern C++
-      - `override` keyword
-      - `constexpr`
-      - ` = default`
-      - ` = delete`
-
-  - **Example 7**
-    - Separation of Concerns & Interfaces
-
- - **Example 8**
-   - Replacing `ShapeCollection` with `std::vector` and smart pointers; updating `ShapeFactory`.
-
- - **Example 9**
-    - Modern C++ additions, including:
-      - 'std::array`
-      -  tuple unpacking
-      - `string_view`
 
