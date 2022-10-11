@@ -100,7 +100,7 @@ int main(int argc, char** argv)
     printHeading(cout, "Display Largest Shape (Area)", 38, '~');
 
     ShapeCollection::const_iterator it = findLargestShapeByArea(shapes);
-    Shape* largestShape = *it;
+    const Shape* largestShape = *it;
 
     // cout << largestShape << "\n";  // oops again
     cout << *largestShape << "\n";
@@ -147,11 +147,9 @@ void printShapeNames(std::ostream& outs, const ShapeCollection& toPrint)
 ShapeCollection::const_iterator findLargestShapeByArea(const ShapeCollection& collection)
 {
     ShapeCollection::const_iterator it           = collection.begin();
-    ShapeCollection::const_iterator largestShape = it;
 
-    // The first shape is the largest
-    // until I look at more
-    largestShape = it;
+    // The first shape is the largest until I look at more
+    ShapeCollection::const_iterator largestShape = it;
 
     // Review pre increment
     while (++it != collection.end()) {

@@ -33,7 +33,7 @@ methodologies, and design paradigms. This discussion is split into nine parts:
 
   - **Example 7**
     - Separation of Concerns & Interfaces
-    - The recording is available at <>.
+    - The recording is available at <https://youtu.be/VM5jyuAGLrA>.
 
  - **Example 8**
    - Replacing `ShapeCollection` with `std::vector` and smart pointers; updating `ShapeFactory`.
