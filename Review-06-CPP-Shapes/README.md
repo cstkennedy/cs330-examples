@@ -40,10 +40,10 @@ methodologies, and design paradigms. This discussion is split into nine parts:
    - The recording is available at <https://youtu.be/wuabT0msdC8>.
 
  - **Example 9**
+    - Implement `transform_if`
     - Modern C++ additions, including:
-      - `std::array`
-      -  tuple unpacking
+      -  tuple unpacking (structured bindings)
       - `string_view`
-    - The recording is available at <>.
+    - The recording is available at <https://youtu.be/aZC58P9kNzg>.
 
 
