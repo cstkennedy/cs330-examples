@@ -50,9 +50,7 @@ int main(int argc, char** argv)
         {testBoardButPoorly, "testBoardButPoorly"}
     };
 
-    for (const UnitTestPair& testPair : tests) {
-        runTest(testPair.first, testPair.second);
-    }
+    runTests(tests);
 
     return 0;
 }

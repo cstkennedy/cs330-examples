@@ -40,4 +40,13 @@ void runTest(const UnitTestFunction& testFunction, std::string description)
               << std::endl;
 }
 
+template<class T>
+void runTests(const T& tests)
+{
+    for (const UnitTestPair& testPair : tests) {
+        runTest(testPair.first, testPair.second);
+    }
+}
+
+
 #endif

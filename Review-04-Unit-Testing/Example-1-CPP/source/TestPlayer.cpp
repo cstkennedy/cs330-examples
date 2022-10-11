@@ -57,9 +57,7 @@ int main(int argc, char** argv)
     UnitTestPair tests[] = {
         {testDefaultConstructor, "testDefaultConstructor"},
     };
-    for (const UnitTestPair& testPair : tests) {
-        runTest(testPair.first, testPair.second);
-    }
+    runTests(tests);
 
     return 0;
 }
