@@ -6,7 +6,7 @@ being passed) between *objects*.
 
 We will start with a whirlwind introduction to UML Sequence diagrams in the
 context of the [C++ Shapes Examples](../Review-06-CPP-Shapes)
-(specifically Example 7 and Example 8).
+(specifically Examples 7, 8, and 9).
 
 The recorded discussion is available [here](https://youtu.be/PusrbfgFfDI).
 
