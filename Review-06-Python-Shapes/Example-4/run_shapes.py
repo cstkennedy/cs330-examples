@@ -55,8 +55,6 @@ def main():
             # And Unpack the list
             name, values = [part.strip() for part in line.split(";")]
 
-            values = values.strip()
-
             try:
                 values = [float(val) for val in values.split()]
                 shapes.append(ShapeFactory.create_from_dimensions(name, values))

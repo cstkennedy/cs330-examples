@@ -60,3 +60,6 @@ class Square(Shape):
                 + FPT_FMT.format("Side", self.side)
                 + FPT_FMT.format("Perimeter", self.perimeter())
                 + FPT_FMT.format("Area", self.area()))
+
+    def __repr__(self):
+        return f"Square(side={self.side})"

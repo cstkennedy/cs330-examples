@@ -73,3 +73,6 @@ class Circle(Shape):
                 + FPT_FMT.format("Diameter", self.diameter)
                 + FPT_FMT.format("Perimeter", self.perimeter())
                 + FPT_FMT.format("Area", self.area()))
+
+    def __repr__(self):
+        return f"Circle(radius={self.radius})"

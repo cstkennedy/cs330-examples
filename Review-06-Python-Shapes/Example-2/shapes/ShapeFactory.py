@@ -56,8 +56,10 @@ class ShapeFactory:
         """
         Print a list of known Shapes
         """
+        #  return "\n".join(
+            #  ["  " + name for name in ShapeFactory._known_shapes.keys()])
         return "\n".join(
-            ["  " + name for name in ShapeFactory._known_shapes.keys()])
+                (f"  {name:}" for name in ShapeFactory._known_shapes.keys()))
 
     @staticmethod
     def number_known():

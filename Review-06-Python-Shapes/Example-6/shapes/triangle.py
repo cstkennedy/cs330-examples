@@ -93,6 +93,10 @@ class Triangle(Shape):
                 + FPT_FMT.format("Perimeter", self.perimeter())
                 + FPT_FMT.format("Area", self.area()))
 
+    def __repr__(self):
+        a, b, c = self.side_a, self.side_b, self.side_c
+        return f"Triangle(side_a={a}, side_b={b}, side_c={c})"
+
 
 class EquilateralTriangle(Triangle):
     """
@@ -163,6 +167,9 @@ class EquilateralTriangle(Triangle):
                 + FPT_FMT.format("Height", self.height)
                 + FPT_FMT.format("Perimeter", Triangle.perimeter(self))
                 + FPT_FMT.format("Area", self.area()))
+
+    def __repr__(self):
+        return f"EquilateralTriangle(side={self.side})"
 
 
 class RightTriangle(Triangle):
@@ -264,3 +271,6 @@ class RightTriangle(Triangle):
                 + FPT_FMT.format("Hypotenuse", self.side_c)
                 + FPT_FMT.format("Perimeter", self.perimeter())
                 + FPT_FMT.format("Area", self.area()))
+
+    def __repr__(self):
+        return f"RightTriangle(base={self.base}, height={self.height})"

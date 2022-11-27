@@ -24,7 +24,7 @@ def main():
     if len(sys.argv) < 2:
         print("No input file provided.")
         print("Usage: {:} input_file".format(*sys.argv))
-        exit(1)
+        sys.exit(1)
 
     shapes_filename = sys.argv[1]
 
@@ -46,7 +46,7 @@ def main():
     print("{:>2} shapes available.".format(ShapeFactory.number_known()))
     print()
 
-    # makeCircle = lambda attribs : Circle(*attribs)
+    #  make_circle = lambda attribs : Circle(*attribs)
 
     # print(ShapeFactory.create_from_dimensions("Circle", [4]))
 
@@ -56,25 +56,25 @@ def main():
     # shapes_in = open(shapes_filename, "r")
     with open(shapes_filename, "r") as shapes_in:
         for line in shapes_in:
-
             line = line.strip()  # Strip leading/trailing whitespace
             # print(line)
 
             line = line.split(";")  # Split on ";"
-            # print(line)
+            #  print(line)
 
             name, values = line  # Unpack the list
-            # print(name)
-            # print(values)
+            #  print(name)
+            #  print(values)
             values = values.strip()
 
-            # print(values)
+            #  print(values)
             try:
                 values = [float(val) for val in values.split()]
-                # print(values)
+                #  print(values)
                 shapes.append(ShapeFactory.create_from_dimensions(name, values))
 
-            except ValueError as _err:
+            #  except ValueError as _err:
+            except (ValueError, TypeError) as _err:
                 print(f"Skipped shape \"{name:}\" due to malformed line.", file=sys.stderr)
 
     # Remove all `None` entries with a list comprehension

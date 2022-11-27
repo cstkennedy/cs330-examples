@@ -5,6 +5,7 @@
 import json
 import pickle
 import sys
+import pprint
 
 import shapes.shape_factory as shape_factory
 
@@ -23,16 +24,15 @@ def main():
 
     if len(sys.argv) < 2:
         print("No input file provided.")
-        print("Usage: {:} input_file".format(*sys.argv))
+        #  print("Usage: {:} input_file".format(*sys.argv))
+        print(f"Usage: {sys.argv[0]:} input_file")
         exit(1)
 
     shapes_filename = sys.argv[1]
 
     print("-" * 80)
-
     for line in PROGRAM_HEADING:
         print(f"{line:^80}")
-
     print("-" * 80)
 
     #---------------------------------------------------------------------------
@@ -43,7 +43,8 @@ def main():
     print("~" * 38)
     print(shape_factory.list_known())
     print("-" * 38)
-    print("{:>2} shapes available.".format(shape_factory.number_known()))
+    #  print("{:>2} shapes available.".format(shape_factory.number_known()))
+    print(f"{shape_factory.number_known():>2} shapes available.")
     print()
 
     # The list needs to be intialized outside the "with" closure
@@ -78,17 +79,11 @@ def main():
     out_filename = "coolPickles.dat"
 
     with open(out_filename, "wb") as pickle_file:
-        # LOL Nope
-        # for shp in shapes:
-        #     pickle.dump(shp, pickle_file)
-
-        # One line, full data structure
         pickle.dump(shapes, pickle_file)
 
     with open(out_filename, "rb") as pickle_file:
         rebuilt_shapes = pickle.load(pickle_file)
 
-    # Print all the rebuilt shapes
     print("~" * 38)
     print("{:^38}".format("Display Re-Built Shapes"))
     print("~" * 38)
@@ -112,8 +107,9 @@ def main():
 
     sorted_shapes = sorted(rebuilt_shapes, key=lambda shape: shape.name)
 
+    pp = pprint.PrettyPrinter(width=80, indent=4, compact=False)
     print("#" * 80)
-    print(sorted_shapes)
+    pp.pprint(sorted_shapes)
     for shp in sorted_shapes:
         print(shp)
 

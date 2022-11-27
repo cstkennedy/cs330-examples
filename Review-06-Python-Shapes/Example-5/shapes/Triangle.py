@@ -83,3 +83,6 @@ class Triangle(Shape):
                 + FPT_FMT.format("Side C", self.side_c)
                 + FPT_FMT.format("Perimeter", self.perimeter())
                 + FPT_FMT.format("Area", self.area()))
+
+    def __repr__(self):
+        return f"Triangle(side_a={self.side_a}, side_b={self.side_b}, side_c={self.side_c})"
