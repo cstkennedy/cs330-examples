@@ -2,7 +2,7 @@
 
 import sys
 
-def fibonacci_sequence(sequence_length):
+def fibonacci_sequence(sequence_length: int):
     """
     Generate the Fibonacci Sequence to the n-th number.
     1 1 2 3 5 8 13 21 34...

@@ -1,18 +1,18 @@
 #! /usr/bin/env python3
 
+from __future__ import annotations
+
 import sys
 import random
 
 from datetime import datetime
 from concurrent.futures import ProcessPoolExecutor
 
-from typing import Dict
-
 DEFAULT_NUM_TRIALS = 10000
 SUMMARY_FMT_STR = "# Heads: {:>6d} ({:>6.4f}) / # Tails {:>6d} ({:>6.4f})"
 
 
-def simulate_flips(num_trials: int) -> Dict[str, int]:
+def simulate_flips(num_trials: int) -> dict[str, int]:
     """
     Simulate a specified number of coin flips
 
