@@ -50,6 +50,9 @@ def main():
     #                discountFlooring)
 
     costs = [discount_flooring(room) for room in duplicate_house]
+    #  costs = []
+    #  for room in duplicate_house:
+        #  costs.append(discount_flooring(room))
 
     # std::copy(costs.begin(), costs.end(),
     #           std::ostream_iterator<double>(std::cout, "\n"))
@@ -92,6 +95,11 @@ def build_house(house: House):
         .with_name("Kitchen") \
         .with_dimensions(20, 12) \
         .with_flooring("Tile", 3.87)
+
+    #  kitchen = Room()
+    #  kitchen.set_name("Kitchen") \
+    #  kitchen.set_dimensions(20, 12) \
+    #  kitchen.set_flooring("Tile", 3.87)
 
     house.add_room(kitchen)
 
