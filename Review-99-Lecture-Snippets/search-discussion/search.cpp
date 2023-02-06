@@ -25,7 +25,7 @@ namespace didactic_functions {
 
     //--------------------------------------------------------------------------
     template <typename T>
-    int search(const std::vector<T> aVec, const T& key)
+    int search(const std::vector<T>& aVec, const T& key)
     {
         for (int i = 0; i < aVec.size(); ++i) {
             if (aVec[i] == key) {
