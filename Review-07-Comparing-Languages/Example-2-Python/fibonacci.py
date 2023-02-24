@@ -1,5 +1,7 @@
 #! /usr/bin/env python3
 
+import sys
+
 
 def main():
     """
@@ -15,7 +17,7 @@ def main():
     # Fibonaccci
     fm2 = 1  # n-2 (previous previous) fibonacci number
     fm1 = 1  # n-1 (previous) fibonacci number
-    f   = 0  # current fibonacci number
+    #  f   = 0  # current fibonacci number
 
     # Prompt the user
     index = input("Generate how many numbers? ")
@@ -37,15 +39,17 @@ def main():
         print("{:3d} is not between 3 and 20\n".format(index))
 
         # Exit with an error state
-        exit(1)
+        sys.exit(1)
 
     # Initial output
-    print("{:>2d}: {:10d}".format(1, fm2))
-    print("{:>2d}: {:10d}".format(2, fm1))
+    #  print("{:>2d}: {:10d}".format(1, fm2))
+    #  print("{:>2d}: {:10d}".format(2, fm1))
+    print(f"{1:>2d}: {fm1:10d}")
+    print(f"{2:>2d}: {fm2:10d}")
 
     # Fhe first 2 numbers were already output
     for i in range(3, (index + 1)):
-        f   = fm1 + fm2
+        f = fm1 + fm2
         fm2 = fm1
         fm1 = f
 
