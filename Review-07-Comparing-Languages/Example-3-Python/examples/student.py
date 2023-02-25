@@ -32,3 +32,6 @@ class Student:
 
     def __str__(self):
         return self.__name
+
+    def __repr__(self):
+        return f"Student(n=\"{self.name}\")"

@@ -1,5 +1,5 @@
-from student import Student
-from roster import Roster
+from examples.student import Student
+from examples.roster import Roster
 
 """
 Demonstrate simple Roster and Student ADTs.

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 
-from student import Student
+from examples.student import Student
 
 DEFAULT_MAX_STUDENTS: int = 10
 
@@ -74,7 +74,6 @@ class Roster:
         self.students.add(stu)
         return True
 
-
     def num_enrolled(self):
         """
         Retrieve the number of enrolled students.
@@ -125,11 +124,14 @@ class Roster:
         hc = hash(self.course_num)
 
         hc += self.enroll_limit
-        hc += hash(self.students)
+
+        # Python sets can not be hashed (3.11.2)
+        #  hc += hash(self.students)
+        hc  += sum(hash(stu) for stu in self.students)
 
         return hc
 
-    def __deepcopy(self, memo):
+    def __deepcopy__(self, memo):
 
         cpy = Roster(self.enroll_limit, self.course_num)
 

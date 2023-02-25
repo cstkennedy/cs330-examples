@@ -4,8 +4,10 @@ Part 1 covers `Example-1` and the different versions of `Example-2`
 
 The Part 1 recording is available [here](https://youtu.be/IMGWyvyVxOE).
 
-  - Example 1 - An example of reading keyboard input using the Java `Scanner`
-    class.
+  - Example 1 - An example of reading keyboard input, including examples using
+    the:
+    - Java `Scanner` class
+    - Python `input` function
   - Example 2 - An example in which the Fibonacci Sequence is computed. This
     example includes C++, Java, Python, and Rust examples. 
 

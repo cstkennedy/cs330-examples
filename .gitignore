@@ -44,6 +44,9 @@ Scratch
 **/.coverage
 **/htmlcov
 
+# Python pytest
+**/.pytest_cache
+
 # Python Disttools
 MANIFEST
 
