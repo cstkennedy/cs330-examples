@@ -59,6 +59,7 @@ MANIFEST
 
 # Rust
 **/target
+**Cargo.lock
 
 # output comparison
 **/out-Rust.txt
