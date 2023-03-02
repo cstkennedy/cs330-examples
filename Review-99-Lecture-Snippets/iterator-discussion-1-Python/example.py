@@ -1,7 +1,6 @@
 from collections.abc import (Iterable, Iterator)
 
 
-
 def find_name(collection: Iterable, thing_to_find: str) -> str:
     """
     Search for a name
@@ -58,20 +57,6 @@ def main():
     # Search for a name
     #--------------------------------------------------------------------------
     print("----------Search for a Name----------")
-    thing_to_find = "Thomas"
-
-    # Original non-function search
-    """
-    Collection::const_iterator search_it = names.begin()
-
-    while (search_it != names.end())
-        # Look at the current name (*search_it) and
-        # compare to the name to find (thing_to_find)
-        if (*search_it == thing_to_find)
-            print("Found a Match")
-        ++search_it
-    """
-
     found_it = find_name(names, "Andrey")
 
     # found_it is either a name (string) or None
