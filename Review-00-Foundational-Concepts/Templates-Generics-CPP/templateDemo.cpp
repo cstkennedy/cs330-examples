@@ -6,7 +6,7 @@
 
 
 /**
- * Print a value mulitple times.
+ * Print a value multiple times.
  *
  * @tparam T type to print multiple times
  *

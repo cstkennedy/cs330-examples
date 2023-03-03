@@ -45,7 +45,7 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    std::string demoType(argv[1]);
+    const std::string demoType(argv[1]);
 
     if (demoType == "static") {
         staticArrayDemo();
