@@ -56,6 +56,7 @@ int ShapeFactory::numberKnown()
     }
     */
     return (end(_known_shapes) - begin(_known_shapes));
+    // return std::distance(begin(_known_shapes), end(_known_shapes));
 }
 
 //------------------------------------------------------------------------------
