@@ -28,9 +28,10 @@ bool is_non_empty(const std::string& str)
 }
 
 
-vector<string> read_lines(istream& ins)
+template<template<typename...>  class Collection>
+Collection<string> read_lines(istream& ins)
 {
-    vector<string> raw_words;
+    Collection<string> raw_words;
 
     string line;
     while (getline(ins, line)) {
@@ -62,7 +63,7 @@ int main(int argc, char** argv)
     }
     const char* filename = argv[1];
     ifstream input_file(filename);
-    vector<string> raw_words = read_lines(input_file);
+    vector<string> raw_words = read_lines<std::vector>(input_file);
 
     vector<string> filtered_words;
     copy_if(begin(raw_words), end(raw_words), back_inserter(filtered_words),
