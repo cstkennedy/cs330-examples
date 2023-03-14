@@ -15,7 +15,7 @@ public class TemplateDemo
 		for (int i = 0; i < count - 1; i++) {
 			System.out.printf("%s ", value);
 		}
-		System.out.println();
+        System.out.printf("%s%n", value);
 	}
 
 
