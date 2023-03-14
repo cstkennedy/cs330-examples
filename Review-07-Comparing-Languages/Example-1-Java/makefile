@@ -22,5 +22,5 @@ $(MAINPROG): $(OBJECTS)
 clean:
 	rm *.class $(MAINPROG).jar
 
-run:
+run: jar
 	java -jar $(MAINPROG).jar
