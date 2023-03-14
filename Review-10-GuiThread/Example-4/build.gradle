@@ -1,0 +1,119 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
+
+    id "checkstyle"
+    id "com.github.spotbugs" version "5.0.9"
+    id "project-report"
+    id "jacoco"
+    id "pmd"
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.2"
+    // testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.2"
+    testImplementation "org.hamcrest:hamcrest-library:2.2"
+}
+
+jar {
+    archiveBaseName = "GeneratePrimes"
+
+    manifest {
+        attributes(
+            "Main-Class": "edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread"
+        )
+    }
+}
+
+test {
+    useJUnitPlatform()
+    reports {
+        html.enabled = true
+    }
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+
+javadoc {
+    failOnError false
+}
+
+task deploy(dependsOn: [
+            javadoc]){
+}
+
+//------------------------------------------------------------------------------
+// Analysis Tools
+//------------------------------------------------------------------------------
+
+// SpotBugs
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.enabled = false
+       html.enabled = true
+    }
+}
+
+spotbugsTest.enabled = false
+// End SpotBugs config
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+        csv.enabled true
+    }
+}
+
+// Check Style Config
+checkstyle {
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+// End Checkstyle config
+
+pmd {
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+
