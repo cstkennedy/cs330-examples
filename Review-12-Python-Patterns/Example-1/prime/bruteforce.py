@@ -1,3 +1,26 @@
+from __future__ import annotations
+
+def __can_be_divided_by_any(known_primes: list[int], next_prime: int):
+    """
+    Iterate over all known primes and check the next_prime.
+
+    Returns:
+        If next_prime can be evenly divided by any previously known prime
+        return True. Return False otherwise
+    """
+
+    # While the list of primes has not yet been exhausted
+    for previous_prime in known_primes:
+
+        # Check for divisibility by the next element--i.e.,
+        # if nextPrime % p == 0 for any p, discard nextPrime
+        # Is the number prime?
+        if next_prime % previous_prime == 0:
+            return True
+
+    return False
+
+
 def generate_primes(to_generate):
     """
     Generate a sequence of prime numbers
@@ -11,31 +34,18 @@ def generate_primes(to_generate):
     for next_prime in known_primes:
         yield next_prime
 
-    for i in range(3, to_generate + 1):
+    for _i in range(3, to_generate + 1):
         # prime from which to start calculations
         next_prime = known_primes[-1]
 
         # true once a prime number has been identified
-        prime = False
+        is_prime = False
 
-        # Iterate over all existing known prime numbers
-        # halt when a prime number has been identified
-        while not prime:
+        # Halt when a prime number has been identified
+        while not is_prime:
             # Guess the next prime
-            # Assume the number is not prime
             next_prime += 2
-            prime = True
-
-            # While the list of primes has not yet been exhausted
-            for previous_prime in known_primes:
-
-                # Check for divisibility by the next element--i.e.,
-                # if nextPrime %p == 0 for any p, discard nextPrime
-                # Is the number prime?
-                prime = (next_prime % previous_prime != 0)
-
-                if not prime:
-                    break
+            is_prime = not __can_be_divided_by_any(known_primes, next_prime)
 
         known_primes.append(next_prime)
 
