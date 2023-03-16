@@ -23,76 +23,7 @@ import edu.odu.cs.cs330.examples.guithread.driver.PrimeOutputPanel;
  */
 public class PrimeGuiThread extends JFrame {
 
-    /**
-     * This worker class contains all the logic for generating primes.
-     * <p>
-     * It is launched within a Thread--note that it implements Runnable
-     */
-    private class PrimeWorker implements Runnable
-    {
-        /**
-         * An instance of Bruteforce Prime Number Generator.
-         */
-        private PrimeGenerator primeGenerator;
-
-        /**
-         * The number of primes to be generated.
-         */
-        private int toGenerate;
-
-        /**
-         * Flag that is set to false when stopButton has been clicked (and
-         * generation needs to be stopped).
-         */
-        private boolean stop;
-
-        /**
-         * Construct a new Worker Instance.
-         *
-         * @param numPrimes desired number of primes to
-         * generate
-         */
-        public PrimeWorker(int numPrimes)
-        {
-            primeGenerator = new PrimeGenerator(PrimeGuiThread.this.primeMasterList);
-
-            // a negative toGenerate means that we have more primes than were
-            // requested.
-            toGenerate     = numPrimes - primeGenerator.numberOfPrimes();
-            stop           = false;
-        }
-
-        /**
-         * Perform the prime number generation.
-         */
-        @Override
-        public void run()
-        {
-            for (int _i = 0; _i < toGenerate && !stop; ++_i) {
-                primeGenerator.next();
-            }
-
-            PrimeGuiThread.this.outputPanel.renderResults(
-                this.stop,
-                this.primeGenerator.numberOfPrimes(),
-                this.primeGenerator.getLast(),
-                this.primeGenerator.toString()
-            );
-
-            PrimeGuiThread.this.inputPanel.toggleButtons();
-            PrimeGuiThread.this.updatePrimeMasterList(this.primeGenerator.getPrimes());
-        }
-
-        /**
-         * Halt the prime number generation.
-         */
-        public void halt()
-        {
-            stop = true;
-        }
-    }
-
-    private class PrimeInputPanel extends JPanel
+    public class PrimeInputPanel extends JPanel
     {
         private JTextField  toGenField;   ///< Input Field - # primes to generate
         private JLabel      toGenLabel;   ///< Label - # primes to generate
@@ -131,7 +62,12 @@ public class PrimeGuiThread extends JFrame {
                     PrimeGuiThread.this.outputPanel.clear();
                     PrimeGuiThread.this.inputPanel.toggleButtons();
 
-                    PrimeGuiThread.this.worker = new PrimeWorker(numPrimes);
+                    PrimeGuiThread.this.worker = new PrimeWorker(
+                            numPrimes,
+                            PrimeInputPanel.this,
+                            PrimeGuiThread.this.outputPanel,
+                            PrimeGuiThread.this.primeMasterList
+                    );
                     new Thread(PrimeGuiThread.this.worker).start();
                 }
             );
@@ -201,16 +137,6 @@ public class PrimeGuiThread extends JFrame {
         pack();
 
         primeMasterList = new ArrayList();
-    }
-
-    /**
-     * T.B.W.
-     */
-    void updatePrimeMasterList(List<Integer> mostRecentList)
-    {
-        if (mostRecentList.size() > this.primeMasterList.size()) {
-            this.primeMasterList = mostRecentList;
-        }
     }
 
     /**
