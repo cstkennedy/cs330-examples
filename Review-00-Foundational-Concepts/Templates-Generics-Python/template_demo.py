@@ -11,10 +11,10 @@ def print_multiple_times(value: Any, count: int):
     @param count number of times to print
     """
 
-    for _ in range(0, count):
+    for _ in range(0, count-1):
         print(f"{value} ", end="")
 
-    print()
+    print(f"{value}")
 
 
 def main():
