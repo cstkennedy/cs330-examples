@@ -15,7 +15,7 @@ class KeyboardStrategy: public Strategy
         std::string _name;
 
     public:
-        const static std::string PROMPT_MSG;
+        static const std::string PROMPT_MSG;
 
         KeyboardStrategy(std::string name);
 
