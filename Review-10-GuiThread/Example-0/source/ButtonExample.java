@@ -21,9 +21,9 @@ public class ButtonExample extends JFrame {
         super("Button Example");
 
         // Set action for upper right close button
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Container cp = getContentPane();
+        Container cp = super.getContentPane();
 
         // Create a button
         clickButton = new JButton("Click Me!");
@@ -53,8 +53,8 @@ public class ButtonExample extends JFrame {
         cp.add(clickButton, BorderLayout.CENTER);
 
         // Package Everything
-        pack();
-        setLocationRelativeTo(null);
+        super.pack();
+        super.setLocationRelativeTo(null);
     }
 
     /**
