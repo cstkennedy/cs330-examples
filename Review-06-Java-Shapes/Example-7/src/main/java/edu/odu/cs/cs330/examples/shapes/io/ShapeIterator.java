@@ -35,12 +35,15 @@ public class ShapeIterator implements Iterator<Shape>
     {
         this.theBuffer = buffer;
 
+        /*
         try {
             this.queued = readNext();
         }
         catch (IOException | CloneNotSupportedException exp) {
             this.queued = null;
         }
+        */
+        this.queued = readNextWrapped();
     }
 
     @Override
@@ -85,6 +88,25 @@ public class ShapeIterator implements Iterator<Shape>
     }
 
     /**
+     * Read the next Shape.
+     *
+     * @return next Shape or null
+     *
+     */
+    private Shape readNextWrapped()
+    {
+        Shape shp = null;
+        try {
+            shp = readNext();
+        }
+        catch (IOException | CloneNotSupportedException exp) {
+            shp = null;
+        }
+
+        return shp;
+    }
+
+    /**
      * T.B.W.
      */
     private Shape initShapeFromDims(Shape shp, Scanner snr)
@@ -105,13 +127,14 @@ public class ShapeIterator implements Iterator<Shape>
     public Shape next()
     {
         Shape shp = this.queued;
-
+        /*
         try {
             this.queued = readNext();
         }
         catch (IOException | CloneNotSupportedException exp) {
             this.queued = null;
-        }
+        }*/
+        this.queued = readNextWrapped();
 
         return shp;
     }
