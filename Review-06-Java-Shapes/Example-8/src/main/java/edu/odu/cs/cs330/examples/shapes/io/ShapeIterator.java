@@ -35,12 +35,15 @@ public class ShapeIterator implements Iterator<Shape>
     {
         this.theBuffer = buffer;
 
+        /*
         try {
             this.queued = readNext();
         }
         catch (IOException | CloneNotSupportedException exp) {
             this.queued = null;
         }
+        */
+        this.queued = readNextWrapped();
     }
 
     @Override
@@ -71,10 +74,9 @@ public class ShapeIterator implements Iterator<Shape>
             shp = ShapeFactory.createShape(name);
 
             if (shp != null) {
-                Scanner lineScanner = new Scanner(line.substring(sIndex + 1,
-                                                                 line.length()));
+                String restOfLine = line.substring(sIndex + 1, line.length());
 
-                shp = initShapeFromDims(shp, lineScanner);
+                shp = (Shape) initShapeFromDims(shp, restOfLine);
             }
             else {
                 line = theBuffer.readLine();
@@ -85,12 +87,32 @@ public class ShapeIterator implements Iterator<Shape>
     }
 
     /**
+     * Read the next Shape.
+     *
+     * @return next Shape or null
+     *
+     */
+    private Shape readNextWrapped()
+    {
+        Shape shp = null;
+        try {
+            shp = readNext();
+        }
+        catch (IOException | CloneNotSupportedException exp) {
+            shp = null;
+        }
+
+        return shp;
+    }
+
+    /**
      * T.B.W.
      */
-    private Shape initShapeFromDims(Shape shp, Scanner snr)
+    private <T extends TraitFromDimensions> T initShapeFromDims(T obj, String restOfLine)
     {
-        TraitFromDimensions obj = (TraitFromDimensions) shp;
         double[] dims = new double[obj.numDims()];
+
+        Scanner snr = new Scanner(restOfLine);
 
         for (int i = 0; i < dims.length; ++i) {
             dims[i] = snr.nextDouble();
@@ -98,19 +120,21 @@ public class ShapeIterator implements Iterator<Shape>
 
         obj.createFromDims(dims);
 
-        return (Shape) obj;
+        return obj;
     }
 
     @Override
     public Shape next()
     {
         Shape shp = this.queued;
+        /*
         try {
             this.queued = readNext();
         }
         catch (IOException | CloneNotSupportedException exp) {
             this.queued = null;
-        }
+        }*/
+        this.queued = readNextWrapped();
 
         return shp;
     }

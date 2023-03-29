@@ -53,6 +53,11 @@ This discussion is split into seven (7) examples:
     - Separation of Concerns & Interfaces
     - The recording is available at <https://youtu.be/SltynAF6UkY>
 
+  - **Example 8**
+    - Generics and Trait Bounds in `ShapeIterator`
+    - This was built during a discussion during a live lecture on 28 March
+      2023. A recording is not yet available.
+
 
 # Running the Examples
 
