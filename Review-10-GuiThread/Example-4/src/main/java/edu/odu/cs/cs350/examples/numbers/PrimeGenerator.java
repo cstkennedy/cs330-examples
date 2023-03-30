@@ -69,8 +69,10 @@ public class PrimeGenerator implements Iterable<Integer>, Cloneable {
 
         return true;
         */
+        /*
         final long numZeroRemainders = this.primes.parallelStream()
             .mapToInt(Integer::intValue)
+            .takeWhile((int p) -> p <= Math.sqrt(n))
             .map(
                 (int p) -> {
                     return n % p;
@@ -81,6 +83,13 @@ public class PrimeGenerator implements Iterable<Integer>, Cloneable {
                     return remainder == 0;
                 }
             )
+            .count();
+        */
+        final long numZeroRemainders = this.primes.parallelStream()
+            .mapToInt(Integer::intValue)
+            .takeWhile((int p) -> p <= Math.sqrt(n))
+            .map((int p) -> n % p)
+            .filter((int remainder) -> remainder == 0)
             .count();
 
         return numZeroRemainders == 0;
