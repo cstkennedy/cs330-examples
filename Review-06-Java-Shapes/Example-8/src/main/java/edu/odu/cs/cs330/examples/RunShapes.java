@@ -9,6 +9,11 @@ import java.util.ArrayList;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import edu.odu.cs.tkennedy.utilities.Utilities;
 import static edu.odu.cs.tkennedy.utilities.Utilities.heading;
@@ -51,7 +56,9 @@ public class RunShapes {
     public static void main(String[] args)
         throws CloneNotSupportedException
     {
+        //----------------------------------------------------------------------
         // Command line argument and File validation
+        //----------------------------------------------------------------------
         BufferedReader shapesFile = null;
         try {
             shapesFile = new BufferedReader(new FileReader(args[0]));
@@ -61,11 +68,13 @@ public class RunShapes {
             System.exit(1);
         }
         catch (FileNotFoundException e) {
-            System.out.println("File (" + args[0] + ") could not be opened.");
+            System.out.printf("File (%s) could not be opened.%n", args[0]);
             System.exit(2);
         }
 
+        //----------------------------------------------------------------------
         // Print main program heading
+        //----------------------------------------------------------------------
         System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
 
         //----------------------------------------------------------------------
@@ -77,40 +86,41 @@ public class RunShapes {
         System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
         System.out.println();
 
+        //----------------------------------------------------------------------
+        // Get list of shapes from file
+        //----------------------------------------------------------------------
         List<Shape> shapes = readShapes(shapesFile);
 
-        // Print all the shapes
+        //----------------------------------------------------------------------
+        // Print all the shape names
+        //----------------------------------------------------------------------
         System.out.println(heading("Display Shape Names", H_WIDTH, '*'));
-        //printShapeNames(shapes);
-
         for (Shape shp : shapes) {
             System.out.println(shp.name());
         }
-
-        /*
-        shapes.stream()
-            .map(Shape::name)
-            .forEach(System.out::println);
-        */
-
         System.out.println();
+
+        //----------------------------------------------------------------------
+        // Print all the shapes
+        //----------------------------------------------------------------------
         System.out.println(heading("Display Shapes", H_WIDTH, '~'));
         for (Shape shp : shapes) {
             System.out.println(shp);
         }
-        /*
-        shapes.stream()
-            .forEach(System.out::println);
-        */
-
         System.out.println();
 
+        //----------------------------------------------------------------------
+        // Find and print the largest shape based on area
+        //----------------------------------------------------------------------
         System.out.println(heading("Display Largest Shape (Area)", H_WIDTH, '~'));
         Shape largestShape = shapes.parallelStream()
                            .max(Comparator.comparing(Shape::area))
                            .get();
         System.out.println(largestShape);
 
+        //----------------------------------------------------------------------
+        // Find and print the smallest shape based on perimeter
+        //----------------------------------------------------------------------
         System.out.println(heading("Display Smallest Shape (Perimeter)", H_WIDTH, '~'));
         Shape smallestShape = shapes.parallelStream()
                             .min(Comparator.comparing(Shape::perimeter))
@@ -132,6 +142,7 @@ public class RunShapes {
     private static List<Shape> readShapes(BufferedReader shapesFile)
         throws CloneNotSupportedException
     {
+        /*
         List<Shape> collection = new ArrayList<>();
 
         Iterator<Shape> it = new ShapeIterator(shapesFile);
@@ -139,10 +150,18 @@ public class RunShapes {
         while (it.hasNext()) {
             Shape shp = it.next();
 
-            if (shp != null) {
-                collection.add(shp);
-            }
+            collection.add(shp);
         }
+
+        return collection;
+        */
+        Iterator<Shape> it = new ShapeIterator(shapesFile);
+        Spliterator<Shape> splitIt = Spliterators.spliteratorUnknownSize(
+            it,
+            Spliterator.ORDERED
+        );
+        Stream<Shape> stream = StreamSupport.stream(splitIt, false); // false -> not parallel
+        List<Shape> collection = stream.collect(Collectors.toList());
 
         return collection;
     }

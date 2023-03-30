@@ -54,7 +54,8 @@ This discussion is split into seven (7) examples:
     - The recording is available at <https://youtu.be/SltynAF6UkY>
 
   - **Example 8**
-    - Generics and Trait Bounds in `ShapeIterator`
+    - Generics and Trait Bounds in `ShapeIterator`, using `extends` with
+      interfaces, converting an `Iterator` to a `Stream`.
     - This was built during a discussion during a live lecture on 28 March
       2023. A recording is not yet available.
 
