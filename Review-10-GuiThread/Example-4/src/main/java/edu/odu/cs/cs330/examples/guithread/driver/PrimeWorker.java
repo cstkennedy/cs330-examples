@@ -39,7 +39,6 @@ public class PrimeWorker implements Runnable
 
     private PrimeInputPanel inputPanel;
     private PrimeOutputPanel outputPanel;
-    private List<Integer> primeMasterList;
 
     /**
      * Construct a new Worker Instance.
@@ -51,12 +50,11 @@ public class PrimeWorker implements Runnable
                        PrimeOutputPanel outputPanel,
                        List<Integer> primeMasterList)
     {
-        this.primeMasterList = primeMasterList;
-        primeGenerator = new PrimeGenerator(primeMasterList);
+        primeGenerator = new PrimeGenerator();
 
         // a negative toGenerate means that we have more primes than were
         // requested.
-        toGenerate     = numPrimes - primeGenerator.numberOfPrimes();
+        toGenerate     = numPrimes - 2;
         stop           = false;
 
         this.inputPanel = inputPanel;
@@ -81,12 +79,6 @@ public class PrimeWorker implements Runnable
         );
 
         this.inputPanel.toggleButtons();
-
-        if (primeGenerator.numberOfPrimes() > primeMasterList.size()) {
-            primeMasterList.clear();
-            primeMasterList.addAll(primeGenerator.getPrimes());
-        }
-
     }
 
     /**

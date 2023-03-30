@@ -66,7 +66,7 @@ public class PrimeGuiThread extends JFrame {
                             numPrimes,
                             PrimeInputPanel.this,
                             PrimeGuiThread.this.outputPanel,
-                            PrimeGuiThread.this.primeMasterList
+                            null
                     );
                     new Thread(PrimeGuiThread.this.worker).start();
                 }
@@ -110,11 +110,6 @@ public class PrimeGuiThread extends JFrame {
     private PrimeWorker worker;
 
     /**
-     * A record of the longest list of primes generated so far.
-     */
-    List<Integer> primeMasterList;
-
-    /**
      * The constructor for the GUI.
      */
     public PrimeGuiThread()
@@ -135,8 +130,6 @@ public class PrimeGuiThread extends JFrame {
 
         // Package Everything
         pack();
-
-        primeMasterList = new ArrayList();
     }
 
     /**
