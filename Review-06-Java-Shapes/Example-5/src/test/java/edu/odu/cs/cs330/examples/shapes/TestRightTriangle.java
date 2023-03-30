@@ -35,7 +35,7 @@ public class TestRightTriangle
     }
 
     @Test
-    public void testDefaultCconstructor()
+    public void testDefaultConstructor()
     {
         assertThat(this.generic.name(), equalTo("Right Triangle"));
         assertThat(this.generic.base(), closeTo(1, 1e-8));
