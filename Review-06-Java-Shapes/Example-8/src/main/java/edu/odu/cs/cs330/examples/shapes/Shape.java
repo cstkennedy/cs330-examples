@@ -7,22 +7,22 @@ package edu.odu.cs.cs330.examples.shapes;
  *
  * @author Thomas J Kennedy
  */
-public abstract class Shape implements Cloneable, TraitFromDimensions {
+public interface Shape extends Cloneable, TraitFromDimensions {
 
     /**
      * Base for Shape formatting strings.
      */
-    protected static final String FMT_BASE = "%-12s: %24";
+    public static final String FMT_BASE = "%-12s: %24";
 
     /**
      * The string-value format string.
      */
-    protected static final String FMT_STR = FMT_BASE + "s%n";
+    public static final String FMT_STR = FMT_BASE + "s%n";
 
     /**
      * The double-value format string.
      */
-    protected static final String FMT_DBL = FMT_BASE + ".4f%n";
+    public static final String FMT_DBL = FMT_BASE + ".4f%n";
 
     /**
      * Return the name.
@@ -49,12 +49,6 @@ public abstract class Shape implements Cloneable, TraitFromDimensions {
      * Return a new duplicate Shape.
      */
     public abstract Object clone() throws CloneNotSupportedException;
-
-    @Override
-    public String toString()
-    {
-        return String.format(FMT_STR, "Name", this.name());
-    }
 }
 
 

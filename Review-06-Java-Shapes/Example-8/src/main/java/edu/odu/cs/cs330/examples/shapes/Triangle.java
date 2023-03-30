@@ -8,7 +8,7 @@ package edu.odu.cs.cs330.examples.shapes;
  *
  * @author Thomas J Kennedy
  */
-public class Triangle extends Shape implements Cloneable, TraitFromDimensions {
+public class Triangle implements Shape {
 
     /**
      * Length of Side A.
@@ -182,11 +182,11 @@ public class Triangle extends Shape implements Cloneable, TraitFromDimensions {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this.name())
-             + String.format(FMT_DBL, "Side A", this._side_a)
-             + String.format(FMT_DBL, "Side B", this._side_b)
-             + String.format(FMT_DBL, "Side C", this._side_c)
-             + String.format(FMT_DBL, "Perimeter", this.perimeter())
-             + String.format(FMT_DBL, "Area", this.area());
+        return String.format(Shape.FMT_STR, "Name", this.name())
+             + String.format(Shape.FMT_DBL, "Side A", this._side_a)
+             + String.format(Shape.FMT_DBL, "Side B", this._side_b)
+             + String.format(Shape.FMT_DBL, "Side C", this._side_c)
+             + String.format(Shape.FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(Shape.FMT_DBL, "Area", this.area());
     }
 }

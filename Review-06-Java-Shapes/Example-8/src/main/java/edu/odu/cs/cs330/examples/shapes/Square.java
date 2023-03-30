@@ -8,7 +8,7 @@ package edu.odu.cs.cs330.examples.shapes;
  *
  * @author Thomas J Kennedy
  */
-public class Square extends Shape implements Cloneable, TraitFromDimensions {
+public class Square implements Shape {
     /**
      * Length of One Side.
      */
@@ -101,10 +101,10 @@ public class Square extends Shape implements Cloneable, TraitFromDimensions {
     @Override
     public String toString()
     {
-        return super.toString()
-             + String.format(FMT_DBL, "Side", this._side)
-             + String.format(FMT_DBL, "Perimeter", this.perimeter())
-             + String.format(FMT_DBL, "Area", this.area());
+        return String.format(Shape.FMT_STR, "name", this.name())
+             + String.format(Shape.FMT_DBL, "Side", this._side)
+             + String.format(Shape.FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(Shape.FMT_DBL, "Area", this.area());
     }
 }
 

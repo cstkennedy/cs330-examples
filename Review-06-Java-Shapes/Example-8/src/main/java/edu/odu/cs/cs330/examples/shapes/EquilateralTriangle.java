@@ -8,7 +8,7 @@ package edu.odu.cs.cs330.examples.shapes;
  *
  * @author Thomas J Kennedy
  */
-public class EquilateralTriangle extends Triangle implements Cloneable, TraitFromDimensions{
+public class EquilateralTriangle extends Triangle implements Shape {
     /**
      * sqrt(3) / 4
      */
@@ -121,11 +121,11 @@ public class EquilateralTriangle extends Triangle implements Cloneable, TraitFro
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this.name())
-             + String.format(FMT_DBL, "Side", this._side_a)
-             + String.format(FMT_DBL, "Height", this.height())
-             + String.format(FMT_DBL, "Perimeter", this.perimeter())
-             + String.format(FMT_DBL, "Area", this.area());
+        return String.format(Shape.FMT_STR, "Name", this.name())
+             + String.format(Shape.FMT_DBL, "Side", this._side_a)
+             + String.format(Shape.FMT_DBL, "Height", this.height())
+             + String.format(Shape.FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(Shape.FMT_DBL, "Area", this.area());
     }
 }
 

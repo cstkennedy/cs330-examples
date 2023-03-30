@@ -8,7 +8,7 @@ package edu.odu.cs.cs330.examples.shapes;
  *
  * @author Thomas J Kennedy
  */
-public class Circle extends Shape implements Cloneable, TraitFromDimensions {
+public class Circle implements Shape {
     /**
      * The mathematical constant PI.
      */
@@ -133,10 +133,10 @@ public class Circle extends Shape implements Cloneable, TraitFromDimensions {
     @Override
     public String toString()
     {
-        return String.format(FMT_STR, "Name", this.name())
-             + String.format(FMT_DBL, "Radius", this.radius())
-             + String.format(FMT_DBL, "Diameter", this.diameter())
-             + String.format(FMT_DBL, "Perimeter", this.perimeter())
-             + String.format(FMT_DBL, "Area", this.area());
+        return String.format(Shape.FMT_STR, "Name", this.name())
+             + String.format(Shape.FMT_DBL, "Radius", this.radius())
+             + String.format(Shape.FMT_DBL, "Diameter", this.diameter())
+             + String.format(Shape.FMT_DBL, "Perimeter", this.perimeter())
+             + String.format(Shape.FMT_DBL, "Area", this.area());
     }
 }
