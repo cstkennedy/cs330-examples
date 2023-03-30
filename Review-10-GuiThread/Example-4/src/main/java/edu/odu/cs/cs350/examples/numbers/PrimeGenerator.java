@@ -56,16 +56,11 @@ public class PrimeGenerator implements Iterable<Integer>, Cloneable {
      */
     private boolean isNumberPrime(int n)
     {
-        Iterator<Integer> li = this.primes.iterator();
-
         // While the list of primes has not yet been exhausted
         // Check for divisibility by the next element--i.e.,
         // if nextPrime %p == 0 for any p, discard nextPrime
-        while (li.hasNext()) {
-            // Retrieve the next prime, p, from
-            // the list of primes, primes
-            int p = li.next().intValue();
-
+        /*
+        for (int p : this.primes) {
             // Is the number prime?
             if (n % p == 0) {
                 return false;
@@ -73,6 +68,22 @@ public class PrimeGenerator implements Iterable<Integer>, Cloneable {
         }
 
         return true;
+        */
+        final long numZeroRemainders = this.primes.parallelStream()
+            .mapToInt(Integer::intValue)
+            .map(
+                (int p) -> {
+                    return n % p;
+                }
+            )
+            .filter(
+                (int remainder) -> {
+                    return remainder == 0;
+                }
+            )
+            .count();
+
+        return numZeroRemainders == 0;
     }
 
     /**
