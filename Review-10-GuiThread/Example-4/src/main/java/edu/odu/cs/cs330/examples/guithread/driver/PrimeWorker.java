@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import edu.odu.cs.cs350.examples.numbers.PrimeGenerator;
-import edu.odu.cs.cs330.examples.guithread.driver.PrimeOutputPanel;
+import edu.odu.cs.cs330.examples.guithread.driver.TraitRenderResults;
 import edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread.PrimeInputPanel;
 
 /**
@@ -19,7 +19,8 @@ import edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread.PrimeInputPanel
  * <p>
  * It is launched within a Thread--note that it implements Runnable
  */
-public class PrimeWorker implements Runnable
+public class PrimeWorker<T extends TraitRenderResults,
+                         U extends TraitControls> implements Runnable
 {
     /**
      * Number of microseconds in one second.
@@ -42,8 +43,8 @@ public class PrimeWorker implements Runnable
      */
     private boolean stop;
 
-    private PrimeInputPanel inputPanel;
-    private PrimeOutputPanel outputPanel;
+    private U inputPanel;
+    private T outputPanel;
 
     /**
      * Construct a new Worker Instance.
@@ -51,8 +52,9 @@ public class PrimeWorker implements Runnable
      * @param numPrimes desired number of primes to
      * generate
      */
-    public PrimeWorker(int numPrimes, PrimeInputPanel inputPanel,
-                       PrimeOutputPanel outputPanel,
+    public PrimeWorker(int numPrimes,
+                       U inputPanel,
+                       T outputPanel,
                        List<Integer> primeMasterList)
     {
         primeGenerator = new PrimeGenerator();
@@ -89,7 +91,7 @@ public class PrimeWorker implements Runnable
             runTimeInSec
         );
 
-        this.inputPanel.toggleButtons();
+        this.inputPanel.toggle();
     }
 
     /**

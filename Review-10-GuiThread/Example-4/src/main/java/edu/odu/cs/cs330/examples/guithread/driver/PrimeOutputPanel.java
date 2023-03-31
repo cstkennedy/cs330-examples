@@ -4,7 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.*;
 
-public class PrimeOutputPanel extends JPanel
+public class PrimeOutputPanel extends JPanel implements TraitRenderResults
 {
     private JPanel      summaryPanel; ///< Panel containing all output elements
 
@@ -58,6 +58,7 @@ public class PrimeOutputPanel extends JPanel
         summaryPanel.add(lastField);
     }
 
+    @Override
     public void renderResults(boolean stopped,
             int numberOfPrimes, int lastPrime, 
             String completeOutput, double runTimeInSec)
@@ -87,7 +88,8 @@ public class PrimeOutputPanel extends JPanel
     /**
      * Clear previous output.
      */
-    void clear()
+    @Override
+    public void clear()
     {
         //logArea.setText(new String());
         //lastField.setText(new String());

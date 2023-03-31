@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import java.util.Arrays;
@@ -23,7 +24,41 @@ import edu.odu.cs.cs330.examples.guithread.driver.PrimeOutputPanel;
  */
 public class PrimeGuiThread extends JFrame {
 
-    public class PrimeInputPanel extends JPanel
+    public class StartButtonEvent implements ActionListener
+    {
+        public StartButtonEvent()
+        {
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent event)
+        {
+            int numPrimes;
+
+            try {
+                numPrimes = Integer.parseInt(
+                    PrimeGuiThread.this.inputPanel.getToGenerateField()
+                );
+            }
+            catch (NumberFormatException exc) {
+                numPrimes = 10;
+                PrimeGuiThread.this.inputPanel.setToGenerateField(numPrimes);
+            }
+
+            PrimeGuiThread.this.outputPanel.clear();
+            PrimeGuiThread.this.inputPanel.toggle();
+
+            PrimeGuiThread.this.worker = new PrimeWorker(
+                numPrimes,
+                PrimeGuiThread.this.inputPanel,
+                PrimeGuiThread.this.outputPanel,
+                null
+            );
+            new Thread(PrimeGuiThread.this.worker).start();
+        }
+    }
+
+    public class PrimeInputPanel extends JPanel implements TraitControls
     {
         private JTextField  toGenField;   ///< Input Field - # primes to generate
         private JLabel      toGenLabel;   ///< Label - # primes to generate
@@ -48,34 +83,13 @@ public class PrimeGuiThread extends JFrame {
 
             // Add Action Listeners to the Buttons
             startButton.addActionListener(
-                (ActionEvent e) -> {
-                    int numPrimes;
-
-                    try {
-                        numPrimes = Integer.parseInt(toGenField.getText());
-                    }
-                    catch (NumberFormatException exc) {
-                        numPrimes = 10;
-                        toGenField.setText("" + numPrimes);
-                    }
-
-                    PrimeGuiThread.this.outputPanel.clear();
-                    PrimeGuiThread.this.inputPanel.toggleButtons();
-
-                    PrimeGuiThread.this.worker = new PrimeWorker(
-                            numPrimes,
-                            PrimeInputPanel.this,
-                            PrimeGuiThread.this.outputPanel,
-                            null
-                    );
-                    new Thread(PrimeGuiThread.this.worker).start();
-                }
+                new StartButtonEvent()
             );
 
             stopButton.addActionListener(
                 (ActionEvent e) -> {
-                    if (worker != null) {
-                        worker.halt();
+                    if (PrimeGuiThread.this.worker != null) {
+                        PrimeGuiThread.this.worker.halt();
                     }
                 }
             );
@@ -85,10 +99,8 @@ public class PrimeGuiThread extends JFrame {
             stopButton.setEnabled(false);
         }
 
-        /**
-         * Toggle start button and stop button states.
-         */
-        void toggleButtons()
+        @Override
+        public void toggle()
         {
             if (startButton.isEnabled()) {
                 startButton.setEnabled(false);
@@ -98,6 +110,22 @@ public class PrimeGuiThread extends JFrame {
                 startButton.setEnabled(true);
                 stopButton.setEnabled(false);
             }
+        }
+
+        /**
+         * Retrieve the text in the JTextField.
+         */
+        public String getToGenerateField()
+        {
+            return toGenField.getText();
+        }
+
+        /**
+         * Set the text in the JTextField to a specified integer.
+         */
+        public void setToGenerateField(int number)
+        {
+            toGenField.setText("" + number);
         }
     }
 
