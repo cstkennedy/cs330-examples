@@ -22,6 +22,11 @@ import edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread.PrimeInputPanel
 public class PrimeWorker implements Runnable
 {
     /**
+     * Number of microseconds in one second.
+     */
+    public static final double MICRO_SEC_TO_SEC = 1000000000.0;
+
+    /**
      * An instance of Bruteforce Prime Number Generator.
      */
     private PrimeGenerator primeGenerator;
@@ -67,15 +72,21 @@ public class PrimeWorker implements Runnable
     @Override
     public void run()
     {
+        final long startTime = System.nanoTime();
+
         for (int _i = 0; _i < toGenerate && !stop; ++_i) {
             primeGenerator.next();
         }
+
+        final long endTime = System.nanoTime();
+        final double runTimeInSec = (endTime - startTime) / MICRO_SEC_TO_SEC;
 
         this.outputPanel.renderResults(
             this.stop,
             this.primeGenerator.numberOfPrimes(),
             this.primeGenerator.getLast(),
-            this.primeGenerator.toString()
+            this.primeGenerator.toString(),
+            runTimeInSec
         );
 
         this.inputPanel.toggleButtons();

@@ -58,12 +58,16 @@ public class PrimeOutputPanel extends JPanel
         summaryPanel.add(lastField);
     }
 
-    public void renderResults(boolean stopped, int numberOfPrimes, int lastPrime, String completeOutput)
+    public void renderResults(boolean stopped,
+            int numberOfPrimes, int lastPrime, 
+            String completeOutput, double runTimeInSec)
     {
         // Update GUI elements
         lastField.setText("" + lastPrime);
 
         StringBuilder bld = new StringBuilder();
+
+        bld.append(String.format("Completed in %.2f seconds%n", runTimeInSec));
 
         // If generation was stopped early--i.e., interrupted--
         // Prepend a message indicating the number of primes that
