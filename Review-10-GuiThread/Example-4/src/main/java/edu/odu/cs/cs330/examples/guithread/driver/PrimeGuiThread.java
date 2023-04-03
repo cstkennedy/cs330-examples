@@ -140,7 +140,7 @@ public class PrimeGuiThread extends JFrame {
     public PrimeGuiThread()
     {
         super("Prime Generator");
-        super.setLocation(null);
+        super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.inputPanel = new PrimeInputPanel();
