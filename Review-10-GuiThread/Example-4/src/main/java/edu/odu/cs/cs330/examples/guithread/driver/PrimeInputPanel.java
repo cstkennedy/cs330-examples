@@ -28,13 +28,8 @@ public class PrimeInputPanel extends JPanel implements TraitControls
         this.add(stopButton);
 
         // Add Action Listeners to the Buttons
-        startButton.addActionListener(
-            startListener
-        );
-
-        stopButton.addActionListener(
-            stopListener
-        );
+        startButton.addActionListener(startListener);
+        stopButton.addActionListener(stopListener);
 
         // Initialize button states
         startButton.setEnabled(true);
