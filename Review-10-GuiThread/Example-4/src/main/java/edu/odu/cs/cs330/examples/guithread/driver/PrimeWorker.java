@@ -54,8 +54,21 @@ public class PrimeWorker<T extends TraitRenderResults,
      */
     public PrimeWorker(int numPrimes,
                        U inputPanel,
-                       T outputPanel,
-                       List<Integer> primeMasterList)
+                       T outputPanel)
+    {
+        this.reset();
+
+        this.inputPanel = inputPanel;
+        this.outputPanel = outputPanel;
+    }
+
+    /**
+     * Set the worker to a state where stop is false with a new number of
+     * primes to generate.
+     *
+     * @param numPrimes number of primes desired
+     */
+    public void reset(int numPrimes)
     {
         primeGenerator = new PrimeGenerator();
 
@@ -63,9 +76,6 @@ public class PrimeWorker<T extends TraitRenderResults,
         // requested.
         toGenerate     = numPrimes - 2;
         stop           = false;
-
-        this.inputPanel = inputPanel;
-        this.outputPanel = outputPanel;
     }
 
     /**

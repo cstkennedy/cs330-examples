@@ -51,8 +51,7 @@ public class PrimeGuiThread extends JFrame {
             PrimeGuiThread.this.worker = new PrimeWorker(
                 numPrimes,
                 PrimeGuiThread.this.inputPanel,
-                PrimeGuiThread.this.outputPanel,
-                null
+                PrimeGuiThread.this.outputPanel
             );
             new Thread(PrimeGuiThread.this.worker).start();
         }
@@ -88,9 +87,11 @@ public class PrimeGuiThread extends JFrame {
 
             stopButton.addActionListener(
                 (ActionEvent e) -> {
+                    /*
                     if (PrimeGuiThread.this.worker != null) {
                         PrimeGuiThread.this.worker.halt();
-                    }
+                    }*/
+                    PrimeGuiThread.this.worker.halt();
                 }
             );
 
@@ -143,21 +144,26 @@ public class PrimeGuiThread extends JFrame {
     public PrimeGuiThread()
     {
         super("Prime Generator");
-        setLocation(50, 75);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setLocation(null);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Container cp = getContentPane();
+        this.inputPanel = new PrimeInputPanel();
+        this.outputPanel = new PrimeOutputPanel();
 
-        inputPanel = new PrimeInputPanel();
-        outputPanel = new PrimeOutputPanel();
+        this.worker = new PrimeWorker(
+            numPrimes,
+            PrimeGuiThread.this.inputPanel,
+            PrimeGuiThread.this.outputPanel
+        );
 
         // Setup and add to the Main Container
+        Container cp = super.getContentPane();
         cp.setLayout(new BorderLayout());
         cp.add(inputPanel, BorderLayout.NORTH);
         cp.add(outputPanel, BorderLayout.CENTER);
 
         // Package Everything
-        pack();
+        super.pack();
     }
 
     /**
