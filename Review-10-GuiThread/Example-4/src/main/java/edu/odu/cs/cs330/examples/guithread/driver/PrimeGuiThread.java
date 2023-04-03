@@ -151,7 +151,7 @@ public class PrimeGuiThread extends JFrame {
         this.outputPanel = new PrimeOutputPanel();
 
         this.worker = new PrimeWorker(
-            numPrimes,
+            2,
             PrimeGuiThread.this.inputPanel,
             PrimeGuiThread.this.outputPanel
         );

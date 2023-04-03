@@ -56,7 +56,7 @@ public class PrimeWorker<T extends TraitRenderResults,
                        U inputPanel,
                        T outputPanel)
     {
-        this.reset();
+        this.reset(numPrimes);
 
         this.inputPanel = inputPanel;
         this.outputPanel = outputPanel;
