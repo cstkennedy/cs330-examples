@@ -1,18 +1,6 @@
 package edu.odu.cs.cs330.examples.guithread.driver;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import javax.swing.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-
 import edu.odu.cs.cs350.examples.numbers.PrimeGenerator;
-import edu.odu.cs.cs330.examples.guithread.driver.TraitRenderResults;
-import edu.odu.cs.cs330.examples.guithread.driver.PrimeGuiThread.PrimeInputPanel;
 
 /**
  * This worker class contains all the logic for generating primes.
@@ -25,7 +13,7 @@ public class PrimeWorker<T extends TraitRenderResults,
     /**
      * Number of microseconds in one second.
      */
-    public static final double MICRO_SEC_TO_SEC = 1000000000.0;
+    public static final double MICRO_SEC_TO_SEC = 1_000_000_000.0;
 
     /**
      * An instance of Bruteforce Prime Number Generator.

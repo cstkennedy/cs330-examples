@@ -60,7 +60,7 @@ public class PrimeOutputPanel extends JPanel implements TraitRenderResults
 
     @Override
     public void renderResults(boolean stopped,
-            int numberOfPrimes, int lastPrime, 
+            int numberOfPrimes, int lastPrime,
             String completeOutput, double runTimeInSec)
     {
         // Update GUI elements

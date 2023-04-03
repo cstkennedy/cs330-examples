@@ -11,12 +11,12 @@ public interface TraitRenderResults
      * @param completeOutput full list of primes
      * @param runTimeInSec total time taken to generate primes in seconds
      */
-    public void renderResults(boolean stopped,
-            int numberOfPrimes, int lastPrime,
-            String completeOutput, double runTimeInSec);
+    void renderResults(boolean stopped,
+         int numberOfPrimes, int lastPrime,
+         String completeOutput, double runTimeInSec);
 
     /**
      * Clear previous output.
      */
-    public void clear();
+    void clear();
 }

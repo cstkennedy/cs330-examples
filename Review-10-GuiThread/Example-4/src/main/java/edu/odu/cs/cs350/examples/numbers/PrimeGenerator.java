@@ -2,7 +2,6 @@ package edu.odu.cs.cs350.examples.numbers;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Iterator;
 
 /**
@@ -155,6 +154,7 @@ public class PrimeGenerator implements Iterable<Integer>, Cloneable {
      *
      * @return Iterator over all Integer prime numbers
      */
+    @Override
     public Iterator<Integer> iterator()
     {
         return primes.iterator();
