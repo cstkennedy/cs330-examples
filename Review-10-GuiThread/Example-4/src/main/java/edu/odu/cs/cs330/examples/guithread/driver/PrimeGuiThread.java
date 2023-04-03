@@ -48,11 +48,7 @@ public class PrimeGuiThread extends JFrame {
             PrimeGuiThread.this.outputPanel.clear();
             PrimeGuiThread.this.inputPanel.toggle();
 
-            PrimeGuiThread.this.worker = new PrimeWorker(
-                numPrimes,
-                PrimeGuiThread.this.inputPanel,
-                PrimeGuiThread.this.outputPanel
-            );
+            PrimeGuiThread.this.worker.reset(numPrimes);
             new Thread(PrimeGuiThread.this.worker).start();
         }
     }
