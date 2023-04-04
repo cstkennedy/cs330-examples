@@ -31,7 +31,7 @@ def simulate_flips(num_trials: int) -> dict[str, int]:
     return counts
 
 
-def print_summary(counts: Dict[str, int]):
+def print_summary(counts: dict[str, int]):
     """
     Print coin flip statistics (including probability distribution)
 
