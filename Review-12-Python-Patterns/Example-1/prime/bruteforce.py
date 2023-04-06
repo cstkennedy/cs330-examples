@@ -1,5 +1,9 @@
 from __future__ import annotations
 
+from itertools import takewhile
+import math
+
+
 def __can_be_divided_by_any(known_primes: list[int], next_prime: int):
     """
     Iterate over all known primes and check the next_prime.
@@ -11,6 +15,7 @@ def __can_be_divided_by_any(known_primes: list[int], next_prime: int):
 
     # While the list of primes has not yet been exhausted
     for previous_prime in known_primes:
+        #  for previous_prime in takewhile(lambda p: p < math.sqrt(next_prime), known_primes):
 
         # Check for divisibility by the next element--i.e.,
         # if nextPrime % p == 0 for any p, discard nextPrime
