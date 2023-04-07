@@ -71,14 +71,14 @@ def is_known(name: str) -> bool:
     return name in _KNOWN_SHAPES
 
 
-def list_known():
+def list_known() -> str:
     """
     Print a list of known Shapes
     """
     return "\n".join((f"  {name:}" for name in _KNOWN_SHAPES))
 
 
-def number_known():
+def number_known() -> int:
     """
     Determine the number of known Shapes
     """

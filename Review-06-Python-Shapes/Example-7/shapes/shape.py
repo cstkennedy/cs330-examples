@@ -5,6 +5,8 @@ base for other (specialized) shapes.
 
 import abc
 
+from typing import Protocol
+
 WIDTH_LABEL = 12  # Label Output Width
 WIDTH_VALUE = 24  # Value Output Width
 
@@ -12,13 +14,12 @@ STR_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}}}\n"
 FPT_FMT = f"{{:<{WIDTH_LABEL}}}:{{:>{WIDTH_VALUE}.4f}}\n"
 
 
-class Shape(metaclass=abc.ABCMeta):
+class Shape(Protocol):
     """
     Shape in a 2-D Cartesian Plane
     """
 
     @property
-    @abc.abstractmethod
     def name(self) -> str:
         """
         Provide read-only access to the name attribute.
@@ -29,7 +30,6 @@ class Shape(metaclass=abc.ABCMeta):
 
         raise NotImplementedError()
 
-    @abc.abstractmethod
     def area(self) -> float:
         """
         Compute the area
@@ -40,7 +40,6 @@ class Shape(metaclass=abc.ABCMeta):
 
         raise NotImplementedError()
 
-    @abc.abstractmethod
     def perimeter(self) -> float:
         """
         Compute the perimeter
@@ -51,18 +50,6 @@ class Shape(metaclass=abc.ABCMeta):
 
         raise NotImplementedError()
 
-    @abc.abstractmethod
-    def __deepcopy__(self, memo):
-        """
-        Return a new duplicate Shape
-
-        Raises:
-            NotImplemented Error if not overridden by subclass
-        """
-
-        raise NotImplementedError()
-
-    @abc.abstractmethod
     def __str__(self) -> str:
         """
         Print the shape
