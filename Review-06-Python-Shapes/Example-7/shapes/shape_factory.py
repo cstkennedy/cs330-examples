@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import copy
 
-from shapes import Shape
+from shapes.shape import Shape
 from shapes.circle import Circle
 from shapes.square import Square
 from shapes.triangle import (Triangle, RightTriangle, EquilateralTriangle)
