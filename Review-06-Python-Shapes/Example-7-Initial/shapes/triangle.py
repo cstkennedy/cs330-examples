@@ -86,7 +86,7 @@ class Triangle(Shape):
         Print the Triangle
         """
 
-        return (STR_FMT.format("Name", self.name)
+        return (super().__str__()
                 + FPT_FMT.format("Side A", self.side_a)
                 + FPT_FMT.format("Side B", self.side_b)
                 + FPT_FMT.format("Side C", self.side_c)

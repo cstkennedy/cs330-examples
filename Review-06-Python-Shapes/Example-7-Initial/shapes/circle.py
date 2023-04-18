@@ -1,7 +1,7 @@
 import math
 import copy
 
-from shapes.shape import (Shape, FPT_FMT, STR_FMT)
+from shapes.shape import (Shape, FPT_FMT)
 
 PI = math.pi  # \f$ \pi \f$
 TAU = 2 * PI  # \f$ \tau = 2\pi \f$
@@ -68,7 +68,7 @@ class Circle(Shape):
         Print the Circle
         """
 
-        return (STR_FMT.format("Name", self.name)
+        return (super().__str__()
                 + FPT_FMT.format("Radius", self.radius)
                 + FPT_FMT.format("Diameter", self.diameter)
                 + FPT_FMT.format("Perimeter", self.perimeter())

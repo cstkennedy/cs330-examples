@@ -21,6 +21,7 @@ def main():
 
     if len(sys.argv) < 2:
         print("No input file provided.")
+        #  print("Usage: {:} input_file".format(*sys.argv))
         print(f"Usage: {sys.argv[0]:} input_file")
         sys.exit(1)
 

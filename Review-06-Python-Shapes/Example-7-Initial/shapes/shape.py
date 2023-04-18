@@ -3,6 +3,8 @@ This module provides the Shape class and related constants which serve as the
 base for other (specialized) shapes.
 """
 
+import abc
+
 from typing import Protocol
 
 WIDTH_LABEL = 12  # Label Output Width
@@ -47,3 +49,13 @@ class Shape(Protocol):
         """
 
         raise NotImplementedError()
+
+    def __str__(self) -> str:
+        """
+        Print the shape
+
+        Raises:
+            NotImplemented Error if not overridden by subclass
+        """
+
+        return STR_FMT.format("Name", self.name)

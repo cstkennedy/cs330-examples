@@ -1,8 +1,6 @@
-from __future__ import annotations
-
 import copy
 
-from shapes.shape import (Shape, FPT_FMT, STR_FMT)
+from shapes.shape import (Shape, FPT_FMT)
 
 
 class Square(Shape):
@@ -10,7 +8,7 @@ class Square(Shape):
     A Rectangle with 4 Equal Sides
     """
 
-    def __init__(self, side=1) -> Self:
+    def __init__(self, side=1):
         """
         Construct a Square
         """
@@ -46,7 +44,7 @@ class Square(Shape):
 
         return 4 * self._side
 
-    def __deepcopy__(self, memo) -> Self:
+    def __deepcopy__(self, memo):
         """
         Return a new duplicate Shape
         """
@@ -58,7 +56,7 @@ class Square(Shape):
         Print the Square
         """
 
-        return (STR_FMT.format("Name", self.name)
+        return (super().__str__()
                 + FPT_FMT.format("Side", self.side)
                 + FPT_FMT.format("Perimeter", self.perimeter())
                 + FPT_FMT.format("Area", self.area()))
