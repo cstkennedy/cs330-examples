@@ -1,8 +1,32 @@
+use crate::flooring::*;
 use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
-use crate::flooring::*;
 
+//------------------------------------------------------------------------------
+#[derive(Debug)]
+pub enum BuildError<'a> {
+    GenericError(&'a str),
+}
+
+/*
+impl From<std::io::Error> for ParseError {
+    fn from(err: std::io::Error) -> Self {
+        ParseError::GenericError(err)
+    }
+}
+*/
+
+impl<'a> fmt::Display for BuildError<'a> {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match &self {
+            BuildError::GenericError(description) => {
+                write!(f, "{:?}", description)
+            }
+        }
+    }
+}
+//------------------------------------------------------------------------------
 
 #[derive(Clone)]
 pub struct DimensionSet {
@@ -121,8 +145,7 @@ impl PartialOrd for Room {
     fn partial_cmp(&self, rhs: &Self) -> Option<Ordering> {
         if self.name.eq(&rhs.name) {
             self.area().partial_cmp(&rhs.area())
-        }
-        else {
+        } else {
             self.name.partial_cmp(&rhs.name)
         }
     }
@@ -130,35 +153,65 @@ impl PartialOrd for Room {
 
 impl PartialEq for Room {
     fn eq(&self, rhs: &Self) -> bool {
-        return self.name.eq(&rhs.name)
-            && self.area().eq(&rhs.area());
+        return self.name.eq(&rhs.name) && self.area().eq(&rhs.area());
     }
 }
 
-
 //------------------------------------------------------------------------------
 pub struct RoomBuilder<'a> {
-    name: &'a str
+    name: Option<&'a str>,
+    length: Option<f64>,
+    width: Option<f64>,
+    flooring_name: Option<&'a str>,
+    unit_cost: Option<f64>,
 }
 
 impl<'a> RoomBuilder<'a> {
-    pub fn with_name(mut self, nme: &str) -> Self {
+    pub fn new() -> Self {
+        RoomBuilder {
+            name: None,
+            length: None,
+            width: None,
+            flooring_name: None,
+            unit_cost: None,
+        }
+    }
+
+    pub fn with_name(mut self, nme: &'a str) -> Self {
+        self.name = Some(nme);
 
         self
     }
 
-    pub fn with_flooring(mut self, nme: &str, unit_c: f64) -> Self {
+    pub fn with_flooring(mut self, nme: &'a str, unit_c: f64) -> Self {
+        self.flooring_name = Some(nme);
+        self.unit_cost = Some(unit_c);
 
         self
     }
 
     pub fn with_dimensions(mut self, l: f64, w: f64) -> Self {
+        self.length = Some(l);
+        self.width = Some(w);
 
         self
     }
 
-    pub fn build(mut self) -> Option<Room> {
-        None
+    pub fn build(self) -> Result<Room, BuildError<'a>> {
+        if self.name.is_none() {
+            return Err(BuildError::GenericError("Name can not be blank"));
+        }
+
+        let room = Room {
+            name: self.name.unwrap().to_owned(),
+            dimensions: DimensionSet::new(self.length.unwrap(), self.width.unwrap()),
+            flooring: Flooring {
+                type_name: self.flooring_name.unwrap().to_owned(),
+                unit_cost: self.unit_cost.unwrap(),
+            },
+        };
+
+        Ok(room)
     }
 }
 

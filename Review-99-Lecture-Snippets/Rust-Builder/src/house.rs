@@ -111,7 +111,8 @@ impl Display for House {
 
         let avg = total / (self.len() as f64);
 
-        #[allow(unused_must_use)] {
+        #[allow(unused_must_use)]
+        {
             writeln!(f, "------------------------------");
             writeln!(f, "Total Cost   : $ {:.2}", total);
             writeln!(f, "Avg Room Cost: $ {:.2}", avg)
@@ -168,7 +169,6 @@ impl PartialEq for House {
         false
         */
 
-        return lhs_room == None
-            && rhs_room == None
+        return lhs_room == None && rhs_room == None;
     }
 }

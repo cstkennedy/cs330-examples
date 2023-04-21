@@ -30,4 +30,3 @@ impl Default for Flooring {
         Flooring::new()
     }
 }
-
