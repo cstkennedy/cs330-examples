@@ -1,18 +1,11 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 
-
+@dataclass
 class Flooring:
-    def __init__(self, type_n: str = "Generic", unit_c: float = 1.0):
-        self.type_name = type_n
-        self.unit_cost = unit_c
-
-    @property
-    def unit_cost(self) -> float:
-        return self.__unit_cost
-
-    @unit_cost.setter
-    def unit_cost(self, uc: float):
-        self.__unit_cost = float(uc)
+    type_name: str = "Generic"
+    unit_cost: float = 1.0
 
 
 @dataclass
@@ -37,8 +30,6 @@ class Room:
         """
 
         return self.__name
-
-
 
     def set_flooring(self, nme: str, unit_c: float):
         """
@@ -101,7 +92,7 @@ class RoomBuilder:
         self.__dimensions = None
         self.__flooring = None
 
-    
+
     def with_name(self, nme: str) -> RoomBuilder:
         """
         Set the name using the builder pattern.
@@ -114,7 +105,6 @@ class RoomBuilder:
 
         return self
 
-
     def with_flooring(self, nme: str, unit_c: float) -> RoomBuilder:
         """
         Set the Flooring using the builder pattern.
@@ -125,11 +115,10 @@ class RoomBuilder:
 
         """
 
-        self.__flooring.type_name = nme
-        self.__flooring.unit_cost = unit_c
+        flr = Flooring(nme, unit_c)
+        self.__flooring = flr
 
         return self
-
 
     def with_dimensions(self, l: float, w: float) -> RoomBuilder:
         """
@@ -141,11 +130,23 @@ class RoomBuilder:
 
         """
 
-        self.__dimensions.length = l
-        self.__dimensions.width = w
+        self.__dimensions = DimensionSet(l, w)
 
         return self
 
-
     def build(self) -> Room:
-        return None
+
+        if not self.__name:
+            raise ValueError("No name was set")
+
+        if not self.__flooring:
+            raise ValueError("No flooring was set")
+
+        if not self.__dimensions:
+            raise ValueError("No length or width were set")
+
+        rm = Room(self.__name)
+        rm.__Room__flooring = self.__flooring
+        rm.__Room__dimensions = self.__dimensions
+
+        return rm

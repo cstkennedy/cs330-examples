@@ -2,7 +2,7 @@
 
 import copy
 
-from room import Room
+from room import Room, RoomBuilder
 from house import House
 
 
@@ -87,26 +87,24 @@ def build_house(house: House):
     Build our example house
     """
 
-    house.add_room(Room("Laundry Room")
+    house.add_room(RoomBuilder()
+                   .with_name("Laundry Room")
                    .with_dimensions(8, 4)
-                   .with_flooring("Laminate", 1.95))
+                   .with_flooring("Laminate", 1.95)
+                   .build())
 
-    kitchen = Room() \
+    kitchen = RoomBuilder() \
         .with_name("Kitchen") \
         .with_dimensions(20, 12) \
-        .with_flooring("Tile", 3.87)
-
-    #  kitchen = Room()
-    #  kitchen.set_name("Kitchen") \
-    #  kitchen.set_dimensions(20, 12) \
-    #  kitchen.set_flooring("Tile", 3.87)
+        .with_flooring("Tile", 3.87) \
+        .build()
 
     house.add_room(kitchen)
 
-    house.add_room(Room()
+    house.add_room(RoomBuilder()
                    .with_name("Storage Room")
                    .with_dimensions(16, 16)
-                   .with_flooring("Birch Wood", 4.39))
+                   .build())
 
 
 def upgrade_flooring(original: House) -> House:
