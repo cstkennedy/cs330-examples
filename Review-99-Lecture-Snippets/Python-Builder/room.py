@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+
 @dataclass
 class Flooring:
     type_name: str = "Generic"
@@ -15,7 +16,6 @@ class DimensionSet:
 
 
 class Room:
-
     def __init__(self, nme: str = "Generic"):
         self.__name = nme
         self.__dimensions = DimensionSet()
@@ -59,21 +59,21 @@ class Room:
         return self.area() * self.__flooring.unit_cost
 
     def __str__(self) -> str:
-
-        return "\n".join((
-            f"Room ({self.name})",
-            "  {:<6}: {:>8.1f}".format("Length", self.__dimensions.length),
-            "  {:<6}: {:>8.1f}".format("Width", self.__dimensions.width),
-            "  {:<6}: {:>8.1f}".format("Area", self.area()),
-            "",
-            f"  Flooring  : {self.__flooring.type_name}",
-            f"  Unit Cost : $ {self.__flooring.unit_cost:>8.2f}",
-            "  Total Cost: $ {:>8.2f}".format(self.flooring_cost()),
-            "\n"
-        ))
+        return "\n".join(
+            (
+                f"Room ({self.name})",
+                "  {:<6}: {:>8.1f}".format("Length", self.__dimensions.length),
+                "  {:<6}: {:>8.1f}".format("Width", self.__dimensions.width),
+                "  {:<6}: {:>8.1f}".format("Area", self.area()),
+                "",
+                f"  Flooring  : {self.__flooring.type_name}",
+                f"  Unit Cost : $ {self.__flooring.unit_cost:>8.2f}",
+                "  Total Cost: $ {:>8.2f}".format(self.flooring_cost()),
+                "\n",
+            )
+        )
 
     def __lt__(self, rhs) -> bool:
-
         if self.name == rhs.name:
             return self.area() < rhs.area()  # pylint caught the missing return
 
@@ -89,9 +89,9 @@ class Room:
 class RoomBuilder:
     def __init__(self):
         self.__name = None
-        self.__dimensions = None
+        self.__length = None
+        self.__width = None
         self.__flooring = None
-
 
     def with_name(self, nme: str) -> RoomBuilder:
         """
@@ -101,7 +101,7 @@ class RoomBuilder:
             nme: room name
         """
 
-        self.__name = nme
+        self.__name = nme.strip()
 
         return self
 
@@ -130,23 +130,39 @@ class RoomBuilder:
 
         """
 
-        self.__dimensions = DimensionSet(l, w)
+        self.__length = l
+        self.__width = w
 
         return self
 
-    def build(self) -> Room:
+    def validate_name(self) -> None:
+        """
+        Raise a Value Error if:
+          1. Name was not set
+          2. Name is the empty string
+          3. Name has fewer than 3 characters
+        """
 
         if not self.__name:
             raise ValueError("No name was set")
 
+        if len(self.__name) < 3:
+            raise ValueError("Name len('{self.__name}') < 3")
+
+    def build(self) -> Room:
+        self.validate_name()
+
         if not self.__flooring:
             raise ValueError("No flooring was set")
 
-        if not self.__dimensions:
-            raise ValueError("No length or width were set")
+        if not self.__length:
+            raise ValueError("No length was set")
 
-        rm = Room(self.__name)
-        rm.__Room__flooring = self.__flooring
-        rm.__Room__dimensions = self.__dimensions
+        if not self.__width:
+            raise ValueError("No width was set")
 
-        return rm
+        room = Room(self.__name)
+        room.__Room__flooring = self.__flooring
+        room.__Room__dimensions = DimensionSet(self.__length, self.__width)
+
+        return room

@@ -4,7 +4,6 @@ from room import Room
 
 
 class House:
-
     def __init__(self, n: str = "House"):
         """
         This is the Default constructor. Start with the name set to "House" and
@@ -59,6 +58,13 @@ class House:
 
         return len(self) == 0
 
+    def flooring_cost_metrics(self) -> float:
+        #  total = sum(map(lambda room: room.flooring_cost(), self))
+        total = sum(room.flooring_cost() for room in self)
+        avg = total / len(self)
+
+        return total, avg
+
     def __iter__(self):
         """
         Wrapper around `list.__iter__()`.
@@ -74,14 +80,15 @@ class House:
           - `Display::fmt` in Rust
         """
 
-        total = sum(map(lambda room: room.flooring_cost(), self))
-        avg = total / len(self)
+        total, avg = self.flooring_cost_metrics()
 
-        return f"--------{self.name:}--------\n" \
-            + "\n".join([str(room) for room in self]) \
-            + "------------------------------\n" \
-            + f"Total Cost   : $ {total:.2f}\n" \
+        return (
+            f"--------{self.name:}--------\n"
+            + "\n".join(str(room) for room in self)
+            + "------------------------------\n"
+            + f"Total Cost   : $ {total:.2f}\n"
             + f"Avg Room Cost: $ {avg:.2f}\n"
+        )
 
     def __eq__(self, rhs) -> bool:
         """
