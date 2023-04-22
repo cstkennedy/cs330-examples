@@ -1,32 +1,8 @@
+use crate::error::*;
 use crate::flooring::*;
 use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
-
-//------------------------------------------------------------------------------
-#[derive(Debug)]
-pub enum BuildError<'a> {
-    GenericError(&'a str),
-}
-
-/*
-impl From<std::io::Error> for ParseError {
-    fn from(err: std::io::Error) -> Self {
-        ParseError::GenericError(err)
-    }
-}
-*/
-
-impl<'a> fmt::Display for BuildError<'a> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match &self {
-            BuildError::GenericError(description) => {
-                write!(f, "{:?}", description)
-            }
-        }
-    }
-}
-//------------------------------------------------------------------------------
 
 #[derive(Clone)]
 pub struct DimensionSet {
@@ -49,7 +25,6 @@ impl Default for DimensionSet {
     }
 }
 
-//------------------------------------------------------------------------------
 #[derive(Clone)]
 pub struct Room {
     pub name: String,
@@ -58,43 +33,6 @@ pub struct Room {
 }
 
 impl Room {
-    /// Set the name using the builder pattern.
-    ///
-    /// # Arguments
-    ///  * `nme` - room name
-    ///
-    pub fn with_name(mut self, nme: &str) -> Self {
-        self.name = nme.to_string();
-
-        self
-    }
-
-    /// Set the Flooring using the builder pattern.
-    ///
-    /// # Arguments
-    ///  * `nme` - flooring type name
-    ///  * `unit_c` - unit cost
-    ///
-    pub fn with_flooring(mut self, nme: &str, unit_c: f64) -> Self {
-        self.flooring.type_name = nme.to_string();
-        self.flooring.unit_cost = unit_c;
-
-        self
-    }
-
-    /// Set the Flooring using the builder pattern.
-    ///
-    /// # Arguments
-    ///  * `l` - length
-    ///  * `w` - width
-    ///
-    pub fn with_dimensions(mut self, l: f64, w: f64) -> Self {
-        self.dimensions.length = l;
-        self.dimensions.width = w;
-
-        self
-    }
-
     /// Set the flooring.
     ///
     /// # Arguments
@@ -162,8 +100,7 @@ pub struct RoomBuilder<'a> {
     name: Option<&'a str>,
     length: Option<f64>,
     width: Option<f64>,
-    flooring_name: Option<&'a str>,
-    unit_cost: Option<f64>,
+    flooring: Option<Flooring>,
 }
 
 impl<'a> RoomBuilder<'a> {
@@ -172,8 +109,7 @@ impl<'a> RoomBuilder<'a> {
             name: None,
             length: None,
             width: None,
-            flooring_name: None,
-            unit_cost: None,
+            flooring: None,
         }
     }
 
@@ -183,9 +119,8 @@ impl<'a> RoomBuilder<'a> {
         self
     }
 
-    pub fn with_flooring(mut self, nme: &'a str, unit_c: f64) -> Self {
-        self.flooring_name = Some(nme);
-        self.unit_cost = Some(unit_c);
+    pub fn with_flooring(mut self, flooring: Flooring) -> Self {
+        self.flooring = Some(flooring);
 
         self
     }
@@ -205,10 +140,7 @@ impl<'a> RoomBuilder<'a> {
         let room = Room {
             name: self.name.unwrap().to_owned(),
             dimensions: DimensionSet::new(self.length.unwrap(), self.width.unwrap()),
-            flooring: Flooring {
-                type_name: self.flooring_name.unwrap().to_owned(),
-                unit_cost: self.unit_cost.unwrap(),
-            },
+            flooring: self.flooring.unwrap(),
         };
 
         Ok(room)

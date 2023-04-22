@@ -82,6 +82,16 @@ impl House {
     pub fn iter_mut(&mut self) -> std::slice::IterMut<Room> {
         self.rooms.iter_mut()
     }
+
+    pub fn flooring_metrics(&self) -> (f64, f64) {
+        let total = self.rooms.iter()
+            .map(|room| room.flooring_cost())
+            .sum();
+
+        let avg = total / (self.len() as f64);
+
+        (total, avg)
+    }
 }
 
 impl Default for House {
@@ -99,24 +109,17 @@ impl Display for House {
     ///   - `__str__` in Python
     ///
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        writeln!(f, "--------{}--------\n", self.name);
-
-        let mut total = 0f64;
+        writeln!(f, "--------{}--------\n", self.name)?;
 
         for room in self.rooms.iter() {
-            let _ = writeln!(f, "{}", room);
-
-            total += room.flooring_cost();
+            let _ = writeln!(f, "{}", room)?;
         }
 
-        let avg = total / (self.len() as f64);
+        let (total, avg) = self.flooring_metrics();
 
-        #[allow(unused_must_use)]
-        {
-            writeln!(f, "------------------------------");
-            writeln!(f, "Total Cost   : $ {:.2}", total);
-            writeln!(f, "Avg Room Cost: $ {:.2}", avg)
-        }
+        writeln!(f, "------------------------------")?;
+        writeln!(f, "Total Cost   : $ {:.2}", total)?;
+        writeln!(f, "Avg Room Cost: $ {:.2}", avg)
     }
 }
 
@@ -135,40 +138,12 @@ impl PartialEq for House {
         }
 
         // We are guaranteed to have the same number of rooms
-        let mut lhs_it = self.iter();
-        let mut rhs_it = rhs.iter();
-
-        let mut lhs_room = lhs_it.next();
-        let mut rhs_room = rhs_it.next();
-
-        while lhs_room != None && rhs_room != None {
-            match (lhs_room, rhs_room) {
-                (Some(lhs), Some(rhs)) => {
-                    if lhs != rhs {
-                        return false;
-                    }
-
-                    lhs_room = lhs_it.next();
-                    rhs_room = rhs_it.next();
-                }
-                (Some(_lhs), None) => {
-                    return false;
-                }
-                (None, Some(_rhs)) => {
-                    return false;
-                }
-                _ => {}
+        for (lhs_room, rhs_room) in self.iter().zip(rhs.iter()) {
+            if lhs_room != rhs_room {
+                return false;
             }
         }
 
-        /*
-        if lhs_room == None && rhs_room == None {
-            return true;
-        }
-
-        false
-        */
-
-        return lhs_room == None && rhs_room == None;
+        return true;
     }
 }

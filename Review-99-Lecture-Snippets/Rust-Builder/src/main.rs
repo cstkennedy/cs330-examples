@@ -10,7 +10,7 @@ use ordered_float::OrderedFloat;
 // use std::env;
 use std::vec::Vec;
 
-use room_renovation::flooring::Flooring;
+use room_renovation::flooring::{Flooring, FlooringBuilder};
 use room_renovation::house::House;
 use room_renovation::room::{DimensionSet, Room, RoomBuilder};
 
@@ -24,11 +24,7 @@ use room_renovation::room::{DimensionSet, Room, RoomBuilder};
 ///
 #[cfg_attr(tarpaulin, skip)]
 fn main() {
-    // Construct, build, and print a house
-    let mut house = House::new();
-
-    // std::istringstream fakeInputFile(ROOM_DATA);
-    build_house(&mut house);
+    let house = build_house();
 
     println!("{}", house);
 
@@ -54,12 +50,8 @@ fn main() {
     }
 
     let total: f64 = costs.iter().sum();
-    let min: f64 = *costs.iter().min_by_key(|c| OrderedFloat(**c)).unwrap();
-    let max: f64 = *costs.iter().max_by_key(|c| OrderedFloat(**c)).unwrap();
 
     println!("Total: {:.2}", total);
-    println!("Min  : {:.2}", min);
-    println!("Max  : {:.2}", max);
 
     match costs.iter().minmax_by_key(|c| OrderedFloat(**c)) {
         MinMaxResult::MinMax(ex_min, ex_max) => {
@@ -70,19 +62,14 @@ fn main() {
     }
 
     println!();
-
-    // Demo "if let" syntax
-    if let MinMaxResult::MinMax(ex_min, ex_max) = costs.iter().minmax_by_key(|c| OrderedFloat(**c))
-    {
-        println!("Min  : {:.2}", ex_min);
-        println!("Max  : {:.2}", ex_max);
-    }
 }
 
 ///
 /// Build our example house
 ///
-fn build_house(house: &mut House) {
+fn build_house() -> House {
+    let mut house = House::new();
+
     house.add_room(Room {
         name: "Laundry Room".to_string(),
         dimensions: DimensionSet::new(8f64, 4f64),
@@ -95,7 +82,13 @@ fn build_house(house: &mut House) {
     let kitchen = RoomBuilder::new()
         .with_name("Kitchen")
         .with_dimensions(20f64, 12f64)
-        .with_flooring("Tile", 3.87f64)
+        .with_flooring(
+            FlooringBuilder::new()
+                .with_specific_name("Tile")
+                .with_unit_cost(3.87f64)
+                .build()
+                .unwrap(),
+        )
         .build()
         .unwrap();
 
@@ -105,10 +98,18 @@ fn build_house(house: &mut House) {
         RoomBuilder::new()
             .with_name("Storage Room")
             .with_dimensions(16f64, 16f64)
-            .with_flooring("Birch Wood", 4.39f64)
+            .with_flooring(
+                FlooringBuilder::new()
+                    .with_specific_name("Birch Wood")
+                    .with_unit_cost(4.39f64)
+                    .build()
+                    .unwrap(),
+            )
             .build()
-            .unwrap()
+            .unwrap(),
     );
+
+    house
 }
 
 ///
