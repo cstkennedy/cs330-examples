@@ -16,7 +16,7 @@ def __can_be_divided_by_any(known_primes: np.array, next_prime: int):
 
     remainders = next_prime % known_primes
 
-    return (len(remainders) - np.count_nonzero(remainders)) == len(remainders)
+    return (np.count_nonzero(remainders)) != len(remainders)
 
 
 def generate_primes(to_generate):

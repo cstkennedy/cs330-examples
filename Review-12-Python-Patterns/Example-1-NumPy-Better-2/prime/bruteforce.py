@@ -14,7 +14,9 @@ def __can_be_divided_by_any(known_primes: np.array, next_prime: int):
         return True. Return False otherwise
     """
 
-    remainders = next_prime % known_primes
+    # Grab items up to (amd including) the sqrt(next_prime)
+    limited = np.extract(known_primes <= np.sqrt(next_prime), known_primes)
+    remainders = next_prime % limited
 
     return (np.count_nonzero(remainders)) != len(remainders)
 
