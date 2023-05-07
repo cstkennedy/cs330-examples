@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Any
 
+
 def print_multiple_times(value: Any, count: int):
     """
     Print a value multiple times.
@@ -11,7 +12,7 @@ def print_multiple_times(value: Any, count: int):
     @param count number of times to print
     """
 
-    for _ in range(0, count-1):
+    for _ in range(0, count - 1):
         print(f"{value} ", end="")
 
     print(f"{value}")
@@ -24,7 +25,8 @@ def main():
     print()
     print_multiple_times("Hello", 4)
     print()
-    print_multiple_times('?', 20)
+    print_multiple_times("?", 20)
+
 
 if __name__ == "__main__":
     main()

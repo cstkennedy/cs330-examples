@@ -1,4 +1,4 @@
-from collections.abc import (Iterable, Iterator)
+from collections.abc import Iterable, Iterator
 
 
 def find_name(collection: Iterable, thing_to_find: str) -> str:
@@ -11,7 +11,6 @@ def find_name(collection: Iterable, thing_to_find: str) -> str:
 
     @returns postion of a match or end if no match was found
     """
-
 
     for cur_thing in collection:
         # Look at the current name (*search_it) and

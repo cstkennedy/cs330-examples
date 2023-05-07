@@ -6,6 +6,7 @@ MAX_SIZE: int = 10
 # 20 Dash Divider
 DIVIDER: str = "--------------------"
 
+
 def main():
     static_array_demo()
 
