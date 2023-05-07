@@ -8,7 +8,7 @@ import containers.LinkedList;
 /**
  * A House is composed of zero or more Room objects.
  * <p>
- * This class serves as our demonstration of the STL
+ * This class serves as our demonstration of the
  * iterator interface.
  */
 public class House implements Iterable<Room>
@@ -19,8 +19,8 @@ public class House implements Iterable<Room>
      */
     private String name;
 
-    // private Collection<Room> rooms;
-    private LinkedList<Room> rooms;
+    // private LinkedList<Room> rooms;
+    private Collection<Room> rooms;
 
     /**
      * Construct a House with a
@@ -89,7 +89,7 @@ public class House implements Iterable<Room>
     }
 
     /**
-     * Logical Equivalance Operator
+     * Logical Equivalence Operator
      */
     @Override
     public boolean equals(Object rhsObj)
@@ -105,7 +105,7 @@ public class House implements Iterable<Room>
         }
 
         if (this.size() != rhs.size()) {
-            return false;
+           return false;
         }
 
         Iterator<Room> lhsIt = this.iterator();

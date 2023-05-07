@@ -1,8 +1,9 @@
 package containers;
 
+import java.util.Collection;
 import java.util.Iterator;
 
-public class LinkedList<T> implements Iterable<T>, Cloneable {
+public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
     private class Node<T> {
         T     data;
         Node  next;
@@ -77,7 +78,7 @@ public class LinkedList<T> implements Iterable<T>, Cloneable {
         this.currentSize = 0;
     }
 
-    public void add(T toAdd)
+    public boolean add(T toAdd)
     {
         Node newNode = new Node(toAdd);
 
@@ -90,7 +91,7 @@ public class LinkedList<T> implements Iterable<T>, Cloneable {
             // Why set newNode to null?
             newNode     = null;
 
-            return;
+            return true;
         }
 
         // Link the newNode to the end
@@ -103,11 +104,46 @@ public class LinkedList<T> implements Iterable<T>, Cloneable {
 
         // Update the size
         ++currentSize;
+
+        return true;
+    }
+
+    /**
+     * Add multiple values.
+     */
+    public boolean addAll(Collection<? extends T> everythingToAdd)
+    {
+        for (T val : everythingToAdd) {
+            if (!this.add(val)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * A "quick-and-dirty" clear operation.
+     *
+     * For this implementation, we will set
+     *   - head = null
+     *   - tail = null
+     *   - currentSize = 0
+     */
+    public void clear()
+    {
+        this.head = null;
+        this.tail = null;
+        this.currentSize = 0;
     }
 
     public int size()
     {
         return this.currentSize;
+    }
+
+    public boolean isEmpty()
+    {
+        return this.size() == 0;
     }
 
     public Iterator<T> iterator()
@@ -124,5 +160,49 @@ public class LinkedList<T> implements Iterable<T>, Cloneable {
         }
 
         return copy;
+    }
+
+    //--------------------------------------------------------------------------
+    // Everything below this this point is to "complete" the Java 11 Collection
+    // interface. None of these operations are supported by our LinkedList and
+    // will either:
+    //   - throw an UnsupportedOperation Exception.
+    //   - return false
+    //   - return null
+    //--------------------------------------------------------------------------
+
+    public boolean retainAll(Collection<?> c)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean remove(Object obj)
+    {
+        return false;
+    }
+
+    public boolean removeAll(Collection<?> c)
+    {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean contains(Object obj)
+    {
+        return false;
+    }
+
+    public boolean containsAll(Collection<?> c)
+    {
+        return false;
+    }
+
+    public <T> T[] toArray(T[] array)
+    {
+        return null;
+    }
+
+    public  Object[] toArray()
+    {
+        return null;
     }
 }

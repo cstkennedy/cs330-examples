@@ -35,10 +35,12 @@ class HouseIO
         double unitCost = scnr.nextDouble();
         String type = scnr.nextLine();
 
-        Room aRoom = new Room(name,
-                              new Room.DimensionSet(length, width),
-                              unitCost,
-                              type);
+        Room aRoom = new Room(
+            name,
+            new Room.DimensionSet(length, width),
+            unitCost,
+            type
+        );
 
         return aRoom;
     }
@@ -55,13 +57,14 @@ class HouseIO
     {
         House house = new House();
 
-        reader.lines()
-                .map((String line) -> {
-                    return extractRoomFrom(line);
-                })
-                .forEach((Room aRoom) -> {
-                    house.addRoom(aRoom);
-                });
+        reader
+            .lines()
+            .map((String line) -> {
+                return extractRoomFrom(line);
+            })
+            .forEach((Room aRoom) -> {
+                house.addRoom(aRoom);
+            });
 
         return house;
     }
