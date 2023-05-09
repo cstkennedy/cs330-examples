@@ -67,9 +67,9 @@ int main(int argc, char** argv)
 
     vector<string> filtered_words;
     copy_if(begin(raw_words), end(raw_words), back_inserter(filtered_words),
-                 [](const string& word) {
-                     return word.size() < 5;
-                 });
+            [](const string& word) {
+                return word.size() < 5;
+            });
     remove_if(begin(filtered_words), end(filtered_words),
               [](const string& word) {
                   return contains_chars(word);
