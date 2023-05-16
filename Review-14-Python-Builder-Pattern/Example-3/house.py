@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable, List
 
 from room import Room
 
@@ -137,8 +137,7 @@ class HouseBuilder:
         pass
         """
 
-        for room in new_rooms:
-            self.the_rooms.append(room)
+        self.the_rooms.extend(new_rooms)
 
         return self
 

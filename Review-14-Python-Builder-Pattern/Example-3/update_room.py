@@ -58,9 +58,8 @@ def build_house():
     Build our example house
     """
 
-    bldr = HouseBuilder()
-
-    # Laundry Room; 8 4 1.95 Laminate
+    # Read rooms into a list
+    rooms = []
     for line in ROOM_DATA.splitlines():
         # Skip blank lines
         if not line:
@@ -68,7 +67,6 @@ def build_house():
 
         name, the_rest = line.strip().split(";")
         the_rest = the_rest.split()
-        #  print(the_rest)
 
         # Grab length and width first
         length, width = [float(val) for val in the_rest[0:2]]
@@ -77,7 +75,7 @@ def build_house():
         flr_type = " ".join(the_rest[3:])
         flr_cost = float(the_rest[2])
 
-        bldr.with_room(
+        rooms.append(
             RoomBuilder()
             .with_name(name)
             .with_dimensions(length, width)
@@ -85,7 +83,10 @@ def build_house():
             .build()
         )
 
-    return bldr.build()
+    # Build a house using all the read in rooms
+    house = HouseBuilder().with_rooms(rooms).build()
+
+    return house
 
 
 def upgrade_flooring(original: House) -> House:
@@ -99,20 +100,14 @@ def upgrade_flooring(original: House) -> House:
         House with the updated flooring
     """
 
-    modified_rooms = []
-
+    bldr = HouseBuilder().with_name("After Stone Bricks")
     for room in original:
         updated_room = copy.deepcopy(room)
         updated_room.set_flooring("Stone Bricks", 12.97)
 
-        modified_rooms.append(updated_room)
+        bldr.with_room(updated_room)
 
-    modified = (
-        HouseBuilder()
-        .with_name("After Stone Bricks")
-        .with_rooms(modified_rooms)
-        .build()
-    )
+    modified = bldr.build()
 
     return modified
 

@@ -11,7 +11,7 @@ use ordered_float::OrderedFloat;
 use std::vec::Vec;
 
 use room_renovation::flooring::{Flooring, FlooringBuilder};
-use room_renovation::house::House;
+use room_renovation::house::{House, HouseBuilder};
 use room_renovation::room::{DimensionSet, Room, RoomBuilder};
 
 ///
@@ -75,9 +75,8 @@ Storage Room; 16 16 4.39 Birch Wood
 /// Build our example house
 ///
 fn build_house() -> House {
-    let mut house = House::new();
-
-    let parsed_rooms: Vec<Room> = ROOM_DATA
+    // Parse all rooms
+    let mut parsed_rooms: Vec<Room> = ROOM_DATA
         .lines()
         .filter(|line| line.len() > 0)
         .map(|line| {
@@ -108,14 +107,15 @@ fn build_house() -> House {
                         .unwrap(),
                 )
                 .build()
-             // .unwrap()
         })
         .flatten()
         .collect();
 
-    for room in parsed_rooms.into_iter() {
-        house.add_room(room);
-    }
+    // Create a house using the parsed rooms
+    let house = HouseBuilder::new()
+        .with_rooms(&mut parsed_rooms)
+        .build()
+        .unwrap();
 
     house
 }
@@ -132,21 +132,33 @@ fn build_house() -> House {
 /// House with the updated flooring
 ///
 fn upgrade_flooring(original: &House) -> House {
-    let mut modified = original.clone();
-
     /*
-    for room in modified.iter_mut() {
-        room.set_flooring("Stone Bricks", 12.97);
+    let mut bldr = HouseBuilder::new()
+        .with_name("After Stone Bricks")
+
+    for room in original.iter() {
+        let mut updated_room = room.clone();
+        updated_room.set_flooring("Stone Bricks", 12.97);
+
+        bldr = bldr.with_room(updated_room);
     }
     */
+    let house = HouseBuilder::new()
+        .with_name("After Stone Bricks")
+        .with_rooms(
+            &mut original.iter()
+            .map(|room| {
+                let mut updated_room = room.clone();
+                updated_room.set_flooring("Stone Bricks", 12.97);
 
-    modified
-        .iter_mut()
-        .for_each(|room| room.set_flooring("Stone Bricks", 12.97));
+                updated_room
+            })
+            .collect::<Vec<Room>>()
+        )
+        .build()
+        .unwrap();
 
-    modified.set_name("After Stone Bricks");
-
-    modified
+    house
 }
 
 ///
