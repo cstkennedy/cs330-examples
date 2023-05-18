@@ -54,9 +54,3 @@ impl<'a> FlooringBuilder<'a> {
     }
 }
 
-impl<'a> From<FlooringBuilder<'a>> for Result<Flooring, BuildError<'a>> {
-    fn from(builder: FlooringBuilder<'a>) -> Self {
-        builder.build()
-    }
-}
-

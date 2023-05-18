@@ -10,9 +10,9 @@ use ordered_float::OrderedFloat;
 // use std::env;
 use std::vec::Vec;
 
-use room_renovation::flooring::{Flooring, FlooringBuilder};
+use room_renovation::flooring::{FlooringBuilder};
 use room_renovation::house::{House, HouseBuilder};
-use room_renovation::room::{DimensionSet, Room, RoomBuilder};
+use room_renovation::room::{Room, RoomBuilder};
 
 ///
 /// Compute the area of a room and the cost of
@@ -85,13 +85,16 @@ fn build_house() -> House {
             let name = line[0];
 
             // Split everything else by whitespace and collect the tokens
-            let the_rest = &line[1];
-            let the_rest: Vec<&str> = the_rest.split_whitespace().collect();
+            // let the_rest = &line[1];
+            let the_rest: Vec<&str> = line[1].split_whitespace().collect();
 
             // Parse the three f64 numbers
-            let length: f64 = the_rest[0].parse().unwrap_or(1_f64);
-            let width: f64 = the_rest[1].parse().unwrap_or(1_f64);
-            let unit_cost: f64 = the_rest[2].parse().unwrap_or(1_f64);
+            let nums: Vec<f64> = the_rest[0..3]
+                .iter()
+                .map(|token| token.parse().unwrap_or(1_f64))
+                .collect();
+            let (length, width) = (nums[0], nums[1]);
+            let unit_cost = nums[2];
 
             // The flooring name might contain spaces. Combine the remainder of the line.
             let flooring_name = the_rest.into_iter().skip(3).join(" ");
@@ -143,6 +146,7 @@ fn upgrade_flooring(original: &House) -> House {
         bldr = bldr.with_room(updated_room);
     }
     */
+    /*
     let house = HouseBuilder::new()
         .with_name("After Stone Bricks")
         .with_rooms(
@@ -159,6 +163,21 @@ fn upgrade_flooring(original: &House) -> House {
         .unwrap();
 
     house
+    */
+    HouseBuilder::new()
+        .with_name("After Stone Bricks")
+        .with_rooms(
+            &mut original.iter()
+            .map(|room| {
+                let mut updated_room = room.clone();
+                updated_room.set_flooring("Stone Bricks", 12.97);
+
+                updated_room
+            })
+            .collect::<Vec<Room>>()
+        )
+        .build()
+        .unwrap()
 }
 
 ///

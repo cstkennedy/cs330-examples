@@ -25,6 +25,12 @@ impl Default for DimensionSet {
     }
 }
 
+impl From<(f64, f64)> for DimensionSet {
+    fn from(dims: (f64, f64)) -> Self {
+        DimensionSet::new(dims.0, dims.1)
+    }
+}
+
 #[derive(Clone)]
 pub struct Room {
     pub name: String,
@@ -147,8 +153,3 @@ impl<'a> RoomBuilder<'a> {
     }
 }
 
-impl From<(f64, f64)> for DimensionSet {
-    fn from(dims: (f64, f64)) -> Self {
-        DimensionSet::new(dims.0, dims.1)
-    }
-}
