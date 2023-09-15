@@ -154,7 +154,7 @@ void buildHouse(std::istream& ins, House& house)
         getline(ins, flooring);
         ins >> ws;
 
-        house.addRoom(Room(name, Room::DimensionSet(l,h), cost, flooring));
+        house.addRoom(Room(name, Room::DimensionSet(l, h), cost, flooring));
     }*/
 
     /*
