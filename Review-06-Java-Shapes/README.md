@@ -25,33 +25,33 @@ This discussion is split into seven (7) examples:
 
   - **Example 1**
     - Basics of Polymorphism
-    - The recording is available at <https://youtu.be/rR4Ai2kHOR0>
+    - The recording is available at <https://youtu.be/rR4Ai2kHOR0> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+1/1_7v2tg7er>
 
   - **Example 2**
     - Factory Pattern and *Interfaces as a Contract*
-    - The recording is available at <https://youtu.be/R3t0FecJfRA>
+    - The recording is available at <https://youtu.be/R3t0FecJfRA> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+2/1_ak6fq5nh>
 
   - **Example 3**
     - Subtyping (e.g., `List` vs `ArrayList`) and Iterators
-    - The recording is available at <https://youtu.be/z6_FzDDBQGI>
+    - The recording is available at <https://youtu.be/z6_FzDDBQGI> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+3/1_2njgkdxo>
 
   - **Example 4** 
     - Input (`BufferedReader` and `Scanner`), Shape `read` Method, and More
       Iterators
-    - The recording is available at <https://youtu.be/FteoxbG99Ic>
+    - The recording is available at <https://youtu.be/FteoxbG99Ic> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+4/1_ixmlacm9>
 
   - **Example 5**
     - A *better* `ShapeFactory` implementation using a `LinkedHashMap<String, Shape>`
-    - The recording is available at <https://youtu.be/jf9OK0EH9bc>
+    - The recording is available at <https://youtu.be/jf9OK0EH9bc> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+5/1_zrh07pda>
 
   - **Example 6**
     - `Stream` API, Lambda Functions, fixing `Shape.name()`, and **replacing**
       `Shape.read`
-    - The recording is available at <https://youtu.be/AxWPjXq2SF8>
+    - The recording is available at <https://youtu.be/AxWPjXq2SF8> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+6/1_1fd2x6gj>
 
   - **Example 7**
     - Separation of Concerns & Interfaces
-    - The recording is available at <https://youtu.be/SltynAF6UkY>
+    - The recording is available at <https://youtu.be/SltynAF6UkY> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+7/1_e2eqfw4c>
 
   - **Example 8**
     - Generics and Trait Bounds in `ShapeIterator`, using `extends` with
