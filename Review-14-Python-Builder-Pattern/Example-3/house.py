@@ -13,7 +13,7 @@ class House:
         """
 
         self.__name: str = nme
-        self.__rooms: List[House] = []
+        self.__rooms: list[House] = []
 
     @property
     def name(self):
@@ -113,7 +113,7 @@ class House:
 class HouseBuilder:
     def __init__(self):
         self.name: str = None
-        self.the_rooms: List[Room] = []
+        self.the_rooms: list[Room] = []
 
     def with_name(self, nme: str) -> Self:
         """
