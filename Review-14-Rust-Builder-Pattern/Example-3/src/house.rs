@@ -174,8 +174,8 @@ impl<'a> HouseBuilder<'a> {
         self
     }
 
-    pub fn with_rooms(mut self, more_rooms: &mut Vec<Room>) -> Self {
-        self.rooms.append(more_rooms);
+    pub fn with_rooms(mut self, mut more_rooms: Vec<Room>) -> Self {
+        self.rooms.append(&mut more_rooms);
 
         self
     }

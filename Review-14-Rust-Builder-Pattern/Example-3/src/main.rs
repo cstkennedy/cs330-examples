@@ -116,7 +116,7 @@ fn build_house() -> House {
 
     // Create a house using the parsed rooms
     let house = HouseBuilder::new()
-        .with_rooms(&mut parsed_rooms)
+        .with_rooms(parsed_rooms)
         .build()
         .unwrap();
 
@@ -167,7 +167,7 @@ fn upgrade_flooring(original: &House) -> House {
     HouseBuilder::new()
         .with_name("After Stone Bricks")
         .with_rooms(
-            &mut original.iter()
+            original.iter()
             .map(|room| {
                 let mut updated_room = room.clone();
                 updated_room.set_flooring("Stone Bricks", 12.97);
