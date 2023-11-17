@@ -4,6 +4,28 @@ import pytest
 from hamcrest import *
 
 from linkedlist import LinkedList
+from typing import Any
+
+
+from dataclasses import dataclass
+
+
+@dataclass
+class Datum:
+    """
+    This class exists to test the linked list __deepcopy__ due to how int and
+    str "objects" are immutable
+    """
+
+    val: Any
+
+    def __format__(self, spec) -> str:
+        """
+        This is an ugly hack to allow a Datum object to
+        be included in an f-string that used an alignment, e.g, {:>4}
+        """
+
+        return str(self.val)
 
 
 @pytest.fixture()
@@ -26,7 +48,7 @@ def build_interesting_list():
     yield data_to_add, ll
 
 
-def test_empty_list(get_empty_list):
+def test_constructor(get_empty_list):
     empty_list = get_empty_list
 
     assert_that(empty_list, is_(not_none()))
@@ -58,9 +80,6 @@ def test_append_int_twice():
     ll.append(3)
 
     assert_that(ll, has_length(2))
-    assert_that(
-        str(ll), string_contains_in_order("Node #    0 -    2", "Node #    1 -    3")
-    )
 
     it = iter(ll)
 
@@ -75,6 +94,12 @@ def test_append_int_twice():
     # Check that we have exhausted the list
     with pytest.raises(StopIteration) as _err:
         next(it)
+
+    # Check __str__
+    expected_strs = [
+        f"Node # {idx:>4} - {datum:>4}" for idx, datum in enumerate(range(2, 4))
+    ]
+    assert_that(str(ll), string_contains_in_order(*expected_strs))
 
 
 def test_append_various(build_interesting_list):
@@ -98,9 +123,37 @@ def test_append_various(build_interesting_list):
     for _ in ll:
         next(it)
 
-    print(str(all_src_data))
-    print(repr(all_src_data))
     with pytest.raises(StopIteration) as _err:
         next(it)
 
 
+def test_str_after_append_various(build_interesting_list):
+    all_src_data, ll = build_interesting_list
+
+    expected_strs = [
+        f"Node # {idx:>4} - {datum:>4}" for idx, datum in enumerate(all_src_data)
+    ]
+    assert_that(str(ll), string_contains_in_order(*expected_strs))
+
+
+def test_deep_copy(build_interesting_list):
+    all_src_data, ll_src = build_interesting_list
+
+    ll_src.append(Datum(52))
+    ll_src.append(Datum(42))
+    ll_src.append(Datum(337))
+
+    ll_copy = copy.deepcopy(ll_src)
+
+    assert_that(ll_copy, is_(instance_of(LinkedList)))
+    assert_that(ll_copy, has_length(len(ll_src)))
+
+    for val_copy, val_src in zip(ll_copy, ll_src):
+        assert_that(val_copy, is_(equal_to(val_src)))
+
+        # Skip int and str entries... literals will always be the same object
+        if any(isinstance(val_copy, a_type) for a_type in [int, str]):
+            continue
+
+        #  print(val_copy)
+        assert_that(val_copy, is_(not_((same_instance(val_src)))))
