@@ -36,7 +36,7 @@ def get_number_to_generate() -> int:
 
 def set_up_random() -> None:
     """
-    If a seed was pasVsed from the command line,
+    If a seed was passed from the command line,
     parse it. Otherwise default to ctime
     """
 
@@ -52,22 +52,20 @@ def main():
     Back to the beginning of the semester... with Linked Lists
     """
 
-    set_up_random()
-
     print("-" * 80)
     print(PROGRAM_HEADING)
     print("-" * 80)
 
-    nodes_to_generate = get_number_to_generate()
-
-    random_ints = LinkedList()
-    random_ints.extend(random.randint(MIN, MAX) for _ in range(0, nodes_to_generate))
+    set_up_random()
+    initial_data = (random.randint(MIN, MAX) for _ in range(get_number_to_generate()))
+    random_ints = LinkedList(initial_data)
 
     print(random_ints)
 
-    print("*" * 80)
+    random_copy = copy.deepcopy(random_ints)
+    random_copy.append(337)
 
-    random_copy = copy.deepcopy(random_ints).append(337)
+    print("*" * 80)
     print(random_copy)
 
     print("*" * 80)

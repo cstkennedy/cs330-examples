@@ -1,13 +1,11 @@
 import copy
+from dataclasses import dataclass
+from typing import Any
 
 import pytest
 from hamcrest import *
 
 from linkedlist import LinkedList
-from typing import Any
-
-
-from dataclasses import dataclass
 
 
 @dataclass
@@ -18,14 +16,6 @@ class Datum:
     """
 
     val: Any
-
-    def __format__(self, spec) -> str:
-        """
-        This is an ugly hack to allow a Datum object to
-        be included in an f-string that used an alignment, e.g, {:>4}
-        """
-
-        return str(self.val)
 
 
 @pytest.fixture()
@@ -47,13 +37,25 @@ def build_interesting_list():
     yield data_to_add, ll
 
 
-def test_constructor(get_empty_list):
+def test_constructor_no_args(get_empty_list):
     empty_list = get_empty_list
 
     assert_that(empty_list.is_empty(), is_(True))
     assert_that(empty_list, is_(not_none()))
     assert_that(empty_list, has_length(0))
-    assert_that(empty_list, has_string(""))
+
+    # Classes with __str__ default to __repr__
+    assert_that(empty_list, has_string("LinkedList()"))
+
+
+def test_constructor_with_args():
+    some_data = [Datum("Hello"), Datum(" "), Datum("Tom"), Datum("!" * 2)]
+
+    ll = LinkedList(initial_data=some_data)
+    assert_that(ll.is_empty(), is_(False))
+    assert_that(ll, has_length(len(some_data)))
+
+    assert_that(ll, contains_exactly(*some_data))
 
 
 def test_append_int_once():
@@ -62,7 +64,7 @@ def test_append_int_once():
 
     assert_that(ll.is_empty(), is_(False))
     assert_that(ll, has_length(1))
-    assert_that(ll, has_string("Node #    0 -    1"))
+    assert_that(ll, has_string("LinkedList(1)"))
 
     it = iter(ll)
     val = next(it)
@@ -98,10 +100,10 @@ def test_append_int_twice():
         next(it)
 
     # Check __str__
-    expected_strs = [
-        f"Node # {idx:>4} - {datum:>4}" for idx, datum in enumerate(range(2, 4))
+    expected_reprs = [
+        repr(datum) for datum in range(2, 4)
     ]
-    assert_that(str(ll), string_contains_in_order(*expected_strs))
+    assert_that(repr(ll), string_contains_in_order(*expected_reprs))
 
 
 def test_append_various(build_interesting_list):
@@ -134,10 +136,10 @@ def test_append_various(build_interesting_list):
 def test_str_after_append_various(build_interesting_list):
     all_src_data, ll = build_interesting_list
 
-    expected_strs = [
-        f"Node # {idx:>4} - {datum:>4}" for idx, datum in enumerate(all_src_data)
+    expected_reprs = [
+        repr(datum) for datum in all_src_data
     ]
-    assert_that(str(ll), string_contains_in_order(*expected_strs))
+    assert_that(str(ll), string_contains_in_order(*expected_reprs))
 
 
 def test_extend_int():
@@ -179,3 +181,6 @@ def test_deep_copy(build_interesting_list):
 
         #  print(val_copy)
         assert_that(val_copy, is_(not_((same_instance(val_src)))))
+
+    expected_reprs = "LinkedList(" + ", ".join([repr(datum) for datum in ll_copy]) + ")"
+    assert_that(ll_copy, has_string(expected_reprs))

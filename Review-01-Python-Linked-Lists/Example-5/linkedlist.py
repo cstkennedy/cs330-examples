@@ -71,7 +71,7 @@ class LinkedList(abc.Iterable):
 
             return self.__current_node
 
-    def __init__(self):
+    def __init__(self, initial_data: abc.Iterable = None):
         """
         Construct an empty Linked List
         """
@@ -79,6 +79,9 @@ class LinkedList(abc.Iterable):
         self.__head: Node = None
         self.__tail: Node = None
         self.__nodes: int = 0
+
+        if initial_data:
+            self.extend(initial_data)
 
     def is_empty(self) -> bool:
         """
@@ -147,11 +150,11 @@ class LinkedList(abc.Iterable):
     def __iter__(self) -> LinkedList.Iterator:
         return LinkedList.Iterator(self.__head)
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         """
         Iterate through the LinkedList and print each individual Node
         with an index.
         """
 
-        return "\n".join((f"Node # {index:>4} - {data:>4}"
-                          for index, data in enumerate(self)))
+        data_repr_str = ", ".join(repr(datum) for datum in self)
+        return f"LinkedList({data_repr_str})"
