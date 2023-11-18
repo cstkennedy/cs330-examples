@@ -71,7 +71,7 @@ class LinkedList(abc.Iterable):
 
             return self.__current_node
 
-    def __init__(self, initial_data: abc.Iterable = None):
+    def __init__(self, *initial_data):
         """
         Construct an empty Linked List
         """

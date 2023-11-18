@@ -57,8 +57,8 @@ def main():
     print("-" * 80)
 
     set_up_random()
-    initial_data = (random.randint(MIN, MAX) for _ in range(get_number_to_generate()))
-    random_ints = LinkedList(initial_data)
+    initial_data = [random.randint(MIN, MAX) for _ in range(get_number_to_generate())]
+    random_ints = LinkedList(*initial_data)
 
     print(random_ints)
 

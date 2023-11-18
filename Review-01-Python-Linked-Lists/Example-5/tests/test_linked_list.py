@@ -51,7 +51,7 @@ def test_constructor_no_args(get_empty_list):
 def test_constructor_with_args():
     some_data = [Datum("Hello"), Datum(" "), Datum("Tom"), Datum("!" * 2)]
 
-    ll = LinkedList(initial_data=some_data)
+    ll = LinkedList(*some_data)
     assert_that(ll.is_empty(), is_(False))
     assert_that(ll, has_length(len(some_data)))
 
