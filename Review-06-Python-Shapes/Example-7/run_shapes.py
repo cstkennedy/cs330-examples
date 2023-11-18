@@ -2,12 +2,64 @@
 
 # Programmer : Thomas J. Kennedy
 
+
+import logging
 import sys
+from typing import Generator, TextIO
 
 import shapes.shape_factory as shape_factory
+from headings import BorderHeading, MultiLineBorderHeading
+from shapes.shape import Shape
 
-PROGRAM_HEADING = ("Objects & Inheritance: 2-D Shapes",
-                   "Thomas J. Kennedy")  # Program Title
+HEADING_WIDTH = 80
+PROGRAM_HEADING = "\n".join(
+    (
+        "-" * HEADING_WIDTH,
+        "Objects & Inheritance: 2-D Shapes".center(HEADING_WIDTH),
+        "Thomas J. Kennedy".center(HEADING_WIDTH),
+        "-" * HEADING_WIDTH,
+    )
+)  # Program Title
+PROGRAM_HEADING = MultiLineBorderHeading(
+    content=(
+        "Objects & Inheritance: 2-D Shapes",
+        "Thomas J. Kennedy",
+    ),
+    width=80,
+    symbol="-",
+)
+
+FACTORY_DESCRIPTION = "\n".join(
+    (
+        "Available Shapes".center(38),
+        "~" * 38,
+        shape_factory.list_known(),
+        "-" * 38,
+        f"{shape_factory.number_known():>2} shapes available.\n",
+    )
+)
+
+
+def read_shapes(shapes_in: TextIO) -> Generator[Shape, None, None]:
+    """
+    T.B.W.
+    """
+
+    for line in shapes_in:
+        # Split on ";" and Strip leading/trailing whitespace
+        # And Unpack the list
+        name, values = [part.strip() for part in line.split(";")]
+
+        values = values.strip()
+
+        try:
+            values = [float(val) for val in values.split()]
+            shape = shape_factory.create_from_dimensions(name, values)
+
+            yield shape
+
+        except ValueError as _err:
+            logging.warning(f'Skipped shape "{name:}" due to malformed line.')
 
 
 def main():
@@ -26,68 +78,27 @@ def main():
 
     shapes_filename = sys.argv[1]
 
-    print("-" * 80)
-    for line in PROGRAM_HEADING:
-        print(f"{line:^80}")
-    print("-" * 80)
-
-    #---------------------------------------------------------------------------
-    # Examine the ShapeFactory
-    #---------------------------------------------------------------------------
+    print(PROGRAM_HEADING)
     print("~" * 38)
-    print("{:^38}".format("Available Shapes"))
-    print("~" * 38)
-    print(shape_factory.list_known())
-    print("-" * 38)
-    print(f"{shape_factory.number_known():>2} shapes available.")
-    print()
-
-    # The list needs to be intialized outside the "with" closure
-    shapes = []  # Create an empty list (prefer `[]` over `list()`)
+    print(FACTORY_DESCRIPTION)
 
     with open(shapes_filename, "r") as shapes_in:
-        for line in shapes_in:
-            # Split on ";" and Strip leading/trailing whitespace
-            # And Unpack the list
-            name, values = [part.strip() for part in line.split(";")]
+        shapes = [shp for shp in read_shapes(shapes_in) if shp is not None]
 
-            values = values.strip()
-
-            try:
-                values = [float(val) for val in values.split()]
-                shapes.append(shape_factory.create_from_dimensions(name, values))
-
-            except ValueError as _err:
-                print(f"Skipped shape \"{name:}\" due to malformed line.", file=sys.stderr)
-
-    # Remove all `None` entries with a list comprehension
-    shapes = [shp for shp in shapes if shp is not None]
-
-    # Print all the shapes
-    print("~" * 38)
-    print("{:^38}".format("Display All Shapes"))
-    print("~" * 38)
-
+    print(BorderHeading("Display All Shapes"))
     for shp in shapes:
         print(shp)
 
-    print("~" * 38)
-    print("{:^38}".format("Display Largest Shape (Area)"))
-    print("~" * 38)
-
+    print(BorderHeading("Display Largest Shape (Area)"))
     largest_shape = max(shapes, key=lambda shape: shape.area())
     print(largest_shape)
 
-    print("~" * 38)
-    print("{:^38}".format("Display Smallest Shape (Perimeter)"))
-    print("~" * 38)
-
+    print(BorderHeading("Display Smallest Shape (Perimeter)"))
     smallest_shape = min(shapes, key=lambda shape: shape.perimeter())
     print(smallest_shape)
 
-    sorted_shapes = sorted(shapes, key=lambda shape: shape.name)
-
-    for shp in sorted_shapes:
+    print(BorderHeading("Display Shapes Sorted by Name"))
+    for shp in sorted(shapes, key=lambda shape: shape.name):
         print(shp)
 
 
