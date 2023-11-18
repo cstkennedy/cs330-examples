@@ -42,8 +42,7 @@ def build_interesting_list():
 
     data_to_add = some_ints + some_strings
 
-    for val in data_to_add:
-        ll.append(val)
+    ll.extend(data_to_add)
 
     yield data_to_add, ll
 
@@ -51,6 +50,7 @@ def build_interesting_list():
 def test_constructor(get_empty_list):
     empty_list = get_empty_list
 
+    assert_that(empty_list.is_empty(), is_(True))
     assert_that(empty_list, is_(not_none()))
     assert_that(empty_list, has_length(0))
     assert_that(empty_list, has_string(""))
@@ -60,6 +60,7 @@ def test_append_int_once():
     ll = LinkedList()
     ll.append(1)
 
+    assert_that(ll.is_empty(), is_(False))
     assert_that(ll, has_length(1))
     assert_that(ll, has_string("Node #    0 -    1"))
 
@@ -79,6 +80,7 @@ def test_append_int_twice():
     ll.append(2)
     ll.append(3)
 
+    assert_that(ll.is_empty(), is_(False))
     assert_that(ll, has_length(2))
 
     it = iter(ll)
@@ -106,6 +108,8 @@ def test_append_various(build_interesting_list):
     all_src_data, ll = build_interesting_list
 
     assert_that(ll, is_(instance_of(LinkedList)))
+
+    assert_that(ll.is_empty(), is_(False))
     assert_that(ll, has_length(len(all_src_data)))
 
     assert_that(ll, has_items(*all_src_data))
@@ -136,16 +140,34 @@ def test_str_after_append_various(build_interesting_list):
     assert_that(str(ll), string_contains_in_order(*expected_strs))
 
 
+def test_extend_int():
+    ll = LinkedList()
+
+    ll.append(-5)
+    ll.append(-2)
+
+    # Add the numbers 0, 2, 4, 6, 8, ..., 100
+    some_ints = list(range(0, 101, 2))
+    ll.extend(some_ints)
+
+    all_data = [-5, -2] + some_ints
+
+    assert_that(ll.is_empty(), is_(False))
+    assert_that(ll, has_length(len(all_data)))
+
+    assert_that(ll, contains_exactly(*all_data))
+
+
 def test_deep_copy(build_interesting_list):
     all_src_data, ll_src = build_interesting_list
 
-    ll_src.append(Datum(52))
-    ll_src.append(Datum(42))
-    ll_src.append(Datum(337))
+    ll_src.extend(Datum(val) for val in (52, 42, 337))
 
     ll_copy = copy.deepcopy(ll_src)
 
     assert_that(ll_copy, is_(instance_of(LinkedList)))
+
+    assert_that(ll_copy.is_empty(), is_(False))
     assert_that(ll_copy, has_length(len(ll_src)))
 
     for val_copy, val_src in zip(ll_copy, ll_src):

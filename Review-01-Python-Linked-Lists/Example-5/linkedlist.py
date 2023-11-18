@@ -80,16 +80,22 @@ class LinkedList(abc.Iterable):
         self.__tail: Node = None
         self.__nodes: int = 0
 
+    def is_empty(self) -> bool:
+        """
+        Evaluates to True if the list is empty (i.e., no Nodes have been added
+        yet) and false otherwise
+        """
+
+        return self.__head is None
+
     def append(self, to_add: Any) -> None:
         """
         Add a Node at the end of the list
         """
 
-        # Store the "to_add" data within the node
         new_node = LinkedList.Node(data=to_add)
 
-        # Handle the case where the first node is added
-        if self.__head is None:
+        if self.is_empty():
             self.__head = new_node
             self.__tail = new_node
 
@@ -98,6 +104,34 @@ class LinkedList(abc.Iterable):
             self.__tail = new_node
 
         self.__nodes += 1
+
+
+    def extend(self, collection: abc.Iterable) -> None:
+        """
+        Take every value in collection, create a new Node, and append it to
+        this list
+        """
+
+        # for value in collection:
+        #    self.append(value)
+
+        it_collection = iter(collection)
+
+        # If adding to an empty list... add the first value
+        if self.is_empty():
+            value = next(it_collection)
+            new_node = LinkedList.Node(value)
+
+            self.__head = new_node
+            self.__tail = new_node
+            self.__nodes = 1
+
+        # Add all the remaining values
+        for value in it_collection:
+            (self.__tail).next = LinkedList.Node(value)
+            self.__tail = self.__tail.next
+
+            self.__nodes += 1
 
     def __deepcopy__(self, memo) -> LinkedList:
         clone = LinkedList()
