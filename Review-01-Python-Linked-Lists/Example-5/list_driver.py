@@ -7,7 +7,7 @@ import copy
 from linkedlist import LinkedList
 
 PROGRAM_HEADING = "\n".join(
-    f"{line:^80}" for line in ("Linked List Review", "Thomas J. Kennedy")
+    ("Linked List Review".center(80), "Thomas J. Kennedy".center(80))
 )
 
 MIN: int = -10  # Lower bound for number generation
