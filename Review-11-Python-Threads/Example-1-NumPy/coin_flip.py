@@ -47,7 +47,8 @@ def simulate_flips(num_trials: int) -> FlipResult:
         num_trials: number of trials to attempt
     """
 
-    flips = np.random.randint(2, size=num_trials)
+    rng = np.random.default_rng()
+    flips = rng.integers(2, size=num_trials, dtype=np.int8)
 
     num_heads = np.count_nonzero(flips)
 
