@@ -10,6 +10,9 @@ class BorderHeading:
     symbol: str = "~"
     width: int = 38
 
+    def with_width(self, val: int) -> Self:
+        return self
+
     def __str__(self) -> str:
         return "\n".join(
             (

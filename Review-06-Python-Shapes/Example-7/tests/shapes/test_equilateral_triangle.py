@@ -1,11 +1,11 @@
-from hamcrest import *
+import copy
+import math
 import unittest
 
-from shapes.triangle import EquilateralTriangle
-from shapes.shape import (Shape, FPT_FMT)
+from hamcrest import *
 
-import math
-import copy
+from shapes.shape import FPT_FMT, Shape
+from shapes.triangle import EquilateralTriangle
 
 
 class TestEquilateralTriangle(unittest.TestCase):

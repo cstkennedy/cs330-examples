@@ -11,15 +11,6 @@ import shapes.shape_factory as shape_factory
 from headings import BorderHeading, MultiLineBorderHeading
 from shapes.shape import Shape
 
-HEADING_WIDTH = 80
-PROGRAM_HEADING = "\n".join(
-    (
-        "-" * HEADING_WIDTH,
-        "Objects & Inheritance: 2-D Shapes".center(HEADING_WIDTH),
-        "Thomas J. Kennedy".center(HEADING_WIDTH),
-        "-" * HEADING_WIDTH,
-    )
-)  # Program Title
 PROGRAM_HEADING = MultiLineBorderHeading(
     content=(
         "Objects & Inheritance: 2-D Shapes",
@@ -31,6 +22,7 @@ PROGRAM_HEADING = MultiLineBorderHeading(
 
 FACTORY_DESCRIPTION = "\n".join(
     (
+        "~" * 38,
         "Available Shapes".center(38),
         "~" * 38,
         shape_factory.list_known(),
@@ -79,7 +71,6 @@ def main():
     shapes_filename = sys.argv[1]
 
     print(PROGRAM_HEADING)
-    print("~" * 38)
     print(FACTORY_DESCRIPTION)
 
     with open(shapes_filename, "r") as shapes_in:

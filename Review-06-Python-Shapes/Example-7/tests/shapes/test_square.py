@@ -1,10 +1,10 @@
-from hamcrest import *
+import copy
 import unittest
 
-from shapes.square import Square
-from shapes.shape import (Shape, FPT_FMT)
+from hamcrest import *
 
-import copy
+from shapes.shape import FPT_FMT, Shape
+from shapes.square import Square
 
 
 class TestSquare(unittest.TestCase):

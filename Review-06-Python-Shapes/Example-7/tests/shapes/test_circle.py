@@ -1,11 +1,11 @@
-from hamcrest import *
+import copy
 import unittest
 
-from shapes.circle import Circle
-from shapes.shape import (Shape, FPT_FMT)
+from hamcrest import *
 
 from shapes import circle
-import copy
+from shapes.circle import Circle
+from shapes.shape import FPT_FMT, Shape
 
 
 class TestCircle(unittest.TestCase):
