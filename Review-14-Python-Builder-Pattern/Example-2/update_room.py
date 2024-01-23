@@ -1,8 +1,6 @@
 #! /usr/bin/env python
 
-import copy
-
-from house import House
+from house import House, HouseBuilder
 from room import Room, RoomBuilder
 
 ROOM_DATA = """
@@ -22,10 +20,8 @@ def main():
     We will use these when we implement the iterator interface.
     """
 
-    house = House()
-
-    # std::istringstream fakeInputFile(ROOM_DATA)
-    build_house(house)
+    # Construct the house within the build function
+    house = build_house()
 
     print(house)
 
@@ -45,22 +41,18 @@ def main():
     for room_cost in costs:
         print(f"{room_cost:.2f}")
 
-    # Print the sum, min, max -> D.R.Y!
-    total = sum(costs)
-    min_c = min(costs)
-    max_c = max(costs)
-
-    print(f"Total: {total:.2f}")
-    print(f"Min  : {min_c:.2f}")
-    print(f"Max  : {max_c:.2f}")
+    print(f"Total: {sum(costs):.2f}")
+    print(f"Min  : {min(costs):.2f}")
+    print(f"Max  : {max(costs):.2f}")
 
 
-def build_house(house: House):
+def build_house():
     """
     Build our example house
     """
 
-    # Laundry Room; 8 4 1.95 Laminate
+    # Read rooms into a list
+    rooms = []
     for line in ROOM_DATA.splitlines():
         # Skip blank lines
         if not line:
@@ -68,7 +60,6 @@ def build_house(house: House):
 
         name, the_rest = line.strip().split(";")
         the_rest = the_rest.split()
-        #  print(the_rest)
 
         # Grab length and width first
         length, width = [float(val) for val in the_rest[0:2]]
@@ -77,13 +68,16 @@ def build_house(house: House):
         flr_type = " ".join(the_rest[3:])
         flr_cost = float(the_rest[2])
 
-        house.add_room(
+        rooms.append(
             RoomBuilder()
             .with_name(name)
             .with_dimensions(length, width)
             .with_flooring(flr_type, flr_cost)
             .build()
         )
+
+    # Build a house using all the read in rooms
+    return HouseBuilder().with_rooms(rooms).build()
 
 
 def upgrade_flooring(original: House) -> House:
@@ -94,18 +88,23 @@ def upgrade_flooring(original: House) -> House:
         original: House to change
 
     Returns:
-        House with the updated flooring
+        A copy of the original house with the updated flooring
     """
 
-    modified = copy.deepcopy(original)
-
-    for room in modified:
-        room.set_flooring("Stone Bricks", 12.97)
-
-    #  modified.set_name("After Stone Bricks")
-    modified.name = "After Stone Bricks"  # Magic!!
-
-    return modified
+    return (
+        HouseBuilder()
+        .with_name("After Stone Bricks")
+        .with_rooms(
+            (
+                RoomBuilder()
+                .from_template(room)
+                .substitute_flooring("Stone Bricks", 12.97)
+                .build()
+                for room in original
+            )
+        )
+        .build()
+    )
 
 
 def discount_flooring(a_room: Room) -> float:

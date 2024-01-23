@@ -1,4 +1,6 @@
-from typing import List
+from __future__ import annotations
+
+from typing import Iterable, List, Self
 
 from room import Room
 
@@ -11,7 +13,7 @@ class House:
         """
 
         self.__name: str = nme
-        self.__rooms: List[House] = []
+        self.__rooms: list[House] = []
 
     @property
     def name(self):
@@ -106,3 +108,50 @@ class House:
 
         # Python handles the traversal for us!
         return self.__rooms == rhs.__rooms
+
+
+class HouseBuilder:
+    def __init__(self):
+        self.name: str = None
+        self.the_rooms: list[Room] = []
+
+    def with_name(self, nme: str) -> Self:
+        """
+        Set house name. This is optional.
+        """
+        self.name = nme
+
+        return self
+
+    def with_room(self, room: Room) -> Self:
+        """
+        Add a single room
+        """
+        self.the_rooms.append(room)
+
+        return self
+
+    def with_rooms(self, new_rooms: Iterable[Room]) -> Self:
+        """
+        Add multiple rooms from any iterable object
+        pass
+        """
+
+        self.the_rooms.extend(new_rooms)
+
+        return self
+
+    def build(self) -> House:
+        if not self.the_rooms:
+            raise ValueError("A House must have at least one room.")
+
+        # If a name was supplied use it... otherwise let the House constructor
+        # supply the default.
+        #  house = House(self.name) if self.name else House()
+        house = House()
+        if self.name:
+            house.name = self.name
+
+        house._House__rooms = self.the_rooms
+
+        return house
