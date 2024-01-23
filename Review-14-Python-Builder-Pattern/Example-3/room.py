@@ -1,39 +1,23 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-
-
-@dataclass
-class Flooring:
-    type_name: str = "Generic"
-    unit_cost: float = 1.0
+import copy
+from dataclasses import dataclass, field
 
 
 @dataclass
 class DimensionSet:
-    length: float = 1.0
-    width: float = 1.0
+    length: float
+    width: float
 
 
-class Room:
-    def __init__(self, nme: str = "Generic"):
-        self.__name = nme
-        self.__dimensions = DimensionSet()
-        self.__flooring = Flooring()
+@dataclass
+class Flooring:
+    type_name: str
+    unit_cost: float
 
-    @property
-    def name(self):
+    def update(self, nme: str, unit_c: float) -> None:
         """
-        Get the name using a property.
-
-        @property must come before @...setter...
-        """
-
-        return self.__name
-
-    def set_flooring(self, nme: str, unit_c: float):
-        """
-        Set the flooring.
+        Replace/update the flooring.
 
         Args:
             nme: flooring type name
@@ -41,49 +25,51 @@ class Room:
 
         """
 
-        self.__flooring.type_name = nme
-        self.__flooring.unit_cost = unit_c
+        self.type_name = nme
+        self.unit_cost = unit_c
+
+
+@dataclass
+class Room:
+    name: str
+    dimensions: DimensionSet
+    flooring: Flooring
 
     def area(self) -> float:
         """
         Compute the area of flooring for a room.
         """
 
-        return float(self.__dimensions.width) * self.__dimensions.length
+        return self.dimensions.width * self.dimensions.length
 
     def flooring_cost(self) -> float:
         """
         Compute the flooring cost based on `self.area()` and unit cost.
         """
 
-        return self.area() * self.__flooring.unit_cost
+        return self.area() * self.flooring.unit_cost
+
+    def __deepcopy__(self, memo) -> Room:
+        cpy = Room(
+            self.name, copy.deepcopy(self.dimensions), copy.deepcopy(self.flooring)
+        )
+
+        return cpy
 
     def __str__(self) -> str:
         return "\n".join(
             (
                 f"Room ({self.name})",
-                "  {:<6}: {:>8.1f}".format("Length", self.__dimensions.length),
-                "  {:<6}: {:>8.1f}".format("Width", self.__dimensions.width),
-                "  {:<6}: {:>8.1f}".format("Area", self.area()),
+                f"  Length: {self.dimensions.length:>8.1f}",
+                f"  Width : {self.dimensions.width:>8.1f}",
+                f"  Area  : {self.area():>8.1f}",
                 "",
-                f"  Flooring  : {self.__flooring.type_name}",
-                f"  Unit Cost : $ {self.__flooring.unit_cost:>8.2f}",
-                "  Total Cost: $ {:>8.2f}".format(self.flooring_cost()),
+                f"  Flooring  : {self.flooring.type_name}",
+                f"  Unit Cost : $ {self.flooring.unit_cost:>8.2f}",
+                f"  Total Cost: $ {self.flooring_cost():>8.2f}",
                 "\n",
             )
         )
-
-    def __lt__(self, rhs) -> bool:
-        if self.name == rhs.name:
-            return self.area() < rhs.area()  # pylint caught the missing return
-
-        return self.name < rhs.name
-
-    def __eq__(self, rhs) -> bool:
-        if not isinstance(rhs, Room):
-            return False
-
-        return self.name == (rhs.name) and self.area() == rhs.area()
 
 
 class RoomBuilder:
@@ -91,7 +77,22 @@ class RoomBuilder:
         self.__name = None
         self.__length = None
         self.__width = None
-        self.__flooring = None
+        self.__flooring_type = None
+        self.__flooring_unit_cost = None
+
+    def from_template(self, room: Room) -> RoomBuilder:
+        self.__name = copy.deepcopy(room.name)
+        self.__length = copy.deepcopy(room.dimensions.length)
+        self.__width = copy.deepcopy(room.dimensions.width)
+        self.__flooring_type = copy.deepcopy(room.flooring.type_name)
+        self.__flooring_unit_cost = copy.deepcopy(room.flooring.unit_cost)
+
+        return self
+
+    def substitute_flooring(self, nme: str, unit_c: float) -> RoomBuilder:
+        self.with_flooring(nme, unit_c)
+
+        return self
 
     def with_name(self, nme: str) -> RoomBuilder:
         """
@@ -115,8 +116,8 @@ class RoomBuilder:
 
         """
 
-        flr = Flooring(nme, unit_c)
-        self.__flooring = flr
+        self.__flooring_type = nme
+        self.__flooring_unit_cost = unit_c
 
         return self
 
@@ -135,25 +136,33 @@ class RoomBuilder:
 
         return self
 
-    def validate_name(self) -> None:
+    def __check_name(self, val: str, name: str) -> None:
         """
         Raise a Value Error if:
-          1. Name was not set
-          2. Name is the empty string
-          3. Name has fewer than 3 characters
+          1. val was not set
+          2. val is the empty string
+          3. val has fewer than 3 characters
         """
 
-        if not self.__name:
-            raise ValueError("No name was set")
+        if not val:
+            raise ValueError(f'"{name}" was not set')
 
-        if len(self.__name) < 3:
-            raise ValueError("Name len('{self.__name}') < 3")
+        if len(val) < 3:
+            raise ValueError('"{name}" len("{val}") < 3')
+
+    def __check_num(self, val: float | int, name: str) -> None:
+        if val <= 0:
+            raise ValueError(f'"{name}" <= 0')
 
     def build(self) -> Room:
-        self.validate_name()
+        self.__check_name(self.__name, "name")
+        self.__check_name(self.__flooring_type, "flooring type")
 
-        if not self.__flooring:
-            raise ValueError("No flooring was set")
+        if not self.__flooring_type:
+            raise ValueError("No flooring type was set")
+
+        if not self.__flooring_unit_cost:
+            raise ValueError("No flooring cost was set")
 
         if not self.__length:
             raise ValueError("No length was set")
@@ -161,8 +170,14 @@ class RoomBuilder:
         if not self.__width:
             raise ValueError("No width was set")
 
-        room = Room(self.__name)
-        room._Room__flooring = self.__flooring
-        room._Room__dimensions = DimensionSet(self.__length, self.__width)
+        self.__check_num(self.__flooring_unit_cost, "flooring cost")
+        self.__check_num(self.__length, "length")
+        self.__check_num(self.__width, "width")
+
+        room = Room(
+            self.__name,
+            DimensionSet(self.__length, self.__width),
+            Flooring(self.__flooring_type, self.__flooring_unit_cost),
+        )
 
         return room

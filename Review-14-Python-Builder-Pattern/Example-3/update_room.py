@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 
-import copy
-
 from house import House, HouseBuilder
 from room import Room, RoomBuilder
 
@@ -43,14 +41,9 @@ def main():
     for room_cost in costs:
         print(f"{room_cost:.2f}")
 
-    # Print the sum, min, max -> D.R.Y!
-    total = sum(costs)
-    min_c = min(costs)
-    max_c = max(costs)
-
-    print(f"Total: {total:.2f}")
-    print(f"Min  : {min_c:.2f}")
-    print(f"Max  : {max_c:.2f}")
+    print(f"Total: {sum(costs):.2f}")
+    print(f"Min  : {min(costs):.2f}")
+    print(f"Max  : {max(costs):.2f}")
 
 
 def build_house():
@@ -84,9 +77,7 @@ def build_house():
         )
 
     # Build a house using all the read in rooms
-    house = HouseBuilder().with_rooms(rooms).build()
-
-    return house
+    return HouseBuilder().with_rooms(rooms).build()
 
 
 def upgrade_flooring(original: House) -> House:
@@ -97,19 +88,23 @@ def upgrade_flooring(original: House) -> House:
         original: House to change
 
     Returns:
-        House with the updated flooring
+        A copy of the original house with the updated flooring
     """
 
-    bldr = HouseBuilder().with_name("After Stone Bricks")
-    for room in original:
-        updated_room = copy.deepcopy(room)
-        updated_room.set_flooring("Stone Bricks", 12.97)
-
-        bldr.with_room(updated_room)
-
-    modified = bldr.build()
-
-    return modified
+    return (
+        HouseBuilder()
+        .with_name("After Stone Bricks")
+        .with_rooms(
+            (
+                RoomBuilder()
+                .from_template(room)
+                .substitute_flooring("Stone Bricks", 12.97)
+                .build()
+                for room in original
+            )
+        )
+        .build()
+    )
 
 
 def discount_flooring(a_room: Room) -> float:
