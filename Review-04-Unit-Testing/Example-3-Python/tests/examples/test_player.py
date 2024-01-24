@@ -1,105 +1,115 @@
+import copy
+
+import pytest
 from hamcrest import *
-import unittest
 
 from examples.player import Player
 
-import copy
+"""
+1 - Does this piece of code perform the operations
+    it was designed to perform?
+
+2 - Does this piece of code do something it was not
+    designed to perform?
+
+1 Test per mutator
+"""
 
 
-class TestPlayer(unittest.TestCase):
-    """
-    1 - Does this piece of code perform the operations
-        it was designed to perform?
+@pytest.fixture
+def create_players():
+    tom = Player("Tom")
+    tom.set_symbol("X")
 
-    2 - Does this piece of code do something it was not
-        designed to perform?
+    a_cylon = Player()
+    the_doctor = Player("The Doctor")
 
-    1 Test per mutator
-    """
+    yield tom, a_cylon, the_doctor
 
-    def setUp(self):
-        self.tom = Player("Tom")
-        self.a_cylon = Player()
-        self.the_doctor = Player("The Doctor")
 
-        self.tom.set_symbol('X')
+def test_player_default_constructor(create_players):
+    tom, a_cylon, _ = create_players
 
-    def test_player_default_constructor(self):
+    assert_that(Player.is_generic(a_cylon))
 
-        self.assertTrue(Player.is_generic(self.a_cylon))
+    assert_that(a_cylon.get_symbol(), equal_to("?"))
 
-        assert_that(self.a_cylon.get_symbol(), equal_to('?'))
+    assert_that(hash(a_cylon), is_not(hash(tom)))
+    assert_that(a_cylon, is_not(equal_to(tom)))
 
-        assert_that(hash(self.a_cylon), is_not(hash(self.tom)))
-        assert_that(self.a_cylon, is_not(equal_to(self.tom)))
+    # Hand wave... These are not the cylons you are looking for.
+    assert_that(a_cylon.is_human(), is_(True))
+    assert_that(a_cylon.is_computer(), is_(False))
 
-        # Hand wave... These are not the cylons you are looking for.
-        assert_that(self.a_cylon.is_human(), is_(True))
-        assert_that(self.a_cylon.is_computer(), is_(False))
 
-    def test_player_constructor(self):
+def test_player_constructor(create_players):
+    tom, _, the_doctor = create_players
 
-        self.assertEqual("Tom", str(self.tom))
-        assert_that(str(self.tom), equal_to("Tom"))
+    assert_that(tom, has_string("Tom"))
+    assert_that(str(tom), equal_to("Tom"))
 
-        assert_that(hash(self.tom), is_not(hash(self.the_doctor)))
-        assert_that(self.tom, is_not(equal_to(self.the_doctor)))
+    assert_that(hash(tom), is_not(hash(the_doctor)))
+    assert_that(tom, is_not(equal_to(the_doctor)))
 
-        assert_that(self.tom.is_human(), is_(True))
-        assert_that(self.tom.is_computer(), is_(False))
+    assert_that(tom.is_human(), is_(True))
+    assert_that(tom.is_computer(), is_(False))
 
-    def test_set_symbol(self):
 
-        old_hash_code = hash(self.tom)
+def test_set_symbol(create_players):
+    tom, a_cylon, _ = create_players
 
-        assert_that(self.tom.get_symbol(), is_('X'))
-        assert_that(hash(self.tom), is_(old_hash_code))
+    old_hash_code = hash(tom)
 
-        self.tom.set_symbol('O')
-        assert_that(self.tom.get_symbol(), is_('O'))
-        assert_that(hash(self.tom), is_(old_hash_code))
+    assert_that(tom.get_symbol(), is_("X"))
+    assert_that(hash(tom), is_(old_hash_code))
 
-    def test_set_name(self):
+    tom.set_symbol("O")
+    assert_that(tom.get_symbol(), is_("O"))
+    assert_that(hash(tom), is_(old_hash_code))
 
-        old_hash_code = hash(self.the_doctor)
 
-        assert_that(self.the_doctor.get_name(), is_("The Doctor"))
-        assert_that(hash(self.the_doctor), is_(old_hash_code))
+def test_set_name(create_players):
+    _, _, the_doctor = create_players
 
-        self.the_doctor.set_name("David Tennant")
-        assert_that(self.the_doctor.get_name(), is_("David Tennant"))
-        assert_that(hash(self.the_doctor), is_not(old_hash_code))
+    old_hash_code = hash(the_doctor)
 
-        self.the_doctor.set_name("Mat Smith")
-        assert_that(self.the_doctor.get_name(), is_("Mat Smith"))
-        assert_that(hash(self.the_doctor), is_not(old_hash_code))
+    assert_that(the_doctor.get_name(), is_("The Doctor"))
+    assert_that(hash(the_doctor), is_(old_hash_code))
 
-        self.the_doctor.set_name("Peter Capaldi")
-        assert_that(self.the_doctor.get_name(), is_("Peter Capaldi"))
-        assert_that(hash(self.the_doctor), is_not(old_hash_code))
+    the_doctor.set_name("David Tennant")
+    assert_that(the_doctor.get_name(), is_("David Tennant"))
+    assert_that(hash(the_doctor), is_not(old_hash_code))
 
-        self.the_doctor.set_name("Jodie Whittaker")
-        assert_that(self.the_doctor.get_name(), is_("Jodie Whittaker"))
-        assert_that(hash(self.the_doctor), is_not(old_hash_code))
+    the_doctor.set_name("Mat Smith")
+    assert_that(the_doctor.get_name(), is_("Mat Smith"))
+    assert_that(hash(the_doctor), is_not(old_hash_code))
 
-        # No clone function, can't test equals
+    the_doctor.set_name("Peter Capaldi")
+    assert_that(the_doctor.get_name(), is_("Peter Capaldi"))
+    assert_that(hash(the_doctor), is_not(old_hash_code))
 
-    def test_clone(self):
+    the_doctor.set_name("Jodie Whittaker")
+    assert_that(the_doctor.get_name(), is_("Jodie Whittaker"))
+    assert_that(hash(the_doctor), is_not(old_hash_code))
 
-        the_original = copy.deepcopy(self.the_doctor)
+    # No clone function, can't test equals
 
-        assert_that(hash(self.the_doctor), equal_to(hash(the_original)))
-        assert_that(self.the_doctor, equal_to(the_original))
-        assert_that(self.the_doctor.get_symbol(),
-                    equal_to(the_original.get_symbol()))
 
-        the_original.set_name("William Hartnell")
-        assert_that(hash(self.the_doctor),
-                    is_not(equal_to(hash(the_original))))
-        assert_that(self.the_doctor, is_not(equal_to(the_original)))
+def test_clone(create_players):
+    _, _, the_doctor = create_players
 
-    @unittest.skip("can not test")
-    def test_next_move(self):
+    the_original = copy.deepcopy(the_doctor)
 
-        # Can not test due to hardcoded System.in use in Player.next_move
-        pass
+    assert_that(hash(the_doctor), equal_to(hash(the_original)))
+    assert_that(the_doctor, equal_to(the_original))
+    assert_that(the_doctor.get_symbol(), equal_to(the_original.get_symbol()))
+
+    the_original.set_name("William Hartnell")
+    assert_that(hash(the_doctor), is_not(equal_to(hash(the_original))))
+    assert_that(the_doctor, is_not(equal_to(the_original)))
+
+
+@pytest.mark.skip("can not test")
+def test_next_move():
+    # Can not test due to hardcoded System.in use in Player.next_move
+    pass
