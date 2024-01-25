@@ -1,9 +1,10 @@
-from examples.student import Student
 from examples.roster import Roster
+from examples.student import Student
 
 """
 Demonstrate simple Roster and Student ADTs.
 """
+
 
 def main():
     """
