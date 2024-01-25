@@ -1,11 +1,11 @@
-from hamcrest import *
+import copy
+import math
 import unittest
 
-from shapes.RightTriangle import RightTriangle
-from shapes.Shape import (Shape, FPT_FMT)
+from hamcrest import *
 
-import math
-import copy
+from shapes.RightTriangle import RightTriangle
+from shapes.Shape import FPT_FMT, Shape
 
 
 class TestRightTriangle(unittest.TestCase):
@@ -57,25 +57,28 @@ class TestRightTriangle(unittest.TestCase):
         # Based on 1/2 base * height (base=1, height = 1)
         expected_area = 0.5
 
-        assert_that(self.generic.area(),
-                    close_to(expected_area, 1e-8))
+        assert_that(self.generic.area(), close_to(expected_area, 1e-8))
 
         # Based on 1/2 base * height (base=2, height = 3)
         expected_area = 3
 
-        assert_that(self.fancy.area(),
-                    close_to(expected_area, 1e-8))
+        assert_that(self.fancy.area(), close_to(expected_area, 1e-8))
 
     def test_perimeter(self):
-        assert_that(self.generic.perimeter(),
-                    close_to(sum([self.generic.base,
-                                  self.generic.height,
-                                  self.generic.hypotenuse]), 1e-8))
+        assert_that(
+            self.generic.perimeter(),
+            close_to(
+                sum([self.generic.base, self.generic.height, self.generic.hypotenuse]),
+                1e-8,
+            ),
+        )
 
-        assert_that(self.fancy.perimeter(),
-                    close_to(sum([self.fancy.base,
-                                  self.fancy.height,
-                                  self.fancy.hypotenuse]), 1e-8))
+        assert_that(
+            self.fancy.perimeter(),
+            close_to(
+                sum([self.fancy.base, self.fancy.height, self.fancy.hypotenuse]), 1e-8
+            ),
+        )
 
     def test_deep_copy(self):
         a_copy = copy.deepcopy(self.fancy)
@@ -92,19 +95,19 @@ class TestRightTriangle(unittest.TestCase):
 
         assert_that(fancy_str, starts_with("Name"))
         assert_that(fancy_str, contains_string("Right Triangle"))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Perimeter",
-                                                         self.fancy.perimeter())))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Area",
-                                                         self.fancy.area())))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Base",
-                                                         self.fancy.base)))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Height",
-                                                         self.fancy.height)))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Hypotenuse",
-                                                         self.fancy.hypotenuse)))
+        assert_that(
+            fancy_str,
+            contains_string(FPT_FMT.format("Perimeter", self.fancy.perimeter())),
+        )
+        assert_that(
+            fancy_str, contains_string(FPT_FMT.format("Area", self.fancy.area()))
+        )
+        assert_that(fancy_str, contains_string(FPT_FMT.format("Base", self.fancy.base)))
+        assert_that(
+            fancy_str, contains_string(FPT_FMT.format("Height", self.fancy.height))
+        )
+        assert_that(
+            fancy_str,
+            contains_string(FPT_FMT.format("Hypotenuse", self.fancy.hypotenuse)),
+        )
         assert_that(fancy_str, ends_with("\n"))

@@ -1,9 +1,9 @@
-from hamcrest import *
+import copy
 import unittest
 
-from shapes.shape import Shape
+from hamcrest import *
 
-import copy
+from shapes.shape import Shape
 
 
 class TestShape(unittest.TestCase):
