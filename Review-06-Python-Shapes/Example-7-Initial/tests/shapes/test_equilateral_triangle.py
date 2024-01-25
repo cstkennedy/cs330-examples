@@ -1,11 +1,11 @@
-from hamcrest import *
+import copy
+import math
 import unittest
 
-from shapes.triangle import EquilateralTriangle
-from shapes.shape import (Shape, FPT_FMT)
+from hamcrest import *
 
-import math
-import copy
+from shapes.shape import FPT_FMT, Shape
+from shapes.triangle import EquilateralTriangle
 
 
 class TestEquilateralTriangle(unittest.TestCase):
@@ -40,8 +40,7 @@ class TestEquilateralTriangle(unittest.TestCase):
     def test_area(self):
         # Based on 1/2 base * height (side=1)
         expected_area = math.sqrt(3) / 4
-        assert_that(self.generic.area(),
-                    close_to(expected_area, 1e-8))
+        assert_that(self.generic.area(), close_to(expected_area, 1e-8))
 
         # Based on 1/2 side * height (side=3)
         expected_area = 3 * math.sqrt(27) / 4
@@ -64,13 +63,14 @@ class TestEquilateralTriangle(unittest.TestCase):
 
         assert_that(fancy_str, starts_with("Name"))
         assert_that(fancy_str, contains_string("Equilateral Triangle"))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Perimeter",
-                                                   self.fancy.perimeter())))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Area", self.fancy.area())))
+        assert_that(
+            fancy_str,
+            contains_string(FPT_FMT.format("Perimeter", self.fancy.perimeter())),
+        )
+        assert_that(
+            fancy_str, contains_string(FPT_FMT.format("Area", self.fancy.area()))
+        )
 
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Side", self.fancy.side)))
+        assert_that(fancy_str, contains_string(FPT_FMT.format("Side", self.fancy.side)))
 
         assert_that(fancy_str, ends_with("\n"))

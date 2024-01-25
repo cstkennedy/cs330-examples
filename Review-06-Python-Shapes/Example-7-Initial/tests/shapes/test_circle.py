@@ -1,11 +1,11 @@
-from hamcrest import *
+import copy
 import unittest
 
-from shapes.circle import Circle
-from shapes.shape import (Shape, FPT_FMT)
+from hamcrest import *
 
 from shapes import circle
-import copy
+from shapes.circle import Circle
+from shapes.shape import FPT_FMT, Shape
 
 
 class TestCircle(unittest.TestCase):
@@ -43,18 +43,22 @@ class TestCircle(unittest.TestCase):
         assert_that(self.fancy.diameter, close_to(4, 1e-6))
 
     def test_area(self):
-        assert_that(self.generic.area(),
-                    close_to(circle.PI * (self.generic.radius ** 2), 0.05))
+        assert_that(
+            self.generic.area(), close_to(circle.PI * (self.generic.radius**2), 0.05)
+        )
 
-        assert_that(self.fancy.area(),
-                    close_to(circle.PI * (self.fancy.radius ** 2), 0.05))
+        assert_that(
+            self.fancy.area(), close_to(circle.PI * (self.fancy.radius**2), 0.05)
+        )
 
     def test_perimeter(self):
-        assert_that(self.generic.perimeter(),
-                    close_to(circle.TAU * self.generic.radius, 0.05))
+        assert_that(
+            self.generic.perimeter(), close_to(circle.TAU * self.generic.radius, 0.05)
+        )
 
-        assert_that(self.fancy.perimeter(),
-                    close_to(circle.TAU * self.fancy.radius, 0.05))
+        assert_that(
+            self.fancy.perimeter(), close_to(circle.TAU * self.fancy.radius, 0.05)
+        )
 
     def test_deep_copy(self):
         a_copy = copy.deepcopy(self.fancy)
@@ -71,14 +75,18 @@ class TestCircle(unittest.TestCase):
         assert_that(fancy_str, contains_string("Circle"))
         assert_that(fancy_str, ends_with("\n"))
 
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Perimeter",
-                                                   self.fancy.perimeter())))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Area", self.fancy.area())))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Radius", self.fancy.radius)))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Diameter", self.fancy.diameter)))
+        assert_that(
+            fancy_str,
+            contains_string(FPT_FMT.format("Perimeter", self.fancy.perimeter())),
+        )
+        assert_that(
+            fancy_str, contains_string(FPT_FMT.format("Area", self.fancy.area()))
+        )
+        assert_that(
+            fancy_str, contains_string(FPT_FMT.format("Radius", self.fancy.radius))
+        )
+        assert_that(
+            fancy_str, contains_string(FPT_FMT.format("Diameter", self.fancy.diameter))
+        )
 
         assert_that(fancy_str, ends_with("\n"))

@@ -1,10 +1,10 @@
-from hamcrest import *
+import copy
 import unittest
 
-from shapes.square import Square
-from shapes.shape import (Shape, FPT_FMT)
+from hamcrest import *
 
-import copy
+from shapes.shape import FPT_FMT, Shape
+from shapes.square import Square
 
 
 class TestSquare(unittest.TestCase):
@@ -39,18 +39,14 @@ class TestSquare(unittest.TestCase):
         assert_that(a_square.name, equal_to("Square"))
 
     def test_area(self):
-        assert_that(self.generic.area(),
-                    close_to(self.generic.side ** 2, 1e-8))
+        assert_that(self.generic.area(), close_to(self.generic.side**2, 1e-8))
 
-        assert_that(self.fancy.area(),
-                    close_to(self.fancy.side ** 2, 1e-8))
+        assert_that(self.fancy.area(), close_to(self.fancy.side**2, 1e-8))
 
     def test_perimeter(self):
-        assert_that(self.generic.perimeter(),
-                    close_to(4 * self.generic.side, 1e-8))
+        assert_that(self.generic.perimeter(), close_to(4 * self.generic.side, 1e-8))
 
-        assert_that(self.fancy.perimeter(),
-                    close_to(4 * self.fancy.side, 1e-8))
+        assert_that(self.fancy.perimeter(), close_to(4 * self.fancy.side, 1e-8))
 
     def test_deep_copy(self):
         a_copy = copy.deepcopy(self.fancy)
@@ -65,13 +61,12 @@ class TestSquare(unittest.TestCase):
 
         assert_that(fancy_str, starts_with("Name"))
         assert_that(fancy_str, contains_string("Square"))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Perimeter",
-                                                   self.fancy.perimeter())))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Area",
-                                                   self.fancy.area())))
-        assert_that(fancy_str,
-                    contains_string(FPT_FMT.format("Side",
-                                                   self.fancy.side)))
+        assert_that(
+            fancy_str,
+            contains_string(FPT_FMT.format("Perimeter", self.fancy.perimeter())),
+        )
+        assert_that(
+            fancy_str, contains_string(FPT_FMT.format("Area", self.fancy.area()))
+        )
+        assert_that(fancy_str, contains_string(FPT_FMT.format("Side", self.fancy.side)))
         assert_that(fancy_str, ends_with("\n"))
