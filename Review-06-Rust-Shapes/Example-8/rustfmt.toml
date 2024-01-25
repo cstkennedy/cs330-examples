@@ -1,0 +1,20 @@
+# Commented out options are only available in the 'nightly' channel
+
+# control_brace_style = "ClosingNextLine"
+# merge_imports = true
+newline_style = "Unix"
+# normalize_comments = true
+remove_nested_parens = true
+# reorder_impl_items = true
+reorder_imports = false
+# trailing_semicolon = true
+
+tab_spaces = 4
+hard_tabs = false
+max_width = 80
+# wrap_comments = true
+# report_todo = "Always"
+# report_fixme = "Always"
+# space_after_colon = true
+
+# blank_lines_lower_bound = 1

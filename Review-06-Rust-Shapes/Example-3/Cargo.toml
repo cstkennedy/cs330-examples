@@ -1,0 +1,11 @@
+[package]
+name = "shapes"
+version = "0.1.0"
+authors = ["Thomas J. Kennedy <tkennedy@cs.odu.edu>"]
+edition = "2018"
+
+[dependencies]
+
+
+[dev-dependencies]
+hamcrest2 = "*"

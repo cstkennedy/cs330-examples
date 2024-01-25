@@ -1,0 +1,85 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+package shapes {
+    class Shape << (T,#FF7700) Trait >> {
+        + name(&self)
+        + area(&self)
+        + perimeter(&self)
+    }
+
+    package factory {
+        enum KnownShape {
+            Circle
+            Square
+            Triangle
+            RightTriangle
+            EquilateralTriangle
+        }
+
+        class Factory {
+
+        }
+    }
+
+    package circle {
+        class Circle {
+            + radius: f64
+            + diameter(&self) -> f64
+        }
+    }
+
+    package square {
+        class Square {
+            + side: f64
+        }
+    }
+
+    package triangle {
+        class Triangle {
+            + side_a: f64
+            + side_b: f64
+            + side_c: f64
+        }
+    }
+
+    package right_triangle {
+        class RightTriangle {
+            + base: f64
+            + height: f64
+            + hypotenuse(&self) -> f64
+        }
+    }
+
+    package equilateral_triangle {
+    class EquilateralTriangle {
+        + side: f64
+        + height(&self) -> f64
+    }
+    }
+}
+
+package std::fmt {
+    class Display << (T,#FF7700) Trait >> {
+        + fmt(&self, f: &mut fmt::Formatter)
+    }
+}
+
+Shape <|.... Circle
+Shape <|.... Square
+Shape <|.... Triangle
+Shape <|.... RightTriangle
+Shape <|.... EquilateralTriangle
+
+Shape <|.. KnownShape
+
+Display <|.[#blue]... Circle
+Display <|.[#blue]... Square
+Display <|.[#blue]... Triangle
+Display <|.[#blue]... RightTriangle
+Display <|.[#blue]... EquilateralTriangle
+Display <|.[#blue]... KnownShape
+Display <|.[#blue]... Factory
+
+@enduml
