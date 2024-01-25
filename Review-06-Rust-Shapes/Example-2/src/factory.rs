@@ -1,14 +1,13 @@
 use std::collections::HashSet;
-use std::fmt;
 use std::error::Error;
+use std::fmt;
 
-use crate::shape::Shape;
-use crate::square::Square;
 use crate::circle::Circle;
-use crate::triangle::Triangle;
 use crate::equilateral_triangle::EquilateralTriangle;
 use crate::right_triangle::RightTriangle;
-
+use crate::shape::Shape;
+use crate::square::Square;
+use crate::triangle::Triangle;
 
 pub struct Factory {
     known_shapes: HashSet<&'static str>,
@@ -16,13 +15,15 @@ pub struct Factory {
 
 impl Factory {
     pub fn new() -> Self {
-        let mut factory = Factory{ known_shapes: HashSet::new() };
-
-        factory.known_shapes.insert("Triangle");
-        factory.known_shapes.insert("Right Triangle");
-        factory.known_shapes.insert("Equilateral Triangle");
-        factory.known_shapes.insert("Square");
-        factory.known_shapes.insert("Circle");
+        let factory = Factory {
+            known_shapes: HashSet::from([
+                "Triangle",
+                "Right Triangle",
+                "Equilateral Triangle",
+                "Square",
+                "Circle",
+            ]),
+        };
 
         factory
     }
@@ -33,14 +34,14 @@ impl Factory {
     ///
     ///   * `name` shape to be created
     ///
-    pub fn create(&self, name: &str) -> Option<Box<Shape>> {
-        match name  {
+    pub fn create(&self, name: &str) -> Option<Box<dyn Shape>> {
+        match name {
             "Triangle" => Some(Box::new(Triangle::new())),
             "Right Triangle" => Some(Box::new(RightTriangle::new())),
             "Equilateral Triangle" => Some(Box::new(EquilateralTriangle::new())),
             "Square" => Some(Box::new(Square::new())),
             "Circle" => Some(Box::new(Circle::new())),
-            _ =>  None
+            _ => None,
         }
     }
 
@@ -79,4 +80,3 @@ impl fmt::Display for Factory {
         Ok(())
     }
 }
-

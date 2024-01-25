@@ -1,16 +1,15 @@
 extern crate shapes;
 
-use shapes::shape::Shape;
 use shapes::circle::Circle;
 use shapes::equilateral_triangle::EquilateralTriangle;
-use shapes::right_triangle::RightTriangle;
-use shapes::square::Square;
 use shapes::factory::Factory;
+use shapes::right_triangle::RightTriangle;
+use shapes::shape::Shape;
+use shapes::square::Square;
 
 use std::vec::Vec;
 
-const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes",
-                                            "Thomas J. Kennedy"];
+const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes", "Thomas J. Kennedy"];
 
 fn main() {
     // Print Program Heading
@@ -85,20 +84,22 @@ fn main() {
     */
 
     // Create 5 "Random" Shapes **with a loop**
-    let shape_names = ["Triangle",
-                       "Right Triangle",
-                       "Equilateral Triangle",
-                       "Square",
-                       "Circle",
-                       "1337 Haxor"];
+    let shape_names = [
+        "Triangle",
+        "Right Triangle",
+        "Equilateral Triangle",
+        "Square",
+        "Circle",
+        "1337 Haxor",
+    ];
 
-    let mut shapes: Vec<Box<Shape>> = Vec::new();
+    let mut shapes: Vec<Box<dyn Shape>> = Vec::new();
 
     for n in shape_names.iter() {
         let next_shape = shape_factory.create(n);
         match next_shape {
             Some(s) => shapes.push(s),
-            None => {},
+            None => {}
         }
     }
 
@@ -121,6 +122,3 @@ fn main() {
         println!();
     }
 }
-
-
-

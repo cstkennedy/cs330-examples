@@ -12,14 +12,21 @@ pub struct Triangle {
 
 impl Triangle {
     pub fn new() -> Self {
-        Triangle { side_a: 1.0, side_b: 1.0, side_c: 1.0 }
+        Triangle {
+            side_a: 1.0,
+            side_b: 1.0,
+            side_c: 1.0,
+        }
     }
 
-    pub fn with_sides(a: f64, b: f64, c:f64) -> Self {
-        Triangle { side_a: a, side_b: b, side_c: c }
+    pub fn with_sides(a: f64, b: f64, c: f64) -> Self {
+        Triangle {
+            side_a: a,
+            side_b: b,
+            side_c: c,
+        }
     }
 }
-
 
 impl Shape for Triangle {
     fn name(&self) -> &'static str {
@@ -37,7 +44,6 @@ impl Shape for Triangle {
     /// and
     /// $Area = \sqrt{ s(s-a)(s-b)(s-c) }$
     fn area(&self) -> f64 {
-
         let s = self.perimeter() / 2.0;
 
         (s * (s - self.side_a) * (s - self.side_b) * (s - self.side_c)).sqrt()
@@ -58,9 +64,9 @@ impl fmt::Display for Triangle {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use hamcrest2::prelude::*;
     use std::f64;
     use std::ptr;
-    use hamcrest2::prelude::*;
 
     #[test]
     fn test_default_constructor() {
@@ -114,28 +120,16 @@ mod tests {
         assert!(fancy_str.contains("Triangle"));
         assert!(fancy_str.ends_with("\n"));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Perimeter",
-                                            fancy.perimeter())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Perimeter", fancy.perimeter())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Area",
-                                            fancy.area())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Area", fancy.area())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Side A",
-                                            fancy.side_a)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Side A", fancy.side_a)));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Side B",
-                                            fancy.side_b)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Side B", fancy.side_b)));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Side C",
-                                            fancy.side_c)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Side C", fancy.side_c)));
 
         assert!(fancy_str.ends_with("\n"));
     }
-
-
 }
