@@ -10,22 +10,20 @@ use crate::square::Square;
 use crate::triangle::Triangle;
 
 pub struct Factory {
-    known_shapes: HashSet<&'static str>,
+    known_shapes: [&'static str; 5],
 }
 
 impl Factory {
     pub fn new() -> Self {
-        let factory = Factory {
-            known_shapes: HashSet::from([
+        Factory {
+            known_shapes: [
                 "Triangle",
                 "Right Triangle",
                 "Equilateral Triangle",
                 "Square",
                 "Circle",
-            ]),
-        };
-
-        factory
+            ],
+        }
     }
 
     /// Create a Shape
@@ -45,17 +43,6 @@ impl Factory {
         }
     }
 
-    // Rust Refactoring required....
-    // <https://stackoverflow.com/questions/30353462/how-to-clone-a-struct-storing-a-boxed-trait-object/30353928#30353928>
-    /*
-    pub fn create(&self, name: &str) -> Option<Box<Shape>>{
-        match self.known_shapes.get(name) {
-            Some(&shape_box) => Some(Box::new((*shape_box).clone())),
-            None => None
-        }
-    }
-    */
-
     /// Determine whether a given shape is known
     ///
     /// # Arguments
@@ -63,20 +50,27 @@ impl Factory {
     ///  * `name` the shape for which to query
     ///
     pub fn is_known(&self, name: &str) -> bool {
-        self.known_shapes.contains(name)
+        self.known_shapes
+            .iter()
+            .find(|&shape_name| shape_name == &name)
+            .is_some()
     }
 
     pub fn number_known(&self) -> usize {
         self.known_shapes.len()
     }
+
+    pub fn list_known(&self) -> String {
+        self.known_shapes
+            .iter()
+            .map(|name| format!("  {}", name))
+            .collect::<Vec<String>>()
+            .join("\n")
+    }
 }
 
 impl fmt::Display for Factory {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        for name in &self.known_shapes {
-            writeln!(f, "  {}", name)?;
-        }
-
-        Ok(())
+        writeln!(f, "{}", self.list_known())
     }
 }
