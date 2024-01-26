@@ -3,7 +3,7 @@ use crate::shape::Shape;
 use std::fmt;
 
 /// Define a General RightTriangle with 3 sides.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct RightTriangle {
     pub base: f64,
     pub height: f64,

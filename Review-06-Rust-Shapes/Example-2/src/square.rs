@@ -3,7 +3,7 @@ use crate::shape::Shape;
 use std::fmt;
 
 /// Define a Square (i.e., an ellipse with the same major and minor axis)
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Square {
     pub side: f64,
 }

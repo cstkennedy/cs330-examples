@@ -3,7 +3,7 @@ use crate::shape::Shape;
 use std::fmt;
 
 /// Define a General Triangle with 3 sides.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Triangle {
     pub side_a: f64,
     pub side_b: f64,

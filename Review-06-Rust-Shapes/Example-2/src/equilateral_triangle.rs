@@ -3,7 +3,7 @@ use crate::shape::Shape;
 use std::fmt;
 
 /// Define a General EquilateralTriangle with 3 sides.
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct EquilateralTriangle {
     pub side: f64,
 }
