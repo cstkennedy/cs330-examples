@@ -60,7 +60,6 @@ mod tests {
     use super::*;
     use hamcrest2::prelude::*;
     use std::f64;
-    use std::ptr;
 
     #[test]
     fn test_default_constructor() {
@@ -115,7 +114,7 @@ mod tests {
 
     #[test]
     fn test_str() {
-        let generic = EquilateralTriangle::new();
+        let _generic = EquilateralTriangle::new();
         let fancy = EquilateralTriangle::with_side(2.0);
         let fancy_str = fancy.to_string();
 

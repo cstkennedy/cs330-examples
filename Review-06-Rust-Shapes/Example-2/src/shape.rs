@@ -1,5 +1,3 @@
-use std::fmt;
-
 /// Define the interface for a 2D shape
 pub trait Shape {
     /// Return the name of the shape as a fixed string

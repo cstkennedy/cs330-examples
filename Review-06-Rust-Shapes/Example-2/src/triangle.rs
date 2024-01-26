@@ -66,7 +66,6 @@ mod tests {
     use super::*;
     use hamcrest2::prelude::*;
     use std::f64;
-    use std::ptr;
 
     #[test]
     fn test_default_constructor() {

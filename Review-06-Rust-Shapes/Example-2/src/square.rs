@@ -93,7 +93,7 @@ mod tests {
 
     #[test]
     fn test_deep_copy() {
-        let generic = Square::new();
+        let _generic = Square::new();
         let fancy = Square::with_side(2.0);
         let a_copy = fancy.clone();
 
@@ -105,7 +105,7 @@ mod tests {
 
     #[test]
     fn test_str() {
-        let generic = Square::new();
+        let _generic = Square::new();
         let fancy = Square::with_side(2.0);
         let fancy_str = fancy.to_string();
 

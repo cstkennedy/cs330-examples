@@ -117,7 +117,7 @@ mod tests {
 
     #[test]
     fn test_deep_copy() {
-        let generic = Circle::new();
+        let _generic = Circle::new();
         let fancy = Circle::with_radius(2.0);
         let a_copy = fancy.clone();
 
@@ -129,7 +129,7 @@ mod tests {
 
     #[test]
     fn test_str() {
-        let generic = Circle::new();
+        let _generic = Circle::new();
         let fancy = Circle::with_radius(2.0);
         let fancy_str = fancy.to_string();
 

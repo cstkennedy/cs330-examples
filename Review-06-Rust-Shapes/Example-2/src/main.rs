@@ -1,11 +1,8 @@
 extern crate shapes;
 
-use shapes::circle::Circle;
-use shapes::equilateral_triangle::EquilateralTriangle;
 use shapes::factory::Factory;
-use shapes::right_triangle::RightTriangle;
+
 use shapes::shape::Shape;
-use shapes::square::Square;
 
 use std::vec::Vec;
 
@@ -62,7 +59,7 @@ fn main() {
     println!("{}", "*".repeat(38));
 
     // List the available shapes
-    print!("{}", shape_factory);
+    print!("{}", shape_factory.list_known());
     println!("{}", "-".repeat(38));
     println!("{:>2} shapes available.", shape_factory.number_known());
     println!();
