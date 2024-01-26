@@ -1,5 +1,5 @@
-use std::fmt::Display;
 use std::fmt::Debug;
+use std::fmt::Display;
 
 /// Define the interface for a 2D shape
 pub trait Shape: Display + Debug {

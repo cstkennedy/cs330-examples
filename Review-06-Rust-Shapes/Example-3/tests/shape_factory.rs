@@ -7,17 +7,10 @@ use hamcrest2::prelude::*;
 
 use shapes::factory;
 use shapes::factory::Factory;
-use shapes::factory::KnownShape;
-use shapes::square::Square;
-use shapes::circle::Circle;
-use shapes::triangle::Triangle;
-use shapes::equilateral_triangle::EquilateralTriangle;
-use shapes::right_triangle::RightTriangle;
 
 use std::io::BufReader;
+
 use stringreader::StringReader;
-use std::fs::File;
-use std::vec::Vec;
 
 #[test]
 fn test_is_known() {
@@ -40,7 +33,7 @@ fn test_number_known() {
 #[test]
 fn test_str() {
     let factory = Factory::new();
-    let f_str = factory.to_string();
+    let f_str = factory.list_known();
 
     assert!(f_str.contains("  Circle"));
     assert!(f_str.contains("  Square"));
@@ -51,7 +44,6 @@ fn test_str() {
 
 #[test]
 fn test_read_shapes() {
-
     // The read function should handle (i.e., ignore) leading whitespace
     let raw_str = r#"
         Triangle
@@ -75,30 +67,4 @@ fn test_read_shapes() {
     assert!(some_shapes[2].to_string().contains("Equilateral Triangle"));
     assert!(some_shapes[3].to_string().contains("Square"));
     assert!(some_shapes[4].to_string().contains("Circle"));
-}
-
-#[test]
-fn test_known_shapes_display() {
-    // @TODO write tests for the KnownShape Display trait implementation
-    // assert!(false); // Fail
-
-    let tri = shapes::triangle::Triangle::new();
-    let a_shape = KnownShape::Triangle(shapes::triangle::Triangle::new());
-    assert_that!(tri.to_string(), equal_to(a_shape.to_string()));
-
-    let tri = shapes::right_triangle::RightTriangle::new();
-    let a_shape = KnownShape::RightTriangle(RightTriangle::new());
-    assert_that!(tri.to_string(), equal_to(a_shape.to_string()));
-
-    let tri = shapes::equilateral_triangle::EquilateralTriangle::new();
-    let a_shape = KnownShape::EquilateralTriangle(EquilateralTriangle::new());
-    assert_that!(tri.to_string(), equal_to(a_shape.to_string()));
-
-    let square = shapes::square::Square::new();
-    let a_shape = KnownShape::Square(Square::new());
-    assert_that!(square.to_string(), equal_to(a_shape.to_string()));
-
-    let circle = shapes::circle::Circle::new();
-    let a_shape = KnownShape::Circle(Circle::new());
-    assert_that!(circle.to_string(), equal_to(a_shape.to_string()));
 }

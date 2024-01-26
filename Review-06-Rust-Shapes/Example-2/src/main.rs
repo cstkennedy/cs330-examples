@@ -8,7 +8,6 @@ use std::vec::Vec;
 
 const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes", "Thomas J. Kennedy"];
 
-
 // What happens when the number of shapes is non-trivial?
 //
 // Suppose we were to expand our Shape hierarchy to include the following
@@ -102,7 +101,8 @@ fn main() {
     }
     */
 
-    let shapes: Vec<Box<dyn Shape>> = shape_names.iter()
+    let shapes: Vec<Box<dyn Shape>> = shape_names
+        .iter()
         .map(|nme| shape_factory.create(nme))
         .flatten()
         .collect();
