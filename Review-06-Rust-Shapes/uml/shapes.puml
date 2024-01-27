@@ -65,9 +65,21 @@ package std::clone {
     }
 }
 
+package std::defailt {
+    class Default << (T,#FF7700) Trait >> {
+        +default() -> Self
+    }
+}
+
 
 Shape .[#blue]...|> Display
 Shape .[#blue]...|> Debug
+
+Default <|.[#blue]... Circle
+Default <|.[#blue]... Square
+Default <|.[#blue]... Triangle
+Default <|.[#blue]... RightTriangle
+Default <|.[#blue]... EquilateralTriangle
 
 Shape <|.... Circle
 Shape <|.... Square

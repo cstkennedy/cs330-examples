@@ -13,7 +13,6 @@ use shapes::square::Square;
 use shapes::triangle::Triangle;
 
 use std::io::BufReader;
-
 use stringreader::StringReader;
 
 #[test]

@@ -45,6 +45,12 @@ impl Shape for EquilateralTriangle {
     }
 }
 
+impl Default for EquilateralTriangle {
+    fn default() -> Self {
+        EquilateralTriangle::new()
+    }
+}
+
 impl fmt::Display for EquilateralTriangle {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "{:12}:{:>24}", "Name", self.name())?;
@@ -58,9 +64,8 @@ impl fmt::Display for EquilateralTriangle {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::f64;
-    use std::ptr;
     use hamcrest2::prelude::*;
+    use std::f64;
 
     #[test]
     fn test_default_constructor() {
@@ -122,17 +127,11 @@ mod tests {
         assert!(fancy_str.contains("Equilateral Triangle"));
         assert!(fancy_str.ends_with("\n"));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Perimeter",
-                                            fancy.perimeter())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Perimeter", fancy.perimeter())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Area",
-                                            fancy.area())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Area", fancy.area())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Side",
-                                            fancy.side)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Side", fancy.side)));
 
         assert!(fancy_str.ends_with("\n"));
     }

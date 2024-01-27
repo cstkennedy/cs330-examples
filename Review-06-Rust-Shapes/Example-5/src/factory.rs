@@ -135,6 +135,8 @@ pub fn number_known() -> usize {
     NUMBER_OF_SHAPES_KNOWN
 }
 
+/// List the known shapes, one per line
+///
 pub fn list_known() -> String {
     KNOWN_SHAPES
         .iter()
@@ -144,7 +146,7 @@ pub fn list_known() -> String {
         + "\n"
 }
 
-/// Create shapes based on names from an input buffer
+/// Create shapes based on names from an input buffer.
 ///
 /// # Arguments
 ///

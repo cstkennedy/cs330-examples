@@ -41,6 +41,7 @@ const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes", "Tho
 // ShapeFactory could be designed as a singleton class.  Our ShapeFactory is
 // simply a tracker--i.e., records are static and will be updated manually
 // at compile time.
+#[cfg_attr(tarpaulin, skip)]
 fn main() {
     // Print Program Heading
     println!("{}", "-".repeat(80));
@@ -50,6 +51,13 @@ fn main() {
     }
 
     println!("{}", "-".repeat(80));
+
+    let argv: Vec<String> = env::args().collect();
+
+    if argv.len() < 2 {
+        println!("Usage: {} file_name", argv[0]);
+        std::process::exit(1);
+    }
 
     // Examine the ShapeFactory
     println!("{}", "*".repeat(38));
