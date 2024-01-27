@@ -10,17 +10,6 @@ package shapes {
     }
 
     package factory {
-        enum KnownShape {
-            Circle
-            Square
-            Triangle
-            RightTriangle
-            EquilateralTriangle
-        }
-
-        class Factory {
-
-        }
     }
 
     package circle {
@@ -64,22 +53,26 @@ package std::fmt {
     class Display << (T,#FF7700) Trait >> {
         + fmt(&self, f: &mut fmt::Formatter)
     }
+
+    class Debug << (T,#FF7700) Trait >> {
+        + fmt(&self, f: &mut fmt::Formatter)
+    }
 }
+
+package std::clone {
+    class Clone << (T,#FF7700) Trait >> {
+        +clone(&self) -> Self
+    }
+}
+
+
+Shape .[#blue]...|> Display
+Shape .[#blue]...|> Debug
 
 Shape <|.... Circle
 Shape <|.... Square
 Shape <|.... Triangle
 Shape <|.... RightTriangle
 Shape <|.... EquilateralTriangle
-
-Shape <|.. KnownShape
-
-Display <|.[#blue]... Circle
-Display <|.[#blue]... Square
-Display <|.[#blue]... Triangle
-Display <|.[#blue]... RightTriangle
-Display <|.[#blue]... EquilateralTriangle
-Display <|.[#blue]... KnownShape
-Display <|.[#blue]... Factory
 
 @enduml
