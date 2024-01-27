@@ -58,9 +58,8 @@ impl fmt::Display for EquilateralTriangle {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::f64;
-    use std::ptr;
     use hamcrest2::prelude::*;
+    use std::f64;
 
     #[test]
     fn test_default_constructor() {
@@ -115,7 +114,7 @@ mod tests {
 
     #[test]
     fn test_str() {
-        let generic = EquilateralTriangle::new();
+        let _generic = EquilateralTriangle::new();
         let fancy = EquilateralTriangle::with_side(2.0);
         let fancy_str = fancy.to_string();
 
@@ -123,17 +122,11 @@ mod tests {
         assert!(fancy_str.contains("Equilateral Triangle"));
         assert!(fancy_str.ends_with("\n"));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Perimeter",
-                                            fancy.perimeter())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Perimeter", fancy.perimeter())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Area",
-                                            fancy.area())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Area", fancy.area())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Side",
-                                            fancy.side)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Side", fancy.side)));
 
         assert!(fancy_str.ends_with("\n"));
     }

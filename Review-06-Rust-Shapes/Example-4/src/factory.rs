@@ -73,75 +73,83 @@ impl From<&[f64]> for Square {
     }
 }
 
-const KNOWN_SHAPES: [&'static str; 5] = [
-    "Triangle",
-    "Right Triangle",
-    "Equilateral Triangle",
-    "Square",
-    "Circle",
-];
+pub struct Factory {
+    known_shapes: [&'static str; 5],
+}
 
-const NUMBER_OF_SHAPES_KNOWN: usize = KNOWN_SHAPES.len();
-
-/// Create a Shape
-///
-/// # Arguments
-///
-///   * `name` shape to be created
-///
-pub fn create(name: &str) -> Option<Box<dyn Shape>> {
-    match name {
-        "Triangle" => Triangle::new().into(),
-        "Right Triangle" => RightTriangle::new().into(),
-        "Equilateral Triangle" => EquilateralTriangle::new().into(),
-        "Square" => Square::new().into(),
-        "Circle" => Circle::new().into(),
-        _ => None,
+impl Factory {
+    pub fn new() -> Self {
+        Factory {
+            known_shapes: [
+                "Triangle",
+                "Right Triangle",
+                "Equilateral Triangle",
+                "Square",
+                "Circle",
+            ],
+        }
     }
-}
 
-/// Create a Shape with specified dimensions.
-///
-/// # Arguments
-///
-///   * `name` shape to be created
-///   * `dims` input dimensions
-///
-pub fn create_with(name: &str, dims: &[f64]) -> Option<Box<dyn Shape>> {
-    match name {
-        "Triangle" => Triangle::from(dims).into(),
-        "Right Triangle" => RightTriangle::from(dims).into(),
-        "Equilateral Triangle" => EquilateralTriangle::from(dims).into(),
-        "Square" => Square::from(dims).into(),
-        "Circle" => Circle::from(dims).into(),
-        _ => None,
+    /// Create a Shape
+    ///
+    /// # Arguments
+    ///
+    ///   * `name` shape to be created
+    ///
+    pub fn create(&self, name: &str) -> Option<Box<dyn Shape>> {
+        match name {
+            "Triangle" => Triangle::new().into(),
+            "Right Triangle" => RightTriangle::new().into(),
+            "Equilateral Triangle" => EquilateralTriangle::new().into(),
+            "Square" => Square::new().into(),
+            "Circle" => Circle::new().into(),
+            _ => None,
+        }
     }
-}
 
-/// Determine whether a given shape is known
-///
-/// # Arguments
-///
-///  * `name` the shape for which to query
-///
-pub fn is_known(name: &str) -> bool {
-    KNOWN_SHAPES
-        .iter()
-        .find(|&shape_name| shape_name == &name)
-        .is_some()
-}
+    /// Create a Shape with specified dimensions.
+    ///
+    /// # Arguments
+    ///
+    ///   * `name` shape to be created
+    ///   * `dims` input dimensions
+    ///
+    pub fn create_with(&self, name: &str, dims: &[f64]) -> Option<Box<dyn Shape>> {
+        match name {
+            "Triangle" => Triangle::from(dims).into(),
+            "Right Triangle" => RightTriangle::from(dims).into(),
+            "Equilateral Triangle" => EquilateralTriangle::from(dims).into(),
+            "Square" => Square::from(dims).into(),
+            "Circle" => Circle::from(dims).into(),
+            _ => None,
+        }
+    }
 
-pub fn number_known() -> usize {
-    NUMBER_OF_SHAPES_KNOWN
-}
+    /// Determine whether a given shape is known
+    ///
+    /// # Arguments
+    ///
+    ///  * `name` the shape for which to query
+    ///
+    pub fn is_known(&self, name: &str) -> bool {
+        self.known_shapes
+            .iter()
+            .find(|&shape_name| shape_name == &name)
+            .is_some()
+    }
 
-pub fn list_known() -> String {
-    KNOWN_SHAPES
-        .iter()
-        .map(|name| format!("  {}", name))
-        .collect::<Vec<String>>()
-        .join("\n")
-        + "\n"
+    pub fn number_known(&self) -> usize {
+        self.known_shapes.len()
+    }
+
+    pub fn list_known(&self) -> String {
+        self.known_shapes
+            .iter()
+            .map(|name| format!("  {}", name))
+            .collect::<Vec<String>>()
+            .join("\n")
+            + "\n"
+    }
 }
 
 /// Create shapes based on names from an input buffer
@@ -150,13 +158,13 @@ pub fn list_known() -> String {
 ///
 ///  * `ins` - input source
 ///
-pub fn read_shapes<B: BufRead>(ins: B) -> Vec<Box<dyn Shape>> {
+pub fn read_shapes<B: BufRead>(ins: B, shape_factory: Factory) -> Vec<Box<dyn Shape>> {
     ins.lines()
         .map(|line| {
             let n = line.unwrap_or("unknown".into());
             let n = n.trim();
 
-            create(n)
+            shape_factory.create(n)
         })
         .flatten()
         .collect()
@@ -168,7 +176,7 @@ pub fn read_shapes<B: BufRead>(ins: B) -> Vec<Box<dyn Shape>> {
 ///
 ///  * `ins` - input source
 ///
-pub fn read_shapes_with<B>(ins: B) -> Vec<Box<dyn Shape>>
+pub fn read_shapes_with<B>(ins: B, shape_factory: Factory) -> Vec<Box<dyn Shape>>
 where
     B: BufRead,
 {
@@ -191,7 +199,7 @@ where
                 .map(|dim| dim.trim().parse().unwrap_or(0_f64))
                 .collect::<Vec<f64>>();
 
-            create_with(&name, &dims)
+            shape_factory.create_with(&name, &dims)
         })
         .flatten()
         .collect()

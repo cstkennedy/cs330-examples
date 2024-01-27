@@ -46,12 +46,6 @@ impl Shape for Circle {
     }
 }
 
-impl Default for Circle {
-    fn default() -> Self {
-        Circle::new()
-    }
-}
-
 impl fmt::Display for Circle {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "{:12}:{:>24}", "Name", self.name())?;
@@ -65,12 +59,11 @@ impl fmt::Display for Circle {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use hamcrest2::prelude::*;
     use std::f64;
     use std::ptr;
-    use hamcrest2::prelude::*;
 
     const TAU: f64 = 2.0 * f64::consts::PI;
-
 
     #[test]
     fn test_default_constructor() {
@@ -102,26 +95,29 @@ mod tests {
         let generic = Circle::new();
         let fancy = Circle::with_radius(2 as f64);
 
-        assert_that!(generic.area(),
-                     close_to(f64::consts::PI * generic.radius.powi(2), 0.05));
+        assert_that!(
+            generic.area(),
+            close_to(f64::consts::PI * generic.radius.powi(2), 0.05)
+        );
 
-        assert_that!(fancy.area(),
-                     close_to(f64::consts::PI * fancy.radius.powi(2), 0.05));
+        assert_that!(
+            fancy.area(),
+            close_to(f64::consts::PI * fancy.radius.powi(2), 0.05)
+        );
     }
 
     #[test]
     fn test_perimeter() {
         let generic = Circle::new();
         let fancy = Circle::with_radius(2.0);
-        assert_that!(generic.perimeter(),
-                     close_to(TAU * generic.radius, 0.05));
+        assert_that!(generic.perimeter(), close_to(TAU * generic.radius, 0.05));
 
-        assert_that!(fancy.perimeter(),
-                     close_to(TAU * fancy.radius, 0.05));
+        assert_that!(fancy.perimeter(), close_to(TAU * fancy.radius, 0.05));
     }
 
     #[test]
     fn test_deep_copy() {
+        let _generic = Circle::new();
         let fancy = Circle::with_radius(2.0);
         let a_copy = fancy.clone();
 
@@ -133,6 +129,7 @@ mod tests {
 
     #[test]
     fn test_str() {
+        let _generic = Circle::new();
         let fancy = Circle::with_radius(2.0);
         let fancy_str = fancy.to_string();
 
@@ -140,21 +137,13 @@ mod tests {
         assert!(fancy_str.contains("Circle"));
         assert!(fancy_str.ends_with("\n"));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Perimeter",
-                                            fancy.perimeter())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Perimeter", fancy.perimeter())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Area",
-                                            fancy.area())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Area", fancy.area())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Radius",
-                                            fancy.radius)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Radius", fancy.radius)));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Diameter",
-                                            fancy.diameter())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Diameter", fancy.diameter())));
 
         assert!(fancy_str.ends_with("\n"));
     }

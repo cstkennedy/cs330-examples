@@ -53,8 +53,8 @@ impl fmt::Display for Square {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::ptr;
     use hamcrest2::prelude::*;
+    use std::ptr;
 
     #[test]
     fn test_default_constructor() {
@@ -93,7 +93,7 @@ mod tests {
 
     #[test]
     fn test_deep_copy() {
-        let generic = Square::new();
+        let _generic = Square::new();
         let fancy = Square::with_side(2.0);
         let a_copy = fancy.clone();
 
@@ -105,7 +105,7 @@ mod tests {
 
     #[test]
     fn test_str() {
-        let generic = Square::new();
+        let _generic = Square::new();
         let fancy = Square::with_side(2.0);
         let fancy_str = fancy.to_string();
 
@@ -113,17 +113,11 @@ mod tests {
         assert!(fancy_str.contains("Square"));
         assert!(fancy_str.ends_with("\n"));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Perimeter",
-                                            fancy.perimeter())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Perimeter", fancy.perimeter())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Area",
-                                            fancy.area())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Area", fancy.area())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Side",
-                                            fancy.side)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Side", fancy.side)));
 
         assert!(fancy_str.ends_with("\n"));
     }

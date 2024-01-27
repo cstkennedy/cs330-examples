@@ -64,6 +64,7 @@ fn main() {
     println!("{:>2} shapes available.", shape_factory.number_known());
     println!();
 
+    let argv: Vec<String> = env::args().collect();
     let file = File::open(&argv[1]).expect("Could not open file");
     let ins = BufReader::new(file);
 

@@ -5,7 +5,7 @@ authors = ["Thomas J. Kennedy <tkennedy@cs.odu.edu>"]
 edition = "2018"
 
 [dependencies]
-ordered-float = "1.0.2"
+
 
 [dev-dependencies]
 hamcrest2 = "*"

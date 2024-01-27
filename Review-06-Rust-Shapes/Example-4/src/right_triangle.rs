@@ -11,7 +11,10 @@ pub struct RightTriangle {
 
 impl RightTriangle {
     pub fn new() -> Self {
-        RightTriangle { base: 1.0, height: 1.0 }
+        RightTriangle {
+            base: 1.0,
+            height: 1.0,
+        }
     }
 
     pub fn with_base_height(b: f64, h: f64) -> Self {
@@ -45,12 +48,6 @@ impl Shape for RightTriangle {
     }
 }
 
-impl Default for RightTriangle {
-    fn default() -> Self {
-        RightTriangle::new()
-    }
-}
-
 impl fmt::Display for RightTriangle {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         writeln!(f, "{:12}:{:>24}", "Name", self.name())?;
@@ -65,9 +62,8 @@ impl fmt::Display for RightTriangle {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::f64;
-    use std::ptr;
     use hamcrest2::prelude::*;
+    use std::f64;
 
     #[test]
     fn test_default_constructor() {
@@ -124,21 +120,13 @@ mod tests {
         assert!(fancy_str.contains("Triangle"));
         assert!(fancy_str.ends_with("\n"));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Perimeter",
-                                            fancy.perimeter())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Perimeter", fancy.perimeter())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Area",
-                                            fancy.area())));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Area", fancy.area())));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Base",
-                                            fancy.base)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Base", fancy.base)));
 
-        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}",
-                                            "Height",
-                                            fancy.height)));
+        assert!(fancy_str.contains(&format!("{:12}:{:>24.4}", "Height", fancy.height)));
 
         assert!(fancy_str.ends_with("\n"));
     }
