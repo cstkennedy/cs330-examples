@@ -1,8 +1,8 @@
 use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
-// use std::str::FromStr;
-// use std::num::ParseFloatError;
+                       // use std::str::FromStr;
+                       // use std::num::ParseFloatError;
 
 #[derive(Clone)]
 pub struct Flooring {
@@ -153,8 +153,7 @@ impl PartialOrd for Room {
     fn partial_cmp(&self, rhs: &Self) -> Option<Ordering> {
         if self.name.eq(&rhs.name) {
             self.area().partial_cmp(&rhs.area())
-        }
-        else {
+        } else {
             self.name.partial_cmp(&rhs.name)
         }
     }
@@ -162,8 +161,7 @@ impl PartialOrd for Room {
 
 impl PartialEq for Room {
     fn eq(&self, rhs: &Self) -> bool {
-        return self.name.eq(&rhs.name)
-            && self.area().eq(&rhs.area());
+        return self.name.eq(&rhs.name) && self.area().eq(&rhs.area());
     }
 }
 

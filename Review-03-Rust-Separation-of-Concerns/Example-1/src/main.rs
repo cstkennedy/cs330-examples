@@ -1,17 +1,17 @@
-extern crate room_renovation;
-extern crate ordered_float;
 extern crate itertools;
+extern crate ordered_float;
+extern crate room_renovation;
 
+use itertools::{Itertools, MinMaxResult};
 use ordered_float::OrderedFloat;
-use itertools::{Itertools,MinMaxResult};
 
 // use std::io::BufReader;
 // use std::fs::File;
 // use std::env;
 use std::vec::Vec;
 
-use room_renovation::room::{Room,Flooring,DimensionSet};
-use room_renovation::house::{House};
+use room_renovation::house::House;
+use room_renovation::room::{DimensionSet, Flooring, Room};
 
 ///
 /// Compute the area of a room and the cost of
@@ -46,8 +46,10 @@ fn main() {
          << "\n";
     */
     println!("house == duplicate_house -> {}", (house == duplicate_house));
-    println!("&house == &duplicate_house -> {}",
-             std::ptr::eq(&house, &duplicate_house));
+    println!(
+        "&house == &duplicate_house -> {}",
+        std::ptr::eq(&house, &duplicate_house)
+    );
 
     println!("{}", house);
     println!("{}", duplicate_house);
@@ -58,9 +60,10 @@ fn main() {
     std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
                    discountFlooring);
     */
-    let costs: Vec<f64> = duplicate_house.iter()
-                            .map(|r| discount_flooring(r))
-                            .collect();
+    let costs: Vec<f64> = duplicate_house
+        .iter()
+        .map(|r| discount_flooring(r))
+        .collect();
 
     /*
     std::copy(costs.begin(), costs.end(),
@@ -111,17 +114,17 @@ fn main() {
         MinMaxResult::MinMax(ex_min, ex_max) => {
             println!("Min  : {:.2}", ex_min);
             println!("Max  : {:.2}", ex_max);
-        },
+        }
         _ => {}
     }
 
     println!();
 
     // Demo "if let" syntax
-    if let MinMaxResult::MinMax(ex_min, ex_max) =
-        costs.iter().minmax_by_key(|c| OrderedFloat(**c)) {
-            println!("Min  : {:.2}", ex_min);
-            println!("Max  : {:.2}", ex_max);
+    if let MinMaxResult::MinMax(ex_min, ex_max) = costs.iter().minmax_by_key(|c| OrderedFloat(**c))
+    {
+        println!("Min  : {:.2}", ex_min);
+        println!("Max  : {:.2}", ex_max);
     }
 }
 
@@ -129,22 +132,20 @@ fn main() {
 /// Build our example house
 ///
 fn build_house(house: &mut House) {
-    house.add_room(
-        Room {
-            name: "Laundry Room".to_string(),
-            dimensions: DimensionSet::new(8f64, 4f64),
-            flooring: Flooring {
-                unit_cost: 1.95f64,
-                type_name: "Laminate".to_string()
-            }
-        }
-    );
+    house.add_room(Room {
+        name: "Laundry Room".to_string(),
+        dimensions: DimensionSet::new(8f64, 4f64),
+        flooring: Flooring {
+            unit_cost: 1.95f64,
+            type_name: "Laminate".to_string(),
+        },
+    });
 
     let kitchen = Room::default()
         .with_name("Kitchen")
         .with_dimensions(20f64, 12f64)
         .with_flooring("Tile", 3.87f64);
-        // .to_owned();
+    // .to_owned();
 
     house.add_room(kitchen);
 
@@ -152,10 +153,8 @@ fn build_house(house: &mut House) {
         Room::default()
             .with_name("Storage Room")
             .with_dimensions(16f64, 16f64)
-            .with_flooring("Birch Wood", 4.39f64)
-            // .to_owned()
+            .with_flooring("Birch Wood", 4.39f64), // .to_owned()
     );
-
 }
 
 ///
@@ -178,7 +177,8 @@ fn upgrade_flooring(original: &House) -> House {
     }
     */
 
-    modified.iter_mut()
+    modified
+        .iter_mut()
         .for_each(|room| room.set_flooring("Stone Bricks", 12.97));
 
     modified.set_name("After Stone Bricks");
@@ -196,6 +196,3 @@ fn upgrade_flooring(original: &House) -> House {
 fn discount_flooring(r: &Room) -> f64 {
     0.90 * r.flooring_cost()
 }
-
-
-
