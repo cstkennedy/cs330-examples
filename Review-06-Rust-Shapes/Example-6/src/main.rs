@@ -90,6 +90,14 @@ fn main() {
     println!();
 
     println!("{}", "*".repeat(38));
+    println!("{:^38}", "Display Shape Names");
+    println!("{}", "*".repeat(38));
+    for s in shapes.iter() {
+        println!("{}", s.name());
+    }
+    println!();
+
+    println!("{}", "*".repeat(38));
     println!("{:^38}", "Largest Shape by Area");
     println!("{}", "*".repeat(38));
 
