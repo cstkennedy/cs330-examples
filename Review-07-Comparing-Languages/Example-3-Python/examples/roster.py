@@ -6,6 +6,7 @@ from examples.student import Student
 
 DEFAULT_MAX_STUDENTS: int = 10
 
+
 class Roster:
     """
     A class roster listing all students enrolled in a course.
@@ -20,7 +21,7 @@ class Roster:
             l enrollment limit
             c course number
         """
-        self.course_num   = c
+        self.course_num = c
         self.enroll_limit = l
 
         self.students = set()
@@ -82,7 +83,6 @@ class Roster:
         return len(self.students)
 
     def __len__(self):
-
         """
         Retrieve the number of enrolled students.
         """
@@ -127,12 +127,11 @@ class Roster:
 
         # Python sets can not be hashed (3.11.2)
         #  hc += hash(self.students)
-        hc  += sum(hash(stu) for stu in self.students)
+        hc += sum(hash(stu) for stu in self.students)
 
         return hc
 
     def __deepcopy__(self, memo):
-
         cpy = Roster(self.enroll_limit, self.course_num)
 
         # Now add the students
@@ -149,7 +148,9 @@ class Roster:
 
         percent_full = 100.0 * len(self.students) / self.enroll_limit
 
-        return (self.course_num +
-                f" -> {len(self.students):>2} of {self.enroll_limit:>2}" +
-                f" ({percent_full}% full)\n" +
-                "\n".join((f"  - {stu}" for stu in self.students)))
+        return (
+            self.course_num
+            + f" -> {len(self.students):>2} of {self.enroll_limit:>2}"
+            + f" ({percent_full}% full)\n"
+            + "\n".join((f"  - {stu}" for stu in self.students))
+        )

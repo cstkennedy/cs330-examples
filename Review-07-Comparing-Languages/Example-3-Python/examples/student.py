@@ -2,6 +2,7 @@ import copy
 
 DEFAULT_NAME = "John Q. Smith"
 
+
 class Student:
     def __init__(self, n: str = DEFAULT_NAME):
         self.__name = n
@@ -34,4 +35,4 @@ class Student:
         return self.__name
 
     def __repr__(self):
-        return f"Student(n=\"{self.name}\")"
+        return f'Student(n="{self.name}")'

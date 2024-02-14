@@ -47,7 +47,7 @@ def main():
     print(f"{1:>2d}: {fm1:10d}")
     print(f"{2:>2d}: {fm2:10d}")
 
-    # Fhe first 2 numbers were already output
+    # The first 2 numbers were already output
     for i in range(3, (index + 1)):
         f = fm1 + fm2
         fm2 = fm1
