@@ -166,7 +166,7 @@ impl<'a> HouseBuilder<'a> {
         self
     }
 
-    pub fn build(self) -> Result<House, BuildError<'a>> {
+    pub fn build(self) -> Result<House, BuildError> {
         if self.rooms.len() < 1 {
             return Err(BuildError::GenericError(
                 "A House must have at least one room.",

@@ -10,7 +10,6 @@ use room_renovation::flooring::FlooringBuilder;
 use room_renovation::house::{House, HouseBuilder};
 use room_renovation::room::{Room, RoomBuilder};
 
-
 const ROOM_DATA: &'static str = r#"
 Laundry Room; 8 4 1.95 Laminate
 Kitchen; 20 12 3.87 Tile
@@ -29,7 +28,7 @@ Storage Room; 16 16 4.39 Birch Wood
 fn main() {
     let house = build_house(ROOM_DATA);
 
-    println!("{}", house);
+    println!("{house}");
 
     // Upgrade the flooring in a second duplicate house
     let duplicate_house = upgrade_flooring(&house);
@@ -40,8 +39,8 @@ fn main() {
         std::ptr::eq(&house, &duplicate_house)
     );
 
-    println!("{}", house);
-    println!("{}", duplicate_house);
+    println!("{house}");
+    println!("{duplicate_house}");
 
     let costs: Vec<f64> = duplicate_house
         .iter()
@@ -49,12 +48,12 @@ fn main() {
         .collect();
 
     for room_cost in costs.iter() {
-        println!("{:.2}", room_cost)
+        println!("{room_cost:.2}")
     }
 
     let total: f64 = costs.iter().sum();
 
-    println!("Total: {:.2}", total);
+    println!("Total: {total:.2}");
 
     /*
     match costs.iter().map(|c| OrderedFloat(*c)).minmax() {
@@ -68,13 +67,12 @@ fn main() {
 
     let result = costs.iter().map(|c| OrderedFloat(*c)).minmax();
     if let MinMaxResult::MinMax(ex_min, ex_max) = result {
-        println!("Min  : {:.2}", ex_min);
-        println!("Max  : {:.2}", ex_max);
+        println!("Min  : {ex_min:.2}");
+        println!("Max  : {ex_max:.2}");
     }
 
     println!();
 }
-
 
 ///
 /// Build our example house
@@ -90,7 +88,6 @@ fn build_house(room_data: &str) -> House {
             let name = line[0];
 
             // Split everything else by whitespace and collect the tokens
-            // let the_rest = &line[1];
             let the_rest: Vec<&str> = line[1].split_whitespace().collect();
 
             // Parse the three f64 numbers
@@ -98,12 +95,13 @@ fn build_house(room_data: &str) -> House {
                 .iter()
                 .map(|token| token.parse().unwrap_or(1_f64))
                 .collect();
-            let (length, width) = (nums[0], nums[1]);
-            let unit_cost = nums[2];
 
             // The flooring name might contain spaces. Combine the remainder of the line.
             let flooring_name = the_rest.into_iter().skip(3).join(" ");
 
+            (name, nums[0], nums[1], flooring_name, nums[2])
+        })
+        .map(|(name, length, width, flooring_name, unit_cost)| {
             RoomBuilder::new()
                 .with_name(name)
                 .with_dimensions(length, width)
@@ -169,6 +167,8 @@ fn upgrade_flooring(original: &House) -> House {
 
     house
     */
+
+    /*
     HouseBuilder::new()
         .with_name("After Stone Bricks")
         .with_rooms(
@@ -179,6 +179,30 @@ fn upgrade_flooring(original: &House) -> House {
                     updated_room.set_flooring("Stone Bricks", 12.97);
 
                     updated_room
+                })
+                .collect::<Vec<Room>>(),
+        )
+        .build()
+        .unwrap()
+    */
+
+    let new_flooring = FlooringBuilder::new()
+        .with_specific_name("Stone Bricks")
+        .with_unit_cost(12.97)
+        .build()
+        .unwrap();
+
+    HouseBuilder::new()
+        .with_name("After Stone Bricks")
+        .with_rooms(
+            original
+                .iter()
+                .map(|room| {
+                    RoomBuilder::new()
+                        .from_existing(room)
+                        .with_flooring(new_flooring.clone())
+                        .build()
+                        .unwrap()
                 })
                 .collect::<Vec<Room>>(),
         )

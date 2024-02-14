@@ -46,7 +46,7 @@ impl<'a> FlooringBuilder<'a> {
         self
     }
 
-    pub fn build(self) -> Result<Flooring, BuildError<'a>> {
+    pub fn build(self) -> Result<Flooring, BuildError> {
         Ok(Flooring {
             type_name: self.type_name.unwrap().to_owned(),
             unit_cost: self.unit_cost.unwrap(),
