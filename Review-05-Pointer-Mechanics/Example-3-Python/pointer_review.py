@@ -20,14 +20,12 @@ def main():
 
     # NumPy Broadcast Method
     powers_of_two = np.arange(0, num_powers, dtype=np.int32)
-    powers_of_two = 2 ** powers_of_two
+    powers_of_two = 2**powers_of_two
 
     for val in powers_of_two:
         print(f"{val:}")
 
-    print()
-    print(D_LINE)
-    print()
+    print(f"\n{D_LINE}\n")
 
     for idx, val in enumerate(powers_of_two):
         # We get the address of the base array each time
@@ -35,9 +33,7 @@ def main():
         array_address = val.__array_interface__["data"][0]
         print(f"{idx:>2}: {val:>11} {array_address:#x}")
 
-    print()
-    print(D_LINE)
-    print()
+    print(f"\n{D_LINE}\n")
 
     # Includes Garbage Collection overhead
     size_in_bytes = sys.getsizeof(np.int32(1))
@@ -49,9 +45,11 @@ def main():
     size_in_bytes = sys.getsizeof(powers_of_two)
     size_in_bits = size_in_bytes << 3
 
-    print()
-    print(f"size_of(np.array({num_powers}, dtype=np.int32):", end="")
-    print(f"{size_in_bytes} bytes / {size_in_bits} bits")
+    print(
+        "\n"
+        f"size_of(np.array({num_powers}, dtype=np.int32): "
+        f"{size_in_bytes} bytes / {size_in_bits} bits"
+    )
 
 
 if __name__ == "__main__":
