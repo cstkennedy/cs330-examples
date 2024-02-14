@@ -1,3 +1,4 @@
+use crate::error::*;
 use crate::room::*;
 use std::fmt;
 use std::fmt::Display;
@@ -20,18 +21,6 @@ impl House {
             name: "House".to_string(),
             rooms: Collection::new(),
         }
-    }
-
-    /// Demonstrate the builder pattern. Take a mutable reference to a House,
-    /// change its name, and return a reference.
-    ///
-    /// # Arguments
-    ///
-    ///  * `nme` - new House name
-    ///
-    pub fn with_name(mut self, nme: &str) -> Self {
-        self.name = nme.to_string();
-        self
     }
 
     /// Set the name using a traditional (i.e., non-builder) mutator.
@@ -84,9 +73,7 @@ impl House {
     }
 
     pub fn flooring_metrics(&self) -> (f64, f64) {
-        let total = self.rooms.iter()
-            .map(|room| room.flooring_cost())
-            .sum();
+        let total = self.rooms.iter().map(|room| room.flooring_cost()).sum();
 
         let avg = total / (self.len() as f64);
 
@@ -145,5 +132,57 @@ impl PartialEq for House {
         }
 
         return true;
+    }
+}
+
+pub struct HouseBuilder<'a> {
+    name: Option<&'a str>,
+    rooms: Vec<Room>,
+}
+
+impl<'a> HouseBuilder<'a> {
+    pub fn new() -> Self {
+        HouseBuilder {
+            name: None,
+            rooms: Default::default(),
+        }
+    }
+
+    pub fn with_name(mut self, nme: &'a str) -> Self {
+        self.name = Some(nme);
+
+        self
+    }
+
+    pub fn with_room(mut self, another_room: Room) -> Self {
+        self.rooms.push(another_room);
+
+        self
+    }
+
+    pub fn with_rooms(mut self, mut more_rooms: Vec<Room>) -> Self {
+        self.rooms.append(&mut more_rooms);
+
+        self
+    }
+
+    pub fn build(self) -> Result<House, BuildError<'a>> {
+        if self.rooms.len() < 1 {
+            return Err(BuildError::GenericError(
+                "A House must have at least one room.",
+            ));
+        }
+
+        let name = match self.name {
+            Some(name) => name,
+            None => "House",
+        };
+
+        let house = House {
+            name: name.to_owned(),
+            rooms: self.rooms,
+        };
+
+        Ok(house)
     }
 }
