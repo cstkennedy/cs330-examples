@@ -2,8 +2,8 @@ use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
 
 #[derive(Debug)]
-pub enum BuildError<'a> {
-    GenericError(&'a str),
+pub enum BuildError {
+    GenericError(&'static str),
 }
 
 /*
@@ -14,7 +14,7 @@ impl From<std::io::Error> for ParseError {
 }
 */
 
-impl<'a> Display for BuildError<'a> {
+impl Display for BuildError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match &self {
             BuildError::GenericError(description) => {

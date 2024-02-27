@@ -25,6 +25,12 @@ impl Default for DimensionSet {
     }
 }
 
+impl From<(f64, f64)> for DimensionSet {
+    fn from(dims: (f64, f64)) -> Self {
+        DimensionSet::new(dims.0, dims.1)
+    }
+}
+
 #[derive(Clone)]
 pub struct Room {
     pub name: String,
@@ -33,17 +39,6 @@ pub struct Room {
 }
 
 impl Room {
-    /// Set the flooring.
-    ///
-    /// # Arguments
-    ///  * `nme` - flooring type name
-    ///  * `unit_c` - unit cost
-    ///
-    pub fn set_flooring(&mut self, nme: &str, unit_c: f64) {
-        self.flooring.type_name = nme.to_string();
-        self.flooring.unit_cost = unit_c;
-    }
-
     /// Compute the area of flooring for a room.
     pub fn area(&self) -> f64 {
         self.dimensions.width * self.dimensions.length
@@ -96,14 +91,14 @@ impl PartialEq for Room {
 }
 
 //------------------------------------------------------------------------------
-pub struct RoomBuilder<'a> {
-    name: Option<&'a str>,
+pub struct RoomBuilder {
+    name: Option<String>,
     length: Option<f64>,
     width: Option<f64>,
     flooring: Option<Flooring>,
 }
 
-impl<'a> RoomBuilder<'a> {
+impl RoomBuilder {
     pub fn new() -> Self {
         RoomBuilder {
             name: None,
@@ -113,8 +108,14 @@ impl<'a> RoomBuilder<'a> {
         }
     }
 
-    pub fn with_name(mut self, nme: &'a str) -> Self {
-        self.name = Some(nme);
+    pub fn from_existing(self, room: &Room) -> Self {
+        self.with_name(&room.name.clone())
+            .with_flooring(room.flooring.clone())
+            .with_dimensions(room.dimensions.length, room.dimensions.width)
+    }
+
+    pub fn with_name(mut self, nme: &str) -> Self {
+        self.name = Some(nme.to_owned());
 
         self
     }
@@ -132,23 +133,17 @@ impl<'a> RoomBuilder<'a> {
         self
     }
 
-    pub fn build(self) -> Result<Room, BuildError<'a>> {
+    pub fn build(self) -> Result<Room, BuildError> {
         if self.name.is_none() {
             return Err(BuildError::GenericError("Name can not be blank"));
         }
 
         let room = Room {
-            name: self.name.unwrap().to_owned(),
+            name: self.name.unwrap(),
             dimensions: DimensionSet::new(self.length.unwrap(), self.width.unwrap()),
             flooring: self.flooring.unwrap(),
         };
 
         Ok(room)
-    }
-}
-
-impl From<(f64, f64)> for DimensionSet {
-    fn from(dims: (f64, f64)) -> Self {
-        DimensionSet::new(dims.0, dims.1)
     }
 }
