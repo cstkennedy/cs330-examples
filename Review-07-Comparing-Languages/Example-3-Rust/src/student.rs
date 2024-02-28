@@ -54,9 +54,12 @@ mod tests {
         assert_that!(tommy, is_not(equal_to(student)));
     }
 
-    #[ignore]
     #[test]
     fn test_clone() {
+        let student = Student::new("Thomas");
+        let copy = student.clone();
 
+        assert_that!(std::ptr::eq(&student, &copy), is(false));
+        assert_that!(student, eq(copy));
     }
 }

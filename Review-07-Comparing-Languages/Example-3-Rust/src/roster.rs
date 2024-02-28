@@ -59,8 +59,7 @@ impl<'a> Roster<'a> {
 
 impl<'a> fmt::Display for Roster<'a> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        let percent_full = 100.0 *
-            (self.num_enrolled() / self.enroll_limit) as f64;
+        let percent_full = 100.0 * (self.num_enrolled() / self.enroll_limit) as f64;
 
         writeln!(
             f,
@@ -77,7 +76,6 @@ impl<'a> fmt::Display for Roster<'a> {
         Ok(())
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -102,8 +100,14 @@ mod tests {
         // test __str__
         let default_course_str = default_course.to_string();
         assert_that!(default_course_str.contains("CS 150"), is(true));
-        assert_that!(default_course_str.contains(&default_course.num_enrolled().to_string()), is(true));
-        assert_that!(default_course_str.contains(&DEFAULT_MAX_STUDENTS.to_string()), is(true));
+        assert_that!(
+            default_course_str.contains(&default_course.num_enrolled().to_string()),
+            is(true)
+        );
+        assert_that!(
+            default_course_str.contains(&DEFAULT_MAX_STUDENTS.to_string()),
+            is(true)
+        );
     }
 
     /*
