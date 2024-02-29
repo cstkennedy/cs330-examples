@@ -9,7 +9,7 @@ const DEFAULT_MAX_STUDENTS: usize = 10;
 pub struct Roster<'a> {
     pub course_num: &'a str,
     pub enroll_limit: usize,
-    pub students: HashSet<Student<'a>>,
+    students: HashSet<Student<'a>>,
 }
 
 impl<'a> Default for Roster<'a> {
