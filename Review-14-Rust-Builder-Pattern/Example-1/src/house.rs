@@ -7,22 +7,13 @@ use std::vec::Vec; // ,Formatter,Result};
 
 type Collection = Vec<Room>;
 
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub struct House {
     name: String,
     rooms: Collection,
 }
 
 impl House {
-    /// This is the Default constructor. Start with the name set to "House" and
-    /// an empty set of rooms (i.e., zero rooms).
-    pub fn new() -> Self {
-        House {
-            name: "House".to_string(),
-            rooms: Collection::new(),
-        }
-    }
-
     /// Set the name using a traditional (i.e., non-builder) mutator.
     ///
     /// # Arguments
@@ -62,13 +53,13 @@ impl House {
 
     /// Wrapper around `Collection<Room>.iter()`.
     ///
-    pub fn iter(&self) -> std::slice::Iter<Room> {
+    pub fn iter(&self) -> impl Iterator<Item = &Room> {
         self.rooms.iter()
     }
 
     /// Wrapper around `Collection<Room>.iter_mut()`.
     ///
-    pub fn iter_mut(&mut self) -> std::slice::IterMut<Room> {
+    pub fn iter_mut(&mut self) -> impl Iterator<Item = &mut Room> {
         self.rooms.iter_mut()
     }
 
@@ -78,14 +69,6 @@ impl House {
         let avg = total / (self.len() as f64);
 
         (total, avg)
-    }
-}
-
-impl Default for House {
-    /// Construct a house with the name "Generic" and zero rooms.
-    ///
-    fn default() -> Self {
-        House::new()
     }
 }
 
@@ -173,10 +156,11 @@ impl<'a> HouseBuilder<'a> {
             ));
         }
 
-        let name = match self.name {
-            Some(name) => name,
-            None => "House",
-        };
+        // let name = match self.name {
+        // Some(name) => name,
+        // None => "House",
+        // };
+        let name = self.name.unwrap_or("House");
 
         let house = House {
             name: name.to_owned(),

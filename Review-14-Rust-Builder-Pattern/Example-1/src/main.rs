@@ -8,6 +8,7 @@ use std::vec::Vec;
 
 use room_renovation::flooring::FlooringBuilder;
 use room_renovation::house::{House, HouseBuilder};
+use room_renovation::io::read_house_from_str;
 use room_renovation::room::{Room, RoomBuilder};
 
 const ROOM_DATA: &'static str = r#"
@@ -26,7 +27,7 @@ Storage Room; 16 16 4.39 Birch Wood
 ///
 #[cfg_attr(tarpaulin, skip)]
 fn main() {
-    let house = build_house(ROOM_DATA);
+    let house = read_house_from_str(ROOM_DATA);
 
     println!("{house}");
 
@@ -72,58 +73,6 @@ fn main() {
     }
 
     println!();
-}
-
-///
-/// Build our example house
-///
-fn build_house(room_data: &str) -> House {
-    // Parse all rooms
-    let parsed_rooms: Vec<Room> = room_data
-        .lines()
-        .filter(|line| line.len() > 0)
-        .map(|line| {
-            // Split at the semicolon (grab the name first)
-            let line = line.split(";").collect::<Vec<&str>>();
-            let name = line[0];
-
-            // Split everything else by whitespace and collect the tokens
-            let the_rest: Vec<&str> = line[1].split_whitespace().collect();
-
-            // Parse the three f64 numbers
-            let nums: Vec<f64> = the_rest[0..3]
-                .iter()
-                .map(|token| token.parse().unwrap_or(1_f64))
-                .collect();
-
-            // The flooring name might contain spaces. Combine the remainder of the line.
-            let flooring_name = the_rest.into_iter().skip(3).join(" ");
-
-            (name, nums[0], nums[1], flooring_name, nums[2])
-        })
-        .map(|(name, length, width, flooring_name, unit_cost)| {
-            RoomBuilder::new()
-                .with_name(name)
-                .with_dimensions(length, width)
-                .with_flooring(
-                    FlooringBuilder::new()
-                        .with_specific_name(&flooring_name)
-                        .with_unit_cost(unit_cost)
-                        .build()
-                        .unwrap(),
-                )
-                .build()
-        })
-        .flatten()
-        .collect();
-
-    // Create a house using the parsed rooms
-    let house = HouseBuilder::new()
-        .with_rooms(parsed_rooms)
-        .build()
-        .unwrap();
-
-    house
 }
 
 ///
