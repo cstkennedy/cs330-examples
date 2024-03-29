@@ -14,7 +14,7 @@ pub struct House {
 }
 
 impl House {
-    pub fn builder<'a>() -> HouseBuilder<'a> {
+    pub fn builder<'a>() -> HouseBuilder<'a, NoRooms> {
         HouseBuilder::new()
     }
 
@@ -122,25 +122,49 @@ impl PartialEq for House {
     }
 }
 
-pub struct HouseBuilder<'a> {
-    name: Option<&'a str>,
-    rooms: Vec<Room>,
+//------------------------------------------------------------------------------
+#[derive(Default)]
+pub struct NoRooms;
+
+pub struct HouseBuilder<'a, SR> {
+    name: &'a str,
+    rooms: SR,
 }
 
-impl<'a> HouseBuilder<'a> {
+impl<'a> HouseBuilder<'a, NoRooms> {
     pub fn new() -> Self {
         HouseBuilder {
-            name: None,
+            name: "Hello",
             rooms: Default::default(),
         }
     }
+}
 
+impl<'a, SR> HouseBuilder<'a, SR> {
     pub fn with_name(mut self, nme: &'a str) -> Self {
-        self.name = Some(nme);
+        self.name = nme;
 
         self
     }
+}
 
+impl<'a> HouseBuilder<'a, NoRooms> {
+    pub fn with_room(self, first_room: Room) -> HouseBuilder<'a, Vec<Room>> {
+        HouseBuilder {
+            name: self.name,
+            rooms: vec![first_room],
+        }
+    }
+
+    pub fn with_rooms(self, first_rooms: Vec<Room>) -> HouseBuilder<'a, Vec<Room>> {
+        HouseBuilder {
+            name: self.name,
+            rooms: first_rooms,
+        }
+    }
+}
+
+impl<'a> HouseBuilder<'a, Vec<Room>> {
     pub fn with_room(mut self, another_room: Room) -> Self {
         self.rooms.push(another_room);
 
@@ -152,22 +176,12 @@ impl<'a> HouseBuilder<'a> {
 
         self
     }
+}
 
+impl<'a> HouseBuilder<'a, Vec<Room>> {
     pub fn build(self) -> Result<House, BuildError> {
-        if self.rooms.len() < 1 {
-            return Err(BuildError::GenericError(
-                "A House must have at least one room.",
-            ));
-        }
-
-        // let name = match self.name {
-        // Some(name) => name,
-        // None => "House",
-        // };
-        let name = self.name.unwrap_or("House");
-
         let house = House {
-            name: name.to_owned(),
+            name: self.name.to_owned(),
             rooms: self.rooms,
         };
 

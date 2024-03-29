@@ -39,7 +39,7 @@ pub struct Room {
 }
 
 impl Room {
-    pub fn builder() -> RoomBuilder {
+    pub fn builder() -> RoomBuilder<NoName, NoDimensions, NoFlooring> {
         RoomBuilder::new()
     }
 
@@ -95,57 +95,87 @@ impl PartialEq for Room {
 }
 
 //------------------------------------------------------------------------------
-pub struct RoomBuilder {
-    name: Option<String>,
-    length: Option<f64>,
-    width: Option<f64>,
-    flooring: Option<Flooring>,
+#[derive(Default)]
+pub struct NoName;
+
+#[derive(Default)]
+pub struct NoDimensions;
+
+#[derive(Default)]
+pub struct NoFlooring;
+
+/// The RoomBuilder's state is defined by three generics
+///   - SN - (State Name) whether the name is set
+///   - SD - (State Dimensions) whether the length and width are set
+///   - SF - (State Flooring) whether the flooring is set 
+///
+#[derive(Default)]
+pub struct RoomBuilder<SN, SD, SF> {
+    name: SN,
+    length: SD,
+    width: SD,
+    flooring: SF,
 }
 
-impl RoomBuilder {
+impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
     pub fn new() -> Self {
         RoomBuilder {
-            name: None,
-            length: None,
-            width: None,
-            flooring: None,
+            name: NoName,
+            length: NoDimensions,
+            width: NoDimensions,
+            flooring: NoFlooring,
+        }
+    }
+}
+
+impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
+    pub fn from_existing(self, room: &Room) -> RoomBuilder<String, f64, Flooring> {
+        RoomBuilder {
+            name: room.name.clone(),
+            width: room.dimensions.width,
+            length: room.dimensions.length,
+            flooring: room.flooring.clone(),
         }
     }
 
-    pub fn from_existing(self, room: &Room) -> Self {
-        self.with_name(&room.name.clone())
-            .with_flooring(room.flooring.clone())
-            .with_dimensions(room.dimensions.length, room.dimensions.width)
+    pub fn with_name(self, nme: &str) -> RoomBuilder<String, NoDimensions, NoFlooring> {
+        RoomBuilder {
+            name: nme.into(),
+            length: self.length,
+            width: self.width,
+            flooring: self.flooring,
+        }
     }
+}
 
-    pub fn with_name(mut self, nme: &str) -> Self {
-        self.name = Some(nme.to_owned());
-
-        self
+impl RoomBuilder<String, NoDimensions, NoFlooring> {
+    pub fn with_dimensions(self, l: f64, w: f64) -> RoomBuilder<String, f64, NoFlooring> {
+        RoomBuilder {
+            name: self.name,
+            length: l,
+            width: w,
+            flooring: self.flooring,
+        }
     }
+}
 
-    pub fn with_flooring(mut self, flooring: Flooring) -> Self {
-        self.flooring = Some(flooring);
-
-        self
+impl<SF> RoomBuilder<String, f64, SF> {
+    pub fn with_flooring(self, flooring: Flooring) -> RoomBuilder<String, f64, Flooring> {
+        RoomBuilder {
+            name: self.name,
+            length: self.length,
+            width: self.width,
+            flooring: flooring,
+        }
     }
+}
 
-    pub fn with_dimensions(mut self, l: f64, w: f64) -> Self {
-        self.length = Some(l);
-        self.width = Some(w);
-
-        self
-    }
-
+impl RoomBuilder<String, f64, Flooring> {
     pub fn build(self) -> Result<Room, BuildError> {
-        if self.name.is_none() {
-            return Err(BuildError::GenericError("Name can not be blank"));
-        }
-
         let room = Room {
-            name: self.name.unwrap(),
-            dimensions: DimensionSet::new(self.length.unwrap(), self.width.unwrap()),
-            flooring: self.flooring.unwrap(),
+            name: self.name,
+            dimensions: DimensionSet::new(self.length, self.width),
+            flooring: self.flooring,
         };
 
         Ok(room)

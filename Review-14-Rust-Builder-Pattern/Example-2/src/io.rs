@@ -38,9 +38,7 @@ pub fn read_house_from_str(room_data: &str) -> House {
         .filter(|(_, nums, _)| nums.len() == 3)
         .map(|(name, nums, flooring_name)| (name, nums[0], nums[1], flooring_name, nums[2]))
         .filter(|(_, length, width, _, unit_cost)| -> bool {
-            return *length > 0.0
-                && *width > 0.0
-                && *unit_cost >= 0.01;
+            return *length > 0.0 && *width > 0.0 && *unit_cost >= 0.01;
         })
         .map(|(name, length, width, flooring_name, unit_cost)| {
             Room::builder()
@@ -57,10 +55,7 @@ pub fn read_house_from_str(room_data: &str) -> House {
         .flatten()
         .collect();
 
-    let house = House::builder()
-        .with_rooms(parsed_rooms)
-        .build()
-        .unwrap();
+    let house = House::builder().with_rooms(parsed_rooms).build().unwrap();
 
     house
 }
