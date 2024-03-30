@@ -1,6 +1,6 @@
 use typed_builder::TypedBuilder;
 
-#[derive(Clone, TypedBuilder)]
+#[derive(Clone, Debug, TypedBuilder)]
 pub struct Flooring {
     #[builder(default="Generic".into())]
     pub type_name: String,

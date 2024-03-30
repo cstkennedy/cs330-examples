@@ -4,7 +4,7 @@ use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct DimensionSet {
     pub length: f64,
     pub width: f64,
@@ -31,7 +31,7 @@ impl From<(f64, f64)> for DimensionSet {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Room {
     pub name: String,
     pub dimensions: DimensionSet,

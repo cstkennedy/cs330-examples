@@ -3,9 +3,10 @@ use itertools::Itertools;
 use crate::flooring::Flooring;
 use crate::house::House;
 use crate::room::Room;
+use crate::error::BuildError;
 use std::vec::Vec;
 
-pub fn read_house_from_str(room_data: &str) -> House {
+pub fn read_house_from_str(room_data: &str) -> Option<House> {
     let parsed_rooms: Vec<Room> = room_data
         .lines()
         .filter(|line| line.len() > 0)
@@ -55,7 +56,10 @@ pub fn read_house_from_str(room_data: &str) -> House {
         .flatten()
         .collect();
 
-    let house = House::builder().with_rooms(parsed_rooms).build().unwrap();
+    let house = match House::builder().with_rooms(parsed_rooms) {
+        Ok(builder) => builder.build().unwrap().into(),
+        Err(_) => None,
+    };
 
     house
 }

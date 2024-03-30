@@ -123,9 +123,10 @@ impl PartialEq for House {
 }
 
 //------------------------------------------------------------------------------
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct NoRooms;
 
+#[derive(Debug)]
 pub struct HouseBuilder<'a, SR> {
     name: &'a str,
     rooms: SR,
@@ -156,10 +157,16 @@ impl<'a> HouseBuilder<'a, NoRooms> {
         }
     }
 
-    pub fn with_rooms(self, first_rooms: Vec<Room>) -> HouseBuilder<'a, Vec<Room>> {
-        HouseBuilder {
-            name: self.name,
-            rooms: first_rooms,
+    pub fn with_rooms(
+        self,
+        first_rooms: Vec<Room>,
+    ) -> Result<HouseBuilder<'a, Vec<Room>>, HouseBuilder<'a, NoRooms>> {
+        match first_rooms.len() {
+            0 => Err(self),
+            _ => Ok(HouseBuilder {
+                name: self.name,
+                rooms: first_rooms,
+            }),
         }
     }
 }

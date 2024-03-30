@@ -28,7 +28,7 @@ Storage Room; 16 16 4.39 Birch Wood
 ///
 #[cfg_attr(tarpaulin, skip)]
 fn main() {
-    let house = read_house_from_str(ROOM_DATA);
+    let house = read_house_from_str(ROOM_DATA).unwrap();
     let duplicate_house = upgrade_flooring(&house);
 
     println!("{house}");
@@ -88,6 +88,7 @@ fn upgrade_flooring(original: &House) -> House {
                 })
                 .collect::<Vec<Room>>(),
         )
+        .unwrap()
         .build()
         .unwrap()
 }
