@@ -180,11 +180,13 @@ impl<'a> HouseBuilder<'a, Vec<Room>> {
 
 impl<'a> HouseBuilder<'a, Vec<Room>> {
     pub fn build(self) -> Result<House, BuildError> {
-        let house = House {
+        if self.rooms.len() == 0 {
+            return Err(BuildError::ZeroRooms);
+        }
+
+        Ok(House {
             name: self.name.to_owned(),
             rooms: self.rooms,
-        };
-
-        Ok(house)
+        })
     }
 }

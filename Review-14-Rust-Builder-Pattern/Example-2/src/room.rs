@@ -107,7 +107,7 @@ pub struct NoFlooring;
 /// The RoomBuilder's state is defined by three generics
 ///   - SN - (State Name) whether the name is set
 ///   - SD - (State Dimensions) whether the length and width are set
-///   - SF - (State Flooring) whether the flooring is set 
+///   - SF - (State Flooring) whether the flooring is set
 ///
 #[derive(Default)]
 pub struct RoomBuilder<SN, SD, SF> {

@@ -7,7 +7,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-ordered-float = "1.0.2"
+ordered-float = "4.2.0"
 itertools = "*"
 typed-builder = "0.18.1"
 

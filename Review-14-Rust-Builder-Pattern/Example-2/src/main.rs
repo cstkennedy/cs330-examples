@@ -1,5 +1,6 @@
 use itertools::{Itertools, MinMaxResult};
 use ordered_float::OrderedFloat;
+use std::iter::Sum;
 
 // use std::io::BufReader;
 // use std::fs::File;
@@ -28,35 +29,26 @@ Storage Room; 16 16 4.39 Birch Wood
 #[cfg_attr(tarpaulin, skip)]
 fn main() {
     let house = read_house_from_str(ROOM_DATA);
-
-    println!("{house}");
-
-    // Upgrade the flooring in a second duplicate house
     let duplicate_house = upgrade_flooring(&house);
-
-    println!("house == duplicate_house -> {}", (house == duplicate_house));
-    println!(
-        "&house == &duplicate_house -> {}",
-        std::ptr::eq(&house, &duplicate_house)
-    );
 
     println!("{house}");
     println!("{duplicate_house}");
 
-    let costs: Vec<f64> = duplicate_house
+    let costs: Vec<_> = duplicate_house
         .iter()
         .map(|r| discount_flooring(r))
+        .map(|c| OrderedFloat(c))
         .collect();
 
     for room_cost in costs.iter() {
         println!("{room_cost:.2}")
     }
 
-    let total: f64 = costs.iter().sum();
+    let total: f64 = *OrderedFloat::sum(costs.iter());
 
     println!("Total: {total:.2}");
 
-    let result = costs.iter().map(|c| OrderedFloat(*c)).minmax();
+    let result = costs.iter().minmax();
     if let MinMaxResult::MinMax(ex_min, ex_max) = result {
         println!("Min  : {ex_min:.2}");
         println!("Max  : {ex_max:.2}");

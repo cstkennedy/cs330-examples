@@ -4,6 +4,7 @@ use std::fmt::Display; //,Formatter,Result};
 #[derive(Debug)]
 pub enum BuildError {
     GenericError(&'static str),
+    ZeroRooms,
 }
 
 /*
@@ -19,6 +20,9 @@ impl Display for BuildError {
         match &self {
             BuildError::GenericError(description) => {
                 write!(f, "{:?}", description)
+            }
+            BuildError::ZeroRooms => {
+                write!(f, "A house must have at least 1 room")
             }
         }
     }
