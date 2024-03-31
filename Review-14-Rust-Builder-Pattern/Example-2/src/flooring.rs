@@ -1,6 +1,6 @@
 use typed_builder::TypedBuilder;
 
-#[derive(Clone, Debug, TypedBuilder)]
+#[derive(Clone, Debug, PartialEq, TypedBuilder)]
 pub struct Flooring {
     #[builder(default="Generic".into())]
     pub type_name: String,
@@ -10,7 +10,7 @@ pub struct Flooring {
 }
 
 impl Flooring {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Flooring::builder().build()
     }
 }
