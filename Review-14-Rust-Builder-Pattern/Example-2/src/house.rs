@@ -123,10 +123,10 @@ impl PartialEq for House {
 }
 
 //------------------------------------------------------------------------------
-#[derive(Default, Debug)]
+#[derive(Default, Debug, PartialEq)]
 pub struct NoRooms;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct HouseBuilder<'a, SR> {
     name: &'a str,
     rooms: SR,
