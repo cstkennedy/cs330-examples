@@ -171,6 +171,13 @@ impl<SF> RoomBuilder<String, f64, SF> {
 }
 
 impl RoomBuilder<String, f64, Flooring> {
+    pub fn with_dimensions(mut self, l: f64, w: f64) -> Self {
+        self.length = l;
+        self.width = w;
+
+        self
+    }
+
     pub fn build(self) -> Result<Room, BuildError> {
         let room = Room {
             name: self.name,

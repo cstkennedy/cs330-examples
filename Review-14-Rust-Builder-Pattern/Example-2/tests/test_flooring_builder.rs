@@ -8,7 +8,7 @@ use room_renovation::house::*;
 use hamcrest2::prelude::*;
 
 #[test]
-fn test_flooring_builder_defaults()
+fn test_defaults()
 {
     let flooring = Flooring::builder().build();
 
@@ -28,7 +28,7 @@ fn test_flooring_builder_defaults()
 }
 
 #[test]
-fn test_flooring_builder()
+fn test_with_values()
 {
     let flooring = Flooring::builder()
         .type_name("Stone Bricks".into())
