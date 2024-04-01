@@ -44,7 +44,7 @@ impl Add for FlipTask {
     fn add(self, other: Self) -> Self {
         Self {
             num_flips: self.num_flips + other.num_flips,
-            num_heads: self.num_heads + other.num_flips,
+            num_heads: self.num_heads + other.num_heads,
             num_tails: self.num_tails + other.num_tails,
         }
     }
@@ -53,7 +53,7 @@ impl Add for FlipTask {
 impl AddAssign for FlipTask {
     fn add_assign(&mut self, other: Self) {
         self.num_flips += other.num_flips;
-        self.num_heads += other.num_flips;
+        self.num_heads += other.num_heads;
         self.num_tails += other.num_tails;
     }
 }
