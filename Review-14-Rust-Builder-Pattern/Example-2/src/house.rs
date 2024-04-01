@@ -14,6 +14,10 @@ pub struct House {
 }
 
 impl House {
+    pub fn builder<'a>() -> HouseBuilder<'a, NoRooms> {
+        HouseBuilder::new()
+    }
+
     /// Set the name using a traditional (i.e., non-builder) mutator.
     ///
     /// # Arguments
@@ -118,25 +122,56 @@ impl PartialEq for House {
     }
 }
 
-pub struct HouseBuilder<'a> {
-    name: Option<&'a str>,
-    rooms: Vec<Room>,
+//------------------------------------------------------------------------------
+#[derive(Default, Debug, PartialEq)]
+pub struct NoRooms;
+
+#[derive(Debug, PartialEq)]
+pub struct HouseBuilder<'a, SR> {
+    name: &'a str,
+    rooms: SR,
 }
 
-impl<'a> HouseBuilder<'a> {
+impl<'a> HouseBuilder<'a, NoRooms> {
     pub fn new() -> Self {
         HouseBuilder {
-            name: None,
+            name: "Hello",
             rooms: Default::default(),
         }
     }
+}
 
+impl<'a, SR> HouseBuilder<'a, SR> {
     pub fn with_name(mut self, nme: &'a str) -> Self {
-        self.name = Some(nme);
+        self.name = nme;
 
         self
     }
+}
 
+impl<'a> HouseBuilder<'a, NoRooms> {
+    pub fn with_room(self, first_room: Room) -> HouseBuilder<'a, Vec<Room>> {
+        HouseBuilder {
+            name: self.name,
+            rooms: vec![first_room],
+        }
+    }
+
+    pub fn with_rooms(
+        self,
+        first_rooms: Vec<Room>,
+    ) -> Result<HouseBuilder<'a, Vec<Room>>, HouseBuilder<'a, NoRooms>> {
+        match first_rooms.len() {
+            0 => Err(self),
+            _ => Ok(HouseBuilder {
+                name: self.name,
+                rooms: first_rooms,
+            }),
+        }
+    }
+}
+
+impl<'a> HouseBuilder<'a, Vec<Room>> {
     pub fn with_room(mut self, another_room: Room) -> Self {
         self.rooms.push(another_room);
 
@@ -148,25 +183,17 @@ impl<'a> HouseBuilder<'a> {
 
         self
     }
+}
 
+impl<'a> HouseBuilder<'a, Vec<Room>> {
     pub fn build(self) -> Result<House, BuildError> {
-        if self.rooms.len() < 1 {
-            return Err(BuildError::GenericError(
-                "A House must have at least one room.",
-            ));
+        if self.rooms.len() == 0 {
+            return Err(BuildError::ZeroRooms);
         }
 
-        // let name = match self.name {
-        // Some(name) => name,
-        // None => "House",
-        // };
-        let name = self.name.unwrap_or("House");
-
-        let house = House {
-            name: name.to_owned(),
+        Ok(House {
+            name: self.name.to_owned(),
             rooms: self.rooms,
-        };
-
-        Ok(house)
+        })
     }
 }
