@@ -1,9 +1,9 @@
 use itertools::Itertools;
 
+use crate::error::BuildError;
 use crate::flooring::Flooring;
 use crate::house::House;
 use crate::room::Room;
-use crate::error::BuildError;
 use std::vec::Vec;
 
 pub fn read_house_from_str(room_data: &str) -> Option<House> {

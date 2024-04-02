@@ -1,15 +1,13 @@
 #[cfg(test)]
 #[macro_use]
-
 use room_renovation::flooring::*;
-use room_renovation::room::*;
 use room_renovation::house::*;
+use room_renovation::room::*;
 
 use hamcrest2::prelude::*;
 
 #[test]
-fn test_defaults()
-{
+fn test_defaults() {
     let flooring = Flooring::builder().build();
 
     assert_that!(&flooring.type_name, is(equal_to("Generic")));
@@ -28,8 +26,7 @@ fn test_defaults()
 }
 
 #[test]
-fn test_with_values()
-{
+fn test_with_values() {
     let flooring = Flooring::builder()
         .type_name("Stone Bricks".into())
         .unit_cost(12.97)

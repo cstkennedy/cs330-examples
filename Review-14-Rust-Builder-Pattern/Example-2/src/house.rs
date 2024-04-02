@@ -7,7 +7,7 @@ use std::vec::Vec; // ,Formatter,Result};
 
 type Collection = Vec<Room>;
 
-#[derive(Clone, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct House {
     name: String,
     rooms: Collection,
@@ -135,7 +135,7 @@ pub struct HouseBuilder<'a, SR> {
 impl<'a> HouseBuilder<'a, NoRooms> {
     pub fn new() -> Self {
         HouseBuilder {
-            name: "Hello",
+            name: "House",
             rooms: Default::default(),
         }
     }
