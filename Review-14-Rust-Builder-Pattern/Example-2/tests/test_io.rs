@@ -81,3 +81,19 @@ fn test_one_room() {
     assert_that!(house.len(), is(equal_to(1)));
 }
 
+#[test]
+fn test_two_rooms() {
+    let lines = [
+        "Kitchen; 4 5 7.5 Vinyl Plank",
+        "Storage Room; 2 4 7.5 Vinyl Plank"
+    ].join("\n");
+
+    let house = io::read_house_from_str(&lines);
+
+    assert_that!(&house, is(some()));
+
+    let house = house.unwrap();
+    assert_that!(house.get_name(), is(equal_to("House")));
+    assert_that!(house.len(), is(equal_to(2)));
+}
+
