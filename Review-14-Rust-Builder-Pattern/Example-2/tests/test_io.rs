@@ -95,5 +95,38 @@ fn test_two_rooms() {
     let house = house.unwrap();
     assert_that!(house.get_name(), is(equal_to("House")));
     assert_that!(house.len(), is(equal_to(2)));
+
+    let expected_rooms = [
+        Room::builder()
+            .with_name("Kitchen")
+            .with_dimensions(4.0, 5.0)
+            .with_flooring(
+                Flooring::builder()
+                    .type_name("Vinyl Plank".to_owned())
+                    .unit_cost(7.5)
+                    .build()
+            )
+            .build()
+            .unwrap(),
+        Room::builder()
+            .with_name("Storage Room")
+            .with_dimensions(2.0, 4.0)
+            .with_flooring(
+                Flooring::builder()
+                    .type_name("Vinyl Plank".to_owned())
+                    .unit_cost(7.5)
+                    .build()
+            )
+            .build()
+            .unwrap()
+    ];
+
+    let num_matching_rooms: usize = expected_rooms
+        .iter()
+        .zip(house.iter())
+        .filter(|(expected_room, actual_room)| &expected_room == &actual_room)
+        .count();
+
+    assert_that!(num_matching_rooms, is(equal_to(2)));
 }
 
