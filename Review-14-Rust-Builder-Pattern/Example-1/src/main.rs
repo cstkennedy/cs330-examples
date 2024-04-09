@@ -25,7 +25,7 @@ Storage Room; 16 16 4.39 Birch Wood
 /// <p>
 /// We will use these when we implement the iterator interface.
 ///
-#[cfg_attr(tarpaulin, skip)]
+#[cfg(not(tarpaulin_include))]
 fn main() {
     let house = read_house_from_str(ROOM_DATA);
 
