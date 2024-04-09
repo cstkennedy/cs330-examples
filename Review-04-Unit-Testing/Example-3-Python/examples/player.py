@@ -1,7 +1,7 @@
-from examples.strategy import (Strategy, KeyboardStrategy)
+from examples.strategy import Strategy, KeyboardStrategy
 
 
-class Player(object):
+class Player:
     """
     This is more a Player interface than a Player class.
     <p>
@@ -39,7 +39,7 @@ class Player(object):
         """
 
         self._name = n
-        self._symbol = '?'  # testing caught this
+        self._symbol = "?"  # testing caught this
 
     def get_name(self) -> str:
         """

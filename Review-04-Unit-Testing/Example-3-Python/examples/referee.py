@@ -1,11 +1,12 @@
 from examples.player import Player
 
-from typing import (Tuple)
+from typing import Tuple
 
 CellPair = Tuple[int, str]
 CellTriple = Tuple[CellPair, CellPair, CellPair]
 
-class Referee(object):
+
+class Referee:
     """
     The Meta-player that checks game status
     e.g., checks for wins, who won, if there is
@@ -63,7 +64,7 @@ class Referee(object):
             True if the cell is currently empty
         """
 
-        return self._board_ref.get_cell(move) not in ['X', 'O']
+        return self._board_ref.get_cell(move) not in ["X", "O"]
 
     def _check_for_horizontal_win(self) -> int:
         """
@@ -160,4 +161,4 @@ class Referee(object):
         """
 
         # return (sym == 'X' ? 1 : 2)
-        return (1 if sym == 'X' else 2)
+        return 1 if sym == "X" else 2

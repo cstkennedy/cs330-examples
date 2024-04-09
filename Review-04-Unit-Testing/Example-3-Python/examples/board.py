@@ -1,10 +1,10 @@
-from typing import (Tuple)
+from typing import Tuple
 
 CellPair = Tuple[int, str]
 CellTriple = Tuple[CellPair, CellPair, CellPair]
 
 
-class Board(object):
+class Board:
     """
     This ADT represents the gameboard used in a round
     of standard tic-tac-toe (i.e., a 3 x 3 grid)
@@ -19,7 +19,7 @@ class Board(object):
         Construct an empty gameboard.
         """
 
-        self._the_board = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        self._the_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
     def get_cell(self, cell_id) -> str:
         """
@@ -36,7 +36,7 @@ class Board(object):
         """
 
         # assert(cell_id > 0 and cell_id < 10)
-        assert (0 < cell_id < 10)
+        assert 0 < cell_id < 10
 
         return self._the_board[cell_id - 1]  # Testing caught the missing -1
 
@@ -57,7 +57,7 @@ class Board(object):
         """
 
         # assert (cell_id > 0 and cell_id < 10)
-        assert (0 < cell_id < 10)
+        assert 0 < cell_id < 10
 
         # Testing caught the missing -1
         self._the_board[cell_id - 1] = new_value
@@ -102,9 +102,11 @@ class Board(object):
         cell2_id -= 1
         cell3_id -= 1
 
-        return ((cell1_id, self._the_board[cell1_id]),
-                (cell2_id, self._the_board[cell2_id]),
-                (cell3_id, self._the_board[cell3_id]))
+        return (
+            (cell1_id, self._the_board[cell1_id]),
+            (cell2_id, self._the_board[cell2_id]),
+            (cell3_id, self._the_board[cell3_id]),
+        )
 
     def is_full(self) -> bool:
         """
@@ -126,7 +128,6 @@ class Board(object):
         return empty_cells == 0
 
     def __eq__(self, rhs):
-
         if not isinstance(rhs, self.__class__):
             return False
 
@@ -141,6 +142,10 @@ class Board(object):
           7|8|9
         """
 
-        return "\n".join(["|".join(self._the_board[0:3]),
-                          "|".join(self._the_board[3:6]),
-                          "|".join(self._the_board[6:9])])
+        return "\n".join(
+            [
+                "|".join(self._the_board[0:3]),
+                "|".join(self._the_board[3:6]),
+                "|".join(self._the_board[6:9]),
+            ]
+        )

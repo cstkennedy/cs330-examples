@@ -1,12 +1,12 @@
 from examples.player import Player
 from examples.board import Board
 from examples.referee import Referee
-from examples.strategy import (Strategy, KeyboardStrategy)
+from examples.strategy import Strategy, KeyboardStrategy
 
 from typing import Optional
 
 
-class Game(object):
+class Game:
     """
     Orchestrates a single match of Tic-Tac-Toe.
     """
@@ -26,8 +26,8 @@ class Game(object):
         self._board = Board()
         self._ref = Referee(self._board)
 
-        self._player1.set_symbol('X')
-        self._player2.set_symbol('O')
+        self._player1.set_symbol("X")
+        self._player2.set_symbol("O")
 
         self._winner = None
 
@@ -42,7 +42,7 @@ class Game(object):
             IOException if there is an error reading the selected move
         """
 
-        # The game ended already - assert could be used
+        # The game ended already
         if self._board.is_full():
             return True
 
@@ -84,15 +84,12 @@ class Game(object):
         return False
 
     def get_player1(self) -> Player:
-
         return self._player1
 
     def get_player2(self) -> Player:
-
         return self._player2
 
     def get_winner(self) -> Optional[Player]:
-
         return self._winner
 
     def get_loser(self) -> Optional[Player]:
@@ -114,23 +111,18 @@ class Game(object):
         return self._player1
 
     def ended_with_win(self) -> bool:
-
         return self._winner is not None
 
     def ended_with_stalemate(self) -> bool:
-
         return self._board.is_full() and (self._winner is None)
 
     def is_over(self) -> bool:
-
         return self.ended_with_win() or self.ended_with_stalemate()
 
     def is_not_over(self) -> bool:
-
         return not self.is_over()
 
     def get_board(self) -> bool:
-
         return self._board
 
     def _round_turn(self, player) -> bool:

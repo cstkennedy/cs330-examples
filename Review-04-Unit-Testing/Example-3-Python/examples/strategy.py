@@ -11,12 +11,12 @@ class Strategy(Protocol):
 
 PROMPT_MSG: str = "Enter your desired move (1-9): "
 
+
 @dataclass
 class KeyboardStrategy:
-
     _name: str = ""
 
     def next_move(self) -> int:
         choice = int(input(f"{self._name}, {PROMPT_MSG}"))
 
-        return choice;
+        return choice
