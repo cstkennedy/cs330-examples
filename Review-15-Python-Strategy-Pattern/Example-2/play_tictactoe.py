@@ -19,14 +19,6 @@ def main():
     game = Game(tom, jay)
     game.play_match()
 
-    while game.is_not_over():
-        game.play_round()
-
-    print(game.get_board())
-
-    if game.ended_with_win():
-        print(f"Congratulations {game.get_winner()}!")
-
 
 if __name__ == "__main__":
     main()
