@@ -16,7 +16,8 @@ def main():
     tom = Player(name="Thomas", strategy=KeyboardStrategy("Tom"))
     jay = Player(name="Jay", strategy=KeyboardStrategy("Jay"))
 
-    game = Game(tom, jay)
+    game = Game()
+    game.set_players(tom, jay)
     game.play_match()
 
 

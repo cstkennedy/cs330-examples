@@ -12,26 +12,39 @@ class Game:
     """
 
     def __init__(self, p1: Player, p2: Player):
-        """
-        Construct a Game setting player 1 and player 2.
-
-        Args:
-            p1: the 'X' player
-            p2: the 'O' player
-        """
-
-        self._player1 = p1
-        self._player2 = p2
 
         self._board = Board()
         self._ref = Referee(self._board)
 
+        self._player1 = None
+        self._player2 = None
+
+        self._winner = None
+        self._loser = None
+
+    def set_players(self, player1: Player, player2: Player) -> Never:
+        """
+        Setting player 1 and player 2 and adjust their symbols.
+
+        Args:
+            player1: the 'X' player
+            player2: the 'O' player
+        """
+
+        self._player1 = player1
+        self._player2 = player2
+
         self._player1.set_symbol("X")
         self._player2.set_symbol("O")
 
-        self._winner = None
+
+    def ready_to_start(self) -> bool:
+        return self._player1 and self._player2
 
     def play_match(self) -> Never:
+        if not self.ready_to_start():
+            return
+
         while self.is_not_over():
             self.play_round()
 
@@ -70,6 +83,7 @@ class Game:
 
         if winner_id == 1:
             self._winner = self._player1
+            self._loser = self._player2
             return True
 
         print()
@@ -88,6 +102,7 @@ class Game:
             # winner = self._player2
 
             self._winner = self._player2
+            self._loser = self._player1
             return True
 
         return False
@@ -119,22 +134,7 @@ class Game:
         return self._winner
 
     def get_loser(self) -> Optional[Player]:
-        # @discussThisInLecture
-        # Caught this bug during testing
-        if self.is_not_over():
-            return None
-
-        # Stalemate
-        # if ended_with_stalemate(): # @DISCUSS mistake caught with pylint
-        if self.ended_with_stalemate():
-            # return Player::referenceCylon
-            return None
-
-        # There was a win, figure out who lost
-        if self._winner == self._player1:
-            return self._player2
-
-        return self._player1
+        return self._loser
 
     def ended_with_win(self) -> bool:
         return self._winner is not None
