@@ -1,7 +1,7 @@
 import copy
 from typing import Self
 
-from examples.strategy import KeyboardStrategy, Strategy
+from examples.strategy import Strategy
 
 
 class Player:
@@ -11,6 +11,9 @@ class Player:
     However, such distinctions and discussions belong in
     the OOP and Inheritance Modules
     """
+
+    DEFAULT_NAME: str = "I. C. Generic"
+    DEFAULT_SYMBOL: str = "?"
 
     @staticmethod
     def is_generic(possible_cylon: Self) -> bool:
@@ -27,7 +30,7 @@ class Player:
 
         return possible_cylon == REFERENCE_CYLON
 
-    def __init__(self, *, name: str = "I. C. Generic", strategy: Strategy):
+    def __init__(self, *, name: str = Player.DEFAULT_NAME, strategy: Strategy):
         """
         Create a Player with a selected name.
 
@@ -37,7 +40,7 @@ class Player:
 
         self._name = name
         self.my_strategy = strategy
-        self._symbol = "?"
+        self._symbol = Player.DEFAULT_SYMBOL
 
     def get_name(self) -> str:
         """
