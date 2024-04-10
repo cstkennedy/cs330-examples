@@ -1,3 +1,6 @@
+import copy
+from typing import Self
+
 from examples.strategy import KeyboardStrategy, Strategy
 
 
@@ -9,13 +12,8 @@ class Player:
     the OOP and Inheritance Modules
     """
 
-    PROMPT_MSG = "Enter your desired move (1-9): "
-    """
-    Message used to prompt a human player for a move.
-    """
-
     @staticmethod
-    def is_generic(possible_cylon: "Player") -> bool:
+    def is_generic(possible_cylon: Self) -> bool:
         """
         Checks whether a player is a placeholder or
         an actual player.
@@ -27,10 +25,9 @@ class Player:
             True if the player is a Cylon
         """
 
-        # print(REFERENCE_CYLON)
         return possible_cylon == REFERENCE_CYLON
 
-    def __init__(self, n: str = "I. C. Generic"):
+    def __init__(self, *, name: str = "I. C. Generic", strategy: Strategy):
         """
         Create a Player with a selected name.
 
@@ -38,8 +35,9 @@ class Player:
             n: desired name
         """
 
-        self._name = n
-        self._symbol = "?"  # testing caught this
+        self._name = name
+        self.my_strategy = strategy
+        self._symbol = "?"
 
     def get_name(self) -> str:
         """
@@ -51,7 +49,7 @@ class Player:
 
         return self._name
 
-    def set_name(self, n: str):
+    def set_name(self, nme: str):
         """
         Set player name.
 
@@ -60,9 +58,9 @@ class Player:
         @pre (n.size() > 0)
         """
 
-        self._name = n
+        self._name = nme
 
-    def next_move(self, the_strategy: Strategy) -> int:
+    def next_move(self) -> int:
         """
         Retrieve the next move.
 
@@ -71,7 +69,7 @@ class Player:
         @throws IOException if the move can not be retreived from the player.
         """
 
-        return the_strategy.next_move()
+        return self.my_strategy.next_move()
 
     def is_human(self) -> bool:
         """
@@ -85,7 +83,7 @@ class Player:
 
         return True
 
-    def is_computer(self):
+    def is_computer(self) -> bool:
         """
         Is this a Computer Player?
 
@@ -139,13 +137,13 @@ class Player:
         Create a new duplicate Player.
         """
 
-        cpy = Player(self._name)
+        cpy = Player(name=self._name, strategy=copy.deepcopy(self.my_strategy))
         cpy.set_symbol(self._symbol)
 
         return cpy
 
 
-REFERENCE_CYLON = Player()
+REFERENCE_CYLON = Player(strategy=None)
 """
 A Player that serves as a sentinal value or placeholder.
 """

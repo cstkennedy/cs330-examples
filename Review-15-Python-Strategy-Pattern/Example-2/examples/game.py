@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Never, Optional
 
 from examples.board import Board
 from examples.player import Player
@@ -30,6 +30,15 @@ class Game:
         self._player2.set_symbol("O")
 
         self._winner = None
+
+    def play_match(self) -> Never:
+        while self.is_not_over():
+            self.play_round()
+
+        print(self.get_board())
+
+        if self.ended_with_win():
+            print(f"Congratulations {self.get_winner()}!")
 
     def play_round(self) -> bool:
         """
@@ -83,6 +92,23 @@ class Game:
 
         return False
 
+    def _round_turn(self, player) -> bool:
+        """
+        Get a player move, and update the board.
+        """
+        move = player.next_move()
+        sym = player.get_symbol()
+
+        # while (board.get_cell(move) != 'X' && board.get_cell(move) != 'O') {
+        while not self._ref.selected_cell_is_empty(move):
+            move = player.next_move()
+            sym = player.get_symbol()
+
+        self._board.set_cell(move, sym)
+
+        # @todo add move validation
+        return True
+
     def get_player1(self) -> Player:
         return self._player1
 
@@ -124,21 +150,3 @@ class Game:
 
     def get_board(self) -> bool:
         return self._board
-
-    def _round_turn(self, player) -> bool:
-        """
-        Get a player move, and update the board.
-        """
-        the_strategy = KeyboardStrategy(player.get_name())
-        move = player.next_move(the_strategy)
-        sym = player.get_symbol()
-
-        # while (board.get_cell(move) != 'X' && board.get_cell(move) != 'O') {
-        while not self._ref.selected_cell_is_empty(move):
-            move = player.next_move(the_strategy)
-            sym = player.get_symbol()
-
-        self._board.set_cell(move, sym)
-
-        # @todo add move validation
-        return True
