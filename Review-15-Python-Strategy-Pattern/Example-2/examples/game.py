@@ -5,6 +5,15 @@ from examples.player import Player
 from examples.referee import Referee
 from examples.strategy import KeyboardStrategy, Strategy
 
+"""
+This exception is raised if a game is started before both players have been
+added and their symbols set.
+"""
+
+
+class GameStateError(Exception):
+    pass
+
 
 class Game:
     """
@@ -12,7 +21,6 @@ class Game:
     """
 
     def __init__(self):
-
         self._board = Board()
         self._ref = Referee(self._board)
 
@@ -42,7 +50,8 @@ class Game:
 
     def play_match(self) -> Never:
         if not self.ready_to_start():
-            return
+            #  return
+            raise GameStateError("Player 1 *and** player 2 must be added")
 
         while self.is_not_over():
             self.play_round()
@@ -76,6 +85,7 @@ class Game:
         # The game is over
         if self._board.is_full():
             print(self._board)
+
             return True
 
         winner_id = self._ref.check_for_win()
@@ -83,6 +93,7 @@ class Game:
         if winner_id == 1:
             self._winner = self._player1
             self._loser = self._player2
+
             return True
 
         print()
@@ -96,12 +107,9 @@ class Game:
         winner_id = self._ref.check_for_win()
 
         if winner_id == 2:
-            # @DISCUSS Caught missing self with with pylint unused variable
-            # check, not unit tests
-            # winner = self._player2
-
             self._winner = self._player2
             self._loser = self._player1
+
             return True
 
         return False
@@ -109,6 +117,9 @@ class Game:
     def _round_turn(self, player) -> bool:
         """
         Get a player move, and update the board.
+
+        If a player provides an invalid move... keep reprompting until a valid
+        move is provided.
         """
         move = player.next_move()
         sym = player.get_symbol()

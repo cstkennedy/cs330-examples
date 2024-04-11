@@ -80,13 +80,6 @@ class Board:
                 !(cell3_id > 0 && cell3_id < 10)
         """
 
-        #  assert (cell1_id > 0 and cell1_id < 10)
-        #  assert (cell2_id > 0 and cell2_id < 10)
-        #  assert (cell3_id > 0 and cell3_id < 10)
-        #  assert (0 < cell1_id < 10)
-        #  assert (0 < cell2_id < 10)
-        #  assert (0 < cell3_id < 10)
-
         if not (0 < cell1_id < 10):
             raise IndexError("Cell 1 Index is not between 0 and 10, exclusive")
 
@@ -134,9 +127,9 @@ class Board:
         """
 
         return "\n".join(
-            [
+            (
                 "|".join(self._the_board[0:3]),
                 "|".join(self._the_board[3:6]),
                 "|".join(self._the_board[6:9]),
-            ]
+            )
         )
