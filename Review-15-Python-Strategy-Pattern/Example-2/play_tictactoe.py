@@ -4,8 +4,7 @@
 This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """
 
-from examples import KeyboardStrategy
-from examples import Game, Player
+from examples import Game, KeyboardStrategy, Player
 
 
 def main():

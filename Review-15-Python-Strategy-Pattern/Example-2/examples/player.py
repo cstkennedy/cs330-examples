@@ -3,6 +3,9 @@ from typing import Self
 
 from examples.strategy import Strategy
 
+DEFAULT_NAME: str = "I. C. Generic"
+DEFAULT_SYMBOL: str = "?"
+
 
 class Player:
     """
@@ -11,9 +14,6 @@ class Player:
     However, such distinctions and discussions belong in
     the OOP and Inheritance Modules
     """
-
-    DEFAULT_NAME: str = "I. C. Generic"
-    DEFAULT_SYMBOL: str = "?"
 
     @staticmethod
     def is_generic(possible_cylon: Self) -> bool:
@@ -30,7 +30,7 @@ class Player:
 
         return possible_cylon == REFERENCE_CYLON
 
-    def __init__(self, *, name: str = Player.DEFAULT_NAME, strategy: Strategy):
+    def __init__(self, *, name: str = DEFAULT_NAME, strategy: Strategy):
         """
         Create a Player with a selected name.
 
@@ -39,8 +39,8 @@ class Player:
         """
 
         self._name = name
-        self.my_strategy = strategy
-        self._symbol = Player.DEFAULT_SYMBOL
+        self._strategy = strategy
+        self._symbol = DEFAULT_SYMBOL
 
     def get_name(self) -> str:
         """
@@ -72,7 +72,7 @@ class Player:
         @throws IOException if the move can not be retreived from the player.
         """
 
-        return self.my_strategy.next_move()
+        return self._strategy.next_move()
 
     def is_human(self) -> bool:
         """
@@ -140,7 +140,7 @@ class Player:
         Create a new duplicate Player.
         """
 
-        cpy = Player(name=self._name, strategy=copy.deepcopy(self.my_strategy))
+        cpy = Player(name=self._name, strategy=copy.deepcopy(self._strategy))
         cpy.set_symbol(self._symbol)
 
         return cpy

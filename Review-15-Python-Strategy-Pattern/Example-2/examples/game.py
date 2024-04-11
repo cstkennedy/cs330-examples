@@ -11,7 +11,7 @@ class Game:
     Orchestrates a single match of Tic-Tac-Toe.
     """
 
-    def __init__(self, p1: Player, p2: Player):
+    def __init__(self):
 
         self._board = Board()
         self._ref = Referee(self._board)
@@ -36,7 +36,6 @@ class Game:
 
         self._player1.set_symbol("X")
         self._player2.set_symbol("O")
-
 
     def ready_to_start(self) -> bool:
         return self._player1 and self._player2
@@ -121,7 +120,6 @@ class Game:
 
         self._board.set_cell(move, sym)
 
-        # @todo add move validation
         return True
 
     def get_player1(self) -> Player:

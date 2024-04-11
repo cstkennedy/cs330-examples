@@ -1,4 +1,4 @@
-from examples.strategy import KeyboardStrategy, Strategy
+from examples.strategy import Strategy
 
 
 class Player:
@@ -7,11 +7,6 @@ class Player:
     <p>
     However, such distinctions and discussions belong in
     the OOP and Inheritance Modules
-    """
-
-    PROMPT_MSG = "Enter your desired move (1-9): "
-    """
-    Message used to prompt a human player for a move.
     """
 
     @staticmethod

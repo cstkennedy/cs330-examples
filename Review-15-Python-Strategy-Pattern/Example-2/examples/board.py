@@ -1,7 +1,5 @@
-from typing import Tuple
-
-CellPair = Tuple[int, str]
-CellTriple = Tuple[CellPair, CellPair, CellPair]
+CellPair = tuple[int, str]
+CellTriple = tuple[CellPair, CellPair, CellPair]
 
 
 class Board:
@@ -21,7 +19,7 @@ class Board:
 
         self._the_board = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-    def get_cell(self, cell_id) -> str:
+    def get_cell(self, cell_id: int) -> str:
         """
         Retrieve the value stored in a selected Cell.
 
@@ -62,7 +60,7 @@ class Board:
         # Testing caught the missing -1
         self._the_board[cell_id - 1] = new_value
 
-    def get_3_cells(self, cell1_id, cell2_id, cell3_id) -> CellTriple:
+    def get_3_cells(self, cell1_id: int, cell2_id: int, cell3_id: int) -> CellTriple:
         """
         Retrieve the value stored in three selected Cells.
 
@@ -117,14 +115,6 @@ class Board:
         Returns:
             True if every cell in the board has either an 'X' or an 'O'
         """
-
-        #  empty_cells = 0
-
-        #  for cell in self._the_board:
-            #  if cell.isdigit():
-                #  empty_cells += 1
-
-        #  return empty_cells == 0
 
         return not any(cell.isdigit() for cell in self._the_board)
 

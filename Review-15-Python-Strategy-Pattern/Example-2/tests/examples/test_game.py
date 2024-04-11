@@ -12,7 +12,8 @@ def test_constructor():
 
     empty_board = Board()
 
-    a_game = Game(tom, a_cylon)
+    a_game = Game()
+    a_game.set_players(tom, a_cylon)
 
     assert_that(a_game.get_player1(), equal_to(tom))
     assert_that(a_game.get_player2(), equal_to(a_cylon))

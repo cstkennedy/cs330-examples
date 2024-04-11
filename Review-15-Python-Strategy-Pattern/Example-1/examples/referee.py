@@ -1,9 +1,7 @@
 from typing import Tuple
 
+from examples.board import Board, CellPair, CellTriple
 from examples.player import Player
-
-CellPair = Tuple[int, str]
-CellTriple = Tuple[CellPair, CellPair, CellPair]
 
 
 class Referee:
@@ -16,7 +14,7 @@ class Referee:
     exposed to the outside world.
     """
 
-    def __init__(self, board):
+    def __init__(self, board: Board):
         """
         Create the referee and allow access
         to a board through a constant reference variable.
@@ -146,7 +144,7 @@ class Referee:
         return num_matches == 3
 
     @staticmethod
-    def _player_num_from_symbol(sym: str) -> Player:
+    def _player_num_from_symbol(sym: str) -> int:
         """
         Given an 'X' or an 'O' determine which player is using the symbol.
 
