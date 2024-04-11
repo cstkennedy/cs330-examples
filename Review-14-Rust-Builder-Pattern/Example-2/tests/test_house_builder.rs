@@ -1,5 +1,4 @@
 #[cfg(test)]
-#[macro_use]
 use room_renovation::flooring::*;
 use room_renovation::house::*;
 use room_renovation::room::*;
@@ -54,10 +53,12 @@ fn test_empty_vec() {
     assert_that!(Err(builder_with_name), is(equal_to(builder_empty_vec)));
 }
 
+#[test]
 fn test_empty_vec_then_with_room_1() {
     let house = House::builder()
         .with_name("Test House")
         .with_rooms(vec![])
+        .err()
         .unwrap()
         .with_room(Room::default())
         .build()
@@ -68,6 +69,7 @@ fn test_empty_vec_then_with_room_1() {
     assert_that!(house.len(), is(equal_to(1)));
 }
 
+#[test]
 fn test_empty_vec_then_with_room_2() {
     let kitchen = Room::builder()
         .with_name("Kitchen")
@@ -84,11 +86,10 @@ fn test_empty_vec_then_with_room_2() {
     let house = House::builder()
         .with_name("Test House")
         .with_rooms(vec![])
+        .err()
         .unwrap()
         .with_room(Room::default())
-        .with_room(
-            kitchen.clone()
-        )
+        .with_room(kitchen.clone())
         .build()
         .unwrap();
 
@@ -96,6 +97,6 @@ fn test_empty_vec_then_with_room_2() {
     assert_that!(house.is_empty(), is(false));
     assert_that!(house.len(), is(equal_to(2)));
 
-    let room = house.iter().nth(0).unwrap();
+    let room = house.iter().nth(1).unwrap();
     assert_that!(room, is(equal_to(&kitchen)));
 }
