@@ -3,7 +3,7 @@ import copy
 import pytest
 from hamcrest import *
 
-from examples import Board, Game, Player, Referee
+from examples import Board, Game, GameStateError, Player, Referee
 
 
 def test_constructor():
@@ -28,6 +28,11 @@ def test_constructor():
 
     # Can not test without Board.equals method
     assert_that(a_game.get_board(), equal_to(empty_board))
+
+def test_game_start_with_no_players():
+    with pytest.raises(GameStateError):
+        game = Game()
+        game.play_match()
 
 
 @pytest.mark.skip("can not test")
