@@ -1,18 +1,37 @@
-from typing import Never, Optional
+"""
+This module handles the top-level game logic, including...
+
+  1. Player symbol assignment
+  2. Setting up the Referee
+  3. Tracking match progress
+  4. Managing player move order and validation
+"""
+
+from enum import StrEnum, auto
+from typing import Never, Optional, Self
 
 from examples.board import Board
 from examples.player import Player
 from examples.referee import Referee
-from examples.strategy import KeyboardStrategy, Strategy
-
-"""
-This exception is raised if a game is started before both players have been
-added and their symbols set.
-"""
 
 
 class GameStateError(Exception):
-    pass
+    """
+    This exception is raised if a game is started before both players have been
+    added and their symbols set.
+    """
+
+
+class GameState(StrEnum):
+    """
+    Used to specify the current state of the game (e.g., not started, in
+    progress, or complete)
+    """
+
+    NOT_STARTED = auto()
+    IN_PROGRESS = auto()
+    OVER_WITH_STALEMATE = auto()
+    OVER_WITH_WIN = auto()
 
 
 class Game:
@@ -44,9 +63,6 @@ class Game:
 
         self._player1.set_symbol("X")
         self._player2.set_symbol("O")
-
-    def ready_to_start(self) -> bool:
-        return self._player1 and self._player2
 
     def play_match(self) -> Never:
         if not self.ready_to_start():
@@ -122,16 +138,19 @@ class Game:
         move is provided.
         """
         move = player.next_move()
-        sym = player.get_symbol()
 
-        # while (board.get_cell(move) != 'X' && board.get_cell(move) != 'O') {
         while not self._ref.selected_cell_is_empty(move):
             move = player.next_move()
-            sym = player.get_symbol()
+
+        sym = player.get_symbol()
 
         self._board.set_cell(move, sym)
 
         return True
+
+    # ---------------------------------------------------------------------------
+    # Game Component (board and player) accessors
+    # ---------------------------------------------------------------------------
 
     def get_player1(self) -> Player:
         return self._player1
@@ -145,6 +164,25 @@ class Game:
     def get_loser(self) -> Optional[Player]:
         return self._loser
 
+    def get_board(self) -> bool:
+        return self._board
+
+    # ---------------------------------------------------------------------------
+    # Game State Examination
+    # ---------------------------------------------------------------------------
+
+    def ready_to_start(self) -> bool:
+        # Bug... the next line returns None
+        #  return self._player1 and self._player2
+
+        if self._player1 is None or self._player2 is None:
+            return False
+
+        return True
+
+    def not_ready_to_start(self) -> bool:
+        return not self.ready_to_start()
+
     def ended_with_win(self) -> bool:
         return self._winner is not None
 
@@ -157,5 +195,15 @@ class Game:
     def is_not_over(self) -> bool:
         return not self.is_over()
 
-    def get_board(self) -> bool:
-        return self._board
+    def current_state(self) -> GameState:
+        if self.not_ready_to_start():
+            return GameState.NOT_STARTED
+
+        if self.ended_with_win():
+            return GameState.OVER_WITH_WIN
+
+        if self.ended_with_stalemate():
+            return GameState.OVER_WITH_STALEMATE
+
+        # The only remaining possiblity is for the game to be in progress
+        return GameState.IN_PROGRESS
