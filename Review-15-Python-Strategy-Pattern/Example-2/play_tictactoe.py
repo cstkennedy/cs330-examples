@@ -1,5 +1,3 @@
-#! /usr/bin/env python3
-
 """
 This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """

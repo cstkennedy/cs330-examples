@@ -8,7 +8,7 @@ This module handles the top-level game logic, including...
 """
 
 from enum import StrEnum, auto
-from typing import Never, Optional, Self
+from typing import Never, Optional
 
 from examples.board import Board
 from examples.player import Player
