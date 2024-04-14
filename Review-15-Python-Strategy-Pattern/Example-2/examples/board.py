@@ -31,12 +31,12 @@ class Board:
         Returns:
             value stored in the Cell
 
-        Precondition:
-            (cell_id > 0 && cell_id < 10) -> @todo change to
+        Raises:
+            IndexError if !(cell1_id > 0 && cell1_id < 10) ||
         """
 
-        # assert(cell_id > 0 and cell_id < 10)
-        assert 0 < cell_id < 10
+        if not 0 < cell_id < 10:
+            raise IndexError("Cell Index is not between 0 and 10, exclusive")
 
         return self._the_board[cell_id - 1]  # Testing caught the missing -1
 
@@ -58,7 +58,7 @@ class Board:
             raise IndexError("Cell Index is not between 0 and 10, exclusive")
 
         if new_value not in Board.VALID_SYMBOLS:
-            raise ValueError(f"\"{new_value}\" is not 'X' or 'O'")
+            raise ValueError(f"'{new_value}' is not 'X' or 'O'")
 
         self._the_board[cell_id - 1] = new_value
 
