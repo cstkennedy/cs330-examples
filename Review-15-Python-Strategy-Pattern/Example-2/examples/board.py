@@ -12,6 +12,8 @@ class Board:
     The digit represents the cell id and is used to update a Cell
     """
 
+    VALID_SYMBOLS = ("X", "O")
+
     def __init__(self):
         """
         Construct an empty gameboard.
@@ -46,18 +48,18 @@ class Board:
             cell_id: numeric id representing the desired cell
             new_value: replacement `CellValue`
 
-        Precondition:
-            (id > 0 && id < 10) &&
-            (
-                (new_value == 'X' || new_value == 'O') ||
-                (new_value >= '1' && new_value <= '9')
-            )
+        Raises:
+            IndexError if !(cell1_id > 0 && cell1_id < 10) ||
+
+            ValueError if new_value is not 'X' or 'O'
         """
 
-        # assert (cell_id > 0 and cell_id < 10)
-        assert 0 < cell_id < 10
+        if not 0 < cell_id < 10:
+            raise IndexError("Cell Index is not between 0 and 10, exclusive")
 
-        # Testing caught the missing -1
+        if new_value not in Board.VALID_SYMBOLS:
+            raise ValueError(f"\"{new_value}\" is not 'X' or 'O'")
+
         self._the_board[cell_id - 1] = new_value
 
     def get_3_cells(self, cell1_id: int, cell2_id: int, cell3_id: int) -> CellTriple:
@@ -80,13 +82,13 @@ class Board:
                 !(cell3_id > 0 && cell3_id < 10)
         """
 
-        if not (0 < cell1_id < 10):
+        if not 0 < cell1_id < 10:
             raise IndexError("Cell 1 Index is not between 0 and 10, exclusive")
 
-        if not (0 < cell2_id < 10):
+        if not 0 < cell2_id < 10:
             raise IndexError("Cell 2 Index is not between 0 and 10, exclusive")
 
-        if not (0 < cell3_id < 10):
+        if not 0 < cell3_id < 10:
             raise IndexError("Cell 3 Index is not between 0 and 10, exclusive")
 
         cell1_id -= 1
@@ -102,8 +104,6 @@ class Board:
     def is_full(self) -> bool:
         """
         Return true if all 9 cells hold player symbols.
-
-        _I added this during implementation of the Game ADT in C++_
 
         Returns:
             True if every cell in the board has either an 'X' or an 'O'

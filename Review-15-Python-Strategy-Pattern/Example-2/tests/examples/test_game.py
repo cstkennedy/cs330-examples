@@ -1,7 +1,7 @@
 import copy
 
 import pytest
-from hamcrest import is_, none, equal_to, assert_that
+from hamcrest import assert_that, equal_to, is_, none
 
 from examples import Board, Game, GameState, GameStateError, Player, Referee
 

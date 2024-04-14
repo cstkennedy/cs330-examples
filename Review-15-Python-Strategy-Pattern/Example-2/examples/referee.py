@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from examples.player import Player
+from .player import Player
 
 CellPair = Tuple[int, str]
 CellTriple = Tuple[CellPair, CellPair, CellPair]

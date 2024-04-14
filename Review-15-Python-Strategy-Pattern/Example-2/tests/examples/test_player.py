@@ -109,7 +109,7 @@ def test_clone(create_players):
     assert_that(the_doctor, is_not(equal_to(the_original)))
 
 
-@pytest.mark.skip("can not test")
+@pytest.mark.skip("cannot test")
 def test_next_move():
     # Can not test due to hardcoded System.in use in Player.next_move
     pass

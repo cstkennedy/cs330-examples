@@ -10,9 +10,9 @@ This module handles the top-level game logic, including...
 from enum import StrEnum, auto
 from typing import Never, Optional
 
-from examples.board import Board
-from examples.player import Player
-from examples.referee import Referee
+from .board import Board
+from .player import Player
+from .referee import Referee
 
 
 class GameStateError(Exception):
