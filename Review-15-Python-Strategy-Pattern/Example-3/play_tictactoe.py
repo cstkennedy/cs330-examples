@@ -3,6 +3,7 @@ This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """
 
 from tictactoe import Game, KeyboardStrategy, Player
+from tictactoe.builders import PlayerBuilder, StrategyFactory
 
 
 def main():
