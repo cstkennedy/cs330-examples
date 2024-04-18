@@ -164,7 +164,7 @@ class Game:
     def get_loser(self) -> Optional[Player]:
         return self._loser
 
-    def get_board(self) -> bool:
+    def get_board(self) -> Board:
         return self._board
 
     # ---------------------------------------------------------------------------

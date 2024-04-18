@@ -30,7 +30,7 @@ class Player:
 
         return possible_cylon == REFERENCE_CYLON
 
-    def __init__(self, *, name: str = DEFAULT_NAME, strategy: Strategy):
+    def __init__(self, *, name: str = DEFAULT_NAME, strategy: Strategy, humanity: bool= False):
         """
         Create a Player with a selected name.
 
@@ -41,6 +41,7 @@ class Player:
         self._name = name
         self._strategy = strategy
         self._symbol = DEFAULT_SYMBOL
+        self._is_human = humanity
 
     def get_name(self) -> str:
         """
@@ -84,7 +85,7 @@ class Player:
             True if the player is a human
         """
 
-        return True
+        return self._is_human
 
     def is_computer(self) -> bool:
         """
@@ -96,7 +97,7 @@ class Player:
             True if the player is a Cylon
         """
 
-        return False
+        return not self.is_human()
 
     def get_symbol(self) -> str:
         """

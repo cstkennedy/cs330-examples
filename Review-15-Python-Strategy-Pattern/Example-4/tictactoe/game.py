@@ -61,8 +61,8 @@ class Game:
         self._player1 = player1
         self._player2 = player2
 
-        self._player1.set_symbol("X")
-        self._player2.set_symbol("O")
+        self._player1.symbol = "X"
+        self._player2.symbol = "O"
 
     def play_match(self) -> Never:
         if not self.ready_to_start():
