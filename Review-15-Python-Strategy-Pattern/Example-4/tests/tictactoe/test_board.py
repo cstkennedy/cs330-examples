@@ -1,7 +1,6 @@
-import copy
 
 import pytest
-from hamcrest import *
+from hamcrest import assert_that, is_, equal_to, is_not
 
 from tictactoe.board import Board
 

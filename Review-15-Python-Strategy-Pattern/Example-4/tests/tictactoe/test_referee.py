@@ -1,9 +1,8 @@
-import copy
 
 import pytest
 from hamcrest import assert_that, is_
 
-from tictactoe import Board, Game, Player, Referee
+from tictactoe import Board, Referee
 
 
 @pytest.fixture

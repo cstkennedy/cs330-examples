@@ -1,10 +1,10 @@
 import copy
 
 import pytest
-from hamcrest import *
+from hamcrest import assert_that, equal_to, is_, has_string, is_not
 
-from tictactoe.player import Player
 import tictactoe.player as player
+from tictactoe.player import Player
 
 """
 1 - Does this piece of code perform the operations

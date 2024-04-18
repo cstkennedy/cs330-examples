@@ -1,9 +1,8 @@
-import copy
-
 import pytest
 from hamcrest import assert_that, equal_to, is_, none
 
-from tictactoe import Board, Game, GameState, GameStateError, Player, Referee
+from tictactoe import Board, Game, GameState, GameStateError, Player
+from tictactoe.builders import PlayerBuilder
 
 
 def test_constructor():
@@ -72,9 +71,49 @@ def test_play_round():
     pass
 
 
-@pytest.mark.skip("cannot test")
 def test_play_match_to_stalemate():
-    pass
+    game = Game()
+
+    game.set_players(
+        PlayerBuilder.builder()
+            .with_name("Player 1")
+            .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
+            .build(),
+        PlayerBuilder.builder()
+            .with_name("Player 2")
+            .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
+            .build(),
+    )
+
+    game.play_match()
+
+    assert_that(game.get_player1().name, is_(equal_to("Player 1")))
+    assert_that(game.get_player2().name, is_(equal_to("Player 2")))
+
+    assert_that(game.is_over(), is_(True))
+    assert_that(game.is_not_over(), is_(False))
+
+    expected_board = Board()
+    expected_board.set_cell(5, "X")
+    expected_board.set_cell(1, "O")
+    expected_board.set_cell(3, "X")
+    expected_board.set_cell(7, "O")
+    expected_board.set_cell(4, "X")
+    expected_board.set_cell(6, "O")
+    expected_board.set_cell(9, "X")
+    expected_board.set_cell(2, "O")
+    expected_board.set_cell(8, "X")
+
+    assert_that(game.get_board(), equal_to(expected_board))
+
+    assert_that(game.get_winner(), is_(none()))
+    assert_that(game.get_loser(), is_(none()))
+
+    assert_that(game.ended_with_win(), is_(False))
+    assert_that(game.ended_with_loss(), is_(False))
+    assert_that(game.ended_with_stalemate(), is_(True))
+
+    assert_that(game.current_state(), is_(GameState.OVER_WITH_STALEMATE))
 
 
 @pytest.mark.skip("cannot test")

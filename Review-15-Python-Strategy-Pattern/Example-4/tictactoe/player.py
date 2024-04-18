@@ -31,7 +31,7 @@ class Player:
         @throws IOException if the move can not be retreived from the player.
         """
 
-        return self._strategy.next_move()
+        return self.strategy.next_move()
 
     def is_human(self) -> bool:
         """
@@ -64,7 +64,7 @@ class Player:
 
         return self.name
 
-    def __deepcopy__(self, memo):
+    def __deepcopy__(self, memo) -> Self:
         """
         Create a new duplicate Player.
         """

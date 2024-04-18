@@ -4,12 +4,11 @@ This is a demo driver for a basic single round game of Tic-Tac-Toe.
 
 from typing import Never
 
-from tictactoe import Game, KeyboardStrategy, Player
-from tictactoe.builders import PlayerBuilder, StrategyFactory
-from tictactoe.strategy import PredefinedMoves
+from tictactoe import Game
+from tictactoe.builders import PlayerBuilder
 
 
-def main():
+def main() -> Never:
     """
     This is a simple main function that takes no command line arguments.
     """

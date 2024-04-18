@@ -134,7 +134,7 @@ class Game:
         while not self._ref.selected_cell_is_empty(move):
             move = player.next_move()
 
-        sym = player.get_symbol()
+        sym = player.symbol
 
         self._board.set_cell(move, sym)
 
@@ -175,6 +175,9 @@ class Game:
 
     def ended_with_win(self) -> bool:
         return self._winner is not None
+
+    def ended_with_loss(self) -> bool:
+        return self.ended_with_win()
 
     def ended_with_stalemate(self) -> bool:
         return self._board.is_full() and (self._winner is None)
