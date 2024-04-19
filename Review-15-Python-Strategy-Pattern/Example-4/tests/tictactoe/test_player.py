@@ -1,7 +1,7 @@
 import copy
 
 import pytest
-from hamcrest import assert_that, equal_to, is_, has_string, is_not
+from hamcrest import assert_that, equal_to, has_string, is_, is_not
 
 import tictactoe.player as player
 from tictactoe.player import Player

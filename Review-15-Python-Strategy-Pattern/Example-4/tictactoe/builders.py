@@ -1,7 +1,8 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Never, Optional, Protocol, Self
 
 from .builder import Builder
+from .game import Game
 from .player import Player
 from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
 
@@ -70,3 +71,75 @@ class PlayerBuilder:
         self.validate()
 
         return Player(name=self.name, strategy=self.strategy, humanity=self.is_human)
+
+
+@dataclass
+class GameBuilder:
+    """
+    Unlike the usual "delay object creation until all data is available"
+    approach in the builder pattern (i.e., deferring creation until all values
+    are available)... the `GameBuilder` immediately creates a `Game` object so that
+    `get_board` can be used immediately.
+
+    This allows the board to be passed to Players that need to examine the
+    board to generate a move.
+    """
+
+    game: Game = field(default_factory=Game)
+
+    player1: Optional[Player] = None
+    player2: Optional[Player] = None
+
+    @staticmethod
+    def builder() -> Self:
+        return GameBuilder()
+
+    def add_human_player(self, *, name) -> Self:
+        if self.player1 is not None and self.player2 is not None:
+            raise TypeError("Player 1 and Player 2 have already been set")
+
+        player = (
+            PlayerBuilder
+                .builder()
+                .with_name(name)
+                .human()
+                .build()
+        )
+
+        if not self.player1:
+            self.player1 = player
+
+        else:
+            self.player2 = player
+
+        return self
+
+    def add_player(self, *, name, strategy, **strategy_args) -> Self:
+        if self.player1 is not None and self.player2 is not None:
+            raise TypeError("Player 1 and Player 2 have already been set")
+
+        player = (
+            PlayerBuilder
+                .builder()
+                .with_name(name)
+                .with_strategy(name=strategy, **strategy_args)
+                .build()
+        )
+
+        if not self.player1:
+            self.player1 = player
+
+        else:
+            self.player2 = player
+
+        return self
+
+    def validate(self) -> bool:
+        return True
+
+    def build(self) -> Game:
+        self.validate()
+
+        self.game.set_players(self.player1, self.player2)
+
+        return self.game

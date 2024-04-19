@@ -2,7 +2,7 @@ import pytest
 from hamcrest import assert_that, equal_to, is_, is_not, none
 
 from tictactoe import Board, Game, GameState, GameStateError, Player
-from tictactoe.builders import PlayerBuilder
+from tictactoe.builders import GameBuilder, PlayerBuilder
 
 
 def test_constructor():
@@ -97,17 +97,11 @@ def test_player_turn():
 
 
 def test_play_match_to_stalemate():
-    game = Game()
-
-    game.set_players(
-        PlayerBuilder.builder()
-            .with_name("Player 1")
-            .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
-            .build(),
-        PlayerBuilder.builder()
-            .with_name("Player 2")
-            .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
-            .build(),
+    game = (
+        GameBuilder.builder()
+        .add_player(name="Player 1", strategy="SetMoves", moves=[5, 3, 4, 9, 8])
+        .add_player(name="Player 2", strategy="SetMoves", moves=[1, 7, 6, 2])
+        .build()
     )
 
     game.play_match()
@@ -142,22 +136,13 @@ def test_play_match_to_stalemate():
 
 
 def test_play_match_to_win_player_1():
-    player1 = (
-        PlayerBuilder.builder()
-        .with_name("Player 1")
-        .with_strategy(name="SetMoves", moves=[1, 3, 2])
+    game = (
+        GameBuilder.builder()
+        .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 2])
+        .add_player(name="Player 2", strategy="SetMoves", moves=[4, 6, 5])
         .build()
     )
 
-    player2 = (
-        PlayerBuilder.builder()
-        .with_name("Player 2")
-        .with_strategy(name="SetMoves", moves=[4, 6, 5])
-        .build()
-    )
-
-    game = Game()
-    game.set_players(player1, player2)
     game.play_match()
 
     assert_that(game.get_player1().name, is_(equal_to("Player 1")))
@@ -179,8 +164,8 @@ def test_play_match_to_win_player_1():
     assert_that(game.get_winner(), is_not(none()))
     assert_that(game.get_loser(), is_not(none()))
 
-    assert_that(game.get_winner(), is_(equal_to(player1)))
-    assert_that(game.get_loser(), is_(equal_to(player2)))
+    assert_that(game.get_winner(), is_(equal_to(game.get_player1())))
+    assert_that(game.get_loser(), is_(equal_to(game.get_player2())))
 
     assert_that(game.ended_with_win(), is_(True))
     assert_that(game.ended_with_loss(), is_(True))
@@ -190,22 +175,13 @@ def test_play_match_to_win_player_1():
 
 
 def test_play_match_to_win_player_2():
-    player1 = (
-        PlayerBuilder.builder()
-        .with_name("Player 1")
-        .with_strategy(name="SetMoves", moves=[1, 3, 7])
+    game = (
+        GameBuilder.builder()
+        .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 7])
+        .add_player(name="Player 2", strategy="SetMoves", moves=[5, 2, 8])
         .build()
     )
 
-    player2 = (
-        PlayerBuilder.builder()
-        .with_name("Player 2")
-        .with_strategy(name="SetMoves", moves=[5, 2, 8])
-        .build()
-    )
-
-    game = Game()
-    game.set_players(player1, player2)
     game.play_match()
 
     assert_that(game.get_player1().name, is_(equal_to("Player 1")))
@@ -227,8 +203,8 @@ def test_play_match_to_win_player_2():
     assert_that(game.get_winner(), is_not(none()))
     assert_that(game.get_loser(), is_not(none()))
 
-    assert_that(game.get_winner(), is_(equal_to(player2)))
-    assert_that(game.get_loser(), is_(equal_to(player1)))
+    assert_that(game.get_winner(), is_(equal_to(game.get_player2())))
+    assert_that(game.get_loser(), is_(equal_to(game.get_player1())))
 
     assert_that(game.ended_with_win(), is_(True))
     assert_that(game.ended_with_loss(), is_(True))
