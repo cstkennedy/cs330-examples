@@ -1,10 +1,9 @@
-"""
-This module handles the top-level game logic, including...
+"""This module handles the top-level game logic, including...
 
-  1. Player symbol assignment
-  2. Setting up the Referee
-  3. Tracking match progress
-  4. Managing player move order and validation
+1. Player symbol assignment
+2. Setting up the Referee
+3. Tracking match progress
+4. Managing player move order and validation
 """
 
 from enum import StrEnum, auto
@@ -16,15 +15,13 @@ from .referee import Referee
 
 
 class GameStateError(Exception):
-    """
-    This exception is raised if a game is started before both players have been
+    """This exception is raised if a game is started before both players have been
     added and their symbols set.
     """
 
 
 class GameState(StrEnum):
-    """
-    Used to specify the current state of the game (e.g., not started, in
+    """Used to specify the current state of the game (e.g., not started, in
     progress, or complete)
     """
 
@@ -35,8 +32,7 @@ class GameState(StrEnum):
 
 
 class Game:
-    """
-    Orchestrates a single match of Tic-Tac-Toe.
+    """Orchestrates a single match of Tic-Tac-Toe.
     """
 
     def __init__(self):
@@ -50,14 +46,14 @@ class Game:
         self._loser = None
 
     def set_players(self, player1: Player, player2: Player) -> Never:
-        """
-        Setting player 1 and player 2 and adjust their symbols.
+        """Setting player 1 and player 2 and adjust their symbols.
 
         Args:
+        ----
             player1: the 'X' player
             player2: the 'O' player
-        """
 
+        """
         self._player1 = player1
         self._player2 = player2
 
@@ -80,16 +76,17 @@ class Game:
             print(f"Congratulations {self.get_winner()}!")
 
     def player_turn(self, player: Player) -> bool:
-        """
-        Play one round of Tic-Tac-Toe.
+        """Play one round of Tic-Tac-Toe.
 
-        Returns:
+        Returns
+        -------
             True if the game ended during the turn
 
-        Raises:
+        Raises
+        ------
             IOException if there is an error reading the selected move
-        """
 
+        """
         # The game ended already
         if self._board.is_full():
             return True
@@ -123,8 +120,7 @@ class Game:
         return False
 
     def _handle_move(self, player) -> Never:
-        """
-        Get a player move, and update the board.
+        """Get a player move, and update the board.
 
         If a player provides an invalid move... keep reprompting until a valid
         move is provided.

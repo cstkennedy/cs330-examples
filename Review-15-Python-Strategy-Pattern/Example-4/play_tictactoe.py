@@ -1,18 +1,14 @@
-"""
-This is a demo driver for a basic single round game of Tic-Tac-Toe.
+"""This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """
 
 from typing import Never
 
-from tictactoe import Game
-from tictactoe.builders import PlayerBuilder, GameBuilder
+from tictactoe.builders import GameBuilder
 
 
 def main() -> Never:
+    """This is a simple main function that takes no command line arguments.
     """
-    This is a simple main function that takes no command line arguments.
-    """
-
     game = (
         GameBuilder.builder()
         .add_human_player(name="Tom")
