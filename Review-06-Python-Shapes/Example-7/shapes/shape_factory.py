@@ -7,12 +7,12 @@ recording which Shape types are available.
 from __future__ import annotations
 
 import copy
+from typing import Optional
 
-from shapes.shape import Shape
 from shapes.circle import Circle
+from shapes.shape import Shape
 from shapes.square import Square
-from shapes.triangle import (Triangle, RightTriangle, EquilateralTriangle)
-
+from shapes.triangle import EquilateralTriangle, RightTriangle, Triangle
 
 _KNOWN_SHAPES = {
     "Triangle": Triangle,
@@ -23,7 +23,7 @@ _KNOWN_SHAPES = {
 }  # _Dictionary_ of known shapes
 
 
-def create(name: str) -> Shape:
+def create(name: str) -> Optional[Shape]:
     """
     Create a Shape
 
@@ -40,7 +40,7 @@ def create(name: str) -> Shape:
     return None
 
 
-def create_from_dimensions(name: str, values: list[float]) -> Shape:
+def create_from_dimensions(name: str, values: list[float]) -> Optional[Shape]:
     """
     Create a Shape
 

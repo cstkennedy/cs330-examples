@@ -5,10 +5,10 @@
 
 import logging
 import sys
-from typing import Generator, TextIO
+from typing import Generator, Optional, TextIO
 
-import shapes.shape_factory as shape_factory
 from headings import BorderHeading, MultiLineBorderHeading
+from shapes import shape_factory
 from shapes.shape import Shape
 
 PROGRAM_HEADING = MultiLineBorderHeading(
@@ -32,7 +32,7 @@ FACTORY_DESCRIPTION = "\n".join(
 )
 
 
-def read_shapes(shapes_in: TextIO) -> Generator[Shape, None, None]:
+def read_shapes(shapes_in: TextIO) -> Generator[Optional[Shape], None, None]:
     """
     T.B.W.
     """

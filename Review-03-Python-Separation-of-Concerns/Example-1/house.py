@@ -12,7 +12,7 @@ class House:
         """
 
         self.__name: str = n
-        self.__rooms: List[House] = []
+        self.__rooms: List[Room] = []
 
     @property
     def name(self):
