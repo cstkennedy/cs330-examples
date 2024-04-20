@@ -122,7 +122,7 @@ class Game:
     def is_not_over(self) -> bool:
         return not self.is_over()
 
-    def get_board(self) -> bool:
+    def get_board(self) -> Board:
         return self._board
 
     def _round_turn(self, player) -> bool:
