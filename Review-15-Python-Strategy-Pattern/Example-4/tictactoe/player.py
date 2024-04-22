@@ -1,6 +1,5 @@
 import copy
 from dataclasses import dataclass, field
-from typing import Self
 
 from .strategy import Strategy
 
@@ -17,7 +16,7 @@ class Player:
     """
 
     name: str = field(default=DEFAULT_NAME, compare=True)
-    strategy: Strategy = field(default=None, compare=False)
+    strategy: Strategy = field(default=None, compare=False)  # type: ignore
     humanity: bool = field(default=False, compare=False)
     symbol: str = field(default=DEFAULT_SYMBOL, compare=False)
 
@@ -59,7 +58,7 @@ class Player:
         """
         return self.name
 
-    def __deepcopy__(self, memo) -> Self:
+    def __deepcopy__(self, memo) -> "Player":
         """Create a new duplicate Player.
         """
         cpy = Player(name=self.name, strategy=copy.deepcopy(self.strategy))

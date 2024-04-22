@@ -1,12 +1,11 @@
 """This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """
 
-from typing import Never
 
 from tictactoe.builders import GameBuilder
 
 
-def main() -> Never:
+def main() -> None:
     """This is a simple main function that takes no command line arguments.
     """
     game = (

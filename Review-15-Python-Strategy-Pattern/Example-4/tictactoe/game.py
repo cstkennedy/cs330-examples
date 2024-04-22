@@ -7,7 +7,7 @@
 """
 
 from enum import StrEnum, auto
-from typing import Never, Optional
+from typing import Optional
 
 from .board import Board
 from .player import Player
@@ -15,13 +15,15 @@ from .referee import Referee
 
 
 class GameStateError(Exception):
-    """This exception is raised if a game is started before both players have been
+    """
+    This exception is raised if a game is started before both players have been
     added and their symbols set.
     """
 
 
 class GameState(StrEnum):
-    """Used to specify the current state of the game (e.g., not started, in
+    """
+    Used to specify the current state of the game (e.g., not started, in
     progress, or complete)
     """
 
@@ -32,7 +34,8 @@ class GameState(StrEnum):
 
 
 class Game:
-    """Orchestrates a single match of Tic-Tac-Toe.
+    """
+    Orchestrates a single match of Tic-Tac-Toe.
     """
 
     def __init__(self):
@@ -45,11 +48,11 @@ class Game:
         self._winner = None
         self._loser = None
 
-    def set_players(self, player1: Player, player2: Player) -> Never:
-        """Setting player 1 and player 2 and adjust their symbols.
+    def set_players(self, player1: Player, player2: Player) -> None:
+        """
+        Setting player 1 and player 2 and adjust their symbols.
 
         Args:
-        ----
             player1: the 'X' player
             player2: the 'O' player
 
@@ -60,7 +63,7 @@ class Game:
         self._player1.symbol = "X"
         self._player2.symbol = "O"
 
-    def play_match(self) -> Never:
+    def play_match(self) -> None:
         if not self.ready_to_start():
             #  return
             raise GameStateError("Player 1 *and** player 2 must be added")
@@ -76,14 +79,13 @@ class Game:
             print(f"Congratulations {self.get_winner()}!")
 
     def player_turn(self, player: Player) -> bool:
-        """Play one round of Tic-Tac-Toe.
+        """
+        Play one round of Tic-Tac-Toe.
 
-        Returns
-        -------
+        Returns:
             True if the game ended during the turn
 
-        Raises
-        ------
+        Raises:
             IOException if there is an error reading the selected move
 
         """
@@ -96,15 +98,15 @@ class Game:
             print(self._board)
         self._handle_move(player)
 
-        winner_id = self._ref.check_for_win()
+        winner_symbol = self._ref.check_for_win()
 
-        if winner_id == 1:
+        if winner_symbol == "X":
             self._winner = self._player1
             self._loser = self._player2
 
             return True
 
-        elif winner_id == 2:
+        elif winner_symbol == "O":
             self._winner = self._player2
             self._loser = self._player1
 
@@ -119,8 +121,9 @@ class Game:
 
         return False
 
-    def _handle_move(self, player) -> Never:
-        """Get a player move, and update the board.
+    def _handle_move(self, player) -> None:
+        """
+        Get a player move, and update the board.
 
         If a player provides an invalid move... keep reprompting until a valid
         move is provided.

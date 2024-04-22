@@ -1,6 +1,4 @@
-from typing import Tuple
-
-from .player import Player
+from typing import Tuple, Optional
 
 CellPair = Tuple[int, str]
 CellTriple = Tuple[CellPair, CellPair, CellPair]
@@ -26,7 +24,7 @@ class Referee:
         """
         self._board_ref = board
 
-    def check_for_win(self) -> int:
+    def check_for_win(self) -> Optional[str]:
         """Check for a win condition.
 
         Returns
@@ -36,42 +34,40 @@ class Referee:
         """
         winner = self._check_for_horizontal_win()
 
-        if winner != 0:
+        if winner:
             return winner
 
         winner = self._check_for_vertical_win()
 
-        if winner != 0:
+        if winner:
             return winner
 
         winner = self._check_for_diagonal_win()
 
-        if winner != 0:
+        if winner:
             return winner
 
-        return 0
+        return None
 
     def selected_cell_is_empty(self, move: int) -> bool:
         """Determine whether a cell in the board has been selected
         by a player.
 
         Args:
-        ----
             move: player candidate move
 
         Returns:
-        -------
             True if the cell is currently empty
 
         """
         return self._board_ref.get_cell(move) not in ["X", "O"]
 
-    def _check_for_horizontal_win(self) -> int:
-        """Check each row of the board for three 'X' or three 'O'
+    def _check_for_horizontal_win(self) -> Optional[str]:
+        """
+        Check each row of the board for three 'X' or three 'O'
         characters.
 
-        Returns
-        -------
+        Returns:
             1 if player 1 has won, 2 if player 2 has one, or 0 if
             no one has won
 
@@ -81,16 +77,16 @@ class Referee:
 
             if self._all_three_match(triple):
                 # if they match, grab the 'X' or 'O'
-                return self._player_num_from_symbol(triple[0][1])
+                return triple[0][1]
 
-        return 0
+        return None
 
-    def _check_for_vertical_win(self) -> int:
-        """Check each column of the board for three 'X' or three 'O'
+    def _check_for_vertical_win(self) -> Optional[str]:
+        """
+        Check each column of the board for three 'X' or three 'O'
         characters.
 
-        Returns
-        -------
+        Returns:
             1 if player 1 has won, 2 if player 2 has one, or 0 if
             no one has won
 
@@ -100,11 +96,11 @@ class Referee:
 
             if self._all_three_match(triple):
                 # if they match, grab the 'X' or 'O'
-                return self._player_num_from_symbol(triple[0][1])
+                return triple[0][1]
 
-        return 0
+        return None
 
-    def _check_for_diagonal_win(self) -> int:
+    def _check_for_diagonal_win(self) -> Optional[str]:
         """Check the two diagonals of the board for three 'X' or three 'O'
         characters.
 
@@ -119,20 +115,19 @@ class Referee:
 
             if self._all_three_match(triple):
                 # if they match, grab the 'X' or 'O'
-                return self._player_num_from_symbol(triple[0][1])
+                return triple[0][1]
 
-        return 0
+        return None
 
     @staticmethod
     def _all_three_match(triple: CellTriple) -> bool:
-        """Check for three matching symbols in the Pair-Triple.
+        """
+        Check for three matching symbols in the Pair-Triple.
 
         Args:
-        ----
             triple: set of three cells to check
 
         Returns:
-        -------
             True if all three pairs contain the same symbol
 
         """
@@ -146,21 +141,3 @@ class Referee:
 
         return num_matches == 3
 
-    @staticmethod
-    def _player_num_from_symbol(sym: str) -> Player:
-        """Given an 'X' or an 'O' determine which player is using the symbol.
-
-        Args:
-        ----
-            sym: symbol to check
-
-        Returns:
-        -------
-            1 for player 1 or 2 for player 2
-
-        Precondition:
-            `sym == 'X' or 'O'`
-
-        """
-        # return (sym == 'X' ? 1 : 2)
-        return 1 if sym == "X" else 2

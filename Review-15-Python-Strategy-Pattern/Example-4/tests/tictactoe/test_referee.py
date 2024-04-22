@@ -1,6 +1,6 @@
 
 import pytest
-from hamcrest import assert_that, is_
+from hamcrest import assert_that, is_, none
 
 from tictactoe import Board, Referee
 
@@ -17,7 +17,7 @@ def empty_board_and_ref():
 def test_constructor(empty_board_and_ref):
     _, a_referee = empty_board_and_ref
 
-    assert_that(a_referee.check_for_win(), is_(0))
+    assert_that(a_referee.check_for_win(), is_(none()))
 
     for i in range(1, 10):
         assert_that(a_referee.selected_cell_is_empty(i), is_(True))
@@ -36,7 +36,7 @@ def test_check_for_horizontal_win():
     assert_that(h_referee.selected_cell_is_empty(5), is_(False))
     assert_that(h_referee.selected_cell_is_empty(6), is_(False))
 
-    assert_that(h_referee.check_for_win(), is_(1))
+    assert_that(h_referee.check_for_win(), is_("X"))
 
 
 def test_check_for_vertical_win():
@@ -52,7 +52,7 @@ def test_check_for_vertical_win():
     assert_that(v_referee.selected_cell_is_empty(5), is_(False))
     assert_that(v_referee.selected_cell_is_empty(8), is_(False))
 
-    assert_that(v_referee.check_for_win(), is_(2))
+    assert_that(v_referee.check_for_win(), is_("O"))
 
 
 def test_check_for_diagonal_win():
@@ -68,4 +68,4 @@ def test_check_for_diagonal_win():
     assert_that(d_referee.selected_cell_is_empty(5), is_(False))
     assert_that(d_referee.selected_cell_is_empty(7), is_(False))
 
-    assert_that(d_referee.check_for_win(), is_(2))
+    assert_that(d_referee.check_for_win(), is_("O"))

@@ -1,24 +1,26 @@
 from dataclasses import dataclass, field
-from typing import Never, Optional, Self, TypeVar
+from typing import Optional, Self, TypeVar
 
 from .game import Game
 from .player import Player
 from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
-
 
 S = TypeVar("S", bound=Strategy)
 
 
 
 class StrategyFactory:
-    __strategy_repo = {"Keyboard": KeyboardStrategy, "SetMoves": PredefinedMoves}
+    __strategy_repo = {
+        "Keyboard": KeyboardStrategy,
+        "SetMoves": PredefinedMoves
+    }
 
     @classmethod
-    def add(cls, type_of_strategy: str, a_strategy: S) -> Never:
+    def add(cls, type_of_strategy: str, a_strategy: S) -> None:
         if type_of_strategy in cls.__strategy_repo:
             raise ValueError(f'An entry for "{type_of_strategy}" already exists')
 
-        cls.__strategy_repo[type_of_strategy] = a_strategy
+        cls.__strategy_repo[type_of_strategy] = a_strategy  # type: ignore
 
     @classmethod
     def create(cls, type_of_strategy: str, /, **kwargs) -> Strategy:
@@ -42,7 +44,7 @@ class PlayerBuilder:
     is_human = False
 
     @staticmethod
-    def builder() -> Self:
+    def builder() -> "PlayerBuilder":
         return PlayerBuilder()
 
     def with_name(self, val: str) -> Self:
@@ -51,6 +53,9 @@ class PlayerBuilder:
         return self
 
     def human(self) -> Self:
+        if not self.name:
+            raise ValueError("Player name must be set before strategy selection")
+
         self.strategy = KeyboardStrategy(self.name)
         self.is_human = True
 
@@ -63,17 +68,21 @@ class PlayerBuilder:
 
     def validate(self) -> bool:
         if not self.name:
-            return ValueError("No name was set")
+            raise ValueError("No name was set")
 
         if not self.strategy:
-            return ValueError("No strategy was specified")
+            raise ValueError("No strategy was specified")
 
         return True
 
     def build(self) -> Player:
         self.validate()
 
-        return Player(name=self.name, strategy=self.strategy, humanity=self.is_human)
+        return Player(
+            name=self.name,  # type: ignore
+            strategy=self.strategy,  # type: ignore
+            humanity=self.is_human
+        )
 
 
 @dataclass
@@ -93,10 +102,10 @@ class GameBuilder:
     player2: Optional[Player] = None
 
     @staticmethod
-    def builder() -> Self:
+    def builder() -> "GameBuilder":
         return GameBuilder()
 
-    def add_human_player(self, *, name) -> Self:
+    def add_human_player(self, *, name: str) -> Self:
         if self.player1 is not None and self.player2 is not None:
             raise TypeError("Player 1 and Player 2 have already been set")
 
@@ -116,7 +125,7 @@ class GameBuilder:
 
         return self
 
-    def add_player(self, *, name, strategy, **strategy_args) -> Self:
+    def add_player(self, *, name: str, strategy: str, **strategy_args) -> Self:
         if self.player1 is not None and self.player2 is not None:
             raise TypeError("Player 1 and Player 2 have already been set")
 
@@ -136,12 +145,16 @@ class GameBuilder:
 
         return self
 
-    def validate(self) -> bool:
-        return True
+    def validate(self) -> None:
+        if self.player1 is None:
+            raise ValueError("Player 1 was not set")
+
+        if self.player2 is None:
+            raise ValueError("Player 2 was not set")
 
     def build(self) -> Game:
         self.validate()
 
-        self.game.set_players(self.player1, self.player2)
+        self.game.set_players(self.player1, self.player2)  # type: ignore
 
         return self.game
