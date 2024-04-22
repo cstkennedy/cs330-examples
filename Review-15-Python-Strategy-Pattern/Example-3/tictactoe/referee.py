@@ -1,6 +1,5 @@
 from typing import Tuple
 
-from .player import Player
 
 CellPair = Tuple[int, str]
 CellTriple = Tuple[CellPair, CellPair, CellPair]
@@ -146,7 +145,7 @@ class Referee:
         return num_matches == 3
 
     @staticmethod
-    def _player_num_from_symbol(sym: str) -> Player:
+    def _player_num_from_symbol(sym: str) -> int:
         """
         Given an 'X' or an 'O' determine which player is using the symbol.
 

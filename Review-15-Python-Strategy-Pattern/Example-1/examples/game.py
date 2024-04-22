@@ -29,7 +29,7 @@ class Game:
         self._player1.set_symbol("X")
         self._player2.set_symbol("O")
 
-        self._winner = None
+        self._winner: Optional[Player] = None
 
     def play_round(self) -> bool:
         """
@@ -122,7 +122,7 @@ class Game:
     def is_not_over(self) -> bool:
         return not self.is_over()
 
-    def get_board(self) -> bool:
+    def get_board(self) -> Board:
         return self._board
 
     def _round_turn(self, player) -> bool:

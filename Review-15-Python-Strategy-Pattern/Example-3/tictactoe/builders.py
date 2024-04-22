@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Never, Optional, Protocol, Self
+from typing import Never, Optional, Protocol, Self, Callable, Any
 
 from .builder import Builder
 from .player import Player
@@ -13,7 +13,7 @@ class StrategyFactory:
     }
 
     @classmethod
-    def add(cls, type_of_strategy: str, a_strategy: Strategy) -> Never:
+    def add(cls, type_of_strategy: str, a_strategy) -> Never:
         if type_of_strategy in cls.__strategy_repo:
             raise ValueError(f'An entry for "{type_of_strategy}" already exists')
 
@@ -41,7 +41,7 @@ class PlayerBuilder:
     is_human = False
 
     @staticmethod
-    def builder() -> Self:
+    def builder() -> "PlayerBuilder":
         return PlayerBuilder()
 
     def with_name(self, val: str) -> Self:
@@ -50,6 +50,9 @@ class PlayerBuilder:
         return self
 
     def human(self) -> Self:
+        if not self.name:
+            raise ValueError("A human player must have a name")
+
         self.strategy = KeyboardStrategy(self.name)
         self.is_human = True
 
@@ -62,10 +65,10 @@ class PlayerBuilder:
 
     def validate(self) -> bool:
         if not self.name:
-            return ValueError("No name was set")
+            raise ValueError("No name was set")
 
         if not self.strategy:
-            return ValueError("No strategy was specified")
+            raise ValueError("No strategy was specified")
 
         return True
 

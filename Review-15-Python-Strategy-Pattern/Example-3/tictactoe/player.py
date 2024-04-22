@@ -16,7 +16,7 @@ class Player:
     """
 
     @staticmethod
-    def is_generic(possible_cylon: Self) -> bool:
+    def is_generic(possible_cylon: "Player") -> bool:
         """
         Checks whether a player is a placeholder or
         an actual player.
