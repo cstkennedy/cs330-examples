@@ -111,7 +111,7 @@ class House:
 
 
 class HouseBuilder:
-    def __init__(self):
+    def __init__(self) -> None:
         self.name: Optional[str] = None
         self.the_rooms: list[Room] = []
 
@@ -152,6 +152,6 @@ class HouseBuilder:
         if self.name:
             house.name = self.name
 
-        house._House__rooms = self.the_rooms
+        house._House__rooms = self.the_rooms  # type: ignore
 
         return house

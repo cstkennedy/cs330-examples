@@ -16,7 +16,7 @@ class Flooring:
     type_name: str
     unit_cost: float
 
-    def update(self, nme: str, unit_c: float) -> Never:
+    def update(self, nme: str, unit_c: float) -> None:
         """
         Replace/update the flooring.
 
@@ -74,7 +74,7 @@ class Room:
 
 
 class RoomBuilder:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__name: Optional[str] = None
         self.__length: Optional[float] = None
         self.__width: Optional[float] = None
@@ -137,7 +137,7 @@ class RoomBuilder:
 
         return self
 
-    def __check_name(self, val: str | None, name: str) -> Never:
+    def __check_name(self, val: str | None, name: str) -> None:
         """
         Raise a Value Error if:
           1. val was not set
@@ -151,7 +151,7 @@ class RoomBuilder:
         if len(val) < 3:
             raise ValueError('"{name}" len("{val}") < 3')
 
-    def __check_num(self, val: float | int, name: str) -> Never:
+    def __check_num(self, val: float | int, name: str) -> None:
         if val <= 0:
             raise ValueError(f'"{name}" <= 0')
 
@@ -176,7 +176,7 @@ class RoomBuilder:
         self.__check_num(self.__width, "width")
 
         room = Room(
-            self.__name,
+            self.__name,  # type: ignore
             DimensionSet(self.__length, self.__width),
             Flooring(self.__flooring_type, self.__flooring_unit_cost),
         )
