@@ -1,7 +1,7 @@
-import math
 import copy
+import math
 
-from shapes.shape import (Shape, FPT_FMT, STR_FMT)
+from shapes.shape import FPT_FMT, STR_FMT, Shape
 
 PI = math.pi  # \f$ \pi \f$
 TAU = 2 * PI  # \f$ \tau = 2\pi \f$

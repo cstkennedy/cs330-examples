@@ -4,8 +4,7 @@ from typing import Never, Protocol
 
 class Strategy(Protocol):
     def next_move(self) -> int:
-        """
-        Retrieve the next move.
+        """Retrieve the next move.
         """
 
 

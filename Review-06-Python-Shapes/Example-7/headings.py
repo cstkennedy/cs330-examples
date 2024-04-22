@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Self
+
 import itertools
 from dataclasses import dataclass
 
@@ -25,7 +27,7 @@ class BorderHeading:
 
 @dataclass
 class MultiLineBorderHeading:
-    content: tuple[str]
+    content: tuple[str, ...]
     symbol: str
     width: int
 

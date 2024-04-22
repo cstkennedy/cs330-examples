@@ -1,7 +1,7 @@
 import copy
 import math
 
-from shapes.shape import (Shape, FPT_FMT, STR_FMT)
+from shapes.shape import FPT_FMT, STR_FMT, Shape
 
 
 class Triangle(Shape):

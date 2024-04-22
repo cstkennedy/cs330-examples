@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, List, Self
+from typing import Iterable, List, Self, Optional
 
 from room import Room
 
@@ -13,7 +13,7 @@ class House:
         """
 
         self.__name: str = nme
-        self.__rooms: list[House] = []
+        self.__rooms: list[Room] = []
 
     @property
     def name(self):
@@ -60,7 +60,7 @@ class House:
 
         return len(self) == 0
 
-    def flooring_cost_metrics(self) -> float:
+    def flooring_cost_metrics(self) -> tuple[float, float]:
         #  total = sum(map(lambda room: room.flooring_cost(), self))
         total = sum(room.flooring_cost() for room in self)
         avg = total / len(self)
@@ -112,7 +112,7 @@ class House:
 
 class HouseBuilder:
     def __init__(self):
-        self.name: str = None
+        self.name: Optional[str] = None
         self.the_rooms: list[Room] = []
 
     def with_name(self, nme: str) -> Self:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 from dataclasses import dataclass, field
+from typing import Optional, Self, Never
 
 
 @dataclass
@@ -15,7 +16,7 @@ class Flooring:
     type_name: str
     unit_cost: float
 
-    def update(self, nme: str, unit_c: float) -> None:
+    def update(self, nme: str, unit_c: float) -> Never:
         """
         Replace/update the flooring.
 
@@ -74,13 +75,13 @@ class Room:
 
 class RoomBuilder:
     def __init__(self):
-        self.__name = None
-        self.__length = None
-        self.__width = None
-        self.__flooring_type = None
-        self.__flooring_unit_cost = None
+        self.__name: Optional[str] = None
+        self.__length: Optional[float] = None
+        self.__width: Optional[float] = None
+        self.__flooring_type: Optional[str] = None
+        self.__flooring_unit_cost: Optional[float] = None
 
-    def from_template(self, room: Room) -> RoomBuilder:
+    def from_template(self, room: Room) -> Self:
         self.__name = copy.deepcopy(room.name)
         self.__length = copy.deepcopy(room.dimensions.length)
         self.__width = copy.deepcopy(room.dimensions.width)
@@ -89,12 +90,12 @@ class RoomBuilder:
 
         return self
 
-    def substitute_flooring(self, nme: str, unit_c: float) -> RoomBuilder:
+    def substitute_flooring(self, nme: str, unit_c: float) -> Self:
         self.with_flooring(nme, unit_c)
 
         return self
 
-    def with_name(self, nme: str) -> RoomBuilder:
+    def with_name(self, nme: str) -> Self:
         """
         Set the name using the builder pattern.
 
@@ -106,7 +107,7 @@ class RoomBuilder:
 
         return self
 
-    def with_flooring(self, nme: str, unit_c: float) -> RoomBuilder:
+    def with_flooring(self, nme: str, unit_c: float) -> Self:
         """
         Set the Flooring using the builder pattern.
 
@@ -121,7 +122,7 @@ class RoomBuilder:
 
         return self
 
-    def with_dimensions(self, l: float, w: float) -> RoomBuilder:
+    def with_dimensions(self, l: float, w: float) -> Self:
         """
         Set the Flooring using the builder pattern.
 
@@ -136,7 +137,7 @@ class RoomBuilder:
 
         return self
 
-    def __check_name(self, val: str, name: str) -> None:
+    def __check_name(self, val: str | None, name: str) -> Never:
         """
         Raise a Value Error if:
           1. val was not set
@@ -150,7 +151,7 @@ class RoomBuilder:
         if len(val) < 3:
             raise ValueError('"{name}" len("{val}") < 3')
 
-    def __check_num(self, val: float | int, name: str) -> None:
+    def __check_num(self, val: float | int, name: str) -> Never:
         if val <= 0:
             raise ValueError(f'"{name}" <= 0')
 

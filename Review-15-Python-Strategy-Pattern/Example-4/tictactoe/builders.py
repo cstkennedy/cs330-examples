@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Never, Optional, Protocol, Self
+from typing import Never, Optional, Self
 
-from .builder import Builder
 from .game import Game
 from .player import Player
 from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
@@ -75,8 +74,7 @@ class PlayerBuilder:
 
 @dataclass
 class GameBuilder:
-    """
-    Unlike the usual "delay object creation until all data is available"
+    """Unlike the usual "delay object creation until all data is available"
     approach in the builder pattern (i.e., deferring creation until all values
     are available)... the `GameBuilder` immediately creates a `Game` object so that
     `get_board` can be used immediately.

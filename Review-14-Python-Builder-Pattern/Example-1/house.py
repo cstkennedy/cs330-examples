@@ -11,7 +11,7 @@ class House:
         """
 
         self.__name: str = n
-        self.__rooms: List[House] = []
+        self.__rooms: List[Room] = []
 
     @property
     def name(self):
@@ -58,7 +58,7 @@ class House:
 
         return len(self) == 0
 
-    def flooring_cost_metrics(self) -> float:
+    def flooring_cost_metrics(self) -> tuple[float, float]:
         #  total = sum(map(lambda room: room.flooring_cost(), self))
         total = sum(room.flooring_cost() for room in self)
         avg = total / len(self)

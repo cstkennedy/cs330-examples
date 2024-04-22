@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import sys
-
+from typing import Optional
 
 # 9.2 ms …  13.4 ms
 # 9.1 ms …  13.2 ms
@@ -21,7 +21,7 @@ def word_stream(word_fname: str):
             if word:
                 yield word
 
-def contains_chars(word: str, banned: list[str] = None) -> bool:
+def contains_chars(word: str, banned: Optional[list[str]] = None) -> bool:
     if not banned:
         banned = [".", "+"]
 

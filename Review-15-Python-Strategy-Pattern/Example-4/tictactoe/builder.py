@@ -11,13 +11,11 @@ T = TypeVar("T")
 
 class Builder(Protocol[T]):
     def validate(self) -> bool:
-        """
-        Run all validation checks and generate exceptions for any failed checks.
+        """Run all validation checks and generate exceptions for any failed checks.
         """
         ...
 
     def build(self) -> T:
-        """
-        T.B.W.
+        """T.B.W.
         """
         ...
