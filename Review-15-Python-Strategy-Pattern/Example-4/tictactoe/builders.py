@@ -1,16 +1,20 @@
 from dataclasses import dataclass, field
-from typing import Never, Optional, Self
+from typing import Never, Optional, Self, TypeVar
 
 from .game import Game
 from .player import Player
 from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
 
 
+S = TypeVar("S", bound=Strategy)
+
+
+
 class StrategyFactory:
     __strategy_repo = {"Keyboard": KeyboardStrategy, "SetMoves": PredefinedMoves}
 
     @classmethod
-    def add(cls, type_of_strategy: str, a_strategy: Strategy) -> Never:
+    def add(cls, type_of_strategy: str, a_strategy: S) -> Never:
         if type_of_strategy in cls.__strategy_repo:
             raise ValueError(f'An entry for "{type_of_strategy}" already exists')
 
