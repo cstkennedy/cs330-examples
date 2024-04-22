@@ -49,7 +49,7 @@ class Game:
         self._winner = None
         self._loser = None
 
-    def set_players(self, player1: Player, player2: Player) -> Never:
+    def set_players(self, player1: Player, player2: Player) -> None:
         """
         Setting player 1 and player 2 and adjust their symbols.
 
@@ -64,7 +64,7 @@ class Game:
         self._player1.set_symbol("X")
         self._player2.set_symbol("O")
 
-    def play_match(self) -> Never:
+    def play_match(self) -> None:
         if not self.ready_to_start():
             #  return
             raise GameStateError("Player 1 *and** player 2 must be added")

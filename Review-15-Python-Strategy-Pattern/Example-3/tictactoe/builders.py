@@ -13,7 +13,7 @@ class StrategyFactory:
     }
 
     @classmethod
-    def add(cls, type_of_strategy: str, a_strategy) -> Never:
+    def add(cls, type_of_strategy: str, a_strategy) -> None:
         if type_of_strategy in cls.__strategy_repo:
             raise ValueError(f'An entry for "{type_of_strategy}" already exists')
 

@@ -23,7 +23,7 @@ class KeyboardStrategy:
 
 
 class PredefinedMoves:
-    def __init__(self, *, moves: list[int]) -> Never:
+    def __init__(self, *, moves: list[int]) -> None:
         self.my_moves = moves
         self.__move_idx = 0
 
