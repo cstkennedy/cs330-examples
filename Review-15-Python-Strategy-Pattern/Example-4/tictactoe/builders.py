@@ -87,7 +87,8 @@ class PlayerBuilder:
 
 @dataclass
 class GameBuilder:
-    """Unlike the usual "delay object creation until all data is available"
+    """
+    Unlike the usual "delay object creation until all data is available"
     approach in the builder pattern (i.e., deferring creation until all values
     are available)... the `GameBuilder` immediately creates a `Game` object so that
     `get_board` can be used immediately.
