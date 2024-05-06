@@ -21,7 +21,5 @@ Example 3 is an example of a CS 250 level Objected Oriented Program in Java
 
   - This includes a brief discussion of Gradle and JUnit as topics of
     interest.
-  - Gradle and JUnit are CS 350 topics that are related to CS 330. You will
-    not be graded on Gradle or JUnit in CS 330.
   - For the **truly curious**, you can access my CS 350 Review Materials
     [here](https://github.com/cstkennedy/cs350-examples)
