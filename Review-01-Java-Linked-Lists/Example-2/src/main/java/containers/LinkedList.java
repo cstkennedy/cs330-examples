@@ -17,9 +17,9 @@ public class LinkedList implements Cloneable
             this.next = null;
         }
 
-        Node(int d)
+        Node(int val)
         {
-            this.data = d;
+            this.data = val;
             this.next = null;
         }
     }
@@ -64,23 +64,23 @@ public class LinkedList implements Cloneable
         Node newNode = new Node(toAdd);
 
         // If adding the first Node
-        if (head == null) {
-            head        = newNode;
-            tail        = newNode;
-            currentSize = 1;
+        if (this.head == null) {
+            this.head        = newNode;
+            this.tail        = newNode;
+            this.currentSize = 1;
 
             // Why set newNode to null?
-            newNode     = null;
+            newNode = null;
 
             return true;
         }
 
         // Link the newNode to the end
         // of the existing list
-        tail.next = newNode;
+        this.tail.next = newNode;
 
         // Update tail;
-        tail = tail.next;
+        this.tail = this.tail.next;
         // tail = newNode;
 
         // Update the size
@@ -123,6 +123,7 @@ public class LinkedList implements Cloneable
     /**
      * Create an identical (deep) copy of this list.
      */
+    @Override
     public LinkedList clone()
     {
         LinkedList copy = new LinkedList();
@@ -137,6 +138,45 @@ public class LinkedList implements Cloneable
         return copy;
     }
 
+    /**
+     * Two Linked Lists are equal if they contain the same data in the same
+     * order.
+     */
+    @Override
+    public boolean equals(Object rhs)
+    {
+        // We can only compare two LinkedLists... for now
+        if (!(rhs instanceof LinkedList)) {
+            return false;
+        }
+
+        LinkedList rhsList = (LinkedList) rhs;
+
+        // If the sizes are different... we know that the two lists are not
+        // equal
+        if (this.size() != rhsList.size()) {
+            return false;
+        }
+
+        // We are now guaranteed to have the same number of entries
+        Node lhsIt = this.head;
+        Node rhsIt = rhsList.head;
+
+        while (lhsIt != null) {
+            if (lhsIt.data != rhsIt.data) {
+                return false;
+            }
+
+            lhsIt = lhsIt.next;
+            rhsIt = rhsIt.next;
+        }
+
+        // If this point is reached... everything matches
+        return true;
+
+    }
+
+    @Override
     public String toString()
     {
         StringBuilder bldr = new StringBuilder();
@@ -146,8 +186,8 @@ public class LinkedList implements Cloneable
 
         while (it != null) {
             bldr.append(
-                String.format("Node # %4d - %4d%n", index, it.data
-            ));
+                String.format("Node # %4d - %4d%n", index, it.data)
+            );
 
             // increment index
             index++;

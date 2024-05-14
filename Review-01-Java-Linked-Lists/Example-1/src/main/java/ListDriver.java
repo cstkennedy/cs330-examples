@@ -77,20 +77,23 @@ public class ListDriver
     {
         final int argc = args.length;
 
-        int seed        = 0;  // Seed for random number generation
-        int toGenerate  = 0;  // Number of nodes to generate
-
+        //----------------------------------------------------------------------
+        // If a seed was passed from the command line,
+        // parse it. Otherwise stick with the default seed
+        //----------------------------------------------------------------------
         Random random = new Random();
 
-        // If a seed was passed from the command line,
-        // parse it. Otherwise default to ctime
         if (argc >= 1) {
-            seed = Integer.parseInt(args[0]);
+            int seed = Integer.parseInt(args[0]);
             random.setSeed(seed);
         }
 
+        //----------------------------------------------------------------------
         // If a node count was passed from the command line,
         // parse it. Otherwise default to 10
+        //----------------------------------------------------------------------
+        int toGenerate = 0;
+
         if (argc >= 2) {
             toGenerate = Integer.parseInt(args[1]);
         }
@@ -98,20 +101,28 @@ public class ListDriver
             toGenerate = 10;
         }
 
+        //----------------------------------------------------------------------
+        // Output the "fancy" program heading
+        //----------------------------------------------------------------------
         System.out.println(projectHeading(PROGRAM_HEADING, W_WIDTH));
 
-        // Create a Linked List
+        //----------------------------------------------------------------------
+        // Create and output a Linked List with random integers
+        //----------------------------------------------------------------------
         LinkedList randomInts = generateList(random, toGenerate);
         System.out.println(randomInts);
 
-        System.out.println(horizontalLine('*', W_WIDTH));
-
+        //----------------------------------------------------------------------
+        // Create a copy of randomInts and add an "extra" number.
+        //----------------------------------------------------------------------
         LinkedList randomCopy = randomInts.clone();
-
         randomCopy.add(337);
 
+        //----------------------------------------------------------------------
+        // Output the original list (again) after outputting the copy
+        //----------------------------------------------------------------------
+        System.out.println(horizontalLine('*', W_WIDTH));
         System.out.println(randomCopy);
-
         System.out.println(horizontalLine('*', W_WIDTH));
         System.out.println(randomInts);
     }
