@@ -14,6 +14,6 @@ The recorded lecture is split into two (2) parts:
     - [YouTube](https://youtu.be/w0jSC5xi7vE)
     - [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Linked+Lists+-+Part+1/1_cmiog7up)
 
-  - Part 2 Example 3
+  - Part 2 (Example 3)
     - [YouTube](https://youtu.be/t0N6f0ke3AA)
     - [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Linked+Lists+-+Part+2/1_3fo9qi9c)
