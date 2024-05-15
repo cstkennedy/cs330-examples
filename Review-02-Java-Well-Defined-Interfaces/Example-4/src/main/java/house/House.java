@@ -141,7 +141,6 @@ public class House implements Iterable<Room>
         if (this.rooms == null) {
             return 0;
         }
-        
 
         return this.rooms.length;
     }
