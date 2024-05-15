@@ -10,9 +10,12 @@ import house.House;
 
 public class UpdateRoom
 {
-    public static final String ROOM_DATA = "Laundry Room; 8 4 1.95 Laminate\n"
-            + "Kitchen; 20 12 3.87 Tile\n"
-            + "Storage Room; 16 16 4.39 Birch Wood";
+    public static final String ROOM_DATA = String.join(
+        System.lineSeparator(),
+        "Laundry Room; 8 4 1.95 Laminate",
+        "Kitchen; 20 12 3.87 Tile",
+        "Storage Room; 16 16 4.39 Birch Wood"
+    );
 
     /**
      * Extract Room information from a string.
@@ -35,10 +38,12 @@ public class UpdateRoom
         double unitCost = scnr.nextDouble();
         String type = scnr.nextLine();
 
-        Room aRoom = new Room(name,
-                              new Room.DimensionSet(length, width),
-                              unitCost,
-                              type);
+        Room aRoom = new Room(
+            name,
+            new Room.DimensionSet(length, width),
+            unitCost,
+            type
+        );
 
         return aRoom;
     }
@@ -56,12 +61,12 @@ public class UpdateRoom
         House house = new House();
 
         reader.lines()
-                .map((String line) -> {
-                    return extractRoomFrom(line);
-                })
-                .forEach((Room aRoom) -> {
-                    house.addRoom(aRoom);
-                });
+            .map((String line) -> {
+                return extractRoomFrom(line);
+            })
+            .forEach((Room aRoom) -> {
+                house.addRoom(aRoom);
+            });
 
         return house;
     }

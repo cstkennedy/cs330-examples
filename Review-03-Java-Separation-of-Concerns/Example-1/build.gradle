@@ -68,7 +68,7 @@ task deploy(dependsOn: [jar, javadoc, check]) {
 }
 
 jacoco {
-    toolVersion = "0.8.4"
+    toolVersion = "0.8.11"
 }
 
 jacocoTestReport {

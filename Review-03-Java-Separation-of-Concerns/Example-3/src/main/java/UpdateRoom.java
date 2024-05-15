@@ -9,9 +9,12 @@ import house.House;
 
 public class UpdateRoom
 {
-    public static final String ROOM_DATA = "Laundry Room; 8 4 1.95 Laminate\n"
-            + "Kitchen; 20 12 3.87 Tile\n"
-            + "Storage Room; 16 16 4.39 Birch Wood";
+    public static final String ROOM_DATA = String.join(
+        System.lineSeparator(),
+        "Laundry Room; 8 4 1.95 Laminate",
+        "Kitchen; 20 12 3.87 Tile",
+        "Storage Room; 16 16 4.39 Birch Wood"
+    );
 
     /**
      * Take a room and change the flooring
