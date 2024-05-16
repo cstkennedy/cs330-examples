@@ -11,7 +11,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 // import org.hamcrest.core.IsNull;
 
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * 1 - Does this piece of code perform the operations
@@ -70,6 +72,34 @@ public class TestLinkedList
         ll.add(13);
 
         assertThat(ll.size(), is(7));
+
+        Iterator<Integer> it = ll.iterator();
+        assertThat(it.hasNext(), is(true));
+
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(5));
+        assertThat(it.next(), is(8));
+        assertThat(it.next(), is(13));
+
+        assertThat(it.hasNext(), is(false));
+    }
+
+    @Test
+    public void testAddAll()
+    {
+        LinkedList<Integer> ll = new LinkedList<>();
+
+        assertThat(ll.size(), is(0));
+        assertThat(ll.isEmpty(), is(true));
+
+        List<Integer> numbers = Arrays.asList(1, 1, 2, 3, 5, 8, 13);
+        ll.addAll(numbers);
+
+        assertThat(ll.size(), is(numbers.size()));
+        assertThat(ll.isEmpty(), is(not(true)));
 
         Iterator<Integer> it = ll.iterator();
         assertThat(it.hasNext(), is(true));
