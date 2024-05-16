@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Iterator;
 import java.util.Arrays;
 
@@ -16,60 +15,6 @@ public class UpdateRoom
         "Kitchen; 20 12 3.87 Tile",
         "Storage Room; 16 16 4.39 Birch Wood"
     );
-
-    /**
-     * Extract Room information from a string.
-     *
-     * @param theString input string containing the data for exactly one Room
-     *
-     * @return initialized Room object
-     */
-    public static Room extractRoomFrom(String theString)
-    {
-        int idxSemicolon = theString.indexOf(';');
-
-        String name = theString.substring(0, idxSemicolon);
-        String theRest = theString.substring(idxSemicolon + 1, theString.length());
-
-        Scanner scnr = new Scanner(theRest);
-
-        double length = scnr.nextDouble();
-        double width = scnr.nextDouble();
-        double unitCost = scnr.nextDouble();
-        String type = scnr.nextLine();
-
-        Room aRoom = new Room(
-            name,
-            new Room.DimensionSet(length, width),
-            unitCost,
-            type
-        );
-
-        return aRoom;
-    }
-
-    /**
-     * Build our example house.
-     *
-     * @param reader source of House information
-     *
-     * @return fully constructed House
-     */
-    public static House buildHouse(BufferedReader reader)
-        throws IOException
-    {
-        House house = new House();
-
-        reader.lines()
-            .map((String line) -> {
-                return extractRoomFrom(line);
-            })
-            .forEach((Room aRoom) -> {
-                house.addRoom(aRoom);
-            });
-
-        return house;
-    }
 
     /**
      * Take a room and change the flooring
@@ -119,9 +64,10 @@ public class UpdateRoom
     {
         double[] costs = new double[house.size()];
 
-        Iterator<Room> it = house.iterator();
-        for (int i = 0; i < house.size(); ++i) {
-            costs[i] = discountFlooring(it.next(), 0.1);
+        int idx = 0;
+        for (Room originalRoom : house) {
+            costs[idx] = discountFlooring(originalRoom, 0.1);
+            ++idx;
         }
 
         return costs;
@@ -142,7 +88,7 @@ public class UpdateRoom
         //----------------------------------------------------------------------
         // Construct, build, and print a house
         //----------------------------------------------------------------------
-        House house = buildHouse(fakeInputFile);
+        House house = HouseIO.buildHouse(fakeInputFile);
 
         System.out.println(house);
         System.out.println();
