@@ -188,12 +188,24 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
 
     public boolean contains(Object obj)
     {
+        for (T entry : this) {
+            if (entry.equals(obj)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     public boolean containsAll(Collection<?> c)
     {
-        return false;
+        for (Object entry : c) {
+            if (!this.contains(entry)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public <T> T[] toArray(T[] array)

@@ -139,4 +139,40 @@ public class TestLinkedList
         assertThat(it.hasNext(), is(false));
     }
 
+    @Test
+    public void testContains()
+    {
+        LinkedList<Integer> ll = new LinkedList<>();
+
+        List<Integer> numbers = Arrays.asList(1, 1, 2, 3, 5, 8, 13);
+        ll.addAll(numbers);
+
+        assertThat(ll.size(), is(numbers.size()));
+        assertThat(ll.isEmpty(), is(not(true)));
+
+        assertThat(ll.contains(1), is(true));
+        assertThat(ll.contains(2), is(true));
+        assertThat(ll.contains(5), is(true));
+        assertThat(ll.contains(8), is(true));
+        assertThat(ll.contains(13), is(true));
+
+        assertThat(ll.contains(337), is(not(true)));
+    }
+
+    @Test
+    public void testContainsAll()
+    {
+        LinkedList<Integer> ll = new LinkedList<>();
+
+        List<Integer> numbers = Arrays.asList(1, 1, 2, 3, 5, 8, 13);
+        ll.addAll(numbers);
+
+        assertThat(ll.size(), is(numbers.size()));
+        assertThat(ll.isEmpty(), is(not(true)));
+
+        assertThat(ll.containsAll(numbers), is(true));
+
+        List<Integer> otherNumbers = Arrays.asList(0, 1, 1, 2, 3, 5, 8, 13);
+        assertThat(ll.containsAll(otherNumbers), is(not(true)));
+    }
 }

@@ -58,6 +58,8 @@ public class UpdateRoom
     public static House buildHouse(BufferedReader reader)
         throws IOException
     {
+        House house = new House();
+
         // BufferedReader input loop
         /*
         String line;
