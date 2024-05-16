@@ -1,19 +1,12 @@
 This set of examples covers basic OOP in Java with a focus on the
 `java.util.Iterator` interface, data ownership, and refactoring.
 
+The discussion is split into two parts:
 
-## Perspective
+  - Part 1 - Example 1
+    - [YouTube](https://youtu.be/jdOhYsHNpZs)
+    - [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+-+Separation+of+Concerns+-+Part+1/1_j1v3xv3a)
 
-The first discussion focuses on Example 1 from the perspective of a *C++*
-programmer walking through a *Java* codebase for the first time. The discussion
-is available at *To Be Recorded*.
-
-
-## ADTs & Iterators in Java
-
-The second discussion focuses on Example 1 from the perspective of a Java
-programmer developing a set of classes with a focus on Iterators. **To Be
-Recorded**.
-
-The third discussion covers Examples 2 & 3 with a focus on
-refactoring existing functions and classes. **To Be Recorded**.
+  - Part 2 - Example 2
+    - [YouTube](https://youtu.be/8V527yPLUyE)
+    - [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+-+Separation+of+Concerns+-+Part+2/1_imhpvclr)
