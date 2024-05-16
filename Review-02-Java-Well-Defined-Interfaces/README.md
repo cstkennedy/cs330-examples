@@ -13,5 +13,5 @@ This discussion is split into four parts:
     - [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+-+Well+Defined+Interfaces+-+Part+3/1_6aqc1rjb)
 
   - Part 4 - Example 5
-    - [YouTube](./)
-    - [Kaltura](./)
+    - [YouTube](https://youtu.be/KLa-PoKQICk)
+    - [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+-+Well+Defined+Interfaces+-+Part+4/1_on6m9buz)
