@@ -45,9 +45,11 @@ public class TestBoard
         assertFalse(aBoard.isFull());
 
         Board.Pair[] retrieved = aBoard.get3Cells(1, 2, 3);
-        Board.Pair[] expected = {new Board.Pair(0, '1'),
-                                 new Board.Pair(1, '2'),
-                                 new Board.Pair(2, '3')};
+        Board.Pair[] expected = {
+            new Board.Pair(0, '1'),
+            new Board.Pair(1, '2'),
+            new Board.Pair(2, '3')
+        };
 
         assertThat(retrieved[0], equalTo(expected[0]));
         assertThat(retrieved[1], equalTo(expected[1]));
@@ -64,9 +66,11 @@ public class TestBoard
         assertThat(aBoard.getCell(9), is('O'));
 
         Board.Pair[] retrieved = aBoard.get3Cells(1, 5, 9);
-        Board.Pair[] expected = {new Board.Pair(0, 'X'),
-                                 new Board.Pair(4, '5'),
-                                 new Board.Pair(8, 'O')};
+        Board.Pair[] expected = {
+            new Board.Pair(0, 'X'),
+            new Board.Pair(4, '5'),
+            new Board.Pair(8, 'O')
+        };
 
         assertThat(retrieved[0], equalTo(expected[0]));
         assertThat(retrieved[1], equalTo(expected[1]));
