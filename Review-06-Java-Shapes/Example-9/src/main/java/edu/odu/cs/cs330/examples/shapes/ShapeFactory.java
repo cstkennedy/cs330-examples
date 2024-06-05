@@ -66,6 +66,18 @@ public class ShapeFactory {
     }
 
     /**
+     * Determine whether a given shape is **not** known.
+     *
+     * @param name the shape for which to query
+     *
+     * @return false if the specified name corresponds to a known shape
+     */
+    public static boolean isNotKnown(String name)
+    {
+        return !ShapeFactory.isKnown(name);
+    }
+
+    /**
      * Print a list of known Shapes.
      *
      * @return a string containing a newline delimited list of known shape names

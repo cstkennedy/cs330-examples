@@ -9,6 +9,8 @@ fn main() {
 
     let all_students = [john, tom, jay, oscar];
 
+    println!("{}", tom);
+
     let mut cs330 = Roster::new(3, "CS 330");
 
     for stu in all_students.into_iter() {

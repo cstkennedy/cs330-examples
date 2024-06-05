@@ -45,7 +45,6 @@ const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes", "Tho
 // ShapeFactory could be designed as a singleton class.  Our ShapeFactory is
 // simply a tracker--i.e., records are static and will be updated manually
 // at compile time.
-#[cfg_attr(tarpaulin, skip)]
 fn main() {
     // Print Program Heading
     println!("{}", "-".repeat(80));

@@ -2,6 +2,7 @@ package edu.odu.cs.cs330.examples;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.FileReader;
 
 import java.util.List;
@@ -25,6 +26,7 @@ import edu.odu.cs.cs330.examples.shapes.Shape;
 import edu.odu.cs.cs330.examples.shapes.ShapeFactory;
 
 import edu.odu.cs.cs330.examples.shapes.io.ShapeIterator;
+import edu.odu.cs.cs330.examples.shapes.io.ShapeParser;
 
 /**
  * This is the Java version of the previous C++ Shapes Inheritance Example.
@@ -45,6 +47,14 @@ public class RunShapes {
      */
     private static final int H_WIDTH = 38;
 
+    private static final String SHAPE_FACTORY_SUMMARY = String.join(
+        "\n",
+        heading("Available Shapes", H_WIDTH, '*'),
+        ShapeFactory.listKnown(),
+        horizontalLine('-', H_WIDTH),
+        String.format("%2d shapes available.%n", ShapeFactory.numberKnown())
+    );
+
     /**
      * This is the main function.
      *
@@ -59,9 +69,9 @@ public class RunShapes {
         //----------------------------------------------------------------------
         // Command line argument and File validation
         //----------------------------------------------------------------------
-        BufferedReader shapesFile = null;
+        List<Shape> shapes = null;
         try {
-            shapesFile = new BufferedReader(new FileReader(args[0]));
+            shapes = ShapeParser.readShapesFromFile(args[0]);
         }
         catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Usage: java -jar {jarfile} {inputTextFile}");
@@ -70,6 +80,15 @@ public class RunShapes {
         catch (FileNotFoundException e) {
             System.out.printf("File (%s) could not be opened.%n", args[0]);
             System.exit(2);
+        }
+        catch (IOException e) {
+            System.out.printf("File (%s) could not be read.%n", args[0]);
+            System.exit(3);
+        }
+
+        if (shapes.size() < 1) {
+            System.out.printf("File (%s) did not contain any valid shapes.", args[0]);
+            System.exit(4);
         }
 
         //----------------------------------------------------------------------
@@ -80,16 +99,7 @@ public class RunShapes {
         //----------------------------------------------------------------------
         // Examine the ShapeFactory
         //----------------------------------------------------------------------
-        System.out.println(heading("Available Shapes", H_WIDTH, '*'));
-        System.out.print(ShapeFactory.listKnown());
-        System.out.println(horizontalLine('-', H_WIDTH));
-        System.out.printf("%2d shapes available.%n", ShapeFactory.numberKnown());
-        System.out.println();
-
-        //----------------------------------------------------------------------
-        // Get list of shapes from file
-        //----------------------------------------------------------------------
-        List<Shape> shapes = readShapes(shapesFile);
+        System.out.println(SHAPE_FACTORY_SUMMARY);
 
         //----------------------------------------------------------------------
         // Print all the shape names
@@ -139,6 +149,7 @@ public class RunShapes {
      * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
      *     model shape
      */
+    @Deprecated
     private static List<Shape> readShapes(BufferedReader shapesFile)
         throws CloneNotSupportedException
     {

@@ -10,12 +10,29 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import edu.odu.cs.cs330.examples.shapes.Shape;
+import edu.odu.cs.cs330.examples.shapes.TraitFromDimensions;
 import edu.odu.cs.cs330.examples.shapes.ShapeFactory;
 
 public class ShapeParser
 {
     private ShapeParser()
     {
+    }
+
+
+    private static <T extends TraitFromDimensions> T initFromDims(T obj, String restOfLine)
+    {
+        double[] dims = new double[obj.numDims()];
+
+        Scanner snr = new Scanner(restOfLine);
+
+        for (int i = 0; i < dims.length; ++i) {
+            dims[i] = snr.nextDouble();
+        }
+
+        obj.createFromDims(dims);
+
+        return obj;
     }
 
     /**
@@ -27,30 +44,22 @@ public class ShapeParser
      *
      * @return an initialized Shape object, or null
      */
-    public static Shape parseShapeLine(String line)
+    public static Shape parseShapeLine(String[] splitLine)
     {
-        /*
-        String[] splitLine = line.strip().split(" ");
+        final String name = splitLine[0];
 
-        String keyword = splitLine[0].strip();
-
-        if (ShapeFactory.isNotKnown(keyword)) {
+        Shape shp = null;
+        try {
+            shp = ShapeFactory.createShape(name);
+        }
+        catch (CloneNotSupportedException exp) {
             return null;
         }
 
-        String tokens[] = Arrays.stream(splitLine)
-            .skip(1)
-            .toArray(String[]::new);
+        String restOfLine = splitLine[1];
+        shp = (Shape) ShapeParser.initFromDims(shp, restOfLine);
 
-        if (tokens.length != ShapeFactory.getNumberOfRequiredValues(keyword)) {
-            return null;
-        }
-
-        Shape item = ShapeFactory.createItemFromTokens(keyword, tokens);
-
-        return item;
-        */
-        return null;
+        return shp;
     }
 
     /**
@@ -67,7 +76,10 @@ public class ShapeParser
     {
         return ins
             .lines()
-            .map(line -> parseShapeLine(line))
+            .filter(line -> line.indexOf(";") > 0)
+            .map(line -> line.split(";"))
+            .filter(splitLine -> ShapeFactory.isKnown(splitLine[0]))
+            .map(splitLine -> parseShapeLine(splitLine))
             .filter(Objects::nonNull)
             .collect(java.util.stream.Collectors.toList());
     }
@@ -84,15 +96,12 @@ public class ShapeParser
     public static List<Shape> readShapesFromFile(String filename)
         throws IOException
     {
-        /*
         FileReader inFile = new FileReader(filename);
         BufferedReader buffer = new BufferedReader(inFile);
 
-        List<Shape> itemsToStore = ShapeParser.readShapes(buffer);
+        List<Shape> shapesToStore = ShapeParser.readShapes(buffer);
         buffer.close();
 
-        return itemsToStore;
-        */
-        return null;
+        return shapesToStore;
     }
 }

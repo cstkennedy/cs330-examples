@@ -1,0 +1,11 @@
+Q - Does it live on the land or in the sea?
+Q - Does it have four (4) legs?
+Q - Does it have wings?
+A - It is a platypus
+A - It is an owl
+Q - Is it a dog?
+A - It is a cat
+A - It is a dog
+Q - Is it a goldfish?
+A - It is a turtle
+A - It is a goldfish
