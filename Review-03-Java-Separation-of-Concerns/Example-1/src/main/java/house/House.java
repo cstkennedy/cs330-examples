@@ -8,7 +8,7 @@ import containers.LinkedList;
 /**
  * A House is composed of zero or more Room objects.
  * <p>
- * This class serves as our demonstration of the STL
+ * This class serves as our demonstration of the
  * iterator interface.
  */
 public class House implements Iterable<Room>
@@ -89,7 +89,7 @@ public class House implements Iterable<Room>
     }
 
     /**
-     * Logical Equivalance Operator
+     * Logical Equivalence Operator
      */
     @Override
     public boolean equals(Object rhsObj)

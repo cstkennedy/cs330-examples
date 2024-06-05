@@ -10,9 +10,12 @@ import house.House;
 
 public class UpdateRoom
 {
-    public static final String ROOM_DATA = "Laundry Room; 8 4 1.95 Laminate\n"
-            + "Kitchen; 20 12 3.87 Tile\n"
-            + "Storage Room; 16 16 4.39 Birch Wood";
+    public static final String ROOM_DATA = String.join(
+        System.lineSeparator(),
+        "Laundry Room; 8 4 1.95 Laminate",
+        "Kitchen; 20 12 3.87 Tile",
+        "Storage Room; 16 16 4.39 Birch Wood"
+    );
 
     /**
      * Extract Room information from a string.
@@ -35,10 +38,12 @@ public class UpdateRoom
         double unitCost = scnr.nextDouble();
         String type = scnr.nextLine();
 
-        Room aRoom = new Room(name,
-                              new Room.DimensionSet(length, width),
-                              unitCost,
-                              type);
+        Room aRoom = new Room(
+            name,
+            new Room.DimensionSet(length, width),
+            unitCost,
+            type
+        );
 
         return aRoom;
     }
@@ -47,10 +52,14 @@ public class UpdateRoom
      * Build our example house.
      *
      * @param reader source of House information
+     *
+     * @return fully constructed House
      */
-    public static void buildHouse(BufferedReader reader, House house)
+    public static House buildHouse(BufferedReader reader)
         throws IOException
     {
+        House house = new House();
+
         // BufferedReader input loop
         /*
         String line;
@@ -64,12 +73,14 @@ public class UpdateRoom
 
         // BufferedReader using a "stream"
         reader.lines()
-                .map((String line) -> {
-                    return extractRoomFrom(line);
-                })
-                .forEach((Room aRoom) -> {
-                    house.addRoom(aRoom);
-                });
+            .map((String line) -> {
+                return extractRoomFrom(line);
+            })
+            .forEach((Room aRoom) -> {
+                house.addRoom(aRoom);
+            });
+
+        return house;
     }
 
     /**
@@ -110,6 +121,25 @@ public class UpdateRoom
     }
 
     /**
+     * Extract and discount renovation cost of each room.
+     *
+     * @param house House from which to extract room costs
+     *
+     * @return collection of costs
+     */
+    public static double[] extractRoomCosts(House house)
+    {
+        double[] costs = new double[house.size()];
+
+        Iterator<Room> it = house.iterator();
+        for (int i = 0; i < house.size(); ++i) {
+            costs[i] = discountFlooring(it.next(), 0.1);
+        }
+
+        return costs;
+    }
+
+    /**
      * Compute the area of a room and the cost of flooring for the room.
      */
     public static void main(String... args)
@@ -124,8 +154,7 @@ public class UpdateRoom
         //----------------------------------------------------------------------
         // Construct, build, and print a house
         //----------------------------------------------------------------------
-        House house = new House();
-        buildHouse(fakeInputFile, house);
+        House house = buildHouse(fakeInputFile);
 
         System.out.println(house);
         System.out.println();
@@ -156,12 +185,7 @@ public class UpdateRoom
         //----------------------------------------------------------------------
         // Create, populate, and output an array of room costs
         //----------------------------------------------------------------------
-        double[] costs = new double[duplicateHouse.size()];
-
-        Iterator<Room> it = duplicateHouse.iterator();
-        for (int i = 0; i < duplicateHouse.size(); ++i) {
-            costs[i] = discountFlooring(it.next(), 0.1);
-        }
+        double[] costs = extractRoomCosts(duplicateHouse);
 
         for (double cost : costs) {
             System.out.printf("%.2f%n", cost);

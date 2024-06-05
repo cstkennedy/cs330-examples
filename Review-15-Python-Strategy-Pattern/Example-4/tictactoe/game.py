@@ -1,4 +1,5 @@
-"""This module handles the top-level game logic, including...
+"""
+This module handles the top-level game logic, including...
 
 1. Player symbol assignment
 2. Setting up the Referee
@@ -38,15 +39,15 @@ class Game:
     Orchestrates a single match of Tic-Tac-Toe.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._board = Board()
         self._ref = Referee(self._board)
 
-        self._player1 = None
-        self._player2 = None
+        self._player1: Player = None
+        self._player2: Player = None
 
-        self._winner = None
-        self._loser = None
+        self._winner: Optional[Player] = None
+        self._loser: Optional[Player] = None
 
     def set_players(self, player1: Player, player2: Player) -> None:
         """
@@ -153,7 +154,7 @@ class Game:
     def get_loser(self) -> Optional[Player]:
         return self._loser
 
-    def get_board(self) -> bool:
+    def get_board(self) -> Board:
         return self._board
 
     # ---------------------------------------------------------------------------
