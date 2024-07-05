@@ -1,5 +1,5 @@
 
-This discussion is split into two lectures...
+This discussion is split into three (3) lectures...
 
   - Part 1 - Example 1
     - [Youtube](https://youtu.be/utNsUk_pcgI) 
