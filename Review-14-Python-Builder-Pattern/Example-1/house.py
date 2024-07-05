@@ -1,5 +1,3 @@
-from typing import List
-
 from room import Room
 
 
@@ -11,7 +9,7 @@ class House:
         """
 
         self.__name: str = n
-        self.__rooms: List[Room] = []
+        self.__rooms: list[Room] = []
 
     @property
     def name(self):

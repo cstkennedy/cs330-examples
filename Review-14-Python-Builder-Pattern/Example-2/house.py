@@ -84,6 +84,7 @@ class House:
 
         total, avg = self.flooring_cost_metrics()
 
+        # TODO: replace '+" with '"\n".join(...)'
         return (
             f"--------{self.name:}--------\n"
             + "\n".join(str(room) for room in self)
@@ -99,6 +100,8 @@ class House:
           - `equals` in Java
           - `eq` in Rust
         """
+
+        # TODO: Add instanceof check
 
         if self.name != rhs.name:
             return False
