@@ -6,14 +6,10 @@ import sys
 
 import prime.bruteforce as bruteforce
 
-
-PROGRAM_HEADING = (
-    "Prime Number Generation",
-    "Thomas J. Kennedy"
-)
+PROGRAM_HEADING = ("Prime Number Generation", "Thomas J. Kennedy")
 
 
-def __parse_args():
+def __parse_args() -> int:
     """
     Parse command line arguments (num_primes). Default to 10.
     """
@@ -44,7 +40,6 @@ def main():
     print("-" * 80)
 
     num_primes = __parse_args()
-
 
     for prime_num in bruteforce.generate_primes(num_primes):
         print(prime_num)

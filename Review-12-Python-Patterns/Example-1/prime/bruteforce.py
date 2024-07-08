@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from itertools import takewhile
 import math
+from itertools import takewhile
+from typing import Generator
 
 
-def __can_be_divided_by_any(known_primes: list[int], next_prime: int):
+def __can_be_divided_by_any(known_primes: list[int], next_prime: int) -> bool:
     """
     Iterate over all known primes and check the next_prime.
 
@@ -26,7 +27,7 @@ def __can_be_divided_by_any(known_primes: list[int], next_prime: int):
     return False
 
 
-def generate_primes(to_generate):
+def generate_primes(to_generate) -> Generator[int, None, None]:
     """
     Generate a sequence of prime numbers
 

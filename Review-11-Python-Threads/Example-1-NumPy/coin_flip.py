@@ -10,7 +10,7 @@ from dataclasses import dataclass
 import numpy as np
 
 # Number of nanoseconds in a second
-NS_IN_SEC = 10 ** 9
+NS_IN_SEC = 10**9
 
 DEFAULT_NUM_TRIALS = 10_000
 SUMMARY_FMT_STR = "# Heads: {:>6,d} ({:>6.4f}) / # Tails {:>6,d} ({:>6.4f})"
@@ -32,10 +32,7 @@ class FlipResult:
 
     def __str__(self):
         return SUMMARY_FMT_STR.format(
-            self.num_heads,
-            self.percent_heads,
-            self.num_tails,
-            self.percent_tails
+            self.num_heads, self.percent_heads, self.num_tails, self.percent_tails
         )
 
 
@@ -48,20 +45,19 @@ def simulate_flips(num_trials: int) -> FlipResult:
     """
 
     rng = np.random.default_rng()
+
     flips = rng.integers(2, size=num_trials, dtype=np.int8)
 
     num_heads = np.count_nonzero(flips)
 
     counts = FlipResult(
-        num_heads = num_heads,
-        num_tails = num_trials - num_heads,
-        total_flips = num_trials
+        num_heads=num_heads, num_tails=num_trials - num_heads, total_flips=num_trials
     )
 
     return counts
 
 
-def run_parallel(num_workers: int, num_trials: int):
+def run_parallel(num_workers: int, num_trials: int) -> None:
     """
     Run coin flip simulations in parallel using Python
     Processes
@@ -90,11 +86,7 @@ def run_parallel(num_workers: int, num_trials: int):
 
     print("-" * 72)
 
-    merged_results = FlipResult(
-        total_heads,
-        total_tails,
-        total_heads + total_tails
-    )
+    merged_results = FlipResult(total_heads, total_tails, total_heads + total_tails)
 
     print(f"Overall   -> {merged_results}")
     print(f"Total Trials -> {merged_results.total_flips:,}")

@@ -51,4 +51,5 @@ if __name__ == "__main__":
     try:
         main()
     except:
+        # Do not use bare excepts in non-demo code
         pass

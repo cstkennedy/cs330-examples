@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import sys
 import random
-
-from datetime import datetime
+import sys
 from concurrent.futures import ProcessPoolExecutor
+from datetime import datetime
 
 DEFAULT_NUM_TRIALS = 10000
 SUMMARY_FMT_STR = "# Heads: {:>6d} ({:>6.4f}) / # Tails {:>6d} ({:>6.4f})"
@@ -31,7 +30,7 @@ def simulate_flips(num_trials: int) -> dict[str, int]:
     return counts
 
 
-def print_summary(counts: dict[str, int]):
+def print_summary(counts: dict[str, int]) -> None:
     """
     Print coin flip statistics (including probability distribution)
 
@@ -42,13 +41,17 @@ def print_summary(counts: dict[str, int]):
 
     total_trials = sum(counts.values())
 
-    print(SUMMARY_FMT_STR.format(counts["Heads"],
-                                 float(counts["Heads"]) / total_trials,
-                                 counts["Tails"],
-                                 float(counts["Tails"]) / total_trials))
+    print(
+        SUMMARY_FMT_STR.format(
+            counts["Heads"],
+            float(counts["Heads"]) / total_trials,
+            counts["Tails"],
+            float(counts["Tails"]) / total_trials,
+        )
+    )
 
 
-def run_parallel(num_workers: int, num_trials: int):
+def run_parallel(num_workers: int, num_trials: int) -> None:
     """
     Run coin flip simulations in parallel using Python
     Processes

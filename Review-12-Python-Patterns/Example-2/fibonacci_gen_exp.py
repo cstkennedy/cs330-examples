@@ -1,8 +1,10 @@
 #! /usr/bin/env python3
 
 import sys
+from typing import Generator
 
-def fibonacci_sequence(sequence_length: int):
+
+def fibonacci_sequence(sequence_length: int) -> Generator[int, None, None]:
     """
     Generate the Fibonacci Sequence to the n-th number.
     1 1 2 3 5 8 13 21 34...
@@ -32,7 +34,7 @@ def fibonacci_sequence(sequence_length: int):
         yield f
 
 
-def get_fibonacci_index():
+def get_fibonacci_index() -> int:
     """
     Check the command line arguments (i.e., sys.argv) for an index. If no index
     was provided prompt the user.
@@ -42,8 +44,7 @@ def get_fibonacci_index():
     """
 
     if len(sys.argv) < 2:
-        index = input("Generate how many numbers? ")
-        index = int(index)  # loosely typed
+        index = int(input("Generate how many numbers? "))
         print()
 
     else:
