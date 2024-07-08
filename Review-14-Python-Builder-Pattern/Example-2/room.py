@@ -159,6 +159,7 @@ class RoomBuilder:
         self.__check_name(self.__name, "name")
         self.__check_name(self.__flooring_type, "flooring type")
 
+        # TODO: Duplicate check (remove)
         if not self.__flooring_type:
             raise ValueError("No flooring type was set")
 

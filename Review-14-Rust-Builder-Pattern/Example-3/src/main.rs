@@ -28,8 +28,10 @@ Storage Room; 16 16 4.39 Birch Wood
 ///
 #[cfg(not(tarpaulin_include))]
 fn main() {
-    let house = read_house_from_str(ROOM_DATA).unwrap();
-    let duplicate_house = upgrade_flooring(&house);
+    let house = read_house_from_str(ROOM_DATA)
+        .expect("Input did not contain at least one valid room line");
+    let duplicate_house = upgrade_flooring(&house)
+        .expect("Reference 'house' was invalid (THIS SHOULD NEVER HAPPEN)");
 
     println!("{house}");
     println!("{duplicate_house}");
@@ -68,13 +70,13 @@ fn main() {
 ///
 /// House with the updated flooring
 ///
-fn upgrade_flooring(original: &House) -> House {
+fn upgrade_flooring(original: &House) -> Option<House> {
     let new_flooring = Flooring::builder()
         .type_name("Stone Bricks".into())
         .unit_cost(12.97)
         .build();
 
-    House::builder()
+    let bldr = House::builder()
         .with_name("After Stone Bricks")
         .with_rooms(
             original
@@ -86,9 +88,12 @@ fn upgrade_flooring(original: &House) -> House {
                         .build()
                 })
                 .collect::<Vec<Room>>(),
-        )
-        .unwrap()
-        .build()
+        );
+
+    match bldr {
+        Ok(bldr) => Some(bldr.build()),
+        Err(_) => None
+    }
 }
 
 ///

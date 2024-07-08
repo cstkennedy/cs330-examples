@@ -18,10 +18,7 @@ def main():
 
     # Construct, build, and print a house
     house = House()
-
-    # std::istringstream fakeInputFile(ROOM_DATA)
     build_house(house)
-
     print(house)
 
     # Upgrade the flooring in a second duplicate house
@@ -52,10 +49,8 @@ def main():
     print(f"Min  : {min_c:.2f}")
     print(f"Max  : {max_c:.2f}")
 
-    # I would probably use minmax_element and auto... if it existed... :(
 
-
-def build_house(house: House):
+def build_house(house: House) -> None:
     """
     Build our example house
     """
