@@ -140,5 +140,5 @@ class Game:
 
         self._board.set_cell(move, sym)
 
-        # @todo add move validation
+        # TODO: add move validation
         return True

@@ -30,7 +30,7 @@ class Player:
 
         return possible_cylon == REFERENCE_CYLON
 
-    def __init__(self, *, name: str = DEFAULT_NAME, strategy: Strategy, humanity: bool= False):
+    def __init__(self, *, name: str = DEFAULT_NAME, strategy: Strategy, humanity: bool = False):
         """
         Create a Player with a selected name.
 
