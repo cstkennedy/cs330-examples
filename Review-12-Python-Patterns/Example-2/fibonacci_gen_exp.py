@@ -26,7 +26,8 @@ def fibonacci_sequence(sequence_length: int) -> Generator[int, None, None]:
     yield fm2
     yield fm1
 
-    for _ in range(3, (sequence_length + 1)):
+    #  for _ in range(3, (sequence_length + 1)):
+    for _ in range(2, sequence_length):
         f = fm1 + fm2
         fm2 = fm1
         fm1 = f

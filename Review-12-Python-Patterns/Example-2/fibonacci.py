@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import sys
 
 def main():
     """
@@ -32,7 +33,7 @@ def main():
     if index < 3 or index > 20:
         print(f"{index:3d} is not between 3 and 20\n")
 
-        exit(1)
+        sys.exit(1)
 
     # Initial output
     print("{:>2d}: {:10d}".format(1, fm2))
