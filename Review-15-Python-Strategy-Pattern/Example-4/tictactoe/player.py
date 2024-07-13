@@ -40,7 +40,6 @@ class Player:
 
         Returns:
             True if the player is a human
-
         """
 
         return self.humanity

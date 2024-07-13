@@ -1,4 +1,5 @@
-"""This is a demo driver for a basic single round game of Tic-Tac-Toe.
+"""
+This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """
 
 
@@ -6,12 +7,17 @@ from tictactoe.builders import GameBuilder
 
 
 def main() -> None:
-    """This is a simple main function that takes no command line arguments.
+    """
+    This is a simple main function that takes no command line arguments.
     """
     game = (
         GameBuilder.builder()
         .add_human_player(name="Tom")
-        .add_player(name="Jay", strategy="SetMoves", moves=[5, 1, 3, 7, 9, 2, 4, 6, 8])
+        .add_player(
+            name="Jay",
+            strategy="SetMoves",
+            moves=[5, 1, 3, 7, 9, 2, 4, 6, 8]
+        )
         .build()
     )
 

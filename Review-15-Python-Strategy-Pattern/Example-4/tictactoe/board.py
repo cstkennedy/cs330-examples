@@ -68,9 +68,9 @@ class Board:
         Retrieve the value stored in three selected Cells.
 
         Args:
-            cell1Id: numeric id representing the 1st desired cell
-            cell2Id: numeric id representing the 2nd desired cell
-            cell3Id: numeric id representing the 3rd desired cell
+            cell1_id: numeric id representing the 1st desired cell
+            cell2_id: numeric id representing the 2nd desired cell
+            cell3_id: numeric id representing the 3rd desired cell
 
         Returns:
             value stored in the Cell

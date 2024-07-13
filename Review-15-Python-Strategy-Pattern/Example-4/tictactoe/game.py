@@ -134,9 +134,7 @@ class Game:
         while not self._ref.selected_cell_is_empty(move):
             move = player.next_move()
 
-        sym = player.symbol
-
-        self._board.set_cell(move, sym)
+        self._board.set_cell(move, player.symbol)
 
     # ---------------------------------------------------------------------------
     # Game Component (board and player) accessors

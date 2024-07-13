@@ -71,13 +71,13 @@ def test_player_turn():
 
     game.set_players(
         PlayerBuilder.builder()
-            .with_name("Player 1")
-            .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
-            .build(),
+        .with_name("Player 1")
+        .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
+        .build(),
         PlayerBuilder.builder()
-            .with_name("Player 2")
-            .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
-            .build(),
+        .with_name("Player 2")
+        .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
+        .build(),
     )
 
     board = game.get_board()

@@ -4,6 +4,7 @@ import pytest
 from hamcrest import assert_that, equal_to, has_string, is_, is_not
 
 import tictactoe.player as player
+from tictactoe.builders import PlayerBuilder
 from tictactoe.player import Player
 
 """
@@ -37,23 +38,26 @@ def test_player_default_constructor(create_players):
 
     assert_that(hash(a_cylon), is_not(hash(tom)))
     assert_that(a_cylon, is_not(equal_to(tom)))
+    assert_that(not player.is_generic(tom))
 
     # Hand wave... These are not the cylons you are looking for.
     assert_that(a_cylon.is_human(), is_(False))
     assert_that(a_cylon.is_computer(), is_(True))
+    assert_that(player.is_generic(a_cylon))
 
 
 def test_player_constructor(create_players):
     tom, _, the_doctor = create_players
 
     assert_that(tom, has_string("Tom"))
-    assert_that(str(tom), equal_to("Tom"))
 
     assert_that(hash(tom), is_not(hash(the_doctor)))
     assert_that(tom, is_not(equal_to(the_doctor)))
 
     assert_that(tom.is_human(), is_(False))
     assert_that(tom.is_computer(), is_(True))
+
+    assert_that(not player.is_generic(tom))
 
 
 def test_set_symbol(create_players):
@@ -63,10 +67,17 @@ def test_set_symbol(create_players):
 
     assert_that(tom.symbol, is_("X"))
     assert_that(hash(tom), is_(old_hash_code))
+    assert_that(tom, has_string("Tom"))
 
     tom.symbol = "O"
     assert_that(tom.symbol, is_("O"))
     assert_that(hash(tom), is_(old_hash_code))
+
+    assert_that(tom, has_string("Tom"))
+    assert_that(tom.is_human(), is_(False))
+    assert_that(tom.is_computer(), is_(True))
+
+    assert_that(not player.is_generic(tom))
 
 
 def test_set_name(create_players):
@@ -93,7 +104,11 @@ def test_set_name(create_players):
     assert_that(the_doctor.name, is_("Jodie Whittaker"))
     assert_that(hash(the_doctor), is_not(old_hash_code))
 
-    # No clone function, can't test equals
+    assert_that(the_doctor, has_string(the_doctor.name))
+    assert_that(the_doctor.is_human(), is_(False))
+    assert_that(the_doctor.is_computer(), is_(True))
+
+    assert_that(not player.is_generic(the_doctor))
 
 
 def test_clone(create_players):
@@ -110,7 +125,18 @@ def test_clone(create_players):
     assert_that(the_doctor, is_not(equal_to(the_original)))
 
 
-@pytest.mark.skip("cannot test")
 def test_next_move():
-    # Can not test due to hardcoded System.in use in player.next_move
-    pass
+    bot_9001 = (
+        PlayerBuilder.builder()
+        .with_name("Tic-Tac-Toe Bot 9001")
+        .with_strategy(name="SetMoves", moves=list(range(1, 10)))
+        .build()
+    )
+
+    for expected_move in range(1, 10):
+        assert_that(bot_9001.next_move(), is_(expected_move))
+
+    # We have exhausted all moves... make sure that Player.next_move
+    # does **not** silence exceptions
+    with pytest.raises(IndexError):
+        bot_9001.next_move()
