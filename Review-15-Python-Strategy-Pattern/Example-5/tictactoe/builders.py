@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Optional, Self, TypeVar
 
 from .game import Game
@@ -93,8 +93,8 @@ class GameBuilder:
     """
     Unlike the usual "delay object creation until all data is available"
     approach in the builder pattern (i.e., deferring creation until all values
-    are available)... the `GameBuilder` immediately creates a `Game` object so that
-    `get_board` can be used immediately.
+    are available)... the `GameBuilder` immediately creates a `Game` object so
+    that `get_board` can be used immediately.
 
     This allows the board to be passed to Players that need to examine the
     board to generate a move.

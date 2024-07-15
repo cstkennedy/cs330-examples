@@ -1,5 +1,5 @@
 import itertools
-from typing import Optional, Tuple
+from typing import Optional
 
 from .board import VALID_SYMBOLS, Board
 
@@ -54,10 +54,10 @@ class Referee:
             self._board_ref.columns(),
             self._board_ref.diagonals(),
         )
-        for triple in triples:
-            if _all_three_match(triple):
-                # if they match, grab the 'X' or 'O'
-                return triple[0]
+
+        # if they match, grab the 'X' or 'O'
+        if matching_triple := next(filter(_all_three_match, triples), None):
+            return matching_triple[0]
 
         return None
 
