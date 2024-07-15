@@ -1,5 +1,4 @@
-CellPair = tuple[int, str]
-CellTriple = tuple[CellPair, CellPair, CellPair]
+VALID_SYMBOLS = ("X", "O")
 
 
 class Board:
@@ -12,9 +11,7 @@ class Board:
     The digit represents the cell id and is used to update a Cell
     """
 
-    VALID_SYMBOLS = ("X", "O")
-
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Construct an empty gameboard.
         """
@@ -41,7 +38,7 @@ class Board:
 
         return self._the_board[cell_id - 1]  # Testing caught the missing -1
 
-    def set_cell(self, cell_id, new_value):
+    def set_cell(self, cell_id: int, new_value: str) -> None:
         """
         Set the value stored in a selected Cell.
 
@@ -58,7 +55,7 @@ class Board:
         if not 0 < cell_id < 10:
             raise IndexError("Cell Index is not between 0 and 10, exclusive")
 
-        if new_value not in Board.VALID_SYMBOLS:
+        if new_value not in VALID_SYMBOLS:
             raise ValueError(f"'{new_value}' is not 'X' or 'O'")
 
         self._the_board[cell_id - 1] = new_value

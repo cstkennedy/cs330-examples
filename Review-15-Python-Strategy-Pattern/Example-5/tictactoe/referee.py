@@ -1,8 +1,22 @@
 import itertools
 from typing import Optional, Tuple
 
-CellPair = Tuple[int, str]
-CellTriple = Tuple[CellPair, CellPair, CellPair]
+from .board import VALID_SYMBOLS, Board
+
+
+def _all_three_match(triple: list[str]) -> bool:
+    """
+    Check for three matching symbols in the Pair-Triple.
+
+    Args:
+        triple: set of three cells to check
+
+    Returns:
+        True if all three pairs contain the same symbol
+    """
+
+    first_symbol = triple[0]
+    return all(symbol == first_symbol for symbol in triple)
 
 
 class Referee:
@@ -15,7 +29,7 @@ class Referee:
     exposed to the outside world.
     """
 
-    def __init__(self, board):
+    def __init__(self, board: Board):
         """
         Create the referee and allow access
         to a board through a constant reference variable.
@@ -41,7 +55,7 @@ class Referee:
             self._board_ref.diagonals(),
         )
         for triple in triples:
-            if self._all_three_match(triple):
+            if _all_three_match(triple):
                 # if they match, grab the 'X' or 'O'
                 return triple[0]
 
@@ -59,19 +73,4 @@ class Referee:
             True if the cell is currently empty
         """
 
-        return self._board_ref.get_cell(move) not in ["X", "O"]
-
-    @staticmethod
-    def _all_three_match(triple: list[str]) -> bool:
-        """
-        Check for three matching symbols in the Pair-Triple.
-
-        Args:
-            triple: set of three cells to check
-
-        Returns:
-            True if all three pairs contain the same symbol
-        """
-
-        first_symbol = triple[0]
-        return all(symbol == first_symbol for symbol in triple)
+        return self._board_ref.get_cell(move) not in VALID_SYMBOLS

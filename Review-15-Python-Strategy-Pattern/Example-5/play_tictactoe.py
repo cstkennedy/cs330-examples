@@ -2,7 +2,6 @@
 This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """
 
-
 from tictactoe.builders import GameBuilder
 
 
@@ -10,6 +9,7 @@ def main() -> None:
     """
     This is a simple main function that takes no command line arguments.
     """
+    # fmt: off
     game = (
         GameBuilder.builder()
         .add_human_player(name="Tom")
@@ -20,6 +20,7 @@ def main() -> None:
         )
         .build()
     )
+    # fmt: on
 
     game.play_match()
 
