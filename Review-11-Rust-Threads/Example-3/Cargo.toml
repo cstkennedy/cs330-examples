@@ -13,7 +13,3 @@ crate-type = ["cdylib"]
 num-format = "0.4.4"
 rand = { version = "0.9.0-alpha.1", features = ["small_rng"] }
 robusta_jni = "0.2.2"
-
-[dependencies.pyo3]
-version = "0.22.1"
-features = ["extension-module"]
