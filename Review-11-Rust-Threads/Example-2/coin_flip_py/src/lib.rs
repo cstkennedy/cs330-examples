@@ -3,8 +3,8 @@ use std::time::Instant;
 use pyo3::prelude::*;
 use pyo3::{wrap_pyfunction, wrap_pymodule};
 
-use coin_flip::*;
-use coin_flip::FlipTask;
+use ::coin_flip::*;
+use ::coin_flip::flip_task::FlipTask;
 
 #[pyfunction]
 fn do_flips(num_threads: usize, num_flips: u64) {
@@ -28,7 +28,7 @@ fn do_flips(num_threads: usize, num_flips: u64) {
 }
 
 #[pymodule]
-fn coin_flip(module: &Bound<'_, PyModule>) -> PyResult<()> {
+fn coin_flip_py(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_wrapped(wrap_pyfunction!(do_flips))?;
     Ok(())
 }

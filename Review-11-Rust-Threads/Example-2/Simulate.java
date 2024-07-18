@@ -2,7 +2,7 @@
 public class Simulate
 {
     static {
-        System.loadLibrary("coin_flip");
+        System.loadLibrary("coin_flip_java");
     }
 
     public static native void doFlips(int numThreads, long numTrials);
