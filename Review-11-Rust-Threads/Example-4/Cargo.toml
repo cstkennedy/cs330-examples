@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "coin_flip",
+    "coin_flip_py"
+]
