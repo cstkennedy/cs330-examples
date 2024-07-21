@@ -1,0 +1,12 @@
+[package]
+name = "coin_flip_java"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name="coin_flip_java"
+crate-type = ["cdylib"]
+
+[dependencies]
+coin_flip = { path = "../coin_flip" }
+robusta_jni = "0.2.2"

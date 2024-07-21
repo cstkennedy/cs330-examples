@@ -5,7 +5,7 @@ from __future__ import annotations
 import random
 import sys
 
-import coin_flip
+import coin_flip_py as coin_flip
 
 DEFAULT_NUM_TRIALS = 10000
 SUMMARY_FMT_STR = "# Heads: {:>6d} ({:>6.4f}) / # Tails {:>6d} ({:>6.4f})"

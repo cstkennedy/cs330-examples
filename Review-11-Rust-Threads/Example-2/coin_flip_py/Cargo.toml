@@ -1,0 +1,15 @@
+[package]
+name = "coin_flip_py"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name="coin_flip_py"
+crate-type = ["cdylib"]
+
+[dependencies]
+coin_flip = { path = "../coin_flip" }
+
+[dependencies.pyo3]
+version = "0.22.1"
+features = ["extension-module"]
