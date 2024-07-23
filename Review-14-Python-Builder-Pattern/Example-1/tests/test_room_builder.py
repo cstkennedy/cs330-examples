@@ -71,4 +71,4 @@ def test_build_success():
     assert_that(room._Room__dimensions.length, is_(close_to(1, 1e-8)))
     assert_that(room._Room__dimensions.width, is_(close_to(2, 1e-8)))
     assert_that(room._Room__flooring.type_name, is_(equal_to("Tile")))
-    assert_that(room._Room_flooring.unit_cost, is_(close_to(1, 1e-2)))
+    assert_that(room._Room__flooring.unit_cost, is_(close_to(1, 1e-2)))
