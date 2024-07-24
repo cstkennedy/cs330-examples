@@ -2,7 +2,7 @@ import pytest
 from hamcrest import *
 
 from house import HouseBuilder
-from room import Room, RoomBuilder
+from room import RoomBuilder
 
 
 @pytest.fixture
@@ -76,15 +76,20 @@ def test_with_name_and_n_rooms(three_rooms, num_rooms):
     # ---------------------------------------------------------------------------
     # Using with_rooms
     # ---------------------------------------------------------------------------
-    house = HouseBuilder().with_name("Test House!!!!").with_rooms(rooms_to_add).build()
+    house = (
+        HouseBuilder()
+        .with_name("Test House!!!!")
+        .with_rooms(rooms_to_add)
+        .build()
+    )
 
     assert_that(house.name, is_(equal_to("Test House!!!!")))
     assert_that(house, has_length(num_rooms))
     assert_that(house, contains_exactly(*rooms_to_add))
 
-    # ---------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     # Using with_room
-    # ---------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
     builder = HouseBuilder().with_name("Test House!!!!")
 
     for room in rooms_to_add:

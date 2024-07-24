@@ -1,4 +1,3 @@
-import pytest
 from hamcrest import *
 
 import update_room

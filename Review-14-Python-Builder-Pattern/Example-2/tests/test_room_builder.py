@@ -1,7 +1,7 @@
 import pytest
 from hamcrest import *
 
-from room import Room, RoomBuilder
+from room import RoomBuilder
 
 
 def test_name_not_set():
@@ -168,3 +168,44 @@ def test_build_success():
     assert_that(room.dimensions.width, is_(close_to(2, 1e-8)))
     assert_that(room.flooring.type_name, is_(equal_to("Tile")))
     assert_that(room.flooring.unit_cost, is_(close_to(1, 1e-2)))
+
+
+def test_from_template():
+    original_room = (
+        RoomBuilder()
+        .with_name("Generic Name")
+        .with_dimensions(1, 2)
+        .with_flooring("Tile", 1)
+        .build()
+    )
+
+    duplicate_room = RoomBuilder().from_template(original_room).build()
+
+    assert_that(duplicate_room, is_not(same_instance(original_room)))
+    assert_that(duplicate_room, is_(equal_to(original_room)))
+
+
+def test_substitute_flooring():
+    original_room = (
+        RoomBuilder()
+        .with_name("Generic Name")
+        .with_dimensions(1, 2)
+        .with_flooring("Tile", 1)
+        .build()
+    )
+
+    duplicate_room = (
+        RoomBuilder()
+        .from_template(original_room)
+        .substitute_flooring("Oak Planks", 9.97)
+        .build()
+    )
+
+    assert_that(duplicate_room, is_not(same_instance(original_room)))
+    assert_that(duplicate_room, is_not(equal_to(original_room)))
+
+    assert_that(duplicate_room.name, is_(equal_to("Generic Name")))
+    assert_that(duplicate_room.dimensions.length, is_(close_to(1, 1e-8)))
+    assert_that(duplicate_room.dimensions.width, is_(close_to(2, 1e-8)))
+    assert_that(duplicate_room.flooring.type_name, is_(equal_to("Oak Planks")))
+    assert_that(duplicate_room.flooring.unit_cost, is_(close_to(9.97, 1e-2)))

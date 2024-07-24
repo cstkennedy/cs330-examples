@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, List, Self, Optional
+from typing import Iterable, List, Optional, Self
 
 from room import Room
 
