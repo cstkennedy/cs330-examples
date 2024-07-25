@@ -119,10 +119,11 @@ class RoomBuilder:
 
     def __check_name(self, val: str | None, name: str) -> None:
         """
-        Raise a Value Error if:
-          1. val was not set
-          2. val is the empty string
-          3. val has fewer than 3 characters
+        Raises:
+            ValueError if...
+                1. val was not set
+                2. val is the empty string
+                3. val has fewer than 3 characters
         """
 
         if not val:
@@ -132,25 +133,22 @@ class RoomBuilder:
             raise ValueError('"{name}" len("{val}") < 3')
 
     def __check_num(self, val: float | int, name: str) -> None:
+        """
+        Raises:
+            ValueError if...
+                1. val was not set
+                3. val is zero or negative
+        """
+
+        if not val:
+            raise ValueError(f'No "{name}" was set')
+
         if val <= 0:
             raise ValueError(f'"{name}" <= 0')
 
     def build(self) -> Room:
         self.__check_name(self.__name, "name")
         self.__check_name(self.__flooring_type, "flooring type")
-
-        # TODO: Duplicate check (remove)
-        if not self.__flooring_type:
-            raise ValueError("No flooring type was set")
-
-        if not self.__flooring_unit_cost:
-            raise ValueError("No flooring cost was set")
-
-        if not self.__length:
-            raise ValueError("No length was set")
-
-        if not self.__width:
-            raise ValueError("No width was set")
 
         self.__check_num(self.__flooring_unit_cost, "flooring cost")
         self.__check_num(self.__length, "length")

@@ -7,6 +7,9 @@ tests:
 
 coverage:
 	${PYTHON} -m coverage run --branch -m pytest -v tests
+
+	${PYTHON} -m coverage report
+
 	${PYTHON} -m coverage html
 
 test_fmt:
