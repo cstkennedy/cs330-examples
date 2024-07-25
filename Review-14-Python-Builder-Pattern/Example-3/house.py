@@ -1,19 +1,23 @@
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from typing import Iterable, List, Optional, Self
 
 from room import Room
 
 
+DEFAULT_NAME = "House"
+
+
 class House:
-    def __init__(self, nme: str = "House"):
+    def __init__(self, *, name: str, rooms: list[Room]):
         """
         This is the Default constructor. Start with the name set to "House" and
         an empty set of rooms (i.e., zero rooms).
         """
 
-        self.__name: str = nme
-        self.__rooms: list[Room] = []
+        self.__name: str = name
+        self.__rooms: list[Room] = rooms
 
     @property
     def name(self):
@@ -25,40 +29,12 @@ class House:
 
         return self.__name
 
-    @name.setter
-    def name(self, nme: str):
-        """
-        Set the name using a setter.
-
-        Args:
-            nme: new House name
-        """
-
-        self.__name = nme
-
-    def add_room(self, to_add: Room):
-        """
-        Add another room to this House.
-
-        Args:
-            to_add: new Room to add
-        """
-
-        self.__rooms.append(to_add)
-
     def __len__(self):
         """
         Return the number of rooms in this House.
         """
 
         return len(self.__rooms)
-
-    def is_empty(self) -> bool:
-        """
-        Determine whether this House is empty (i.e. `self.len() == 0).
-        """
-
-        return len(self) == 0
 
     def flooring_cost_metrics(self) -> tuple[float, float]:
         #  total = sum(map(lambda room: room.flooring_cost(), self))
@@ -113,10 +89,10 @@ class House:
         return self.__rooms == rhs.__rooms
 
 
+@dataclass
 class HouseBuilder:
-    def __init__(self) -> None:
-        self.name: Optional[str] = None
-        self.the_rooms: list[Room] = []
+    name: Optional[str] = None
+    the_rooms: list[Room] = field(default_factory=list)
 
     def with_name(self, nme: str) -> Self:
         """
@@ -137,7 +113,6 @@ class HouseBuilder:
     def with_rooms(self, new_rooms: Iterable[Room]) -> Self:
         """
         Add multiple rooms from any iterable object
-        pass
         """
 
         self.the_rooms.extend(new_rooms)
@@ -148,13 +123,8 @@ class HouseBuilder:
         if not self.the_rooms:
             raise ValueError("A House must have at least one room.")
 
-        # If a name was supplied use it... otherwise let the House constructor
-        # supply the default.
-        #  house = House(self.name) if self.name else House()
-        house = House()
+        # If a name was supplied use it... otherwise supply the default.
         if self.name:
-            house.name = self.name
+            return House(name=self.name, rooms=self.the_rooms)
 
-        house._House__rooms = self.the_rooms  # type: ignore
-
-        return house
+        return House(name=DEFAULT_NAME, rooms=self.the_rooms)
