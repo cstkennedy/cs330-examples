@@ -1,0 +1,49 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+class Circle {
+
+}
+
+
+class EquilateralTriangle {
+}
+
+
+class RightTriangle {
+}
+
+
+abstract class Shape {
+}
+
+
+class ShapeFactory {
+}
+
+
+
+class ShapePair {
+}
+
+
+
+class Square {
+}
+
+
+class Triangle {
+}
+
+.Shape <|-- .Circle
+.Shape <|-- .Square
+.Shape <|-- .Triangle
+.Triangle <|-- .EquilateralTriangle
+.Triangle <|-- .RightTriangle
+
+ShapePair -- "model\n1" .Shape
+ShapeFactory o--right-- ShapePair
+
+@enduml
+

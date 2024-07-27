@@ -1,0 +1,40 @@
+@startuml
+autoactivate on
+hide footbox
+skinparam sequenceParticipant underline
+
+title CPP RunShapes "read" Function With Iterators
+
+participant ":RunShapes" as rs
+activate rs
+
+participant ":ShapeFactory" as sf
+activate sf
+
+create "collection:ShapeCollection" as collection
+rs -> collection: new
+return
+
+loop while input has more shapes
+    rs -> sf: operator>>(ins, s)
+        sf -> sf: createShape(name)
+        return s
+        alt s is not null
+            create "s:Shape*" as sptr
+            sf -> sptr: new()
+            return
+            sf -> sptr: read(ins)
+            return
+        else getline(ins, name) discard the rest of the line
+        end
+return  s
+end
+
+opt s is not null
+    rs -> collection: push_back(s)
+end
+
+deactivate rs
+
+@enduml
+
