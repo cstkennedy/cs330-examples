@@ -8,3 +8,5 @@ This discussion is split into two lectures...
     - [Youtube](https://youtu.be/SnGximidEjo) 
       or
       [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Python+Builder+Pattern+-+Example+1/1_9th13s3u)
+  - Part 3 - Example 3
+    - Draft (No recording)

@@ -15,4 +15,7 @@ This discussion is split into four (4) parts...
      or
      [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Python+Strategy+Pattern+-+Part+3/1_b242v9o5)
 
-  4. Not Yet Recorded
+  3. Available on 
+     [Youtube](https://youtu.be/DNyeG5m4Rsw) 
+     or
+     [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Python+Strategy+Pattern+-+Part+4/1_kugitu9c)
