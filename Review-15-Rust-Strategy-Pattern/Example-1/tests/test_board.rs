@@ -22,7 +22,7 @@ pub fn test_default_constructor(a_board: Board) {
         );
     }
 
-    // assert_that!(a_board, has_string(EXPECTED_EMPTY_STR))
+    assert_that!(a_board.to_string(), is(equal_to(EXPECTED_EMPTY_STR)));
     assert_that!(a_board.is_full(), is(not(true)));
 
     let rows = a_board.rows();
@@ -52,8 +52,8 @@ pub fn test_set_cell(mut a_board: Board) {
     assert_that!(a_board.get_cell(1), is(equal_to(Ok('X'))));
     assert_that!(a_board.get_cell(9), is(equal_to(Ok('O'))));
 
-    // assert_that!(str(a_board), is_not(equal_to(EXPECTED_EMPTY_STR)))
-    // assert_that!(a_board, has_string("X|2|3\n4|5|6\n7|8|O"))
+    assert_that!(a_board.to_string(), is_not(equal_to(EXPECTED_EMPTY_STR)));
+    assert_that!(a_board.to_string(), is(equal_to("X|2|3\n4|5|6\n7|8|O")));
 
     let rows = a_board.rows();
     assert_that!(

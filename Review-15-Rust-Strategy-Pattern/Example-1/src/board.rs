@@ -1,3 +1,5 @@
+use std::fmt;
+
 type CellPair = (usize, char);
 type CellTriple = (CellPair, CellPair, CellPair);
 
@@ -10,6 +12,7 @@ const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
 /// A Cell can be empty, where it stores a value in the range 1-9
 /// The digit represents the cell id and is used to update a Cell
 
+#[derive(Clone, Debug, PartialEq)]
 pub struct Board {
     the_board: [char; 9],
 }
@@ -94,27 +97,21 @@ impl Board {
             == 0
     }
 }
-/*
-    def __eq__(self, rhs):
-        if not isinstance(rhs, self.__class__):
-            return False
 
-        return self._the_board == rhs._the_board
+impl fmt::Display for Board {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let board_str = self
+            .rows()
+            .iter()
+            .map(|&row| {
+                row.iter()
+                    .map(|cell| cell.to_string())
+                    .collect::<Vec<String>>()
+                    .join("|")
+            })
+            .collect::<Vec<String>>()
+            .join("\n");
 
-    def __str__(self):
-        '''
-        Print the Board.
-        E.g.,
-          1|2|3
-          4|5|6
-          7|8|9
-        '''
-
-        return '\n'.join(
-            (
-                '|'.join(self._the_board[0:3]),
-                '|'.join(self._the_board[3:6]),
-                '|'.join(self._the_board[6:9]),
-            )
-        )
-*/
+        write!(f, "{}", board_str)
+    }
+}
