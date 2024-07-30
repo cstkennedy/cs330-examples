@@ -3,7 +3,7 @@ use crate::strategy::Strategy;
 
 const DEFAULT_NAME: &str = "I. C. Generic";
 
-struct Player<'a> {
+pub struct Player<'a> {
     name: &'a str,
     strategy: Box<&'a mut dyn Strategy>,
     humanity: bool,
@@ -19,10 +19,6 @@ impl<'a> Player<'a> {
     }
 
     /// Retrieve the next move.
-    ///
-    /// # Returns
-    ///     board cell id representing the selected move
-    ///
     pub fn next_move(&mut self) -> usize {
         self.strategy.next_move()
     }

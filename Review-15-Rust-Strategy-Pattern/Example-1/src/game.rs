@@ -1,16 +1,15 @@
 use crate::board::Board;
+use crate::player::Player;
 
-type Player = String;
-
-pub struct Game {
-    player_1: Player,
-    player_2: Player,
+pub struct Game<'game> {
+    player_1: Player<'game>,
+    player_2: Player<'game>,
 
     board: Board,
 }
 
-impl Game {
-    pub fn new(player_1: Player, player_2: Player) -> Self {
+impl<'game> Game<'game> {
+    pub fn new(player_1: Player<'game>, player_2: Player<'game>) -> Self {
         Game {
             player_1: player_1,
             player_2: player_2,
@@ -18,9 +17,4 @@ impl Game {
         }
     }
 
-    pub fn do_board_update(self) {
-        if self.board.is_full() {
-        } else {
-        }
-    }
 }
