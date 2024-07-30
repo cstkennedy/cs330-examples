@@ -1,5 +1,4 @@
 use crate::board::Board;
-use crate::referee::Referee;
 
 type Player = String;
 
@@ -8,7 +7,6 @@ pub struct Game {
     player_2: Player,
 
     board: Board,
-    referee: Referee,
 }
 
 impl Game {
@@ -17,7 +15,6 @@ impl Game {
             player_1: player_1,
             player_2: player_2,
             board: Board::new(),
-            referee: Referee::new(),
         }
     }
 

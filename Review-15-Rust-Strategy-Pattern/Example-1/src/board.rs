@@ -1,9 +1,10 @@
+use itertools::Itertools;
 use std::fmt;
 
 type CellPair = (usize, char);
 type CellTriple = (CellPair, CellPair, CellPair);
 
-const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
+pub const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
 
 /// This ADT represents the gameboard used in a round
 /// of standard tic-tac-toe (i.e., a 3 x 3 grid)
@@ -100,6 +101,7 @@ impl Board {
 
 impl fmt::Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        /*
         let board_str = self
             .rows()
             .iter()
@@ -110,6 +112,12 @@ impl fmt::Display for Board {
                     .join("|")
             })
             .collect::<Vec<String>>()
+            .join("\n");
+        */
+        let board_str = self
+            .rows()
+            .iter()
+            .map(|&row| row.iter().join("|"))
             .join("\n");
 
         write!(f, "{}", board_str)

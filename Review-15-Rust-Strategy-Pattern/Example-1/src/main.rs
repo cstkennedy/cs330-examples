@@ -1,5 +1,5 @@
 use tictactoe::game::Game;
 
 fn main() {
-    let game = Game::new("Thomas".into(), "Jay".into());
+    let _game = Game::new("Thomas".into(), "Jay".into());
 }
