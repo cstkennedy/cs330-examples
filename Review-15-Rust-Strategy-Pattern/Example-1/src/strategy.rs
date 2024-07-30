@@ -1,13 +1,13 @@
 use std::io::Write;
 use std::io::{stdin, stdout};
 
-trait Strategy {
+pub trait Strategy {
     fn next_move(&mut self) -> usize;
 }
 
 const PROMPT_MSG: &str = "Enter your desired move (1-9): ";
 
-struct KeyboardStrategy {
+pub struct KeyboardStrategy {
     name: &'static str,
 }
 
@@ -38,7 +38,7 @@ impl Strategy for KeyboardStrategy {
     }
 }
 
-struct PredefinedMoves<'a> {
+pub struct PredefinedMoves<'a> {
     my_moves: &'a [usize],
     move_idx: usize,
 }
