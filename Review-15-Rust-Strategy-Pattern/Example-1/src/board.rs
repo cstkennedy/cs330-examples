@@ -94,7 +94,7 @@ impl Board {
             == 0
     }
 }
-    /*
+/*
     def __eq__(self, rhs):
         if not isinstance(rhs, self.__class__):
             return False

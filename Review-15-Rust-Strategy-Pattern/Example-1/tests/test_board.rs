@@ -28,73 +28,53 @@ pub fn test_default_constructor(a_board: Board) {
     let rows = a_board.rows();
     assert_that!(
         &rows,
-        contains(vec![
-            ['1', '2', '3'],
-            ['4', '5', '6'],
-            ['7', '8', '9'],
-        ])
+        contains(vec![['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9'],])
     );
 
     let cols = a_board.columns();
     assert_that!(
         &cols,
-        contains(vec![
-            ['1', '4', '7'],
-            ['2', '5', '8'],
-            ['3', '6', '9'],
-        ])
+        contains(vec![['1', '4', '7'], ['2', '5', '8'], ['3', '6', '9'],])
     );
 
     let diagonals = a_board.diagonals();
     assert_that!(
         &diagonals,
-        contains(vec![
-            ['1', '5', '9'],
-            ['3', '5', '7'],
-        ])
+        contains(vec![['1', '5', '9'], ['3', '5', '7'],])
     );
 }
 
-/*
+#[rstest]
+pub fn test_set_cell(mut a_board: Board) {
+    assert_that!(a_board.set_cell(1, 'X'), is(ok()));
+    assert_that!(a_board.set_cell(9, 'O'), is(ok()));
 
-def test_set_cell(a_board):
-    a_board.set_cell(1, "X")
-    a_board.set_cell(9, "O")
+    assert_that!(a_board.get_cell(1), is(equal_to(Ok('X'))));
+    assert_that!(a_board.get_cell(9), is(equal_to(Ok('O'))));
 
-    assert_that!(a_board.get_cell(1), is_("X"))
-    assert_that!(a_board.get_cell(9), is_("O"))
+    // assert_that!(str(a_board), is_not(equal_to(EXPECTED_EMPTY_STR)))
+    // assert_that!(a_board, has_string("X|2|3\n4|5|6\n7|8|O"))
 
-    assert_that!(str(a_board), is_not(equal_to(EXPECTED_EMPTY_STR)))
-    assert_that!(a_board, has_string("X|2|3\n4|5|6\n7|8|O"))
-
+    let rows = a_board.rows();
     assert_that!(
-        a_board.rows(),
-        contains_exactly(
-            list("X23"),
-            list("456"),
-            list("78O"),
-        ),
-    )
+        &rows,
+        contains(vec![['X', '2', '3'], ['4', '5', '6'], ['7', '8', 'O'],])
+    );
 
+    let cols = a_board.columns();
     assert_that!(
-        a_board.columns(),
-        contains_exactly(
-            list("X47"),
-            list("258"),
-            list("36O"),
-        ),
-    )
+        &cols,
+        contains(vec![['X', '4', '7'], ['2', '5', '8'], ['3', '6', 'O'],])
+    );
 
+    let diagonals = a_board.diagonals();
     assert_that!(
-        a_board.diagonals(),
-        contains_exactly(
-            list("X5O"),
-            list("357"),
-        ),
-    )
+        &diagonals,
+        contains(vec![['X', '5', 'O'], ['3', '5', '7'],])
+    );
 
-    assert_that!(not a_board.is_full())
-*/
+    assert_that!(a_board.is_full(), is(not(true)));
+}
 
 #[rstest]
 #[case(0)]
