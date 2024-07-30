@@ -25,33 +25,34 @@ pub fn test_default_constructor(a_board: Board) {
     // assert_that!(a_board, has_string(EXPECTED_EMPTY_STR))
     assert_that!(a_board.is_full(), is(not(true)));
 
+    let rows = a_board.rows();
     assert_that!(
-        &a_board.rows().iter().collect::<Vec<&[char; 3]>>(),
+        &rows,
         contains(vec![
-            &['1', '2', '3'],
-            &['4', '5', '6'],
-            &['7', '8', '9'],
+            ['1', '2', '3'],
+            ['4', '5', '6'],
+            ['7', '8', '9'],
         ])
     );
 
-    /*
+    let cols = a_board.columns();
     assert_that!(
-        a_board.columns(),
-        contains_exactly(
-            list("147"),
-            list("258"),
-            list("369"),
-        ),
-    )
+        &cols,
+        contains(vec![
+            ['1', '4', '7'],
+            ['2', '5', '8'],
+            ['3', '6', '9'],
+        ])
+    );
 
+    let diagonals = a_board.diagonals();
     assert_that!(
-        a_board.diagonals(),
-        contains_exactly(
-            list("159"),
-            list("357"),
-        ),
-    )
-    */
+        &diagonals,
+        contains(vec![
+            ['1', '5', '9'],
+            ['3', '5', '7'],
+        ])
+    );
 }
 
 /*
@@ -104,15 +105,30 @@ pub fn test_get_cell_bounds_check(#[case] cell_id: usize) {
     assert_that!(a_board.get_cell(cell_id), is(err()));
 }
 
-/*
-@pytest.mark.parametrize("cell_id", [0, -1, 10, 11])
-def test_set_cell_bounds_check(a_board, cell_id):
-    with pytest.raises(IndexError):
-        a_board.set_cell(cell_id, "X")
+#[rstest]
+#[case(0)]
+#[case(10)]
+#[case(11)]
+pub fn test_set_cell_bounds_check(#[case] cell_id: usize) {
+    let mut a_board = Board::new();
+    assert_that!(a_board.set_cell(cell_id, 'X'), is(err()));
+    assert_that!(a_board.set_cell(cell_id, 'O'), is(err()));
+}
 
-
-@pytest.mark.parametrize("symbol", ["x", "o", "?"])
-def test_set_cell_symbol_check(a_board, symbol):
-    with pytest.raises(ValueError):
-        a_board.set_cell(1, symbol)
-*/
+#[rstest]
+#[case('?')]
+#[case('+')]
+#[case('x')]
+#[case('o')]
+pub fn test_set_cell_symbol_check(#[case] symbol: char) {
+    let mut a_board = Board::new();
+    assert_that!(a_board.set_cell(1, symbol), is(err()));
+    assert_that!(a_board.set_cell(2, symbol), is(err()));
+    assert_that!(a_board.set_cell(3, symbol), is(err()));
+    assert_that!(a_board.set_cell(4, symbol), is(err()));
+    assert_that!(a_board.set_cell(5, symbol), is(err()));
+    assert_that!(a_board.set_cell(6, symbol), is(err()));
+    assert_that!(a_board.set_cell(7, symbol), is(err()));
+    assert_that!(a_board.set_cell(8, symbol), is(err()));
+    assert_that!(a_board.set_cell(9, symbol), is(err()));
+}

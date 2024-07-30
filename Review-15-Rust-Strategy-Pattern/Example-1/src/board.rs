@@ -22,15 +22,13 @@ impl Board {
     }
 
     /// Retrieve the value stored in a selected Cell.
-
+    ///
     /// Args:
     ///     cell_id: numeric id representing the desired cell
-
+    ///
     /// Returns:
     ///     value stored in the Cell
-
-    /// Raises:
-    ///     IndexError if !(cell1_id > 0 && cell1_id < 10) ||
+    ///
     pub fn get_cell(&self, cell_id: usize) -> Result<char, &'static str> {
         if cell_id <= 0 || cell_id >= 10 {
             return Err("Cell Index is not between 0 and 10, exclusive");
@@ -45,20 +43,15 @@ impl Board {
     ///     cell_id: numeric id representing the desired cell
     ///     new_value: replacement `CellValue`
     ///
-    /// Raises:
-    ///     IndexError if !(cell1_id > 0 && cell1_id < 10) ||
-    ///
-    ///     ValueError if new_value is not 'X' or 'O'
     pub fn set_cell(&mut self, cell_id: usize, new_value: char) -> Result<(), &'static str> {
         if cell_id <= 0 || cell_id >= 10 {
             return Err("Cell Index is not between 0 and 10, exclusive");
         }
 
-        /*
+        if VALID_SYMBOLS.iter().find(|symbol| *symbol == &new_value) == None {
+            return Err("'new_value' is not 'X' or 'O'");
+        }
 
-        if new_value not in VALID_SYMBOLS {
-            raise ValueError(f''{new_value}' is not 'X' or 'O'')
-        */
         self.the_board[cell_id - 1] = new_value;
         Ok(())
     }
