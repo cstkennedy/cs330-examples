@@ -5,15 +5,15 @@ const DEFAULT_NAME: &str = "I. C. Generic";
 
 pub struct Player<'a> {
     name: &'a str,
-    strategy: Box<&'a mut dyn Strategy>,
+    strategy: Box<dyn Strategy + 'a>,
     humanity: bool,
 }
 
 impl<'a> Player<'a> {
-    pub fn new(name: &'a str, strategy: Box<&'a mut dyn Strategy>, is_a_human: bool) -> Self {
+    pub fn new(name: &'a str, strategy: impl Strategy + 'a, is_a_human: bool) -> Self {
         Player {
             name: name,
-            strategy: strategy,
+            strategy: Box::new(strategy),
             humanity: is_a_human,
         }
     }
