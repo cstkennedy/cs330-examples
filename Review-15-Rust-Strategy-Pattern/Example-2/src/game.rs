@@ -69,6 +69,9 @@ impl<'game> InitializedGame<'game> {
     pub fn play_match(mut self) -> CompletedGame<'game> {
         while self.is_not_over() {
             if Self::do_one_turn(&mut self.board, &mut self.player_1, 'X') {
+                println!("{}", self.board);
+                println!();
+
                 return CompletedGame {
                     winner: Some(self.player_1),
                     loser: Some(self.player_2),
@@ -77,6 +80,9 @@ impl<'game> InitializedGame<'game> {
             }
 
             if Self::do_one_turn(&mut self.board, &mut self.player_2, 'O') {
+                println!("{}", self.board);
+                println!();
+
                 return CompletedGame {
                     winner: Some(self.player_2),
                     loser: Some(self.player_1),

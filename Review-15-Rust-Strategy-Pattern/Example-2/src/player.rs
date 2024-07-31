@@ -37,23 +37,10 @@ impl<'a> Player<'a> {
         self.name
     }
 }
+
+// TODO: implement Debug using
+// <https://doc.rust-lang.org/std/fmt/struct.Formatter.html#method.debug_struct>
 /*
-    pub fn __str__(self) {
-        """
-        Generate a player string, but only the name.
-        """
-
-        return self.name
-
-    pub fn __deepcopy__(self, memo) -> "Player" {
-        """
-        Create a new duplicate Player.
-        """
-
-        cpy = Player(name=self.name, strategy=copy.deepcopy(self.strategy))
-
-        return cpy
-
 
 pub fn is_generic(possible_cylon: Player) -> bool {
     """
