@@ -32,6 +32,10 @@ impl<'a> Player<'a> {
     pub fn is_computer(&self) -> bool {
         !self.is_human()
     }
+
+    pub fn get_name(&self) -> &str {
+        self.name
+    }
 }
 /*
     pub fn __str__(self) {

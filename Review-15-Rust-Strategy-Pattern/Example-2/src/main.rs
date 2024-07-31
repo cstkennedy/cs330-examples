@@ -11,5 +11,6 @@ fn main() {
             false,
         ));
 
-    game.play_match();
+    let finished_game = game.play_match();
+    println!("{}", finished_game);
 }
