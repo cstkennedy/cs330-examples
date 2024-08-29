@@ -379,3 +379,42 @@ node_1::next -> newNode
 </details>
 
 ![](add-12.svg)
+
+<details>
+    <summary> PlantUML Object Diagram Source </summary>
+
+```plantuml
+@startuml add-13
+
+object ll {
+    head
+    tail
+    currentSize = 3
+}
+
+object node_0 {
+    data = 4
+    next
+}
+
+object node_1 {
+    data = 9001
+    next
+}
+
+object newNode {
+    data = 337
+    next = null
+}
+
+ll::head -> node_0
+ll::tail -> newNode
+
+node_0::next -> node_1
+node_1::next -> newNode
+
+@enduml
+```
+</details>
+
+![](add-12.svg)
