@@ -417,4 +417,4 @@ node_1::next -> newNode
 ```
 </details>
 
-![](add-12.svg)
+![](add-13.svg)
