@@ -69,6 +69,36 @@ public class TestLinkedList
     }
 
     @Test
+    public void testAddButBetter()
+    {
+        LinkedList ll = new LinkedList();
+
+        assertThat(ll.size(), is(0));
+
+        ll.add(1);
+        ll.add(1);
+        ll.add(2);
+        ll.add(3);
+        ll.add(5);
+        ll.add(8);
+        ll.add(13);
+
+        assertThat(ll.size(), is(7));
+
+        LinkedList.Iterator it = ll.iterator();
+        assertThat(it.hasNext(), is(true));
+
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(1));
+        assertThat(it.next(), is(2));
+        assertThat(it.next(), is(3));
+        assertThat(it.next(), is(5));
+        assertThat(it.next(), is(8));
+        assertThat(it.next(), is(13));
+
+        assertThat(it.hasNext(), is(false));
+    }
+    @Test
     public void testClone()
     {
         LinkedList original = new LinkedList();
