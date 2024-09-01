@@ -17,8 +17,12 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion(11)
-    targetCompatibility = JavaVersion.toVersion(11)
+    // sourceCompatibility = JavaVersion.toVersion(11)
+    // targetCompatibility = JavaVersion.toVersion(11)
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 repositories {
