@@ -142,6 +142,6 @@ public class ListDriver
         while (it.hasNext()) {
             System.out.printf("  %4d%n", it.next());
         }
-        System.out.println("[");
+        System.out.println("]");
     }
 }
