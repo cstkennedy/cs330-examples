@@ -22,7 +22,6 @@ class DimensionSet:
 
 
 class Room:
-
     def __init__(self, nme: str = "Generic"):
         self.__name = nme
         self.__dimensions = DimensionSet()

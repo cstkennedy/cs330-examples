@@ -25,26 +25,12 @@ use room_renovation::room::{DimensionSet, Flooring, Room};
 fn main() {
     // Construct, build, and print a house
     let mut house = House::new();
-
-    // std::istringstream fakeInputFile(ROOM_DATA);
     build_house(&mut house);
 
     println!("{}", house);
 
     // Upgrade the flooring in a second duplicate house
     let duplicate_house = upgrade_flooring(&house);
-
-    /*
-    // cout.setf(ios::boolalpha);
-    cout << "\n"
-         << "house == duplicateHouse   -> "
-         << (house == duplicateHouse)
-         << "\n"
-         << "&house == &duplicateHouse -> "
-         << (&house == &duplicateHouse)
-         << "\n"
-         << "\n";
-    */
     println!("house == duplicate_house -> {}", (house == duplicate_house));
     println!(
         "&house == &duplicate_house -> {}",
@@ -54,42 +40,15 @@ fn main() {
     println!("{}", house);
     println!("{}", duplicate_house);
 
-    /*
-    // Get all the flooring costs with a 10% discount
-    vector<double> costs(duplicateHouse.size());
-    std::transform(duplicateHouse.begin(), duplicateHouse.end(), costs.begin(),
-                   discountFlooring);
-    */
     let costs: Vec<f64> = duplicate_house
         .iter()
         .map(|r| discount_flooring(r))
         .collect();
 
-    /*
-    std::copy(costs.begin(), costs.end(),
-              std::ostream_iterator<double>(std::cout, "\n"));
-    */
     for room_cost in costs.iter() {
         println!("{:.2}", room_cost)
     }
 
-    /*
-    costs.iter()
-        .for_each(|room_cost| println!("{:.2}", room_cost));
-    */
-
-    /*
-    // Print the sum, min, max -> D.R.Y!
-    cout << "Total: "
-         << std::accumulate(costs.begin(), costs.end(), 0.0, std::plus<double>())
-         << "\n";
-    cout << "Min: "
-         << *std::min_element(costs.begin(), costs.end())
-         << "\n"
-         << "Max: "
-         << *std::max_element(costs.begin(), costs.end())
-         << "\n";
-    */
 
     let total: f64 = costs.iter().sum();
     let min: f64 = *costs.iter().min_by_key(|c| OrderedFloat(**c)).unwrap();
@@ -99,17 +58,6 @@ fn main() {
     println!("Min  : {:.2}", min);
     println!("Max  : {:.2}", max);
 
-    // I would probably use minmax_element and auto
-    /*
-    std::pair<std::vector<double>::const_iterator,
-              std::vector<double>::const_iterator> extremes = std::minmax_element(costs.begin(), costs.end());
-    */
-    /*
-    auto extremes = std::minmax_element(costs.begin(), costs.end());
-
-    cout << "Min: " << *(extremes.first)  << "\n"
-         << "Max: " << *(extremes.second) << "\n";
-    */
     match costs.iter().minmax_by_key(|c| OrderedFloat(**c)) {
         MinMaxResult::MinMax(ex_min, ex_max) => {
             println!("Min  : {:.2}", ex_min);

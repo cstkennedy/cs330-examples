@@ -1,10 +1,7 @@
-from typing import List
-
 from room import Room
 
 
 class House:
-
     def __init__(self, n: str = "House"):
         """
         This is the Default constructor. Start with the name set to "House" and
@@ -12,7 +9,7 @@ class House:
         """
 
         self.__name: str = n
-        self.__rooms: List[Room] = []
+        self.__rooms: list[Room] = []
 
     @property
     def name(self):
@@ -77,11 +74,13 @@ class House:
         total = sum(map(lambda room: room.flooring_cost(), self))
         avg = total / len(self)
 
-        return f"--------{self.name:}--------\n" \
-            + "\n".join([str(room) for room in self]) \
-            + "------------------------------\n" \
-            + f"Total Cost   : $ {total:.2f}\n" \
+        return (
+            f"--------{self.name:}--------\n"
+            + "\n".join(str(room) for room in self)
+            + "------------------------------\n"
+            + f"Total Cost   : $ {total:.2f}\n"
             + f"Avg Room Cost: $ {avg:.2f}\n"
+        )
 
     def __eq__(self, rhs) -> bool:
         """
