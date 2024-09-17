@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class TestBoard
 {
-    final String expectedEmptyStr = "1|2|3\n4|5|6\n7|8|9\n";
+    private static final String EXPECTED_EMPTY_STRING = "1|2|3\n4|5|6\n7|8|9\n";
 
     Board aBoard;
 
@@ -41,7 +41,7 @@ public class TestBoard
             assertThat(aBoard.getCell(i), is(expectedChar));
         }
 
-        assertThat(aBoard.toString(), equalTo(expectedEmptyStr));
+        assertThat(aBoard.toString(), equalTo(EXPECTED_EMPTY_STRING));
         assertFalse(aBoard.isFull());
 
         Board.Pair[] retrieved = aBoard.get3Cells(1, 2, 3);
@@ -72,11 +72,11 @@ public class TestBoard
             new Board.Pair(8, 'O')
         };
 
-        assertThat(retrieved[0], equalTo(expected[0]));
-        assertThat(retrieved[1], equalTo(expected[1]));
-        assertThat(retrieved[2], equalTo(expected[2]));
+        assertThat(retrieved[0], is(equalTo(expected[0])));
+        assertThat(retrieved[1], is(equalTo(expected[1])));
+        assertThat(retrieved[2], is(equalTo(expected[2])));
 
-        assertThat(aBoard.toString(), not(equalTo(expectedEmptyStr)));
+        assertThat(aBoard.toString(), not(equalTo(EXPECTED_EMPTY_STRING)));
         assertThat(aBoard.toString(), equalTo("X|2|3\n4|5|6\n7|8|O\n"));
 
         assertFalse(aBoard.isFull());
