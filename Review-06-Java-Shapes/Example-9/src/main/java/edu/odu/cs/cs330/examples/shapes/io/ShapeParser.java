@@ -19,7 +19,6 @@ public class ShapeParser
     {
     }
 
-
     private static <T extends TraitFromDimensions> T initFromDims(T obj, String restOfLine)
     {
         double[] dims = new double[obj.numDims()];

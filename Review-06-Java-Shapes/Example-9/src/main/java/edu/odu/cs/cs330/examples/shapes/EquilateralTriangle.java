@@ -34,16 +34,6 @@ public class EquilateralTriangle extends Triangle implements Shape {
     }
 
     /**
-     * Construct an EquilateralTriangle.
-     *
-     * @param src the EquilateralTriangle to copy
-     */
-    public EquilateralTriangle(EquilateralTriangle src)
-    {
-        this.side(src.side());
-    }
-
-    /**
      * Compute the height using
      * @f$ height = \frac{5}{4}side @f$.
      *
@@ -100,7 +90,7 @@ public class EquilateralTriangle extends Triangle implements Shape {
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new EquilateralTriangle(this);
+        return new EquilateralTriangle(this.side());
     }
 
     @Override

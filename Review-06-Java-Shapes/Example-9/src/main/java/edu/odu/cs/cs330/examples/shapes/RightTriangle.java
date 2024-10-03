@@ -140,7 +140,11 @@ public class RightTriangle extends Triangle implements Shape {
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new RightTriangle(this);
+        RightTriangle cpy = new RightTriangle();
+        cpy.height(this.height());
+        cpy.base(this.base());
+
+        return cpy;
     }
 
     @Override

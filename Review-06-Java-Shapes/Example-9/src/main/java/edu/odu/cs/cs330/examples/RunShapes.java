@@ -25,7 +25,6 @@ import static edu.odu.cs.tkennedy.utilities.Utilities.projectHeading;
 import edu.odu.cs.cs330.examples.shapes.Shape;
 import edu.odu.cs.cs330.examples.shapes.ShapeFactory;
 
-import edu.odu.cs.cs330.examples.shapes.io.ShapeIterator;
 import edu.odu.cs.cs330.examples.shapes.io.ShapeParser;
 
 /**
@@ -136,44 +135,5 @@ public class RunShapes {
                             .min(Comparator.comparing(Shape::perimeter))
                             .get();
         System.out.println(smallestShape);
-    }
-
-    /**
-     * Read shapes from an input stream
-     * and construct an `ArrayList<Shape>` object.
-     *
-     * @param shapesFile input source
-     *
-     * @return collection of read-in shapes
-     *
-     * @throws CloneNotSupportedException if the `ShapeFactory` fails to clone a
-     *     model shape
-     */
-    @Deprecated
-    private static List<Shape> readShapes(BufferedReader shapesFile)
-        throws CloneNotSupportedException
-    {
-        /*
-        List<Shape> collection = new ArrayList<>();
-
-        Iterator<Shape> it = new ShapeIterator(shapesFile);
-
-        while (it.hasNext()) {
-            Shape shp = it.next();
-
-            collection.add(shp);
-        }
-
-        return collection;
-        */
-        Iterator<Shape> it = new ShapeIterator(shapesFile);
-        Spliterator<Shape> splitIt = Spliterators.spliteratorUnknownSize(
-            it,
-            Spliterator.ORDERED
-        );
-        Stream<Shape> stream = StreamSupport.stream(splitIt, false); // false -> not parallel
-        List<Shape> collection = stream.collect(Collectors.toList());
-
-        return collection;
     }
 }

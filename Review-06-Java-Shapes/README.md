@@ -56,8 +56,15 @@ This discussion is split into seven (7) examples:
   - **Example 8**
     - Generics and Trait Bounds in `ShapeIterator`, using `extends` with
       interfaces, converting an `Iterator` to a `Stream`.
-    - This was built during a discussion during a live lecture on 28 March
-      2023. A recording is not yet available.
+    - This was built during a discussion during a live lecture.
+      A recording is not yet available.
+
+  - **Example 9**
+    - Remove Copy Constructors and rewrite `clone` methods
+    - Refactor driver logic and move IO logic into dedicated `ShapeParser`
+    - This was built during a discussion during a live lecture.
+      A recording is not yet available.
+
 
 
 # Running the Examples

@@ -33,16 +33,6 @@ public class Square implements Shape {
     }
 
     /**
-     * Construct a Square.
-     *
-     * @param src the Square to copy
-     */
-    public Square(Square src)
-    {
-        this(src._side);
-    }
-
-    /**
      * Return the side length.
      *
      * @return length of a single side
@@ -83,7 +73,7 @@ public class Square implements Shape {
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Square(this);
+        return new Square(this.side());
     }
 
     @Override
@@ -101,7 +91,7 @@ public class Square implements Shape {
     @Override
     public String toString()
     {
-        return String.format(Shape.FMT_STR, "name", this.name())
+        return String.format(Shape.FMT_STR, "Name", this.name())
              + String.format(Shape.FMT_DBL, "Side", this._side)
              + String.format(Shape.FMT_DBL, "Perimeter", this.perimeter())
              + String.format(Shape.FMT_DBL, "Area", this.area());

@@ -43,16 +43,6 @@ public class Circle implements Shape {
     }
 
     /**
-     * Construct a Circle.
-     *
-     * @param src the Circle to copy
-     */
-    public Circle(Circle src)
-    {
-        this._radius = src._radius;
-    }
-
-    /**
      * Return the radius length.
      */
     public double radius()
@@ -112,7 +102,7 @@ public class Circle implements Shape {
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Circle(this);
+        return new Circle(this.radius());
     }
 
     @Override

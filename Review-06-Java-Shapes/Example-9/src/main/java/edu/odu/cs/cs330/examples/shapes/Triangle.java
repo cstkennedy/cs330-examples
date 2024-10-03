@@ -49,18 +49,6 @@ public class Triangle implements Shape {
     }
 
     /**
-     * Construct a Triangle.
-     *
-     * @param src the Triangle to copy
-     */
-    public Triangle(Triangle src)
-    {
-        this._side_a = src._side_a;
-        this._side_b = src._side_b;
-        this._side_c = src._side_c;
-    }
-
-    /**
      * Length of side A.
      *
      * @return the length of side A
@@ -162,7 +150,7 @@ public class Triangle implements Shape {
     @Override
     public Object clone() throws CloneNotSupportedException
     {
-        return new Triangle(this);
+        return new Triangle(this.sideA(), this.sideB(), this.sideC());
     }
 
     @Override
