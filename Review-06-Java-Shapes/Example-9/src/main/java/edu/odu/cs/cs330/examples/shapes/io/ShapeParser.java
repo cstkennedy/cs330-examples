@@ -39,7 +39,7 @@ public class ShapeParser
      * <p>
      * How is **inheritance** used?
      *
-     * @param scanner input from which to read in the Shape
+     * @param splitLine raw input line split on whitespace (e.g., ' ', '\t')
      *
      * @return an initialized Shape object, or null
      */

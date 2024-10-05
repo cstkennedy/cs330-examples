@@ -91,10 +91,13 @@ public class Square implements Shape {
     @Override
     public String toString()
     {
-        return String.format(Shape.FMT_STR, "Name", this.name())
-             + String.format(Shape.FMT_DBL, "Side", this._side)
-             + String.format(Shape.FMT_DBL, "Perimeter", this.perimeter())
-             + String.format(Shape.FMT_DBL, "Area", this.area());
+        return String.join(
+            "",
+            String.format(Shape.FMT_STR, "Name", this.name()),
+            String.format(Shape.FMT_DBL, "Side", this._side),
+            String.format(Shape.FMT_DBL, "Perimeter", this.perimeter()),
+            String.format(Shape.FMT_DBL, "Area", this.area())
+        );
     }
 }
 

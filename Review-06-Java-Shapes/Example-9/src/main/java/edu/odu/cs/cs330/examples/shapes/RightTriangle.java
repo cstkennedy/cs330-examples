@@ -168,12 +168,15 @@ public class RightTriangle extends Triangle implements Shape {
     @Override
     public String toString()
     {
-        return String.format(Shape.FMT_STR, "Name", this.name())
-             + String.format(Shape.FMT_DBL, "Base", this.base())
-             + String.format(Shape.FMT_DBL, "Height", this.height())
-             + String.format(Shape.FMT_DBL, "Hypotenuse", this.hypotenuse())
-             + String.format(Shape.FMT_DBL, "Perimeter", this.perimeter())
-             + String.format(Shape.FMT_DBL, "Area", this.area());
+        return String.join(
+            "",
+            String.format(Shape.FMT_STR, "Name", this.name()),
+            String.format(Shape.FMT_DBL, "Base", this.base()),
+            String.format(Shape.FMT_DBL, "Height", this.height()),
+            String.format(Shape.FMT_DBL, "Hypotenuse", this.hypotenuse()),
+            String.format(Shape.FMT_DBL, "Perimeter", this.perimeter()),
+            String.format(Shape.FMT_DBL, "Area", this.area())
+        );
     }
 }
 

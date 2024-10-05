@@ -1,34 +1,22 @@
 package edu.odu.cs.cs330.examples;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.FileReader;
 
 import java.util.List;
-import java.util.ArrayList;
-
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.Spliterators;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import edu.odu.cs.tkennedy.utilities.Utilities;
 import static edu.odu.cs.tkennedy.utilities.Utilities.heading;
 import static edu.odu.cs.tkennedy.utilities.Utilities.horizontalLine;
 import static edu.odu.cs.tkennedy.utilities.Utilities.projectHeading;
 
-// import edu.odu.cs.cs330.examples.shapes.*;
 import edu.odu.cs.cs330.examples.shapes.Shape;
 import edu.odu.cs.cs330.examples.shapes.ShapeFactory;
-
 import edu.odu.cs.cs330.examples.shapes.io.ShapeParser;
 
 /**
- * This is the Java version of the previous C++ Shapes Inheritance Example.
+ * This is the Java version of the Shapes Inheritance Example.
  *
  * @author Thomas J Kennedy
  */
@@ -46,8 +34,12 @@ public class RunShapes {
      */
     private static final int H_WIDTH = 38;
 
+    /**
+     * Collect all information about the ShapeFactory (e.g., supported shapes)
+     * ahead of time.
+     */
     private static final String SHAPE_FACTORY_SUMMARY = String.join(
-        "\n",
+        System.lineSeparator(), // replace '\n'
         heading("Available Shapes", H_WIDTH, '*'),
         ShapeFactory.listKnown(),
         horizontalLine('-', H_WIDTH),

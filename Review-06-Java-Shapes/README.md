@@ -56,14 +56,17 @@ This discussion is split into seven (7) examples:
   - **Example 8**
     - Generics and Trait Bounds in `ShapeIterator`, using `extends` with
       interfaces, converting an `Iterator` to a `Stream`.
-    - This was built during a discussion during a live lecture.
-      A recording is not yet available.
+    - The recording is available at <https://youtu.be/Yz2nyYUAJOY> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+8/1_ed5cdhpi>
 
-  - **Example 9**
+  - **Example 9 - Part 1**
     - Remove Copy Constructors and rewrite `clone` methods
     - Refactor driver logic and move IO logic into dedicated `ShapeParser`
-    - This was built during a discussion during a live lecture.
-      A recording is not yet available.
+    - The recording is available at <https://youtu.be/wLwSxvf-KdY> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+9+%28Part+1%29/1_p3b0q0lo>
+
+  - **Example 9 - Part 2**
+    - Remove Copy Constructors and rewrite `clone` methods
+    - Refactor driver logic and move IO logic into dedicated `ShapeParser`
+    - The recording is available at <https://youtu.be/HwrTr5fvCj0> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+9+%28Part+2%29/1_lr5tjj7t>
 
 
 
