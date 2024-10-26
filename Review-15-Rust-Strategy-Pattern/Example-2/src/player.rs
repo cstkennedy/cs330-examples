@@ -3,6 +3,7 @@ use crate::strategy::Strategy;
 
 const DEFAULT_NAME: &str = "I. C. Generic";
 
+#[derive(Debug)]
 pub struct Player<'a> {
     name: &'a str,
     strategy: Box<dyn Strategy + 'a>,

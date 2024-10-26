@@ -26,4 +26,6 @@ fn main() {
         .play_match();
 
     println!("{}", finished_game);
+
+    // println!("{:?}", Player::new("Thomas", KeyboardStrategy::new("Thomas"), true));
 }

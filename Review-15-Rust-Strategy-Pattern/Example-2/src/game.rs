@@ -7,10 +7,12 @@ use crate::referee::Referee;
 #[derive(Clone, Debug, Default)]
 pub struct Game;
 
+#[derive(Debug)]
 pub struct GameWithOnePlayerSet<'game> {
     player_1: Player<'game>,
 }
 
+#[derive(Debug)]
 pub struct InitializedGame<'game> {
     player_1: Player<'game>,
     player_2: Player<'game>,
@@ -18,11 +20,13 @@ pub struct InitializedGame<'game> {
     board: Board,
 }
 
+#[derive(Debug)]
 pub enum EndState {
     Win,
     Stalemate,
 }
 
+#[derive(Debug)]
 pub struct CompletedGame<'game> {
     pub winner: Option<Player<'game>>,
     pub loser: Option<Player<'game>>,
