@@ -37,24 +37,20 @@ impl<'a> Player<'a> {
     pub fn get_name(&self) -> &str {
         self.name
     }
+
+    /// Checks whether a player is a placeholder or
+    /// an actual player.
+    ///
+    /// # Args
+    ///     possible_cylon (Player): player whose humanity is in question
+    ///
+    /// # Returns
+    ///     True if the player is a Cylon
+    pub fn is_generic(possible_cylon: &Player<'a>) -> bool {
+        possible_cylon.name == DEFAULT_NAME
+    }
+
 }
 
 // TODO: implement Debug using
 // <https://doc.rust-lang.org/std/fmt/struct.Formatter.html#method.debug_struct>
-/*
-
-pub fn is_generic(possible_cylon: Player) -> bool {
-    """
-    Checks whether a player is a placeholder or
-    an actual player.
-
-    Args {
-        possible_cylon (Player): player whose humanity is in question
-
-    Returns {
-        True if the player is a Cylon
-
-    """
-
-    return possible_cylon.name == DEFAULT_NAME
-*/
