@@ -1,5 +1,5 @@
 use tictactoe::game::Game;
-use tictactoe::player::{Player, PlayerType};
+use tictactoe::player::{Player};
 use tictactoe::strategy::*;
 
 fn main() {
@@ -8,7 +8,6 @@ fn main() {
             Player::builder()
                 .human()
                 .with_name("Thomas")
-                .with_strategy(KeyboardStrategy::new("Thomas"))
                 .build()
         )
         .add_player(

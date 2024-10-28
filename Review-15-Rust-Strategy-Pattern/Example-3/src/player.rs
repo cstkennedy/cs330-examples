@@ -1,4 +1,5 @@
 use crate::strategy::Strategy;
+use crate::strategy::KeyboardStrategy;
 
 const DEFAULT_NAME: &str = "I. C. Generic";
 
@@ -53,6 +54,7 @@ pub enum PlayerType {
     #[default] Computer
 }
 
+// TODO: Add proper error handling
 #[derive(Debug, Default)]
 pub struct PlayerBuilder<'a> {
     name: Option<&'a str>,
@@ -60,7 +62,6 @@ pub struct PlayerBuilder<'a> {
     player_type: Option<PlayerType>,
 }
 
-// TODO: Add proper error handling
 impl<'a> PlayerBuilder<'a> {
     pub fn human(mut self) -> Self {
         self.player_type = Some(PlayerType::Human);
@@ -69,7 +70,13 @@ impl<'a> PlayerBuilder<'a> {
 
     pub fn with_name(mut self, name: &'a str) -> Self {
         self.name = Some(name);
-        self
+
+        match self.player_type {
+            Some(PlayerType::Human) => {
+                self.with_strategy(KeyboardStrategy::new(&name))
+            },
+            _ => self
+        }
     }
 
     pub fn with_strategy(mut self, strategy: impl Strategy + 'a) -> Self {
