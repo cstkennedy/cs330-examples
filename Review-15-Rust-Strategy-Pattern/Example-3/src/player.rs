@@ -1,7 +1,7 @@
 use crate::strategy::Strategy;
 use crate::strategy::KeyboardStrategy;
 
-const DEFAULT_NAME: &str = "I. C. Generic";
+pub const DEFAULT_NAME: &str = "I. C. Generic";
 
 #[derive(Debug)]
 pub struct Player<'a> {

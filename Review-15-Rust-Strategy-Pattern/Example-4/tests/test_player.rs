@@ -4,7 +4,6 @@ use rstest::*;
 
 use tictactoe::player::DEFAULT_NAME;
 use tictactoe::player::Player;
-use tictactoe::player::PlayerType;
 use tictactoe::strategy::*;
 
 
