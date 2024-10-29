@@ -65,7 +65,7 @@ package std::clone {
     }
 }
 
-package std::defailt {
+package std::default {
     class Default << (T,#FF7700) Trait >> {
         +default() -> Self
     }

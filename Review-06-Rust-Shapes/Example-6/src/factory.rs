@@ -6,6 +6,12 @@ use crate::square::Square;
 use crate::triangle::Triangle;
 use std::io::BufRead;
 
+impl From<Triangle> for Box<dyn Shape> {
+    fn from(shape: Triangle) -> Self {
+        Box::new(shape)
+    }
+}
+
 impl From<Triangle> for Option<Box<dyn Shape>> {
     fn from(shape: Triangle) -> Self {
         Some(Box::new(shape))
@@ -117,6 +123,18 @@ pub fn create_with(name: &str, dims: &[f64]) -> Option<Box<dyn Shape>> {
         _ => None,
     }
 }
+
+/*
+pub fn create_lambda(name: &str, dims: &[f64]) {
+    let functions: Vec<(&str, Box<dyn Fn(&[f64]) -> Box<dyn Shape>>)> = vec![
+        ("Triangle", Box::new(|dims| Triangle::from(dims).into())),
+        ("Right Triangle", |&dims| RightTriangle::from(dims)),
+        ("Equilateral Triangle", |&dims| EquilateralTriangle::from(dims)),
+        ("Square", |&dims| Square::from(dims)),
+        ("Circle", |&dims| Circle::from(dims)),
+    ];
+}
+*/
 
 /// Determine whether a given shape is known
 ///
