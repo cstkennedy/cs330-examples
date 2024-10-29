@@ -5,20 +5,16 @@ use crate::player::Player;
 use crate::referee::Referee;
 
 #[derive(Clone, Debug, Default)]
-pub struct Game;
+pub struct Player1NotSet;
 
-#[derive(Debug)]
-pub struct GameWithOnePlayerSet<'game> {
-    player_1: Player<'game>,
-}
+#[derive(Clone, Debug, Default)]
+pub struct Player2NotSet;
 
-#[derive(Debug)]
-pub struct InitializedGame<'game> {
-    player_1: Player<'game>,
-    player_2: Player<'game>,
+#[derive(Clone, Debug, Default)]
+pub struct NotReady;
 
-    board: Board,
-}
+#[derive(Clone, Debug, Default)]
+pub struct InProgress;
 
 #[derive(Debug)]
 pub enum EndState {
@@ -26,34 +22,41 @@ pub enum EndState {
     Stalemate,
 }
 
-#[derive(Debug)]
-pub struct CompletedGame<'game> {
-    pub winner: Option<Player<'game>>,
-    pub loser: Option<Player<'game>>,
-    pub end_state: EndState,
+#[derive(Clone, Debug, Default)]
+pub struct Game<P1, P2, S> {
+    player_1: P1,
+    player_2: P2,
+    board: Board,
+    state: S
 }
 
-impl Game {
+impl Game<Player1NotSet, Player2NotSet, NotReady> {
     pub fn new() -> Self {
-        Self
+        Game::default()
     }
 
-    pub fn add_player<'game>(self, player: Player<'game>) -> GameWithOnePlayerSet {
-        GameWithOnePlayerSet { player_1: player }
-    }
-}
-
-impl<'game> GameWithOnePlayerSet<'game> {
-    pub fn add_player(self, player: Player<'game>) -> InitializedGame {
-        InitializedGame {
-            player_1: self.player_1,
-            player_2: player,
-            board: Board::new(),
+    pub fn add_player<'game>(self, player: Player<'game>) -> Game<Player<'game>, Player2NotSet, NotReady> {
+        Game {
+            player_1: player,
+            player_2: self.player_2,
+            board: self.board,
+            state: self.state
         }
     }
 }
 
-impl<'game> InitializedGame<'game> {
+impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
+    pub fn add_player(self, player: Player<'game>) -> Game<Player<'game>, Player<'game>, InProgress> {
+        Game {
+            player_1: self.player_1,
+            player_2: player,
+            board: Board::new(),
+            state: InProgress
+        }
+    }
+}
+
+impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> bool {
         println!("{}", board);
         println!();
@@ -109,6 +112,13 @@ impl<'game> InitializedGame<'game> {
     pub fn is_not_over(&self) -> bool {
         !self.is_over()
     }
+}
+
+#[derive(Debug)]
+pub struct CompletedGame<'game> {
+    pub winner: Option<Player<'game>>,
+    pub loser: Option<Player<'game>>,
+    pub end_state: EndState,
 }
 
 impl<'game> CompletedGame<'game> {
