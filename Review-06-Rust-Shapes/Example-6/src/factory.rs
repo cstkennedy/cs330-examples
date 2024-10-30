@@ -5,6 +5,7 @@ use crate::shape::Shape;
 use crate::square::Square;
 use crate::triangle::Triangle;
 use std::io::BufRead;
+use std::cell::LazyCell;
 
 impl From<Triangle> for Box<dyn Shape> {
     fn from(shape: Triangle) -> Self {
@@ -88,6 +89,12 @@ const KNOWN_SHAPES: [&'static str; 5] = [
 ];
 
 const NUMBER_OF_SHAPES_KNOWN: usize = KNOWN_SHAPES.len();
+
+type BoxedCreateFunction = Box<dyn Fn () -> Box<dyn Shape>>;
+
+const test: LazyCell<u64> = LazyCell::new(|| {
+    12
+});
 
 /// Create a Shape
 ///
