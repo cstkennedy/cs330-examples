@@ -75,26 +75,28 @@ impl From<&[f64]> for Square {
     }
 }
 
+struct DefaultTuple<'a>(&'a str, Box<dyn Fn() -> Box<dyn Shape>>);
+
 #[rustfmt::skip]
-const CREATE_SHAPE_FROM_DEFAULTS: LazyCell<Vec<(&str, Box<dyn Fn() -> Box<dyn Shape>>)>> = LazyCell::new(|| {
+const CREATE_SHAPE_FROM_DEFAULTS: LazyCell<Vec<DefaultTuple<'static>>> = LazyCell::new(|| {
     vec![
-        (
+        DefaultTuple(
             "Triangle",
             Box::new(|| Triangle::new().into())
         ),
-        (
+        DefaultTuple(
             "Right Triangle",
             Box::new(|| RightTriangle::new().into()),
         ),
-        (
+        DefaultTuple(
             "Equilateral Triangle",
             Box::new(|| EquilateralTriangle::new().into()),
         ),
-        (
+        DefaultTuple(
             "Square",
             Box::new(|| Square::new().into())
         ),
-        (
+        DefaultTuple(
             "Circle",
             Box::new(|| Circle::new().into())
         ),
