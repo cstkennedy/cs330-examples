@@ -4,8 +4,21 @@ use crate::right_triangle::RightTriangle;
 use crate::shape::Shape;
 use crate::square::Square;
 use crate::triangle::Triangle;
-use std::io::BufRead;
+
 use std::cell::LazyCell;
+use std::io::BufRead;
+
+impl From<Circle> for Box<dyn Shape> {
+    fn from(shape: Circle) -> Self {
+        Box::new(shape)
+    }
+}
+
+impl From<Square> for Box<dyn Shape> {
+    fn from(shape: Square) -> Self {
+        Box::new(shape)
+    }
+}
 
 impl From<Triangle> for Box<dyn Shape> {
     fn from(shape: Triangle) -> Self {
@@ -13,33 +26,15 @@ impl From<Triangle> for Box<dyn Shape> {
     }
 }
 
-impl From<Triangle> for Option<Box<dyn Shape>> {
-    fn from(shape: Triangle) -> Self {
-        Some(Box::new(shape))
-    }
-}
-
-impl From<EquilateralTriangle> for Option<Box<dyn Shape>> {
+impl From<EquilateralTriangle> for Box<dyn Shape> {
     fn from(shape: EquilateralTriangle) -> Self {
-        Some(Box::new(shape))
+        Box::new(shape)
     }
 }
 
-impl From<RightTriangle> for Option<Box<dyn Shape>> {
+impl From<RightTriangle> for Box<dyn Shape> {
     fn from(shape: RightTriangle) -> Self {
-        Some(Box::new(shape))
-    }
-}
-
-impl From<Circle> for Option<Box<dyn Shape>> {
-    fn from(shape: Circle) -> Self {
-        Some(Box::new(shape))
-    }
-}
-
-impl From<Square> for Option<Box<dyn Shape>> {
-    fn from(shape: Square) -> Self {
-        Some(Box::new(shape))
+        Box::new(shape)
     }
 }
 
@@ -80,20 +75,56 @@ impl From<&[f64]> for Square {
     }
 }
 
-const KNOWN_SHAPES: [&'static str; 5] = [
-    "Triangle",
-    "Right Triangle",
-    "Equilateral Triangle",
-    "Square",
-    "Circle",
-];
+#[rustfmt::skip]
+const CREATE_SHAPE_FROM_DEFAULTS: LazyCell<Vec<(&str, Box<dyn Fn() -> Box<dyn Shape>>)>> = LazyCell::new(|| {
+    vec![
+        (
+            "Triangle",
+            Box::new(|| Triangle::new().into())
+        ),
+        (
+            "Right Triangle",
+            Box::new(|| RightTriangle::new().into()),
+        ),
+        (
+            "Equilateral Triangle",
+            Box::new(|| EquilateralTriangle::new().into()),
+        ),
+        (
+            "Square",
+            Box::new(|| Square::new().into())
+        ),
+        (
+            "Circle",
+            Box::new(|| Circle::new().into())
+        ),
+    ]
+});
 
-const NUMBER_OF_SHAPES_KNOWN: usize = KNOWN_SHAPES.len();
-
-type BoxedCreateFunction = Box<dyn Fn () -> Box<dyn Shape>>;
-
-const test: LazyCell<u64> = LazyCell::new(|| {
-    12
+#[rustfmt::skip]
+const CREATE_SHAPE_FROM_DIMS: LazyCell<Vec<(&str, Box<dyn Fn(&[f64]) -> Box<dyn Shape>>)>> = LazyCell::new(|| {
+    vec![
+        (
+            "Triangle",
+            Box::new(|dims| Triangle::from(dims).into())
+        ),
+        (
+            "Right Triangle",
+            Box::new(|dims| RightTriangle::from(dims).into()),
+        ),
+        (
+            "Equilateral Triangle",
+            Box::new(|dims| EquilateralTriangle::from(dims).into()),
+        ),
+        (
+            "Square",
+            Box::new(|dims| Square::from(dims).into())
+        ),
+        (
+            "Circle",
+            Box::new(|dims| Circle::from(dims).into())
+        ),
+    ]
 });
 
 /// Create a Shape
@@ -103,12 +134,11 @@ const test: LazyCell<u64> = LazyCell::new(|| {
 ///   * `name` shape to be created
 ///
 pub fn create(name: &str) -> Option<Box<dyn Shape>> {
-    match name {
-        "Triangle" => Triangle::new().into(),
-        "Right Triangle" => RightTriangle::new().into(),
-        "Equilateral Triangle" => EquilateralTriangle::new().into(),
-        "Square" => Square::new().into(),
-        "Circle" => Circle::new().into(),
+    match CREATE_SHAPE_FROM_DEFAULTS
+        .iter()
+        .find(|(shape_name, _)| shape_name == &name)
+    {
+        Some((_, creation_op)) => creation_op().into(),
         _ => None,
     }
 }
@@ -121,27 +151,14 @@ pub fn create(name: &str) -> Option<Box<dyn Shape>> {
 ///   * `dims` input dimensions
 ///
 pub fn create_with(name: &str, dims: &[f64]) -> Option<Box<dyn Shape>> {
-    match name {
-        "Triangle" => Triangle::from(dims).into(),
-        "Right Triangle" => RightTriangle::from(dims).into(),
-        "Equilateral Triangle" => EquilateralTriangle::from(dims).into(),
-        "Square" => Square::from(dims).into(),
-        "Circle" => Circle::from(dims).into(),
+    match CREATE_SHAPE_FROM_DIMS
+        .iter()
+        .find(|(shape_name, _)| shape_name == &name)
+    {
+        Some((_, creation_op)) => creation_op(&dims).into(),
         _ => None,
     }
 }
-
-/*
-pub fn create_lambda(name: &str, dims: &[f64]) {
-    let functions: Vec<(&str, Box<dyn Fn(&[f64]) -> Box<dyn Shape>>)> = vec![
-        ("Triangle", Box::new(|dims| Triangle::from(dims).into())),
-        ("Right Triangle", |&dims| RightTriangle::from(dims)),
-        ("Equilateral Triangle", |&dims| EquilateralTriangle::from(dims)),
-        ("Square", |&dims| Square::from(dims)),
-        ("Circle", |&dims| Circle::from(dims)),
-    ];
-}
-*/
 
 /// Determine whether a given shape is known
 ///
@@ -150,22 +167,22 @@ pub fn create_lambda(name: &str, dims: &[f64]) {
 ///  * `name` the shape for which to query
 ///
 pub fn is_known(name: &str) -> bool {
-    KNOWN_SHAPES
+    CREATE_SHAPE_FROM_DEFAULTS
         .iter()
-        .find(|&shape_name| shape_name == &name)
+        .find(|(shape_name, _)| shape_name == &name)
         .is_some()
 }
 
-pub const fn number_known() -> usize {
-    NUMBER_OF_SHAPES_KNOWN
+pub fn number_known() -> usize {
+    CREATE_SHAPE_FROM_DEFAULTS.len()
 }
 
 /// List the known shapes, one per line
 ///
 pub fn list_known() -> String {
-    KNOWN_SHAPES
+    CREATE_SHAPE_FROM_DEFAULTS
         .iter()
-        .map(|name| format!("  {}", name))
+        .map(|(name, _)| format!("  {}", name))
         .collect::<Vec<String>>()
         .join("\n")
         + "\n"
@@ -179,11 +196,10 @@ pub fn list_known() -> String {
 ///
 pub fn read_shapes<B: BufRead>(ins: B) -> Vec<Box<dyn Shape>> {
     ins.lines()
+        .flatten()
         .map(|line| {
-            let n = line.unwrap_or("unknown".into());
-            let n = n.trim();
-
-            create(n)
+            let name = line.trim();
+            create(name)
         })
         .flatten()
         .collect()
