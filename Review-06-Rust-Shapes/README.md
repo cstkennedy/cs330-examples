@@ -31,10 +31,12 @@ This discussion is split into six (6) examples:
     - Add `From<&[f64]>` for Shape creation
 
   - **Example 5** 
-    - Refactor facotry module to use `LazyCell` for constants
+    - Refactor factory module to use `LazyCell` for constants
 
   - **Example 6**
     - Finishing `main`
+    - Separate parser module
+    - Add prelude
 
 
 
