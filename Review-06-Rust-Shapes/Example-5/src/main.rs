@@ -1,6 +1,6 @@
 extern crate shapes;
 
-use shapes::factory;
+use shapes::factory::Factory;
 
 use std::env;
 use std::fs::File;
@@ -65,16 +65,15 @@ fn main() {
     println!("{}", "*".repeat(38));
 
     // List the available shapes
-    print!("{}", factory::list_known());
+    print!("{}", Factory::list_known());
     println!("{}", "-".repeat(38));
-    println!("{:>2} shapes available.", factory::number_known());
+    println!("{:>2} shapes available.", Factory::number_known());
     println!();
 
-    let argv: Vec<String> = env::args().collect();
     let file = File::open(&argv[1]).expect("Could not open file");
     let ins = BufReader::new(file);
 
-    let shapes = factory::read_shapes_with(ins);
+    let shapes = shapes::factory::read_shapes_with(ins);
 
     println!("{}", "*".repeat(38));
     println!("{:^38}", "Display All Shapes");

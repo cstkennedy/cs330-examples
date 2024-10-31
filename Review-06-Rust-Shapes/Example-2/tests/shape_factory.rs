@@ -9,26 +9,21 @@ use shapes::factory::Factory;
 
 #[test]
 fn test_is_known() {
-    let factory = Factory::new();
-
-    assert!(factory.is_known("Circle"));
-    assert!(factory.is_known("Square"));
-    assert!(factory.is_known("Triangle"));
-    assert!(factory.is_known("Right Triangle"));
-    assert!(factory.is_known("Equilateral Triangle"));
+    assert!(Factory::is_known("Circle"));
+    assert!(Factory::is_known("Square"));
+    assert!(Factory::is_known("Triangle"));
+    assert!(Factory::is_known("Right Triangle"));
+    assert!(Factory::is_known("Equilateral Triangle"));
 }
 
 #[test]
 fn test_number_known() {
-    let factory = Factory::new();
-
-    assert_that!(factory.number_known(), is(equal_to(5)));
+    assert_that!(Factory::number_known(), is(equal_to(5)));
 }
 
 #[test]
 fn test_str() {
-    let factory = Factory::new();
-    let f_str = factory.list_known();
+    let f_str = Factory::list_known();
 
     assert!(f_str.contains("  Circle"));
     assert!(f_str.contains("  Square"));

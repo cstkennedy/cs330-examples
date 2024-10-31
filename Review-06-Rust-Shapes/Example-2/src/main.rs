@@ -50,29 +50,27 @@ fn main() {
 
     println!("{}", "-".repeat(80));
 
-    let shape_factory = Factory::new();
-
     // Examine the ShapeFactory
     println!("{}", "*".repeat(38));
     println!("{:^38}", "Available Shapes");
     println!("{}", "*".repeat(38));
 
     // List the available shapes
-    print!("{}", shape_factory.list_known());
+    print!("{}", Factory::list_known());
     println!("{}", "-".repeat(38));
-    println!("{:>2} shapes available.", shape_factory.number_known());
+    println!("{:>2} shapes available.", Factory::number_known());
     println!();
 
     // Create 5 "Random" Shapes
     /*
     let mut shapes: Vec<Box<Shape>> = Vec::new();
-    shapes.push(shape_factory.create("Triangle").unwrap());
-    shapes.push(shape_factory.create("Right Triangle").unwrap());
-    shapes.push(shape_factory.create("Equilateral Triangle").unwrap());
-    shapes.push(shape_factory.create("Square").unwrap());
-    shapes.push(shape_factory.create("Circle").unwrap());
+    shapes.push(Factory::create("Triangle").unwrap());
+    shapes.push(Factory::create("Right Triangle").unwrap());
+    shapes.push(Factory::create("Equilateral Triangle").unwrap());
+    shapes.push(Factory::create("Square").unwrap());
+    shapes.push(Factory::create("Circle").unwrap());
 
-    let next_shape = shape_factory.create("1337 Haxor");
+    let next_shape = Factory::create("1337 Haxor");
     match next_shape {
         Some(s) => shapes.push(s),
         None => {},
@@ -93,7 +91,7 @@ fn main() {
     let mut shapes: Vec<Box<dyn Shape>> = Vec::new();
 
     for nme in shape_names.iter() {
-        let next_shape = shape_factory.create(nme);
+        let next_shape = Factory::create(nme);
         match next_shape {
             Some(shp) => shapes.push(shp),
             None => {}
@@ -103,7 +101,7 @@ fn main() {
 
     let shapes: Vec<Box<dyn Shape>> = shape_names
         .iter()
-        .map(|nme| shape_factory.create(nme))
+        .map(|nme| Factory::create(nme))
         .flatten()
         .collect();
 

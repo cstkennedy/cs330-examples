@@ -1,8 +1,7 @@
 # Overview
 
-These examples present many **Object-Oriented** concepts... in the
-context of Rust
-Topics include:
+These examples present many **Object-Oriented** concepts... in the context of
+Rust. Topics include:
 
   - traits
   - `Box<T>`
@@ -13,37 +12,29 @@ Topics include:
   - Iterators
   - `S.O.L.I.D`
 
-
-
-# Draft - Based on Java example
-
-This discussion is split into seven (7) examples:
+This discussion is split into six (6) examples:
 
   - **Example 1**
     - Basics of Polymorphism
 
   - **Example 2**
+    - `const` keyword
     - Factory Pattern and *Interfaces as a Contract*
+    - Implementing the `From` trait
 
   - **Example 3**
-    - Subtyping (e.g., `List` vs `ArrayList`) and Iterators
+    - Input
+    - Composing `Option` and `Box`
+    - `.iter()` and `flatten()`
 
   - **Example 4** 
-    - Input (`BufferedReader` and `Scanner`), Shape `read` Method, and More
-      Iterators
+    - Add `From<&[f64]>` for Shape creation
 
-  - **Example 5**
-    - A *better* `ShapeFactory` implementation using a `LinkedHashMap<String, Shape>`
+  - **Example 5** 
+    - Refactor facotry module to use `LazyCell` for constants
 
   - **Example 6**
-    - `Stream` API, Lambda Functions, fixing `Shape.name()`, and **replacing**
-      `Shape.read`
+    - Finishing `main`
 
-  - **Example 7**
-    - Separation of Concerns & Interfaces
-
-  - **Example 8**
-    - Generics and Trait Bounds in `ShapeIterator`, using `extends` with
-      interfaces, converting an `Iterator` to a `Stream`.
 
 

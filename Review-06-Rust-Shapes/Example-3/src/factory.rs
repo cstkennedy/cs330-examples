@@ -36,22 +36,18 @@ impl From<Square> for Option<Box<dyn Shape>> {
     }
 }
 
-pub struct Factory {
-    known_shapes: [&'static str; 5],
-}
+pub struct Factory;
+
 
 impl Factory {
-    pub fn new() -> Self {
-        Factory {
-            known_shapes: [
+    const KNOWN_SHAPES: [&'static str; 5] = [
                 "Triangle",
                 "Right Triangle",
                 "Equilateral Triangle",
                 "Square",
                 "Circle",
-            ],
-        }
-    }
+            ];
+
 
     /// Create a Shape
     ///
@@ -59,7 +55,16 @@ impl Factory {
     ///
     ///   * `name` shape to be created
     ///
-    pub fn create(&self, name: &str) -> Option<Box<dyn Shape>> {
+    pub fn create(name: &str) -> Option<Box<dyn Shape>> {
+        // match name {
+        //     "Triangle" => Some(Box::new(Triangle::new())),
+        //     "Right Triangle" => Some(Box::new(RightTriangle::new())),
+        //     "Equilateral Triangle" => Some(Box::new(EquilateralTriangle::new())),
+        //     "Square" => Some(Box::new(Square::new())),
+        //     "Circle" => Some(Box::new(Circle::new())),
+        //     _ => None,
+        // }
+
         match name {
             "Triangle" => Triangle::new().into(),
             "Right Triangle" => RightTriangle::new().into(),
@@ -76,19 +81,19 @@ impl Factory {
     ///
     ///  * `name` the shape for which to query
     ///
-    pub fn is_known(&self, name: &str) -> bool {
-        self.known_shapes
+    pub fn is_known(name: &str) -> bool {
+        Self::KNOWN_SHAPES
             .iter()
             .find(|&shape_name| shape_name == &name)
             .is_some()
     }
 
-    pub fn number_known(&self) -> usize {
-        self.known_shapes.len()
+    pub fn number_known() -> usize {
+        Self::KNOWN_SHAPES.len()
     }
 
-    pub fn list_known(&self) -> String {
-        self.known_shapes
+    pub fn list_known() -> String {
+        Self::KNOWN_SHAPES
             .iter()
             .map(|name| format!("  {}", name))
             .collect::<Vec<String>>()
@@ -97,25 +102,25 @@ impl Factory {
     }
 }
 
-/// Create shapes based on names from an input buffer
+/// Create shapes based on names from an input buffer.
 ///
 /// # Arguments
 ///
 ///  * `ins` - input source
 ///
-pub fn read_shapes<B: BufRead>(ins: B, shape_factory: Factory) -> Vec<Box<dyn Shape>> {
+pub fn read_shapes<B: BufRead>(ins: B) -> Vec<Box<dyn Shape>> {
     /*
     let mut shapes: Vec<Box<dyn Shape>> = Vec::new();
 
     for line in ins.lines() {
-        // let next_shape = shape_factory.create(n);
+        // let next_shape = Factory::create(n);
         // match next_shape {
             // Some(s) => shapes.push(s),
             // None => {},
         // }
         let n = line.unwrap();
         let n = n.trim();
-        if let Some(s) = shape_factory.create(n) {
+        if let Some(s) = Factory::create(n) {
             shapes.push(s)
         }
     }
@@ -127,7 +132,7 @@ pub fn read_shapes<B: BufRead>(ins: B, shape_factory: Factory) -> Vec<Box<dyn Sh
             let n = line.unwrap_or("unknown".into());
             let n = n.trim();
 
-            shape_factory.create(n)
+            Factory::create(n)
         })
         .flatten()
         .collect()
