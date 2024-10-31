@@ -3,8 +3,7 @@ extern crate shapes;
 
 use ordered_float::OrderedFloat;
 
-use shapes::factory;
-use shapes::shape::Shape;
+use shapes::prelude::*;
 
 use std::cell::LazyCell;
 use std::env;
@@ -26,9 +25,9 @@ const FACTORY_INFO: LazyCell<String> = LazyCell::new(|| {
         "*".repeat(38),
         format!("{:^38}", "Available Shapes"),
         "*".repeat(38),
-        format!("{}", factory::list_known()),
+        format!("{}", Factory::list_known()),
         "-".repeat(38),
-        format!("{:>2} shapes available.", factory::number_known()),
+        format!("{:>2} shapes available.", Factory::number_known()),
         "".to_owned(),
     ]
     .into_iter()
@@ -85,7 +84,7 @@ fn main() {
     let file = File::open(&argv[1]).expect("Could not open file");
     let ins = BufReader::new(file);
 
-    let shapes = factory::read_shapes_with(ins);
+    let shapes = Parser::read_shapes_with(ins);
 
     println!("{}", "*".repeat(38));
     println!("{:^38}", "Display All Shapes");
