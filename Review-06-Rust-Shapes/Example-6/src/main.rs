@@ -6,12 +6,35 @@ use ordered_float::OrderedFloat;
 use shapes::factory;
 use shapes::shape::Shape;
 
+use std::cell::LazyCell;
 use std::env;
 use std::fs::File;
 use std::io::BufReader;
 use std::vec::Vec;
 
-const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes", "Thomas J. Kennedy"];
+const PROGRAM_HEADING: LazyCell<String> = LazyCell::new(|| {
+    let heading: String = ["Objects & Traits: 2-D Shapes", "Thomas J. Kennedy"]
+        .iter()
+        .map(|line| format!("{:^80}\n", line))
+        .collect();
+
+    format!("{}\n{}{}", "-".repeat(80), heading, "-".repeat(80))
+});
+
+const FACTORY_INFO: LazyCell<String> = LazyCell::new(|| {
+    [
+        "*".repeat(38),
+        format!("{:^38}", "Available Shapes"),
+        "*".repeat(38),
+        format!("{}", factory::list_known()),
+        "-".repeat(38),
+        format!("{:>2} shapes available.", factory::number_known()),
+        "".to_owned(),
+    ]
+    .into_iter()
+    .collect::<Vec<String>>()
+    .join("\n")
+});
 
 // What happens when the number of shapes is non-trivial?
 //
@@ -47,13 +70,7 @@ const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes", "Tho
 // at compile time.
 fn main() {
     // Print Program Heading
-    println!("{}", "-".repeat(80));
-
-    for &line in PROGRAM_HEADING.iter() {
-        println!("{:^80}", line);
-    }
-
-    println!("{}", "-".repeat(80));
+    println!("{}", *PROGRAM_HEADING);
 
     let argv: Vec<String> = env::args().collect();
 
@@ -62,16 +79,7 @@ fn main() {
         std::process::exit(1);
     }
 
-    // Examine the ShapeFactory
-    println!("{}", "*".repeat(38));
-    println!("{:^38}", "Available Shapes");
-    println!("{}", "*".repeat(38));
-
-    // List the available shapes
-    print!("{}", factory::list_known());
-    println!("{}", "-".repeat(38));
-    println!("{:>2} shapes available.", factory::number_known());
-    println!();
+    println!("{}", *FACTORY_INFO);
 
     let argv: Vec<String> = env::args().collect();
     let file = File::open(&argv[1]).expect("Could not open file");
