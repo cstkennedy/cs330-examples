@@ -23,9 +23,11 @@ This discussion is split into six (6) examples:
     - Implementing the `From` trait
 
   - **Example 3**
-    - Input
     - Composing `Option` and `Box`
     - `.iter()` and `flatten()`
+    - Input
+    - Add parser module
+    - Add prelude
 
   - **Example 4** 
     - Add `From<&[f64]>` for Shape creation
@@ -35,8 +37,7 @@ This discussion is split into six (6) examples:
 
   - **Example 6**
     - Finishing `main`
-    - Separate parser module
-    - Add prelude
+
 
 
 

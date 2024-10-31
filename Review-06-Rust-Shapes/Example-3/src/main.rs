@@ -1,7 +1,7 @@
 extern crate shapes;
 
-use shapes::factory::Factory;
 
+use shapes::prelude::*;
 use std::env;
 use std::fs::File;
 use std::io::BufReader;
@@ -73,7 +73,7 @@ fn main() {
     let file = File::open(&argv[1]).expect("Could not open file");
     let ins = BufReader::new(file);
 
-    let shapes = shapes::factory::read_shapes(ins);
+    let shapes = Parser::read_shapes(ins);
 
     println!("{}", "*".repeat(38));
     println!("{:^38}", "Display All Shapes");

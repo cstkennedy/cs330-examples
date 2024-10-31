@@ -101,39 +101,3 @@ impl Factory {
             + "\n"
     }
 }
-
-/// Create shapes based on names from an input buffer.
-///
-/// # Arguments
-///
-///  * `ins` - input source
-///
-pub fn read_shapes<B: BufRead>(ins: B) -> Vec<Box<dyn Shape>> {
-    /*
-    let mut shapes: Vec<Box<dyn Shape>> = Vec::new();
-
-    for line in ins.lines() {
-        // let next_shape = Factory::create(n);
-        // match next_shape {
-            // Some(s) => shapes.push(s),
-            // None => {},
-        // }
-        let n = line.unwrap();
-        let n = n.trim();
-        if let Some(s) = Factory::create(n) {
-            shapes.push(s)
-        }
-    }
-
-    shapes
-    */
-    ins.lines()
-        .map(|line| {
-            let n = line.unwrap_or("unknown".into());
-            let n = n.trim();
-
-            Factory::create(n)
-        })
-        .flatten()
-        .collect()
-}
