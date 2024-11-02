@@ -32,7 +32,7 @@ const int TOTAL_WIDTH = getTotalWidth();
 /**
  * Main Function - Basics of Pointers & References
  */
-int main(int argc, char** argv)
+int main([[maybe_unused]] const int argc, [[maybe_unused]] const char* const* argv)
 {
     // Declarations & Definitions
     int        x               = 9001;
