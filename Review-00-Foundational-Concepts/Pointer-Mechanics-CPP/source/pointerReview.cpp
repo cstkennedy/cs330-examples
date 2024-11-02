@@ -10,18 +10,16 @@
 using namespace std;
 
 const std::string D_LINE(48, '-');  // A 48-dash dividing line
+const size_t NUM_POWERS = 32;
 
 /**
  * Main Function - Basics of Pointers & References
  */
-int main(int argc, char** argv)
+int main([[maybe_unused]] const int argc, [[maybe_unused]] const char* const* argv)
 {
-    const int numPowers = 32;
-    std::array<int, numPowers> powersOfTwo = {0};
+    std::array<int, NUM_POWERS> powersOfTwo = {0};
 
-    cout << D_LINE << "\n";
-
-    for (int i = 0; i < powersOfTwo.size(); i++) {
+    for (size_t i = 0; i < powersOfTwo.size(); i++) {
         powersOfTwo[i] = (1 << i);
     }
 
@@ -35,11 +33,13 @@ int main(int argc, char** argv)
         cout << *it << "\n";
     }
 
-    for (std::array<int, numPowers>::iterator it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
+    for (std::array<int, NUM_POWERS>::iterator it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
     for (auto it = powersOfTwo.begin(); it < powersOfTwo.end(); it++) {
         cout << it << " -> " << *it << "\n";
     }
     */
+
+    cout << D_LINE << "\n";
 
     // for (const auto& v : powersOfTwo) {
     for (const int& v : powersOfTwo) {
@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     cout << D_LINE << "\n";
     cout << "\n";
 
-    for (int i = 0; i < numPowers; i++) {
+    for (size_t i = 0; i < NUM_POWERS; i++) {
         cout << right << setw(2)  << i << ": "
              << right << setw(11) << powersOfTwo[i]
              << right << setw(33) << std::bitset<32>(powersOfTwo[i])
@@ -61,7 +61,7 @@ int main(int argc, char** argv)
     cout << D_LINE << "\n";
     cout << "\n";
 
-    for (int i = 0; i < numPowers; i++) {
+    for (size_t i = 0; i < NUM_POWERS; i++) {
         cout << right << setw(2)  << i << ": "
              << right << setw(11) << powersOfTwo[i]
              << right << setw(33) << &powersOfTwo[i]
@@ -75,20 +75,23 @@ int main(int argc, char** argv)
     sizeInBits  = sizeInBytes << 3;
 
     cout << "\n";
-    cout << "sizeof(int) : " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)" << "\n";
+    cout << "sizeof(int) : "
+         << sizeInBytes << " (bytes) / "
+         << sizeInBits  << " (bits)" << "\n";
 
     sizeInBytes = sizeof(int&);
     sizeInBits  = sizeInBytes << 3;
 
-    cout << "sizeof(int&): " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)" << "\n";
+    cout << "sizeof(int&): "
+         << sizeInBytes << " (bytes) / "
+         << sizeInBits  << " (bits)" << "\n";
 
     sizeInBytes = sizeof(int*);
     sizeInBits  = sizeInBytes << 3;
 
-    cout << "sizeof(int*): " << sizeInBytes << " (bytes) / "
-                             << sizeInBits  << " (bits)" << "\n";
+    cout << "sizeof(int*): "
+         << sizeInBytes << " (bytes) / "
+         << sizeInBits  << " (bits)" << "\n";
 
     sizeInBytes = sizeof(powersOfTwo);
     sizeInBits  = sizeInBytes << 3;
@@ -102,7 +105,7 @@ int main(int argc, char** argv)
          << setw(4) << sizeInBits  << " (bits)"
          << "\n";
 
-    sizeInBytes = (sizeof(int) * numPowers);
+    sizeInBytes = (sizeof(int) * NUM_POWERS);
     sizeInBits  = sizeInBytes << 3;
 
     cout << "data size:           "
