@@ -19,7 +19,6 @@ class Node:
     left: Node = None
     right: Node = None
 
-
     def __str__(self) -> str:
         return self.content
 
@@ -100,10 +99,6 @@ def play_game(tree: Tree) -> None:
         play_game(Tree(tree.root.right))
 
 
-
-
-
-
 def main():
     logging.basicConfig(level=logging.WARNING)
 
@@ -119,6 +114,7 @@ def main():
     print("-" * 72)
 
     play_game(tree)
+
 
 if __name__ == "__main__":
     main()
