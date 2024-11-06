@@ -1,0 +1,18 @@
+[package]
+name = "room_renovation"
+version = "0.1.0"
+authors = ["Thomas J. Kennedy <tkennedy@cs.odu.edu>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ordered-float = "4.2.0"
+itertools = "*"
+typed-builder = "0.18.1"
+thiserror = "2.0.0"
+
+[dev-dependencies]
+hamcrest2 = "*"
+stringreader = "0.1.1"
+
