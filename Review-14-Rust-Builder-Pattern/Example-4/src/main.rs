@@ -76,17 +76,19 @@ fn upgrade_flooring(original: &House) -> Option<House> {
         .unit_cost(12.97)
         .build();
 
-    let bldr = House::builder().with_name("After Stone Bricks").with_rooms(
-        original
-            .iter()
-            .map(|room| {
-                Room::builder()
-                    .from_existing(room)
-                    .with_flooring(new_flooring.clone())
-                    .build()
-            })
-            .collect::<Vec<Room>>(),
-    );
+    let bldr = House::builder()
+        .with_name("After Stone Bricks")
+        .with_rooms(
+            original
+                .iter()
+                .map(|room| {
+                    Room::builder()
+                        .from_existing(room)
+                        .with_flooring(new_flooring.clone())
+                        .build()
+                })
+                .collect::<Vec<Room>>(),
+        );
 
     match bldr {
         Ok(bldr) => Some(bldr.build()),
