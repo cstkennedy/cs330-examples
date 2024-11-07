@@ -20,13 +20,15 @@ const PROGRAM_HEADING: LazyCell<String> = LazyCell::new(|| {
     format!("{}\n{}{}", "-".repeat(80), heading, "-".repeat(80))
 });
 
+const STAR_DIVIDER: LazyCell<String> = LazyCell::new(|| "*".repeat(38));
+
 const FACTORY_INFO: LazyCell<String> = LazyCell::new(|| {
     [
-        "*".repeat(38),
+        STAR_DIVIDER.clone(),
         format!("{:^38}", "Available Shapes"),
-        "*".repeat(38),
+        STAR_DIVIDER.clone(),
         format!("{}", Factory::list_known()),
-        "-".repeat(38),
+        STAR_DIVIDER.clone(),
         format!("{:>2} shapes available.", Factory::number_known()),
         "".to_owned(),
     ]
@@ -68,7 +70,6 @@ const FACTORY_INFO: LazyCell<String> = LazyCell::new(|| {
 // simply a tracker--i.e., records are static and will be updated manually
 // at compile time.
 fn main() {
-    // Print Program Heading
     println!("{}", *PROGRAM_HEADING);
 
     let argv: Vec<String> = env::args().collect();
@@ -86,26 +87,26 @@ fn main() {
 
     let shapes = Parser::read_shapes_with(ins);
 
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
     println!("{:^38}", "Display All Shapes");
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
 
     for shp in shapes.iter() {
         println!("{}\n", shp);
     }
     println!();
 
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
     println!("{:^38}", "Display Shape Names");
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
     for s in shapes.iter() {
         println!("{}", s.name());
     }
     println!();
 
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
     println!("{:^38}", "Largest Shape by Area");
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
 
     let largest = &*shapes
         .iter()
@@ -113,9 +114,9 @@ fn main() {
         .unwrap();
     println!("{}", largest);
 
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
     println!("{:^38}", "Smallest Shape by Perimeter");
-    println!("{}", "*".repeat(38));
+    println!("{}", *STAR_DIVIDER);
 
     let smallest = &*shapes
         .iter()
