@@ -7,8 +7,11 @@ use std::io::{stdin, stdout, Write};
 /// !(index >= 3 && index <= 20)
 /// !(index >= 3) || !(index <= 20)
 /// (index < 3 || index > 20)
+///
+/// Rust
+/// (3..=20).contains(...)
 fn __validate_args(index: u8) -> bool {
-    index < 3 || index > 20
+    !(3..=20).contains(&index)
 }
 
 /// Generate the Fibonacci Sequence to the n-th number.
@@ -36,7 +39,7 @@ fn main() {
     println!();
 
     if __validate_args(index) {
-        print!("{index:3} is not between 3 and 20\n");
+        println!("{index:3} is not between 3 and 20");
         std::process::exit(1);
     }
 

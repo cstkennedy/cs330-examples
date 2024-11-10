@@ -1,5 +1,3 @@
-use rand::prelude::*;
-
 use std::env;
 
 use std::thread;
@@ -15,6 +13,7 @@ where
 {
     let args: Vec<String> = args.collect();
 
+    /*
     let num_threads: usize = args[1].parse().unwrap_or(1);
     let num_threads = {
         if num_threads < 1 {
@@ -25,6 +24,9 @@ where
             num_threads
         }
     };
+    */
+    let num_threads: usize = args[1].parse().unwrap_or(1);
+    let num_threads = num_threads.clamp(1, 32);
 
     let num_flips: u64 = args[2]
         .replace(",", "")

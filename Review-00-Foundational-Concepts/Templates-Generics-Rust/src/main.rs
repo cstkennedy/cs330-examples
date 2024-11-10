@@ -13,9 +13,9 @@ where
 fn main() {
     print_multiple_times(7, 3);
     println!();
-    print_multiple_times(5.5 as f64, 2);
+    print_multiple_times(5.5_f64, 2);
     println!();
-    print_multiple_times(5.5 as f32, 2);
+    print_multiple_times(5.5_f32, 2);
     println!();
     print_multiple_times("Hello", 4);
     println!();

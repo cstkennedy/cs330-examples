@@ -2,7 +2,7 @@ use std::mem::size_of;
 use std::ptr::addr_of;
 
 fn main() {
-    let x: i32 = 9001 as i32;
+    let x: i32 = 9001_i32;
     let x_pointer: *const i32 = &x;
 
     println!(
