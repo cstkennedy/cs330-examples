@@ -2,6 +2,8 @@ extern crate ordered_float;
 extern crate shapes;
 
 use ordered_float::OrderedFloat;
+use eyre;
+use eyre::WrapErr;
 
 use shapes::prelude::*;
 
@@ -69,7 +71,7 @@ const FACTORY_INFO: LazyCell<String> = LazyCell::new(|| {
 // ShapeFactory could be designed as a singleton class.  Our ShapeFactory is
 // simply a tracker--i.e., records are static and will be updated manually
 // at compile time.
-fn main() {
+fn main() -> eyre::Result<()> {
     println!("{}", *PROGRAM_HEADING);
 
     let argv: Vec<String> = env::args().collect();
@@ -82,7 +84,7 @@ fn main() {
     println!("{}", *FACTORY_INFO);
 
     let filename: &str = &argv[1];
-    let file = File::open(&filename).expect(&format!("Could not open '{}", &filename));
+    let file = File::open(filename).wrap_err_with(|| format!("Could not open '{}", filename))?;
     let ins = BufReader::new(file);
 
     let shapes = Parser::read_shapes_with(ins);
@@ -123,4 +125,6 @@ fn main() {
         .min_by_key(|s| OrderedFloat(s.perimeter()))
         .unwrap();
     println!("{}", smallest);
+
+    Ok(())
 }

@@ -7,7 +7,7 @@ edition = "2021"
 [dependencies]
 ordered-float = "1.0.2"
 itertools = "0.8"
-anyhow = "1.0.93"
+eyre = "0.6.12"
 
 [dev-dependencies]
 hamcrest2 = "*"
