@@ -81,8 +81,8 @@ fn main() {
 
     println!("{}", *FACTORY_INFO);
 
-    let argv: Vec<String> = env::args().collect();
-    let file = File::open(&argv[1]).expect("Could not open file");
+    let filename: &str = &argv[1];
+    let file = File::open(&filename).expect(&format!("Could not open '{}", &filename));
     let ins = BufReader::new(file);
 
     let shapes = Parser::read_shapes_with(ins);

@@ -1,6 +1,5 @@
 #[cfg(test)]
 #[macro_use]
-
 use hamcrest2::prelude::*;
 
 use shapes::prelude::Parser;
