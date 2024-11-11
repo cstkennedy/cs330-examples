@@ -12,7 +12,7 @@ use room_renovation::house::House;
 use room_renovation::io::read_house_from_str;
 use room_renovation::room::Room;
 
-const ROOM_DATA: &'static str = r#"
+const ROOM_DATA: &str = r#"
 Laundry Room; 8 4 1.95 Laminate
 Kitchen; 20 12 3.87 Tile
 Storage Room; 16 16 4.39 Birch Wood
@@ -38,8 +38,8 @@ fn main() {
 
     let costs: Vec<_> = duplicate_house
         .iter()
-        .map(|r| discount_flooring(r))
-        .map(|c| OrderedFloat(c))
+        .map(discount_flooring)
+        .map(OrderedFloat)
         .collect();
 
     for room_cost in costs.iter() {

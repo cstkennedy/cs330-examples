@@ -91,7 +91,7 @@ impl PartialOrd for Room {
 
 impl PartialEq for Room {
     fn eq(&self, rhs: &Self) -> bool {
-        return self.name.eq(&rhs.name) && self.area().eq(&rhs.area());
+        self.name.eq(&rhs.name) && self.area().eq(&rhs.area())
     }
 }
 

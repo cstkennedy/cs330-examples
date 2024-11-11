@@ -67,7 +67,7 @@ impl Display for House {
         writeln!(f, "--------{}--------\n", self.name)?;
 
         for room in self.rooms.iter() {
-            let _ = writeln!(f, "{}", room)?;
+            writeln!(f, "{}", room)?;
         }
 
         let (total, avg) = self.flooring_metrics();

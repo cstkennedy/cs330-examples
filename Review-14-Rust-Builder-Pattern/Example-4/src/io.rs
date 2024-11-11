@@ -5,13 +5,13 @@ use crate::house::House;
 use crate::room::Room;
 use std::vec::Vec;
 
-const MIN_LINEAR_DIM: f64 = 0.0 as f64;
-const MIN_COST: f64 = 0.01 as f64;
+const MIN_LINEAR_DIM: f64 = 0.0_f64;
+const MIN_COST: f64 = 0.01_f64;
 
 pub fn read_house_from_str(room_data: &str) -> Option<House> {
     let parsed_rooms: Vec<Room> = room_data
         .lines()
-        .filter(|line| line.len() > 0)
+        .filter(|line| !line.is_empty())
         .filter(|line| line.contains(";"))
         .map(|line| {
             let line = line.split(";").collect::<Vec<&str>>();
@@ -27,8 +27,7 @@ pub fn read_house_from_str(room_data: &str) -> Option<House> {
         .map(|(name, the_rest)| {
             let nums: Vec<f64> = the_rest[0..3]
                 .iter()
-                .map(|token| token.parse())
-                .flatten()
+                .flat_map(|token| token.parse())
                 .collect();
 
             // The flooring name might contain spaces.
@@ -56,13 +55,11 @@ pub fn read_house_from_str(room_data: &str) -> Option<House> {
         })
         .collect();
 
-    let house = match House::builder().with_rooms(parsed_rooms) {
+    match House::builder().with_rooms(parsed_rooms) {
         Ok(builder) => {
             let house = builder.build();
             Some(house)
         }
         Err(_) => None,
-    };
-
-    house
+    }
 }
