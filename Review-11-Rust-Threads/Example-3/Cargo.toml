@@ -1,0 +1,8 @@
+[workspace]
+
+resolver = "2"
+
+members = [
+    "coin_flip",
+    "coin_flip_py"
+]
