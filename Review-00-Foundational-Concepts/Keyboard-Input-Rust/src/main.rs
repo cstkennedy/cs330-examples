@@ -1,26 +1,27 @@
 use std::io::{stdin, stdout};
 use std::io::Write;
 
-fn main() {
+// TODO: Add proper error handling
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     print!("Enter an Integer: ");
     let _ = stdout().flush();
     let trimmed_input = read_line_as_string();
-    let input_int: i64 = trimmed_input.parse().unwrap();
+    let input_int: i64 = trimmed_input.parse()?;
 
     print!("Enter a Double: ");
     let _ = stdout().flush();
     let trimmed_input = read_line_as_string();
-    let input_double = trimmed_input.parse::<f64>().unwrap();
+    let input_double = trimmed_input.parse::<f64>()?;
 
     print!("Enter a Character: ");
     let _ = stdout().flush();
     let trimmed_input = read_line_as_string();
-    let input_char = trimmed_input.chars().nth(0).unwrap();
+    let input_char = trimmed_input.chars().nth(0).unwrap_or('\0');
 
     print!("Enter a Boolean: ");
     let _ = stdout().flush();
     let trimmed_input = read_line_as_string().to_lowercase().to_string();
-    let input_boolean: bool = trimmed_input.parse().unwrap();
+    let input_boolean: bool = trimmed_input.parse()?;
 
     print!("Enter a String (with spaces): ");
     let _ = stdout().flush();
@@ -33,6 +34,8 @@ fn main() {
     println!("  Item {:2}: {}", 3, input_char);
     println!("  Item {:2}: {}", 4, input_boolean);
     println!("  Item {:2}: {}", 6, input_string);
+
+    Ok(())
 }
 
 /// Read a line from std in and trim the trailing newline.
