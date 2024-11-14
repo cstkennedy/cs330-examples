@@ -68,14 +68,11 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
         println!();
 
         loop {
-            match player.next_move() {
-                Ok(selected_move) => {
-                    if Referee::selected_cell_is_empty(selected_move, &board) {
-                        let _ = board.set_cell(selected_move, symbol);
-                        break;
-                    }
+            if let Ok(selected_move) = player.next_move() {
+                if Referee::selected_cell_is_empty(selected_move, &board) {
+                    let _ = board.set_cell(selected_move, symbol);
+                    break;
                 }
-                Err(_) => {}
             }
         }
 
