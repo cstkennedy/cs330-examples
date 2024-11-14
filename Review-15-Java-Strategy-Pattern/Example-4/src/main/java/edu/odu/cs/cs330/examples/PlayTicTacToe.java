@@ -17,10 +17,12 @@ public class PlayTicTacToe
     public static void main(String[] args)
         throws IOException
     {
+        // clang-format off
         Game game = Game.builder()
             .withHumanPlayer("Thomas")
             .withHumanPlayer("Jay")
             .build();
+        // clang-format on
 
         game.playMatch();
     }
