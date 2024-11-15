@@ -11,8 +11,14 @@ pub enum BoardError {
 }
 
 #[derive(Debug, Error, PartialEq)]
-#[error(transparent)]
-pub struct StrategyError(BoardError);
+pub enum StrategyError {
+    #[error("{:?}", .0)]
+    ParseError(#[from] std::num::ParseIntError),
+    #[error("{:?}", .0)]
+    BoardError(BoardError),
+    #[error("{:?}", .0)]
+    OutOfMovesError(String),
+}
 
 #[derive(Debug, Error, PartialEq)]
 pub struct ErrorWithValue<E: std::error::Error, V> {

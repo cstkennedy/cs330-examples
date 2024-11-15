@@ -1,6 +1,7 @@
 use std::fmt;
 
 use crate::board::Board;
+use crate::error::StrategyError;
 use crate::player::Player;
 use crate::referee::Referee;
 
@@ -20,6 +21,7 @@ pub struct InProgress;
 pub enum EndState {
     Win,
     Stalemate,
+    Forfeit,
 }
 
 #[derive(Clone, Debug, Default)]
@@ -68,11 +70,18 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
         println!();
 
         loop {
-            if let Ok(selected_move) = player.next_move() {
-                if Referee::selected_cell_is_empty(selected_move, &board) {
-                    let _ = board.set_cell(selected_move, symbol);
-                    break;
+            match player.next_move() {
+                Ok(selected_move) => {
+                    if Referee::selected_cell_is_empty(selected_move, &board) {
+                        let _ = board.set_cell(selected_move, symbol);
+                        break;
+                    }
                 }
+                Err(StrategyError::OutOfMovesError(msg)) => {
+                    // TODO: Refactor code to handle this as a forfeit
+                    panic!("{}", msg);
+                }
+                Err(_) => {}
             }
         }
 
@@ -152,6 +161,16 @@ impl<'game> fmt::Display for CompletedGame<'game> {
             }
             EndState::Stalemate => {
                 writeln!(f, "Stalemate...")
+            }
+            EndState::Forfeit => {
+                writeln!(
+                    f,
+                    "{} forfeited.",
+                    self.loser
+                        .as_ref()
+                        .expect("loser should be set...")
+                        .get_name()
+                )
             }
         }
     }

@@ -14,7 +14,7 @@ pub struct Player<'a> {
 impl<'a> Player<'a> {
     /// Retrieve the next move.
     pub fn next_move(&mut self) -> Result<usize, StrategyError> {
-        Ok(self.strategy.next_move())
+        self.strategy.next_move()
     }
 
     /// Is this a Human Player?
