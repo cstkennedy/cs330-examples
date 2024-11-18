@@ -26,3 +26,5 @@ pub struct ErrorWithValue<E: std::error::Error, V> {
     pub the_error: E,
     pub the_value: V,
 }
+
+type PredefinedMovesError<'a> = ErrorWithValue<StrategyError, (usize, &'a [f64])>;

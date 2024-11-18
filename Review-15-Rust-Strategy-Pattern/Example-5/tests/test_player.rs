@@ -38,9 +38,9 @@ pub fn test_builder_computer(a_player: Player) {
 pub fn test_next_move(a_player: Player) {
     let mut player = a_player;
 
-    assert_that!(player.next_move(), is(equal_to(5 as usize)));
-    assert_that!(player.next_move(), is(equal_to(1 as usize)));
-    assert_that!(player.next_move(), is(equal_to(3 as usize)));
+    assert_that!(player.next_move(), is(equal_to(Ok(5 as usize))));
+    assert_that!(player.next_move(), is(equal_to(Ok(1 as usize))));
+    assert_that!(player.next_move(), is(equal_to(Ok(3 as usize))));
 }
 
 #[rstest]

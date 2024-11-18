@@ -17,7 +17,7 @@ pub struct NotReady;
 #[derive(Clone, Debug, Default)]
 pub struct InProgress;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum EndState {
     Win,
     Stalemate,
@@ -79,7 +79,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                 }
                 Err(StrategyError::OutOfMovesError(msg)) => {
                     // TODO: Refactor code to handle this as a forfeit
-                    panic!("{}", msg);
+                    panic!("'{}' - {}", symbol, msg);
                 }
                 Err(_) => {}
             }
@@ -89,6 +89,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
     }
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
+        // TODO: Fix bug... Game::is_over always returns true
         while self.is_not_over() {
             if Self::do_one_turn(&mut self.board, &mut self.player_1, 'X') {
                 println!("{}", self.board);

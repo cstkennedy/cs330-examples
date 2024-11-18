@@ -95,11 +95,19 @@ impl Board {
     /// Returns:
     ///     True if every cell in the board has either an 'X' or an 'O'
     pub fn is_full(&self) -> bool {
+        // Bug: missing filter - never equal to zero
+        //   found with test_board::test_is_full
+        /*
         self.the_board
             .iter()
             .map(|cell: &char| cell.is_numeric())
             .count()
             == 0
+        */
+
+        !self.the_board
+            .iter()
+            .any(|cell: &char| cell.is_numeric())
     }
 }
 
