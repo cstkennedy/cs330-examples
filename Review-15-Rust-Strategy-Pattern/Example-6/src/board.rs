@@ -56,7 +56,7 @@ impl Board {
             return Err(BoardError::InvalidIndex);
         }
 
-        if VALID_SYMBOLS.iter().find(|symbol| *symbol == &new_value) == None {
+        if !VALID_SYMBOLS.iter().any(|symbol| *symbol == new_value) {
             return Err(BoardError::InvalidSymbol);
         }
 

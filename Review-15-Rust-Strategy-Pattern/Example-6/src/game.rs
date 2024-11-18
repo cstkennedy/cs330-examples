@@ -45,10 +45,10 @@ impl Game<Player1NotSet, Player2NotSet, NotReady> {
         Game::default()
     }
 
-    pub fn add_player<'game>(
+    pub fn add_player(
         self,
-        player: Player<'game>,
-    ) -> Game<Player<'game>, Player2NotSet, NotReady> {
+        player: Player<'_>,
+    ) -> Game<Player<'_>, Player2NotSet, NotReady> {
         Game {
             player_1: player,
             player_2: self.player_2,
@@ -77,7 +77,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
         loop {
             match player.next_move() {
                 Ok(selected_move) => {
-                    if Referee::selected_cell_is_empty(selected_move, &board) {
+                    if Referee::selected_cell_is_empty(selected_move, board) {
                         let _ = board.set_cell(selected_move, symbol);
                         break;
                     }
@@ -89,7 +89,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
             }
         }
 
-        if Referee::check_for_win(&board) {
+        if Referee::check_for_win(board) {
             TurnResult::Win
         } else if board.is_full() {
             TurnResult::Stalemate
