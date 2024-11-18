@@ -24,6 +24,14 @@ pub enum EndState {
     Forfeit,
 }
 
+#[derive(Debug, PartialEq)]
+enum TurnResult {
+    Win,
+    Stalemate,
+    NotOverYet,
+    Forfeit,
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct Game<P1, P2, S> {
     player_1: P1,
@@ -65,10 +73,7 @@ impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
 }
 
 impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
-    fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> bool {
-        println!("{}", board);
-        println!();
-
+    fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> TurnResult {
         loop {
             match player.next_move() {
                 Ok(selected_move) => {
@@ -77,47 +82,74 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                         break;
                     }
                 }
-                Err(StrategyError::OutOfMovesError(msg)) => {
-                    // TODO: Refactor code to handle this as a forfeit
-                    panic!("'{}' - {}", symbol, msg);
+                Err(StrategyError::OutOfMovesError(_)) => {
+                    return TurnResult::Forfeit;
                 }
                 Err(_) => {}
             }
         }
 
-        Referee::check_for_win(&board)
+        if Referee::check_for_win(&board) {
+            TurnResult::Win
+        } else if board.is_full() {
+            TurnResult::Stalemate
+        } else {
+            TurnResult::NotOverYet
+        }
     }
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
-        // TODO: Fix bug... Game::is_over always returns true
-        while self.is_not_over() {
-            if Self::do_one_turn(&mut self.board, &mut self.player_1, 'X') {
+        loop {
+            let players = vec![(&mut self.player_1, 'X'), (&mut self.player_2, 'O')];
+
+            for (player, symbol) in players {
                 println!("{}", self.board);
                 println!();
 
-                return CompletedGame {
-                    winner: Some(self.player_1),
-                    loser: Some(self.player_2),
-                    end_state: EndState::Win,
-                };
+                match Self::do_one_turn(&mut self.board, player, symbol) {
+                    TurnResult::Win => {
+                        println!("{}", self.board);
+                        println!();
+
+                        return if symbol == 'X' {
+                            CompletedGame {
+                                winner: Some(self.player_1),
+                                loser: Some(self.player_2),
+                                end_state: EndState::Win,
+                            }
+                        } else {
+                            CompletedGame {
+                                winner: Some(self.player_2),
+                                loser: Some(self.player_1),
+                                end_state: EndState::Win,
+                            }
+                        };
+                    }
+                    TurnResult::Stalemate => {
+                        return CompletedGame {
+                            winner: None,
+                            loser: None,
+                            end_state: EndState::Stalemate,
+                        }
+                    }
+                    TurnResult::Forfeit => {
+                        return if symbol == 'X' {
+                            CompletedGame {
+                                winner: Some(self.player_2),
+                                loser: Some(self.player_1),
+                                end_state: EndState::Forfeit,
+                            }
+                        } else {
+                            CompletedGame {
+                                winner: Some(self.player_1),
+                                loser: Some(self.player_2),
+                                end_state: EndState::Forfeit,
+                            }
+                        };
+                    }
+                    _ => {}
+                }
             }
-
-            if Self::do_one_turn(&mut self.board, &mut self.player_2, 'O') {
-                println!("{}", self.board);
-                println!();
-
-                return CompletedGame {
-                    winner: Some(self.player_2),
-                    loser: Some(self.player_1),
-                    end_state: EndState::Win,
-                };
-            }
-        }
-
-        CompletedGame {
-            winner: None,
-            loser: None,
-            end_state: EndState::Stalemate,
         }
     }
 

@@ -1,0 +1,15 @@
+[package]
+name = "tictactoe"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+doctest = false
+
+[dependencies]
+hamcrest2 = "*"
+itertools = "0.13.0"
+thiserror = "2.0.3"
+
+[dev-dependencies]
+rstest = "0.21.0"
