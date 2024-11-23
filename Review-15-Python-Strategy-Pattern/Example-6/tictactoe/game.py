@@ -7,6 +7,7 @@ This module handles the top-level game logic, including...
 4. Managing player move order and validation
 """
 
+from dataclasses import dataclass
 from enum import StrEnum, auto
 from typing import Optional
 
@@ -137,14 +138,14 @@ class Game:
     def get_player2(self) -> Player:
         return self._player2
 
+    def get_board(self) -> Board:
+        return self._board
+
     def get_winner(self) -> Optional[Player]:
         return self._winner
 
     def get_loser(self) -> Optional[Player]:
         return self._loser
-
-    def get_board(self) -> Board:
-        return self._board
 
     # --------------------------------------------------------------------------
     # Game State Examination
@@ -186,9 +187,35 @@ class Game:
                 return "Stalemate..."
 
             case GameState.OVER_WITH_FORFEIT:
-                return f"{self._loser.get_name()} forfeited."
+                return f"{self._loser.name} forfeited."
 
             case _:
                 pass
 
         return "Game is in progress."
+
+
+@dataclass(kw_only=True)
+class CompletedGame:
+    board: Board
+
+    winner: Optional[Player] = None
+    loser: Optional[Player] = None
+
+    state = GameState.NOT_STARTED
+
+    def __str__(self) -> str:
+        match self.state:
+            case GameState.OVER_WITH_WIN:
+                return f"Congratulations {self.winner.name}!"
+
+            case GameState.OVER_WITH_STALEMATE:
+                return "Stalemate..."
+
+            case GameState.OVER_WITH_FORFEIT:
+                return f"{self.loser.name} forfeited."
+
+            case _:
+                raise GameStateError()
+
+        return "Error"
