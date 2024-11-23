@@ -1,6 +1,7 @@
 from dataclasses import dataclass
-from typing import Optional, Self, TypeVar
+from typing import Any, Callable, Optional, Self
 
+from .board import NullRender, RenderBoardToScreen
 from .game import Game
 from .player import Player
 from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
@@ -15,7 +16,9 @@ class StrategyFactory:
     }
 
     @classmethod
-    def add(cls, type_of_strategy: str, a_strategy: StrategyCreationFunction) -> None:
+    def add(
+        cls, type_of_strategy: str, a_strategy: StrategyCreationFunction
+    ) -> None:
         if type_of_strategy in cls.__strategy_repo:
             raise ValueError(
                 f'An entry for "{type_of_strategy}" already exists'
@@ -85,6 +88,9 @@ class PlayerBuilder:
             name=self.name,  # type: ignore
             strategy=self.strategy,  # type: ignore
             humanity=self.is_human,
+            preferred_renderer=(
+                RenderBoardToScreen() if self.is_human else NullRender() # type: ignore
+            ),
         )
 
 

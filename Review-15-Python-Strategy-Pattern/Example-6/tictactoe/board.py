@@ -1,4 +1,6 @@
-VALID_SYMBOLS = ("X", "O")
+from typing import Protocol
+
+VALID_SYMBOLS: tuple[str, str] = ("X", "O")
 
 
 class Board:
@@ -125,3 +127,21 @@ class Board:
                 "|".join(self._the_board[6:9]),
             )
         )
+
+
+class RenderStrategy(Protocol):
+    # fmt: off
+    def render(self, board: Board) -> None:
+        ...
+    # fmt: on
+
+
+class RenderBoardToScreen:
+    def render(self, board: Board) -> None:
+        print()
+        print(board)
+
+
+class NullRender:
+    def render(self, board: Board) -> None:
+        pass

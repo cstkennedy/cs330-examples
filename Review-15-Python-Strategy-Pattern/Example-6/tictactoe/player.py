@@ -1,6 +1,7 @@
 import copy
 from dataclasses import dataclass, field
 
+from .board import RenderStrategy
 from .strategy import Strategy
 
 DEFAULT_NAME: str = "I. C. Generic"
@@ -19,6 +20,7 @@ class Player:
     name: str = field(default=DEFAULT_NAME, compare=True)
     strategy: Strategy = field(default=None, compare=False)  # type: ignore
     humanity: bool = field(default=False, compare=False)
+    preferred_renderer: RenderStrategy = field(compare=False)
 
     def next_move(self) -> int:
         """
@@ -56,6 +58,9 @@ class Player:
 
         return not self.is_human()
 
+    def get_render_preference(self) -> RenderStrategy:
+        return self.preferred_renderer
+
     def __str__(self):
         """
         Generate a player string, but only the name.
@@ -68,7 +73,11 @@ class Player:
         Create a new duplicate Player.
         """
 
-        cpy = Player(name=self.name, strategy=copy.deepcopy(self.strategy))
+        cpy = Player(
+            name=self.name,
+            strategy=copy.deepcopy(self.strategy),
+            preferred_renderer=self.preferred_renderer,
+        )
 
         return cpy
 

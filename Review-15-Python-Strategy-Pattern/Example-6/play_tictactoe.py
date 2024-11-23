@@ -23,6 +23,7 @@ def main() -> None:
     # fmt: on
 
     game.play_match()
+    print(game)
 
 
 if __name__ == "__main__":

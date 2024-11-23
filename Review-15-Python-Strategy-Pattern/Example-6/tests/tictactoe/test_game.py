@@ -2,12 +2,13 @@ import pytest
 from hamcrest import assert_that, equal_to, is_, is_not, none
 
 from tictactoe import Board, Game, GameState, GameStateError, Player
+from tictactoe.board import NullRender, RenderBoardToScreen
 from tictactoe.builders import GameBuilder, PlayerBuilder
 
 
 def test_constructor():
-    tom = Player(name="Tom", strategy=None)
-    a_cylon = Player(strategy=None)
+    tom = Player(name="Tom", strategy=None, preferred_renderer=NullRender)
+    a_cylon = Player(strategy=None, preferred_renderer=NullRender)
     a_game = Game(tom, a_cylon)
 
     assert_that(a_game.get_player1(), equal_to(tom))

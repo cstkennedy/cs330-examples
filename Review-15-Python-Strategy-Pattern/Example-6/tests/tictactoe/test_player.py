@@ -4,6 +4,7 @@ import pytest
 from hamcrest import assert_that, equal_to, has_string, is_, is_not
 
 import tictactoe.player as player
+from tictactoe.board import NullRender, RenderBoardToScreen
 from tictactoe.builders import PlayerBuilder
 from tictactoe.player import Player
 
@@ -20,10 +21,13 @@ from tictactoe.player import Player
 
 @pytest.fixture
 def create_players():
-    tom = Player(name="Tom", strategy=None)
+    tom = Player(name="Tom", strategy=None, preferred_renderer=NullRender)
 
-    a_cylon = Player(strategy=None)
-    the_doctor = Player(name="The Doctor", strategy=None)
+    a_cylon = Player(strategy=None, preferred_renderer=NullRender)
+
+    the_doctor = Player(
+        name="The Doctor", strategy=None, preferred_renderer=NullRender
+    )
 
     yield tom, a_cylon, the_doctor
 

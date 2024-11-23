@@ -32,6 +32,7 @@ class GameState(StrEnum):
     IN_PROGRESS = auto()
     OVER_WITH_STALEMATE = auto()
     OVER_WITH_WIN = auto()
+    OVER_WITH_FORFEIT = auto()
 
 
 class Game:
@@ -49,22 +50,34 @@ class Game:
         self._winner: Optional[Player] = None
         self._loser: Optional[Player] = None
 
+        self.state = GameState.NOT_STARTED
+
     def play_match(self) -> None:
         if not self.ready_to_start():
-            #  return
             raise GameStateError("Player 1 *and** player 2 must be added")
 
-        while self.is_not_over():
-            if self.player_turn(self._player1, "X"):
+        self.state = GameState.IN_PROGRESS
+
+        """
+        while self.state == GameState.IN_PROGRESS:
+            self.player_turn(self._player1, "X")
+
+            if self.state != GameState.IN_PROGRESS:
                 break
 
-            if self.player_turn(self._player2, "O"):
-                break
+            self.player_turn(self._player2, "O")
+        """
 
-        if self.ended_with_win():
-            print(f"Congratulations {self.get_winner()}!")
+        while self.state == GameState.IN_PROGRESS:
+            players_and_symbols = ((self._player1, "X"), (self._player2, "O"))
 
-    def player_turn(self, player: Player, symbol: str) -> bool:
+            for player, symbol in players_and_symbols:
+                if self.state != GameState.IN_PROGRESS:
+                    break
+
+                self.player_turn(player, symbol)
+
+    def player_turn(self, player: Player, symbol: str) -> None:
         """
         Play one round of Tic-Tac-Toe.
 
@@ -76,36 +89,29 @@ class Game:
 
         """
         # The game ended already
-        if self._board.is_full():
-            return True
+        if not self.ready_to_start() and self.state != GameState.IN_PROGRESS:
+            raise GameStateError()  # TODO: Add a test for this exception
 
-        if player.is_human():
-            print()
-            print(self._board)
+        self.state = GameState.IN_PROGRESS
+
+        player.get_render_preference().render(self._board)
+
         self._handle_move(player, symbol)
 
-        winner_symbol = self._ref.check_for_win()
+        if winner_symbol := self._ref.check_for_win():
+            self.state = GameState.OVER_WITH_WIN
 
-        if winner_symbol == "X":
-            self._winner = self._player1
-            self._loser = self._player2
+            self._winner = (
+                self._player1 if winner_symbol == "X" else self._player2
+            )
+            self._loser = (
+                self._player2 if winner_symbol == "X" else self._player1
+            )
 
-            return True
+        elif self._board.is_full():
+            self.state = GameState.OVER_WITH_STALEMATE
 
-        if winner_symbol == "O":
-            self._winner = self._player2
-            self._loser = self._player1
-
-            return True
-
-        # The game is over
-        if self._board.is_full():
-            if player.is_human():
-                print(self._board)
-
-            return True
-
-        return False
+            player.get_render_preference().render(self._board)
 
     def _handle_move(self, player: Player, symbol: str) -> None:
         """
@@ -145,9 +151,6 @@ class Game:
     # --------------------------------------------------------------------------
 
     def ready_to_start(self) -> bool:
-        # Bug... the next line returns None
-        #  return self._player1 and self._player2
-
         if self._player1 is None or self._player2 is None:
             return False
 
@@ -160,10 +163,10 @@ class Game:
         return self._winner is not None
 
     def ended_with_loss(self) -> bool:
-        return self.ended_with_win()
+        return self.state == GameState.OVER_WITH_WIN
 
     def ended_with_stalemate(self) -> bool:
-        return self._board.is_full() and (self._winner is None)
+        return self.state == GameState.OVER_WITH_STALEMATE
 
     def is_over(self) -> bool:
         return self.ended_with_win() or self.ended_with_stalemate()
@@ -172,14 +175,20 @@ class Game:
         return not self.is_over()
 
     def current_state(self) -> GameState:
-        if self.not_ready_to_start():
-            return GameState.NOT_STARTED
+        return self.state
 
-        if self.ended_with_win():
-            return GameState.OVER_WITH_WIN
+    def __str__(self) -> str:
+        match self.current_state():
+            case GameState.OVER_WITH_WIN:
+                return f"Congratulations {self._winner.name}!"
 
-        if self.ended_with_stalemate():
-            return GameState.OVER_WITH_STALEMATE
+            case GameState.OVER_WITH_STALEMATE:
+                return "Stalemate..."
 
-        # The only remaining possiblity is for the game to be in progress
-        return GameState.IN_PROGRESS
+            case GameState.OVER_WITH_FORFEIT:
+                return f"{self._loser.get_name()} forfeited."
+
+            case _:
+                pass
+
+        return "Game is in progress."
