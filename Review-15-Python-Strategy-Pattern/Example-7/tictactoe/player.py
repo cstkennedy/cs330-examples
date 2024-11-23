@@ -5,7 +5,6 @@ from .board import RenderStrategy
 from .strategy import Strategy
 
 DEFAULT_NAME: str = "I. C. Generic"
-DEFAULT_SYMBOL: str = "?"
 
 
 @dataclass(kw_only=True, unsafe_hash=True)

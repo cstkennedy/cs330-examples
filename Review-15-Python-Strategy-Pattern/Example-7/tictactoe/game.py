@@ -97,9 +97,6 @@ class Game:
         self._player1: Player = player1
         self._player2: Player = player2
 
-        self._winner: Optional[Player] = None
-        self._loser: Optional[Player] = None
-
         self.state = GameState.NOT_STARTED
 
     def play_match(self) -> CompletedGame:
@@ -149,10 +146,11 @@ class Game:
         player.get_render_preference().render(self._board)
 
         # Get a move and re-prompt if the move is invalid
-        move = player.next_move()
-
-        while not self._ref.selected_cell_is_empty(move):
+        while True:
             move = player.next_move()
+
+            if self._ref.selected_cell_is_empty(move):
+                break
 
         self._board.set_cell(move, symbol)
 
