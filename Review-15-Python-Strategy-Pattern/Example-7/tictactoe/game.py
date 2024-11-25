@@ -7,7 +7,7 @@ This module handles the top-level game logic, including...
 4. Managing player move order and validation
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import StrEnum, auto
 from typing import Optional
 
@@ -38,12 +38,12 @@ class GameState(StrEnum):
 
 @dataclass(kw_only=True)
 class CompletedGame:
-    board: Board
+    board: Board = field(compare=True)
 
-    winner: Optional[Player] = None
-    loser: Optional[Player] = None
+    winner: Optional[Player] = field(default=None, compare=True)
+    loser: Optional[Player] = field(default=None, compare=True)
 
-    state: GameState
+    state: GameState = field(compare=False)
 
     def is_over(self) -> bool:
         return True
@@ -131,8 +131,6 @@ class Game:
                         return CompletedGame(
                             state=GameState.OVER_WITH_STALEMATE,
                             board=self._board,
-                            winner=None,
-                            loser=None,
                         )
 
                     case TurnResult.FORFEIT:
