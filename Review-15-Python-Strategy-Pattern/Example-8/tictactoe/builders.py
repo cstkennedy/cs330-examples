@@ -1,50 +1,16 @@
 from dataclasses import dataclass
-from typing import Any, Callable, Optional, Self
+from typing import Any, Callable, Generic, Optional, Self, TypeVar
 
-from .board import NullRender, RenderBigBoardToScreen
+from .factory import MoveStrategyFactory, RenderStrategyFactory
 from .game import Game
 from .player import Player
-from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
-
-StrategyCreationFunction = Callable[..., Strategy]
-
-
-class StrategyFactory:
-    __strategy_repo: dict[str, StrategyCreationFunction] = {
-        "Keyboard": KeyboardStrategy,
-        "SetMoves": PredefinedMoves,
-    }
-
-    @classmethod
-    def add(
-        cls, type_of_strategy: str, a_strategy: StrategyCreationFunction
-    ) -> None:
-        if type_of_strategy in cls.__strategy_repo:
-            raise ValueError(
-                f'An entry for "{type_of_strategy}" already exists'
-            )
-
-        cls.__strategy_repo[type_of_strategy] = a_strategy  # type: ignore
-
-    @classmethod
-    def create(cls, type_of_strategy: str, /, **kwargs: Any) -> Strategy:
-        if type_of_strategy not in cls.__strategy_repo:
-            raise ValueError(f'"{type_of_strategy}" is not a known strategy')
-
-        if not kwargs:
-            return cls.__strategy_repo[type_of_strategy]()
-
-        return cls.__strategy_repo[type_of_strategy](**kwargs)
-
-    @classmethod
-    def list_strategies(cls) -> str:
-        return "\n".join(f"  - {name}" for name in cls.__strategy_repo)
+from .strategy import MoveStrategy
 
 
 @dataclass
 class PlayerBuilder:
     name: Optional[str] = None
-    strategy: Optional[Strategy] = None
+    strategy: Optional[MoveStrategy] = None
     is_human = False
 
     @staticmethod
@@ -62,13 +28,13 @@ class PlayerBuilder:
                 "Player name must be set before strategy selection"
             )
 
-        self.strategy = KeyboardStrategy(self.name)
+        self.strategy = MoveStrategyFactory.create("Keyboard", _name=self.name)
         self.is_human = True
 
         return self
 
     def with_strategy(self, name: str, *args, **kwargs) -> Self:
-        self.strategy = StrategyFactory.create(name, **kwargs)
+        self.strategy = MoveStrategyFactory.create(name, **kwargs)
 
         return self
 
@@ -89,7 +55,7 @@ class PlayerBuilder:
             strategy=self.strategy,  # type: ignore
             humanity=self.is_human,
             preferred_renderer=(
-                RenderBigBoardToScreen() if self.is_human else NullRender()  # type: ignore
+                RenderStrategyFactory.create("BigBoard") if self.is_human else RenderStrategyFactory.create("Null")  # type: ignore
             ),
         )
 

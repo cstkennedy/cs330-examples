@@ -2,7 +2,7 @@ import copy
 from dataclasses import dataclass, field
 
 from .board import RenderStrategy
-from .strategy import Strategy
+from .strategy import MoveStrategy
 
 DEFAULT_NAME: str = "I. C. Generic"
 
@@ -17,7 +17,7 @@ class Player:
     """
 
     name: str = field(default=DEFAULT_NAME, compare=True)
-    strategy: Strategy = field(default=None, compare=False)  # type: ignore
+    strategy: MoveStrategy = field(default=None, compare=False)  # type: ignore
     humanity: bool = field(default=False, compare=False)
     preferred_renderer: RenderStrategy = field(compare=False)
 

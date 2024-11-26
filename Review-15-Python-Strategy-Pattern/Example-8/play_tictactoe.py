@@ -4,6 +4,8 @@ This is a demo driver for a basic single round game of Tic-Tac-Toe.
 
 from tictactoe.builders import GameBuilder
 
+import tictactoe
+
 
 def main() -> None:
     """
@@ -23,7 +25,11 @@ def main() -> None:
     )
     # fmt: on
 
+
     print(game)
+
+    print("Known Strategies:")
+    print(tictactoe.factory.RenderStrategyFactory.list_strategies())
 
 
 if __name__ == "__main__":

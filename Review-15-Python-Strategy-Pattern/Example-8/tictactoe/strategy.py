@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import ClassVar, Protocol, Self
 
 
-class Strategy(Protocol):
+class MoveStrategy(Protocol):
     def next_move(self) -> int:
         """
         Retrieve the next move.
