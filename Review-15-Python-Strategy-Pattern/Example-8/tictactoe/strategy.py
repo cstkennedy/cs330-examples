@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import ClassVar, Protocol, Self
+from typing import ClassVar, Protocol
 
 
 class MoveStrategy(Protocol):

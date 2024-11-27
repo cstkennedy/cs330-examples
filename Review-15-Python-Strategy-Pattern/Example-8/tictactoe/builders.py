@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Callable, Generic, Optional, Self, TypeVar
+from typing import Optional, Self
 
 from .factory import MoveStrategyFactory, RenderStrategyFactory
 from .game import Game
@@ -33,7 +33,7 @@ class PlayerBuilder:
 
         return self
 
-    def with_strategy(self, name: str, *args, **kwargs) -> Self:
+    def with_strategy(self, name: str, *_args, **kwargs) -> Self:
         self.strategy = MoveStrategyFactory.create(name, **kwargs)
 
         return self
@@ -55,7 +55,9 @@ class PlayerBuilder:
             strategy=self.strategy,  # type: ignore
             humanity=self.is_human,
             preferred_renderer=(
-                RenderStrategyFactory.create("BigBoard") if self.is_human else RenderStrategyFactory.create("Null")  # type: ignore
+                RenderStrategyFactory.create("BigBoard")
+                if self.is_human
+                else RenderStrategyFactory.create("Null")
             ),
         )
 

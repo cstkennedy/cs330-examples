@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Callable, Generic, Optional, Self, Type, TypeVar
+from typing import Any, Callable, Generic, Type, TypeVar
 
 from .board import (
     NullRender,
@@ -9,8 +9,7 @@ from .board import (
 )
 from .strategy import KeyboardStrategy, MoveStrategy, PredefinedMoves
 
-import tictactoe.factory
-
+logger = logging.getLogger("tictactoe.factory")
 
 S = TypeVar("S")
 CreationFunction = Callable[..., S]
@@ -35,7 +34,7 @@ class StrategyFactory(Generic[S]):
             )
 
         cls.__strategy_repo[(cls, type_of_strategy)] = a_strategy  # type: ignore
-        logging.info(f"Added '{type_of_strategy}' entry for '{cls}'")
+        logger.info(f"Added '{type_of_strategy}' entry for '{cls}'")
 
     @classmethod
     def create(cls, type_of_strategy: str, /, **kwargs: Any) -> S:
@@ -49,7 +48,11 @@ class StrategyFactory(Generic[S]):
 
     @classmethod
     def list_strategies(cls) -> str:
-        return "\n".join(f"  - {name}" for name in cls.__strategy_repo)
+        return "\n".join(
+            f"  - ({clazz.__name__}) {name}"
+            for clazz, name in cls.__strategy_repo
+            if clazz.__name__ == cls.__name__
+        )
 
 
 class MoveStrategyFactory(StrategyFactory[MoveStrategy]):
@@ -68,5 +71,3 @@ RenderStrategyFactory.add("Default", RenderBoardToScreen)
 RenderStrategyFactory.add("BigBoard", RenderBigBoardToScreen)
 RenderStrategyFactory.add("Null", NullRender)
 RenderStrategyFactory.add("None", NullRender)
-
-
