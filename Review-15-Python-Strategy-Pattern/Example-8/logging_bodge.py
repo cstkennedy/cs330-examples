@@ -6,7 +6,7 @@ import sys
 # we can actually log module initialization
 # -------------------------------------------------------------------------------
 logger = logging.getLogger("tictactoe")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.WARN)
 
 handler = logging.StreamHandler(sys.stderr)
 

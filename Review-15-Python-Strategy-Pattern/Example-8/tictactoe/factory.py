@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Callable, Generic, Type, TypeVar
+from typing import Any, Callable, Generic, Type, TypeVar, Self
 
 from .board import (
     NullRender,
@@ -20,15 +20,18 @@ class StrategyFactory(Generic[S]):
     Common logic for all strategy factories.
     """
 
-    __strategy_repo: dict[tuple[Type[Any], str], S] = {}
+    __strategy_repo: dict[tuple[Type[Self], str], CreationFunction] = {}
     """
     This stores all strategies for every Factory class that uses
     StrategyFactory as a base.
+
+    Type[Self] is based on RTM-ing for typing of classes
+    <https://docs.python.org/3/library/typing.html#the-type-of-class-objects>
     """
 
     @classmethod
     def add(cls, type_of_strategy: str, a_strategy: CreationFunction) -> None:
-        if type_of_strategy in cls.__strategy_repo:
+        if (cls, type_of_strategy) in cls.__strategy_repo:
             raise ValueError(
                 f'An entry for "{type_of_strategy}" already exists'
             )
