@@ -1,0 +1,219 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide empty members
+
+package tictactoe {
+    package board {
+        class Board {
+            __init__(self) -> None
+            get_cell(self, cell_id: int) -> str
+            set_cell(self, cell_id: int, new_value: str) -> None
+            rows(self) -> list[list[str]]
+            columns(self) -> list[list[str]]
+            diagonals(self) -> list[list[str]]
+            is_full(self) -> bool
+            __eq__(self, rhs)
+            __str__(self)
+        }
+
+        protocol RenderStrategy <<Protocol>> {
+            render(self, board: Board) -> None
+        }
+
+        class RenderBoardToScreen {
+            render(self, board: Board) -> None
+        }
+
+        class RenderBigBoardToScreen {
+            EMPTY_PART: ClassVar[str] = "     ┃" * 2
+
+            __row_helper(self, row: list[str]) -> str
+            render(self, board: Board) -> None
+        }
+
+        class NullRender {
+            render(self, board: Board) -> None
+        }
+    }
+
+    package builder {
+        protocol Builder <<Protocol>> {
+            validate(self) -> None
+            build(self) -> Any
+
+        }
+    }
+
+    package builders {
+        class PlayerBuilder {
+            name: Optional[str] = None
+            strategy: Optional[MoveStrategy] = None
+            is_human = False
+
+            {static} builder() -> "PlayerBuilder"
+            with_name(self, val: str) -> Self
+            human(self) -> Self
+            with_strategy(self, name: str, *_args, **kwargs) -> Self
+            validate(self) -> bool
+            build(self) -> Player
+        }
+
+
+        class GameBuilder {
+            player1: Optional[Player] = None
+            player2: Optional[Player] = None
+            
+            {static} builder() -> GameBuilder
+            __add_player_impl(self, player: Player) -> None
+            add_human_player(self, *, name: str) -> Self
+            add_player(self, *, name: str, strategy: str, **strategy_args) -> Self
+            validate(self) -> None
+            build(self) -> Game
+        }
+    }
+
+    package factory {
+        class StrategyFactory {
+            __strategy_repo: dict[tuple[Type[Self], str], CreationFunction] = {}
+
+            add(cls, type_of_strategy: str, a_strategy: CreationFunction) -> None
+            create(cls, type_of_strategy: str, /, **kwargs: Any) -> S
+            list_strategies(cls) -> str
+            count_strategies(cls) -> str
+
+        }
+        note top: All methods are class methods 
+
+        class MoveStrategyFactory {
+
+        }
+
+        class RenderStrategyFactory {
+
+        }
+
+    }
+
+    package game {
+        exception GameStateError <<Exception>> {
+
+        }
+
+
+        enum GameState <<StrEnum>> {
+            OVER_WITH_STALEMATE
+            OVER_WITH_WIN
+            OVER_WITH_FORFEIT
+        }
+
+
+        class CompletedGame {
+            board: Board = field(compare=True)
+
+            winner: Optional[Player] = field(default=None, compare=True)
+            loser: Optional[Player] = field(default=None, compare=True)
+
+            state: GameState = field(compare=False)
+
+            is_over(self) -> bool
+            is_not_over(self) -> bool
+            ended_with_win(self) -> bool
+            ended_with_loss(self) -> bool
+            ended_with_stalemate(self) -> bool
+            __str__(self) -> str
+        }
+
+        enum TurnResult <<StrEnum>>
+        {
+            WIN
+            STALEMATE
+            NOT_OVER_YET 
+            FORFEIT
+        }
+
+        class Game {
+            board: Board = field(default_factory=Board)
+
+            player1: Player
+            player2: Player
+
+            __post_init__(self)
+            __opponent_of(self, player: Player) -> Player
+            play_match(self) -> CompletedGame
+            _player_turn(self, player: Player, symbol: str) -> TurnResult
+            ready_to_start(self) -> bool
+            not_ready_to_start(self) -> bool
+            is_over(self) -> bool
+        }
+    }
+
+    package player {
+        class Player {
+            name: str = field(default=DEFAULT_NAME, compare=True)
+            strategy: MoveStrategy = field(default=None, compare=False)
+            humanity: bool = field(default=False, compare=False)
+            preferred_renderer: RenderStrategy = field(compare=False)
+
+            next_move(self) -> int
+            is_human(self) -> bool
+            is_computer(self) -> bool
+            get_render_preference(self) -> RenderStrategy
+            __str__(self)
+            __deepcopy__(self, memo) -> "Player"
+        }
+
+    }
+
+    package referee {
+        class Referee {
+            __init__(self, board: Board):
+            check_for_win(self) -> Optional[str]:
+            selected_cell_is_empty(self, move: int) -> bool
+        }
+
+    }
+
+    package strategy {
+        protocol MoveStrategy <<Protocol>> {
+            next_move(self) -> int
+        }
+
+
+        class KeyboardStrategy {
+            PROMPT_MSG: ClassVar[str] = "Enter your desired move (1-9): "
+
+            _name: str = ""
+
+            next_move(self) -> int
+        }
+
+        class PredefinedMoves {
+            __init__(self, *, moves: list[int]) -> None
+            next_move(self) -> int
+        }
+    }
+}
+
+
+MoveStrategy <|.[#blue]. KeyboardStrategy
+MoveStrategy <|.[#blue]. PredefinedMoves
+
+RenderStrategy <|.[#blue]. RenderBoardToScreen
+RenderStrategy <|.[#blue]. RenderBigBoardToScreen
+RenderStrategy <|.[#blue]. NullRender
+
+Builder <|.[#blue]. PlayerBuilder
+Builder <|.[#blue]. GameBuilder
+
+PlayerBuilder <.. GameBuilder
+
+MoveStrategyFactory <. PlayerBuilder
+RenderStrategyFactory <. PlayerBuilder
+
+StrategyFactory <|.[#blue]. MoveStrategyFactory
+StrategyFactory <|.[#blue]. RenderStrategyFactory
+
+RenderStrategy <-- RenderStrategyFactory: "manages"
+MoveStrategy <-- MoveStrategyFactory: "manages"
+
+@enduml
