@@ -36,6 +36,7 @@ def test_game_start_with_no_players():
 
 
 def test_player_turn():
+    PlayerBuilder.use_defaults()
     game = Game(
         player1=(
             PlayerBuilder.builder()
@@ -61,6 +62,7 @@ def test_player_turn():
 
 
 def test_play_match_to_stalemate():
+    PlayerBuilder.use_defaults()
     game = (
         GameBuilder.builder()
         .add_player(name="Player 1", strategy="SetMoves", moves=[5, 3, 4, 9, 8])
@@ -96,6 +98,7 @@ def test_play_match_to_stalemate():
 
 
 def test_play_match_to_win_player_1():
+    PlayerBuilder.use_defaults()
     game = (
         GameBuilder.builder()
         .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 2])
@@ -131,6 +134,7 @@ def test_play_match_to_win_player_1():
 
 
 def test_play_match_to_win_player_2():
+    PlayerBuilder.use_defaults()
     game = (
         GameBuilder.builder()
         .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 7])

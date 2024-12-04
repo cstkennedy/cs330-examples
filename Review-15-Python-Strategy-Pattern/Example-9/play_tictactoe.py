@@ -2,12 +2,10 @@
 This is a demo driver for a basic single round game of Tic-Tac-Toe.
 """
 
-# -------------------------------------------------------------------------------
-# Set up logging before tictactoe.factory is imported... so that
-# we can actually log module initialization
-# -------------------------------------------------------------------------------
-import logging_bodge  # noqa: F401, W0611
-import tictactoe.factory as factories
+import logging
+
+import tictactoe.factories as factories
+from logging_bodge import set_up_logging
 from tictactoe.builders import GameBuilder
 
 
@@ -31,6 +29,7 @@ def main() -> None:
     # fmt: off
     game = (
         GameBuilder.builder()
+        .use_defaults()
         .add_human_player(name="Tom")
         .add_player(
             name="Jay",
@@ -46,6 +45,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    set_up_logging(level=logging.INFO)
     main()
 
     # @todo add exception handling

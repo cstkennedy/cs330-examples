@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Callable, Generic, Type, TypeVar, Self
+from typing import Any, Callable, Generic, Self, Type, TypeVar
 
 from .board import (
     NullRender,
@@ -7,7 +7,7 @@ from .board import (
     RenderBoardToScreen,
     RenderStrategy,
 )
-from .strategy import KeyboardStrategy, MoveStrategy, PredefinedMoves
+from .player import KeyboardStrategy, MoveStrategy, PredefinedMoves
 
 logger = logging.getLogger("tictactoe.factory")
 
@@ -58,7 +58,7 @@ class StrategyFactory(Generic[S]):
         )
 
     @classmethod
-    def count_strategies(cls) -> str:
+    def count_strategies(cls) -> int:
         return len(
             list(
                 _
@@ -69,18 +69,16 @@ class StrategyFactory(Generic[S]):
 
 
 class MoveStrategyFactory(StrategyFactory[MoveStrategy]):
-    pass
-
-
-MoveStrategyFactory.add("Keyboard", KeyboardStrategy)
-MoveStrategyFactory.add("SetMoves", PredefinedMoves)
+    @classmethod
+    def add_defaults(cls) -> None:
+        cls.add("Keyboard", KeyboardStrategy)
+        cls.add("SetMoves", PredefinedMoves)
 
 
 class RenderStrategyFactory(StrategyFactory[RenderStrategy]):
-    pass
-
-
-RenderStrategyFactory.add("Default", RenderBoardToScreen)
-RenderStrategyFactory.add("BigBoard", RenderBigBoardToScreen)
-RenderStrategyFactory.add("Null", NullRender)
-RenderStrategyFactory.add("None", NullRender)
+    @classmethod
+    def add_defaults(cls) -> None:
+        cls.add("Default", RenderBoardToScreen)
+        cls.add("BigBoard", RenderBigBoardToScreen)
+        cls.add("Null", NullRender)
+        cls.add("None", NullRender)

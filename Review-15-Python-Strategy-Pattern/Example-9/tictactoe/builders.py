@@ -1,10 +1,24 @@
 from dataclasses import dataclass
-from typing import Optional, Self
+from typing import Any, ClassVar, Optional, Protocol, Self
 
-from .factory import MoveStrategyFactory, RenderStrategyFactory
+from .factories import MoveStrategyFactory, RenderStrategyFactory
 from .game import Game
-from .player import Player
-from .strategy import MoveStrategy
+from .player import MoveStrategy, Player
+
+
+# Add TypeVar
+class Builder(Protocol):
+    def validate(self) -> None:
+        """
+        Run all validation checks and generate exceptions for any failed checks.
+        """
+        ...
+
+    def build(self) -> Any:
+        """
+        T.B.W.
+        """
+        ...
 
 
 @dataclass
@@ -13,9 +27,20 @@ class PlayerBuilder:
     strategy: Optional[MoveStrategy] = None
     is_human = False
 
+    defaults_set_up: ClassVar[bool] = False
+
     @staticmethod
     def builder() -> "PlayerBuilder":
         return PlayerBuilder()
+
+    @classmethod
+    def use_defaults(cls) -> None:
+        if cls.defaults_set_up:
+            return
+
+        MoveStrategyFactory.add_defaults()
+        RenderStrategyFactory.add_defaults()
+        cls.defaults_set_up = True
 
     def with_name(self, val: str) -> Self:
         self.name = val
@@ -70,6 +95,11 @@ class GameBuilder:
     @staticmethod
     def builder() -> "GameBuilder":
         return GameBuilder()
+
+    def use_defaults(self) -> Self:
+        PlayerBuilder.use_defaults()
+
+        return self
 
     def __add_player_impl(self, player: Player) -> None:
         if self.player1 is not None and self.player2 is not None:
