@@ -35,8 +35,7 @@ public class Board
      *
      * @return value stored in the Cell
      *
-     * @pre (id > 0 && id < 10) -> @todo change to
-     *     throws IllegalArgumentException
+     * @throws IllegalArgumentException if (id <= 0 or id > 10)
      */
     public char getCell(int id)
     {
