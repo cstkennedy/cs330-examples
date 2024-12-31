@@ -1,0 +1,40 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+    id "application"
+    id "eclipse"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    archiveBaseName = "EvenGen"
+
+    manifest {
+        attributes(
+            "Main-Class": "EvenGen"
+        )
+    }
+}
+
+run {
+    mainClass = "EvenGen"
+}
+
+javadoc {
+    failOnError false
+}
+
