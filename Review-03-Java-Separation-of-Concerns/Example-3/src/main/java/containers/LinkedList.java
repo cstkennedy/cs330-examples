@@ -3,25 +3,44 @@ package containers;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * This is a custom LinkedList class used to demonstrate how to both
+ * implement a Linked List and implement the Java Collection interface.
+ *
+ * @param <T> type of data to store
+ */
+@SuppressWarnings({
+    "PMD.CloneThrowsCloneNotSupportedException",
+    "PMD.FieldDeclarationsShouldBeAtStartOfClass",
+    "PMD.ProperCloneImplementation",
+    "PMD.ShortClassName",
+    "PMD.TooManyMethods"
+})
 public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
-    private class Node<T> {
-        T     data;
-        Node  next;
 
-        Node()
+    @SuppressWarnings({
+        "PMD.NullAssignment"
+    })
+    private class Node<T> {
+        private final T  data;
+        private Node<T>  next;
+
+        public Node()
         {
             this.data = null;
             this.next = null;
         }
 
-        Node(T d)
+        public Node(final T datum)
         {
-            this.data = d;
+            this.data = datum;
             this.next = null;
         }
     }
 
-    public class LinkedListIterator<T> implements Iterator<T>
+    // NOTE: Removed <T> from LinkedListIterator declaration
+    // We want to inherit the <T> from LinkedList, not define a new <T>.
+    public class LinkedListIterator implements Iterator<T>
     {
         /**
          * This is used to keep track of the iterator's position. It is a
@@ -37,15 +56,16 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
             this.currentFocus = LinkedList.this.head;
         }
 
+        @Override
         public boolean hasNext()
         {
             return this.currentFocus != null;
-                // && this.currentFocus.next != null;
         }
 
+        @Override
         public T next()
         {
-            T currentData = this.currentFocus.data;
+            final T currentData = this.currentFocus.data;
 
             this.currentFocus = this.currentFocus.next;
 
@@ -54,55 +74,51 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
     }
 
     /**
-     * This is a pointer to the head (first)
-     * Node
+     * This is a pointer to the head (first) Node.
      */
-    private Node head;
+    private Node<T> head;
 
     /**
-     * This is a pointer to the tail (last)
-     * Node
+     * This is a pointer to the tail (last) Node.
      */
-    private Node tail;
+    private Node<T> tail;
 
     /**
-     * Current size of the LinkedList--e.g.,
-     * current (actual) number of rooms
+     * Current size of the LinkedList--e.g., current (actual) number of rooms.
      */
-    int currentSize;
+    private int currentSize;
 
+    @SuppressWarnings({
+        "PMD.NullAssignment"
+    })
     public LinkedList()
     {
         this.head = null;
         this.tail = null;
         this.currentSize = 0;
     }
+
+    @SuppressWarnings({
+        "PMD.OnlyOneReturn"
+    })
     @Override
-    public boolean add(T toAdd)
+    public boolean add(final T toAdd)
     {
-        Node newNode = new Node(toAdd);
+        final Node<T> newNode = new Node<>(toAdd);
 
         // If adding the first Node
-        if (head == null) {
-            head        = newNode;
-            tail        = newNode;
-            currentSize = 1;
-
-            // Why set newNode to null?
-            newNode     = null;
+        if (this.head == null) {
+            this.head        = newNode;
+            this.tail        = newNode;
+            this.currentSize = 1;
 
             return true;
         }
 
-        // Link the newNode to the end
-        // of the existing list
-        tail.next = newNode;
+        // Link the newNode to the end of the existing list
+        this.tail.next = newNode;
+        this.tail = tail.next;
 
-        // Update tail;
-        tail = tail.next;
-        // tail = newNode;
-
-        // Update the size
         ++currentSize;
 
         return true;
@@ -111,9 +127,13 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
     /**
      * Add multiple values.
      */
-    public boolean addAll(Collection<? extends T> everythingToAdd)
+    @SuppressWarnings({
+        "PMD.OnlyOneReturn"
+    })
+    @Override
+    public boolean addAll(final Collection<? extends T> everythingToAdd)
     {
-        for (T val : everythingToAdd) {
+        for (final T val : everythingToAdd) {
             if (!this.add(val)) {
                 return false;
             }
@@ -129,6 +149,10 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
      *   - tail = null
      *   - currentSize = 0
      */
+    @SuppressWarnings({
+        "PMD.NullAssignment"
+    })
+    @Override
     public void clear()
     {
         this.head = null;
@@ -136,16 +160,19 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
         this.currentSize = 0;
     }
 
+    @Override
     public int size()
     {
         return this.currentSize;
     }
 
+    @Override
     public boolean isEmpty()
     {
         return this.size() == 0;
     }
 
+    @Override
     public Iterator<T> iterator()
     {
         return new LinkedListIterator();
@@ -154,9 +181,9 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
     @Override
     public LinkedList<T> clone()
     {
-        LinkedList<T> copy = new LinkedList<>();
+        final LinkedList<T> copy = new LinkedList<>();
 
-        for (T entry : this) {
+        for (final T entry : this) {
             copy.add(entry);
         }
 
@@ -172,22 +199,29 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
     //   - return null
     //--------------------------------------------------------------------------
 
-    public boolean retainAll(Collection<?> c)
+    @Override
+    public boolean retainAll(final Collection<?> collection)
     {
         throw new UnsupportedOperationException();
     }
 
-    public boolean remove(Object obj)
+    @Override
+    public boolean remove(final Object obj)
     {
         return false;
     }
 
-    public boolean removeAll(Collection<?> c)
+    @Override
+    public boolean removeAll(final Collection<?> collection)
     {
         throw new UnsupportedOperationException();
     }
 
-    public boolean contains(Object obj)
+    @SuppressWarnings({
+        "PMD.OnlyOneReturn"
+    })
+    @Override
+    public boolean contains(final Object obj)
     {
         for (T entry : this) {
             if (entry.equals(obj)) {
@@ -198,7 +232,11 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
         return false;
     }
 
-    public boolean containsAll(Collection<?> c)
+    @SuppressWarnings({
+        "PMD.OnlyOneReturn"
+    })
+    @Override
+    public boolean containsAll(final Collection<?> c)
     {
         for (Object entry : c) {
             if (!this.contains(entry)) {
@@ -209,11 +247,13 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
         return true;
     }
 
-    public <T> T[] toArray(T[] array)
+    @Override
+    public <T> T[] toArray(final T[] array)
     {
         return null;
     }
 
+    @Override
     public  Object[] toArray()
     {
         return null;

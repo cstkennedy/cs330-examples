@@ -10,3 +10,6 @@ The discussion is split into two parts:
   - Part 2 - Example 2
     - [YouTube](https://youtu.be/8V527yPLUyE)
     - [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+-+Separation+of+Concerns+-+Part+2/1_imhpvclr)
+
+
+**Note:** Example 3 is the result of code/style review using Checkstyle and PMD. There is no recorded lecture.
