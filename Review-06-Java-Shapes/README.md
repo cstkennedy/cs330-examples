@@ -17,11 +17,11 @@ Topics include:
 
 **Note** that the first few examples are not written in
 [idiomatic](http://www.merriam-webster.com/dictionary/idiomatic) Java. By the
-last example (i.e., Example 7)... we will have a "fairly good" codebase. *Note
+last example (i.e., Example 9)... we will have a "fairly good" codebase. *Note
 that a few pieces of the Java class checklist (e.g., `equals`) are glossed
 over.*
 
-This discussion is split into seven (7) examples:
+This discussion is split into nine (9) examples:
 
   - **Example 1**
     - Basics of Polymorphism
