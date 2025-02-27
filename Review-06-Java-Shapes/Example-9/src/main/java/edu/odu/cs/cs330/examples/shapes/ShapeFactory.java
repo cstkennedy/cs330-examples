@@ -11,9 +11,8 @@ import java.util.LinkedHashMap;
  * @author Thomas J Kennedy
  */
 public class ShapeFactory {
-    /**
-     * Listing of known shapes.
-     */
+    /*
+    // "Option" 1
     private static final Map<String, Shape> _KNOWN_SHAPES = new LinkedHashMap<>() {{
         put("Triangle", new Triangle());
         put("Right Triangle", new RightTriangle());
@@ -21,6 +20,33 @@ public class ShapeFactory {
         put("Square", new Square());
         put("Circle", new Circle());
     }};
+    */
+
+    // Option 2
+    /*
+    private static final Map<String, Shape> _KNOWN_SHAPES;
+
+    static {
+        _KNOWN_SHAPES = new LinkedHashMap<>();
+
+        _KNOWN_SHAPES.put("Triangle", new Triangle());
+        _KNOWN_SHAPES.put("Right Triangle", new RightTriangle());
+        _KNOWN_SHAPES.put("Equilateral Triangle", new EquilateralTriangle());
+        _KNOWN_SHAPES.put("Square", new Square());
+        _KNOWN_SHAPES.put("Circle", new Circle());
+    };
+    */
+
+    /**
+     * Listing of known shapes.
+     */
+    private static final Map<String, Shape> _KNOWN_SHAPES = Map.of(
+        "Triangle", new Triangle(),
+        "Right Triangle", new RightTriangle(),
+        "Equilateral Triangle", new EquilateralTriangle(),
+        "Square", new Square(),
+        "Circle", new Circle()
+    );
 
     /**
      * ShapeFactory is a collection of static functions. There is no reason to
@@ -94,8 +120,14 @@ public class ShapeFactory {
         return bld.toString();
         */
 
+        /*
         return _KNOWN_SHAPES.keySet()
             .stream()
+            .collect(java.util.stream.Collectors.joining("\n", "", "\n"));
+        */
+        return _KNOWN_SHAPES.keySet()
+            .stream()
+            .sorted()
             .collect(java.util.stream.Collectors.joining("\n", "", "\n"));
     }
 
