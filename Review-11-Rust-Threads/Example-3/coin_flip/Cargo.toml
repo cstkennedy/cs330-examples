@@ -8,3 +8,15 @@ edition = "2021"
 [dependencies]
 num-format = "0.4.4"
 rand = { version = "0.9.0-alpha.1", features = ["small_rng"] }
+
+[dev-dependencies]
+divan = "0.1.17"
+
+[[bench]]
+name = "strong_scaling"
+harness = false
+
+[[bench]]
+name = "weak_scaling"
+harness = false
+

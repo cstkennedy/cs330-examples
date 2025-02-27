@@ -11,5 +11,5 @@ crate-type = ["cdylib"]
 coin_flip = { path = "../coin_flip" }
 
 [dependencies.pyo3]
-version = "0.22.1"
+version = "0.23.5"
 features = ["extension-module"]
