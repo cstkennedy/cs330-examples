@@ -21,13 +21,23 @@ import edu.odu.cs.cs330.examples.shapes.io.ShapeParser;
  * @author Thomas J Kennedy
  */
 public class RunShapes {
-    /**
-     * This is the Program Title.
-     */
+    /*
     private static final String[] PROGRAM_HEADING = {
         "Objects & Inheritance: 2-D Shapes",
         "Thomas J. Kennedy"
     };
+    */
+
+    /**
+     * This is the Program Title.
+     */
+    private static final String PROGRAM_HEADING = projectHeading(
+        new String[] {
+            "Objects & Inheritance: 2-D Shapes",
+            "Thomas J. Kennedy"
+        }, // TODO: varargs and/or builder
+        Utilities.W_WIDTH
+    );
 
     /**
      * The default heading width.
@@ -85,7 +95,8 @@ public class RunShapes {
         //----------------------------------------------------------------------
         // Print main program heading
         //----------------------------------------------------------------------
-        System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
+        // System.out.println(projectHeading(PROGRAM_HEADING, Utilities.W_WIDTH));
+        System.out.println(PROGRAM_HEADING);
 
         //----------------------------------------------------------------------
         // Examine the ShapeFactory

@@ -30,6 +30,8 @@ public interface Shape extends Cloneable, TraitFromDimensions {
      * @return shape name
      */
     public abstract String name();
+    // TODO: remove abstract - it is left here for emphasis (i.e., discussion).
+    // However, it is a code smell in interfaces.
 
     /**
      * Compute the area.
