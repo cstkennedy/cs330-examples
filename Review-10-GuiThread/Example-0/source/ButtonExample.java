@@ -6,7 +6,8 @@ import javax.swing.*;
  * A GUI Program that extends the JFrame class
  * to generate a Window.
  */
-public class ButtonExample extends JFrame {
+public class ButtonExample extends JFrame
+{
     /**
      * Control - start generation
      */
@@ -15,8 +16,7 @@ public class ButtonExample extends JFrame {
     /**
      * Constructor
      */
-    public ButtonExample()
-    {
+    public ButtonExample() {
         // Invoke the JFrame (base class) constructor
         super("Button Example");
 
@@ -34,20 +34,19 @@ public class ButtonExample extends JFrame {
          * <p>
          * This is an example of an immediate class.
          * <p>
-         * I am specializing (defining) class and
-         * instantiating an object.
+         * I am specializing (defining) a class (that implements an interface)
+         * and instantiating an object.
          */
         clickButton.addActionListener(
             new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent e)
-                {
+                public void actionPerformed(ActionEvent e) {
                     displayMessage();
                 }
             }
         );
 
-        // Setup and add to the Main Container
+        // Set up and add to the Main Container
         cp.setLayout(new BorderLayout());
 
         cp.add(clickButton, BorderLayout.CENTER);
@@ -62,12 +61,13 @@ public class ButtonExample extends JFrame {
      */
     void displayMessage()
     {
-        // Generate a message (pop-up)
-        // dialog window
-        JOptionPane.showMessageDialog(null,
-                                      "The Game",
-                                      "The Game",
-                                      JOptionPane.ERROR_MESSAGE);
+        // Generate a message (pop-up) dialog window
+        JOptionPane.showMessageDialog(
+            null,
+            "The Game",
+            "The Game",
+            JOptionPane.ERROR_MESSAGE
+        );
     }
 
     /**
