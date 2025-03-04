@@ -1,9 +1,12 @@
+use std::vec::Vec;
+
 use itertools::Itertools;
 
 use crate::flooring::Flooring;
 use crate::house::House;
 use crate::room::Room;
-use std::vec::Vec;
+use crate::error;
+
 
 const MIN_LINEAR_DIM: f64 = 0.0_f64;
 const MIN_COST: f64 = 0.01_f64;
@@ -40,18 +43,19 @@ pub fn read_house_from_str(room_data: &str) -> Option<House> {
         .map(|(name, nums, flooring_name)| (name, nums[0], nums[1], flooring_name, nums[2]))
         .filter(|(_, length, width, _, _)| *length > MIN_LINEAR_DIM && *width > MIN_LINEAR_DIM)
         .filter(|(_, _, _, _, unit_cost)| *unit_cost >= MIN_COST)
-        .map(|(name, length, width, flooring_name, unit_cost)| {
-            Room::builder()
+        .flat_map(|(name, length, width, flooring_name, unit_cost)| -> Result<Room, error::BuildErrorWithState<_>> {
+            let room = Room::builder()
                 .with_name(name)
-                .with_dimensions(length, width)
-                .unwrap()
+                .with_dimensions(length, width)?
                 .with_flooring(
                     Flooring::builder()
                         .type_name(flooring_name)
                         .unit_cost(unit_cost)
                         .build(),
                 )
-                .build()
+                .build();
+
+            Ok(room)
         })
         .collect();
 
