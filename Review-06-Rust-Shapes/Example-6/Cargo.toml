@@ -2,7 +2,7 @@
 name = "shapes"
 version = "0.1.0"
 authors = ["Thomas J. Kennedy <tkennedy@cs.odu.edu>"]
-edition = "2021"
+edition = "2024"
 
 [dependencies]
 ordered-float = "1.0.2"
