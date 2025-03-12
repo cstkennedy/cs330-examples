@@ -1,0 +1,6 @@
+extend = { path = "../../common/python.toml" }
+
+[tasks.run]
+command = "python3.11"
+args = [ "update_room.py" ]
+

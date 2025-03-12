@@ -1,0 +1,4 @@
+[tasks.test]
+command = "python3.11"
+args = ["-m", "pytest", "tests", "-v", "--no-header"]
+

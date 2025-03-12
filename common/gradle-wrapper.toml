@@ -1,0 +1,26 @@
+[tasks.clean]
+command = './gradlew'
+args = ["clean"]
+
+[tasks.build]
+command = './gradlew'
+args = ["build"]
+
+[tasks.jar]
+command = './gradlew'
+args = ["jar"]
+
+[tasks.test]
+command = './gradlew'
+args = ["test"]
+
+[tasks.run]
+command = './gradlew'
+args = ["run"]
+
+[tasks.re-test]
+dependencies = [
+	"clean",
+	"test"
+]
+
