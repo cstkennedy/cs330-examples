@@ -22,7 +22,6 @@ def main():
 
     # Construct the house within the build function
     house = build_house()
-
     print(house)
 
     # Upgrade the flooring in a second duplicate house

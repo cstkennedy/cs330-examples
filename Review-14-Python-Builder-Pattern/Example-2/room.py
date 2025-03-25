@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 from dataclasses import dataclass, field
-from typing import Never, Optional, Self
+from typing import Optional, Self
 
 
 @dataclass
@@ -139,19 +139,30 @@ class RoomBuilder:
 
     def __check_name(self, val: str | None, name: str) -> None:
         """
-        Raise a Value Error if:
-          1. val was not set
-          2. val is the empty string
-          3. val has fewer than 3 characters
+        Raises:
+            ValueError if...
+                1. val was not set
+                2. val is the empty string
+                3. val has fewer than 3 characters
         """
 
         if not val:
             raise ValueError(f'"{name}" was not set')
 
         if len(val) < 3:
-            raise ValueError('"{name}" len("{val}") < 3')
+            raise ValueError(f'"{name}" len("{val}") < 3')
 
     def __check_num(self, val: float | int, name: str) -> None:
+        """
+        Raises:
+            ValueError if...
+                1. val was not set
+                3. val is zero or negative
+        """
+
+        if not val:
+            raise ValueError(f'No "{name}" was set')
+
         if val <= 0:
             raise ValueError(f'"{name}" <= 0')
 

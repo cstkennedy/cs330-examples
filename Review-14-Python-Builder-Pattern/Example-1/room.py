@@ -16,13 +16,13 @@ class DimensionSet:
 
 
 class Room:
-    def __init__(self, nme: str = "Generic"):
+    def __init__(self, nme: str = "Generic") -> None:
         self.__name = nme
         self.__dimensions = DimensionSet()
         self.__flooring = Flooring()
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         Get the name using a property.
 
@@ -31,7 +31,7 @@ class Room:
 
         return self.__name
 
-    def set_flooring(self, nme: str, unit_c: float):
+    def set_flooring(self, nme: str, unit_c: float) -> None:
         """
         Set the flooring.
 

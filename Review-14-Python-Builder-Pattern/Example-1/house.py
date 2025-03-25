@@ -1,14 +1,16 @@
+from typing import Iterator
+
 from room import Room
 
 
 class House:
-    def __init__(self, n: str = "House"):
+    def __init__(self, nme: str = "House") -> None:
         """
         This is the Default constructor. Start with the name set to "House" and
         an empty set of rooms (i.e., zero rooms).
         """
 
-        self.__name: str = n
+        self.__name: str = nme
         self.__rooms: list[Room] = []
 
     @property
@@ -32,7 +34,7 @@ class House:
 
         self.__name = nme
 
-    def add_room(self, to_add: Room):
+    def add_room(self, to_add: Room) -> None:
         """
         Add another room to this House.
 
@@ -42,7 +44,7 @@ class House:
 
         self.__rooms.append(to_add)
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Return the number of rooms in this House.
         """
@@ -63,7 +65,7 @@ class House:
 
         return total, avg
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Room]:
         """
         Wrapper around `list.__iter__()`.
         """
@@ -80,6 +82,7 @@ class House:
 
         total, avg = self.flooring_cost_metrics()
 
+        # TODO: replace '+" with '"\n".join(...)'
         return (
             f"--------{self.name:}--------\n"
             + "\n".join(str(room) for room in self)
@@ -90,11 +93,13 @@ class House:
 
     def __eq__(self, rhs) -> bool:
         """
-        This is the equivalent of overloading:
-          - `operator==` in C++
-          - `equals` in Java
-          - `eq` in Rust
+        This is the equivalent of:
+          - overloading `operator==` in C++
+          - overriding `equals` in Java
+          - implementing or deriving the `PartialEq` trait in Rust
         """
+
+        # TODO: Add instanceof check
 
         if self.name != rhs.name:
             return False

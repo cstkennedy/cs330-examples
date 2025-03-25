@@ -130,14 +130,14 @@ class RoomBuilder:
             raise ValueError(f'"{name}" was not set')
 
         if len(val) < 3:
-            raise ValueError('"{name}" len("{val}") < 3')
+            raise ValueError(f'"{name}" len("{val}") < 3')
 
-    def __check_num(self, val: float | int, name: str) -> None:
+    def __check_num(self, val: float | int | None, name: str) -> None:
         """
         Raises:
             ValueError if...
                 1. val was not set
-                3. val is zero or negative
+                2. val is zero or negative
         """
 
         if not val:
@@ -157,7 +157,7 @@ class RoomBuilder:
         room = Room(
             self.__name,  # type: ignore
             DimensionSet(self.__length, self.__width),
-            Flooring(self.__flooring_type, self.__flooring_unit_cost),
+            Flooring(self.__flooring_type, self.__flooring_unit_cost), # type: ignore
         )
 
         return room

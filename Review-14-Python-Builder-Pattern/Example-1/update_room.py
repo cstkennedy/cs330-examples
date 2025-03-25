@@ -6,7 +6,7 @@ from house import House
 from room import Room, RoomBuilder
 
 
-def main():
+def main() -> None:
     """
     Compute the area of a room and the cost of
     flooring for the room
