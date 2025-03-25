@@ -1,14 +1,10 @@
-#! /usr/bin/env python3
-
-from __future__ import annotations
-
 import random
 import sys
 
 import coin_flip
 
-DEFAULT_NUM_TRIALS = 10000
-SUMMARY_FMT_STR = "# Heads: {:>6d} ({:>6.4f}) / # Tails {:>6d} ({:>6.4f})"
+DEFAULT_NUM_TRIALS: int = 10_000
+SUMMARY_FMT_STR: str = "# Heads: {:>6d} ({:>6.4f}) / # Tails {:>6d} ({:>6.4f})"
 
 
 def main():

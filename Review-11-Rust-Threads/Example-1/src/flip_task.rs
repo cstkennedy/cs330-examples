@@ -4,7 +4,7 @@ use rand::rngs::SmallRng;
 use std::ops::Add;
 use std::ops::AddAssign;
 
-#[derive(Default)]
+#[derive(Clone, Copy, Default)]
 pub struct FlipTask {
     pub num_flips: u64,
     pub num_heads: u64,

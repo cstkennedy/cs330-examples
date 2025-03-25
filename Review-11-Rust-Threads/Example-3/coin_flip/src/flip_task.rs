@@ -13,10 +13,10 @@ pub struct FlipTask {
 
 impl FlipTask {
     pub fn simulate_flips(num_flips: u64) -> FlipTask {
-        let mut rng = SmallRng::from_thread_rng();
+        let mut rng = SmallRng::from_rng(&mut rand::rng());
 
         let num_heads = (0..num_flips)
-            .map(|_| rng.gen::<bool>())
+            .map(|_| rng.random::<bool>())
             .filter(|val| val == &true)
             .count() as u64;
 

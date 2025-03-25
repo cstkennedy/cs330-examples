@@ -1,0 +1,45 @@
+[config]
+default_to_workspace = false
+
+[env]
+PYTHON = "python3.11"
+LIB = "coin_flip"
+
+[tasks.build-ffi-flow]
+condition = { files_modified = { input = ["**/Cargo.toml", "**/src/**/*.rs"], output = ["./target/**/*${LIB}*"] }, platforms = ["linux"]}
+dependencies = [ "build", "copy-lib" ]
+
+[tasks.build]
+condition = { files_modified = { input = ["**/Cargo.toml", "**/src/**/*.rs"], output = ["./target/**/*${LIB}*"] } }
+private = true
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.copy-lib]
+condition = { files_modified = { input = ["./target/release/lib${LIB}_py.so"], output = ["${LIB}.so"] }, platforms = ["linux"] }
+private = true
+command = "cp"
+args = [ "./target/release/lib${LIB}_py.so", "./${LIB}.so" ]
+
+[tasks.clean-ffi-flow]
+condition = { platforms = ["linux"] }
+dependencies = [ "clean", "clean-lib" ]
+
+[tasks.clean]
+command = "cargo"
+args = [ "clean" ]
+
+[tasks.clean-lib]
+condition = { platforms = ["linux"] }
+command = "rm"
+args = [ "./${LIB}.so" ]
+
+[tasks.run-python]
+dependencies = [ "build", "copy-lib" ]
+command = "${PYTHON}"
+args = ["simulate.py", "${@}"]
+
+[tasks.run-rust]
+dependencies = ["build"]
+command = "./target/release/coin_flip_rs"
+args = ["${@}"]

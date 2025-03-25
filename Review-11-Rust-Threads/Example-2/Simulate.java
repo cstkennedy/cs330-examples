@@ -10,12 +10,12 @@ public class Simulate
     /**
      * Number of microseconds in one second.
      */
-    public static final double MICRO_SEC_TO_SEC = 1000000000.0;
+    public static final double MICRO_SEC_TO_SEC = 1_000_000_000.0;
 
     /**
      * Default number of trials to run.
      */
-    public static final long DEFAULT_NUM_TRIALS = 10000;
+    public static final long DEFAULT_NUM_TRIALS = 10_000;
 
     /**
      * Maximum allowed threads.

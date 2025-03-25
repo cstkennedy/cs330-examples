@@ -1,0 +1,64 @@
+[config]
+default_to_workspace = false
+
+[env]
+PYTHON = "python3.11"
+JAVA = "java"
+LIB = "coin_flip"
+
+[tasks.build-ffi-flow]
+condition = { files_modified = { input = ["**/Cargo.toml", "**/src/**/*.rs"], output = ["./target/**/*${LIB}*"] }, platforms = ["linux"]}
+dependencies = [ "build", "copy-lib" ]
+
+[tasks.build]
+condition = { files_modified = { input = ["**/Cargo.toml", "**/src/**/*.rs"], output = ["./target/**/*${LIB}*"] } }
+private = true
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.compile-java]
+condition = { files_modified = { input = ["**/Cargo.toml", "**/src/**/*.rs"], output = ["./target/**/*${LIB}*"] } }
+private = true
+command = "javac"
+args = ["Simulate.java"]
+
+[tasks.copy-lib]
+condition = { files_modified = { input = ["./target/release/lib${LIB}_py.so"], output = ["${LIB}_py.so"] }, platforms = ["linux"] }
+private = true
+command = "cp"
+args = [ "./target/release/lib${LIB}_py.so", "./${LIB}_py.so" ]
+
+[tasks.clean-ffi-flow]
+condition = { platforms = ["linux"] }
+dependencies = [ "clean", "clean-lib", "clean-java" ]
+
+[tasks.clean]
+command = "cargo"
+args = [ "clean" ]
+
+[tasks.clean-lib]
+condition = { platforms = ["linux"] }
+command = "rm"
+args = [ "./${LIB}_py.so" ]
+
+[tasks.clean-java]
+condition = { platforms = ["linux"] }
+command = "rm"
+args = [ "./*.class" ]
+
+[tasks.run-java]
+dependencies = [ "build", "compile-java" ]
+command = "${JAVA}"
+args = [
+	"-Djava.library.path=./target/release", "Simulate", "${@}"
+]
+
+[tasks.run-python]
+dependencies = [ "build", "copy-lib" ]
+command = "${PYTHON}"
+args = ["simulate.py", "${@}"]
+
+[tasks.run-rust]
+dependencies = ["build"]
+command = "./target/release/coin_flip_rs"
+args = ["${@}"]
