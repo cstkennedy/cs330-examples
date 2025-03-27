@@ -1,5 +1,5 @@
 import pytest
-from hamcrest import *
+from hamcrest import assert_that, close_to, equal_to, is_, is_not, same_instance
 
 from renovation.room import FlooringBuilder, RoomBuilder
 

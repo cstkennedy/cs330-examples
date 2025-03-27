@@ -1,4 +1,4 @@
-from hamcrest import *
+from hamcrest import assert_that, close_to, contains_exactly, equal_to, is_
 
 import update_room
 from renovation.house import HouseBuilder
@@ -39,7 +39,7 @@ def test_build_house():
         ),
     ]
 
-    actual_house = update_room.build_house()
+    actual_house = update_room.build_house(update_room.ROOM_DATA)
 
     assert_that(actual_house.name, is_(equal_to("House")))
     assert_that(actual_house, contains_exactly(*expected_rooms))

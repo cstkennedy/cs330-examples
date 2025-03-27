@@ -19,7 +19,7 @@ def main():
     """
 
     # Construct the house within the build function
-    house = build_house()
+    house = build_house(ROOM_DATA)
     print(house)
 
     # Upgrade the flooring in a second duplicate house
@@ -45,50 +45,77 @@ def main():
     print(f"Max  : {max(costs):.2f}")
 
 
-def build_house():
+def parse_room(line: str) -> Room:
     """
-    Build our example house
+    Parse a single room line in the form...
+
+    name length width unit_cost flooring_name
+
+    Raises:
+        ValueError if one or more tokens are invalid
+
+        IndexError if at least one token (e.g., name or length) is missing
     """
 
-    # Read rooms into a list
+    name, the_rest = line.strip().split(";")
+    tokens = the_rest.split()
+
+    # Grab length and width first
+    length, width = [float(val) for val in tokens[0:2]]
+
+    # The flooring name may have a space in it
+    flr_type = " ".join(tokens[3:])
+    flr_cost = float(tokens[2])
+
+    # fmt: off
+    return (
+        RoomBuilder()
+        .with_name(name)
+        .with_dimensions(length, width)
+        .with_flooring(
+            FlooringBuilder()
+            .with_name(flr_type)
+            .with_cost(flr_cost)
+            .build()
+        )
+        .build()
+    )
+    # fmt: on
+
+
+def build_house(room_data: str) -> House:
+    """
+    Build our example house
+
+    Raises:
+        InvariantError if there is not at least one valid room line
+
+        ValueError if one or more tokens are invalid (e.g, cannot be parsed)
+
+        IndexError if at least one token (e.g., name or lenght) is missing
+    """
+
     rooms = []
-    for line in ROOM_DATA.splitlines():
+    for line in room_data.splitlines():
         # Skip blank lines
         if not line:
             continue
 
-        name, the_rest = line.strip().split(";")
-        the_rest = the_rest.split()
+        rooms.append(parse_room(line))
 
-        # Grab length and width first
-        length, width = [float(val) for val in the_rest[0:2]]
-
-        # The flooring name may have a space in it
-        flr_type = " ".join(the_rest[3:])
-        flr_cost = float(the_rest[2])
-
-        # fmt: off
-        rooms.append(
-            RoomBuilder()
-            .with_name(name)
-            .with_dimensions(length, width)
-            .with_flooring(
-                FlooringBuilder()
-                .with_name(flr_type)
-                .with_cost(flr_cost)
-                .build()
-            )
-            .build()
-        )
-        # fmt: on
-
-    # Build a house using all the read in rooms
-    return HouseBuilder().with_rooms(rooms).build()
+    # fmt: off
+    return (
+        HouseBuilder()
+        .with_rooms(rooms)
+        .build()
+    )
+    # fmt: on
 
 
 def upgrade_flooring(original: House) -> House:
     """
-    Take a room and change the flooring
+    Take an existing house and create a pseudo-duplicate by copying each room
+    and changing each copy's flooring.
 
     Args:
         original: House to change

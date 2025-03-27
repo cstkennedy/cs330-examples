@@ -127,6 +127,7 @@ class HouseBuilder:
             InvariantError if there has not been at least one room provided
             through either ``with_room`` or ``with_rooms``
         """
+
         if not self.the_rooms:
             raise InvariantError("A House must have at least one room.")
 
