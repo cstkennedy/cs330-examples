@@ -2,7 +2,7 @@ from hamcrest import *
 
 import update_room
 from renovation.house import HouseBuilder
-from renovation.room import RoomBuilder
+from renovation.room import FlooringBuilder, RoomBuilder
 
 
 def test_build_house():
@@ -11,21 +11,30 @@ def test_build_house():
             RoomBuilder()
             .with_name("Laundry Room")
             .with_dimensions(8, 4)
-            .with_flooring("Laminate", 1.95)
+            .with_flooring(
+                FlooringBuilder().with_name("Laminate").with_cost(1.95).build()
+            )
             .build()
         ),
         (
             RoomBuilder()
             .with_name("Kitchen")
             .with_dimensions(20, 12)
-            .with_flooring("Tile", 3.87)
+            .with_flooring(
+                FlooringBuilder().with_name("Tile").with_cost(3.87).build()
+            )
             .build()
         ),
         (
             RoomBuilder()
             .with_name("Storage Room")
             .with_dimensions(16, 16)
-            .with_flooring("Birch Wood", 4.39)
+            .with_flooring(
+                FlooringBuilder()
+                .with_name("Birch Wood")
+                .with_cost(4.39)
+                .build()
+            )
             .build()
         ),
     ]
@@ -46,21 +55,36 @@ def test_upgrade_flooring():
                     RoomBuilder()
                     .with_name("Laundry Room")
                     .with_dimensions(8, 4)
-                    .with_flooring("Laminate", 1.95)
+                    .with_flooring(
+                        FlooringBuilder()
+                        .with_name("Laminate")
+                        .with_cost(1.95)
+                        .build()
+                    )
                     .build()
                 ),
                 (
                     RoomBuilder()
                     .with_name("Kitchen")
                     .with_dimensions(20, 12)
-                    .with_flooring("Tile", 3.87)
+                    .with_flooring(
+                        FlooringBuilder()
+                        .with_name("Tile")
+                        .with_cost(3.87)
+                        .build()
+                    )
                     .build()
                 ),
                 (
                     RoomBuilder()
                     .with_name("Storage Room")
                     .with_dimensions(16, 16)
-                    .with_flooring("Birch Wood", 4.39)
+                    .with_flooring(
+                        FlooringBuilder()
+                        .with_name("Birch Wood")
+                        .with_cost(4.39)
+                        .build()
+                    )
                     .build()
                 ),
             ]
@@ -77,21 +101,36 @@ def test_upgrade_flooring():
                     RoomBuilder()
                     .with_name("Laundry Room")
                     .with_dimensions(8, 4)
-                    .with_flooring("Stone Bricks", 12.97)
+                    .with_flooring(
+                        FlooringBuilder()
+                        .with_name("Stone Bricks")
+                        .with_cost(12.97)
+                        .build()
+                    )
                     .build()
                 ),
                 (
                     RoomBuilder()
                     .with_name("Kitchen")
                     .with_dimensions(20, 12)
-                    .with_flooring("Stone Bricks", 12.97)
+                    .with_flooring(
+                        FlooringBuilder()
+                        .with_name("Stone Bricks")
+                        .with_cost(12.97)
+                        .build()
+                    )
                     .build()
                 ),
                 (
                     RoomBuilder()
                     .with_name("Storage Room")
                     .with_dimensions(16, 16)
-                    .with_flooring("Stone Bricks", 12.97)
+                    .with_flooring(
+                        FlooringBuilder()
+                        .with_name("Stone Bricks")
+                        .with_cost(12.97)
+                        .build()
+                    )
                     .build()
                 ),
             ]
@@ -105,14 +144,12 @@ def test_upgrade_flooring():
 
 
 def test_discount_flooring():
-    # fmt: off
     room = (
         RoomBuilder()
         .with_name("Generic Name")
         .with_dimensions(1, 2)
-        .with_flooring("Tile", 1)
+        .with_flooring(FlooringBuilder().with_name("Tile").with_cost(1).build())
         .build()
     )
-    # fmt: on
 
     assert_that(update_room.discount_flooring(room), is_(close_to(1.8, 1e-2)))

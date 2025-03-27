@@ -1,10 +1,16 @@
-class NotSetValueError(ValueError):
+class BuildError(ValueError):
     """
-    Used when a ValueError is results from when None is encountered for a
-    required value
+    Used as the base for any exception that occurs within a builder
     """
 
-class BuildValueError(ValueError):
-    """Used when a ValueError is generated in a builder's build method"""
+
+class NotSetError(BuildError):
+    """
+    Used when a required value is expected, but `None` is encountered
+    """
 
 
+class InvariantError(BuildError):
+    """
+    Used when a invariant is violated
+    """

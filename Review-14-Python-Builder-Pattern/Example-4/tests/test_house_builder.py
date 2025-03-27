@@ -2,7 +2,7 @@ import pytest
 from hamcrest import *
 
 from renovation.house import HouseBuilder
-from renovation.room import RoomBuilder
+from renovation.room import FlooringBuilder, RoomBuilder
 
 
 @pytest.fixture
@@ -12,21 +12,30 @@ def three_rooms():
             RoomBuilder()
             .with_name("Laundry Room")
             .with_dimensions(8, 4)
-            .with_flooring("Laminate", 1.95)
+            .with_flooring(
+                FlooringBuilder().with_name("Laminate").with_cost(1.95).build()
+            )
             .build()
         ),
         (
             RoomBuilder()
             .with_name("Kitchen")
             .with_dimensions(20, 12)
-            .with_flooring("Tile", 3.87)
+            .with_flooring(
+                FlooringBuilder().with_name("Tile").with_cost(3.87).build()
+            )
             .build()
         ),
         (
             RoomBuilder()
             .with_name("Storage Room")
             .with_dimensions(16, 16)
-            .with_flooring("Birch Wood", 4.39)
+            .with_flooring(
+                FlooringBuilder()
+                .with_name("Birch Wood")
+                .with_cost(4.39)
+                .build()
+            )
             .build()
         ),
     ]

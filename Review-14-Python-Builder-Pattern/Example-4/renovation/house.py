@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Iterable, Iterator, List, Optional, Self
+from itertools import chain
+from typing import Iterable, Iterator, Self
 
-from .error import BuildValueError
+from .error import InvariantError
 from .room import Room
-
 
 DEFAULT_NAME = "House"
 
@@ -13,24 +13,18 @@ DEFAULT_NAME = "House"
 class House:
     def __init__(self, *, name: str, rooms: list[Room]) -> None:
         """
-        This is the Default constructor. Start with the name set to "House" and
-        an empty set of rooms (i.e., zero rooms).
+        Start with the name set to "House" and an empty collection of rooms
+        (i.e., zero rooms).
         """
 
         self.__name: str = name
         self.__rooms: list[Room] = rooms
 
     @property
-    def name(self):
-        """
-        Get the name using a property.
-
-        @property must come before @...setter...
-        """
-
+    def name(self) -> str:
         return self.__name
 
-    def __len__(self):
+    def __len__(self) -> int:
         """
         Return the number of rooms in this House.
         """
@@ -38,47 +32,46 @@ class House:
         return len(self.__rooms)
 
     def flooring_cost_metrics(self) -> tuple[float, float]:
-        #  total = sum(map(lambda room: room.flooring_cost(), self))
         total = sum(room.flooring_cost() for room in self)
         avg = total / len(self)
 
         return total, avg
 
     def __iter__(self) -> Iterator[Room]:
-        """
-        Wrapper around `list.__iter__()`.
-        """
-
         return iter(self.__rooms)
 
     def __str__(self) -> str:
         """
-        This is the equivalent of overloading:
-          - `operator<<` in C++
-          - `toString` in Java
-          - `Display::fmt` in Rust
+        This is the equivalent of...
+          - overloading ``operator<<`` in C++
+          - overriding ``toString`` in Java
+          - implementing the ``Display`` trait in Rust
         """
 
         total, avg = self.flooring_cost_metrics()
 
-        # TODO: replace '+" with '"\n".join(...)'
-        return (
-            f"--------{self.name:}--------\n"
-            + "\n".join(str(room) for room in self)
-            + "------------------------------\n"
-            + f"Total Cost   : $ {total:.2f}\n"
-            + f"Avg Room Cost: $ {avg:.2f}\n"
+        return "\n".join(
+            chain(
+                (f"--------{self.name:}--------\n",),
+                (f"{room}\n" for room in self),
+                (
+                    "------------------------------",
+                    f"Total Cost   : $ {total:.2f}",
+                    f"Avg Room Cost: $ {avg:.2f}",
+                ),
+            )
         )
 
     def __eq__(self, rhs) -> bool:
         """
         This is the equivalent of:
-          - overloading `operator==` in C++
-          - overriding `equals` in Java
-          - implementing or deriving the `PartialEq` trait in Rust
+          - overloading ``operator==`` in C++
+          - overriding ``equals`` in Java
+          - implementing or deriving the ``PartialEq`` trait in Rust
         """
 
-        # TODO: Add instanceof check
+        if not isinstance(rhs, House):
+            return False
 
         if self.name != rhs.name:
             return False
@@ -92,6 +85,11 @@ class House:
 
 @dataclass
 class HouseBuilder:
+    """
+    Used to construct a house object. Setting a name is optional. At least one
+    room must be added before invoking ``HouseBuilder.build``
+    """
+
     name: str = DEFAULT_NAME
     the_rooms: list[Room] = field(default_factory=list)
 
@@ -121,7 +119,15 @@ class HouseBuilder:
         return self
 
     def build(self) -> House:
+        """
+        Construct and return a house.
+
+
+        Raises:
+            InvariantError if there has not been at least one room provided
+            through either ``with_room`` or ``with_rooms``
+        """
         if not self.the_rooms:
-            raise BuildValueError("A House must have at least one room.")
+            raise InvariantError("A House must have at least one room.")
 
         return House(name=self.name, rooms=self.the_rooms)

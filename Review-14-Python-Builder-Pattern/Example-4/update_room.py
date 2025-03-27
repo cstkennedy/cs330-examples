@@ -1,5 +1,5 @@
 from renovation.house import House, HouseBuilder
-from renovation.room import Room, RoomBuilder
+from renovation.room import FlooringBuilder, Room, RoomBuilder
 
 ROOM_DATA = """
 Laundry Room; 8 4 1.95 Laminate
@@ -30,7 +30,9 @@ def main():
     print()
 
     print(house)
+    print()
     print(duplicate_house)
+    print()
 
     # Get all the flooring costs with a 10% discount
     costs = [discount_flooring(room) for room in duplicate_house]
@@ -65,13 +67,20 @@ def build_house():
         flr_type = " ".join(the_rest[3:])
         flr_cost = float(the_rest[2])
 
+        # fmt: off
         rooms.append(
             RoomBuilder()
             .with_name(name)
             .with_dimensions(length, width)
-            .with_flooring(flr_type, flr_cost)
+            .with_flooring(
+                FlooringBuilder()
+                .with_name(flr_type)
+                .with_cost(flr_cost)
+                .build()
+            )
             .build()
         )
+        # fmt: on
 
     # Build a house using all the read in rooms
     return HouseBuilder().with_rooms(rooms).build()
@@ -89,17 +98,24 @@ def upgrade_flooring(original: House) -> House:
     """
 
     return (
+        # fmt: off
         HouseBuilder()
         .with_name("After Stone Bricks")
         .with_rooms(
             (
                 RoomBuilder.from_template(room)
-                .substitute_flooring("Stone Bricks", 12.97)
+                .substitute_flooring(
+                    FlooringBuilder()
+                    .with_name("Stone Bricks")
+                    .with_cost(12.97)
+                    .build()
+                )
                 .build()
                 for room in original
             )
         )
         .build()
+        # fmt: on
     )
 
 

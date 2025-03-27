@@ -1,7 +1,7 @@
 import pytest
 from hamcrest import *
 
-from renovation.room import RoomBuilder
+from renovation.room import FlooringBuilder, RoomBuilder
 
 
 def test_name_not_set():
@@ -10,7 +10,7 @@ def test_name_not_set():
         _ = (
             RoomBuilder()
             .with_dimensions(1, 1)
-            .with_flooring("Tile", 1.0)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(1.0).build())
             .build()
         )
         # fmt: on
@@ -24,7 +24,7 @@ def test_name_too_short(some_name):
             RoomBuilder()
             .with_name(some_name)
             .with_dimensions(1, 1)
-            .with_flooring("Tile", 1.0)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(1.0).build())
             .build()
         )
         # fmt: on
@@ -50,7 +50,7 @@ def test_flooring_type_too_short(some_name):
             RoomBuilder()
             .with_name("Generic Room")
             .with_dimensions(1, 1)
-            .with_flooring(some_name, 1.0)
+            .with_flooring(FlooringBuilder().with_name(some_name).with_cost(1.0).build())
             .build()
         )
         # fmt: on
@@ -66,7 +66,7 @@ def test_length_not_set():
         _ = (
             RoomBuilder()
             .with_name("Generic Name")
-            .with_flooring("Tile", 1.0)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(1.0).build())
             .build()
         )
         # fmt: on
@@ -83,7 +83,7 @@ def test_flooring_cost_is_zero():
             RoomBuilder()
             .with_name("Generic Name")
             .with_dimensions(1, 1)
-            .with_flooring("Tile", 0)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(0).build())
             .build()
         )
         # fmt: on
@@ -96,7 +96,7 @@ def test_flooring_cost_is_negative():
             RoomBuilder()
             .with_name("Generic Name")
             .with_dimensions(1, 1)
-            .with_flooring("Tile", -1)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(-1).build())
             .build()
         )
         # fmt: on
@@ -109,7 +109,7 @@ def test_length_is_zero():
             RoomBuilder()
             .with_name("Generic Name")
             .with_dimensions(0, 1)
-            .with_flooring("Tile", -1)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(-1).build())
             .build()
         )
         # fmt: on
@@ -122,7 +122,7 @@ def test_length_is_negative():
             RoomBuilder()
             .with_name("Generic Name")
             .with_dimensions(-1, 1)
-            .with_flooring("Tile", -1)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(-1).build())
             .build()
         )
         # fmt: on
@@ -135,7 +135,7 @@ def test_width_is_zero():
             RoomBuilder()
             .with_name("Generic Name")
             .with_dimensions(1, 0)
-            .with_flooring("Tile", -1)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(-1).build())
             .build()
         )
         # fmt: on
@@ -148,7 +148,7 @@ def test_width_is_negative():
             RoomBuilder()
             .with_name("Generic Name")
             .with_dimensions(1, -1)
-            .with_flooring("Tile", -1)
+            .with_flooring(FlooringBuilder().with_name("Tile").with_cost(-1).build())
             .build()
         )
         # fmt: on
@@ -159,13 +159,13 @@ def test_build_success():
         RoomBuilder()
         .with_name("Generic Name")
         .with_dimensions(1, 2)
-        .with_flooring("Tile", 1)
+        .with_flooring(FlooringBuilder().with_name("Tile").with_cost(1).build())
         .build()
     )
 
     assert_that(room.name, is_(equal_to("Generic Name")))
-    assert_that(room.dimensions.length, is_(close_to(1, 1e-8)))
-    assert_that(room.dimensions.width, is_(close_to(2, 1e-8)))
+    assert_that(room.length, is_(close_to(1, 1e-8)))
+    assert_that(room.width, is_(close_to(2, 1e-8)))
     assert_that(room.flooring.type_name, is_(equal_to("Tile")))
     assert_that(room.flooring.unit_cost, is_(close_to(1, 1e-2)))
 
@@ -175,7 +175,7 @@ def test_from_template():
         RoomBuilder()
         .with_name("Generic Name")
         .with_dimensions(1, 2)
-        .with_flooring("Tile", 1)
+        .with_flooring(FlooringBuilder().with_name("Tile").with_cost(1).build())
         .build()
     )
 
@@ -190,14 +190,16 @@ def test_substitute_flooring():
         RoomBuilder()
         .with_name("Generic Name")
         .with_dimensions(1, 2)
-        .with_flooring("Tile", 1)
+        .with_flooring(FlooringBuilder().with_name("Tile").with_cost(1).build())
         .build()
     )
 
     duplicate_room = (
         RoomBuilder()
         .from_template(original_room)
-        .substitute_flooring("Oak Planks", 9.97)
+        .substitute_flooring(
+            FlooringBuilder().with_name("Oak Planks").with_cost(9.97).build()
+        )
         .build()
     )
 
@@ -205,7 +207,7 @@ def test_substitute_flooring():
     assert_that(duplicate_room, is_not(equal_to(original_room)))
 
     assert_that(duplicate_room.name, is_(equal_to("Generic Name")))
-    assert_that(duplicate_room.dimensions.length, is_(close_to(1, 1e-8)))
-    assert_that(duplicate_room.dimensions.width, is_(close_to(2, 1e-8)))
+    assert_that(duplicate_room.length, is_(close_to(1, 1e-8)))
+    assert_that(duplicate_room.width, is_(close_to(2, 1e-8)))
     assert_that(duplicate_room.flooring.type_name, is_(equal_to("Oak Planks")))
     assert_that(duplicate_room.flooring.unit_cost, is_(close_to(9.97, 1e-2)))
