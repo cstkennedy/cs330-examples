@@ -19,10 +19,10 @@ def main() -> None:
             moves=[5, 1, 3, 7, 9, 2, 4, 6, 8]
         )
         .build()
+        .play_match()
     )
     # fmt: on
 
-    game.play_match()
     print(game)
 
 

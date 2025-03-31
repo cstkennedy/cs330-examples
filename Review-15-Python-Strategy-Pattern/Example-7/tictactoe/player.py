@@ -1,8 +1,43 @@
 import copy
 from dataclasses import dataclass, field
+from typing import ClassVar, Protocol
 
 from .board import RenderStrategy
-from .strategy import Strategy
+
+
+class MoveStrategy(Protocol):
+    def next_move(self) -> int:
+        """
+        Retrieve the next move.
+        """
+
+
+@dataclass
+class KeyboardStrategy:
+    PROMPT_MSG: ClassVar[str] = "Enter your desired move (1-9): "
+
+    _name: str = ""
+
+    def next_move(self) -> int:
+        print()
+        choice = int(input(f"{self._name}, {self.PROMPT_MSG}"))
+        print()
+
+        return choice
+
+
+class PredefinedMoves:
+    def __init__(self, *, moves: list[int]) -> None:
+        self.my_moves = moves
+        self.__move_idx = 0
+
+    def next_move(self) -> int:
+        my_next_move = self.my_moves[self.__move_idx]
+
+        self.__move_idx += 1
+
+        return my_next_move
+
 
 DEFAULT_NAME: str = "I. C. Generic"
 
@@ -17,7 +52,7 @@ class Player:
     """
 
     name: str = field(default=DEFAULT_NAME, compare=True)
-    strategy: Strategy = field(default=None, compare=False)  # type: ignore
+    strategy: MoveStrategy = field(default=None, compare=False)  # type: ignore
     humanity: bool = field(default=False, compare=False)
     preferred_renderer: RenderStrategy = field(compare=False)
 

@@ -4,6 +4,7 @@ from hamcrest import assert_that, equal_to, is_, is_not, none
 from tictactoe import Board, Game, GameState, GameStateError, Player
 from tictactoe.board import NullRender, RenderBoardToScreen
 from tictactoe.builders import GameBuilder, PlayerBuilder
+from tictactoe.game import TurnResult
 
 
 def test_constructor():
@@ -15,9 +16,6 @@ def test_constructor():
     assert_that(a_game.get_player2(), equal_to(a_cylon))
 
     assert_that(a_game.is_over(), is_(False))
-
-    assert_that(a_game.get_winner(), is_(none()))
-    assert_that(a_game.get_loser(), is_(none()))
 
     # Can not test without Board.equals method
     empty_board = Board()
@@ -51,20 +49,13 @@ def test_player_turn():
         .build(),
     )
 
-    board = game.get_board()
+    turn_result = game._player_turn(game.get_player1(), "X")
+    assert_that(game.get_board().get_cell(5), is_(equal_to("X")))
+    assert_that(turn_result, is_(equal_to(TurnResult.NOT_OVER_YET)))
 
-    game.player_turn(game.get_player1(), "X")
-
-    assert_that(game.current_state(), is_(equal_to(GameState.IN_PROGRESS)))
-    assert_that(board.get_cell(5), is_(equal_to("X")))
-
-    game.player_turn(game.get_player2(), "O")
-
-    assert_that(game.current_state(), is_(equal_to(GameState.IN_PROGRESS)))
-    assert_that(board.get_cell(1), is_(equal_to("O")))
-
-    assert_that(game.is_over(), is_(False))
-    assert_that(game.is_not_over(), is_(True))
+    turn_result = game._player_turn(game.get_player2(), "O")
+    assert_that(game.get_board().get_cell(1), is_(equal_to("O")))
+    assert_that(turn_result, is_(equal_to(TurnResult.NOT_OVER_YET)))
 
 
 def test_play_match_to_stalemate():
@@ -73,12 +64,8 @@ def test_play_match_to_stalemate():
         .add_player(name="Player 1", strategy="SetMoves", moves=[5, 3, 4, 9, 8])
         .add_player(name="Player 2", strategy="SetMoves", moves=[1, 7, 6, 2])
         .build()
+        .play_match()
     )
-
-    game.play_match()
-
-    assert_that(game.get_player1().name, is_(equal_to("Player 1")))
-    assert_that(game.get_player2().name, is_(equal_to("Player 2")))
 
     assert_that(game.is_over(), is_(True))
     assert_that(game.is_not_over(), is_(False))
@@ -94,16 +81,16 @@ def test_play_match_to_stalemate():
     expected_board.set_cell(2, "O")
     expected_board.set_cell(8, "X")
 
-    assert_that(game.get_board(), equal_to(expected_board))
+    assert_that(game.board, equal_to(expected_board))
 
-    assert_that(game.get_winner(), is_(none()))
-    assert_that(game.get_loser(), is_(none()))
+    assert_that(game.winner, is_(none()))
+    assert_that(game.loser, is_(none()))
 
     assert_that(game.ended_with_win(), is_(False))
     assert_that(game.ended_with_loss(), is_(False))
     assert_that(game.ended_with_stalemate(), is_(True))
 
-    assert_that(game.current_state(), is_(GameState.OVER_WITH_STALEMATE))
+    assert_that(game.state, is_(GameState.OVER_WITH_STALEMATE))
 
 
 def test_play_match_to_win_player_1():
@@ -112,12 +99,8 @@ def test_play_match_to_win_player_1():
         .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 2])
         .add_player(name="Player 2", strategy="SetMoves", moves=[4, 6, 5])
         .build()
+        .play_match()
     )
-
-    game.play_match()
-
-    assert_that(game.get_player1().name, is_(equal_to("Player 1")))
-    assert_that(game.get_player2().name, is_(equal_to("Player 2")))
 
     assert_that(game.is_over(), is_(True))
     assert_that(game.is_not_over(), is_(False))
@@ -130,19 +113,19 @@ def test_play_match_to_win_player_1():
     #  expected_board.set_cell(5, "O")
     expected_board.set_cell(6, "O")
 
-    assert_that(game.get_board(), equal_to(expected_board))
+    assert_that(game.board, equal_to(expected_board))
 
-    assert_that(game.get_winner(), is_not(none()))
-    assert_that(game.get_loser(), is_not(none()))
+    assert_that(game.winner, is_not(none()))
+    assert_that(game.loser, is_not(none()))
 
-    assert_that(game.get_winner(), is_(equal_to(game.get_player1())))
-    assert_that(game.get_loser(), is_(equal_to(game.get_player2())))
+    assert_that(game.winner.name, is_(equal_to("Player 1")))
+    assert_that(game.loser.name, is_(equal_to("Player 2")))
 
     assert_that(game.ended_with_win(), is_(True))
     assert_that(game.ended_with_loss(), is_(True))
     assert_that(game.ended_with_stalemate(), is_(False))
 
-    assert_that(game.current_state(), is_(GameState.OVER_WITH_WIN))
+    assert_that(game.state, is_(GameState.OVER_WITH_WIN))
 
 
 def test_play_match_to_win_player_2():
@@ -151,12 +134,8 @@ def test_play_match_to_win_player_2():
         .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 7])
         .add_player(name="Player 2", strategy="SetMoves", moves=[5, 2, 8])
         .build()
+        .play_match()
     )
-
-    game.play_match()
-
-    assert_that(game.get_player1().name, is_(equal_to("Player 1")))
-    assert_that(game.get_player2().name, is_(equal_to("Player 2")))
 
     assert_that(game.is_over(), is_(True))
     assert_that(game.is_not_over(), is_(False))
@@ -169,16 +148,16 @@ def test_play_match_to_win_player_2():
     expected_board.set_cell(5, "O")
     expected_board.set_cell(8, "O")
 
-    assert_that(game.get_board(), equal_to(expected_board))
+    assert_that(game.board, equal_to(expected_board))
 
-    assert_that(game.get_winner(), is_not(none()))
-    assert_that(game.get_loser(), is_not(none()))
+    assert_that(game.winner, is_not(none()))
+    assert_that(game.loser, is_not(none()))
 
-    assert_that(game.get_winner(), is_(equal_to(game.get_player2())))
-    assert_that(game.get_loser(), is_(equal_to(game.get_player1())))
+    assert_that(game.winner.name, is_(equal_to("Player 2")))
+    assert_that(game.loser.name, is_(equal_to("Player 1")))
 
     assert_that(game.ended_with_win(), is_(True))
     assert_that(game.ended_with_loss(), is_(True))
     assert_that(game.ended_with_stalemate(), is_(False))
 
-    assert_that(game.current_state(), is_(GameState.OVER_WITH_WIN))
+    assert_that(game.state, is_(GameState.OVER_WITH_WIN))
