@@ -3,10 +3,9 @@ from typing import Any, Callable, Optional, Self
 
 from .board import NullRender, RenderBoardToScreen
 from .game import Game
-from .player import Player
-from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
+from .player import MoveStrategy, Player, KeyboardStrategy, PredefinedMoves
 
-StrategyCreationFunction = Callable[..., Strategy]
+StrategyCreationFunction = Callable[..., MoveStrategy]
 
 
 class StrategyFactory:
@@ -27,7 +26,7 @@ class StrategyFactory:
         cls.__strategy_repo[type_of_strategy] = a_strategy  # type: ignore
 
     @classmethod
-    def create(cls, type_of_strategy: str, /, **kwargs: Any) -> Strategy:
+    def create(cls, type_of_strategy: str, /, **kwargs: Any) -> MoveStrategy:
         if type_of_strategy not in cls.__strategy_repo:
             raise ValueError(f'"{type_of_strategy}" is not a known strategy')
 
@@ -44,7 +43,7 @@ class StrategyFactory:
 @dataclass
 class PlayerBuilder:
     name: Optional[str] = None
-    strategy: Optional[Strategy] = None
+    strategy: Optional[MoveStrategy] = None
     is_human = False
 
     @staticmethod

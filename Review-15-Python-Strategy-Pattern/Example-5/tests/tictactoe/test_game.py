@@ -2,7 +2,7 @@ import pytest
 from hamcrest import assert_that, equal_to, is_, is_not, none
 
 from tictactoe import Board, Game, GameState, GameStateError, Player
-from tictactoe.board import NullRender, RenderBoardToScreen
+from tictactoe.board import NullRender
 from tictactoe.builders import GameBuilder, PlayerBuilder
 from tictactoe.game import TurnResult
 
