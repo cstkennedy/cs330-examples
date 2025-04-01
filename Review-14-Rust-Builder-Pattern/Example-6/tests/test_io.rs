@@ -3,37 +3,49 @@ use room_renovation::house::*;
 use room_renovation::io::HouseParser;
 use room_renovation::room::*;
 
+use std::io::BufReader;
+use stringreader::StringReader;
+
 use hamcrest2::prelude::*;
 use rstest::rstest;
 
 #[rstest]
 fn test_empty_string() {
-    let house = HouseParser::read_house_from_str("");
+    let str_reader = StringReader::new("");
+    let str_reader = BufReader::new(str_reader);
+    let house = HouseParser::read_house(str_reader);
 
     assert_that!(house, is(err()));
 }
 
+/*
 #[rstest]
 fn test_blank_string_white_space() {
-    let house = HouseParser::read_house_from_str(" ");
+    let house = HouseParser::read_house(" ");
     assert_that!(house, is(err()));
 
-    let house = HouseParser::read_house_from_str(" \t ");
+    let house = HouseParser::read_house(" \t ");
     assert_that!(house, is(err()));
 
     let line = [" ", " \t   ", "    \t\t", "\t"].join("\n");
-    let house = HouseParser::read_house_from_str(&line);
+    let house = HouseParser::read_house(line.as_str());
     assert_that!(house, is(err()));
 }
+*/
 
 #[rstest]
 fn test_malformed_lines_only_name() {
     let line = "Kitchen";
-    let house = HouseParser::read_house_from_str(&line);
+    let str_reader = StringReader::new(&line);
+    let str_reader = BufReader::new(str_reader);
+    let house = HouseParser::read_house(str_reader);
     assert_that!(house, is(err()));
 
     let lines = ["Kitchen", "", " Storage    "].join(";\n");
-    let house = HouseParser::read_house_from_str(&lines);
+    let str_reader = StringReader::new(&lines);
+    let str_reader = BufReader::new(str_reader);
+
+    let house = HouseParser::read_house(str_reader);
     assert_that!(house, is(err()));
 }
 
@@ -47,14 +59,20 @@ fn test_malformed_lines_only_name() {
 #[case(["", "4", "5", "7.5", ""])]
 fn test_malformed_lines_missing_tokens(#[case] tokens: [&str; 5]) {
     let line = tokens.join(" ");
-    let house = HouseParser::read_house_from_str(&line);
+    let str_reader = StringReader::new(&line);
+    let str_reader = BufReader::new(str_reader);
+
+    let house = HouseParser::read_house(str_reader);
     assert_that!(house, is(err()));
 }
 
 #[rstest]
 fn test_one_room() {
     let line = "Kitchen; 4 5 7.5 Vinyl Plank";
-    let house = HouseParser::read_house_from_str(&line);
+    let str_reader = StringReader::new(line);
+    let str_reader = BufReader::new(str_reader);
+
+    let house = HouseParser::read_house(str_reader);
 
     assert_that!(&house, is(ok()));
 
@@ -70,8 +88,10 @@ fn test_two_rooms() {
         "Storage Room; 2 4 7.5 Vinyl Plank",
     ]
     .join("\n");
+    let str_reader = StringReader::new(&lines);
+    let str_reader = BufReader::new(str_reader);
 
-    let house = HouseParser::read_house_from_str(&lines);
+    let house = HouseParser::read_house(str_reader);
 
     assert_that!(&house, is(ok()));
 

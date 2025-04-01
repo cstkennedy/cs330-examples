@@ -1,4 +1,7 @@
 use std::str::FromStr;
+use std::fs::File;
+use std::io::BufRead;
+use std::io::BufReader;
 
 use itertools::Itertools;
 
@@ -84,31 +87,31 @@ impl FromStr for Room {
 pub struct HouseParser;
 
 impl HouseParser {
-    pub fn read_house_from_str(room_data: &str) -> Result<House, HouseError> {
-        /*
-        let parsed_rooms: Vec<Room> = room_data
-            .lines()
-            .filter(|line| !line.is_empty())
-            .filter(|line| line.contains(";"))
-            // .flat_map(|line| Room::from_str(line))
-            .flat_map(Room::from_str)
-            // .flat_map(|line| line.parse::<Room>())
-            .collect();
+    /// Open a file and read in data based on a supplied closure
+    ///
+    /// # Arguments
+    ///
+    ///   * `filename` - file from which to read
+    ///   * `parse_fn` - parsing function to use
+    pub fn read_from_file<T, F>(filename: &str, parse_fn: F) -> Result<T, ParseError>
+    where
+        F: Fn(BufReader<File>) -> T,
+    {
+        let file = File::open(filename)?;
+        let ins = BufReader::new(file);
+        let all_things = parse_fn(ins);
 
-        match House::builder().with_rooms(parsed_rooms) {
-            Ok(builder) => {
-                let house = builder.build();
-                Some(house)
-            }
-            Err(_) => None,
-        }
-        */
+        Ok(all_things)
+    }
+
+    pub fn read_house(room_data: impl BufRead) -> Result<House, HouseError> {
         let house = House::builder()
             .with_rooms(
                 room_data
                     .lines()
+                    .flatten()
                     .filter(|line| !line.is_empty())
-                    .flat_map(Room::from_str)
+                    .flat_map(|line| Room::from_str(&line))
                     .collect(),
             )?
             .build();

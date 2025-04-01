@@ -12,19 +12,19 @@ use eyre::{self, Result, WrapErr};
 use room_renovation::error::HouseError;
 use room_renovation::prelude::*;
 
-const ROOM_DATA: &str = r#"
-Laundry Room; 8 4 1.95 Laminate
-Kitchen; 20 12 3.87 Tile
-Storage Room; 16 16 4.39 Birch Wood
-"#;
-
 ///
 /// Compute the area of a room and the cost of
 /// flooring for the room
 ///
 #[cfg(not(tarpaulin_include))]
 fn main() -> eyre::Result<()> {
-    let house = HouseParser::read_house_from_str(ROOM_DATA)
+    let argv: Vec<String> = std::env::args().collect();
+
+    if argv.len() < 2 {
+        eyre::bail!("Usage: {} room_filename", argv[0]);
+    }
+
+    let house = HouseParser::read_from_file(&argv[1], |ins| HouseParser::read_house(ins))?
         .wrap_err("Input did not contain at least one valid room line")?;
 
     let duplicate_house = upgrade_flooring(house.iter())

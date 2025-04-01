@@ -1,6 +1,6 @@
 use thiserror::Error;
 
-#[derive(Debug, Error, PartialEq)]
+#[derive(Debug, Error)]
 pub enum ParseError {
     #[error("Missing '{delim}' in '{line}'")]
     MissingDelimiter { delim: String, line: String },
@@ -10,9 +10,12 @@ pub enum ParseError {
 
     #[error("'{0}' is malformed")]
     MalformedLine(String),
+
+    #[error("{0}")]
+    IOError(#[from] std::io::Error),
 }
 
-#[derive(Debug, Error, PartialEq)]
+#[derive(Debug, Error)]
 pub enum RoomError {
     #[error("'length' and 'width' must be > {0}")]
     InvalidDimensions(f64),
@@ -30,20 +33,20 @@ pub enum RoomError {
     ParseError(#[from] ParseError),
 }
 
-#[derive(Debug, Error, PartialEq)]
+#[derive(Debug, Error)]
 pub enum HouseError {
     #[error("A house must have at least 1 room")]
     ZeroRooms,
 }
 
-#[derive(Debug, Error, PartialEq)]
+#[derive(Debug, Error)]
 pub struct ErrorWithState<E: std::error::Error, S> {
     #[source]
     pub the_error: E,
     pub the_state: S,
 }
 
-#[derive(Debug, Error, PartialEq)]
+#[derive(Debug, Error)]
 pub struct BuildErrorWithState<E: std::error::Error, B> {
     #[source]
     pub the_error: E,
