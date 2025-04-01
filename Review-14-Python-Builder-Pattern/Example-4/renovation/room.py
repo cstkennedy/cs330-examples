@@ -29,7 +29,7 @@ class Room:
 
     def flooring_cost(self) -> float:
         """
-        Compute the flooring cost based on `self.area()` and unit cost.
+        Compute the flooring cost based on :meth:`self.area` and unit cost.
         """
 
         return self.area() * self.flooring.unit_cost

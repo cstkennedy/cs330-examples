@@ -1,7 +1,7 @@
 from renovation.house import House, HouseBuilder
 from renovation.room import FlooringBuilder, Room, RoomBuilder
 
-ROOM_DATA = """
+ROOM_DATA: str = """
 Laundry Room; 8 4 1.95 Laminate
 Kitchen; 20 12 3.87 Tile
 Storage Room; 16 16 4.39 Birch Wood
@@ -95,6 +95,7 @@ def build_house(room_data: str) -> House:
         IndexError if at least one token (e.g., name or lenght) is missing
     """
 
+    """
     rooms = []
     for line in room_data.splitlines():
         # Skip blank lines
@@ -102,6 +103,10 @@ def build_house(room_data: str) -> House:
             continue
 
         rooms.append(parse_room(line))
+    """
+
+    #  rooms = [parse_room(line) for line in room_data.splitlines() if line]
+    rooms = (parse_room(line) for line in room_data.splitlines() if line)
 
     # fmt: off
     return (

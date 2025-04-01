@@ -6,7 +6,7 @@ class BuildError(ValueError):
 
 class NotSetError(BuildError):
     """
-    Used when a required value is expected, but `None` is encountered
+    Used when a required value is expected, but ``None`` is encountered
     """
 
 

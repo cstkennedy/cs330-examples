@@ -125,7 +125,7 @@ class HouseBuilder:
 
         Raises:
             InvariantError if there has not been at least one room provided
-            through either ``with_room`` or ``with_rooms``
+            through either :meth:`self.with_room` or :meth:`self.with_rooms`
         """
 
         if not self.the_rooms:
