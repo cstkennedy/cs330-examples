@@ -1,3 +1,9 @@
+[project[
+name = "CS 330 Tic-Tac-Toe",
+version = "1.0",
+description = "Python Tic-Tac-Toe Example",
+authors = {name = "Thomas J. Kennedy", email="tkennedy@cs.odu.edu"}
+
 [tool.ruff]
 line-length = 80
 indent-width = 4
