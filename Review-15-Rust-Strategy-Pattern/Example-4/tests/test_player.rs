@@ -2,10 +2,9 @@
 use hamcrest2::prelude::*;
 use rstest::*;
 
-use tictactoe::player::DEFAULT_NAME;
 use tictactoe::player::Player;
+use tictactoe::player::DEFAULT_NAME;
 use tictactoe::strategy::*;
-
 
 #[fixture]
 fn a_player<'a>() -> Player<'a> {
@@ -20,10 +19,7 @@ pub fn test_is_generic(a_player: Player) {
     let player = a_player;
     assert_that!(Player::is_generic(&player), is(not(true)));
 
-    let player = Player::builder()
-        .human()
-        .with_name(DEFAULT_NAME)
-        .build();
+    let player = Player::builder().human().with_name(DEFAULT_NAME).build();
     assert_that!(Player::is_generic(&player), is(true));
 }
 
@@ -42,17 +38,14 @@ pub fn test_builder_computer(a_player: Player) {
 pub fn test_next_move(a_player: Player) {
     let mut player = a_player;
 
-    assert_that!(player.next_move(), is(equal_to(5 as usize)));
-    assert_that!(player.next_move(), is(equal_to(1 as usize)));
-    assert_that!(player.next_move(), is(equal_to(3 as usize)));
+    assert_that!(player.next_move(), is(equal_to(Ok(5 as usize))));
+    assert_that!(player.next_move(), is(equal_to(Ok(1 as usize))));
+    assert_that!(player.next_move(), is(equal_to(Ok(3 as usize))));
 }
 
 #[rstest]
 pub fn test_builder_human() {
-    let player = Player::builder()
-        .human()
-        .with_name("Tom")
-        .build();
+    let player = Player::builder().human().with_name("Tom").build();
 
     assert_that!(player.get_name(), is(equal_to("Tom")));
     assert_that!(player.is_human(), is(true));
@@ -60,6 +53,3 @@ pub fn test_builder_human() {
 
     assert_that!(Player::is_generic(&player), is(not(true)));
 }
-
-
-

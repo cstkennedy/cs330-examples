@@ -1,7 +1,7 @@
 use crate::board::{Board, VALID_SYMBOLS};
 use crate::strategy::Strategy;
 
-const DEFAULT_NAME: &str = "I. C. Generic";
+pub const DEFAULT_NAME: &str = "I. C. Generic";
 
 #[derive(Debug)]
 pub struct Player<'a> {

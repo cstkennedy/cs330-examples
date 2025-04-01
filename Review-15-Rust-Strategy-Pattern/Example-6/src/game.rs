@@ -18,13 +18,6 @@ pub struct NotReady;
 pub struct InProgress;
 
 #[derive(Debug, PartialEq)]
-pub enum EndState {
-    Win,
-    Stalemate,
-    Forfeit,
-}
-
-#[derive(Debug, PartialEq)]
 enum TurnResult {
     Win,
     Stalemate,
@@ -45,10 +38,7 @@ impl Game<Player1NotSet, Player2NotSet, NotReady> {
         Game::default()
     }
 
-    pub fn add_player(
-        self,
-        player: Player<'_>,
-    ) -> Game<Player<'_>, Player2NotSet, NotReady> {
+    pub fn add_player(self, player: Player<'_>) -> Game<Player<'_>, Player2NotSet, NotReady> {
         Game {
             player_1: player,
             player_2: self.player_2,
@@ -77,8 +67,8 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
         loop {
             match player.next_move() {
                 Ok(selected_move) => {
-                    if Referee::selected_cell_is_empty(selected_move, board) {
-                        let _ = board.set_cell(selected_move, symbol);
+                    if Referee::selected_cell_is_empty(selected_move.into(), board) {
+                        let _ = board.set_cell(selected_move.into(), symbol);
                         break;
                     }
                 }
@@ -112,38 +102,33 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                         println!();
 
                         return if symbol == 'X' {
-                            CompletedGame {
-                                winner: Some(self.player_1),
-                                loser: Some(self.player_2),
-                                end_state: EndState::Win,
+                            CompletedGame::Win {
+                                winner: self.player_1,
+                                loser: self.player_2,
                             }
                         } else {
-                            CompletedGame {
-                                winner: Some(self.player_2),
-                                loser: Some(self.player_1),
-                                end_state: EndState::Win,
+                            CompletedGame::Win {
+                                winner: self.player_2,
+                                loser: self.player_1,
                             }
                         };
                     }
                     TurnResult::Stalemate => {
-                        return CompletedGame {
-                            winner: None,
-                            loser: None,
-                            end_state: EndState::Stalemate,
-                        }
+                        return CompletedGame::Stalemate {
+                            player_1: self.player_1,
+                            player_2: self.player_2,
+                        };
                     }
                     TurnResult::Forfeit => {
                         return if symbol == 'X' {
-                            CompletedGame {
-                                winner: Some(self.player_2),
-                                loser: Some(self.player_1),
-                                end_state: EndState::Forfeit,
+                            CompletedGame::Forfeit {
+                                winner: self.player_2,
+                                loser: self.player_1,
                             }
                         } else {
-                            CompletedGame {
-                                winner: Some(self.player_1),
-                                loser: Some(self.player_2),
-                                end_state: EndState::Forfeit,
+                            CompletedGame::Forfeit {
+                                winner: self.player_1,
+                                loser: self.player_2,
                             }
                         };
                     }
@@ -163,10 +148,19 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
 }
 
 #[derive(Debug)]
-pub struct CompletedGame<'game> {
-    pub winner: Option<Player<'game>>,
-    pub loser: Option<Player<'game>>,
-    pub end_state: EndState,
+pub enum CompletedGame<'game> {
+    Win {
+        winner: Player<'game>,
+        loser: Player<'game>,
+    },
+    Stalemate {
+        player_1: Player<'game>,
+        player_2: Player<'game>,
+    },
+    Forfeit {
+        winner: Player<'game>,
+        loser: Player<'game>,
+    },
 }
 
 impl<'game> CompletedGame<'game> {
@@ -181,29 +175,18 @@ impl<'game> CompletedGame<'game> {
 
 impl<'game> fmt::Display for CompletedGame<'game> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.end_state {
-            EndState::Win => {
-                writeln!(
-                    f,
-                    "Congratulations {}!",
-                    self.winner
-                        .as_ref()
-                        .expect("winner should be set...")
-                        .get_name()
-                )
+        match *self {
+            Self::Win { ref winner, .. } => {
+                writeln!(f, "Congratulations {}!", winner.get_name())
             }
-            EndState::Stalemate => {
+            Self::Stalemate { .. } => {
                 writeln!(f, "Stalemate...")
             }
-            EndState::Forfeit => {
-                writeln!(
-                    f,
-                    "{} forfeited.",
-                    self.loser
-                        .as_ref()
-                        .expect("loser should be set...")
-                        .get_name()
-                )
+            Self::Forfeit {
+                winner: _, // ignore
+                ref loser,
+            } => {
+                writeln!(f, "{} forfeited.", loser.get_name())
             }
         }
     }

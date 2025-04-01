@@ -24,7 +24,7 @@ impl Referee {
             Err(_) => false,
             Ok(symbol) => !VALID_SYMBOLS
                 .iter()
-                .any(|valid_symbol| *valid_symbol == symbol)
+                .any(|valid_symbol| *valid_symbol == symbol),
         }
     }
 }

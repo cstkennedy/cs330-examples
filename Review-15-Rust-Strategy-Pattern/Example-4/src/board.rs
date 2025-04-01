@@ -1,6 +1,8 @@
 use itertools::Itertools;
 use std::fmt;
 
+use crate::error::BoardError;
+
 pub const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
 
 /// This ADT represents the gameboard used in a round
@@ -35,9 +37,9 @@ impl Board {
     /// Returns:
     ///     value stored in the Cell
     ///
-    pub fn get_cell(&self, cell_id: usize) -> Result<char, &'static str> {
+    pub fn get_cell(&self, cell_id: usize) -> Result<char, BoardError> {
         if cell_id <= 0 || cell_id >= 10 {
-            return Err("Cell Index is not between 0 and 10, exclusive");
+            return Err(BoardError::InvalidIndex);
         }
 
         Ok(self.the_board[cell_id - 1])
@@ -49,13 +51,13 @@ impl Board {
     ///     cell_id: numeric id representing the desired cell
     ///     new_value: replacement `CellValue`
     ///
-    pub fn set_cell(&mut self, cell_id: usize, new_value: char) -> Result<(), &'static str> {
+    pub fn set_cell(&mut self, cell_id: usize, new_value: char) -> Result<(), BoardError> {
         if cell_id <= 0 || cell_id >= 10 {
-            return Err("Cell Index is not between 0 and 10, exclusive");
+            return Err(BoardError::InvalidIndex);
         }
 
-        if VALID_SYMBOLS.iter().find(|symbol| *symbol == &new_value) == None {
-            return Err("'new_value' is not 'X' or 'O'");
+        if !VALID_SYMBOLS.iter().any(|symbol| *symbol == new_value) {
+            return Err(BoardError::InvalidSymbol);
         }
 
         self.the_board[cell_id - 1] = new_value;
@@ -93,11 +95,17 @@ impl Board {
     /// Returns:
     ///     True if every cell in the board has either an 'X' or an 'O'
     pub fn is_full(&self) -> bool {
+        // Bug: missing filter - never equal to zero
+        //   found with test_board::test_is_full
+        /*
         self.the_board
             .iter()
             .map(|cell: &char| cell.is_numeric())
             .count()
             == 0
+        */
+
+        !self.the_board.iter().any(|cell: &char| cell.is_numeric())
     }
 }
 

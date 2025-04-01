@@ -48,6 +48,12 @@ impl<'a> Player<'a> {
     }
 }
 
+impl<'a> PartialEq for Player<'a> {
+    fn eq(&self, rhs: &Self) -> bool {
+        self.name == rhs.name
+    }
+}
+
 #[derive(Debug, Default)]
 pub struct NoStrategy;
 
@@ -86,16 +92,22 @@ impl PlayerBuilder<NoName, NoStrategy, NoType> {
         PlayerBuilder {
             name: NoName,
             strategy: NoStrategy,
-            player_type: HumanPlayer::default(),
+            player_type: HumanPlayer,
         }
     }
 
-    pub fn with_name<'a>(self, name: &'a str) -> PlayerBuilder<&'a str, NoStrategy, NoType> {
+    pub fn with_name(self, name: &str) -> PlayerBuilder<&str, NoStrategy, NoType> {
         PlayerBuilder {
-            name: name,
+            name,
             strategy: NoStrategy,
             player_type: NoType,
         }
+    }
+}
+
+impl Default for PlayerBuilder<NoName, NoStrategy, NoType> {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -105,8 +117,8 @@ impl<'a> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
         name: &'a str,
     ) -> PlayerBuilder<&'a str, BoxedStrategy<'a>, HumanPlayer> {
         PlayerBuilder {
-            name: name,
-            strategy: Box::new(KeyboardStrategy::new(&name)),
+            name,
+            strategy: Box::new(KeyboardStrategy::new(name)),
             player_type: self.player_type,
         }
     }

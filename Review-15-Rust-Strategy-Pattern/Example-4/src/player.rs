@@ -1,5 +1,6 @@
-use crate::strategy::Strategy;
+use crate::error::StrategyError;
 use crate::strategy::KeyboardStrategy;
+use crate::strategy::Strategy;
 
 pub const DEFAULT_NAME: &str = "I. C. Generic";
 
@@ -12,7 +13,7 @@ pub struct Player<'a> {
 
 impl<'a> Player<'a> {
     /// Retrieve the next move.
-    pub fn next_move(&mut self) -> usize {
+    pub fn next_move(&mut self) -> Result<usize, StrategyError> {
         self.strategy.next_move()
     }
 
@@ -47,6 +48,11 @@ impl<'a> Player<'a> {
     }
 }
 
+impl<'a> PartialEq for Player<'a> {
+    fn eq(&self, rhs: &Self) -> bool {
+        self.name == rhs.name
+    }
+}
 
 #[derive(Debug, Default)]
 pub struct NoStrategy;
@@ -65,7 +71,6 @@ pub struct NoName;
 #[derive(Debug, Default)]
 pub struct NoType;
 
-
 // TODO: Add proper error handling
 #[derive(Debug)]
 pub struct PlayerBuilder<N, S, T> {
@@ -79,7 +84,7 @@ impl PlayerBuilder<NoName, NoStrategy, NoType> {
         PlayerBuilder {
             name: NoName,
             strategy: NoStrategy,
-            player_type: NoType
+            player_type: NoType,
         }
     }
 
@@ -87,35 +92,47 @@ impl PlayerBuilder<NoName, NoStrategy, NoType> {
         PlayerBuilder {
             name: NoName,
             strategy: NoStrategy,
-            player_type: HumanPlayer::default()
+            player_type: HumanPlayer,
         }
     }
 
-    pub fn with_name<'a>(self, name: &'a str) -> PlayerBuilder<&'a str, NoStrategy, NoType> {
+    pub fn with_name(self, name: &str) -> PlayerBuilder<&str, NoStrategy, NoType> {
         PlayerBuilder {
-            name: name,
+            name,
             strategy: NoStrategy,
-            player_type: NoType
+            player_type: NoType,
         }
     }
 }
 
+impl Default for PlayerBuilder<NoName, NoStrategy, NoType> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl<'a> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
-    pub fn with_name(self, name: &'a str) -> PlayerBuilder<&'a str, BoxedStrategy<'a>, HumanPlayer> {
+    pub fn with_name(
+        self,
+        name: &'a str,
+    ) -> PlayerBuilder<&'a str, BoxedStrategy<'a>, HumanPlayer> {
         PlayerBuilder {
-            name: name,
-            strategy: Box::new(KeyboardStrategy::new(&name)),
-            player_type: self.player_type
+            name,
+            strategy: Box::new(KeyboardStrategy::new(name)),
+            player_type: self.player_type,
         }
     }
 }
 
 impl<'a> PlayerBuilder<&'a str, NoStrategy, NoType> {
-    pub fn with_strategy(self, strategy: impl Strategy + 'a) -> PlayerBuilder<&'a str, BoxedStrategy<'a>, NoType> {
+    pub fn with_strategy(
+        self,
+        strategy: impl Strategy + 'a,
+    ) -> PlayerBuilder<&'a str, BoxedStrategy<'a>, NoType> {
         PlayerBuilder {
             name: self.name,
             strategy: Box::new(strategy),
-            player_type: self.player_type
+            player_type: self.player_type,
         }
     }
 }
@@ -125,7 +142,7 @@ impl<'a> PlayerBuilder<&'a str, BoxedStrategy<'a>, NoType> {
         Player {
             name: self.name,
             strategy: self.strategy,
-            humanity: false
+            humanity: false,
         }
     }
 }
@@ -135,12 +152,10 @@ impl<'a> PlayerBuilder<&'a str, BoxedStrategy<'a>, HumanPlayer> {
         Player {
             name: self.name,
             strategy: self.strategy,
-            humanity: true
+            humanity: true,
         }
     }
-
 }
-
 
 // TODO: implement Debug using
 // <https://doc.rust-lang.org/std/fmt/struct.Formatter.html#method.debug_struct>

@@ -2,14 +2,13 @@
 use hamcrest2::prelude::*;
 use rstest::*;
 
-use tictactoe::prelude::*;
 use tictactoe::game::EndState;
+use tictactoe::prelude::*;
 
 #[rstest]
-#[should_panic]
 fn test_out_of_moves_player_1() {
     #[rustfmt::skip]
-    let _ = Game::new()
+    let game = Game::new()
         .add_player(
             Player::builder()
                 .with_name("Thomas")
@@ -27,13 +26,20 @@ fn test_out_of_moves_player_1() {
                 .build(),
         )
         .play_match();
+
+    assert_that!(&game.winner, is(some()));
+    assert_that!(&game.loser, is(some()));
+
+    assert_that!(game.winner.unwrap().get_name(), is(equal_to("Jay")));
+    assert_that!(game.loser.unwrap().get_name(), is(equal_to("Thomas")));
+
+    assert_that!(game.end_state, is(equal_to(EndState::Forfeit)));
 }
 
 #[rstest]
-#[should_panic]
 fn test_out_of_moves_player_2() {
     #[rustfmt::skip]
-    let _ = Game::new()
+    let game = Game::new()
         .add_player(
             Player::builder()
                 .with_name("Thomas")
@@ -51,6 +57,14 @@ fn test_out_of_moves_player_2() {
                 .build(),
         )
         .play_match();
+
+    assert_that!(&game.winner, is(some()));
+    assert_that!(&game.loser, is(some()));
+
+    assert_that!(game.winner.unwrap().get_name(), is(equal_to("Thomas")));
+    assert_that!(game.loser.unwrap().get_name(), is(equal_to("Jay")));
+
+    assert_that!(game.end_state, is(equal_to(EndState::Forfeit)));
 }
 
 #[rstest]

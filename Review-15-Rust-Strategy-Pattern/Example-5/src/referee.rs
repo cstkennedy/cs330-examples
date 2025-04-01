@@ -22,10 +22,9 @@ impl Referee {
     pub fn selected_cell_is_empty(candidate_move: usize, board: &Board) -> bool {
         match board.get_cell(candidate_move) {
             Err(_) => false,
-            Ok(symbol) => VALID_SYMBOLS
+            Ok(symbol) => !VALID_SYMBOLS
                 .iter()
-                .find(|valid_symbol| *valid_symbol == &symbol)
-                .is_none(),
+                .any(|valid_symbol| *valid_symbol == symbol)
         }
     }
 }

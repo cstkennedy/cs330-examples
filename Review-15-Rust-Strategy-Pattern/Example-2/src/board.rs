@@ -14,11 +14,17 @@ pub struct Board {
     the_board: [char; 9],
 }
 
-impl Board {
-    pub fn new() -> Self {
+impl Default for Board {
+    fn default() -> Self {
         Board {
             the_board: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         }
+    }
+}
+
+impl Board {
+    pub fn new() -> Self {
+        Board::default()
     }
 
     /// Retrieve the value stored in a selected Cell.

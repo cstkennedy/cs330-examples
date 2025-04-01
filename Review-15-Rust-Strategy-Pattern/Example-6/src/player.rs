@@ -1,6 +1,6 @@
 use crate::error::StrategyError;
 use crate::strategy::KeyboardStrategy;
-use crate::strategy::Strategy;
+use crate::strategy::{Move, Strategy};
 
 pub const DEFAULT_NAME: &str = "I. C. Generic";
 
@@ -13,7 +13,7 @@ pub struct Player<'a> {
 
 impl<'a> Player<'a> {
     /// Retrieve the next move.
-    pub fn next_move(&mut self) -> Result<usize, StrategyError> {
+    pub fn next_move(&mut self) -> Result<Move, StrategyError> {
         self.strategy.next_move()
     }
 

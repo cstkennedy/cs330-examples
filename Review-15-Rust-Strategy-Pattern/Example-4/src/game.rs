@@ -1,6 +1,7 @@
 use std::fmt;
 
 use crate::board::Board;
+use crate::error::StrategyError;
 use crate::player::Player;
 use crate::referee::Referee;
 
@@ -16,7 +17,7 @@ pub struct NotReady;
 #[derive(Clone, Debug, Default)]
 pub struct InProgress;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum EndState {
     Win,
     Stalemate,
@@ -27,7 +28,7 @@ pub struct Game<P1, P2, S> {
     player_1: P1,
     player_2: P2,
     board: Board,
-    state: S
+    state: S,
 }
 
 impl Game<Player1NotSet, Player2NotSet, NotReady> {
@@ -35,23 +36,29 @@ impl Game<Player1NotSet, Player2NotSet, NotReady> {
         Game::default()
     }
 
-    pub fn add_player<'game>(self, player: Player<'game>) -> Game<Player<'game>, Player2NotSet, NotReady> {
+    pub fn add_player(
+        self,
+        player: Player<'_>,
+    ) -> Game<Player<'_>, Player2NotSet, NotReady> {
         Game {
             player_1: player,
             player_2: self.player_2,
             board: self.board,
-            state: self.state
+            state: self.state,
         }
     }
 }
 
 impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
-    pub fn add_player(self, player: Player<'game>) -> Game<Player<'game>, Player<'game>, InProgress> {
+    pub fn add_player(
+        self,
+        player: Player<'game>,
+    ) -> Game<Player<'game>, Player<'game>, InProgress> {
         Game {
             player_1: self.player_1,
             player_2: player,
-            board: Board::new(),
-            state: InProgress
+            board: self.board,
+            state: InProgress,
         }
     }
 }
@@ -62,7 +69,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
         println!();
 
         loop {
-            let selected_move = player.next_move();
+            let selected_move = player.next_move().unwrap();
 
             if Referee::selected_cell_is_empty(selected_move, &board) {
                 let _ = board.set_cell(selected_move, symbol);
@@ -79,30 +86,18 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                 println!("{}", self.board);
                 println!();
 
-                return CompletedGame {
-                    winner: Some(self.player_1),
-                    loser: Some(self.player_2),
-                    end_state: EndState::Win,
-                };
+                return CompletedGame::win(self.player_1, self.player_2);
             }
 
             if Self::do_one_turn(&mut self.board, &mut self.player_2, 'O') {
                 println!("{}", self.board);
                 println!();
 
-                return CompletedGame {
-                    winner: Some(self.player_2),
-                    loser: Some(self.player_1),
-                    end_state: EndState::Win,
-                };
+                return CompletedGame::win(self.player_2, self.player_1);
             }
         }
 
-        CompletedGame {
-            winner: None,
-            loser: None,
-            end_state: EndState::Stalemate,
-        }
+        CompletedGame::stalemate()
     }
 
     pub fn is_over(&self) -> bool {
@@ -122,6 +117,22 @@ pub struct CompletedGame<'game> {
 }
 
 impl<'game> CompletedGame<'game> {
+    pub fn win(winner: Player<'game>, loser: Player<'game>) -> Self {
+        CompletedGame {
+            winner: winner.into(),
+            loser: loser.into(),
+            end_state: EndState::Win,
+        }
+    }
+
+    pub fn stalemate() -> Self {
+        CompletedGame {
+            winner: None,
+            loser: None,
+            end_state: EndState::Stalemate,
+        }
+    }
+
     pub fn is_over(&self) -> bool {
         true
     }

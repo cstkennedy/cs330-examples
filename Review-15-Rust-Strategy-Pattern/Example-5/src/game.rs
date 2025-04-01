@@ -24,6 +24,14 @@ pub enum EndState {
     Forfeit,
 }
 
+#[derive(Debug, PartialEq)]
+enum TurnResult {
+    Win,
+    Stalemate,
+    NotOverYet,
+    Forfeit,
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct Game<P1, P2, S> {
     player_1: P1,
@@ -37,10 +45,10 @@ impl Game<Player1NotSet, Player2NotSet, NotReady> {
         Game::default()
     }
 
-    pub fn add_player<'game>(
+    pub fn add_player(
         self,
-        player: Player<'game>,
-    ) -> Game<Player<'game>, Player2NotSet, NotReady> {
+        player: Player<'_>,
+    ) -> Game<Player<'_>, Player2NotSet, NotReady> {
         Game {
             player_1: player,
             player_2: self.player_2,
@@ -65,59 +73,63 @@ impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
 }
 
 impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
-    fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> bool {
-        println!("{}", board);
-        println!();
-
+    fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> TurnResult {
         loop {
             match player.next_move() {
                 Ok(selected_move) => {
-                    if Referee::selected_cell_is_empty(selected_move, &board) {
+                    if Referee::selected_cell_is_empty(selected_move, board) {
                         let _ = board.set_cell(selected_move, symbol);
                         break;
                     }
                 }
-                Err(StrategyError::OutOfMovesError(msg)) => {
-                    // TODO: Refactor code to handle this as a forfeit
-                    panic!("'{}' - {}", symbol, msg);
+                Err(StrategyError::OutOfMovesError(_)) => {
+                    return TurnResult::Forfeit;
                 }
                 Err(_) => {}
             }
         }
 
-        Referee::check_for_win(&board)
+        if Referee::check_for_win(board) {
+            TurnResult::Win
+        } else if board.is_full() {
+            TurnResult::Stalemate
+        } else {
+            TurnResult::NotOverYet
+        }
     }
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
-        // TODO: Fix bug... Game::is_over always returns true
-        while self.is_not_over() {
-            if Self::do_one_turn(&mut self.board, &mut self.player_1, 'X') {
+        loop {
+            let players = vec![(&mut self.player_1, 'X'), (&mut self.player_2, 'O')];
+
+            for (player, symbol) in players {
                 println!("{}", self.board);
                 println!();
 
-                return CompletedGame {
-                    winner: Some(self.player_1),
-                    loser: Some(self.player_2),
-                    end_state: EndState::Win,
-                };
+                match Self::do_one_turn(&mut self.board, player, symbol) {
+                    TurnResult::Win => {
+                        println!("{}", self.board);
+                        println!();
+
+                        return if symbol == 'X' {
+                            CompletedGame::win(self.player_1, self.player_2)
+                        } else {
+                            CompletedGame::win(self.player_2, self.player_1)
+                        };
+                    }
+                    TurnResult::Stalemate => {
+                        return CompletedGame::stalemate();
+                    }
+                    TurnResult::Forfeit => {
+                        return if symbol == 'X' {
+                            CompletedGame::forfeit(self.player_2, self.player_1)
+                        } else {
+                            CompletedGame::forfeit(self.player_1, self.player_2)
+                        };
+                    }
+                    _ => {}
+                }
             }
-
-            if Self::do_one_turn(&mut self.board, &mut self.player_2, 'O') {
-                println!("{}", self.board);
-                println!();
-
-                return CompletedGame {
-                    winner: Some(self.player_2),
-                    loser: Some(self.player_1),
-                    end_state: EndState::Win,
-                };
-            }
-        }
-
-        CompletedGame {
-            winner: None,
-            loser: None,
-            end_state: EndState::Stalemate,
         }
     }
 
@@ -138,6 +150,30 @@ pub struct CompletedGame<'game> {
 }
 
 impl<'game> CompletedGame<'game> {
+    pub fn win(winner: Player<'game>, loser: Player<'game>) -> Self {
+        CompletedGame {
+            winner: winner.into(),
+            loser: loser.into(),
+            end_state: EndState::Win,
+        }
+    }
+
+    pub fn stalemate() -> Self {
+        CompletedGame {
+            winner: None,
+            loser: None,
+            end_state: EndState::Stalemate,
+        }
+    }
+
+    pub fn forfeit(winner: Player<'game>, loser: Player<'game>) -> Self {
+        CompletedGame {
+            winner: winner.into(),
+            loser: loser.into(),
+            end_state: EndState::Forfeit,
+        }
+    }
+
     pub fn is_over(&self) -> bool {
         true
     }

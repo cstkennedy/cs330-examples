@@ -26,12 +26,6 @@ pub enum EndState {
     Stalemate,
 }
 
-#[derive(Debug)]
-pub struct CompletedGame<'game> {
-    pub winner: Option<Player<'game>>,
-    pub loser: Option<Player<'game>>,
-    pub end_state: EndState,
-}
 
 impl Game {
     pub fn new() -> Self {
@@ -76,30 +70,18 @@ impl<'game> InitializedGame<'game> {
                 println!("{}", self.board);
                 println!();
 
-                return CompletedGame {
-                    winner: Some(self.player_1),
-                    loser: Some(self.player_2),
-                    end_state: EndState::Win,
-                };
+                return CompletedGame::win(self.player_1, self.player_2);
             }
 
             if Self::do_one_turn(&mut self.board, &mut self.player_2, 'O') {
                 println!("{}", self.board);
                 println!();
 
-                return CompletedGame {
-                    winner: Some(self.player_2),
-                    loser: Some(self.player_1),
-                    end_state: EndState::Win,
-                };
+                return CompletedGame::win(self.player_2, self.player_1);
             }
         }
 
-        CompletedGame {
-            winner: None,
-            loser: None,
-            end_state: EndState::Stalemate,
-        }
+        CompletedGame::stalemate()
     }
 
     pub fn is_over(&self) -> bool {
@@ -111,7 +93,30 @@ impl<'game> InitializedGame<'game> {
     }
 }
 
+#[derive(Debug)]
+pub struct CompletedGame<'game> {
+    pub winner: Option<Player<'game>>,
+    pub loser: Option<Player<'game>>,
+    pub end_state: EndState,
+}
+
 impl<'game> CompletedGame<'game> {
+    pub fn win(winner: Player<'game>, loser: Player<'game>) -> Self {
+        CompletedGame {
+            winner: winner.into(),
+            loser: loser.into(),
+            end_state: EndState::Win,
+        }
+    }
+
+    pub fn stalemate() -> Self {
+        CompletedGame {
+            winner: None,
+            loser: None,
+            end_state: EndState::Stalemate,
+        }
+    }
+
     pub fn is_over(&self) -> bool {
         true
     }
