@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from typing import Any, Callable, Optional, Self
+from typing import Any, Callable, ClassVar, Optional, Protocol, Self
 
 from .board import NullRender, RenderBoardToScreen
 from .game import Game
-from .player import MoveStrategy, Player, KeyboardStrategy, PredefinedMoves
+from .player import KeyboardStrategy, MoveStrategy, Player, PredefinedMoves
 
 StrategyCreationFunction = Callable[..., MoveStrategy]
 
@@ -42,8 +42,8 @@ class StrategyFactory:
 
 @dataclass
 class PlayerBuilder:
-    name: Optional[str] = None
-    strategy: Optional[MoveStrategy] = None
+    name: str | None = None
+    strategy: MoveStrategy | None = None
     is_human = False
 
     @staticmethod
@@ -95,8 +95,8 @@ class PlayerBuilder:
 
 @dataclass
 class GameBuilder:
-    player1: Optional[Player] = None
-    player2: Optional[Player] = None
+    player1: Player | None = None
+    player2: Player | None = None
 
     @staticmethod
     def builder() -> "GameBuilder":
@@ -124,7 +124,7 @@ class GameBuilder:
 
         return self
 
-    def add_player(self, *, name: str, strategy: str, **strategy_args) -> Self:
+    def add_player(self, *, name: str, strategy: str, **strategy_args: Any) -> Self:
         self.__add_player_impl(
             PlayerBuilder.builder()
             .with_name(name)

@@ -1,12 +1,5 @@
 import pytest
-from hamcrest import (
-    assert_that,
-    contains_exactly,
-    equal_to,
-    has_string,
-    is_,
-    is_not,
-)
+from hamcrest import assert_that, contains_exactly, equal_to, has_string, is_, is_not
 
 from tictactoe.board import Board
 

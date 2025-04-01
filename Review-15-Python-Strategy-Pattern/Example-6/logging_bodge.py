@@ -14,9 +14,3 @@ def set_up_logging(level: int = logging.WARN) -> None:
 
     logger.addHandler(handler)
 
-
-# -------------------------------------------------------------------------------
-# Set up logging before tictactoe.factory is imported... so that
-# we can actually log module initialization
-# -------------------------------------------------------------------------------
-#  set_up_logging(level=logging.INFO)

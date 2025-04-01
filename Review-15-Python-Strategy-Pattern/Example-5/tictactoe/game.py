@@ -40,8 +40,8 @@ class GameState(StrEnum):
 class CompletedGame:
     board: Board = field(compare=True)
 
-    winner: Optional[Player] = field(default=None, compare=True)
-    loser: Optional[Player] = field(default=None, compare=True)
+    winner: Player | None = field(default=None, compare=True)
+    loser: Player | None = field(default=None, compare=True)
 
     state: GameState = field(compare=False)
 
@@ -69,7 +69,7 @@ class CompletedGame:
                 return "Stalemate..."
 
             case GameState.OVER_WITH_FORFEIT:
-                return f"{self.loser.name} forfeited."
+                return f"{self.loser.name} forfeited."  # type: ignore
 
             case _:
                 # No other state makes sense

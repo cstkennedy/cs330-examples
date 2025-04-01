@@ -89,8 +89,8 @@ class PlayerBuilder:
 
 @dataclass
 class GameBuilder:
-    player1: Optional[Player] = None
-    player2: Optional[Player] = None
+    player1: Player | None = None
+    player2: Player | None = None
 
     @staticmethod
     def builder() -> "GameBuilder":
