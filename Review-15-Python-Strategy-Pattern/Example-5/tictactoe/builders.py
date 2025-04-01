@@ -1,21 +1,24 @@
 from dataclasses import dataclass
-from typing import Optional, Self, TypeVar
+from typing import Any, Callable, Optional, Self
 
+from .board import NullRender, RenderBoardToScreen
 from .game import Game
 from .player import Player
 from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
 
-S = TypeVar("S", bound=Strategy)
+StrategyCreationFunction = Callable[..., Strategy]
 
 
 class StrategyFactory:
-    __strategy_repo = {
+    __strategy_repo: dict[str, StrategyCreationFunction] = {
         "Keyboard": KeyboardStrategy,
         "SetMoves": PredefinedMoves,
     }
 
     @classmethod
-    def add(cls, type_of_strategy: str, a_strategy: S) -> None:
+    def add(
+        cls, type_of_strategy: str, a_strategy: StrategyCreationFunction
+    ) -> None:
         if type_of_strategy in cls.__strategy_repo:
             raise ValueError(
                 f'An entry for "{type_of_strategy}" already exists'
@@ -24,7 +27,7 @@ class StrategyFactory:
         cls.__strategy_repo[type_of_strategy] = a_strategy  # type: ignore
 
     @classmethod
-    def create(cls, type_of_strategy: str, /, **kwargs) -> Strategy:
+    def create(cls, type_of_strategy: str, /, **kwargs: Any) -> Strategy:
         if type_of_strategy not in cls.__strategy_repo:
             raise ValueError(f'"{type_of_strategy}" is not a known strategy')
 
@@ -85,21 +88,14 @@ class PlayerBuilder:
             name=self.name,  # type: ignore
             strategy=self.strategy,  # type: ignore
             humanity=self.is_human,
+            preferred_renderer=(
+                RenderBoardToScreen() if self.is_human else NullRender()  # type: ignore
+            ),
         )
 
 
 @dataclass
 class GameBuilder:
-    """
-    Unlike the usual "delay object creation until all data is available"
-    approach in the builder pattern (i.e., deferring creation until all values
-    are available)... the `GameBuilder` immediately creates a `Game` object so
-    that `get_board` can be used immediately.
-
-    This allows the board to be passed to Players that need to examine the
-    board to generate a move.
-    """
-
     player1: Optional[Player] = None
     player2: Optional[Player] = None
 
@@ -107,12 +103,19 @@ class GameBuilder:
     def builder() -> "GameBuilder":
         return GameBuilder()
 
-    def add_human_player(self, *, name: str) -> Self:
+    def __add_player_impl(self, player: Player) -> None:
         if self.player1 is not None and self.player2 is not None:
             raise TypeError("Player 1 and Player 2 have already been set")
 
+        if not self.player1:
+            self.player1 = player
+
+        else:
+            self.player2 = player
+
+    def add_human_player(self, *, name: str) -> Self:
         # fmt: off
-        player = (
+        self.__add_player_impl(
             PlayerBuilder.builder()
             .with_name(name)
             .human()
@@ -120,30 +123,15 @@ class GameBuilder:
         )
         # fmt: on
 
-        if not self.player1:
-            self.player1 = player
-
-        else:
-            self.player2 = player
-
         return self
 
     def add_player(self, *, name: str, strategy: str, **strategy_args) -> Self:
-        if self.player1 is not None and self.player2 is not None:
-            raise TypeError("Player 1 and Player 2 have already been set")
-
-        player = (
+        self.__add_player_impl(
             PlayerBuilder.builder()
             .with_name(name)
             .with_strategy(name=strategy, **strategy_args)
             .build()
         )
-
-        if not self.player1:
-            self.player1 = player
-
-        else:
-            self.player2 = player
 
         return self
 

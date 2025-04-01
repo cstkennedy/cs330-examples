@@ -1,4 +1,4 @@
-from typing import Protocol
+from typing import ClassVar, Protocol
 
 VALID_SYMBOLS: tuple[str, str] = ("X", "O")
 
@@ -31,7 +31,7 @@ class Board:
             value stored in the Cell
 
         Raises:
-            IndexError if !(cell1_id > 0 && cell1_id < 10) ||
+            IndexError if !(cell1_id > 0 && cell1_id < 10)
 
         """
 
@@ -140,6 +140,36 @@ class RenderBoardToScreen:
     def render(self, board: Board) -> None:
         print()
         print(board)
+
+
+class RenderBigBoardToScreen:
+    EMPTY_PART: ClassVar[str] = "     ┃" * 2
+
+    def __row_helper(self, row: list[str]) -> str:
+        return "\n".join(
+            (
+                RenderBigBoardToScreen.EMPTY_PART,
+                "┃".join((f"  {cell_val}  " for cell_val in row)),
+                RenderBigBoardToScreen.EMPTY_PART,
+            )
+        )
+
+    def render(self, board: Board) -> None:
+        row_iter = iter(board.rows())
+
+        row_divider = "╋".join(["━" * 5 for _ in range(0, 3)])
+
+        print(
+            "\n".join(
+                (
+                    self.__row_helper(next(row_iter)),
+                    row_divider,
+                    self.__row_helper(next(row_iter)),
+                    row_divider,
+                    self.__row_helper(next(row_iter)),
+                )
+            )
+        )
 
 
 class NullRender:

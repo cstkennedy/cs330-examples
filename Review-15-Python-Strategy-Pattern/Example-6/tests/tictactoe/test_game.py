@@ -2,7 +2,7 @@ import pytest
 from hamcrest import assert_that, equal_to, is_, is_not, none
 
 from tictactoe import Board, Game, GameState, GameStateError, Player
-from tictactoe.board import NullRender, RenderBoardToScreen
+from tictactoe.board import NullRender
 from tictactoe.builders import GameBuilder, PlayerBuilder
 from tictactoe.game import TurnResult
 
@@ -10,55 +10,59 @@ from tictactoe.game import TurnResult
 def test_constructor():
     tom = Player(name="Tom", strategy=None, preferred_renderer=NullRender)
     a_cylon = Player(strategy=None, preferred_renderer=NullRender)
-    a_game = Game(tom, a_cylon)
+    a_game = Game(player1=tom, player2=a_cylon)
 
-    assert_that(a_game.get_player1(), equal_to(tom))
-    assert_that(a_game.get_player2(), equal_to(a_cylon))
+    assert_that(a_game.player1, equal_to(tom))
+    assert_that(a_game.player2, equal_to(a_cylon))
 
     assert_that(a_game.is_over(), is_(False))
 
     # Can not test without Board.equals method
     empty_board = Board()
-    assert_that(a_game.get_board(), equal_to(empty_board))
+    assert_that(a_game.board, equal_to(empty_board))
 
 
 def test_game_start_with_no_players():
-    game = Game(None, None)
+    game = Game(player1=None, player2=None)
 
-    assert_that(game.get_player1(), is_(none()))
-    assert_that(game.get_player2(), is_(none()))
+    assert_that(game.player1, is_(none()))
+    assert_that(game.player2, is_(none()))
 
     assert_that(game.ready_to_start(), is_(False))
     assert_that(game.not_ready_to_start(), is_(True))
-
-    assert_that(game.current_state(), is_(GameState.NOT_STARTED))
 
     with pytest.raises(GameStateError):
         game.play_match()
 
 
 def test_player_turn():
+    PlayerBuilder.use_defaults()
     game = Game(
-        PlayerBuilder.builder()
-        .with_name("Player 1")
-        .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
-        .build(),
-        PlayerBuilder.builder()
-        .with_name("Player 2")
-        .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
-        .build(),
+        player1=(
+            PlayerBuilder.builder()
+            .with_name("Player 1")
+            .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
+            .build()
+        ),
+        player2=(
+            PlayerBuilder.builder()
+            .with_name("Player 2")
+            .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
+            .build()
+        ),
     )
 
-    turn_result = game._player_turn(game.get_player1(), "X")
-    assert_that(game.get_board().get_cell(5), is_(equal_to("X")))
+    turn_result = game._player_turn(game.player1, "X")
+    assert_that(game.board.get_cell(5), is_(equal_to("X")))
     assert_that(turn_result, is_(equal_to(TurnResult.NOT_OVER_YET)))
 
-    turn_result = game._player_turn(game.get_player2(), "O")
-    assert_that(game.get_board().get_cell(1), is_(equal_to("O")))
+    turn_result = game._player_turn(game.player2, "O")
+    assert_that(game.board.get_cell(1), is_(equal_to("O")))
     assert_that(turn_result, is_(equal_to(TurnResult.NOT_OVER_YET)))
 
 
 def test_play_match_to_stalemate():
+    PlayerBuilder.use_defaults()
     game = (
         GameBuilder.builder()
         .add_player(name="Player 1", strategy="SetMoves", moves=[5, 3, 4, 9, 8])
@@ -94,6 +98,7 @@ def test_play_match_to_stalemate():
 
 
 def test_play_match_to_win_player_1():
+    PlayerBuilder.use_defaults()
     game = (
         GameBuilder.builder()
         .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 2])
@@ -129,6 +134,7 @@ def test_play_match_to_win_player_1():
 
 
 def test_play_match_to_win_player_2():
+    PlayerBuilder.use_defaults()
     game = (
         GameBuilder.builder()
         .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 7])

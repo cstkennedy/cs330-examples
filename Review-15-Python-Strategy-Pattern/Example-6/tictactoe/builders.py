@@ -1,55 +1,46 @@
 from dataclasses import dataclass
-from typing import Any, Callable, Optional, Self
+from typing import Any, ClassVar, Optional, Protocol, Self
 
-from .board import NullRender, RenderBoardToScreen
+from .factories import MoveStrategyFactory, RenderStrategyFactory
 from .game import Game
-from .player import Player
-from .strategy import KeyboardStrategy, PredefinedMoves, Strategy
-
-StrategyCreationFunction = Callable[..., Strategy]
+from .player import MoveStrategy, Player
 
 
-class StrategyFactory:
-    __strategy_repo: dict[str, StrategyCreationFunction] = {
-        "Keyboard": KeyboardStrategy,
-        "SetMoves": PredefinedMoves,
-    }
+# Add TypeVar
+class Builder(Protocol):
+    def validate(self) -> None:
+        """
+        Run all validation checks and generate exceptions for any failed checks.
+        """
+        ...
 
-    @classmethod
-    def add(
-        cls, type_of_strategy: str, a_strategy: StrategyCreationFunction
-    ) -> None:
-        if type_of_strategy in cls.__strategy_repo:
-            raise ValueError(
-                f'An entry for "{type_of_strategy}" already exists'
-            )
-
-        cls.__strategy_repo[type_of_strategy] = a_strategy  # type: ignore
-
-    @classmethod
-    def create(cls, type_of_strategy: str, /, **kwargs: Any) -> Strategy:
-        if type_of_strategy not in cls.__strategy_repo:
-            raise ValueError(f'"{type_of_strategy}" is not a known strategy')
-
-        if not kwargs:
-            return cls.__strategy_repo[type_of_strategy]()
-
-        return cls.__strategy_repo[type_of_strategy](**kwargs)
-
-    @classmethod
-    def list_strategies(cls) -> str:
-        return "\n".join(f"  - {name}" for name in cls.__strategy_repo)
+    def build(self) -> Any:
+        """
+        T.B.W.
+        """
+        ...
 
 
 @dataclass
 class PlayerBuilder:
     name: Optional[str] = None
-    strategy: Optional[Strategy] = None
+    strategy: Optional[MoveStrategy] = None
     is_human = False
+
+    defaults_set_up: ClassVar[bool] = False
 
     @staticmethod
     def builder() -> "PlayerBuilder":
         return PlayerBuilder()
+
+    @classmethod
+    def use_defaults(cls) -> None:
+        if cls.defaults_set_up:
+            return
+
+        MoveStrategyFactory.add_defaults()
+        RenderStrategyFactory.add_defaults()
+        cls.defaults_set_up = True
 
     def with_name(self, val: str) -> Self:
         self.name = val
@@ -62,13 +53,13 @@ class PlayerBuilder:
                 "Player name must be set before strategy selection"
             )
 
-        self.strategy = KeyboardStrategy(self.name)
+        self.strategy = MoveStrategyFactory.create("Keyboard", _name=self.name)
         self.is_human = True
 
         return self
 
-    def with_strategy(self, name: str, *args, **kwargs) -> Self:
-        self.strategy = StrategyFactory.create(name, **kwargs)
+    def with_strategy(self, name: str, *_args, **kwargs) -> Self:
+        self.strategy = MoveStrategyFactory.create(name, **kwargs)
 
         return self
 
@@ -89,7 +80,9 @@ class PlayerBuilder:
             strategy=self.strategy,  # type: ignore
             humanity=self.is_human,
             preferred_renderer=(
-                RenderBoardToScreen() if self.is_human else NullRender()  # type: ignore
+                RenderStrategyFactory.create("BigBoard")
+                if self.is_human
+                else RenderStrategyFactory.create("Null")
             ),
         )
 
@@ -102,6 +95,11 @@ class GameBuilder:
     @staticmethod
     def builder() -> "GameBuilder":
         return GameBuilder()
+
+    def use_defaults(self) -> Self:
+        PlayerBuilder.use_defaults()
+
+        return self
 
     def __add_player_impl(self, player: Player) -> None:
         if self.player1 is not None and self.player2 is not None:
@@ -145,4 +143,4 @@ class GameBuilder:
     def build(self) -> Game:
         self.validate()
 
-        return Game(self.player1, self.player2)  # type: ignore
+        return Game(player1=self.player1, player2=self.player2)  # type: ignore
