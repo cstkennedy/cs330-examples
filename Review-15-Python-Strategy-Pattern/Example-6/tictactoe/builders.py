@@ -23,8 +23,8 @@ class Builder(Protocol):
 
 @dataclass
 class PlayerBuilder:
-    name: Optional[str] = None
-    strategy: Optional[MoveStrategy] = None
+    name: str | None = None
+    strategy: MoveStrategy | None = None
     is_human = False
 
     defaults_set_up: ClassVar[bool] = False
@@ -58,7 +58,7 @@ class PlayerBuilder:
 
         return self
 
-    def with_strategy(self, name: str, *_args, **kwargs) -> Self:
+    def with_strategy(self, name: str, *_args: None, **kwargs: dict[str, Any]) -> Self:
         self.strategy = MoveStrategyFactory.create(name, **kwargs)
 
         return self
@@ -123,7 +123,7 @@ class GameBuilder:
 
         return self
 
-    def add_player(self, *, name: str, strategy: str, **strategy_args) -> Self:
+    def add_player(self, *, name: str, strategy: str, **strategy_args: Any) -> Self:
         self.__add_player_impl(
             PlayerBuilder.builder()
             .with_name(name)

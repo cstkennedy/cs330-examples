@@ -1,4 +1,4 @@
-from typing import ClassVar, Protocol
+from typing import Any, ClassVar, Protocol
 
 VALID_SYMBOLS: tuple[str, str] = ("X", "O")
 
@@ -105,13 +105,13 @@ class Board:
 
         return not any(cell.isdigit() for cell in self._the_board)
 
-    def __eq__(self, rhs):
+    def __eq__(self, rhs: Any) -> bool:
         if not isinstance(rhs, self.__class__):
             return False
 
         return self._the_board == rhs._the_board
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Print the Board.
         E.g.,

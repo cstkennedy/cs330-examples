@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 import copy
 from dataclasses import dataclass, field
-from typing import ClassVar, Protocol
+from typing import ClassVar, Protocol, Self
 
 from .board import RenderStrategy
 
@@ -95,14 +97,14 @@ class Player:
     def get_render_preference(self) -> RenderStrategy:
         return self.preferred_renderer
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         Generate a player string, but only the name.
         """
 
         return self.name
 
-    def __deepcopy__(self, memo) -> "Player":
+    def __deepcopy__(self, _memo: None) -> Player:
         """
         Create a new duplicate Player.
         """

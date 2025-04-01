@@ -36,7 +36,7 @@ class StrategyFactory(Generic[S]):
                 f'An entry for "{type_of_strategy}" already exists'
             )
 
-        cls.__strategy_repo[(cls, type_of_strategy)] = a_strategy  # type: ignore
+        cls.__strategy_repo[(cls, type_of_strategy)] = a_strategy
         logger.info(f"Added '{type_of_strategy}' entry for '{cls}'")
 
     @classmethod
