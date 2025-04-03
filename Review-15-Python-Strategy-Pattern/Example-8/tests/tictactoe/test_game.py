@@ -1,10 +1,10 @@
 import pytest
 from hamcrest import assert_that, equal_to, instance_of, is_
 
-import tictactoe.factories as factories
 from tictactoe import Board, Game, Player
 from tictactoe.board import NullRender
 from tictactoe.game import CompletedGame, TurnResult
+from tictactoe.player import PredefinedMoves
 
 
 def test_constructor():
@@ -25,25 +25,22 @@ def test_game_start_with_no_players():
 
 
 def test_player_turn():
-    Game.use_defaults()
+    # fmt: off
     game = Game(
         player1=(
             Player.create_computer(
-                name=("Player 1"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[5, 3, 4, 9, 8]
-                ),
+                name="Player 1",
+                strategy=PredefinedMoves(moves=[5, 3, 4, 9, 8]),
             )
         ),
         player2=(
             Player.create_computer(
-                name=("Player 2"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[1, 7, 6, 2]
-                ),
+                name="Player 2",
+                strategy=PredefinedMoves(moves=[1, 7, 6, 2])
             )
         ),
     )
+    # fmt: on
 
     turn_result = game._player_turn(game.player1, "X")
     assert_that(game.board.get_cell(5), is_(equal_to("X")))
@@ -55,25 +52,22 @@ def test_player_turn():
 
 
 def test_play_match_to_stalemate():
-    Game.use_defaults()
+    # fmt: off
     game = Game(
         player1=(
             Player.create_computer(
-                name=("Player 1"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[5, 3, 4, 9, 8]
-                ),
+                name="Player 1",
+                strategy=PredefinedMoves(moves=[5, 3, 4, 9, 8]),
             )
         ),
         player2=(
             Player.create_computer(
-                name=("Player 2"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[1, 7, 6, 2]
-                ),
+                name="Player 2",
+                strategy=PredefinedMoves(moves=[1, 7, 6, 2])
             )
         ),
     ).play_match()
+    # fmt: on
 
     expected_board = Board()
     expected_board.set_cell(5, "X")
@@ -91,22 +85,17 @@ def test_play_match_to_stalemate():
 
 
 def test_play_match_to_win_player_1():
-    Game.use_defaults()
     game = Game(
         player1=(
             Player.create_computer(
-                name=("Player 1"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[1, 3, 2]
-                ),
+                name="Player 1",
+                strategy=PredefinedMoves(moves=[1, 3, 2]),
             )
         ),
         player2=(
             Player.create_computer(
-                name=("Player 2"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[4, 6, 5]
-                ),
+                name="Player 2",
+                strategy=PredefinedMoves(moves=[4, 6, 5]),
             )
         ),
     ).play_match()
@@ -128,22 +117,15 @@ def test_play_match_to_win_player_1():
 
 
 def test_play_match_to_win_player_2():
-    Game.use_defaults()
     game = Game(
         player1=(
             Player.create_computer(
-                name=("Player 1"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[1, 3, 7]
-                ),
+                name="Player 1", strategy=PredefinedMoves(moves=[1, 3, 7])
             )
         ),
         player2=(
             Player.create_computer(
-                name=("Player 2"),
-                strategy=factories.MoveStrategyFactory.create(
-                    "SetMoves", moves=[5, 2, 8]
-                ),
+                name="Player 2", strategy=PredefinedMoves(moves=[5, 2, 8])
             )
         ),
     ).play_match()
