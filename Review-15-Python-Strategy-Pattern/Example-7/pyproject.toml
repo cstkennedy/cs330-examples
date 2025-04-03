@@ -19,3 +19,9 @@ line-length = 80
 
 [tool.isort]
 profile = "black"
+
+[[tool.mypy.overrides]]
+module = "tests.tictactoe.*"
+disallow_untyped_defs = false
+
+

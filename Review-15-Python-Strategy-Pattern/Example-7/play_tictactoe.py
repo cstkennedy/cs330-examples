@@ -29,15 +29,15 @@ def main() -> None:
         )
     )
 
-    # fmt: off
     game = Game(
-        player1 = Player.create_human(name="Thomas"),
-        player2 = Player.create_computer(
+        player1=Player.create_human(name="Thomas"),
+        player2=Player.create_computer(
             name="Jay",
-            strategy = factories.MoveStrategyFactory.create("SetMoves", moves=[5, 1, 3, 7, 9, 2, 4, 6, 8])
-        )
+            strategy=factories.MoveStrategyFactory.create(
+                "SetMoves", moves=[5, 1, 3, 7, 9, 2, 4, 6, 8]
+            ),
+        ),
     ).play_match()
-    # fmt: on
 
     print(game)
 

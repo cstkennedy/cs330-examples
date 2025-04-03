@@ -70,9 +70,6 @@ class Game:
     player1: Player
     player2: Player
 
-    def __post_init__(self) -> None:
-        self._ref = Referee(self.board)
-
     def __opponent_of(self, player: Player) -> Player:
         if player is self.player1:
             return self.player2
@@ -121,12 +118,12 @@ class Game:
         while True:
             move = player.next_move()
 
-            if self._ref.selected_cell_is_empty(move):
+            if Referee.selected_cell_is_empty(self.board, move):
                 break
 
         self.board.set_cell(move, symbol)
 
-        if self._ref.check_for_win():
+        if Referee.check_for_win(self.board):
             return TurnResult.WIN
 
         if self.board.is_full():

@@ -59,7 +59,7 @@ class Player:
     preferred_renderer: RenderStrategy = field(compare=False)
 
     @staticmethod
-    def create_human(*, name: str) -> Self:
+    def create_human(*, name: str) -> Player:
         return Player(
             name=name,
             strategy=KeyboardStrategy(name),
@@ -68,7 +68,7 @@ class Player:
         )
 
     @staticmethod
-    def create_computer(*, name: str, strategy: MoveStrategy) -> Self:
+    def create_computer(*, name: str, strategy: MoveStrategy) -> Player:
         return Player(
             name=name,
             strategy=strategy,

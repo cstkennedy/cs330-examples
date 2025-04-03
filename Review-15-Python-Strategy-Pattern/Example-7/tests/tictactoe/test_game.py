@@ -1,6 +1,7 @@
 import pytest
 from hamcrest import assert_that, equal_to, instance_of, is_, none
 
+import tictactoe.factories as factories
 from tictactoe import Board, Game, GameStateError, Player
 from tictactoe.board import NullRender
 from tictactoe.game import CompletedGame, TurnResult
@@ -35,16 +36,20 @@ def test_player_turn():
     Game.use_defaults()
     game = Game(
         player1=(
-            PlayerBuilder.builder()
-            .with_name("Player 1")
-            .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
-            .build()
+            Player.create_computer(
+                name=("Player 1"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[5, 3, 4, 9, 8]
+                ),
+            )
         ),
         player2=(
-            PlayerBuilder.builder()
-            .with_name("Player 2")
-            .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
-            .build()
+            Player.create_computer(
+                name=("Player 2"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[1, 7, 6, 2]
+                ),
+            )
         ),
     )
 
@@ -61,16 +66,20 @@ def test_play_match_to_stalemate():
     Game.use_defaults()
     game = Game(
         player1=(
-            PlayerBuilder.builder()
-            .with_name("Player 1")
-            .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
-            .build()
+            Player.create_computer(
+                name=("Player 1"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[5, 3, 4, 9, 8]
+                ),
+            )
         ),
         player2=(
-            PlayerBuilder.builder()
-            .with_name("Player 2")
-            .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
-            .build()
+            Player.create_computer(
+                name=("Player 2"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[1, 7, 6, 2]
+                ),
+            )
         ),
     ).play_match()
 
@@ -93,16 +102,20 @@ def test_play_match_to_win_player_1():
     Game.use_defaults()
     game = Game(
         player1=(
-            PlayerBuilder.builder()
-            .with_name("Player 1")
-            .with_strategy(name="SetMoves", moves=[1, 3, 2])
-            .build()
+            Player.create_computer(
+                name=("Player 1"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[1, 3, 2]
+                ),
+            )
         ),
         player2=(
-            PlayerBuilder.builder()
-            .with_name("Player 2")
-            .with_strategy(name="SetMoves", moves=[4, 6, 5])
-            .build()
+            Player.create_computer(
+                name=("Player 2"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[4, 6, 5]
+                ),
+            )
         ),
     ).play_match()
 
@@ -126,16 +139,20 @@ def test_play_match_to_win_player_2():
     Game.use_defaults()
     game = Game(
         player1=(
-            PlayerBuilder.builder()
-            .with_name("Player 1")
-            .with_strategy(name="SetMoves", moves=[1, 3, 7])
-            .build()
+            Player.create_computer(
+                name=("Player 1"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[1, 3, 7]
+                ),
+            )
         ),
         player2=(
-            PlayerBuilder.builder()
-            .with_name("Player 2")
-            .with_strategy(name="SetMoves", moves=[5, 2, 8])
-            .build()
+            Player.create_computer(
+                name=("Player 2"),
+                strategy=factories.MoveStrategyFactory.create(
+                    "SetMoves", moves=[5, 2, 8]
+                ),
+            )
         ),
     ).play_match()
 
