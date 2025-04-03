@@ -4,7 +4,7 @@ import copy
 from dataclasses import dataclass, field
 from typing import ClassVar, Final, Protocol
 
-from .board import RenderStrategy
+from .board import NullRender, RenderBigBoardToScreen, RenderStrategy
 
 
 class MoveStrategy(Protocol):
@@ -58,6 +58,24 @@ class Player:
     humanity: bool = field(default=False, compare=False)
     preferred_renderer: RenderStrategy = field(compare=False)
 
+    @staticmethod
+    def create_human(*, name: str) -> Self:
+        return Player(
+            name=name,
+            strategy=KeyboardStrategy(name),
+            humanity=True,
+            preferred_renderer=RenderBigBoardToScreen(),
+        )
+
+    @staticmethod
+    def create_computer(*, name: str, strategy: MoveStrategy) -> Self:
+        return Player(
+            name=name,
+            strategy=strategy,
+            humanity=False,
+            preferred_renderer=NullRender(),
+        )
+
     def next_move(self) -> int:
         """
         Retrieve the next move.
@@ -84,8 +102,6 @@ class Player:
     def is_computer(self) -> bool:
         """
         Is this a Computer Player?
-
-        In this discussion, always no :(
 
         Returns:
             True if the player is a Cylon

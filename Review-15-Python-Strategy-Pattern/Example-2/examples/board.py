@@ -32,7 +32,7 @@ class Board:
             value stored in the Cell
 
         Raises:
-            IndexError if !(cell1_id > 0 && cell1_id < 10) ||
+            IndexError if !(cell1_id > 0 && cell1_id < 10)
         """
 
         if not 0 < cell_id < 10:

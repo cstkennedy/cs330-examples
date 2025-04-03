@@ -3,7 +3,6 @@ from hamcrest import assert_that, equal_to, instance_of, is_, none
 
 from tictactoe import Board, Game, GameStateError, Player
 from tictactoe.board import NullRender
-from tictactoe.builders import GameBuilder, PlayerBuilder
 from tictactoe.game import CompletedGame, TurnResult
 
 
@@ -33,7 +32,7 @@ def test_game_start_with_no_players():
 
 
 def test_player_turn():
-    PlayerBuilder.use_defaults()
+    Game.use_defaults()
     game = Game(
         player1=(
             PlayerBuilder.builder()
@@ -59,14 +58,21 @@ def test_player_turn():
 
 
 def test_play_match_to_stalemate():
-    PlayerBuilder.use_defaults()
-    game = (
-        GameBuilder.builder()
-        .add_player(name="Player 1", strategy="SetMoves", moves=[5, 3, 4, 9, 8])
-        .add_player(name="Player 2", strategy="SetMoves", moves=[1, 7, 6, 2])
-        .build()
-        .play_match()
-    )
+    Game.use_defaults()
+    game = Game(
+        player1=(
+            PlayerBuilder.builder()
+            .with_name("Player 1")
+            .with_strategy(name="SetMoves", moves=[5, 3, 4, 9, 8])
+            .build()
+        ),
+        player2=(
+            PlayerBuilder.builder()
+            .with_name("Player 2")
+            .with_strategy(name="SetMoves", moves=[1, 7, 6, 2])
+            .build()
+        ),
+    ).play_match()
 
     expected_board = Board()
     expected_board.set_cell(5, "X")
@@ -84,14 +90,21 @@ def test_play_match_to_stalemate():
 
 
 def test_play_match_to_win_player_1():
-    PlayerBuilder.use_defaults()
-    game = (
-        GameBuilder.builder()
-        .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 2])
-        .add_player(name="Player 2", strategy="SetMoves", moves=[4, 6, 5])
-        .build()
-        .play_match()
-    )
+    Game.use_defaults()
+    game = Game(
+        player1=(
+            PlayerBuilder.builder()
+            .with_name("Player 1")
+            .with_strategy(name="SetMoves", moves=[1, 3, 2])
+            .build()
+        ),
+        player2=(
+            PlayerBuilder.builder()
+            .with_name("Player 2")
+            .with_strategy(name="SetMoves", moves=[4, 6, 5])
+            .build()
+        ),
+    ).play_match()
 
     expected_board = Board()
     expected_board.set_cell(1, "X")
@@ -110,14 +123,21 @@ def test_play_match_to_win_player_1():
 
 
 def test_play_match_to_win_player_2():
-    PlayerBuilder.use_defaults()
-    game = (
-        GameBuilder.builder()
-        .add_player(name="Player 1", strategy="SetMoves", moves=[1, 3, 7])
-        .add_player(name="Player 2", strategy="SetMoves", moves=[5, 2, 8])
-        .build()
-        .play_match()
-    )
+    Game.use_defaults()
+    game = Game(
+        player1=(
+            PlayerBuilder.builder()
+            .with_name("Player 1")
+            .with_strategy(name="SetMoves", moves=[1, 3, 7])
+            .build()
+        ),
+        player2=(
+            PlayerBuilder.builder()
+            .with_name("Player 2")
+            .with_strategy(name="SetMoves", moves=[5, 2, 8])
+            .build()
+        ),
+    ).play_match()
 
     expected_board = Board()
     expected_board.set_cell(1, "X")

@@ -1,31 +1,16 @@
 from dataclasses import dataclass
-from typing import Any, ClassVar, Optional, Protocol, Self
+from typing import Any, ClassVar, Self
 
 from .factories import MoveStrategyFactory, RenderStrategyFactory
 from .game import Game
 from .player import MoveStrategy, Player
 
 
-# Add TypeVar
-class Builder(Protocol):
-    def validate(self) -> None:
-        """
-        Run all validation checks and generate exceptions for any failed checks.
-        """
-        ...
-
-    def build(self) -> Any:
-        """
-        T.B.W.
-        """
-        ...
-
-
 @dataclass
 class PlayerBuilder:
     name: str | None = None
     strategy: MoveStrategy | None = None
-    is_human = False
+    is_human: bool = False
 
     defaults_set_up: ClassVar[bool] = False
 
@@ -58,26 +43,23 @@ class PlayerBuilder:
 
         return self
 
-    def with_strategy(self, name: str, *_args: None, **kwargs: dict[str, Any]) -> Self:
+    def with_strategy(
+        self, name: str, *_args: None, **kwargs: dict[str, Any]
+    ) -> Self:
         self.strategy = MoveStrategyFactory.create(name, **kwargs)
 
         return self
 
-    def validate(self) -> bool:
+    def build(self) -> Player:
         if not self.name:
             raise ValueError("No name was set")
 
         if not self.strategy:
             raise ValueError("No strategy was specified")
 
-        return True
-
-    def build(self) -> Player:
-        self.validate()
-
         return Player(
-            name=self.name,  # type: ignore
-            strategy=self.strategy,  # type: ignore
+            name=self.name,
+            strategy=self.strategy,
             humanity=self.is_human,
             preferred_renderer=(
                 RenderStrategyFactory.create("BigBoard")
@@ -123,7 +105,9 @@ class GameBuilder:
 
         return self
 
-    def add_player(self, *, name: str, strategy: str, **strategy_args: Any) -> Self:
+    def add_player(
+        self, *, name: str, strategy: str, **strategy_args: Any
+    ) -> Self:
         self.__add_player_impl(
             PlayerBuilder.builder()
             .with_name(name)
@@ -133,14 +117,11 @@ class GameBuilder:
 
         return self
 
-    def validate(self) -> None:
+    def build(self) -> Game:
         if self.player1 is None:
             raise ValueError("Player 1 was not set")
 
         if self.player2 is None:
             raise ValueError("Player 2 was not set")
-
-    def build(self) -> Game:
-        self.validate()
 
         return Game(player1=self.player1, player2=self.player2)  # type: ignore

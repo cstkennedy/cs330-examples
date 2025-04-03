@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from enum import StrEnum, auto
 
 from .board import Board
+from .factories import MoveStrategyFactory, RenderStrategyFactory
 from .player import Player
 from .referee import Referee
 
@@ -77,6 +78,11 @@ class Game:
             return self.player2
 
         return self.player1
+
+    @staticmethod
+    def use_defaults() -> None:
+        MoveStrategyFactory.add_defaults()
+        RenderStrategyFactory.add_defaults()
 
     def play_match(
         self,
