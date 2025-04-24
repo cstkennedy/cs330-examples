@@ -40,17 +40,17 @@ def read_shapes(shapes_in: TextIO) -> Generator[Optional[Shape], None, None]:
     for line in shapes_in:
         # Split on ";" and Strip leading/trailing whitespace
         # And Unpack the list
-        name, values = [part.strip() for part in line.split(";")]
-
-        values = values.strip()
-
         try:
+            name, values = [part.strip() for part in line.split(";")]
+
+            values = values.strip()
+
             values = [float(val) for val in values.split()]
             shape = shape_factory.create_from_dimensions(name, values)
 
             yield shape
 
-        except ValueError as _err:
+        except (ValueError, TypeError) as _err:
             logging.warning(f'Skipped shape "{name:}" due to malformed line.')
 
 
