@@ -1,27 +1,39 @@
-#! /usr/bin/env python3
+"""
+Demonstrate generator expressions in Python using...
 
-from __future__ import annotations
+  1. a generator function with filter function calls
+  2. a generator with conditions
+"""
 
 import sys
-from typing import Optional
+from typing import Generator, TextIO
 
-# 9.2 ms …  13.4 ms
-# 9.1 ms …  13.2 ms
-# 9.2 ms …  12.7 ms
-# 9.1 ms …  13.6 ms
-# 9.6 ms …  15.9 ms
 
-def word_stream(word_fname: str):
+def word_stream(word_buffer: TextIO) -> Generator[str, None, None]:
     """
-    T.B.W.
-    """
-    with open(word_fname, "r") as word_file:
-        for line in word_file:
-            word = line.strip()
-            if word:
-                yield word
+    Read in each line from a buffer (e.g., file) stripping all leading and
+    trailing whitespace. All blank lines are skipped.
 
-def contains_chars(word: str, banned: Optional[list[str]] = None) -> bool:
+    Yields:
+        lines one at a time, assuming that each line is one word
+    """
+
+    for line in word_buffer:
+        word = line.strip()
+        if word:
+            yield word
+
+
+def contains_chars(word: str, banned: list[str] | None = None) -> bool:
+    """
+    Determine if a "word" (more aptly "token") contains a banned symbol.
+
+    If no banned list is provided... default to ['.' and '+']
+
+    Returns:
+        True if the "word" contains a banned symbol and false otherwise
+    """
+
     if not banned:
         banned = [".", "+"]
 
@@ -32,18 +44,23 @@ def contains_chars(word: str, banned: Optional[list[str]] = None) -> bool:
     return False
 
 
-def main():
-
+def main() -> None:
     word_fname = sys.argv[1]
 
-    words = word_stream(word_fname)
-    #  words_lt_5 = (word for word in words if len(word) < 5)
-    words = filter(lambda word: len(word) < 5, words)
-    words = filter(lambda word: not contains_chars(word), words)
+    with open(word_fname, "r") as word_file:
+        #  words = word_stream(word_file)
+        #  words = filter(lambda word: len(word) < 5, words)
+        #  words = filter(lambda word: not contains_chars(word), words)
 
+        words = (
+            word
+            for word in word_stream(word_file)
+            if len(word) < 5
+            if not contains_chars(word)
+        )
 
-    for word in words:
-        print(f"|{word}|")
+        for word in words:
+            print(f"|{word}|")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,9 @@
+[package]
+name = "fibonacci"
+version = "0.1.0"
+authors = ["Thomas J. Kennedy <tkennedy@cs.odu.edu>"]
+edition = "2024"
+
+[dependencies]
+eyre = "0.6.12"
+itertools = "0.14.0"
