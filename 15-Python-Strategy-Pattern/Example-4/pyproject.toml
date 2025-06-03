@@ -1,8 +1,22 @@
 [project]
-name = "CS 330 Tic-Tac-Toe"
+name = "cs330-tic-tac-toe"
 version = "1.0"
 description = "Python Tic-Tac-Toe Example"
 authors = {name = "Thomas J. Kennedy", email="tkennedy@cs.odu.edu"}
+requires-python=">=3.11"
+
+[dependency-groups]
+dev = [
+    "pyhamcrest>=2.1.0",
+    "pytest>=8.4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+# Thank you... <https://github.com/astral-sh/uv/issues/7260#issuecomment-2341586054>
+pythonpath = ["."]
 
 [tool.ruff]
 line-length = 80
@@ -19,3 +33,5 @@ line-length = 80
 
 [tool.isort]
 profile = "black"
+
+
