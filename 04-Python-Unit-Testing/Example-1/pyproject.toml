@@ -1,5 +1,5 @@
 [project]
-name = "python-separation-of-concerns"
+name = "python-unit-testing"
 version = "0.1.0"
 requires-python = ">=3.11"
 dependencies = [
