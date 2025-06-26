@@ -35,6 +35,6 @@ run {
 }
 
 javadoc {
-    failOnError false
+    failOnError = false
 }
 
