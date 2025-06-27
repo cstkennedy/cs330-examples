@@ -7,18 +7,19 @@ buildscript {
 plugins {
     id "java"
     id "application"
+    id "jvm-test-suite"
     id "eclipse"
 
     id "checkstyle"
-    id "com.github.spotbugs" version "5.0.9"
+    id "com.github.spotbugs" version "6.2.1"
     id "project-report"
     id "jacoco"
     id "pmd"
 }
 
 java {
-    sourceCompatibility = JavaVersion.toVersion(11)
-    targetCompatibility = JavaVersion.toVersion(11)
+    sourceCompatibility = JavaVersion.toVersion(17)
+    targetCompatibility = JavaVersion.toVersion(17)
 }
 
 repositories {
@@ -42,86 +43,67 @@ jar {
 }
 
 run {
-    main = "edu.odu.cs.cs330.examples.PlayTicTacToe"
+    mainClass = "edu.odu.cs.cs330.examples.PlayTicTacToe"
+    standardInput = System.in
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
+    }
 }
 
 test {
-    useJUnitPlatform()
-    reports {
-        html.enabled = true
-    }
     ignoreFailures = true
 
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
+
+    finalizedBy jacocoTestReport
 }
 
 javadoc {
-    failOnError false
-}
-
-task deploy(dependsOn: [jar, javadoc, check]) {
-
-}
-
-jacoco {
-    toolVersion = "0.8.4"
-}
-
-jacocoTestReport {
-    reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
-    }
+    failOnError = false
 }
 
 //------------------------------------------------------------------------------
 // Analysis Tools
 //------------------------------------------------------------------------------
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        csv.required = true
+    }
+}
 
 // SpotBugs
+spotbugs {
+    toolVersion = "4.9.3"
+}
+
 spotbugsMain {
     ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
+    effort = com.github.spotbugs.snom.Effort.MAX
+    reportLevel = com.github.spotbugs.snom.Confidence.values()[1] // Medium
     reports {
-       xml.enabled = false
-       html.enabled = true
+       xml.required = false
+       html.required = true
     }
 }
 
 spotbugsTest.enabled = false
 // End SpotBugs config
 
-jacoco {
-    toolVersion = "0.8.11"
-}
-
-jacocoTestReport {
-    reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
-    }
-}
-
-// Check Style Config
-checkstyle {
-    ignoreFailures = true
-    showViolations = false
-}
-
-tasks.withType(Checkstyle) {
-    reports {
-        html.destination project.file("build/reports/checkstyle/main.html")
-    }
-}
-checkstyleTest.enabled = false
-// End Checkstyle config
-
 pmd {
+    toolVersion = "7.0.0"
+
     ignoreFailures = true
     ruleSets = [
         "category/java/bestpractices.xml",
@@ -132,4 +114,18 @@ pmd {
     ]
 }
 
+// Check Style Config
+checkstyle {
+    toolVersion = "10.12.4"
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.outputLocation = project.file("build/reports/checkstyle/main.html")
+    }
+}
+checkstyleTest.enabled = false
+// End Checkstyle config
 
