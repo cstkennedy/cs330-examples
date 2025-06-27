@@ -51,7 +51,7 @@ jar {
 }
 
 run {
-    main = "edu.odu.cs.cs330.examples.RunShapes"
+    mainClass = "edu.odu.cs.cs330.examples.RunShapes"
     args = ["src/main/resources/inputShapes.txt", "2"]
 }
 
@@ -103,8 +103,8 @@ spotbugsMain {
     effort = "max"
     reportLevel = "medium"
     reports {
-       xml.enabled = false
-       html.enabled = true
+       xml.required = false
+       html.required = true
     }
 }
 
@@ -117,9 +117,9 @@ jacoco {
 
 jacocoTestReport {
     reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
+        html.required = true
+        xml.required = true
+        csv.required = true
     }
 }
 
