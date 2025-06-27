@@ -10,6 +10,11 @@
             </a>
         </li>
         <li>
+            <a href="<#if (content.rootpath)??>${content.rootpath}<#else></#if>doxygen/html/index.html" target="_blank">
+                API (Doxygen)
+            </a>
+        </li>
+        <li>
             <a href="<#if (content.rootpath)??>${content.rootpath}<#else></#if>dependencies.html" target="_blank">
                 Dependencies
             </a>

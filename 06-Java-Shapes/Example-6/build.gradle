@@ -109,11 +109,8 @@ integrationTest {
     finalizedBy integrationTestCodeCoverageReport
 }
 
-//
-// Todo: Add Notes
-//
-
-tasks.named('check') {
+// Update "check" task to include integration test set
+tasks.named("check") {
     dependsOn(testing.suites.integrationTest)
 }
 
@@ -158,7 +155,7 @@ task mergedJacocoReportHTML(
     sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
     classDirectories.from = files(sourceSets.main.output)
 
-    executionData.from = fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+    executionData.from = fileTree(project.rootDir.absolutePath).include("build/jacoco/*.exec")
 
     reports {
         xml.required = false
@@ -226,11 +223,12 @@ task reports(
         "jacocoTestReport",
         "testCodeCoverageReport",
         "integrationTestCodeCoverageReport",
+        "mergedJacocoReportHTML",
         "projectReport"
     ]
 )
 {
-    description "Generate all reports and documentation for this project"
+    description = "Generate all reports and documentation for this project"
 }
 
 task copyJDocs (type: Copy) {
@@ -238,15 +236,6 @@ task copyJDocs (type: Copy) {
     into "build/tmp/website/assets"
     dependsOn "javadoc"
 }
-
-/*
-task copyTestReports (type: Copy) {
-    from "build/reports/tests"
-    into "build/tmp/website/assets/tests"
-    dependsOn "test"
-    dependsOn "integrationTest"
-}
-*/
 
 task copyReports (type: Copy) {
     from "build/reports"
