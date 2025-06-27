@@ -1,13 +1,7 @@
-This is a discussion of selected examples from previous reviews re-implemented
-in Python 3. Topics include:
+This example covers the Fibonacci Sequence implemented in Python using
+Generators.
 
-  - Generator Expressions
-  - Dictionary Comprehensions
-  - Modules
-  - `enumerate`
+The recording can be accessed on...
 
-The recording is available on...
-
-  - [YouTube](https://youtu.be/2_FzZRkvU2k)
-    or
-    [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Python+Patterns/1_73tbd97c)
+  - [ODU - Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=18d6a561-7c3a-4a95-8286-b30900d5e9a9)
+  - [YouTube](https://youtu.be/N_0g11l-Z9s)

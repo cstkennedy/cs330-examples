@@ -18,7 +18,7 @@ def fibonacci_sequence(sequence_length: int) -> Generator[int, None, None]:
     # !(index >= 3) || !(index <= 200)
     # (index < 3 || index > 200)
     if sequence_length < 3 or sequence_length > 200:
-        raise ValueError(f"{sequence_length:3d} is not between 3 and 200\n")
+        raise ValueError(f"{sequence_length:3d} is not between 3 and 200")
 
     fm2 = 1  # n-2 (previous previous) fibonacci number
     fm1 = 1  # n-1 (previous) fibonacci number
