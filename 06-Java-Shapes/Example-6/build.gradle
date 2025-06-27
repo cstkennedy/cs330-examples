@@ -7,19 +7,18 @@ buildscript {
 plugins {
     id "java"
     id "application"
+    id "jvm-test-suite"
+    id "eclipse"
 
-    id "jacoco"
-    id "org.barfuin.gradle.jacocolog" version "2.0.0"
-
-    id "pmd"
-    id "com.github.spotbugs" version "5.0.9"
     id "checkstyle"
+    id "com.github.spotbugs" version "6.2.1"
     id "project-report"
+    id "jacoco"
+    id "jacoco-report-aggregation"
+    id "org.barfuin.gradle.jacocolog" version "3.1.0"
+    id "pmd"
 
     id "org.jbake.site" version "5.5.0"
-
-    // Split Integration Tests from Unit Tests
-    id "org.unbroken-dome.test-sets" version "4.0.0"
 }
 
 java {
@@ -59,60 +58,77 @@ application {
     mainClass = "edu.odu.cs.cs330.examples.RunShapes"
 }
 
-// Apply common settings for both test (unit test) and integration test tasks
-tasks.withType(Test) {
-    useJUnitPlatform()
+// https://docs.gradle.org/current/userguide/jvm_test_suite_plugin.html#jvm_test_suite_plugin
+testing {
+    suites {
+        configureEach {
+            useJUnitJupiter()
+        }
 
-    reports {
-        html.required = true
+        test {
+            // configureEach replaced explicit "test" target config
+        }
+
+        integrationTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+                implementation("org.junit.jupiter:junit-jupiter:5.8.2")
+                implementation("org.hamcrest:hamcrest-library:2.2")
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
     }
+}
+
+test {
     ignoreFailures = true
 
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
-}
 
-test {
     finalizedBy jacocoTestReport
 }
 
-// Set up Integration Tests
-testSets {
-    integrationTest
-}
-
 integrationTest {
-    finalizedBy jacocoIntegrationTestReport
+    dependsOn test
+
+    ignoreFailures = true
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+
+    finalizedBy integrationTestCodeCoverageReport
 }
 
-check.dependsOn integrationTest
+//
+// Todo: Add Notes
+//
+
+tasks.named('check') {
+    dependsOn(testing.suites.integrationTest)
+}
 
 //------------------------------------------------------------------------------
 // Documentation Tool(s)
 //------------------------------------------------------------------------------
 javadoc {
-    failOnError false
+    failOnError = false
 }
 
 //------------------------------------------------------------------------------
 // Analysis Tool(s)
 //------------------------------------------------------------------------------
-spotbugsMain {
-    ignoreFailures = true
-    effort = "max"
-    reportLevel = "medium"
-    reports {
-       xml.required = false
-       html.required = true
-    }
-}
-
-spotbugsTest.enabled = false
-spotbugsIntegrationTest.enabled = false
-
 jacoco {
-    toolVersion = "0.8.5"
+    toolVersion = "0.8.13"
 }
 
 jacocoTestReport {
@@ -127,8 +143,16 @@ jacocoTestReport {
  * This task is based on HenrikBaerbak's example at
  * <https://discuss.gradle.org/t/merge-jacoco-coverage-reports-for-multiproject-setups/12100/10>
  */
-task mergedJacocoReportHTML (type: JacocoReport,
-    dependsOn: ["test", "integrationTest", "jacocoTestReport", "jacocoIntegrationTestReport"])
+task mergedJacocoReportHTML(
+    type: JacocoReport,
+    dependsOn: [
+        "test",
+        "integrationTest",
+        "jacocoTestReport",
+        "testCodeCoverageReport",
+        "integrationTestCodeCoverageReport"
+    ]
+)
 {
     additionalSourceDirs.from = files(sourceSets.main.allSource.srcDirs)
     sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
@@ -137,34 +161,33 @@ task mergedJacocoReportHTML (type: JacocoReport,
     executionData.from = fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
     reports {
-        xml.enabled false
-        csv.enabled false
-        html.enabled true
+        xml.required = false
+        csv.required = false
     }
 }
 
-checkstyle {
-    toolVersion "8.42"
+// SpotBugs
+spotbugs {
+    toolVersion = "4.9.3"
+}
+
+spotbugsMain {
     ignoreFailures = true
-    showViolations = false
-}
-
-tasks.withType(Checkstyle) {
+    effort = com.github.spotbugs.snom.Effort.MAX
+    reportLevel = com.github.spotbugs.snom.Confidence.values()[1] // Medium
     reports {
-        html.destination project.file("build/reports/checkstyle/main.html")
+       xml.required = false
+       html.required = true
     }
 }
 
-checkstyleTest {
-    enabled = false
-}
-
-checkstyleIntegrationTest {
-    enabled = false
-}
+spotbugsTest.enabled = false
+spotbugsIntegrationTest.enabled = false
+// End SpotBugs config
 
 pmd {
-    toolVersion = "6.21.0"
+    toolVersion = "7.0.0"
+
     ignoreFailures = true
     ruleSets = [
         "category/java/bestpractices.xml",
@@ -175,24 +198,38 @@ pmd {
     ]
 }
 
-pmdTest {
-    enabled = false
+// Check Style Config
+checkstyle {
+    toolVersion = "10.12.4"
+    ignoreFailures = true
+    showViolations = false
 }
 
-pmdIntegrationTest {
-    enabled = false
+tasks.withType(Checkstyle) {
+    reports {
+        html.outputLocation = project.file("build/reports/checkstyle/main.html")
+    }
 }
+checkstyleTest.enabled = false
+checkstyleIntegrationTest.enabled = false
+// End Checkstyle config
 
 //------------------------------------------------------------------------------
 // JBake Configuration
 //------------------------------------------------------------------------------
-task reports (dependsOn: ["javadoc",
-                          "check",
-                          "jacocoTestReport",
-                          "jacocoIntegrationTestReport",
-                          "mergedJacocoReportHTML",
-                          "projectReport"]) {
-
+task reports(
+    dependsOn: [
+        "javadoc",
+        "check",
+        "test",
+        "integrationTest",
+        "jacocoTestReport",
+        "testCodeCoverageReport",
+        "integrationTestCodeCoverageReport",
+        "projectReport"
+    ]
+)
+{
     description "Generate all reports and documentation for this project"
 }
 
@@ -201,6 +238,15 @@ task copyJDocs (type: Copy) {
     into "build/tmp/website/assets"
     dependsOn "javadoc"
 }
+
+/*
+task copyTestReports (type: Copy) {
+    from "build/reports/tests"
+    into "build/tmp/website/assets/tests"
+    dependsOn "test"
+    dependsOn "integrationTest"
+}
+*/
 
 task copyReports (type: Copy) {
     from "build/reports"
@@ -225,13 +271,19 @@ task buildHomePage (dependsOn: copyJbakeTemplates) {
         }
     }
 }
-
 jbake {
      srcDirName = "build/tmp/website"
 }
 
 // Ensure all Copy and JBake build tasks run
-task setupWebsite (dependsOn: ["buildHomePage", "copyReports", "copyJDocs"]){
+task setupWebsite(
+    dependsOn: [
+        "buildHomePage",
+        "copyJDocs",
+        "copyReports"
+    ]
+)
+{
 }
 
 bake.dependsOn "setupWebsite"

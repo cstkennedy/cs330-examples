@@ -1,0 +1,138 @@
+
+spotbugsMain {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "medium"
+    reports {
+       xml.required = false
+       html.required = true
+    }
+}
+
+spotbugsTest.enabled = false
+spotbugsIntegrationTest.enabled = false
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        html.required = true
+        xml.required = true
+        csv.required = true
+    }
+}
+
+/*
+ * This task is based on HenrikBaerbak's example at
+ * <https://discuss.gradle.org/t/merge-jacoco-coverage-reports-for-multiproject-setups/12100/10>
+ */
+task mergedJacocoReportHTML (type: JacocoReport,
+    dependsOn: ["test", "integrationTest", "jacocoTestReport", "jacocoIntegrationTestReport"])
+{
+    additionalSourceDirs.from = files(sourceSets.main.allSource.srcDirs)
+    sourceDirectories.from = files(sourceSets.main.allSource.srcDirs)
+    classDirectories.from = files(sourceSets.main.output)
+
+    executionData.from = fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+}
+
+checkstyle {
+    toolVersion "8.42"
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.destination project.file("build/reports/checkstyle/main.html")
+    }
+}
+
+checkstyleTest {
+    enabled = false
+}
+
+checkstyleIntegrationTest {
+    enabled = false
+}
+
+pmd {
+    toolVersion = "6.21.0"
+    ignoreFailures = true
+    ruleSets = [
+        "category/java/bestpractices.xml",
+        "category/java/codestyle.xml",
+        "category/java/design.xml",
+        "category/java/errorprone.xml",
+        "category/java/performance.xml"
+    ]
+}
+
+pmdTest {
+    enabled = false
+}
+
+pmdIntegrationTest {
+    enabled = false
+}
+
+//------------------------------------------------------------------------------
+// JBake Configuration
+//------------------------------------------------------------------------------
+task reports (dependsOn: ["javadoc",
+                          "check",
+                          "jacocoTestReport",
+                          "jacocoIntegrationTestReport",
+                          "mergedJacocoReportHTML",
+                          "projectReport"]) {
+
+    description "Generate all reports and documentation for this project"
+}
+
+task copyJDocs (type: Copy) {
+    from "build/docs"
+    into "build/tmp/website/assets"
+    dependsOn "javadoc"
+}
+
+task copyReports (type: Copy) {
+    from "build/reports"
+    into "build/tmp/website/assets"
+    dependsOn "reports"
+}
+
+task copyJbakeTemplates (type: Copy) {
+    from "src/jbake"
+    into "build/tmp/website"
+}
+
+// Combine home0.md and the project README.md into a single homepage
+task buildHomePage (dependsOn: copyJbakeTemplates) {
+    inputs.files ( "build/tmp/website/content/home0.md", "../README.md")
+    outputs.file ("build/tmp/website/content/home.md")
+    doLast  {
+        outputs.files.singleFile.withOutputStream { out ->
+            for (file in inputs.files) file.withInputStream {
+                out << it << '\n'
+            }
+        }
+    }
+}
+
+jbake {
+     srcDirName = "build/tmp/website"
+}
+
+// Ensure all Copy and JBake build tasks run
+task setupWebsite (dependsOn: ["buildHomePage", "copyReports", "copyJDocs"]){
+}
+
+bake.dependsOn "setupWebsite"
