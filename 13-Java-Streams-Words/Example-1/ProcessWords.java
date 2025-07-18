@@ -19,7 +19,7 @@ public class ProcessWords
     {
         final String wordFilename = args[0];
 
-        try (BufferedReader buffer = Files.newBufferedReader(Paths.get(wordFilename)) ) {
+        try (BufferedReader buffer = Files.newBufferedReader(Paths.get(wordFilename))) {
             List<String> words = buffer
                 .lines()
                 .filter((line) -> !line.isEmpty())
