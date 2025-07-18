@@ -1,5 +1,4 @@
-This example discusses how to filter a list of words using Python Generator
-Expressions.
+This example discusses how to filter a list of words using the Java Stream API.
 
 The recording can be accessed as part of, a multi-language lecture, on...
 

@@ -1,4 +1,4 @@
-This example discusses how to filter a list of words using Python Generator
+This example discusses how to filter a list of words using Rust Iterator Adapters
 Expressions.
 
 The recording can be accessed as part of, a multi-language lecture, on...

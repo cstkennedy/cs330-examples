@@ -18,7 +18,6 @@ public class ProcessWords
         throws IOException
     {
         final String wordFilename = args[0];
-        // .ok_or_eyre("Word filename was not provided")?;
 
         try (BufferedReader buffer = Files.newBufferedReader(Paths.get(wordFilename)) ) {
             List<String> words = buffer
