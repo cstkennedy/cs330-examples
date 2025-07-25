@@ -63,7 +63,7 @@ fn main() {
 
     // Create 5 "Random" Shapes
     /*
-    let mut shapes: Vec<Box<Shape>> = Vec::new();
+    let mut shapes: Vec<Box<dyn Shape>> = Vec::new();
     shapes.push(Factory::create("Triangle").unwrap());
     shapes.push(Factory::create("Right Triangle").unwrap());
     shapes.push(Factory::create("Equilateral Triangle").unwrap());
@@ -129,5 +129,6 @@ fn main() {
     }
 
     println!();
-    println!("{:?}", shapes);
+    // println!("{:?}", shapes);
+    println!("{:#?}", shapes);
 }

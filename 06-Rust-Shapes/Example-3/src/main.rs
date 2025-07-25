@@ -88,6 +88,6 @@ fn main() {
     println!("{}", "*".repeat(38));
 
     for shp in shapes.iter() {
-        println!("{:?}", shp);
+        println!("{:#?}", shp);
     }
 }

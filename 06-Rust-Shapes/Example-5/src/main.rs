@@ -69,7 +69,7 @@ fn main() {
     println!("{}", "-".repeat(38));
     println!("{:>2} shapes available.", Factory::number_known());
     println!();
-
+    ;
     let file = File::open(&argv[1]).expect("Could not open file");
     let ins = BufReader::new(file);
 
@@ -88,6 +88,6 @@ fn main() {
     println!("{}", "*".repeat(38));
 
     for shp in shapes.iter() {
-        println!("{:?}", shp);
+        println!("{:#?}", shp);
     }
 }

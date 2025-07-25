@@ -40,12 +40,12 @@ pub struct Factory;
 
 impl Factory {
     const KNOWN_SHAPES: [&'static str; 5] = [
-                "Triangle",
-                "Right Triangle",
-                "Equilateral Triangle",
-                "Square",
-                "Circle",
-            ];
+        "Triangle",
+        "Right Triangle",
+        "Equilateral Triangle",
+        "Square",
+        "Circle",
+    ];
 
 
     /// Create a Shape
