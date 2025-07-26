@@ -1,9 +1,26 @@
-## Testing: C++, JUnit, Pyunit
+## Unit Test - Java & JUnit
 
-This is a quick look at Interface Completeness and Unit Testing. We will look
-at C++, Java, and Python 3 code. The source code is available in \ExampleZip{Review-04.zip}
+This is a quick look at Interface Completeness, Unit Test, and the
+Mutator-Accessor Strategy... in Java.
 
-The recorded review is split into two parts:
+This discussion is split into three (3) parts...
 
-  1. [Part 1](https://youtu.be/8DQcCkq65kU) - C++ (Example 3) and Java (Examples 4-5).
-  2. [Part 2](https://youtu.be/QPL927bYs7I) - Example 6 (Python 3).
+  - **Part 1 (Example 1)**
+
+    This is a discussion of a basic unit test that makes use of the
+    mutator-accessor strategy (with a few "oversights"). Exceptions are not
+    handled.
+
+  - **Part 2 (Example 2)**
+
+    This discussion covers how to address the shortcomings identified in Part 1.
+    How to check that expected exceptions are thrown (with `assertThrows`) is
+    covered.
+
+  - **Part 3 (Example 3)**
+
+    This discussion covers how to eliminate the unecesary exceptions by using
+    the notion of clamping numbers to a specified range (in our case... 0 to 255).
+
+    Testing a static function and parameterized tests are covered.
+
