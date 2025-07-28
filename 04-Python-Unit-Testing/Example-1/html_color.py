@@ -20,9 +20,9 @@ class HtmlColor:
         pass
 
     def __init__(self, red: int = 0, green: int = 0, blue: int = 0) -> None:
-        self.__red = red
-        self.__green = green
-        self.__blue = blue
+        self.red = red
+        self.green = green
+        self.blue = blue
 
     @property
     def red(self) -> int:
@@ -80,7 +80,6 @@ class HtmlColor:
 
     def __hash__(self) -> int:
         return hash((self.__red, self.__green, self.__blue))
-
 
     def __str__(self) -> str:
         """

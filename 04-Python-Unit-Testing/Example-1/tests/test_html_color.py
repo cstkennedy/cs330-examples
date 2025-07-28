@@ -8,35 +8,27 @@
 1 Test per mutator
 """
 
+import copy
+
 import pytest
 from hamcrest import *
 
 from html_color import HtmlColor
 
-"""
-    private HtmlColor black
-    private HtmlColor white
-    private HtmlColor red
-    private HtmlColor green
-    private HtmlColor blue
-    private HtmlColor rColor // "random" color
-
-    @BeforeEach
-    public void setUp()
-        throws HtmlColor.InvalidColorException
-    {
-        black  = HtmlColor()
-        white  = HtmlColor(255, 255, 255)
-        red    = HtmlColor(255, 0, 0)
-        green  = HtmlColor(0, 255, 0)
-        blue   = HtmlColor(0, 0, 255)
-        rColor = HtmlColor(7, 62, 55)
-    }
-"""
 
 @pytest.fixture
 def black() -> HtmlColor:
     yield HtmlColor()
+
+
+@pytest.fixture
+def white() -> HtmlColor:
+    yield HtmlColor(255, 255, 255)
+
+
+@pytest.fixture
+def blue() -> HtmlColor:
+    yield HtmlColor(0, 0, 255)
 
 
 def test_default_constructor(black: HtmlColor):
@@ -60,116 +52,73 @@ def test_non_default_constructor(black: HtmlColor):
     assert_that(hash(color), is_not(hash(black)))
     assert_that(str(color), equal_to("#073E37"))
 
-"""
 
-    @Test
-    public void testNonDefaultConstructorInvalidRed()
-        throws HtmlColor.InvalidColorException
-    {
-        assertThrows(HtmlColor.InvalidColorException.class,
-            ()-> {
-                HtmlColor color = HtmlColor(-1, 62, 55)
-            }
-        )
+def test_constructor_invalid_red():
+    with pytest.raises(HtmlColor.InvalidColorException):
+        _ = HtmlColor(-1, 62, 55)
 
-        assertThrows(HtmlColor.InvalidColorException.class,
-            ()-> {
-                HtmlColor color = HtmlColor(700, 62, 55)
-            }
-        )
-    }
-"""
+    with pytest.raises(HtmlColor.InvalidColorException):
+        _ = HtmlColor(700, 62, 55)
 
-"""
-    @Test
-    public void testNonDefaultConstructorInvalidGreen()
-        throws HtmlColor.InvalidColorException
-    {
-        assertThrows(HtmlColor.InvalidColorException.class,
-            ()-> {
-                HtmlColor color = HtmlColor(0, -1, 55)
-            }
-        )
 
-        assertThrows(HtmlColor.InvalidColorException.class,
-            ()-> {
-                HtmlColor color = HtmlColor(0, 620, 55)
-            }
-        )
-    }
+def test_constructor_invalid_green():
+    with pytest.raises(HtmlColor.InvalidColorException):
+        _ = HtmlColor(1, -1, 55)
 
-    @Test
-    public void testNonDefaultConstructorInvalidBlue()
-        throws HtmlColor.InvalidColorException
-    {
-        assertThrows(HtmlColor.InvalidColorException.class,
-            ()-> {
-                HtmlColor color = HtmlColor(0, 0, -55)
-            }
-        )
+    with pytest.raises(HtmlColor.InvalidColorException):
+        _ = HtmlColor(1, 700, 55)
 
-        assertThrows(HtmlColor.InvalidColorException.class,
-            ()-> {
-                HtmlColor color = HtmlColor(0, 62, 550)
-            }
-        )
-    }
 
-    @Test
-    public void testSetRed()
-        throws HtmlColor.InvalidColorException
-    {
-        HtmlColor color = (HtmlColor) black.clone()
-        int oldHashCode = color.hashCode()
+def test_constructor_invalid_blue():
+    with pytest.raises(HtmlColor.InvalidColorException):
+        _ = HtmlColor(0, 0, -10)
 
-        color.setRed(100)
+    with pytest.raises(HtmlColor.InvalidColorException):
+        _ = HtmlColor(0, 0, 300)
 
-        assert_that(color.red, is_(100))
-        assert_that(color.blue, is_(0))
-        assert_that(color.green, is_(0))
 
-        assert_that(color, is_(equal_to(color)))
-        assert_that(color, is_(not(equal_to(black))))
-        assert_that(color.hashCode(), not(oldHashCode))
-    }
+def test_set_red(black: HtmlColor):
+    color = copy.deepcopy(black)
+    old_hash_code = hash(color)
 
-    @Test
-    public void testSetGreen()
-        throws HtmlColor.InvalidColorException
-    {
-        HtmlColor color = (HtmlColor) blue.clone()
-        int oldHashCode = color.hashCode()
+    color.red = 100
 
-        color.setGreen(100)
+    assert_that(color.red, is_(100))
+    assert_that(color.blue, is_(0))
+    assert_that(color.green, is_(0))
 
-        assert_that(color.red, is_(0))
-        assert_that(color.blue, is_(255))
-        assert_that(color.green, is_(100))
+    assert_that(color, is_(equal_to(color)))
+    assert_that(color, is_not(equal_to(black)))
+    assert_that(hash(color), is_not(old_hash_code))
 
-        assert_that(color, is_(not(equal_to(blue))))
-        assert_that(color.hashCode(), not(oldHashCode))
-    }
 
-    @Test
-    public void testSetBlue()
-        throws HtmlColor.InvalidColorException
-    {
-        HtmlColor color = (HtmlColor) white.clone()
-        int oldHashCode = color.hashCode()
+def test_set_green(blue: HtmlColor):
+    color = copy.deepcopy(blue)
+    old_hash_code = hash(color)
 
-        color.setBlue(100)
+    color.green = 100
 
-        assert_that(color.red, is_(255))
-        assert_that(color.blue, is_(100))
-        assert_that(color.green, is_(255))
+    assert_that(color.red, is_(0))
+    assert_that(color.green, is_(100))
+    assert_that(color.blue, is_(255))
 
-        assert_that(color, is_(not(equal_to(white))))
-        assert_that(color.hashCode(), not(oldHashCode))
-        assert_that(color.toString(), equal_to("#FFFF64"))
+    assert_that(color, is_(equal_to(color)))
+    assert_that(color, is_not(equal_to(blue)))
+    assert_that(hash(color), is_not(old_hash_code))
 
-        //assertTrue(color.toString().contains("64"))
-        assert_that(color.toString(), containsString("64"))
-        /assert_that(color.toString(), containsString("FFFF"))
-    }
-}
-"""
+
+def test_set_blue(white: HtmlColor):
+    color = copy.deepcopy(white)
+    old_hash_code = hash(color)
+
+    color.blue = 100
+
+    assert_that(color.red, is_(255))
+    assert_that(color.green, is_(255))
+    assert_that(color.blue, is_(100))
+
+    assert_that(color, is_(equal_to(color)))
+    assert_that(color, is_not(equal_to(white)))
+    assert_that(hash(color), is_not(old_hash_code))
+
+    assert_that(color, has_string("#FFFF64"))
