@@ -25,48 +25,78 @@ This discussion is split into nine (9) examples:
 
   - **Example 1**
     - Basics of Polymorphism
-    - The recording is available at <https://youtu.be/rR4Ai2kHOR0> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+1/1_7v2tg7er>
+    - The recording is available on
+      [YouTube](https://youtu.be/rR4Ai2kHOR0)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=f274fe7d-fe60-48b7-ba6c-b3020118a5d8)
 
   - **Example 2**
     - Factory Pattern and *Interfaces as a Contract*
-    - The recording is available at <https://youtu.be/R3t0FecJfRA> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+2/1_ak6fq5nh>
+    - The recording is available on
+      [YouTube](https://youtu.be/R3t0FecJfRA)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=0b99309c-604b-4071-97ab-b3020118e26f)
 
   - **Example 3**
     - Subtyping (e.g., `List` vs `ArrayList`) and Iterators
-    - The recording is available at <https://youtu.be/z6_FzDDBQGI> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+3/1_2njgkdxo>
+    - The recording is available on
+      [YouTube](https://youtu.be/z6_FzDDBQGI)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=245f2f5f-d236-42f6-b525-b3020118fb2e)
 
   - **Example 4** 
     - Input (`BufferedReader` and `Scanner`), Shape `read` Method, and More
       Iterators
-    - The recording is available at <https://youtu.be/FteoxbG99Ic> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+4/1_ixmlacm9>
+    - The recording is available on
+      [YouTube](https://youtu.be/FteoxbG99Ic)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=cc6d9732-0ab5-4aaa-b38f-b30201191697)
 
   - **Example 5**
     - A *better* `ShapeFactory` implementation using a `LinkedHashMap<String, Shape>`
-    - The recording is available at <https://youtu.be/jf9OK0EH9bc> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+5/1_zrh07pda>
+    - The recording is available on
+      [YouTube](https://youtu.be/jf9OK0EH9bc)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=76ffae13-17d5-436d-a911-b30201194402)
 
   - **Example 6**
     - `Stream` API, Lambda Functions, fixing `Shape.name()`, and **replacing**
       `Shape.read`
-    - The recording is available at <https://youtu.be/AxWPjXq2SF8> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+6/1_1fd2x6gj>
+    - The recording is available on
+      [YouTube](https://youtu.be/AxWPjXq2SF8)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=c8162003-ddca-42e7-bea5-b30201196423)
 
   - **Example 7**
     - Separation of Concerns & Interfaces
-    - The recording is available at <https://youtu.be/SltynAF6UkY> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+7/1_e2eqfw4c>
+    - The recording is available on
+      [YouTube](https://youtu.be/SltynAF6UkY)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=110cc53d-526e-4807-845a-b30201197cf9)
 
   - **Example 8**
     - Generics and Trait Bounds in `ShapeIterator`, using `extends` with
       interfaces, converting an `Iterator` to a `Stream`.
-    - The recording is available at <https://youtu.be/Yz2nyYUAJOY> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+8/1_ed5cdhpi>
+    - The recording is available on
+      [YouTube](https://youtu.be/Yz2nyYUAJOY)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=8ad06ff6-22ab-4468-91df-b3020119a41d)
 
   - **Example 9 - Part 1**
     - Remove Copy Constructors and rewrite `clone` methods
     - Refactor driver logic and move IO logic into dedicated `ShapeParser`
-    - The recording is available at <https://youtu.be/wLwSxvf-KdY> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+9+%28Part+1%29/1_p3b0q0lo>
+    - The recording is available on
+      [YouTube](https://youtu.be/wLwSxvf-KdY)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=c533cace-131a-4897-abf7-b3020119ce5a)
 
   - **Example 9 - Part 2**
     - Remove Copy Constructors and rewrite `clone` methods
     - Refactor driver logic and move IO logic into dedicated `ShapeParser`
-    - The recording is available at <https://youtu.be/HwrTr5fvCj0> or <https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Java+Shapes+-+Example+9+%28Part+2%29/1_lr5tjj7t>
+    - The recording is available on
+      [YouTube](https://youtu.be/HwrTr5fvCj0)
+      or
+      [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=68fb0e16-ce1d-4891-9f50-b302011a172f)
 
 
 
