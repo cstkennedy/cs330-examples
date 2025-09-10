@@ -77,6 +77,7 @@ public class LinkedList<T> implements Collection<T>, Iterable<T>, Cloneable {
         this.tail = null;
         this.currentSize = 0;
     }
+
     @Override
     public boolean add(T toAdd)
     {
