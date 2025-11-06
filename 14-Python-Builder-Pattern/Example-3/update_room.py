@@ -21,7 +21,14 @@ def main():
     """
 
     # Construct the house within the build function
-    house = build_house()
+    house = (
+        HouseBuilder().with_rooms(
+            parse_room_from_str(line)
+            for line in ROOM_DATA.splitlines()
+            if line
+        )
+        .build()
+    )
     print(house)
 
     # Upgrade the flooring in a second duplicate house
@@ -45,38 +52,28 @@ def main():
     print(f"Max  : {max(costs):.2f}")
 
 
-def build_house():
+def parse_room_from_str(line: str) -> Room:
     """
-    Build our example house
+    T.B.W.
     """
 
-    # Read rooms into a list
-    rooms = []
-    for line in ROOM_DATA.splitlines():
-        # Skip blank lines
-        if not line:
-            continue
+    name, the_rest = line.strip().split(";")
+    the_rest = the_rest.split()
 
-        name, the_rest = line.strip().split(";")
-        the_rest = the_rest.split()
+    # Grab length and width first
+    length, width = [float(val) for val in the_rest[0:2]]
 
-        # Grab length and width first
-        length, width = [float(val) for val in the_rest[0:2]]
+    # The flooring name may have a space in it
+    flr_type = " ".join(the_rest[3:])
+    flr_cost = float(the_rest[2])
 
-        # The flooring name may have a space in it
-        flr_type = " ".join(the_rest[3:])
-        flr_cost = float(the_rest[2])
-
-        rooms.append(
-            RoomBuilder()
-            .with_name(name)
-            .with_dimensions(length, width)
-            .with_flooring(flr_type, flr_cost)
-            .build()
-        )
-
-    # Build a house using all the read in rooms
-    return HouseBuilder().with_rooms(rooms).build()
+    return (
+        RoomBuilder()
+        .with_name(name)
+        .with_dimensions(length, width)
+        .with_flooring(flr_type, flr_cost)
+        .build()
+    )
 
 
 def upgrade_flooring(original: House) -> House:
