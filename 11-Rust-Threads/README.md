@@ -9,4 +9,4 @@ The recording can be accessed on...
 
   - [YouTube](https://youtu.be/TKOMR8b9L8w)
     or
-    [Kaltura](https://odumedia.mediaspace.kaltura.com/media/CS+330+-+Rust+Threads/1_zjkorifg)
+    [Panopto](https://odu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=0d68a874-e72b-494b-a1d7-b302011d69b1)
