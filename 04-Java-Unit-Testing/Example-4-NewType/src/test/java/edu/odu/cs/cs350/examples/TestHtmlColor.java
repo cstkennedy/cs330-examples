@@ -84,6 +84,31 @@ public class TestHtmlColor {
         assertThat(HtmlColor.Component.clamp(value), is(255));
     }
 
+    @Test
+    public void testComponentFromInvalid()
+        throws HtmlColor.InvalidColorException
+    {
+        assertThrows(HtmlColor.InvalidColorException.class,
+            ()-> {
+                var comp = HtmlColor.Component.from(-1);
+            }
+        );
+
+        assertThrows(HtmlColor.InvalidColorException.class,
+            ()-> {
+                var comp = HtmlColor.Component.from(700);
+            }
+        );
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 10, 100, 200, 250, 254, 255})
+    public void testComponentFromInRange(int value)
+        throws HtmlColor.InvalidColorException
+    {
+        assertThat(HtmlColor.Component.from(value).value(), is(value));
+    }
+
     @ParameterizedTest
     @ValueSource(ints = {-100, -5, -1, 0})
     public void testComponentFromClampedBelowRange(int value)

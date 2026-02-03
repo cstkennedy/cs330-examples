@@ -11,6 +11,19 @@ import java.util.Objects;
 public class HtmlColor implements Cloneable
 {
     /**
+     * A situation occurred where the red component, green component, or blue
+     * component (or some combination) of the three (3) fell outside the range
+     * [0, 255].
+     */
+    public static class InvalidColorException extends Exception
+    {
+        public InvalidColorException(String message)
+        {
+            super(message);
+        }
+    }
+
+    /**
      * Represents a color component (red, green, or blue).
      */
     public static class Component
@@ -31,10 +44,19 @@ public class HtmlColor implements Cloneable
             return Math.min(Math.max(0, val), 255);
         }
 
-        // Not implemented
         public static Component from(int raw_val)
+            throws InvalidColorException
         {
-            return null;
+            if (raw_val < 0 || raw_val > 255) {
+                throw new InvalidColorException(
+                    String.format(
+                        "'%d' is not in the range [0, 255]",
+                        raw_val
+                    )
+                );
+            }
+
+            return new Component(raw_val);
         }
 
         public static Component from_clamped(int raw_val)
@@ -46,11 +68,13 @@ public class HtmlColor implements Cloneable
 
         private int val;
 
+        // The Java record does not allow a Constructor to be private.
         private Component()
         {
             this.val = 0;
         }
 
+        // The Java record does not allow a Constructor to be private.
         private Component(int sanitized_val)
         {
             this.val = sanitized_val;
