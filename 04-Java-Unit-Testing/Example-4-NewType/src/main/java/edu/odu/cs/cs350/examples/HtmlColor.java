@@ -60,6 +60,24 @@ public class HtmlColor implements Cloneable
         {
             return this.val;
         }
+
+        @Override
+        public boolean equals(Object rhsObj)
+        {
+            if (!(rhsObj instanceof Component)) {
+                return false;
+            }
+
+            Component rhs = (Component) rhsObj;
+
+            return this.val == rhs.val;
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return this.val;
+        }
     }
 
     private Component red;   ///< red color component [0,255]
@@ -159,9 +177,9 @@ public class HtmlColor implements Cloneable
 
         HtmlColor rhs = (HtmlColor) obj;
 
-        return this.red.value() == rhs.red.value()
-            && this.green.value() == rhs.green.value()
-            && this.blue.value() == rhs.blue.value();
+        return this.red.equals(rhs.red)
+            && this.green.equals(rhs.green)
+            && this.blue.equals(rhs.blue);
     }
 
     /**
@@ -169,7 +187,7 @@ public class HtmlColor implements Cloneable
      */
     public int hashCode()
     {
-        return Objects.hash(this.red.value(), this.green.value(), this.blue.value());
+        return Objects.hash(this.red, this.green, this.blue);
     }
 
     /**
