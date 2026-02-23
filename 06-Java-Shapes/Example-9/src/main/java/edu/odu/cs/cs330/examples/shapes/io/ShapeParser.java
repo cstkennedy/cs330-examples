@@ -55,6 +55,14 @@ public class ShapeParser
             return null;
         }
 
+        // Mistake...
+        // Forgot to handle shp = null if the name is unknown
+        /*
+        if (shp == null) {
+            return null;
+        }
+        */
+
         String restOfLine = splitLine[1];
         shp = (Shape) ShapeParser.initFromDims(shp, restOfLine);
 

@@ -25,6 +25,8 @@ import edu.odu.cs.cs330.examples.shapes.Triangle;
 import edu.odu.cs.cs330.examples.shapes.EquilateralTriangle;
 import edu.odu.cs.cs330.examples.shapes.RightTriangle;
 
+import edu.odu.cs.cs330.examples.shapes.io.ShapeParser;
+
 
 /**
  * 1 - Does this piece of code perform the operations
@@ -47,8 +49,8 @@ public class TestShapeParser
     final String TRIANGLE_INPUT = "Triangle; 5 7 9";
     final String INVALID_INPUT = "1337 Haxor; 1 lol i broke it";
 
-    final String ALL_VALID = String.join(
-        "\n",
+    final String ALL_LINES = String.join(
+        System.lineSeparator(),
         CIRCLE_INPUT,
         SQUARE_INPUT,
         EQL_TRIANGLE_INPUT,
@@ -56,6 +58,65 @@ public class TestShapeParser
         TRIANGLE_INPUT,
         INVALID_INPUT
     );
+
+    @Test
+    public void testParseLineSuccess()
+    {
+        final String inputString = CIRCLE_INPUT;
+        final Circle expectedCircle = new Circle(5);
+
+        final String[] splitLine = {"Circle", "5"};
+        final Shape shape = ShapeParser.parseShapeLine(splitLine);
+
+        assertThat(shape, is(instanceOf(Circle.class)));
+        assertThat(shape.toString(), is(equalTo(expectedCircle.toString())));
+    }
+
+    @Test
+    public void testParseLineFailure()
+    {
+        final String[] splitLine = {"ROFLMAO", "5 12"};
+        final Shape shape = ShapeParser.parseShapeLine(splitLine);
+
+        assertThat(shape, is(nullValue()));
+    }
+
+    private static BufferedReader stringAsBuffer(String aString)
+    {
+        return new BufferedReader(new StringReader(aString));
+    }
+
+    @Test
+    public void testReadCircle()
+        throws IOException
+    {
+        final List<Shape> shapes = ShapeParser.readShapes(
+            TestShapeParser.stringAsBuffer(CIRCLE_INPUT)
+        );
+        assertThat(shapes, hasSize(1));
+
+        final Shape shp = shapes.get(0);
+
+        assertThat(shp, is(instanceOf(Circle.class)));
+        assertThat(shp.name(), is(equalTo("Circle")));
+        assertThat(((Circle) shp).radius(), is(closeTo(5, 1e-8)));
+    }
+
+    @Test
+    public void testReadSquare()
+        throws IOException
+    {
+        final List<Shape> shapes = ShapeParser.readShapes(
+            TestShapeParser.stringAsBuffer(SQUARE_INPUT)
+        );
+        assertThat(shapes, hasSize(1));
+
+        final Shape shp = shapes.get(0);
+
+        assertThat(shp, is(instanceOf(Square.class)));
+        assertThat(shp.name(), is(equalTo("Square")));
+        assertThat(((Square) shp).side(), is(closeTo(9, 1e-8)));
+    }
 
     /*
     Consumable foodShape;
