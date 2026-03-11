@@ -106,8 +106,15 @@ impl PartialEq for House {
 #[derive(Default, Debug, PartialEq)]
 pub struct NoRooms;
 
+/*
 #[derive(Default, Debug, PartialEq)]
 pub struct WithRooms(Vec<Room>);
+
+impl WithRooms {
+    pub fn inner_value(self) -> Vec<Room> {
+        self.0
+    }
+}
 
 impl std::ops::Deref for WithRooms {
     type Target = Vec<Room>;
@@ -134,6 +141,39 @@ impl From<WithRooms> for Vec<Room> {
         value.0
     }
 }
+*/
+
+#[derive(Default, Debug, PartialEq)]
+pub struct WrappedType<T>(T);
+
+impl<T> WrappedType<T> {
+    pub fn inner_value(self) -> T {
+        self.0
+    }
+}
+
+impl<T> std::ops::Deref for WrappedType<T> {
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl<T> std::ops::DerefMut for WrappedType<T> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
+impl<T> From<T> for WrappedType<T> {
+    fn from(value: T) -> Self {
+        WrappedType::<T>(value)
+    }
+}
+
+pub type WithRooms = WrappedType<Vec<Room>>;
+
 
 #[derive(Debug, PartialEq)]
 pub struct HouseBuilder<SR> {
@@ -202,7 +242,7 @@ impl HouseBuilder<WithRooms> {
     pub fn build(self) -> House {
         House {
             name: self.name.to_owned(),
-            rooms: self.rooms.into(),
+            rooms: self.rooms.inner_value(),
         }
     }
 }

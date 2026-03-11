@@ -112,8 +112,7 @@ pub struct NoFlooring;
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct RoomBuilder<SN, SD, SF> {
     name: SN,
-    length: SD,
-    width: SD,
+    dimensions: SD,
     flooring: SF,
 }
 
@@ -121,19 +120,17 @@ impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
     pub fn new() -> Self {
         RoomBuilder {
             name: NoName,
-            length: NoDimensions,
-            width: NoDimensions,
+            dimensions: NoDimensions,
             flooring: NoFlooring,
         }
     }
 }
 
 impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
-    pub fn from_existing(self, room: &Room) -> RoomBuilder<String, f64, Flooring> {
+    pub fn from_existing(self, room: &Room) -> RoomBuilder<String, DimensionSet, Flooring> {
         RoomBuilder {
             name: room.name.clone(),
-            width: room.dimensions.width,
-            length: room.dimensions.length,
+            dimensions: room.dimensions.clone(),
             flooring: room.flooring.clone(),
         }
     }
@@ -141,8 +138,7 @@ impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
     pub fn with_name(self, nme: &str) -> RoomBuilder<String, NoDimensions, NoFlooring> {
         RoomBuilder {
             name: nme.into(),
-            length: self.length,
-            width: self.width,
+            dimensions: self.dimensions,
             flooring: self.flooring,
         }
     }
@@ -153,7 +149,7 @@ impl RoomBuilder<String, NoDimensions, NoFlooring> {
         self,
         length: f64,
         width: f64,
-    ) -> Result<RoomBuilder<String, f64, NoFlooring>, RoomErrorWithState<Self>> {
+    ) -> Result<RoomBuilder<String, DimensionSet, NoFlooring>, RoomErrorWithState<Self>> {
         match (length > 0.0, width > 0.0) {
             (false, false) => Err(RoomErrorWithState {
                 the_error: RoomError::InvalidDimensions(0.0),
@@ -169,26 +165,24 @@ impl RoomBuilder<String, NoDimensions, NoFlooring> {
             }),
             (true, true) => Ok(RoomBuilder {
                 name: self.name,
-                length: length,
-                width: width,
+                dimensions: DimensionSet::from((length, width)),
                 flooring: self.flooring,
             }),
         }
     }
 }
 
-impl<SF> RoomBuilder<String, f64, SF> {
-    pub fn with_flooring(self, flooring: Flooring) -> RoomBuilder<String, f64, Flooring> {
+impl<SF> RoomBuilder<String, DimensionSet, SF> {
+    pub fn with_flooring(self, flooring: Flooring) -> RoomBuilder<String, DimensionSet, Flooring> {
         RoomBuilder {
             name: self.name,
-            length: self.length,
-            width: self.width,
+            dimensions: self.dimensions,
             flooring: flooring,
         }
     }
 }
 
-impl RoomBuilder<String, f64, Flooring> {
+impl RoomBuilder<String, DimensionSet, Flooring> {
     pub fn with_dimensions(
         mut self,
         length: f64,
@@ -208,8 +202,8 @@ impl RoomBuilder<String, f64, Flooring> {
                 the_builder: self,
             }),
             (true, true) => {
-                self.length = length;
-                self.width = width;
+                self.dimensions.length = length;
+                self.dimensions.width = width;
 
                 Ok(self)
             }
@@ -219,7 +213,7 @@ impl RoomBuilder<String, f64, Flooring> {
     pub fn build(self) -> Room {
         Room {
             name: self.name,
-            dimensions: DimensionSet::new(self.length, self.width),
+            dimensions: self.dimensions,
             flooring: self.flooring,
         }
     }
