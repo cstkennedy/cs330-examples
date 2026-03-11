@@ -3,6 +3,7 @@ use std::vec::Vec;
 
 use crate::error::{HouseError, HouseErrorWithState};
 use crate::room::Room;
+use crate::builder_utils::WrappedType;
 
 type Collection = Vec<Room>;
 
@@ -143,35 +144,6 @@ impl From<WithRooms> for Vec<Room> {
 }
 */
 
-#[derive(Default, Debug, PartialEq)]
-pub struct WrappedType<T>(T);
-
-impl<T> WrappedType<T> {
-    pub fn inner_value(self) -> T {
-        self.0
-    }
-}
-
-impl<T> std::ops::Deref for WrappedType<T> {
-    type Target = T;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl<T> std::ops::DerefMut for WrappedType<T> {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
-impl<T> From<T> for WrappedType<T> {
-    fn from(value: T) -> Self {
-        WrappedType::<T>(value)
-    }
-}
-
 pub type WithRooms = WrappedType<Vec<Room>>;
 
 
@@ -241,7 +213,7 @@ impl HouseBuilder<WithRooms> {
 
     pub fn build(self) -> House {
         House {
-            name: self.name.to_owned(),
+            name: self.name,
             rooms: self.rooms.inner_value(),
         }
     }

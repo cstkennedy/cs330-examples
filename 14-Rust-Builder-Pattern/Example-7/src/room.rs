@@ -1,8 +1,10 @@
-use crate::error::*;
-use crate::flooring::*;
 use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
+
+use crate::error::*;
+use crate::flooring::*;
+use crate::builder_utils::WrappedType;
 
 #[derive(Clone, Debug)]
 pub struct DimensionSet {
@@ -104,6 +106,10 @@ pub struct NoDimensions;
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct NoFlooring;
 
+type WithName = WrappedType<String>;
+type WithDimensions = WrappedType<DimensionSet>;
+type WithFlooring = WrappedType<Flooring>;
+
 /// The RoomBuilder's state is defined by three generics
 ///   - SN - (State Name) whether the name is set
 ///   - SD - (State Dimensions) whether the length and width are set
@@ -127,15 +133,15 @@ impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
 }
 
 impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
-    pub fn from_existing(self, room: &Room) -> RoomBuilder<String, DimensionSet, Flooring> {
+    pub fn from_existing(self, room: &Room) -> RoomBuilder<WithName, WithDimensions, WithFlooring> {
         RoomBuilder {
-            name: room.name.clone(),
-            dimensions: room.dimensions.clone(),
-            flooring: room.flooring.clone(),
+            name: room.name.clone().into(),
+            dimensions: room.dimensions.clone().into(),
+            flooring: room.flooring.clone().into(),
         }
     }
 
-    pub fn with_name(self, nme: &str) -> RoomBuilder<String, NoDimensions, NoFlooring> {
+    pub fn with_name(self, nme: &str) -> RoomBuilder<WithName, NoDimensions, NoFlooring> {
         RoomBuilder {
             name: nme.into(),
             dimensions: self.dimensions,
@@ -144,12 +150,12 @@ impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
     }
 }
 
-impl RoomBuilder<String, NoDimensions, NoFlooring> {
+impl RoomBuilder<WithName, NoDimensions, NoFlooring> {
     pub fn with_dimensions(
         self,
         length: f64,
         width: f64,
-    ) -> Result<RoomBuilder<String, DimensionSet, NoFlooring>, RoomErrorWithState<Self>> {
+    ) -> Result<RoomBuilder<WithName, WithDimensions, NoFlooring>, RoomErrorWithState<Self>> {
         match (length > 0.0, width > 0.0) {
             (false, false) => Err(RoomErrorWithState {
                 the_error: RoomError::InvalidDimensions(0.0),
@@ -165,24 +171,24 @@ impl RoomBuilder<String, NoDimensions, NoFlooring> {
             }),
             (true, true) => Ok(RoomBuilder {
                 name: self.name,
-                dimensions: DimensionSet::from((length, width)),
+                dimensions: DimensionSet::from((length, width)).into(),
                 flooring: self.flooring,
             }),
         }
     }
 }
 
-impl<SF> RoomBuilder<String, DimensionSet, SF> {
-    pub fn with_flooring(self, flooring: Flooring) -> RoomBuilder<String, DimensionSet, Flooring> {
+impl<SF> RoomBuilder<WithName, WithDimensions, SF> {
+    pub fn with_flooring(self, flooring: Flooring) -> RoomBuilder<WithName, WithDimensions, WithFlooring> {
         RoomBuilder {
             name: self.name,
-            dimensions: self.dimensions,
-            flooring: flooring,
+            dimensions: self.dimensions.into(),
+            flooring: flooring.into(),
         }
     }
 }
 
-impl RoomBuilder<String, DimensionSet, Flooring> {
+impl RoomBuilder<WithName, WithDimensions, WithFlooring> {
     pub fn with_dimensions(
         mut self,
         length: f64,
@@ -212,9 +218,9 @@ impl RoomBuilder<String, DimensionSet, Flooring> {
 
     pub fn build(self) -> Room {
         Room {
-            name: self.name,
-            dimensions: self.dimensions,
-            flooring: self.flooring,
+            name: self.name.inner_value(),
+            dimensions: self.dimensions.inner_value(),
+            flooring: self.flooring.inner_value(),
         }
     }
 }
