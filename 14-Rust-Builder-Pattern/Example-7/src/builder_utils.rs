@@ -28,6 +28,14 @@ impl<T> From<T> for WrappedType<T> {
     }
 }
 
+/*
+impl<T> From<WrappedType<T>> for T {
+    fn from(value: WrappedType<T>) -> Self {
+        value.0
+    }
+}
+*/
+
 impl From<&str> for WrappedType<String> {
     fn from(value: &str) -> Self {
         Self::from(value.to_owned())
