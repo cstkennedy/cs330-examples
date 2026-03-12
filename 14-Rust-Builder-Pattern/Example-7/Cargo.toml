@@ -12,6 +12,7 @@ itertools = "*"
 typed-builder = "0.18.1"
 thiserror = "2.0.0"
 eyre = "0.6.12"
+log = "0.4.27"
 
 [dev-dependencies]
 hamcrest2 = "*"

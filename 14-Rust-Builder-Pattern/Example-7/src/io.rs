@@ -4,6 +4,7 @@ use std::io::BufRead;
 use std::io::BufReader;
 
 use itertools::Itertools;
+use log;
 
 use crate::error::{HouseError, ParseError, RoomError};
 use crate::flooring::Flooring;
@@ -111,7 +112,13 @@ impl HouseParser {
                     .lines()
                     .flatten()
                     .filter(|line| !line.is_empty())
-                    .flat_map(|line| Room::from_str(&line))
+                    .map(|line| Room::from_str(&line))
+                    .inspect(|room_result| {
+                        if let Err(error) = room_result {
+                            log::debug!("{}", error);
+                        }
+                    })
+                    .flatten()
                     .collect(),
             )?
             .build();
