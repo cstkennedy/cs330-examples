@@ -11,12 +11,12 @@ fn test_dimension_set() {
     assert_that!(dims.length, is(close_to(1.0, 0.01)));
     assert_that!(dims.width, is(close_to(1.0, 0.01)));
 
-    let dims = DimensionSet::new(2.0, 3.0);
+    let dims: DimensionSet = (2.0, 3.0).try_into().unwrap();
 
     assert_that!(dims.length, is(close_to(2.0, 0.01)));
     assert_that!(dims.width, is(close_to(3.0, 0.01)));
 
-    let dims: DimensionSet = (4.0, 5.0).into();
+    let dims: DimensionSet = (4.0, 5.0).try_into().unwrap();
 
     assert_that!(dims.length, is(close_to(4.0, 0.01)));
     assert_that!(dims.width, is(close_to(5.0, 0.01)));

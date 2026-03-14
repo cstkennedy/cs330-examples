@@ -2,9 +2,9 @@ use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
 
+use crate::builder_utils::WrappedType;
 use crate::error::*;
 use crate::flooring::*;
-use crate::builder_utils::WrappedType;
 
 #[derive(Clone, Debug)]
 pub struct DimensionSet {
@@ -13,7 +13,7 @@ pub struct DimensionSet {
 }
 
 impl DimensionSet {
-    pub fn new(l: f64, w: f64) -> Self {
+    fn new(l: f64, w: f64) -> Self {
         DimensionSet {
             length: l,
             width: w,
@@ -27,9 +27,26 @@ impl Default for DimensionSet {
     }
 }
 
+/*
 impl From<(f64, f64)> for DimensionSet {
     fn from(dims: (f64, f64)) -> Self {
         DimensionSet::new(dims.0, dims.1)
+    }
+}
+*/
+
+impl TryFrom<(f64, f64)> for DimensionSet {
+    type Error = RoomError;
+
+    fn try_from(dims: (f64, f64)) -> Result<Self, Self::Error> {
+        let (length, width) = dims;
+
+        match (length > 0.0, width > 0.0) {
+            (false, false) => Err(RoomError::InvalidDimensions(0.0)),
+            (false, true) => Err(RoomError::InvalidLength(0.0)),
+            (true, false) => Err(RoomError::InvalidWidth(0.0)),
+            (true, true) => Ok(DimensionSet::new(length, width)),
+        }
     }
 }
 
@@ -156,22 +173,14 @@ impl RoomBuilder<WithName, NoDimensions, NoFlooring> {
         length: f64,
         width: f64,
     ) -> Result<RoomBuilder<WithName, WithDimensions, NoFlooring>, RoomErrorWithState<Self>> {
-        match (length > 0.0, width > 0.0) {
-            (false, false) => Err(RoomErrorWithState {
-                the_error: RoomError::InvalidDimensions(0.0),
+        match DimensionSet::try_from((length, width)) {
+            Err(error) => Err(RoomErrorWithState {
+                the_error: error,
                 the_builder: self,
             }),
-            (false, true) => Err(RoomErrorWithState {
-                the_error: RoomError::InvalidLength(0.0),
-                the_builder: self,
-            }),
-            (true, false) => Err(RoomErrorWithState {
-                the_error: RoomError::InvalidWidth(0.0),
-                the_builder: self,
-            }),
-            (true, true) => Ok(RoomBuilder {
+            Ok(dims) => Ok(RoomBuilder {
                 name: self.name,
-                dimensions: DimensionSet::from((length, width)).into(),
+                dimensions: dims.into(),
                 flooring: self.flooring,
             }),
         }
@@ -179,7 +188,10 @@ impl RoomBuilder<WithName, NoDimensions, NoFlooring> {
 }
 
 impl<SF> RoomBuilder<WithName, WithDimensions, SF> {
-    pub fn with_flooring(self, flooring: Flooring) -> RoomBuilder<WithName, WithDimensions, WithFlooring> {
+    pub fn with_flooring(
+        self,
+        flooring: Flooring,
+    ) -> RoomBuilder<WithName, WithDimensions, WithFlooring> {
         RoomBuilder {
             name: self.name,
             dimensions: self.dimensions.into(),
@@ -194,22 +206,13 @@ impl RoomBuilder<WithName, WithDimensions, WithFlooring> {
         length: f64,
         width: f64,
     ) -> Result<Self, RoomErrorWithState<Self>> {
-        match (length > 0.0, width > 0.0) {
-            (false, false) => Err(RoomErrorWithState {
-                the_error: RoomError::InvalidDimensions(0.0),
+        match DimensionSet::try_from((length, width)) {
+            Err(error) => Err(RoomErrorWithState {
+                the_error: error,
                 the_builder: self,
             }),
-            (false, true) => Err(RoomErrorWithState {
-                the_error: RoomError::InvalidLength(0.0),
-                the_builder: self,
-            }),
-            (true, false) => Err(RoomErrorWithState {
-                the_error: RoomError::InvalidWidth(0.0),
-                the_builder: self,
-            }),
-            (true, true) => {
-                self.dimensions.length = length;
-                self.dimensions.width = width;
+            Ok(dims) => {
+                self.dimensions = dims.into();
 
                 Ok(self)
             }

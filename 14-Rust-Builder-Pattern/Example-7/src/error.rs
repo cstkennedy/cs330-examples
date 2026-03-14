@@ -13,6 +13,18 @@ pub enum ParseError {
 
     #[error("{0}")]
     IOError(#[from] std::io::Error),
+
+    #[error("{0}")]
+    ParseFloatError(#[from] std::num::ParseFloatError),
+}
+
+#[derive(Debug, Error)]
+pub enum FlooringError {
+    #[error("'unit cost' must be > {0}")]
+    InvalidCost(f64),
+
+    #[error("{0:?}")]
+    ParseFloatError(#[from] std::num::ParseFloatError),
 }
 
 #[derive(Debug, Error)]
@@ -26,11 +38,17 @@ pub enum RoomError {
     #[error("'width' must be > {0}")]
     InvalidWidth(f64),
 
-    #[error("'unit cost' must be > {0}")]
-    InvalidCost(f64),
+    #[error("{0:?}")]
+    FlooringError(#[from] FlooringError),
 
     #[error("{0:?}")]
     ParseError(#[from] ParseError),
+}
+
+impl From<std::num::ParseFloatError> for RoomError {
+    fn from(error: std::num::ParseFloatError) -> Self {
+        ParseError::from(error).into()
+    }
 }
 
 #[derive(Debug, Error)]

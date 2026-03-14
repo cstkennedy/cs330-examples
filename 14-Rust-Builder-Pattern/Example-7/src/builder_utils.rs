@@ -1,4 +1,3 @@
-
 #[derive(Default, Clone, Debug, PartialEq)]
 pub struct WrappedType<T>(T);
 

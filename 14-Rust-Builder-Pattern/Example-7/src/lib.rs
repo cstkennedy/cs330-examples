@@ -1,5 +1,5 @@
-pub mod error;
 mod builder_utils;
+pub mod error;
 pub mod flooring;
 pub mod house;
 pub mod io;

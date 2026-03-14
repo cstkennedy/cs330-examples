@@ -1,9 +1,9 @@
 use std::fmt::{self, Display, Formatter};
 use std::vec::Vec;
 
+use crate::builder_utils::WrappedType;
 use crate::error::{HouseError, HouseErrorWithState};
 use crate::room::Room;
-use crate::builder_utils::WrappedType;
 
 type Collection = Vec<Room>;
 
@@ -145,7 +145,6 @@ impl From<WithRooms> for Vec<Room> {
 */
 
 pub type WithRooms = WrappedType<Vec<Room>>;
-
 
 #[derive(Debug, PartialEq)]
 pub struct HouseBuilder<SR> {
