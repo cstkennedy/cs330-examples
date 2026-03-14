@@ -3,7 +3,7 @@ use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
 
 use crate::builder_utils::WrappedType;
-use crate::error::{DimensionError, RoomError, RoomErrorWithState};
+use crate::error::{DimensionError};
 use crate::flooring::*;
 
 #[derive(Clone, Debug)]
@@ -26,14 +26,6 @@ impl Default for DimensionSet {
         DimensionSet::new(1f64, 1f64)
     }
 }
-
-/*
-impl From<(f64, f64)> for DimensionSet {
-    fn from(dims: (f64, f64)) -> Self {
-        DimensionSet::new(dims.0, dims.1)
-    }
-}
-*/
 
 impl TryFrom<(f64, f64)> for DimensionSet {
     type Error = DimensionError;
@@ -77,8 +69,7 @@ impl Default for Room {
     fn default() -> Self {
         Room::builder()
             .with_name("Generic")
-            .with_dimensions(1.0, 1.0)
-            .unwrap()
+            .with_checked_dimensions(DimensionSet::default())
             .with_flooring(Flooring::default())
             .build()
     }
@@ -168,25 +159,6 @@ impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
 }
 
 impl RoomBuilder<WithName, NoDimensions, NoFlooring> {
-    #[deprecated]
-    pub fn with_dimensions(
-        self,
-        length: f64,
-        width: f64,
-    ) -> Result<RoomBuilder<WithName, WithDimensions, NoFlooring>, RoomErrorWithState<Self>> {
-        match DimensionSet::try_from((length, width)) {
-            Err(error) => Err(RoomErrorWithState {
-                the_error: error.into(),
-                the_builder: self,
-            }),
-            Ok(dims) => Ok(RoomBuilder {
-                name: self.name,
-                dimensions: dims.into(),
-                flooring: self.flooring,
-            }),
-        }
-    }
-
     pub fn with_checked_dimensions(
         self,
         dimensions: DimensionSet,
@@ -213,25 +185,6 @@ impl<SF> RoomBuilder<WithName, WithDimensions, SF> {
 }
 
 impl RoomBuilder<WithName, WithDimensions, WithFlooring> {
-    #[deprecated]
-    pub fn with_dimensions(
-        mut self,
-        length: f64,
-        width: f64,
-    ) -> Result<Self, RoomErrorWithState<Self>> {
-        match DimensionSet::try_from((length, width)) {
-            Err(error) => Err(RoomErrorWithState {
-                the_error: error.into(),
-                the_builder: self,
-            }),
-            Ok(dims) => {
-                self.dimensions = dims.into();
-
-                Ok(self)
-            }
-        }
-    }
-
     pub fn with_checked_dimensions(mut self, dimensions: DimensionSet) -> Self {
         self.dimensions = dimensions.into();
 

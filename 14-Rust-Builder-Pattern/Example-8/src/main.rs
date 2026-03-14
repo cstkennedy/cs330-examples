@@ -77,8 +77,8 @@ fn upgrade_flooring<'a, I>(original_rooms: I) -> Result<House, HouseError>
     where I: Iterator<Item=&'a Room>
 {
     let new_flooring = Flooring::builder()
-        .type_name("Stone Bricks".into())
-        .unit_cost(12.97)
+        .with_name("Stone Bricks".into())
+        .with_unit_cost(12.97.try_into()?)
         .build();
 
     let house = House::builder()

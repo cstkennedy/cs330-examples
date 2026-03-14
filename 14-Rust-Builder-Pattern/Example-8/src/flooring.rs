@@ -62,24 +62,8 @@ impl FlooringBuilder {
         }
     }
 
-    // accepting a String is not idiomatic Rust
-    // the type should be &str
-    #[deprecated]
-    pub fn type_name(mut self, name: String) -> Self {
-        self.type_name = name;
-
-        self
-    }
-
     pub fn with_name(mut self, name: &str) -> Self {
         self.type_name = name.to_owned();
-
-        self
-    }
-
-    #[deprecated]
-    pub fn unit_cost(mut self, cost: f64) -> Self {
-        self.unit_cost = cost;
 
         self
     }

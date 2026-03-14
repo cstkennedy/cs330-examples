@@ -6,7 +6,7 @@ use std::str::FromStr;
 use itertools::Itertools;
 use log;
 
-use crate::error::{CostError, DimensionError, HouseError, ParseRoomError, RoomError};
+use crate::error::{CostError, DimensionError, HouseError, ParseRoomError};
 use crate::flooring::{Cost, Flooring};
 use crate::house::House;
 use crate::room::{DimensionSet, Room};
@@ -66,8 +66,6 @@ impl FromStr for Room {
     fn from_str(line: &str) -> Result<Self, Self::Err> {
         let (name, the_rest) = separate_name_from_rest(&line)?;
 
-        // let length: f64 = the_rest[0].parse()?;
-        // let width: f64 = the_rest[1].parse()?;
         let dimensions = DimensionSet::try_from((the_rest[0], the_rest[1]))?;
         let unit_cost: Cost = the_rest[2].parse()?;
 
@@ -77,10 +75,10 @@ impl FromStr for Room {
 
         let room = Room::builder()
             .with_name(name)
-            .with_dimensions(dimensions.length, dimensions.width)?
+            .with_checked_dimensions(dimensions)
             .with_flooring(
                 Flooring::builder()
-                    .type_name(flooring_name)
+                    .with_name(&flooring_name)
                     .with_unit_cost(unit_cost)
                     .build(),
             )

@@ -41,6 +41,12 @@ pub enum RoomError {
     FlooringError(#[from] FlooringError),
 }
 
+impl From<CostError> for RoomError {
+    fn from(cost_error: CostError) -> Self {
+        RoomError::from(FlooringError::from(cost_error))
+    }
+}
+
 #[derive(Debug, Error)]
 pub enum ParseRoomError {
     #[error("'{delim}' missing in '{line}'")]
@@ -60,10 +66,6 @@ pub enum ParseRoomError {
 
     #[error("{0}")]
     FlooringError(#[from] FlooringError),
-
-    // TODO: Remove
-    #[error("{0}")]
-    RoomError(#[from] RoomError),
 }
 
 
@@ -75,15 +77,17 @@ impl From<CostError> for ParseRoomError {
 
 #[derive(Debug, Error)]
 pub enum HouseError {
+    #[error("{0}")]
+    RoomError(#[from] RoomError),
+
     #[error("A house must have at least 1 room")]
     ZeroRooms,
 }
 
-#[derive(Debug, Error)]
-pub struct ErrorWithState<E: std::error::Error, S> {
-    #[source]
-    pub the_error: E,
-    pub the_state: S,
+impl From<CostError> for HouseError {
+    fn from(cost_error: CostError) -> Self {
+        HouseError::from(RoomError::from(cost_error))
+    }
 }
 
 #[derive(Debug, Error)]
@@ -93,35 +97,7 @@ pub struct BuildErrorWithState<E: std::error::Error, B> {
     pub the_builder: B,
 }
 
-impl<E, S> From<ErrorWithState<E, S>> for BuildErrorWithState<E, S>
-where
-    E: std::error::Error,
-{
-    fn from(source: ErrorWithState<E, S>) -> Self {
-        BuildErrorWithState {
-            the_error: source.the_error,
-            the_builder: source.the_state,
-        }
-    }
-}
-
-// TODO: Remove
-pub type RoomErrorWithState<S> = BuildErrorWithState<RoomError, S>;
 pub type HouseErrorWithState<S> = BuildErrorWithState<HouseError, S>;
-
-// TODO: Remove
-impl<S> From<RoomErrorWithState<S>> for RoomError {
-    fn from(source_with_state: RoomErrorWithState<S>) -> Self {
-        source_with_state.the_error
-    }
-}
-
-// TODO: Remove
-impl<S> From<RoomErrorWithState<S>> for ParseRoomError {
-    fn from(source_with_state: RoomErrorWithState<S>) -> Self {
-        ParseRoomError::from(source_with_state.the_error)
-    }
-}
 
 impl<S> From<HouseErrorWithState<S>> for HouseError {
     fn from(source_with_state: HouseErrorWithState<S>) -> Self {
