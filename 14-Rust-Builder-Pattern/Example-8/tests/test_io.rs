@@ -4,15 +4,13 @@ use room_renovation::io::HouseParser;
 use room_renovation::room::*;
 
 use std::io::BufReader;
-use stringreader::StringReader;
 
 use hamcrest2::prelude::*;
 use rstest::rstest;
 
 #[rstest]
 fn test_empty_string() {
-    let str_reader = StringReader::new("");
-    let str_reader = BufReader::new(str_reader);
+    let str_reader = BufReader::new("".as_bytes());
     let house = HouseParser::read_house(str_reader);
 
     assert_that!(house, is(err()));
@@ -35,15 +33,13 @@ fn test_blank_string_white_space() {
 
 #[rstest]
 fn test_malformed_lines_only_name() {
-    let line = "Kitchen";
-    let str_reader = StringReader::new(&line);
-    let str_reader = BufReader::new(str_reader);
+    let line = "Kitchen".as_bytes();
+    let str_reader = BufReader::new(line);
     let house = HouseParser::read_house(str_reader);
     assert_that!(house, is(err()));
 
     let lines = ["Kitchen", "", " Storage    "].join(";\n");
-    let str_reader = StringReader::new(&lines);
-    let str_reader = BufReader::new(str_reader);
+    let str_reader = BufReader::new(lines.as_bytes());
 
     let house = HouseParser::read_house(str_reader);
     assert_that!(house, is(err()));
@@ -59,8 +55,7 @@ fn test_malformed_lines_only_name() {
 #[case(["", "4", "5", "7.5", ""])]
 fn test_malformed_lines_missing_tokens(#[case] tokens: [&str; 5]) {
     let line = tokens.join(" ");
-    let str_reader = StringReader::new(&line);
-    let str_reader = BufReader::new(str_reader);
+    let str_reader = BufReader::new(line.as_bytes());
 
     let house = HouseParser::read_house(str_reader);
     assert_that!(house, is(err()));
@@ -69,8 +64,7 @@ fn test_malformed_lines_missing_tokens(#[case] tokens: [&str; 5]) {
 #[rstest]
 fn test_one_room() {
     let line = "Kitchen; 4 5 7.5 Vinyl Plank";
-    let str_reader = StringReader::new(line);
-    let str_reader = BufReader::new(str_reader);
+    let str_reader = BufReader::new(line.as_bytes());
 
     let house = HouseParser::read_house(str_reader);
 
@@ -81,25 +75,9 @@ fn test_one_room() {
     assert_that!(house.len(), is(equal_to(1)));
 }
 
-#[rstest]
-fn test_two_rooms() {
-    let lines = [
-        "Kitchen; 4 5 7.5 Vinyl Plank",
-        "Storage Room; 2 4 7.5 Vinyl Plank",
-    ]
-    .join("\n");
-    let str_reader = StringReader::new(&lines);
-    let str_reader = BufReader::new(str_reader);
-
-    let house = HouseParser::read_house(str_reader);
-
-    assert_that!(&house, is(ok()));
-
-    let house = house.unwrap();
-    assert_that!(house.get_name(), is(equal_to("House")));
-    assert_that!(house.len(), is(equal_to(2)));
-
-    let expected_rooms = [
+#[rstest::fixture]
+fn expected_rooms() -> [Room; 2] {
+    [
         Room::builder()
             .with_name("Kitchen")
             .with_checked_dimensions((4.0, 5.0).try_into().unwrap())
@@ -120,7 +98,25 @@ fn test_two_rooms() {
                     .build(),
             )
             .build(),
-    ];
+    ]
+}
+
+#[rstest]
+fn test_two_rooms(expected_rooms: [Room; 2]) {
+    let lines = [
+        "Kitchen; 4 5 7.5 Vinyl Plank",
+        "Storage Room; 2 4 7.5 Vinyl Plank",
+    ]
+    .join("\n");
+    let str_reader = BufReader::new(lines.as_bytes());
+
+    let house = HouseParser::read_house(str_reader);
+
+    assert_that!(&house, is(ok()));
+
+    let house = house.unwrap();
+    assert_that!(house.get_name(), is(equal_to("House")));
+    assert_that!(house.len(), is(equal_to(2)));
 
     let num_matching_rooms: usize = expected_rooms
         .iter()
