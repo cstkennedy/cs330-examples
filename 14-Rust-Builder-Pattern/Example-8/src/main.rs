@@ -2,11 +2,6 @@ use itertools::{Itertools, MinMaxResult};
 use ordered_float::OrderedFloat;
 use std::iter::Sum;
 
-// use std::io::BufReader;
-// use std::fs::File;
-// use std::env;
-use std::vec::Vec;
-
 use eyre::{self, Result, WrapErr};
 use simple_logger::SimpleLogger;
 

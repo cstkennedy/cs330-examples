@@ -2,14 +2,26 @@ use room_renovation::flooring::*;
 use room_renovation::house::*;
 use room_renovation::room::*;
 
+use rstest::rstest;
 use hamcrest2::prelude::*;
 
-#[test]
-fn test_cost() {
+#[rstest]
+#[case(0.0)]
+#[case(f64::MIN_POSITIVE)]
+#[case(0.01)]
+#[case(0.10)]
+#[case(1.10)]
+#[case(f64::MAX)]
+fn test_cost_ok(#[case] raw_cost: f64) {
+    assert_that!(Cost::try_from(raw_cost), is(ok()))
+}
+
+#[rstest]
+fn test_cost_err() {
     todo!()
 }
 
-#[test]
+#[rstest]
 fn test_defaults() {
     let flooring = Flooring::builder().build();
 
