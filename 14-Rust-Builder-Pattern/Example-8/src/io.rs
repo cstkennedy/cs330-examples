@@ -88,6 +88,7 @@ impl FromStr for Room {
     }
 }
 
+// TODO: Rewrite to use nom parser
 pub struct HouseParser;
 
 impl HouseParser {
