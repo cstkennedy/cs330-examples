@@ -7,6 +7,14 @@ use crate::error::{MoveError, StrategyCreationError, StrategyError};
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Move(usize);
 
+impl std::ops::Deref for Move {
+    type Target = usize;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
 impl From<Move> for usize {
     fn from(val: Move) -> usize {
         val.0

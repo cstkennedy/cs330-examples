@@ -68,7 +68,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
             match player.next_move() {
                 Ok(selected_move) => {
                     if Referee::selected_cell_is_empty(selected_move.into(), board) {
-                        let _ = board.set_cell(selected_move.into(), symbol);
+                        let _ = board.set_cell(*selected_move, symbol);
                         break;
                     }
                 }
