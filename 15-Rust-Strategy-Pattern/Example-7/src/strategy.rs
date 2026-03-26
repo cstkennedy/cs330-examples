@@ -61,7 +61,7 @@ impl PredefinedMoves {
             .collect();
 
         if validated_moves.is_empty() {
-            return Err(MoveError::BatchValueError(format!("{:?}", some_moves)).into());
+            return Err(StrategyCreationError::NoValidMoves(some_moves.into()));
         }
 
         Ok(PredefinedMoves {
@@ -69,39 +69,23 @@ impl PredefinedMoves {
             move_idx: 0,
         })
     }
-}
 
-impl TryFrom<&[usize]> for PredefinedMoves {
-    type Error = StrategyCreationError;
+    pub fn from_iterable_nondiscarding<I>(raw_moves: I) -> Result<PredefinedMoves, StrategyCreationError>
+        where I: IntoIterator<Item=usize>
+    {
+        let some_moves: Vec<usize> = raw_moves.into_iter().collect();
 
-    fn try_from(some_moves: &[usize]) -> Result<PredefinedMoves, Self::Error> {
         let validated_moves: Vec<Move> = some_moves.iter()
             .copied()
             .flat_map(Move::try_from)
             .collect();
 
-        if validated_moves.len() != some_moves.len() {
-            return Err(MoveError::BatchValueError(format!("{:?}", some_moves)).into());
+        if validated_moves.is_empty() {
+            return Err(StrategyCreationError::NoValidMoves(some_moves.into()));
         }
 
-        Ok(PredefinedMoves {
-            my_moves: validated_moves,
-            move_idx: 0,
-        })
-    }
-}
-
-impl<const N: usize> TryFrom<&[usize; N]> for PredefinedMoves {
-    type Error = StrategyCreationError;
-
-    fn try_from(some_moves: &[usize; N]) -> Result<PredefinedMoves, Self::Error> {
-        let validated_moves: Vec<Move> = some_moves.iter()
-            .copied()
-            .flat_map(Move::try_from)
-            .collect();
-
         if validated_moves.len() != some_moves.len() {
-            return Err(MoveError::BatchValueError(format!("{:?}", some_moves)).into());
+            return Err(MoveError::BatchValueError(some_moves.into()).into());
         }
 
         Ok(PredefinedMoves {

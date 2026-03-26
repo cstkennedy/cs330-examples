@@ -12,7 +12,7 @@ use tictactoe::r#move::Move;
 fn a_player<'a>() -> Player<'a> {
     Player::builder()
         .with_name("Jay")
-        .with_strategy(PredefinedMoves::try_from(&[5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap())
+        .with_strategy(PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap())
         .build()
 }
 

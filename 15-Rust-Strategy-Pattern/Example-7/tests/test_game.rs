@@ -7,8 +7,8 @@ use tictactoe::prelude::*;
 
 #[rstest]
 fn test_out_of_moves_player_1() {
-    let moves_for_tom: &[usize] = &[5, 1];
-    let moves_for_jay: &[usize] = &[5, 1, 3, 7, 9, 2, 4, 6, 8];
+    let moves_for_tom: [usize; 2] = [5, 1];
+    let moves_for_jay: [usize; 9] = [5, 1, 3, 7, 9, 2, 4, 6, 8];
 
     #[rustfmt::skip]
     let game = Game::new()
@@ -16,7 +16,7 @@ fn test_out_of_moves_player_1() {
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::try_from(moves_for_tom).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding(moves_for_tom).unwrap()
                 )
                 .build()
         )
@@ -24,7 +24,7 @@ fn test_out_of_moves_player_1() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::try_from(moves_for_jay).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding(moves_for_jay).unwrap()
                 )
                 .build(),
         )
@@ -55,7 +55,7 @@ fn test_out_of_moves_player_2() {
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
                 )
                 .build()
         )
@@ -63,7 +63,7 @@ fn test_out_of_moves_player_2() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[5, 1]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1]).unwrap()
                 )
                 .build(),
         )
@@ -89,7 +89,7 @@ fn test_stalemate() {
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
                 )
                 .build()
         )
@@ -97,7 +97,7 @@ fn test_stalemate() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
                 )
                 .build(),
         )
@@ -123,7 +123,7 @@ fn test_win_player_1() {
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[5, 1, 9]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 9]).unwrap()
                 )
                 .build()
         )
@@ -131,7 +131,7 @@ fn test_win_player_1() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[5, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 3, 7, 9, 2, 4, 6, 8]).unwrap()
                 )
                 .build(),
         )
@@ -157,7 +157,7 @@ fn test_win_player_2() {
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[5, 1, 2, 4]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 2, 4]).unwrap()
                 )
                 .build()
         )
@@ -165,7 +165,7 @@ fn test_win_player_2() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::try_from(&[3, 6, 9]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([3, 6, 9]).unwrap()
                 )
                 .build(),
         )
