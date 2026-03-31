@@ -3,7 +3,6 @@ use crate::strategy::KeyboardStrategy;
 use crate::strategy::Strategy;
 use crate::r#move::Move;
 
-pub const DEFAULT_NAME: &str = "I. C. Generic";
 
 #[derive(Debug)]
 pub struct Player<'a> {
@@ -13,6 +12,8 @@ pub struct Player<'a> {
 }
 
 impl<'a> Player<'a> {
+    pub const DEFAULT_NAME: &'static str = "I. C. Generic";
+
     /// Retrieve the next move.
     pub fn next_move(&mut self) -> Result<Move, StrategyError> {
         self.strategy.next_move()
@@ -41,7 +42,7 @@ impl<'a> Player<'a> {
     /// # Returns
     ///     True if the player is a Cylon
     pub fn is_generic(possible_cylon: &Player<'a>) -> bool {
-        possible_cylon.name == DEFAULT_NAME
+        possible_cylon.name == Self::DEFAULT_NAME
     }
 
     pub fn builder() -> PlayerBuilder<NoName, NoStrategy, NoType> {

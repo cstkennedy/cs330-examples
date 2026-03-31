@@ -5,6 +5,15 @@ use crate::error::StrategyError;
 use crate::player::Player;
 use crate::referee::Referee;
 
+
+pub trait GameIsOver {
+    fn is_over(&self) -> bool;
+
+    fn is_not_over(&self) -> bool {
+        GameIsOver::is_over(self)
+    }
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct Player1NotSet;
 
@@ -63,6 +72,19 @@ impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
 }
 
 impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
+    // TODO: move to referee?
+    fn determine_turn_result(board: &Board) -> TurnResult {
+        if Referee::check_for_win(board) {
+            return TurnResult::Win
+        }
+
+        if board.is_full() {
+            return TurnResult::Stalemate;
+        }
+
+        TurnResult::NotOverYet
+    }
+
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> TurnResult {
         loop {
             match player.next_move() {
@@ -79,13 +101,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
             }
         }
 
-        if Referee::check_for_win(board) {
-            TurnResult::Win
-        } else if board.is_full() {
-            TurnResult::Stalemate
-        } else {
-            TurnResult::NotOverYet
-        }
+        Self::determine_turn_result(&board)
     }
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
@@ -137,13 +153,11 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
             }
         }
     }
+}
 
-    pub fn is_over(&self) -> bool {
+impl GameIsOver for Game<Player<'_>, Player<'_>, InProgress> {
+    fn is_over(&self) -> bool {
         false
-    }
-
-    pub fn is_not_over(&self) -> bool {
-        !self.is_over()
     }
 }
 
@@ -163,13 +177,9 @@ pub enum CompletedGame<'game> {
     },
 }
 
-impl<'game> CompletedGame<'game> {
-    pub fn is_over(&self) -> bool {
+impl GameIsOver for CompletedGame<'_> {
+    fn is_over(&self) -> bool {
         true
-    }
-
-    pub fn is_not_over(&self) -> bool {
-        !self.is_over()
     }
 }
 

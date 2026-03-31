@@ -2,7 +2,6 @@
 use hamcrest2::prelude::*;
 use rstest::*;
 
-use tictactoe::player::DEFAULT_NAME;
 use tictactoe::player::Player;
 use tictactoe::strategy::*;
 use tictactoe::r#move::Move;
@@ -21,7 +20,7 @@ pub fn test_is_generic(a_player: Player) {
     let player = a_player;
     assert_that!(Player::is_generic(&player), is(not(true)));
 
-    let player = Player::builder().human().with_name(DEFAULT_NAME).build();
+    let player = Player::builder().human().with_name(Player::DEFAULT_NAME).build();
     assert_that!(Player::is_generic(&player), is(true));
 }
 
