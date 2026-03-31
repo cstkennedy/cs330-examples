@@ -5,7 +5,6 @@ use hamcrest2::prelude::*;
 use shapes::prelude::Parser;
 
 use std::io::BufReader;
-use stringreader::StringReader;
 
 #[test]
 fn test_read_shapes() {
@@ -18,8 +17,7 @@ fn test_read_shapes() {
         Circle
         1337 Haxor"#;
 
-    let str_reader = StringReader::new(raw_str);
-    let str_reader = BufReader::new(str_reader);
+    let str_reader = BufReader::new(raw_str.as_bytes());
 
     let some_shapes = Parser::read_shapes(str_reader);
 
@@ -43,8 +41,7 @@ fn test_read_shapes_with() {
         Circle; 5
         1337 Haxor; invalid input"#;
 
-    let str_reader = StringReader::new(raw_str);
-    let str_reader = BufReader::new(str_reader);
+    let str_reader = BufReader::new(raw_str.as_bytes());
 
     let some_shapes = Parser::read_shapes_with(str_reader);
     // println!("{:?}", some_shapes);
