@@ -1,6 +1,5 @@
 use std::io::BufReader;
 
-use stringreader::StringReader;
 use divan::{black_box, Bencher};
 
 use shapes::prelude::Parser;
@@ -16,9 +15,7 @@ fn bench_read_shapes() {
         Circle
         1337 Haxor"#;
 
-    let str_reader = StringReader::new(raw_str);
-    let str_reader = BufReader::new(str_reader);
-    let some_shapes = Parser::read_shapes(black_box(str_reader));
+    let some_shapes = Parser::read_shapes(black_box(raw_str.as_bytes()));
 
 }
 
@@ -33,9 +30,7 @@ fn test_bench_shapes_with() {
         Circle; 5
         1337 Haxor; invalid input"#;
 
-    let str_reader = StringReader::new(raw_str);
-    let str_reader = BufReader::new(str_reader);
-    let some_shapes = Parser::read_shapes_with(black_box(str_reader));
+    let some_shapes = Parser::read_shapes(black_box(raw_str.as_bytes()));
 }
 
 fn main() {
