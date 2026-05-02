@@ -14,7 +14,6 @@ clap = { version = "4.5.29", features = ["derive"] }
 # criterion = "0.5.1"
 divan = "0.1.17"
 hamcrest2 = "*"
-stringreader = "0.1.1"
 
 
 [[bench]]

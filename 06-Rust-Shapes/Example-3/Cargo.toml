@@ -9,4 +9,3 @@ edition = "2024"
 
 [dev-dependencies]
 hamcrest2 = "*"
-stringreader = "0.1.1"
