@@ -271,14 +271,15 @@ public class Room implements Cloneable {
     {
         return String.join(
             System.lineSeparator(),
-            String.format("Room (%s)%n", this.name),
-            String.format("  Length: %.1f %s%n", this.dimensions.getLength(), Room.UNITS),
-            String.format("  Width : %.1f %s%n", this.dimensions.getWidth(), Room.UNITS),
-            String.format("  Area  : %.1f sq %s%n", this.area(), Room.UNITS),
-            String.format("%n"),
-            String.format("  Flooring   : %s%n", this.flooring.type),
-            String.format("  Unit Cost  : $ %8.2f%n", this.flooring.unitCost),
-            String.format("  Total Cost : $ %8.2f%n", this.flooringCost())
+            String.format("Room (%s)", this.name),
+            String.format("  Length: %.1f %s", this.dimensions.getLength(), Room.UNITS),
+            String.format("  Width : %.1f %s", this.dimensions.getWidth(), Room.UNITS),
+            String.format("  Area  : %.1f sq %s", this.area(), Room.UNITS),
+            String.format(""),
+            String.format("  Flooring   : %s", this.flooring.type),
+            String.format("  Unit Cost  : $ %8.2f", this.flooring.unitCost),
+            String.format("  Total Cost : $ %8.2f", this.flooringCost()),
+            ""
         );
     }
 
