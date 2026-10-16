@@ -24,12 +24,11 @@ fn test_with_room_2() {
         .with_room(
             Room::builder()
                 .with_name("Kitchen")
-                .with_dimensions(16.0, 20.0)
-                .unwrap()
+                .with_checked_dimensions((16.0, 20.0).try_into().unwrap())
                 .with_flooring(
                     Flooring::builder()
-                        .type_name("Neutral Tile".into())
-                        .unit_cost(14.00)
+                        .with_name("Neutral Tile")
+                        .with_unit_cost(14.00.try_into().unwrap())
                         .build(),
                 )
                 .build(),
@@ -68,12 +67,11 @@ fn test_empty_vec_then_with_room_1() {
 fn test_empty_vec_then_with_room_2() {
     let kitchen = Room::builder()
         .with_name("Kitchen")
-        .with_dimensions(16.0, 20.0)
-        .unwrap()
+        .with_checked_dimensions((16.0, 20.0).try_into().unwrap())
         .with_flooring(
             Flooring::builder()
-                .type_name("Neutral Tile".into())
-                .unit_cost(14.00)
+                .with_name("Neutral Tile")
+                .with_unit_cost(14.00.try_into().unwrap())
                 .build(),
         )
         .build();

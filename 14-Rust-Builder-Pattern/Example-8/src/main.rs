@@ -72,7 +72,7 @@ fn upgrade_flooring<'a, I>(original_rooms: I) -> Result<House, HouseError>
     where I: Iterator<Item=&'a Room>
 {
     let new_flooring = Flooring::builder()
-        .with_name("Stone Bricks".into())
+        .with_name("Stone Bricks")
         .with_unit_cost(12.97.try_into()?)
         .build();
 
@@ -86,7 +86,6 @@ fn upgrade_flooring<'a, I>(original_rooms: I) -> Result<House, HouseError>
                         .with_flooring(new_flooring.clone())
                         .build()
                 })
-                .collect(),
         )?
         .build();
 

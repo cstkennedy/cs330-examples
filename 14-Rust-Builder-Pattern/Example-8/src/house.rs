@@ -107,45 +107,6 @@ impl PartialEq for House {
 #[derive(Default, Debug, PartialEq)]
 pub struct NoRooms;
 
-/*
-#[derive(Default, Debug, PartialEq)]
-pub struct WithRooms(Vec<Room>);
-
-impl WithRooms {
-    pub fn inner_value(self) -> Vec<Room> {
-        self.0
-    }
-}
-
-impl std::ops::Deref for WithRooms {
-    type Target = Vec<Room>;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl std::ops::DerefMut for WithRooms {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.0
-    }
-}
-
-impl From<Vec<Room>> for WithRooms {
-    fn from(value: Vec<Room>) -> Self {
-        WithRooms(value)
-    }
-}
-
-impl From<WithRooms> for Vec<Room> {
-    fn from(value: WithRooms) -> Self {
-        value.0
-    }
-}
-*/
-
-pub type WithRooms = WrappedType<Vec<Room>>;
-
 #[derive(Debug, PartialEq)]
 pub struct HouseBuilder<SR> {
     name: String,
@@ -173,39 +134,48 @@ impl<SR> HouseBuilder<SR> {
 }
 
 impl HouseBuilder<NoRooms> {
-    pub fn with_room(self, first_room: Room) -> HouseBuilder<WithRooms> {
+    pub fn with_room(self, first_room: Room) -> HouseBuilder<Vec<Room>> {
         HouseBuilder {
             name: self.name,
-            rooms: vec![first_room].into(),
+            rooms: vec![first_room],
         }
     }
 
-    pub fn with_rooms(
+    pub fn with_rooms<I>(
         self,
-        first_rooms: Vec<Room>,
-    ) -> Result<HouseBuilder<WithRooms>, HouseErrorWithState<Self>> {
-        match first_rooms.len() {
+        first_rooms: I,
+    ) -> Result<HouseBuilder<Vec<Room>>, HouseErrorWithState<Self>>
+    where
+        I: std::iter::IntoIterator<Item = Room>,
+    {
+        let rooms: Vec<Room> = first_rooms.into_iter().collect();
+
+        match rooms.len() {
             0 => Err(HouseErrorWithState {
                 the_error: HouseError::ZeroRooms,
                 the_builder: self,
             }),
             _ => Ok(HouseBuilder {
                 name: self.name,
-                rooms: WithRooms::from(first_rooms),
+                rooms: rooms,
             }),
         }
     }
 }
 
-impl HouseBuilder<WithRooms> {
+impl HouseBuilder<Vec<Room>> {
     pub fn with_room(mut self, another_room: Room) -> Self {
         self.rooms.push(another_room);
 
         self
     }
 
-    pub fn with_rooms(mut self, mut more_rooms: Vec<Room>) -> Self {
-        self.rooms.append(&mut more_rooms);
+    pub fn with_rooms<I>(mut self, more_rooms: I) -> HouseBuilder<Vec<Room>>
+    where
+        I: std::iter::IntoIterator<Item = Room>,
+    {
+        let more_rooms = more_rooms.into_iter();
+        self.rooms.extend(more_rooms);
 
         self
     }
@@ -213,7 +183,7 @@ impl HouseBuilder<WithRooms> {
     pub fn build(self) -> House {
         House {
             name: self.name,
-            rooms: self.rooms.inner_value(),
+            rooms: self.rooms,
         }
     }
 }

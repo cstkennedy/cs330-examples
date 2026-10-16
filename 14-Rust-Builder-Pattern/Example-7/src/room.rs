@@ -27,14 +27,6 @@ impl Default for DimensionSet {
     }
 }
 
-/*
-impl From<(f64, f64)> for DimensionSet {
-    fn from(dims: (f64, f64)) -> Self {
-        DimensionSet::new(dims.0, dims.1)
-    }
-}
-*/
-
 impl TryFrom<(f64, f64)> for DimensionSet {
     type Error = DimensionError;
 
@@ -77,8 +69,7 @@ impl Default for Room {
     fn default() -> Self {
         Room::builder()
             .with_name("Generic")
-            .with_dimensions(1.0, 1.0)
-            .unwrap()
+            .with_checked_dimensions(DimensionSet::default())
             .with_flooring(Flooring::default())
             .build()
     }

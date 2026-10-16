@@ -41,6 +41,12 @@ pub enum RoomError {
     FlooringError(#[from] FlooringError),
 }
 
+impl From<CostError> for RoomError {
+    fn from(cost_error: CostError) -> Self {
+        RoomError::from(FlooringError::from(cost_error))
+    }
+}
+
 #[derive(Debug, Error)]
 pub enum ParseRoomError {
     #[error("'{delim}' missing in '{line}'")]
@@ -75,8 +81,17 @@ impl From<CostError> for ParseRoomError {
 
 #[derive(Debug, Error)]
 pub enum HouseError {
+    #[error("{0}")]
+    RoomError(#[from] RoomError),
+
     #[error("A house must have at least 1 room")]
     ZeroRooms,
+}
+
+impl From<CostError> for HouseError {
+    fn from(cost_error: CostError) -> Self {
+        HouseError::from(RoomError::from(cost_error))
+    }
 }
 
 #[derive(Debug, Error)]

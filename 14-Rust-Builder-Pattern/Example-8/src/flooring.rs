@@ -1,3 +1,4 @@
+use crate::builder_utils::WrappedType;
 use crate::error::CostError;
 
 #[derive(Clone, Debug, PartialEq)]
@@ -27,6 +28,12 @@ impl Default for Flooring {
 #[derive(Default, Debug, Clone, Copy)]
 pub struct Cost {
     wrapped: f64,
+}
+
+impl WrappedType<f64> for Cost {
+    fn inner_value(self) -> f64 {
+        self.wrapped
+    }
 }
 
 impl std::ops::Deref for Cost {

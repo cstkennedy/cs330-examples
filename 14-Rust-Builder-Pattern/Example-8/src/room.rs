@@ -3,7 +3,7 @@ use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
 
 use crate::builder_utils::WrappedType;
-use crate::error::{DimensionError};
+use crate::error::{DimensionError, RoomError, RoomErrorWithState};
 use crate::flooring::*;
 
 #[derive(Clone, Debug)]
@@ -114,10 +114,6 @@ pub struct NoDimensions;
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct NoFlooring;
 
-type WithName = WrappedType<String>;
-type WithDimensions = WrappedType<DimensionSet>;
-type WithFlooring = WrappedType<Flooring>;
-
 /// The RoomBuilder's state is defined by three generics
 ///   - SN - (State Name) whether the name is set
 ///   - SD - (State Dimensions) whether the length and width are set
@@ -141,15 +137,15 @@ impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
 }
 
 impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
-    pub fn from_existing(self, room: &Room) -> RoomBuilder<WithName, WithDimensions, WithFlooring> {
+    pub fn from_existing(self, room: &Room) -> RoomBuilder<String, DimensionSet, Flooring> {
         RoomBuilder {
-            name: room.name.clone().into(),
-            dimensions: room.dimensions.clone().into(),
-            flooring: room.flooring.clone().into(),
+            name: room.name.clone(),
+            dimensions: room.dimensions.clone(),
+            flooring: room.flooring.clone(),
         }
     }
 
-    pub fn with_name(self, nme: &str) -> RoomBuilder<WithName, NoDimensions, NoFlooring> {
+    pub fn with_name(self, nme: &str) -> RoomBuilder<String, NoDimensions, NoFlooring> {
         RoomBuilder {
             name: nme.into(),
             dimensions: self.dimensions,
@@ -158,44 +154,41 @@ impl RoomBuilder<NoName, NoDimensions, NoFlooring> {
     }
 }
 
-impl RoomBuilder<WithName, NoDimensions, NoFlooring> {
+impl RoomBuilder<String, NoDimensions, NoFlooring> {
     pub fn with_checked_dimensions(
         self,
         dimensions: DimensionSet,
-    ) -> RoomBuilder<WithName, WithDimensions, NoFlooring> {
+    ) -> RoomBuilder<String, DimensionSet, NoFlooring> {
         RoomBuilder {
             name: self.name,
-            dimensions: dimensions.into(),
+            dimensions: dimensions,
             flooring: self.flooring,
         }
     }
 }
 
-impl<SF> RoomBuilder<WithName, WithDimensions, SF> {
-    pub fn with_flooring(
-        self,
-        flooring: Flooring,
-    ) -> RoomBuilder<WithName, WithDimensions, WithFlooring> {
+impl<SF> RoomBuilder<String, DimensionSet, SF> {
+    pub fn with_flooring(self, flooring: Flooring) -> RoomBuilder<String, DimensionSet, Flooring> {
         RoomBuilder {
             name: self.name,
-            dimensions: self.dimensions.into(),
-            flooring: flooring.into(),
+            dimensions: self.dimensions,
+            flooring: flooring,
         }
     }
 }
 
-impl RoomBuilder<WithName, WithDimensions, WithFlooring> {
+impl RoomBuilder<String, DimensionSet, Flooring> {
     pub fn with_checked_dimensions(mut self, dimensions: DimensionSet) -> Self {
-        self.dimensions = dimensions.into();
+        self.dimensions = dimensions;
 
         self
     }
 
     pub fn build(self) -> Room {
         Room {
-            name: self.name.inner_value(),
-            dimensions: self.dimensions.inner_value(),
-            flooring: self.flooring.inner_value(),
+            name: self.name,
+            dimensions: self.dimensions,
+            flooring: self.flooring,
         }
     }
 }

@@ -2,11 +2,6 @@ use itertools::{Itertools, MinMaxResult};
 use ordered_float::OrderedFloat;
 use std::iter::Sum;
 
-// use std::io::BufReader;
-// use std::fs::File;
-// use std::env;
-use std::vec::Vec;
-
 use eyre::{self, Result, WrapErr};
 use simple_logger::SimpleLogger;
 
@@ -77,8 +72,8 @@ fn upgrade_flooring<'a, I>(original_rooms: I) -> Result<House, HouseError>
     where I: Iterator<Item=&'a Room>
 {
     let new_flooring = Flooring::builder()
-        .type_name("Stone Bricks".into())
-        .unit_cost(12.97)
+        .with_name("Stone Bricks")
+        .with_unit_cost(12.97.try_into()?)
         .build();
 
     let house = House::builder()

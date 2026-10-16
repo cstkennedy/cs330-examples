@@ -21,57 +21,67 @@ impl FromStr for Cost {
     }
 }
 
-impl TryFrom<(&str, &str)> for DimensionSet {
-    type Error = DimensionError;
-
-    fn try_from(dims: (&str, &str)) -> Result<Self, Self::Error> {
-        let (length, width): (f64, f64) = (dims.0.parse()?, dims.1.parse()?);
-
-        DimensionSet::try_from((length, width))
-    }
-}
-
 const MIN_NUM_ROOM_TOKENS: usize = 4;
-
-fn separate_name_from_rest(line: &str) -> Result<(&str, Vec<&str>), ParseRoomError> {
-    let tokens = line.split(";").collect::<Vec<&str>>();
-
-    if tokens.len() < 2 {
-        return Err(ParseRoomError::MissingDelimiter {
-            delim: ";".into(),
-            line: line.to_owned(),
-        }
-        .into());
-    }
-
-    // 1. Grab the name
-    // 2. Split everything else by whitespace
-    let name = tokens[0];
-    let the_rest: Vec<&str> = tokens[1].split_whitespace().collect();
-
-    if the_rest.len() < MIN_NUM_ROOM_TOKENS {
-        return Err(ParseRoomError::TooFewTokens {
-            num_tokens: the_rest.len(),
-            line: line.to_owned(),
-        }
-        .into());
-    }
-
-    Ok((name, the_rest))
-}
 
 impl FromStr for Room {
     type Err = ParseRoomError;
 
     fn from_str(line: &str) -> Result<Self, Self::Err> {
-        let (name, the_rest) = separate_name_from_rest(&line)?;
+        let mut tokens = line.split(";");
 
-        let dimensions = DimensionSet::try_from((the_rest[0], the_rest[1]))?;
-        let unit_cost: Cost = the_rest[2].parse()?;
+        // 1. Grab the name
+        let Some(name) = tokens.next() else {
+            unreachable!()
+        };
+
+        let Some(the_rest) = tokens.next() else {
+            return Err(ParseRoomError::MissingDelimiter {
+                delim: ";".into(),
+                line: line.to_owned(),
+            }
+            .into());
+        };
+
+        // 2. Split everything else by whitespace
+        let mut the_rest = the_rest.split_whitespace();
+
+        // 3. Dimensions...
+        let Some(length_str) = the_rest.next() else {
+            return Err(ParseRoomError::TooFewTokens {
+                line: line.to_owned(),
+            }
+            .into());
+        };
+        let length: f64 = length_str.parse()?;
+
+        let Some(width_str) = the_rest.next() else {
+            return Err(ParseRoomError::TooFewTokens {
+                line: line.to_owned(),
+            }
+            .into());
+        };
+        let width: f64 = width_str.parse()?;
+        let dimensions = DimensionSet::try_from((length, width))?;
+
+        // 4. Unit cost...
+        let Some(unit_cost) = the_rest.next() else {
+            return Err(ParseRoomError::TooFewTokens {
+                line: line.to_owned(),
+            }
+            .into());
+        };
+        let unit_cost: Cost = unit_cost.parse()?;
 
         // The flooring name might contain spaces.
         // Combine the remainder of the line.
-        let flooring_name = the_rest.into_iter().skip(3).join(" ");
+        let flooring_name = the_rest.join(" ");
+
+        if flooring_name.is_empty() {
+            return Err(ParseRoomError::TooFewTokens {
+                line: line.to_owned(),
+            }
+            .into());
+        }
 
         let room = Room::builder()
             .with_name(name)
@@ -88,7 +98,6 @@ impl FromStr for Room {
     }
 }
 
-// TODO: Rewrite to use nom parser
 pub struct HouseParser;
 
 impl HouseParser {
@@ -124,7 +133,6 @@ impl HouseParser {
                         }
                     })
                     .flat_map(|(_, result)| result)
-                    .collect(),
             )?
             .build();
 

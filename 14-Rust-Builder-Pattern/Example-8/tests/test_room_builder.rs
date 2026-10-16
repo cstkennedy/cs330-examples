@@ -2,8 +2,8 @@ use room_renovation::flooring::*;
 use room_renovation::house::*;
 use room_renovation::room::*;
 
-use rstest::rstest;
 use hamcrest2::prelude::*;
+use rstest::rstest;
 
 #[rstest]
 fn test_dimension_set_default() {

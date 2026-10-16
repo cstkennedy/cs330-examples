@@ -6,7 +6,7 @@ use std::str::FromStr;
 use itertools::Itertools;
 use log;
 
-use crate::error::{CostError, DimensionError, HouseError, ParseRoomError, RoomError};
+use crate::error::{CostError, DimensionError, HouseError, ParseRoomError};
 use crate::flooring::{Cost, Flooring};
 use crate::house::House;
 use crate::room::{DimensionSet, Room};
@@ -80,7 +80,7 @@ impl FromStr for Room {
             .with_dimensions(dimensions.length, dimensions.width)?
             .with_flooring(
                 Flooring::builder()
-                    .type_name(flooring_name)
+                    .with_name(&flooring_name)
                     .with_unit_cost(unit_cost)
                     .build(),
             )

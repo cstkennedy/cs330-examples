@@ -2,8 +2,8 @@ use room_renovation::flooring::*;
 use room_renovation::house::*;
 use room_renovation::room::*;
 
-use rstest::rstest;
 use hamcrest2::prelude::*;
+use rstest::rstest;
 
 #[rstest]
 #[case(0.0)]
@@ -18,7 +18,8 @@ fn test_cost_ok(#[case] raw_cost: f64) {
 
 #[rstest]
 fn test_cost_err() {
-    todo!()
+    // todo!()
+    assert_that!(Cost::try_from(-1.0), is(err()));
 }
 
 #[rstest]
