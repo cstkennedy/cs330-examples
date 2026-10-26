@@ -64,6 +64,7 @@ impl FromStr for Room {
         let dimensions = DimensionSet::try_from((length, width))?;
 
         // 4. Unit cost...
+        /*
         let Some(unit_cost) = the_rest.next() else {
             return Err(ParseRoomError::TooFewTokens {
                 line: line.to_owned(),
@@ -71,6 +72,13 @@ impl FromStr for Room {
             .into());
         };
         let unit_cost: Cost = unit_cost.parse()?;
+        */
+        let unit_cost: Cost = the_rest
+            .next()
+            .ok_or_else(|| ParseRoomError::TooFewTokens {
+                line: line.to_owned(),
+            })?
+            .parse()?;
 
         // The flooring name might contain spaces.
         // Combine the remainder of the line.
@@ -132,7 +140,7 @@ impl HouseParser {
                             log::warn!("Line #{idx} - {}", error);
                         }
                     })
-                    .flat_map(|(_, result)| result)
+                    .flat_map(|(_, result)| result),
             )?
             .build();
 
