@@ -66,10 +66,7 @@ impl FromStr for Room {
         let flooring_name = the_rest.join(" ");
 
         if flooring_name.is_empty() {
-            return Err(ParseRoomError::TooFewTokens {
-                line: line.to_owned(),
-            }
-            .into());
+            return Err(ParseRoomError::too_few_tokens(line));
         }
 
         let room = Room::builder()

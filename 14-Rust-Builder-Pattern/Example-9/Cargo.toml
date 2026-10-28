@@ -17,5 +17,5 @@ simple_logger = { version = "5.2.0", features = ["colors"] }
 
 [dev-dependencies]
 hamcrest2 = "*"
-rstest = "0.25.0"
+rstest = "0.28.0"
 
