@@ -14,6 +14,7 @@ impl Flooring {
         FlooringBuilder::new()
     }
 
+    #[deprecated]
     pub fn new() -> Self {
         Flooring::builder().build()
     }
@@ -69,8 +70,17 @@ impl FlooringBuilder {
         }
     }
 
+    /*
     pub fn with_name(mut self, name: &str) -> Self {
         self.type_name = name.to_owned();
+
+        self
+    }
+    */
+    pub fn with_name<S>(mut self, name: S) -> Self
+        where S: AsRef<str>
+    {
+        self.type_name = name.as_ref().to_owned();
 
         self
     }

@@ -1,5 +1,7 @@
 use thiserror::Error;
 
+pub trait InvariantError: std::error::Error {}
+
 #[derive(Debug, Error)]
 pub enum CostError {
     #[error("'unit cost' must be > {0}")]
@@ -9,11 +11,14 @@ pub enum CostError {
     ParseFloatError(#[from] std::num::ParseFloatError),
 }
 
+/*
+#[deprecated]
 #[derive(Debug, Error)]
 pub enum FlooringError {
     #[error("{0}")]
     CostError(#[from] CostError),
 }
+*/
 
 #[derive(Debug, Error)]
 pub enum DimensionError {
@@ -28,20 +33,26 @@ pub enum DimensionError {
 }
 
 // TODO: Remove
+#[deprecated]
 #[derive(Debug, Error)]
 pub enum RoomError {
     #[error("{0}")]
     DimensionError(#[from] DimensionError),
-
+    /*
     #[error("{0}")]
     FlooringError(#[from] FlooringError),
+    */
+    #[error("{0}")]
+    CostError(#[from] CostError),
 }
 
+/*
 impl From<CostError> for RoomError {
     fn from(cost_error: CostError) -> Self {
         RoomError::from(FlooringError::from(cost_error))
     }
 }
+*/
 
 #[derive(Debug, Error)]
 pub enum ParseRoomError {
@@ -66,10 +77,15 @@ pub enum ParseRoomError {
     #[error("{0}")]
     DimensionError(#[from] DimensionError),
 
+    /*
     #[error("{0}")]
     FlooringError(#[from] FlooringError),
+    */
+    #[error("{0}")]
+    CostError(#[from] CostError),
 
     // TODO: Remove
+    #[deprecated]
     #[error("{0}")]
     RoomError(#[from] RoomError),
 }
@@ -80,28 +96,41 @@ impl ParseRoomError {
             line: line.to_owned(),
         }
     }
+
+    pub(crate) fn missing_semicolon(line: &str) -> Self {
+        ParseRoomError::MissingDelimiter {
+            delim: ';',
+            line: line.to_owned(),
+        }
+    }
 }
 
+/*
 impl From<CostError> for ParseRoomError {
     fn from(cost_error: CostError) -> Self {
         ParseRoomError::from(FlooringError::from(cost_error))
     }
 }
+*/
 
 #[derive(Debug, Error)]
 pub enum HouseError {
+    /*
     #[error("{0}")]
     RoomError(#[from] RoomError),
+    */
 
     #[error("A house must have at least 1 room")]
     ZeroRooms,
 }
 
+/*
 impl From<CostError> for HouseError {
     fn from(cost_error: CostError) -> Self {
         HouseError::from(RoomError::from(cost_error))
     }
 }
+*/
 
 #[derive(Debug, Error)]
 pub struct ErrorWithState<E: std::error::Error, S> {
@@ -130,6 +159,7 @@ where
 }
 
 // TODO: Remove
+#[deprecated]
 pub type RoomErrorWithState<S> = BuildErrorWithState<RoomError, S>;
 pub type HouseErrorWithState<S> = BuildErrorWithState<HouseError, S>;
 

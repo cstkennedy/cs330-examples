@@ -27,9 +27,9 @@ impl FromStr for Room {
     type Err = ParseRoomError;
 
     fn from_str(line: &str) -> Result<Self, Self::Err> {
-        let mut tokens = line.split(";");
-
         // 1. Grab the name
+        /*
+        let tokens = line.split(";")
         let Some(name) = tokens.next() else {
             unreachable!()
         };
@@ -41,6 +41,10 @@ impl FromStr for Room {
                 line: line.to_owned(),
             })?
             .split_whitespace();
+        */
+        let (name, the_rest) = line.split_once(";")
+            .ok_or_else(|| ParseRoomError::missing_semicolon(line))?;
+        let mut the_rest = the_rest.split_whitespace();
 
         // 3. Dimensions...
         let length = the_rest
@@ -63,21 +67,22 @@ impl FromStr for Room {
 
         // The flooring name might contain spaces.
         // Combine the remainder of the line.
-        let flooring_name = the_rest.join(" ");
+        let flooring_name = {
+            let flooring_name = the_rest.join(" ").trim().to_owned();
 
-        if flooring_name.is_empty() {
-            return Err(ParseRoomError::TooFewTokens {
-                line: line.to_owned(),
+            if flooring_name.is_empty() {
+                return Err(ParseRoomError::too_few_tokens(line));
             }
-            .into());
-        }
+
+            flooring_name
+        };
 
         let room = Room::builder()
             .with_name(name)
             .with_checked_dimensions(dimensions)
             .with_flooring(
                 Flooring::builder()
-                    .with_name(&flooring_name)
+                    .with_name(flooring_name)
                     .with_unit_cost(unit_cost)
                     .build(),
             )

@@ -25,7 +25,12 @@ fn main() -> eyre::Result<()> {
     let house = HouseParser::read_from_file(&argv[1], |ins| HouseParser::read_house(ins))?
         .wrap_err("Input did not contain at least one valid room line")?;
 
-    let duplicate_house = upgrade_flooring(house.iter())
+    let new_flooring = Flooring::builder()
+        .with_name("Stone Bricks")
+        .with_unit_cost(12.97.try_into()?)
+        .build();
+
+    let duplicate_house = upgrade_flooring(house.iter(), new_flooring)
         .wrap_err("Reference 'house' was invalid (THIS SHOULD NEVER HAPPEN)")?;
 
     println!("{house}");
@@ -68,13 +73,15 @@ fn main() -> eyre::Result<()> {
 /// House with updated flooring
 ///
 #[rustfmt::skip]
-fn upgrade_flooring<'a, I>(original_rooms: I) -> Result<House, HouseError>
+fn upgrade_flooring<'a, I>(original_rooms: I, new_flooring: Flooring) -> Result<House, HouseError>
     where I: Iterator<Item=&'a Room>
 {
+    /*
     let new_flooring = Flooring::builder()
         .with_name("Stone Bricks")
         .with_unit_cost(12.97.try_into()?)
         .build();
+    */
 
     let house = House::builder()
         .with_name("After Stone Bricks")
