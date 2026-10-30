@@ -1,8 +1,7 @@
 use std::fmt::{self, Display, Formatter};
 use std::vec::Vec;
 
-use crate::builder_utils::WrappedType;
-use crate::error::{HouseError};
+use crate::error::HouseError;
 use crate::room::Room;
 
 type Collection = Vec<Room>;
@@ -144,7 +143,7 @@ impl HouseBuilder<NoRooms> {
     pub fn with_rooms<I>(
         self,
         first_rooms: I,
-    // ) -> Result<HouseBuilder<Vec<Room>>, HouseErrorWithState<Self>>
+        // ) -> Result<HouseBuilder<Vec<Room>>, HouseErrorWithState<Self>>
     ) -> Result<HouseBuilder<Vec<Room>>, HouseError>
     where
         I: std::iter::IntoIterator<Item = Room>,
@@ -164,9 +163,7 @@ impl HouseBuilder<NoRooms> {
         }
         */
         match rooms.len() {
-            0 => Err(
-                HouseError::ZeroRooms,
-            ),
+            0 => Err(HouseError::ZeroRooms),
             _ => Ok(HouseBuilder {
                 name: self.name,
                 rooms: rooms,

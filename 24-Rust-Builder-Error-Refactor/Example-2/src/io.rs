@@ -6,7 +6,7 @@ use std::str::FromStr;
 use itertools::Itertools;
 use log;
 
-use crate::error::{CostError, DimensionError, HouseError, ParseRoomError};
+use crate::error::{CostError, HouseError, ParseRoomError};
 use crate::flooring::{Cost, Flooring};
 use crate::house::House;
 use crate::room::{DimensionSet, Room};
@@ -27,22 +27,8 @@ impl FromStr for Room {
     type Err = ParseRoomError;
 
     fn from_str(line: &str) -> Result<Self, Self::Err> {
-        // 1. Grab the name
-        /*
-        let tokens = line.split(";")
-        let Some(name) = tokens.next() else {
-            unreachable!()
-        };
-
-        let mut the_rest = tokens
-            .next()
-            .ok_or_else(|| ParseRoomError::MissingDelimiter {
-                delim: ';',
-                line: line.to_owned(),
-            })?
-            .split_whitespace();
-        */
-        let (name, the_rest) = line.split_once(";")
+        let (name, the_rest) = line
+            .split_once(";")
             .ok_or_else(|| ParseRoomError::missing_semicolon(line))?;
         let mut the_rest = the_rest.split_whitespace();
 

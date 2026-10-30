@@ -1,5 +1,4 @@
 use room_renovation::flooring::*;
-use room_renovation::house::*;
 use room_renovation::io::HouseParser;
 use room_renovation::room::*;
 

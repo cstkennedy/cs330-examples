@@ -1,6 +1,4 @@
 use room_renovation::flooring::*;
-use room_renovation::house::*;
-use room_renovation::room::*;
 
 use hamcrest2::prelude::*;
 use rstest::rstest;
@@ -31,7 +29,7 @@ fn test_defaults() {
 
     let reference = flooring;
 
-    let flooring = Flooring::new();
+    let flooring = Flooring::default();
 
     assert_that!(&flooring.type_name, is(equal_to("Generic")));
     assert_that!(flooring.unit_cost, is(close_to(1.0, 0.001)));

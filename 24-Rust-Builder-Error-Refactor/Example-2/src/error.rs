@@ -23,6 +23,7 @@ pub enum DimensionError {
     InvalidWidth(f64),
 }
 
+/*
 // TODO: Remove
 #[deprecated]
 #[derive(Debug, Error)]
@@ -33,6 +34,7 @@ pub enum RoomError {
     #[error("{0}")]
     CostError(#[from] CostError),
 }
+*/
 
 #[derive(Debug, Error)]
 pub enum ParseRoomError {
@@ -40,9 +42,7 @@ pub enum ParseRoomError {
     MissingDelimiter { delim: char, line: String },
 
     #[error("'{line}' is malformed")]
-    TooFewTokens {
-        line: String,
-    },
+    TooFewTokens { line: String },
 
     #[error("'{0}' is malformed")]
     MalformedLine(String),
@@ -60,9 +60,9 @@ pub enum ParseRoomError {
     CostError(#[from] CostError),
 
     // TODO: Remove
-    #[deprecated]
-    #[error("{0}")]
-    RoomError(#[from] RoomError),
+    // #[deprecated]
+    // #[error("{0}")]
+    // RoomError(#[from] RoomError),
 }
 
 impl ParseRoomError {
@@ -80,13 +80,13 @@ impl ParseRoomError {
     }
 }
 
-
 #[derive(Debug, Error)]
 pub enum HouseError {
     #[error("A house must have at least 1 room")]
     ZeroRooms,
 }
 
+/*
 #[derive(Debug, Error)]
 pub struct ErrorWithState<E: std::error::Error, S> {
     #[source]
@@ -112,6 +112,8 @@ where
         }
     }
 }
+*/
+
 
 // TODO: Remove
 // #[deprecated]

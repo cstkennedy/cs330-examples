@@ -2,8 +2,7 @@ use std::cmp::Ordering;
 use std::fmt;
 use std::fmt::Display; //,Formatter,Result};
 
-use crate::builder_utils::WrappedType;
-use crate::error::{DimensionError, RoomError};
+use crate::error::DimensionError;
 use crate::flooring::*;
 
 #[derive(Clone, Debug)]
