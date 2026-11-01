@@ -69,6 +69,16 @@ impl FromStr for Room {
     }
 }
 
+pub trait Parser {
+    type Item;
+    type Error;
+}
+
+pub trait PlainTextParser: Parser {
+    fn read_from_file(filename: &str) -> Result<Self::Item, Self::Error>;
+    fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error>;
+}
+
 pub struct HouseParser;
 
 impl HouseParser {
@@ -89,6 +99,7 @@ impl HouseParser {
         Ok(all_things)
     }
 
+    #[deprecated]
     pub fn read_house(room_data: impl BufRead) -> Result<House, HouseError> {
         let house = House::builder()
             .with_rooms(
@@ -108,5 +119,27 @@ impl HouseParser {
             .build();
 
         Ok(house)
+    }
+}
+
+impl Parser for HouseParser {
+    type Item = House;
+    type Error = HouseError;
+}
+
+impl PlainTextParser for HouseParser {
+    fn read_from_file(filename: &str) -> Result<Self::Item, Self::Error> {
+        /*
+        let file = File::open(filename)?;
+        let ins = BufReader::new(file);
+
+        Self::read_item(ins)
+        */
+
+        todo!()
+    }
+
+    fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error> {
+        Self::read_house(buffer)
     }
 }
