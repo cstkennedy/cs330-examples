@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::BufRead;
 use std::io::BufReader;
+use std::path::Path;
 use std::str::FromStr;
 
 use itertools::Itertools;
@@ -75,7 +76,10 @@ pub trait Parser {
 }
 
 pub trait PlainTextParser: Parser {
-    fn read_from_file(filename: &str) -> Result<Self::Item, Self::Error>;
+    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
+    where
+        P: AsRef<Path>;
+
     fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error>;
 }
 
@@ -92,11 +96,14 @@ impl HouseParser {
     where
         F: Fn(BufReader<File>) -> T,
     {
+        /*
         let file = File::open(filename)?;
         let ins = BufReader::new(file);
         let all_things = parse_fn(ins);
 
         Ok(all_things)
+        */
+        todo!()
     }
 
     #[deprecated]
@@ -128,8 +135,12 @@ impl Parser for HouseParser {
 }
 
 impl PlainTextParser for HouseParser {
-    fn read_from_file(filename: &str) -> Result<Self::Item, Self::Error> {
+    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
+    where
+        P: AsRef<Path>,
+    {
         /*
+        let filename = filename.as_ref();
         let file = File::open(filename)?;
         let ins = BufReader::new(file);
 

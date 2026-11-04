@@ -6,6 +6,7 @@ use eyre::{self, Result, WrapErr};
 use simple_logger::SimpleLogger;
 
 use room_renovation::error::HouseError;
+use room_renovation::io::PlainTextParser;
 use room_renovation::prelude::*;
 
 ///
@@ -22,8 +23,12 @@ fn main() -> eyre::Result<()> {
         eyre::bail!("Usage: {} room_filename", argv[0]);
     }
 
-    let house = HouseParser::read_from_file(&argv[1], |ins| HouseParser::read_house(ins))?
-        .wrap_err("Input did not contain at least one valid room line")?;
+    // let house = HouseParser::read_from_file(&argv[1], |ins| HouseParser::read_house(ins))?
+    // let house = HouseParser::read_from_file(&argv[1], |ins| HouseParser::read_item(ins))?
+    let house = HouseParser::read_from_file(&argv[1], |ins| {
+        <HouseParser as PlainTextParser>::read_item(ins)
+    })?
+    .wrap_err("Input did not contain at least one valid room line")?;
 
     let new_flooring = Flooring::builder()
         .with_name("Stone Bricks")
