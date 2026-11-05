@@ -31,6 +31,12 @@ struct RoomRecord {
     flooring: FlooringRecord,
 }
 
+#[derive(Debug, Deserialize, Serialize)]
+struct RoomRecords {
+    #[serde(rename = "room")]
+    pub rooms: Vec<RoomRecord>,
+}
+
 impl FromStr for RoomRecord {
     type Err = ParseRoomError;
 
@@ -117,6 +123,14 @@ pub trait CsvParser: Parser {
     fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error>;
 }
 
+pub trait TomlParser: Parser {
+    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
+    where
+        P: AsRef<Path>;
+
+    fn read_item(buffer: impl AsRef<str>) -> Result<Self::Item, Self::Error>;
+}
+
 pub struct HouseParser;
 
 impl Parser for HouseParser {
@@ -181,9 +195,41 @@ impl CsvParser for HouseParser {
                 reader
                     .deserialize::<RoomRecord>()
                     .into_iter()
-                    .map(|record| {
-                        record?.try_into()
+                    .map(|record| record?.try_into())
+                    .enumerate()
+                    .inspect(|(idx, room_result)| {
+                        if let Err(error) = room_result {
+                            log::warn!("Line #{idx} - {}", error);
+                        }
                     })
+                    .flat_map(|(_, result)| result),
+            )?
+            .build();
+
+        Ok(house)
+    }
+}
+
+impl TomlParser for HouseParser {
+    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
+    where
+        P: AsRef<Path>,
+    {
+        let filename = filename.as_ref();
+        let contents = std::fs::read_to_string(filename)?;
+
+        <Self as TomlParser>::read_item(contents)
+    }
+
+    fn read_item(buffer: impl AsRef<str>) -> Result<Self::Item, Self::Error> {
+        let records: RoomRecords = toml::from_str(buffer.as_ref())?;
+
+        let house = House::builder()
+            .with_rooms(
+                records
+                    .rooms
+                    .into_iter()
+                    .map(|record| record.try_into())
                     .enumerate()
                     .inspect(|(idx, room_result)| {
                         if let Err(error) = room_result {

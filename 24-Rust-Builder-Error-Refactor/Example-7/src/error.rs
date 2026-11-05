@@ -104,6 +104,9 @@ pub enum ParseRoomError {
     CsvError(#[from] csv::Error),
 
     #[error("{0}")]
+    TomlError(#[from] toml::de::Error),
+
+    #[error("{0}")]
     IOError(#[from] std::io::Error),
 
     #[error("{0:?}")]
