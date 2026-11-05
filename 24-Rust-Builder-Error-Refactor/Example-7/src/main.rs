@@ -1,13 +1,13 @@
 use itertools::{Itertools, MinMaxResult};
 use ordered_float::OrderedFloat;
 use std::iter::Sum;
-use std::path::{Path, PathBuf};
+use std::path::{PathBuf};
 
 use clap::Parser;
 use eyre::{self, WrapErr};
 use simple_logger::SimpleLogger;
 
-use room_renovation::io::{CsvParser, PlainTextParser, TomlParser};
+use room_renovation::io::{CsvParser, PlainTextParser, TomlParser, YamlParser};
 use room_renovation::prelude::*;
 
 #[derive(Parser)]
@@ -43,6 +43,8 @@ fn main() -> eyre::Result<()> {
         Some("csv") => <HouseParser as CsvParser>::read_from_file(args.filename)
             .wrap_err("Input did not contain at least one valid room line")?,
         Some("toml") => <HouseParser as TomlParser>::read_from_file(args.filename)
+            .wrap_err("Input did not contain at least one valid room line")?,
+        Some("yaml") => <HouseParser as YamlParser>::read_from_file(args.filename)
             .wrap_err("Input did not contain at least one valid room line")?,
         Some(ext) => {
             eyre::bail!("'{ext}' is not supported")

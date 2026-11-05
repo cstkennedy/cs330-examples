@@ -78,6 +78,9 @@ pub enum PlainTextParserError {
 
     #[error("'{0}' is malformed")]
     MalformedLine(String),
+
+    #[error("{0:?}")]
+    ParseFloatError(#[from] std::num::ParseFloatError),
 }
 
 impl PlainTextParserError {
@@ -107,16 +110,25 @@ pub enum ParseRoomError {
     TomlError(#[from] toml::de::Error),
 
     #[error("{0}")]
+    YamlError(#[from] serde_saphyr::Error),
+
+    #[error("{0}")]
     IOError(#[from] std::io::Error),
 
-    #[error("{0:?}")]
-    ParseFloatError(#[from] std::num::ParseFloatError),
+    // #[error("{0:?}")]
+    // ParseFloatError(#[from] std::num::ParseFloatError),
 
     #[error("{0}")]
     FloatNumericError(#[from] NumericInvariantError<f64>),
 
     #[error("{0}")]
     InvariantError(#[from] HouseError),
+}
+
+impl From<std::num::ParseFloatError> for ParseRoomError {
+    fn from(float_error: std::num::ParseFloatError) -> Self {
+        PlainTextParserError::ParseFloatError(float_error).into()
+    }
 }
 
 #[derive(Debug, Error)]
