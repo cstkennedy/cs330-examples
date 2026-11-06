@@ -241,13 +241,12 @@ impl TomlParser for HouseParser {
                     .rooms
                     .into_iter()
                     .map(|record| record.try_into())
-                    .enumerate()
-                    .inspect(|(idx, room_result)| {
+                    .inspect(|room_result| {
                         if let Err(error) = room_result {
-                            log::warn!("Line #{idx} - {}", error);
+                            log::warn!("{}", error);
                         }
                     })
-                    .flat_map(|(_, result)| result),
+                    .flatten()
             )?
             .build();
 
@@ -265,13 +264,12 @@ impl YamlParser for HouseParser {
                     .rooms
                     .into_iter()
                     .map(|record| record.try_into())
-                    .enumerate()
-                    .inspect(|(idx, room_result)| {
+                    .inspect(|room_result| {
                         if let Err(error) = room_result {
-                            log::warn!("Line #{idx} - {}", error);
+                            log::warn!("{}", error);
                         }
                     })
-                    .flat_map(|(_, result)| result),
+                    .flatten()
             )?
             .build();
 
