@@ -117,7 +117,6 @@ pub enum ParseRoomError {
 
     // #[error("{0:?}")]
     // ParseFloatError(#[from] std::num::ParseFloatError),
-
     #[error("{0}")]
     FloatNumericError(#[from] NumericInvariantError<f64>),
 

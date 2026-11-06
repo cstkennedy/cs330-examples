@@ -1,7 +1,7 @@
 use itertools::{Itertools, MinMaxResult};
 use ordered_float::OrderedFloat;
 use std::iter::Sum;
-use std::path::{PathBuf};
+use std::path::PathBuf;
 
 use clap::Parser;
 use eyre::{self, WrapErr};
@@ -13,6 +13,29 @@ use room_renovation::prelude::*;
 #[derive(Parser)]
 struct Args {
     filename: PathBuf,
+}
+
+fn read_from_file(args: Args) -> eyre::Result<House> {
+    let maybe_extension = args.filename.extension().and_then(|s| s.to_str());
+
+    let house = match maybe_extension {
+        Some("txt") => <HouseParser as PlainTextParser>::read_from_file(args.filename)
+            .wrap_err("Input did not contain at least one valid room line")?,
+        Some("csv") => <HouseParser as CsvParser>::read_from_file(args.filename)
+            .wrap_err("Input did not contain at least one valid room line")?,
+        Some("toml") => <HouseParser as TomlParser>::read_from_file(args.filename)
+            .wrap_err("Input did not contain at least one valid room line")?,
+        Some("yaml") => <HouseParser as YamlParser>::read_from_file(args.filename)
+            .wrap_err("Input did not contain at least one valid room line")?,
+        Some(ext) => {
+            eyre::bail!("'{ext}' is not supported")
+        }
+        _ => {
+            todo!()
+        }
+    };
+
+    Ok(house)
 }
 
 ///
@@ -35,24 +58,8 @@ fn main() -> eyre::Result<()> {
     */
 
     let args = Args::parse();
-    let maybe_extension = args.filename.extension().and_then(|s| s.to_str());
 
-    let house = match maybe_extension {
-        Some("txt") => <HouseParser as PlainTextParser>::read_from_file(args.filename)
-            .wrap_err("Input did not contain at least one valid room line")?,
-        Some("csv") => <HouseParser as CsvParser>::read_from_file(args.filename)
-            .wrap_err("Input did not contain at least one valid room line")?,
-        Some("toml") => <HouseParser as TomlParser>::read_from_file(args.filename)
-            .wrap_err("Input did not contain at least one valid room line")?,
-        Some("yaml") => <HouseParser as YamlParser>::read_from_file(args.filename)
-            .wrap_err("Input did not contain at least one valid room line")?,
-        Some(ext) => {
-            eyre::bail!("'{ext}' is not supported")
-        }
-        _ => {
-            todo!()
-        }
-    };
+    let house = read_from_file(args)?;
 
     let new_flooring = Flooring::builder()
         .with_name("Stone Bricks")

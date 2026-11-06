@@ -1,0 +1,9 @@
+Laundry Room; 8 4 1.95 Laminate
+Incomplete Laundry Room; 8 4 1.95
+Kitchen; 20 12 3.87 Tile
+Negative Length Kitchen; -20 12 3.87 Tile
+No-Semicolon Storage Room 16 16 4.39 Birch Wood
+Storage Room; 16 16 4.39 Birch Wood
+Not a Room; 5
+Negative Cost Room; 16 16 -4.39 Birch Wood
+Negative Width Room; 16 -16 4.39 Birch Wood

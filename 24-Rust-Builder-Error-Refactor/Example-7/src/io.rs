@@ -32,8 +32,13 @@ struct RoomRecord {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-struct RoomRecords {
+struct TomlRoomRecords {
     #[serde(rename = "room")]
+    pub rooms: Vec<RoomRecord>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+struct YamlRoomRecords {
     pub rooms: Vec<RoomRecord>,
 }
 
@@ -110,7 +115,16 @@ pub trait Parser {
 pub trait PlainTextParser: Parser {
     fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
     where
-        P: AsRef<Path>;
+        P: AsRef<Path>,
+        <Self as Parser>::Error: From<std::io::Error>,
+    {
+        let filename = filename.as_ref();
+        let file = File::open(filename)?;
+        let ins = BufReader::new(file);
+
+        // Self::read_item(ins)
+        <Self as PlainTextParser>::read_item(ins)
+    }
 
     fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error>;
 }
@@ -118,7 +132,15 @@ pub trait PlainTextParser: Parser {
 pub trait CsvParser: Parser {
     fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
     where
-        P: AsRef<Path>;
+        P: AsRef<Path>,
+        <Self as Parser>::Error: From<std::io::Error>,
+    {
+        let filename = filename.as_ref();
+        let file = File::open(filename)?;
+        let ins = BufReader::new(file);
+
+        <Self as CsvParser>::read_item(ins)
+    }
 
     fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error>;
 }
@@ -126,7 +148,14 @@ pub trait CsvParser: Parser {
 pub trait TomlParser: Parser {
     fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
     where
-        P: AsRef<Path>;
+        P: AsRef<Path>,
+        <Self as Parser>::Error: From<std::io::Error>,
+    {
+        let filename = filename.as_ref();
+        let contents = std::fs::read_to_string(filename)?;
+
+        <Self as TomlParser>::read_item(contents)
+    }
 
     fn read_item(buffer: impl AsRef<str>) -> Result<Self::Item, Self::Error>;
 }
@@ -134,7 +163,14 @@ pub trait TomlParser: Parser {
 pub trait YamlParser: Parser {
     fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
     where
-        P: AsRef<Path>;
+        P: AsRef<Path>,
+        <Self as Parser>::Error: From<std::io::Error>,
+    {
+        let filename = filename.as_ref();
+        let contents = std::fs::read_to_string(filename)?;
+
+        <Self as YamlParser>::read_item(contents)
+    }
 
     fn read_item(buffer: impl AsRef<str>) -> Result<Self::Item, Self::Error>;
 }
@@ -147,18 +183,6 @@ impl Parser for HouseParser {
 }
 
 impl PlainTextParser for HouseParser {
-    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
-    where
-        P: AsRef<Path>,
-    {
-        let filename = filename.as_ref();
-        let file = File::open(filename)?;
-        let ins = BufReader::new(file);
-
-        // Self::read_item(ins)
-        <Self as PlainTextParser>::read_item(ins)
-    }
-
     fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error> {
         let house = House::builder()
             .with_rooms(
@@ -184,17 +208,6 @@ impl PlainTextParser for HouseParser {
 }
 
 impl CsvParser for HouseParser {
-    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
-    where
-        P: AsRef<Path>,
-    {
-        let filename = filename.as_ref();
-        let file = File::open(filename)?;
-        let ins = BufReader::new(file);
-
-        <Self as CsvParser>::read_item(ins)
-    }
-
     fn read_item(buffer: impl BufRead) -> Result<Self::Item, Self::Error> {
         let mut reader = csv::Reader::from_reader(buffer);
 
@@ -219,18 +232,8 @@ impl CsvParser for HouseParser {
 }
 
 impl TomlParser for HouseParser {
-    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
-    where
-        P: AsRef<Path>,
-    {
-        let filename = filename.as_ref();
-        let contents = std::fs::read_to_string(filename)?;
-
-        <Self as TomlParser>::read_item(contents)
-    }
-
     fn read_item(buffer: impl AsRef<str>) -> Result<Self::Item, Self::Error> {
-        let records: RoomRecords = toml::from_str(buffer.as_ref())?;
+        let records: TomlRoomRecords = toml::from_str(buffer.as_ref())?;
 
         let house = House::builder()
             .with_rooms(
@@ -253,18 +256,8 @@ impl TomlParser for HouseParser {
 }
 
 impl YamlParser for HouseParser {
-    fn read_from_file<P>(filename: P) -> Result<Self::Item, Self::Error>
-    where
-        P: AsRef<Path>,
-    {
-        let filename = filename.as_ref();
-        let contents = std::fs::read_to_string(filename)?;
-
-        <Self as YamlParser>::read_item(contents)
-    }
-
     fn read_item(buffer: impl AsRef<str>) -> Result<Self::Item, Self::Error> {
-        let records: RoomRecords = serde_saphyr::from_str(buffer.as_ref())?;
+        let records: YamlRoomRecords = serde_saphyr::from_str(buffer.as_ref())?;
 
         let house = House::builder()
             .with_rooms(
