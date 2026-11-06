@@ -7,7 +7,7 @@ use clap::Parser;
 use eyre::{self, WrapErr};
 use simple_logger::SimpleLogger;
 
-use room_renovation::io::{CsvParser, PlainTextParser, TomlParser, YamlParser};
+use room_renovation::io::{Parser as RRParser, formats};
 use room_renovation::prelude::*;
 
 #[derive(Parser)]
@@ -19,13 +19,13 @@ fn read_from_file(args: Args) -> eyre::Result<House> {
     let maybe_extension = args.filename.extension().and_then(|s| s.to_str());
 
     let house = match maybe_extension {
-        Some("txt") => <HouseParser as PlainTextParser>::read_from_file(args.filename)
+        Some("txt") => <HouseParser as RRParser<formats::PlainText>>::read_from_file(args.filename)
             .wrap_err("Input did not contain at least one valid room line")?,
-        Some("csv") => <HouseParser as CsvParser>::read_from_file(args.filename)
+        Some("csv") => <HouseParser as RRParser<formats::Csv>>::read_from_file(args.filename)
             .wrap_err("Input did not contain at least one valid room line")?,
-        Some("toml") => <HouseParser as TomlParser>::read_from_file(args.filename)
+        Some("toml") => <HouseParser as RRParser<formats::Toml>>::read_from_file(args.filename)
             .wrap_err("Input did not contain at least one valid room line")?,
-        Some("yaml") => <HouseParser as YamlParser>::read_from_file(args.filename)
+        Some("yaml") => <HouseParser as RRParser<formats::Yaml>>::read_from_file(args.filename)
             .wrap_err("Input did not contain at least one valid room line")?,
         Some(ext) => {
             eyre::bail!("'{ext}' is not supported")
