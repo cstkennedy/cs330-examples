@@ -8,13 +8,13 @@ impl NumberGuesser {
         lower_limit + (upper_limit - lower_limit) / 2_u32
     }
 
-    pub fn ask_if_number(next_guess: u32) {
-        print!("Is your number {next_guess}? (y/n): ");
+    pub fn ask_if_number(guess: u32) {
+        print!("Is your number {guess}? (y/n): ");
         let _ = stdout().flush();
     }
 
-    pub fn ask_if_too_high_or_low() {
-        print!("Was my guess too high or too low? (h/l): ");
+    pub fn ask_if_too_high_or_low(guess: u32) {
+        print!("Was {guess} too high or too low? (h/l): ");
         let _ = stdout().flush();
     }
 }
@@ -22,11 +22,11 @@ impl NumberGuesser {
 pub struct NumberSelector;
 
 impl NumberSelector {
-    pub fn answer_yes_or_no() -> Result<String, std::io::Error> {
+    pub fn answer_yes_or_no(_guess: u32) -> Result<String, std::io::Error> {
         Ok(read_line()?.to_lowercase())
     }
 
-    pub fn answer_too_high_or_low() -> Result<String, std::io::Error> {
+    pub fn answer_too_high_or_low(_guess: u32) -> Result<String, std::io::Error> {
         Ok(read_line()?.to_lowercase())
     }
 }
