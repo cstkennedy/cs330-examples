@@ -14,7 +14,7 @@ pub fn game_loop(range: std::ops::RangeInclusive<u32>) -> eyre::Result<()> {
         NumberGuesser::ask_if_number(guess);
         match NumberSelector::answer_yes_or_no(guess)?.as_ref() {
             "y" => {
-                println!("I win!");
+                NumberGuesser::announce_win();
                 break;
             }
             _ => {

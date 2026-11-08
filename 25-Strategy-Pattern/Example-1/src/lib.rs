@@ -17,6 +17,10 @@ impl NumberGuesser {
         print!("Was {guess} too high or too low? (h/l): ");
         let _ = stdout().flush();
     }
+
+    pub fn announce_win() {
+        println!("I win!");
+    }
 }
 
 pub struct NumberSelector;
