@@ -1,5 +1,5 @@
 use number_guess::{
-    guessers::{BisectionGuesser, LowGuesser, HighGuesser},
+    guessers::{BisectionGuesser, HighGuesser, LowGuesser},
     selectors::HumanSelector,
     traits::ResponseYesOrNo,
 };
