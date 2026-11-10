@@ -37,15 +37,19 @@ impl NumberSelector for FixedSelector {
     }
 }
 
-#[test_matrix(0..=100)]
-#[rstest]
-fn test_bisection_guesser(number_to_guess: u32) {
-    const MAX_ALLOWED_ATTEMPTS: u32 = 7;
-    let guess_range = 0_u32..=100;
+pub enum NumberWasGuessed {
+    Yes,
+    No,
+}
 
-    let selector = FixedSelector::from(number_to_guess);
-    let mut guesser = BisectionGuesser::from(guess_range);
-
+fn bounded_game_loop<S, G, const MAX_ALLOWED_ATTEMPTS: u32>(
+    selector: S,
+    mut guesser: G,
+) -> NumberWasGuessed
+where
+    G: NumberGuesser,
+    S: NumberSelector,
+{
     let mut guess_attempts = 0_u32;
 
     loop {
@@ -58,14 +62,31 @@ fn test_bisection_guesser(number_to_guess: u32) {
                 guess_attempts += 1;
 
                 if guess_attempts >= MAX_ALLOWED_ATTEMPTS {
-                    assert!(
-                        false,
-                        "'{}' not guessed in '{}' attempts",
-                        number_to_guess, MAX_ALLOWED_ATTEMPTS
-                    );
+                    return NumberWasGuessed::No;
                 }
             }
         }
+    }
+
+    NumberWasGuessed::Yes
+}
+
+#[test_matrix(0..=100)]
+#[rstest]
+fn test_bisection_guesser(number_to_guess: u32) {
+    const MAX_ALLOWED_ATTEMPTS: u32 = 7;
+    let guess_range = 0_u32..=100;
+
+    let selector = FixedSelector::from(number_to_guess);
+    let mut guesser = BisectionGuesser::from(guess_range);
+
+    if let NumberWasGuessed::No = bounded_game_loop::<_, _, MAX_ALLOWED_ATTEMPTS>(selector, guesser)
+    {
+        assert!(
+            false,
+            "'{}' not guessed in '{}' attempts",
+            number_to_guess, MAX_ALLOWED_ATTEMPTS
+        );
     }
 }
 
@@ -78,26 +99,13 @@ fn test_high_guesser(number_to_guess: u32) {
     let selector = FixedSelector::from(number_to_guess);
     let mut guesser = HighGuesser::from(guess_range);
 
-    let mut guess_attempts = 0_u32;
-
-    loop {
-        match guesser.ask_if_number(&selector) {
-            ResponseYesOrNo::Yes => {
-                // Number Was guessed!
-                break;
-            }
-            ResponseYesOrNo::No => {
-                guess_attempts += 1;
-
-                if guess_attempts >= MAX_ALLOWED_ATTEMPTS {
-                    assert!(
-                        false,
-                        "'{}' not guessed in '{}' attempts",
-                        number_to_guess, MAX_ALLOWED_ATTEMPTS
-                    );
-                }
-            }
-        }
+    if let NumberWasGuessed::No = bounded_game_loop::<_, _, MAX_ALLOWED_ATTEMPTS>(selector, guesser)
+    {
+        assert!(
+            false,
+            "'{}' not guessed in '{}' attempts",
+            number_to_guess, MAX_ALLOWED_ATTEMPTS
+        );
     }
 }
 
@@ -110,25 +118,12 @@ fn test_low_guesser(number_to_guess: u32) {
     let selector = FixedSelector::from(number_to_guess);
     let mut guesser = LowGuesser::from(guess_range);
 
-    let mut guess_attempts = 0_u32;
-
-    loop {
-        match guesser.ask_if_number(&selector) {
-            ResponseYesOrNo::Yes => {
-                // Number Was guessed!
-                break;
-            }
-            ResponseYesOrNo::No => {
-                guess_attempts += 1;
-
-                if guess_attempts >= MAX_ALLOWED_ATTEMPTS {
-                    assert!(
-                        false,
-                        "'{}' not guessed in '{}' attempts",
-                        number_to_guess, MAX_ALLOWED_ATTEMPTS
-                    );
-                }
-            }
-        }
+    if let NumberWasGuessed::No = bounded_game_loop::<_, _, MAX_ALLOWED_ATTEMPTS>(selector, guesser)
+    {
+        assert!(
+            false,
+            "'{}' not guessed in '{}' attempts",
+            number_to_guess, MAX_ALLOWED_ATTEMPTS
+        );
     }
 }
