@@ -1,8 +1,9 @@
 use crate::board::{Board, VALID_SYMBOLS};
 use crate::strategy::Strategy;
 
-const DEFAULT_NAME: &str = "I. C. Generic";
+pub const DEFAULT_NAME: &str = "I. C. Generic";
 
+#[derive(Debug)]
 pub struct Player<'a> {
     name: &'a str,
     strategy: Box<dyn Strategy + 'a>,
@@ -32,37 +33,24 @@ impl<'a> Player<'a> {
     pub fn is_computer(&self) -> bool {
         !self.is_human()
     }
+
+    pub fn get_name(&self) -> &str {
+        self.name
+    }
+
+    /// Checks whether a player is a placeholder or
+    /// an actual player.
+    ///
+    /// # Args
+    ///     possible_cylon (Player): player whose humanity is in question
+    ///
+    /// # Returns
+    ///     True if the player is a Cylon
+    pub fn is_generic(possible_cylon: &Player<'a>) -> bool {
+        possible_cylon.name == DEFAULT_NAME
+    }
+
 }
-/*
-    pub fn __str__(self) {
-        """
-        Generate a player string, but only the name.
-        """
 
-        return self.name
-
-    pub fn __deepcopy__(self, memo) -> "Player" {
-        """
-        Create a new duplicate Player.
-        """
-
-        cpy = Player(name=self.name, strategy=copy.deepcopy(self.strategy))
-
-        return cpy
-
-
-pub fn is_generic(possible_cylon: Player) -> bool {
-    """
-    Checks whether a player is a placeholder or
-    an actual player.
-
-    Args {
-        possible_cylon (Player): player whose humanity is in question
-
-    Returns {
-        True if the player is a Cylon
-
-    """
-
-    return possible_cylon.name == DEFAULT_NAME
-*/
+// TODO: implement Debug using
+// <https://doc.rust-lang.org/std/fmt/struct.Formatter.html#method.debug_struct>

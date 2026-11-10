@@ -1,18 +1,20 @@
+use std::fmt::Debug;
 use std::io::Write;
 use std::io::{stdin, stdout};
 
-pub trait Strategy {
+pub trait Strategy: Debug {
     fn next_move(&mut self) -> usize;
 }
 
 const PROMPT_MSG: &str = "Enter your desired move (1-9): ";
 
-pub struct KeyboardStrategy {
-    name: &'static str,
+#[derive(Debug)]
+pub struct KeyboardStrategy<'a> {
+    name: &'a str,
 }
 
-impl KeyboardStrategy {
-    pub fn new(player_name: &'static str) -> Self {
+impl<'a> KeyboardStrategy<'a> {
+    pub fn new(player_name: &'a str) -> Self {
         KeyboardStrategy { name: player_name }
     }
 
@@ -26,7 +28,7 @@ impl KeyboardStrategy {
     }
 }
 
-impl Strategy for KeyboardStrategy {
+impl<'a> Strategy for KeyboardStrategy<'a> {
     fn next_move(&mut self) -> usize {
         print!("{}, {PROMPT_MSG}", &self.name);
         let _ = stdout().flush();
@@ -38,6 +40,7 @@ impl Strategy for KeyboardStrategy {
     }
 }
 
+#[derive(Debug)]
 pub struct PredefinedMoves<'a> {
     my_moves: &'a [usize],
     move_idx: usize,
