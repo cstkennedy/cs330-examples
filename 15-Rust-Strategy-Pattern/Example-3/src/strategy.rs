@@ -35,7 +35,7 @@ impl<'a> Strategy for KeyboardStrategy<'a> {
         print!("{}, {PROMPT_MSG}", &self.name);
         let _ = stdout().flush();
 
-        let choice: usize = Self::read_line_as_string().parse()?;
+        let choice: usize = Self::read_line_as_string().unwrap().parse()?;
 
         Ok(choice)
     }

@@ -1,3 +1,4 @@
+use crate::error::StrategyError;
 use crate::board::{Board, VALID_SYMBOLS};
 use crate::strategy::Strategy;
 
@@ -20,7 +21,7 @@ impl<'a> Player<'a> {
     }
 
     /// Retrieve the next move.
-    pub fn next_move(&mut self) -> usize {
+    pub fn next_move(&mut self) -> Result<usize, StrategyError> {
         self.strategy.next_move()
     }
 

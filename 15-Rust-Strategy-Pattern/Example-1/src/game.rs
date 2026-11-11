@@ -20,7 +20,7 @@ impl<'game> Game<'game> {
 
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> bool {
         loop {
-            let selected_move = player.next_move();
+            let selected_move = player.next_move().unwrap();
 
             if Referee::selected_cell_is_empty(selected_move, &board) {
                 let _ = board.set_cell(selected_move, symbol);
