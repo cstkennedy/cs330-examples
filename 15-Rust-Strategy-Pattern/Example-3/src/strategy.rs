@@ -2,8 +2,10 @@ use std::fmt::Debug;
 use std::io::Write;
 use std::io::{stdin, stdout};
 
+use crate::error::StrategyError;
+
 pub trait Strategy: Debug {
-    fn next_move(&mut self) -> usize;
+    fn next_move(&mut self) -> Result<usize, StrategyError>;
 }
 
 const PROMPT_MSG: &str = "Enter your desired move (1-9): ";
@@ -29,14 +31,13 @@ impl<'a> KeyboardStrategy<'a> {
 }
 
 impl<'a> Strategy for KeyboardStrategy<'a> {
-    fn next_move(&mut self) -> usize {
+    fn next_move(&mut self) -> Result<usize, StrategyError> {
         print!("{}, {PROMPT_MSG}", &self.name);
         let _ = stdout().flush();
 
-        // TODO: This should have proper error checking
-        let choice = Self::read_line_as_string().parse().unwrap();
+        let choice: usize = Self::read_line_as_string().parse()?;
 
-        choice
+        Ok(choice)
     }
 }
 
@@ -56,10 +57,17 @@ impl<'a> PredefinedMoves<'a> {
 }
 
 impl<'a> Strategy for PredefinedMoves<'a> {
-    fn next_move(&mut self) -> usize {
+    fn next_move(&mut self) -> Result<usize, StrategyError> {
+        if self.move_idx == self.my_moves.len() {
+            return Err(StrategyError::OutOfMovesError(format!(
+                "Exhausted all {} prepared moves",
+                self.my_moves.len()
+            )));
+        }
+
         let my_next_move = self.my_moves[self.move_idx];
         self.move_idx += 1;
 
-        my_next_move
+        Ok(my_next_move)
     }
 }

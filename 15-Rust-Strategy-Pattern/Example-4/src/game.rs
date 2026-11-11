@@ -21,6 +21,15 @@ pub struct InProgress;
 pub enum EndState {
     Win,
     Stalemate,
+    Forfeit,
+}
+
+#[derive(Debug, PartialEq)]
+enum TurnResult {
+    Win,
+    Stalemate,
+    NotOverYet,
+    Forfeit,
 }
 
 #[derive(Clone, Debug, Default)]
@@ -64,40 +73,64 @@ impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
 }
 
 impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
-    fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> bool {
-        println!("{}", board);
-        println!();
-
+    fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> TurnResult {
         loop {
-            let selected_move = player.next_move().unwrap();
-
-            if Referee::selected_cell_is_empty(selected_move, &board) {
-                let _ = board.set_cell(selected_move, symbol);
-                break;
+            match player.next_move() {
+                Ok(selected_move) => {
+                    if Referee::selected_cell_is_empty(selected_move, board) {
+                        let _ = board.set_cell(selected_move, symbol);
+                        break;
+                    }
+                }
+                Err(StrategyError::OutOfMovesError(_)) => {
+                    return TurnResult::Forfeit;
+                }
+                Err(_) => {}
             }
         }
 
-        Referee::check_for_win(&board)
+        if Referee::check_for_win(board) {
+            TurnResult::Win
+        } else if board.is_full() {
+            TurnResult::Stalemate
+        } else {
+            TurnResult::NotOverYet
+        }
     }
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
-        while self.is_not_over() {
-            if Self::do_one_turn(&mut self.board, &mut self.player_1, 'X') {
+        loop {
+            let players = vec![(&mut self.player_1, 'X'), (&mut self.player_2, 'O')];
+
+            for (player, symbol) in players {
                 println!("{}", self.board);
                 println!();
 
-                return CompletedGame::win(self.player_1, self.player_2);
-            }
+                match Self::do_one_turn(&mut self.board, player, symbol) {
+                    TurnResult::Win => {
+                        println!("{}", self.board);
+                        println!();
 
-            if Self::do_one_turn(&mut self.board, &mut self.player_2, 'O') {
-                println!("{}", self.board);
-                println!();
-
-                return CompletedGame::win(self.player_2, self.player_1);
+                        return if symbol == 'X' {
+                            CompletedGame::win(self.player_1, self.player_2)
+                        } else {
+                            CompletedGame::win(self.player_2, self.player_1)
+                        };
+                    }
+                    TurnResult::Stalemate => {
+                        return CompletedGame::stalemate();
+                    }
+                    TurnResult::Forfeit => {
+                        return if symbol == 'X' {
+                            CompletedGame::forfeit(self.player_2, self.player_1)
+                        } else {
+                            CompletedGame::forfeit(self.player_1, self.player_2)
+                        };
+                    }
+                    _ => {}
+                }
             }
         }
-
-        CompletedGame::stalemate()
     }
 
     pub fn is_over(&self) -> bool {
@@ -133,6 +166,14 @@ impl<'game> CompletedGame<'game> {
         }
     }
 
+    pub fn forfeit(winner: Player<'game>, loser: Player<'game>) -> Self {
+        CompletedGame {
+            winner: winner.into(),
+            loser: loser.into(),
+            end_state: EndState::Forfeit,
+        }
+    }
+
     pub fn is_over(&self) -> bool {
         true
     }
@@ -157,6 +198,16 @@ impl<'game> fmt::Display for CompletedGame<'game> {
             }
             EndState::Stalemate => {
                 writeln!(f, "Stalemate...")
+            }
+            EndState::Forfeit => {
+                writeln!(
+                    f,
+                    "{} forfeited.",
+                    self.loser
+                        .as_ref()
+                        .expect("loser should be set...")
+                        .get_name()
+                )
             }
         }
     }

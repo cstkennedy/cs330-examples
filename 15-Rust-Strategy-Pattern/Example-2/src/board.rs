@@ -103,19 +103,6 @@ impl Board {
 
 impl fmt::Display for Board {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        /*
-        let board_str = self
-            .rows()
-            .iter()
-            .map(|&row| {
-                row.iter()
-                    .map(|cell| cell.to_string())
-                    .collect::<Vec<String>>()
-                    .join("|")
-            })
-            .collect::<Vec<String>>()
-            .join("\n");
-        */
         let board_str = self
             .rows()
             .iter()

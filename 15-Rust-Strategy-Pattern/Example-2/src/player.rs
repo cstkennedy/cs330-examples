@@ -1,4 +1,5 @@
-use crate::board::{Board, VALID_SYMBOLS};
+use crate::error::StrategyError;
+use crate::strategy::KeyboardStrategy;
 use crate::strategy::Strategy;
 
 pub const DEFAULT_NAME: &str = "I. C. Generic";
@@ -11,16 +12,8 @@ pub struct Player<'a> {
 }
 
 impl<'a> Player<'a> {
-    pub fn new(name: &'a str, strategy: impl Strategy + 'a, is_a_human: bool) -> Self {
-        Player {
-            name: name,
-            strategy: Box::new(strategy),
-            humanity: is_a_human,
-        }
-    }
-
     /// Retrieve the next move.
-    pub fn next_move(&mut self) -> usize {
+    pub fn next_move(&mut self) -> Result<usize, StrategyError> {
         self.strategy.next_move()
     }
 
@@ -50,6 +43,118 @@ impl<'a> Player<'a> {
         possible_cylon.name == DEFAULT_NAME
     }
 
+    pub fn builder() -> PlayerBuilder<NoName, NoStrategy, NoType> {
+        PlayerBuilder::new()
+    }
+}
+
+impl<'a> PartialEq for Player<'a> {
+    fn eq(&self, rhs: &Self) -> bool {
+        self.name == rhs.name
+    }
+}
+
+#[derive(Debug, Default)]
+pub struct NoStrategy;
+
+pub type BoxedStrategy<'a> = Box<dyn Strategy + 'a>;
+
+#[derive(Debug, Default)]
+pub struct HumanPlayer;
+
+#[derive(Debug, Default)]
+pub struct ComputerPlayer;
+
+#[derive(Debug, Default)]
+pub struct NoName;
+
+#[derive(Debug, Default)]
+pub struct NoType;
+
+// TODO: Add proper error handling
+#[derive(Debug)]
+pub struct PlayerBuilder<N, S, T> {
+    name: N,
+    strategy: S,
+    player_type: T,
+}
+
+impl PlayerBuilder<NoName, NoStrategy, NoType> {
+    pub fn new() -> Self {
+        PlayerBuilder {
+            name: NoName,
+            strategy: NoStrategy,
+            player_type: NoType,
+        }
+    }
+
+    pub fn human(self) -> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
+        PlayerBuilder {
+            name: NoName,
+            strategy: NoStrategy,
+            player_type: HumanPlayer,
+        }
+    }
+
+    pub fn with_name(self, name: &str) -> PlayerBuilder<&str, NoStrategy, NoType> {
+        PlayerBuilder {
+            name,
+            strategy: NoStrategy,
+            player_type: NoType,
+        }
+    }
+}
+
+impl Default for PlayerBuilder<NoName, NoStrategy, NoType> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl<'a> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
+    pub fn with_name(
+        self,
+        name: &'a str,
+    ) -> PlayerBuilder<&'a str, BoxedStrategy<'a>, HumanPlayer> {
+        PlayerBuilder {
+            name,
+            strategy: Box::new(KeyboardStrategy::new(name)),
+            player_type: self.player_type,
+        }
+    }
+}
+
+impl<'a> PlayerBuilder<&'a str, NoStrategy, NoType> {
+    pub fn with_strategy(
+        self,
+        strategy: impl Strategy + 'a,
+    ) -> PlayerBuilder<&'a str, BoxedStrategy<'a>, NoType> {
+        PlayerBuilder {
+            name: self.name,
+            strategy: Box::new(strategy),
+            player_type: self.player_type,
+        }
+    }
+}
+
+impl<'a> PlayerBuilder<&'a str, BoxedStrategy<'a>, NoType> {
+    pub fn build(self) -> Player<'a> {
+        Player {
+            name: self.name,
+            strategy: self.strategy,
+            humanity: false,
+        }
+    }
+}
+
+impl<'a> PlayerBuilder<&'a str, BoxedStrategy<'a>, HumanPlayer> {
+    pub fn build(self) -> Player<'a> {
+        Player {
+            name: self.name,
+            strategy: self.strategy,
+            humanity: true,
+        }
+    }
 }
 
 // TODO: implement Debug using

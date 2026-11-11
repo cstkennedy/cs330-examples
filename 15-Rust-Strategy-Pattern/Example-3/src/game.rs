@@ -1,59 +1,75 @@
 use std::fmt;
 
 use crate::board::Board;
+use crate::error::StrategyError;
 use crate::player::Player;
 use crate::referee::Referee;
 
 #[derive(Clone, Debug, Default)]
-pub struct Game;
+pub struct Player1NotSet;
 
-#[derive(Debug)]
-pub struct GameWithOnePlayerSet<'game> {
-    player_1: Player<'game>,
-}
+#[derive(Clone, Debug, Default)]
+pub struct Player2NotSet;
 
-#[derive(Debug)]
-pub struct InitializedGame<'game> {
-    player_1: Player<'game>,
-    player_2: Player<'game>,
+#[derive(Clone, Debug, Default)]
+pub struct NotReady;
 
-    board: Board,
-}
+#[derive(Clone, Debug, Default)]
+pub struct InProgress;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum EndState {
     Win,
     Stalemate,
 }
 
-
-impl Game {
-    pub fn new() -> Self {
-        Self
-    }
-
-    pub fn add_player<'game>(self, player: Player<'game>) -> GameWithOnePlayerSet {
-        GameWithOnePlayerSet { player_1: player }
-    }
+#[derive(Clone, Debug, Default)]
+pub struct Game<P1, P2, S> {
+    player_1: P1,
+    player_2: P2,
+    board: Board,
+    state: S,
 }
 
-impl<'game> GameWithOnePlayerSet<'game> {
-    pub fn add_player(self, player: Player<'game>) -> InitializedGame {
-        InitializedGame {
-            player_1: self.player_1,
-            player_2: player,
-            board: Board::new(),
+impl Game<Player1NotSet, Player2NotSet, NotReady> {
+    pub fn new() -> Self {
+        Game::default()
+    }
+
+    pub fn add_player(
+        self,
+        player: Player<'_>,
+    ) -> Game<Player<'_>, Player2NotSet, NotReady> {
+        Game {
+            player_1: player,
+            player_2: self.player_2,
+            board: self.board,
+            state: self.state,
         }
     }
 }
 
-impl<'game> InitializedGame<'game> {
+impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
+    pub fn add_player(
+        self,
+        player: Player<'game>,
+    ) -> Game<Player<'game>, Player<'game>, InProgress> {
+        Game {
+            player_1: self.player_1,
+            player_2: player,
+            board: self.board,
+            state: InProgress,
+        }
+    }
+}
+
+impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> bool {
         println!("{}", board);
         println!();
 
         loop {
-            let selected_move = player.next_move();
+            let selected_move = player.next_move().unwrap();
 
             if Referee::selected_cell_is_empty(selected_move, &board) {
                 let _ = board.set_cell(selected_move, symbol);

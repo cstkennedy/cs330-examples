@@ -7,6 +7,7 @@ pub struct Referee;
 
 impl Referee {
     pub fn check_for_win(board: &Board) -> bool {
+        /*
         board
             .rows()
             .iter()
@@ -14,17 +15,21 @@ impl Referee {
             .chain(board.diagonals().iter())
             .map(|&cell_triple| cell_triple.iter().all_equal())
             .contains(&true)
+        */
+        board
+            .rows()
+            .iter()
+            .chain(board.columns().iter())
+            .chain(board.diagonals().iter())
+            .filter(|&cell_triple| cell_triple.iter().all_equal())
+            .count() != 0
     }
 
     /// Determine whether a cell in the board has been selected
     /// by a player.
     ///
+    #[deprecated]
     pub fn selected_cell_is_empty(candidate_move: usize, board: &Board) -> bool {
-        match board.get_cell(candidate_move) {
-            Err(_) => false,
-            Ok(symbol) => !VALID_SYMBOLS
-                .iter()
-                .any(|valid_symbol| *valid_symbol == symbol),
-        }
+        board.cell_is_empty(candidate_move).unwrap_or(false)
     }
 }

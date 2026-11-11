@@ -1,9 +1,6 @@
 use itertools::Itertools;
 use std::fmt;
 
-type CellPair = (usize, char);
-type CellTriple = (CellPair, CellPair, CellPair);
-
 pub const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
 
 /// This ADT represents the gameboard used in a round
@@ -12,17 +9,22 @@ pub const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
 /// Each entry in the Board is referred to as a _Cell_.
 /// A Cell can be empty, where it stores a value in the range 1-9
 /// The digit represents the cell id and is used to update a Cell
-
 #[derive(Clone, Debug, PartialEq)]
 pub struct Board {
     the_board: [char; 9],
 }
 
-impl Board {
-    pub fn new() -> Self {
+impl Default for Board {
+    fn default() -> Self {
         Board {
             the_board: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
         }
+    }
+}
+
+impl Board {
+    pub fn new() -> Self {
+        Board::default()
     }
 
     /// Retrieve the value stored in a selected Cell.

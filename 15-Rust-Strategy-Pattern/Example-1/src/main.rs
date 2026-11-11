@@ -1,6 +1,4 @@
-use tictactoe::game::Game;
-use tictactoe::player::Player;
-use tictactoe::strategy::*;
+use tictactoe::prelude::*;
 
 fn main() {
     let mut game = Game::new(

@@ -9,6 +9,7 @@ doctest = false
 [dependencies]
 hamcrest2 = "*"
 itertools = "0.13.0"
+thiserror = "2.0.12"
 
 [dev-dependencies]
 rstest = "0.21.0"
