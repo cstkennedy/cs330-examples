@@ -7,21 +7,24 @@ pub enum BoardError {
 
     #[error("Cell Index is not between 0 and 10, exclusive")]
     InvalidIndex,
-
-    #[error("{0:?}")]
-    Generic(&'static str),
 }
 
 #[derive(Debug, Error, PartialEq)]
 pub enum MoveError {
     #[error("'{0}' is not between 0 and 10, exclusive")]
     ValueError(usize),
+
+    #[error("One of '{0:?}' is not between 0 and 10, exclusive")]
+    BatchValueError(Vec<usize>),
 }
 
 #[derive(Debug, Error, PartialEq)]
 pub enum StrategyCreationError {
     #[error("All Moves must be between 1 and 9, inclusive")]
     MoveError(#[from] MoveError),
+
+    #[error("None of '{0:?}' are between 0 and 10, exclusive")]
+    NoValidMoves(Vec<usize>),
 }
 
 #[derive(Debug, Error, PartialEq)]
@@ -43,4 +46,5 @@ pub struct ErrorWithValue<E: std::error::Error, V> {
     pub the_value: V,
 }
 
+#[deprecated]
 type PredefinedMovesError<'a> = ErrorWithValue<StrategyError, (usize, &'a [f64])>;

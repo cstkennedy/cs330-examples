@@ -1,6 +1,9 @@
 use crate::error::StrategyError;
+use crate::r#move::Move;
 use crate::strategy::KeyboardStrategy;
-use crate::strategy::{Move, Strategy};
+use crate::strategy::Strategy;
+use crate::r#move::Move;
+
 
 #[derive(Debug)]
 pub struct Player<'a> {

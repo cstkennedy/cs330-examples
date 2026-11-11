@@ -5,6 +5,7 @@ use crate::error::StrategyError;
 use crate::player::Player;
 use crate::referee::Referee;
 
+
 pub trait GameIsOver {
     fn is_over(&self) -> bool;
 
@@ -88,7 +89,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
         loop {
             match player.next_move() {
                 Ok(selected_move) => {
-                    if Referee::selected_cell_is_empty(selected_move.into(), board) {
+                    if Referee::selected_cell_is_empty(*selected_move, board) {
                         let _ = board.set_cell(*selected_move, symbol);
                         break;
                     }
@@ -176,8 +177,8 @@ pub enum CompletedGame<'game> {
     },
 }
 
-impl<'game> CompletedGame<'game> {
-    pub fn is_over(&self) -> bool {
+impl GameIsOver for CompletedGame<'_> {
+    fn is_over(&self) -> bool {
         true
     }
 }
