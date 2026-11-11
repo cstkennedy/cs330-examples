@@ -1,4 +1,4 @@
-use crate::error::{MoveError};
+use crate::error::MoveError;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct Move(usize);
@@ -22,4 +22,3 @@ impl TryFrom<usize> for Move {
         Ok(Move(val))
     }
 }
-

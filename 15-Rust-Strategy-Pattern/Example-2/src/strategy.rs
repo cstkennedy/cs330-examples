@@ -19,12 +19,12 @@ impl<'a> KeyboardStrategy<'a> {
     }
 
     /// Read a line from std in and trim the trailing newline.
-    fn read_line_as_string() -> String {
+    fn read_line_as_string() -> Result<String, std::io::Error> {
         let mut str_buffer = String::new();
-        let _ = stdin().read_line(&mut str_buffer).unwrap();
+        let _ = stdin().read_line(&mut str_buffer)?;
         let str_buffer = str_buffer.trim().to_string();
 
-        str_buffer
+        Ok(str_buffer)
     }
 }
 
@@ -34,7 +34,7 @@ impl<'a> Strategy for KeyboardStrategy<'a> {
         let _ = stdout().flush();
 
         // TODO: This should have proper error checking
-        let choice = Self::read_line_as_string().parse().unwrap();
+        let choice = Self::read_line_as_string().unwrap().parse().unwrap();
 
         choice
     }

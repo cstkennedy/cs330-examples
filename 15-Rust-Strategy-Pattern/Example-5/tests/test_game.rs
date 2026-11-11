@@ -2,7 +2,7 @@
 use hamcrest2::prelude::*;
 use rstest::*;
 
-use tictactoe::game::EndState;
+use tictactoe::game::CompletedGame;
 use tictactoe::prelude::*;
 
 #[rstest]
@@ -27,13 +27,21 @@ fn test_out_of_moves_player_1() {
         )
         .play_match();
 
+    assert!(matches!(game, CompletedGame::Forfeit { .. }));
+
+    /*
     assert_that!(&game.winner, is(some()));
     assert_that!(&game.loser, is(some()));
+    */
 
-    assert_that!(game.winner.unwrap().get_name(), is(equal_to("Jay")));
-    assert_that!(game.loser.unwrap().get_name(), is(equal_to("Thomas")));
-
-    assert_that!(game.end_state, is(equal_to(EndState::Forfeit)));
+    if let CompletedGame::Forfeit {
+        ref winner,
+        ref loser,
+    } = game
+    {
+        assert_that!(winner.get_name(), is(equal_to("Jay")));
+        assert_that!(loser.get_name(), is(equal_to("Thomas")));
+    }
 }
 
 #[rstest]
@@ -58,13 +66,16 @@ fn test_out_of_moves_player_2() {
         )
         .play_match();
 
-    assert_that!(&game.winner, is(some()));
-    assert_that!(&game.loser, is(some()));
+    assert!(matches!(game, CompletedGame::Forfeit { .. }));
 
-    assert_that!(game.winner.unwrap().get_name(), is(equal_to("Thomas")));
-    assert_that!(game.loser.unwrap().get_name(), is(equal_to("Jay")));
-
-    assert_that!(game.end_state, is(equal_to(EndState::Forfeit)));
+    if let CompletedGame::Forfeit {
+        ref winner,
+        ref loser,
+    } = game
+    {
+        assert_that!(winner.get_name(), is(equal_to("Thomas")));
+        assert_that!(loser.get_name(), is(equal_to("Jay")));
+    }
 }
 
 #[rstest]
@@ -89,10 +100,16 @@ fn test_stalemate() {
         )
         .play_match();
 
-    assert_that!(&game.winner, is(none()));
-    assert_that!(&game.loser, is(none()));
+    assert!(matches!(game, CompletedGame::Stalemate { .. }));
 
-    assert_that!(game.end_state, is(equal_to(EndState::Stalemate)));
+    if let CompletedGame::Stalemate {
+        ref player_1,
+        ref player_2,
+    } = game
+    {
+        assert_that!(player_1.get_name(), is(equal_to("Thomas")));
+        assert_that!(player_2.get_name(), is(equal_to("Jay")));
+    }
 }
 
 #[rstest]
@@ -117,13 +134,16 @@ fn test_win_player_1() {
         )
         .play_match();
 
-    assert_that!(&game.winner, is(some()));
-    assert_that!(&game.loser, is(some()));
+    assert!(matches!(game, CompletedGame::Win { .. }));
 
-    assert_that!(game.winner.unwrap().get_name(), is(equal_to("Thomas")));
-    assert_that!(game.loser.unwrap().get_name(), is(equal_to("Jay")));
-
-    assert_that!(game.end_state, is(equal_to(EndState::Win)));
+    if let CompletedGame::Win {
+        ref winner,
+        ref loser,
+    } = game
+    {
+        assert_that!(winner.get_name(), is(equal_to("Thomas")));
+        assert_that!(loser.get_name(), is(equal_to("Jay")));
+    }
 }
 
 #[rstest]
@@ -148,11 +168,14 @@ fn test_win_player_2() {
         )
         .play_match();
 
-    assert_that!(&game.winner, is(some()));
-    assert_that!(&game.loser, is(some()));
+    assert!(matches!(game, CompletedGame::Win { .. }));
 
-    assert_that!(game.winner.unwrap().get_name(), is(equal_to("Jay")));
-    assert_that!(game.loser.unwrap().get_name(), is(equal_to("Thomas")));
-
-    assert_that!(game.end_state, is(equal_to(EndState::Win)));
+    if let CompletedGame::Win {
+        ref winner,
+        ref loser,
+    } = game
+    {
+        assert_that!(winner.get_name(), is(equal_to("Jay")));
+        assert_that!(loser.get_name(), is(equal_to("Thomas")));
+    }
 }

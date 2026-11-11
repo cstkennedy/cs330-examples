@@ -3,35 +3,7 @@ use std::io::Write;
 use std::io::{stdin, stdout};
 
 use crate::error::{MoveError, StrategyCreationError, StrategyError};
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
-pub struct Move(usize);
-
-impl std::ops::Deref for Move {
-    type Target = usize;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl From<Move> for usize {
-    fn from(val: Move) -> usize {
-        val.0
-    }
-}
-
-impl TryFrom<usize> for Move {
-    type Error = MoveError;
-
-    fn try_from(val: usize) -> Result<Move, Self::Error> {
-        if val < 1 || val > 9 {
-            return Err(MoveError::ValueError(val));
-        }
-
-        Ok(Move(val))
-    }
-}
+use crate::r#move::Move;
 
 pub trait Strategy: Debug {
     fn next_move(&mut self) -> Result<Move, StrategyError>;
@@ -50,12 +22,12 @@ impl<'a> KeyboardStrategy<'a> {
     }
 
     /// Read a line from std in and trim the trailing newline.
-    fn read_line_as_string() -> String {
+    fn read_line_as_string() -> Result<String, std::io::Error> {
         let mut str_buffer = String::new();
-        let _ = stdin().read_line(&mut str_buffer).unwrap();
+        let _ = stdin().read_line(&mut str_buffer)?;
         let str_buffer = str_buffer.trim().to_string();
 
-        str_buffer
+        Ok(str_buffer)
     }
 }
 
@@ -64,29 +36,89 @@ impl<'a> Strategy for KeyboardStrategy<'a> {
         print!("{}, {}", &self.name, Self::PROMPT_MSG);
         let _ = stdout().flush();
 
-        let choice: usize = Self::read_line_as_string().parse()?;
+        let choice: usize = Self::read_line_as_string().unwrap().parse()?;
 
         Ok(choice.try_into()?)
     }
 }
 
 #[derive(Debug)]
-pub struct PredefinedMoves<'a> {
-    my_moves: &'a [usize],
+pub struct PredefinedMoves {
+    my_moves: Vec<Move>,
     move_idx: usize,
 }
 
-/*
-impl<'a> PredefinedMoves<'a> {
-    pub fn new(some_moves: &'a [usize]) -> Self {
-        PredefinedMoves {
-            my_moves: some_moves,
-            move_idx: 0,
+impl PredefinedMoves {
+    pub fn from_iterable_discarding<I>(
+        raw_moves: I,
+    ) -> Result<PredefinedMoves, StrategyCreationError>
+    where
+        I: IntoIterator<Item = usize>,
+    {
+        let some_moves: Vec<usize> = raw_moves.into_iter().collect();
+
+        let validated_moves: Vec<Move> = some_moves
+            .iter()
+            .copied()
+            .flat_map(Move::try_from)
+            .collect();
+
+        if validated_moves.is_empty() {
+            return Err(StrategyCreationError::NoValidMoves(some_moves.into()));
         }
+
+        Ok(PredefinedMoves {
+            my_moves: validated_moves,
+            move_idx: 0,
+        })
+    }
+
+    pub fn from_iterable_nondiscarding<I>(
+        raw_moves: I,
+    ) -> Result<PredefinedMoves, StrategyCreationError>
+    where
+        I: IntoIterator<Item = usize>,
+    {
+        let some_moves: Vec<usize> = raw_moves.into_iter().collect();
+
+        let validated_moves: Vec<Move> = some_moves
+            .iter()
+            .copied()
+            .flat_map(Move::try_from)
+            .collect();
+
+        if validated_moves.is_empty() {
+            return Err(StrategyCreationError::NoValidMoves(some_moves.into()));
+        }
+
+        if validated_moves.len() != some_moves.len() {
+            return Err(MoveError::BatchValueError(some_moves.into()).into());
+        }
+
+        Ok(PredefinedMoves {
+            my_moves: validated_moves,
+            move_idx: 0,
+        })
     }
 }
-*/
 
+impl Strategy for PredefinedMoves {
+    fn next_move(&mut self) -> Result<Move, StrategyError> {
+        if self.move_idx == self.my_moves.len() {
+            return Err(StrategyError::OutOfMovesError(format!(
+                "Exhausted all {} prepared moves",
+                self.my_moves.len()
+            )));
+        }
+
+        let my_next_move = self.my_moves[self.move_idx];
+        self.move_idx += 1;
+
+        Ok(my_next_move)
+    }
+}
+
+/*
 impl<'a> TryFrom<&'a [usize]> for PredefinedMoves<'a> {
     type Error = StrategyCreationError;
 
@@ -132,3 +164,4 @@ impl<'a> Strategy for PredefinedMoves<'a> {
         Ok(my_next_move.try_into()?)
     }
 }
+*/

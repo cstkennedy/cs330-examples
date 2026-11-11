@@ -20,11 +20,11 @@ impl Referee {
     /// by a player.
     ///
     pub fn selected_cell_is_empty(candidate_move: usize, board: &Board) -> bool {
-        let symbol = board.get_cell(candidate_move).unwrap();
-
-        VALID_SYMBOLS
-            .iter()
-            .find(|valid_symbol| *valid_symbol == &symbol)
-            .is_none()
+        match board.get_cell(candidate_move) {
+            Err(_) => false,
+            Ok(symbol) => !VALID_SYMBOLS
+                .iter()
+                .any(|valid_symbol| *valid_symbol == symbol)
+        }
     }
 }

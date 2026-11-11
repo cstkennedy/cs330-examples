@@ -4,6 +4,7 @@ use thiserror::Error;
 pub enum BoardError {
     #[error("'new_value' is not 'X' or 'O'")]
     InvalidSymbol,
+
     #[error("Cell Index is not between 0 and 10, exclusive")]
     InvalidIndex,
     #[error("{0:?}")]
