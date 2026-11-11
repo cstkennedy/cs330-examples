@@ -2,10 +2,12 @@ use std::fmt::Debug;
 use std::io::Write;
 use std::io::{stdin, stdout};
 
-use crate::error::StrategyError;
+use crate::error::{MoveError, StrategyCreationError, StrategyError};
+use crate::r#move::Move;
+
 
 pub trait Strategy: Debug {
-    fn next_move(&mut self) -> Result<usize, StrategyError>;
+    fn next_move(&mut self) -> Result<Move, StrategyError>;
 }
 
 #[derive(Debug)]
@@ -31,33 +33,70 @@ impl<'a> KeyboardStrategy<'a> {
 }
 
 impl<'a> Strategy for KeyboardStrategy<'a> {
-    fn next_move(&mut self) -> Result<usize, StrategyError> {
+    fn next_move(&mut self) -> Result<Move, StrategyError> {
         print!("{}, {}", &self.name, Self::PROMPT_MSG);
         let _ = stdout().flush();
 
         let choice: usize = Self::read_line_as_string().unwrap().parse()?;
 
-        Ok(choice)
+        Ok(choice.try_into()?)
     }
 }
 
 #[derive(Debug)]
-pub struct PredefinedMoves<'a> {
-    my_moves: &'a [usize],
+pub struct PredefinedMoves {
+    my_moves: Vec<Move>,
     move_idx: usize,
 }
 
-impl<'a> PredefinedMoves<'a> {
-    pub fn new(some_moves: &'a [usize]) -> Self {
-        PredefinedMoves {
-            my_moves: some_moves,
-            move_idx: 0,
+impl PredefinedMoves {
+    pub fn from_iterable_discarding<I>(raw_moves: I) -> Result<PredefinedMoves, StrategyCreationError>
+        where I: IntoIterator<Item=usize>
+    {
+        let some_moves: Vec<usize> = raw_moves.into_iter().collect();
+
+        let validated_moves: Vec<Move> = some_moves.iter()
+            .copied()
+            .flat_map(Move::try_from)
+            .collect();
+
+        if validated_moves.is_empty() {
+            return Err(StrategyCreationError::NoValidMoves(some_moves.into()));
         }
+
+        Ok(PredefinedMoves {
+            my_moves: validated_moves,
+            move_idx: 0,
+        })
+    }
+
+    pub fn from_iterable_nondiscarding<I>(raw_moves: I) -> Result<PredefinedMoves, StrategyCreationError>
+        where I: IntoIterator<Item=usize>
+    {
+        let some_moves: Vec<usize> = raw_moves.into_iter().collect();
+
+        let validated_moves: Vec<Move> = some_moves.iter()
+            .copied()
+            .flat_map(Move::try_from)
+            .collect();
+
+        if validated_moves.is_empty() {
+            return Err(StrategyCreationError::NoValidMoves(some_moves.into()));
+        }
+
+        if validated_moves.len() != some_moves.len() {
+            return Err(MoveError::BatchValueError(some_moves.into()).into());
+        }
+
+        Ok(PredefinedMoves {
+            my_moves: validated_moves,
+            move_idx: 0,
+        })
     }
 }
 
-impl<'a> Strategy for PredefinedMoves<'a> {
-    fn next_move(&mut self) -> Result<usize, StrategyError> {
+impl Strategy for PredefinedMoves {
+    fn next_move(&mut self) -> Result<Move, StrategyError> {
         if self.move_idx == self.my_moves.len() {
             return Err(StrategyError::OutOfMovesError(format!(
                 "Exhausted all {} prepared moves",
@@ -71,3 +110,4 @@ impl<'a> Strategy for PredefinedMoves<'a> {
         Ok(my_next_move)
     }
 }
+*/

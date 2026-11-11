@@ -5,6 +5,15 @@ use crate::error::StrategyError;
 use crate::player::Player;
 use crate::referee::Referee;
 
+
+pub trait GameIsOver {
+    fn is_over(&self) -> bool;
+
+    fn is_not_over(&self) -> bool {
+        GameIsOver::is_over(self)
+    }
+}
+
 #[derive(Clone, Debug, Default)]
 pub struct Player1NotSet;
 
@@ -16,13 +25,6 @@ pub struct NotReady;
 
 #[derive(Clone, Debug, Default)]
 pub struct InProgress;
-
-#[derive(Debug, PartialEq)]
-pub enum EndState {
-    Win,
-    Stalemate,
-    Forfeit,
-}
 
 #[derive(Debug, PartialEq)]
 enum TurnResult {
@@ -45,10 +47,7 @@ impl Game<Player1NotSet, Player2NotSet, NotReady> {
         Game::default()
     }
 
-    pub fn add_player(
-        self,
-        player: Player<'_>,
-    ) -> Game<Player<'_>, Player2NotSet, NotReady> {
+    pub fn add_player(self, player: Player<'_>) -> Game<Player<'_>, Player2NotSet, NotReady> {
         Game {
             player_1: player,
             player_2: self.player_2,
@@ -73,12 +72,25 @@ impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
 }
 
 impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
+    // TODO: move to referee?
+    fn determine_turn_result(board: &Board) -> TurnResult {
+        if Referee::check_for_win(board) {
+            return TurnResult::Win;
+        }
+
+        if board.is_full() {
+            return TurnResult::Stalemate;
+        }
+
+        TurnResult::NotOverYet
+    }
+
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: char) -> TurnResult {
         loop {
             match player.next_move() {
                 Ok(selected_move) => {
-                    if Referee::selected_cell_is_empty(selected_move, board) {
-                        let _ = board.set_cell(selected_move, symbol);
+                    if Referee::selected_cell_is_empty(*selected_move, board) {
+                        let _ = board.set_cell(*selected_move, symbol);
                         break;
                     }
                 }
@@ -89,13 +101,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
             }
         }
 
-        if Referee::check_for_win(board) {
-            TurnResult::Win
-        } else if board.is_full() {
-            TurnResult::Stalemate
-        } else {
-            TurnResult::NotOverYet
-        }
+        Self::determine_turn_result(&board)
     }
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
@@ -112,19 +118,34 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                         println!();
 
                         return if symbol == 'X' {
-                            CompletedGame::win(self.player_1, self.player_2)
+                            CompletedGame::Win {
+                                winner: self.player_1,
+                                loser: self.player_2,
+                            }
                         } else {
-                            CompletedGame::win(self.player_2, self.player_1)
+                            CompletedGame::Win {
+                                winner: self.player_2,
+                                loser: self.player_1,
+                            }
                         };
                     }
                     TurnResult::Stalemate => {
-                        return CompletedGame::stalemate();
+                        return CompletedGame::Stalemate {
+                            player_1: self.player_1,
+                            player_2: self.player_2,
+                        };
                     }
                     TurnResult::Forfeit => {
                         return if symbol == 'X' {
-                            CompletedGame::forfeit(self.player_2, self.player_1)
+                            CompletedGame::Forfeit {
+                                winner: self.player_2,
+                                loser: self.player_1,
+                            }
                         } else {
-                            CompletedGame::forfeit(self.player_1, self.player_2)
+                            CompletedGame::Forfeit {
+                                winner: self.player_1,
+                                loser: self.player_2,
+                            }
                         };
                     }
                     _ => {}
@@ -132,82 +153,50 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
             }
         }
     }
+}
 
-    pub fn is_over(&self) -> bool {
+impl GameIsOver for Game<Player<'_>, Player<'_>, InProgress> {
+    fn is_over(&self) -> bool {
         false
-    }
-
-    pub fn is_not_over(&self) -> bool {
-        !self.is_over()
     }
 }
 
 #[derive(Debug)]
-pub struct CompletedGame<'game> {
-    pub winner: Option<Player<'game>>,
-    pub loser: Option<Player<'game>>,
-    pub end_state: EndState,
+pub enum CompletedGame<'game> {
+    Win {
+        winner: Player<'game>,
+        loser: Player<'game>,
+    },
+    Stalemate {
+        player_1: Player<'game>,
+        player_2: Player<'game>,
+    },
+    Forfeit {
+        winner: Player<'game>,
+        loser: Player<'game>,
+    },
 }
 
-impl<'game> CompletedGame<'game> {
-    pub fn win(winner: Player<'game>, loser: Player<'game>) -> Self {
-        CompletedGame {
-            winner: winner.into(),
-            loser: loser.into(),
-            end_state: EndState::Win,
-        }
-    }
-
-    pub fn stalemate() -> Self {
-        CompletedGame {
-            winner: None,
-            loser: None,
-            end_state: EndState::Stalemate,
-        }
-    }
-
-    pub fn forfeit(winner: Player<'game>, loser: Player<'game>) -> Self {
-        CompletedGame {
-            winner: winner.into(),
-            loser: loser.into(),
-            end_state: EndState::Forfeit,
-        }
-    }
-
-    pub fn is_over(&self) -> bool {
+impl GameIsOver for CompletedGame<'_> {
+    fn is_over(&self) -> bool {
         true
-    }
-
-    pub fn is_not_over(&self) -> bool {
-        !self.is_over()
     }
 }
 
 impl<'game> fmt::Display for CompletedGame<'game> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self.end_state {
-            EndState::Win => {
-                writeln!(
-                    f,
-                    "Congratulations {}!",
-                    self.winner
-                        .as_ref()
-                        .expect("winner should be set...")
-                        .get_name()
-                )
+        match *self {
+            Self::Win { ref winner, .. } => {
+                writeln!(f, "Congratulations {}!", winner.get_name())
             }
-            EndState::Stalemate => {
+            Self::Stalemate { .. } => {
                 writeln!(f, "Stalemate...")
             }
-            EndState::Forfeit => {
-                writeln!(
-                    f,
-                    "{} forfeited.",
-                    self.loser
-                        .as_ref()
-                        .expect("loser should be set...")
-                        .get_name()
-                )
+            Self::Forfeit {
+                winner: _, // ignore
+                ref loser,
+            } => {
+                writeln!(f, "{} forfeited.", loser.get_name())
             }
         }
     }

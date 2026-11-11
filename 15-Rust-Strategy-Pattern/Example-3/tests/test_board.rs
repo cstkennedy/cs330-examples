@@ -76,6 +76,22 @@ pub fn test_set_cell(mut a_board: Board) {
     assert_that!(a_board.is_full(), is(not(true)));
 }
 
+// Added when debuging test_game::test_stalemate
+#[rstest]
+pub fn test_is_full(mut a_board: Board) {
+    assert_that!(a_board.set_cell(1, 'X'), is(ok()));
+    assert_that!(a_board.set_cell(2, 'O'), is(ok()));
+    assert_that!(a_board.set_cell(3, 'X'), is(ok()));
+    assert_that!(a_board.set_cell(4, 'O'), is(ok()));
+    assert_that!(a_board.set_cell(5, 'X'), is(ok()));
+    assert_that!(a_board.set_cell(6, 'O'), is(ok()));
+    assert_that!(a_board.set_cell(7, 'X'), is(ok()));
+    assert_that!(a_board.set_cell(8, 'O'), is(ok()));
+    assert_that!(a_board.set_cell(9, 'X'), is(ok()));
+
+    assert_that!(a_board.is_full(), is(true));
+}
+
 #[rstest]
 #[case(0)]
 #[case(10)]
