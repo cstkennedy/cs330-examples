@@ -107,6 +107,14 @@ impl Board {
 
         !self.the_board.iter().any(|cell: &char| cell.is_numeric())
     }
+
+    /// Return true/false if the position is valid and None otherwise
+    pub fn cell_is_empty(&self, position: usize) -> Option<bool> {
+        match self.get_cell(position) {
+            Err(_) => None,
+            Ok(symbol) => Some(!VALID_SYMBOLS.iter().contains(&symbol)),
+        }
+    }
 }
 
 impl fmt::Display for Board {

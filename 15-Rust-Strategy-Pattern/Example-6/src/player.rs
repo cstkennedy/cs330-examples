@@ -1,4 +1,5 @@
 use crate::error::StrategyError;
+use crate::r#move::Move;
 use crate::strategy::KeyboardStrategy;
 use crate::strategy::Strategy;
 use crate::r#move::Move;
