@@ -1,10 +1,10 @@
-extern crate shapes;
+extern crate shapes; // Not needed in modern Rust (old habits)
 
 use shapes::factory::Factory;
 
 use shapes::shape::Shape;
 
-use std::vec::Vec;
+use std::vec::Vec; // Not needed in modern Rust (old habits)
 
 const PROGRAM_HEADING: [&'static str; 2] = ["Objects & Traits: 2-D Shapes", "Thomas J. Kennedy"];
 

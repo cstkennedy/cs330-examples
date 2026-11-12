@@ -1,4 +1,5 @@
 Triangle; 4 4 4
+Triangle; 4 4
 Right Triangle; 4 5
 Equilateral Triangle; 3
 Square; 9

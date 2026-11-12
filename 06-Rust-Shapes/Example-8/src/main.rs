@@ -87,7 +87,7 @@ fn main() -> eyre::Result<()> {
 
     let shapes = {
         let file = File::open(&cli.shapes_filename)
-            .wrap_err_with(|| format!("Could not open '{}", cli.shapes_filename))?;
+            .wrap_err_with(|| format!("Could not open '{}'", cli.shapes_filename))?;
 
         let ins = BufReader::new(file);
         ShapeParser::read_shapes_with(ins)

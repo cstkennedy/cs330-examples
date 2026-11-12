@@ -15,7 +15,8 @@ fn bench_read_shapes() {
         Circle
         1337 Haxor"#;
 
-    let some_shapes = Parser::read_shapes(black_box(raw_str.as_bytes()));
+    let str_reader = BufReader::new(raw_str.as_bytes());
+    let some_shapes = Parser::read_shapes(black_box(str_reader));
 
 }
 
@@ -30,7 +31,9 @@ fn test_bench_shapes_with() {
         Circle; 5
         1337 Haxor; invalid input"#;
 
-    let some_shapes = Parser::read_shapes(black_box(raw_str.as_bytes()));
+    let str_reader = BufReader::new(raw_str.as_bytes());
+    let str_reader = BufReader::new(str_reader);
+    let some_shapes = Parser::read_shapes_with(black_box(str_reader));
 }
 
 fn main() {
