@@ -1,0 +1,25 @@
+[package]
+name = "shapes"
+version = "0.1.0"
+authors = ["Thomas J. Kennedy <tkennedy@cs.odu.edu>"]
+edition = "2024"
+
+[dependencies]
+ordered-float = "5.3.0"
+itertools = "0.14"
+eyre = "0.6.12"
+clap = { version = "4.5.29", features = ["derive"] }
+
+[dev-dependencies]
+# criterion = "0.5.1"
+divan = "0.1.17"
+hamcrest2 = "*"
+
+[[bench]]
+name = "bench_factory"
+harness = false
+
+[[bench]]
+name = "bench_parser"
+harness = false
+

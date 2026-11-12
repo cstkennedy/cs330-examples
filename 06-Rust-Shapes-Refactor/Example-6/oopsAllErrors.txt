@@ -1,0 +1,6 @@
+Triangle; 4 4
+Right Triangle; 4 
+Equilateral Triangle; 
+Square; 9 2
+Circle;
+1337 Haxor; 1 lol i broke it
