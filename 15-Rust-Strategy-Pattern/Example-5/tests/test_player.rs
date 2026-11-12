@@ -2,16 +2,17 @@
 use hamcrest2::prelude::*;
 use rstest::*;
 
+use tictactoe::board::Position;
 use tictactoe::player::Player;
 use tictactoe::strategy::*;
-use tictactoe::board::Position;
-
 
 #[fixture]
 fn a_player<'a>() -> Player<'a> {
     Player::builder()
         .with_name("Jay")
-        .with_strategy(PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap())
+        .with_strategy(
+            PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap(),
+        )
         .build()
 }
 
@@ -20,7 +21,10 @@ pub fn test_is_generic(a_player: Player) {
     let player = a_player;
     assert_that!(Player::is_generic(&player), is(not(true)));
 
-    let player = Player::builder().human().with_name(Player::DEFAULT_NAME).build();
+    let player = Player::builder()
+        .human()
+        .with_name(Player::DEFAULT_NAME)
+        .build();
     assert_that!(Player::is_generic(&player), is(true));
 }
 

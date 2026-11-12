@@ -18,10 +18,7 @@ pub fn test_default_constructor(a_board: Board) {
         let position = Position::try_from(position).unwrap();
 
         // assert_that!(a_board.get_cell(position), is(ok()));
-        assert_that!(
-            a_board.get_cell(position),
-            is(equal_to(expected_char))
-        );
+        assert_that!(a_board.get_cell(position), is(equal_to(expected_char)));
     }
 
     assert_that!(a_board.to_string(), is(equal_to(EXPECTED_EMPTY_STR)));
@@ -51,8 +48,14 @@ pub fn test_set_cell(mut a_board: Board) {
     a_board.set_cell(Position::try_from(1).unwrap(), Symbol::X);
     a_board.set_cell(Position::try_from(9).unwrap(), Symbol::O);
 
-    assert_that!(a_board.get_cell(Position::try_from(1).unwrap()), is(equal_to('X')));
-    assert_that!(a_board.get_cell(Position::try_from(9).unwrap()), is(equal_to('O')));
+    assert_that!(
+        a_board.get_cell(Position::try_from(1).unwrap()),
+        is(equal_to('X'))
+    );
+    assert_that!(
+        a_board.get_cell(Position::try_from(9).unwrap()),
+        is(equal_to('O'))
+    );
 
     assert_that!(a_board.to_string(), is_not(equal_to(EXPECTED_EMPTY_STR)));
     assert_that!(a_board.to_string(), is(equal_to("X|2|3\n4|5|6\n7|8|O")));
@@ -103,6 +106,24 @@ pub fn test_is_full(mut a_board: Board) {
     a_board.set_cell(Position::try_from(9).unwrap(), Symbol::X);
 
     assert_that!(a_board.is_full(), is(true));
+}
+
+#[rstest]
+#[case(1)]
+#[case(2)]
+#[case(3)]
+#[case(4)]
+#[case(5)]
+#[case(6)]
+#[case(7)]
+#[case(8)]
+#[case(9)]
+pub fn test_position_from_usize(#[case] cell_id: usize) {
+    let position = Position::try_from(cell_id);
+    assert_that!(&position, is(ok()));
+
+    let idx: usize = *position.unwrap();
+    assert_that!(idx, is(equal_to(cell_id)));
 }
 
 #[rstest]

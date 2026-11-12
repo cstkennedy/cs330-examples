@@ -1,5 +1,6 @@
 use thiserror::Error;
 
+/*
 #[derive(Debug, Error, PartialEq)]
 pub enum BoardError {
     #[error("'new_value' is not 'X' or 'O'")]
@@ -8,6 +9,7 @@ pub enum BoardError {
     #[error("Cell Index is not between 0 and 10, exclusive")]
     InvalidIndex,
 }
+*/
 
 #[derive(Debug, Error, PartialEq)]
 pub enum PositionError {
@@ -31,12 +33,16 @@ pub enum StrategyCreationError {
 pub enum StrategyError {
     #[error("{:?}", .0)]
     ParseError(#[from] std::num::ParseIntError),
+
+    /*
     #[error("{:?}", .0)]
     BoardError(#[from] BoardError),
+    */
     #[error("{:?}", .0)]
     PositionError(#[from] PositionError),
-    #[error("{:?}", .0)]
-    OutOfMovesError(String),
+
+    #[error("Exhausted all {num_moves} prepared moves")]
+    OutOfMovesError { num_moves: usize },
 }
 
 #[derive(Debug, Error, PartialEq)]
@@ -45,4 +51,3 @@ pub struct ErrorWithValue<E: std::error::Error, V> {
     pub the_error: E,
     pub the_value: V,
 }
-

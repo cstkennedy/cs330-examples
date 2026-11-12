@@ -13,7 +13,8 @@ impl Referee {
             .chain(board.columns().iter())
             .chain(board.diagonals().iter())
             .filter(|&cell_triple| cell_triple.iter().all_equal())
-            .count() != 0
+            .count()
+            != 0
     }
 
     /// Determine whether a cell in the board has been selected

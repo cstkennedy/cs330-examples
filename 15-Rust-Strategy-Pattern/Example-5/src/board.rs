@@ -1,9 +1,7 @@
 use itertools::Itertools;
 use std::fmt;
 
-use crate::error::BoardError;
 use crate::error::PositionError;
-
 
 // pub const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
 
@@ -33,14 +31,14 @@ impl TryFrom<usize> for Position {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Symbol {
     X,
-    O
+    O,
 }
 
 impl Symbol {
     pub fn as_char(&self) -> char {
         match self {
             Self::X => 'X',
-            Self::O => 'O'
+            Self::O => 'O',
         }
     }
 }

@@ -2,9 +2,8 @@ use std::fmt::Debug;
 use std::io::Write;
 use std::io::{stdin, stdout};
 
-use crate::error::{PositionError, StrategyCreationError, StrategyError};
 use crate::board::Position;
-
+use crate::error::{PositionError, StrategyCreationError, StrategyError};
 
 pub trait Strategy: Debug {
     fn next_move(&mut self) -> Result<Position, StrategyError>;
@@ -51,11 +50,13 @@ pub struct PredefinedMoves {
 
 impl PredefinedMoves {
     pub fn from_iterable_discarding<I>(raw_moves: I) -> Result<Self, StrategyCreationError>
-        where I: IntoIterator<Item=usize>
+    where
+        I: IntoIterator<Item = usize>,
     {
         let some_moves: Vec<usize> = raw_moves.into_iter().collect();
 
-        let validated_moves: Vec<Position> = some_moves.iter()
+        let validated_moves: Vec<Position> = some_moves
+            .iter()
             .copied()
             .flat_map(Position::try_from)
             .collect();
@@ -71,11 +72,13 @@ impl PredefinedMoves {
     }
 
     pub fn from_iterable_nondiscarding<I>(raw_moves: I) -> Result<Self, StrategyCreationError>
-        where I: IntoIterator<Item=usize>
+    where
+        I: IntoIterator<Item = usize>,
     {
         let some_moves: Vec<usize> = raw_moves.into_iter().collect();
 
-        let validated_moves: Vec<Position> = some_moves.iter()
+        let validated_moves: Vec<Position> = some_moves
+            .iter()
             .copied()
             .flat_map(Position::try_from)
             .collect();
@@ -98,10 +101,9 @@ impl PredefinedMoves {
 impl Strategy for PredefinedMoves {
     fn next_move(&mut self) -> Result<Position, StrategyError> {
         if self.move_idx == self.my_moves.len() {
-            return Err(StrategyError::OutOfMovesError(format!(
-                "Exhausted all {} prepared moves",
-                self.my_moves.len()
-            )));
+            return Err(StrategyError::OutOfMovesError {
+                num_moves: self.my_moves.len(),
+            });
         }
 
         let my_next_move = self.my_moves[self.move_idx];

@@ -5,7 +5,6 @@ use crate::error::StrategyError;
 use crate::player::Player;
 use crate::referee::Referee;
 
-
 pub trait GameIsOver {
     fn is_over(&self) -> bool;
 
@@ -95,7 +94,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                         break;
                     }
                 }
-                Err(StrategyError::OutOfMovesError(_)) => {
+                Err(StrategyError::OutOfMovesError { .. }) => {
                     return TurnResult::Forfeit;
                 }
                 Err(_) => {}
@@ -107,7 +106,10 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
         loop {
-            let players = vec![(&mut self.player_1, Symbol::X), (&mut self.player_2, Symbol::O)];
+            let players = vec![
+                (&mut self.player_1, Symbol::X),
+                (&mut self.player_2, Symbol::O),
+            ];
 
             for (player, symbol) in players {
                 println!("{}", self.board);
@@ -126,7 +128,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                             Symbol::O => CompletedGame::Win {
                                 winner: self.player_2,
                                 loser: self.player_1,
-                            }
+                            },
                         };
                     }
                     TurnResult::Stalemate => {
@@ -144,7 +146,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                             Symbol::O => CompletedGame::Forfeit {
                                 winner: self.player_1,
                                 loser: self.player_2,
-                            }
+                            },
                         };
                     }
                     _ => {}
