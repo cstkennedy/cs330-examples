@@ -2,10 +2,15 @@ use std::io::BufReader;
 
 use divan::{Bencher, black_box};
 
+use shapes::factory::{CreationFactory, Factory, FactoryDirectory};
 use shapes::prelude::Parser;
 
-#[divan::bench(min_time = 1)]
-fn bench_read_shapes() {
+#[divan::bench(min_time = 1, types = [Factory])]
+fn bench_read_shapes<F>()
+where
+    F: CreationFactory,
+    F::Item: std::str::FromStr,
+{
     // The read function should handle (i.e., ignore) leading whitespace
     let raw_str = r#"
         Triangle
@@ -16,11 +21,15 @@ fn bench_read_shapes() {
         1337 Haxor"#;
 
     let str_reader = BufReader::new(raw_str.as_bytes());
-    let some_shapes = Parser::read_shapes(black_box(str_reader));
+    let some_shapes = Parser::<F>::read_shapes(black_box(str_reader));
 }
 
-#[divan::bench(min_time = 1)]
-fn test_bench_shapes_with() {
+#[divan::bench(min_time = 1, types = [Factory])]
+fn test_bench_shapes_with<F>()
+where
+    F: CreationFactory,
+    F::Item: std::str::FromStr,
+{
     // The read function should handle (i.e., ignore) leading whitespace
     let raw_str = r#"
         Triangle; 1 2 3
@@ -32,7 +41,7 @@ fn test_bench_shapes_with() {
 
     let str_reader = BufReader::new(raw_str.as_bytes());
     let str_reader = BufReader::new(str_reader);
-    let some_shapes = Parser::read_shapes_with(black_box(str_reader));
+    let some_shapes = Parser::<F>::read_shapes_with(black_box(str_reader));
 }
 
 fn main() {

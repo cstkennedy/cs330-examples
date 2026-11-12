@@ -3,5 +3,6 @@ resolver = "3"
 
 members = [
     "shapes",
-    "shapes_bin"
+    "shapes_bin",
+    "shapes_rand_file"
 ]

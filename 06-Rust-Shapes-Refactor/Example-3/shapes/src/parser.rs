@@ -1,23 +1,28 @@
-use crate::factory::Factory;
-use crate::shape::Shape;
+use crate::factory::CreationFactory;
 
 use std::io::BufRead;
+use std::str::FromStr;
 
-pub struct Parser;
+pub struct Parser<F> {
+    factory: std::marker::PhantomData<F>,
+}
 
-impl Parser {
+impl<F> Parser<F>
+where
+    F: CreationFactory,
+{
     /// Create shapes based on names from an input buffer.
     ///
     /// # Arguments
     ///
     ///  * `ins` - input source
     ///
-    pub fn read_shapes<B: BufRead>(ins: B) -> Vec<Box<dyn Shape>> {
+    pub fn read_shapes<B: BufRead>(ins: B) -> Vec<F::Item> {
         ins.lines()
             .flatten()
             .flat_map(|line| {
                 let name = line.trim();
-                Factory::create(name)
+                F::create_default(name)
             })
             .collect()
     }
@@ -28,31 +33,15 @@ impl Parser {
     ///
     ///  * `ins` - input source
     ///
-    pub fn read_shapes_with<B>(ins: B) -> Vec<Box<dyn Shape>>
+    pub fn read_shapes_with<B>(ins: B) -> Vec<F::Item>
     where
         B: BufRead,
+        F::Item: FromStr,
     {
         ins.lines()
             .flatten()
             .filter(|line| line.len() > 0)
-            .map(|line| {
-                line.trim()
-                    .split(";")
-                    .map(String::from)
-                    .collect::<Vec<String>>()
-            })
-            .filter(|split_line| split_line.len() == 2)
-            .flat_map(|split_line| {
-                let name = &split_line[0];
-
-                let dims = &split_line[1]
-                    .split_whitespace()
-                    .filter(|s| !s.is_empty())
-                    .flat_map(|dim| dim.trim().parse())
-                    .collect::<Vec<f64>>();
-
-                Factory::create_with(&name, &dims)
-            })
+            .flat_map(|line| line.parse::<F::Item>())
             .collect()
     }
 }

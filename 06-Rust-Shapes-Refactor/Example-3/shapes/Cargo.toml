@@ -5,6 +5,7 @@ authors = ["Thomas J. Kennedy <tkennedy@cs.odu.edu>"]
 edition = "2024"
 
 [dependencies]
+itertools = "0.15.0"
 thiserror = "2.0.18"
 
 
@@ -13,6 +14,10 @@ thiserror = "2.0.18"
 divan = "0.1.17"
 hamcrest2 = "*"
 rstest = "0.26.1"
+
+[[bench]]
+name = "bench_errors"
+harness = false
 
 [[bench]]
 name = "bench_factory"

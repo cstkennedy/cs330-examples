@@ -38,46 +38,87 @@ impl From<RightTriangle> for Box<dyn Shape> {
     }
 }
 
-impl From<&[f64]> for Triangle {
-    fn from(dims: &[f64]) -> Self {
-        Triangle {
+impl TryFrom<&[f64]> for Triangle {
+    type Error = CreationError;
+
+    fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
+        if dims.len() != 3 {
+            return Err(CreationError::DimensionCountError {
+                name: "Triangle".to_owned(),
+                num_required: 3,
+            });
+        }
+        Ok(Triangle {
             side_a: dims[0],
             side_b: dims[1],
             side_c: dims[2],
+        })
+    }
+}
+
+impl TryFrom<&[f64]> for EquilateralTriangle {
+    type Error = CreationError;
+
+    fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
+        if dims.len() != 1 {
+            return Err(CreationError::DimensionCountError {
+                name: "Equilateral Triangle".to_owned(),
+                num_required: 1,
+            });
         }
+        Ok(EquilateralTriangle { side: dims[0] })
     }
 }
 
-impl From<&[f64]> for EquilateralTriangle {
-    fn from(dims: &[f64]) -> Self {
-        EquilateralTriangle { side: dims[0] }
-    }
-}
+impl TryFrom<&[f64]> for RightTriangle {
+    type Error = CreationError;
 
-impl From<&[f64]> for RightTriangle {
-    fn from(dims: &[f64]) -> Self {
-        RightTriangle {
+    fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
+        if dims.len() != 2 {
+            return Err(CreationError::DimensionCountError {
+                name: "Right Triangle".to_owned(),
+                num_required: 2,
+            });
+        }
+        Ok(RightTriangle {
             base: dims[0],
             height: dims[1],
+        })
+    }
+}
+
+impl TryFrom<&[f64]> for Circle {
+    type Error = CreationError;
+
+    fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
+        if dims.len() != 1 {
+            return Err(CreationError::DimensionCountError {
+                name: "Circle".to_owned(),
+                num_required: 1,
+            });
         }
+        Ok(Circle { radius: dims[0] })
     }
 }
 
-impl From<&[f64]> for Circle {
-    fn from(dims: &[f64]) -> Self {
-        Circle { radius: dims[0] }
-    }
-}
+impl TryFrom<&[f64]> for Square {
+    type Error = CreationError;
 
-impl From<&[f64]> for Square {
-    fn from(dims: &[f64]) -> Self {
-        Square { side: dims[0] }
+    fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
+        if dims.len() != 1 {
+            return Err(CreationError::DimensionCountError {
+                name: "Square".to_owned(),
+                num_required: 1,
+            });
+        }
+
+        Ok(Square { side: dims[0] })
     }
 }
 
 type DefaultFunction = dyn Fn() -> Box<dyn Shape>;
-type DimFunction = dyn Fn(&[f64]) -> Box<dyn Shape>;
-type ShapeTuple<'a> = (&'a str, Box<DefaultFunction>, Box<DimFunction>, usize);
+type DimFunction = dyn Fn(&[f64]) -> Result<Box<dyn Shape>, CreationError>;
+type ShapeTuple<'a> = (&'a str, Box<DefaultFunction>, Box<DimFunction>);
 
 #[rustfmt::skip]
 const CREATE_SHAPE: LazyCell<Vec<ShapeTuple>> = LazyCell::new(|| {
@@ -85,32 +126,27 @@ const CREATE_SHAPE: LazyCell<Vec<ShapeTuple>> = LazyCell::new(|| {
         (
             "Triangle",
             Box::new(|| Triangle::default().into()),
-            Box::new(|dims| Triangle::from(dims).into()),
-            3
+            Box::new(|dims| Ok(Triangle::try_from(dims)?.into())),
         ),
         (
             "Right Triangle",
             Box::new(|| RightTriangle::default().into()),
-            Box::new(|dims| RightTriangle::from(dims).into()),
-            2,
+            Box::new(|dims| Ok(RightTriangle::try_from(dims)?.into())),
         ),
         (
             "Equilateral Triangle",
             Box::new(|| EquilateralTriangle::default().into()),
-            Box::new(|dims| EquilateralTriangle::from(dims).into()),
-            1
+            Box::new(|dims| Ok(EquilateralTriangle::try_from(dims)?.into())),
         ),
         (
             "Square",
             Box::new(|| Square::default().into()),
-            Box::new(|dims| Square::from(dims).into()),
-            1
+            Box::new(|dims| Ok(Square::try_from(dims)?.into())),
         ),
         (
             "Circle",
             Box::new(|| Circle::default().into()),
-            Box::new(|dims| Circle::from(dims).into()),
-            1
+            Box::new(|dims| Ok(Circle::try_from(dims)?.into())),
         ),
     ]
 });
@@ -179,9 +215,9 @@ impl Factory {
     pub fn create(name: &str) -> Result<Box<dyn Shape>, CreationError> {
         match CREATE_SHAPE
             .iter()
-            .find(|(shape_name, _, _, _)| shape_name == &name)
+            .find(|(shape_name, _, _)| shape_name == &name)
         {
-            Some((_, creation_op, _, _)) => Ok(creation_op().into()),
+            Some((_, creation_op, _,)) => Ok(creation_op().into()),
             None => Err(CreationError::UnknownShapeError(name.to_owned())),
         }
     }
@@ -194,51 +230,14 @@ impl Factory {
     ///   * `dims` input dimensions
     ///
     pub fn create_with(name: &str, dims: &[f64]) -> Result<Box<dyn Shape>, CreationError> {
-        /*
-        if let Some((_, _, creation_op, required_len)) = CREATE_SHAPE
-            .iter()
-            .find(|(shape_name, _, _, _)| shape_name == &name)
-        {
-            if *required_len == dims.len() {
-                return Ok(creation_op(&dims));
-            } else {
-                return Err(CreationError::DimensionCountError {
-                    name: name.to_owned(), num_required: *required_len
-                });
-            }
-        } else {
-            Err(CreationError::UnknownShapeError(name.to_owned()))
-        }
-        */
-
         match CREATE_SHAPE
             .iter()
-            .find(|(shape_name, _, _, _)| shape_name == &name)
+            .find(|(shape_name, _, _)| shape_name == &name)
         {
             None => Err(CreationError::UnknownShapeError(name.to_owned())),
-            Some((_, _, creation_op, required_len)) => match *required_len == dims.len() {
-                false => Err(CreationError::DimensionCountError {
-                    name: name.to_owned(),
-                    num_required: *required_len,
-                }),
-                true => Ok(creation_op(&dims)),
-            },
+            Some((_, _, creation_op)) => creation_op(&dims),
         }
     }
-
-    /*
-    pub fn create_with(name: &str, dims: &[f64]) -> Option<Box<dyn Shape>> {
-        if let Some((_, _, creation_op, required_len)) = CREATE_SHAPE
-            .iter()
-            .find(|(shape_name, _, _, _)| shape_name == &name)
-        {
-            if *required_len == dims.len() {
-                return creation_op(&dims).into();
-            }
-        }
-        None
-    }
-    */
 
     /// Determine whether a given shape is known
     ///
@@ -249,7 +248,7 @@ impl Factory {
     pub fn is_known(name: &str) -> bool {
         CREATE_SHAPE
             .iter()
-            .find(|(shape_name, _, _, _)| shape_name == &name)
+            .find(|(shape_name, _, _)| shape_name == &name)
             .is_some()
     }
 
@@ -262,7 +261,7 @@ impl Factory {
     pub fn list_known() -> String {
         CREATE_SHAPE
             .iter()
-            .map(|(name, _, _, _)| format!("  {}", name))
+            .map(|(name, _, _)| format!("  {}", name))
             .collect::<Vec<String>>()
             .join("\n")
             + "\n"

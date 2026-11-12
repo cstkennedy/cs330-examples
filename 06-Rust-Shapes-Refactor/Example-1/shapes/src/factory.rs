@@ -1,5 +1,6 @@
 use crate::circle::Circle;
 use crate::equilateral_triangle::EquilateralTriangle;
+use crate::error::CreationError;
 use crate::right_triangle::RightTriangle;
 use crate::shape::Shape;
 use crate::square::Square;
@@ -116,6 +117,58 @@ const CREATE_SHAPE: LazyCell<Vec<ShapeTuple>> = LazyCell::new(|| {
 
 pub struct Factory;
 
+//------------------------------------------------------------------------------
+// Start thinking about this...
+//------------------------------------------------------------------------------
+/*
+pub trait CreationFactory {
+    type Item;
+    type CreationArgs<'a>;
+    type Error;
+
+    fn create_default(name: &str) -> Result<Self::Item, Self::Error>;
+
+    fn create_with<'a>(name: &str, dims: Self::CreationArgs<'a>) -> Result<Self::Item, Self::Error>;
+}
+
+impl CreationFactory for Factory {
+    type Item = Box<dyn Shape>;
+    type CreationArgs<'a> = &'a[f64];
+    type Error = CreationError;
+
+    fn create_default(name: &str) -> Result<Self::Item, Self::Error>
+    {
+        match CREATE_SHAPE
+            .iter()
+            .find(|(shape_name, _, _, _)| shape_name == &name)
+        {
+            Some((_, creation_op, _, _)) => Ok(creation_op().into()),
+            None => Err(CreationError::UnknownShapeError(name.to_owned())),
+        }
+    }
+
+    fn create_with<'a>(name: &str, dims: Self::CreationArgs<'a>) -> Result<Self::Item, Self::Error>
+    {
+        match CREATE_SHAPE
+            .iter()
+            .find(|(shape_name, _, _, _)| shape_name == &name)
+        {
+            None => Err(CreationError::UnknownShapeError(name.to_owned())),
+            Some((_, _, creation_op, required_len)) => match *required_len == dims.len() {
+                false => Err(CreationError::DimensionCountError {
+                    name: name.to_owned(),
+                    num_required: *required_len,
+                }),
+                true => Ok(creation_op(&dims)),
+            },
+        }
+    }
+}
+*/
+//------------------------------------------------------------------------------
+// Stop thinking about this...
+//------------------------------------------------------------------------------
+
 impl Factory {
     /// Create a Shape
     ///
@@ -123,13 +176,13 @@ impl Factory {
     ///
     ///   * `name` shape to be created
     ///
-    pub fn create(name: &str) -> Option<Box<dyn Shape>> {
+    pub fn create(name: &str) -> Result<Box<dyn Shape>, CreationError> {
         match CREATE_SHAPE
             .iter()
             .find(|(shape_name, _, _, _)| shape_name == &name)
         {
-            Some((_, creation_op, _, _)) => creation_op().into(),
-            _ => None,
+            Some((_, creation_op, _, _)) => Ok(creation_op().into()),
+            None => Err(CreationError::UnknownShapeError(name.to_owned())),
         }
     }
 
@@ -140,6 +193,40 @@ impl Factory {
     ///   * `name` shape to be created
     ///   * `dims` input dimensions
     ///
+    pub fn create_with(name: &str, dims: &[f64]) -> Result<Box<dyn Shape>, CreationError> {
+        /*
+        if let Some((_, _, creation_op, required_len)) = CREATE_SHAPE
+            .iter()
+            .find(|(shape_name, _, _, _)| shape_name == &name)
+        {
+            if *required_len == dims.len() {
+                return Ok(creation_op(&dims));
+            } else {
+                return Err(CreationError::DimensionCountError {
+                    name: name.to_owned(), num_required: *required_len
+                });
+            }
+        } else {
+            Err(CreationError::UnknownShapeError(name.to_owned()))
+        }
+        */
+
+        match CREATE_SHAPE
+            .iter()
+            .find(|(shape_name, _, _, _)| shape_name == &name)
+        {
+            None => Err(CreationError::UnknownShapeError(name.to_owned())),
+            Some((_, _, creation_op, required_len)) => match *required_len == dims.len() {
+                false => Err(CreationError::DimensionCountError {
+                    name: name.to_owned(),
+                    num_required: *required_len,
+                }),
+                true => Ok(creation_op(&dims)),
+            },
+        }
+    }
+
+    /*
     pub fn create_with(name: &str, dims: &[f64]) -> Option<Box<dyn Shape>> {
         if let Some((_, _, creation_op, required_len)) = CREATE_SHAPE
             .iter()
@@ -151,6 +238,7 @@ impl Factory {
         }
         None
     }
+    */
 
     /// Determine whether a given shape is known
     ///

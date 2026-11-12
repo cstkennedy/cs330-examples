@@ -1,6 +1,6 @@
 use std::io::BufReader;
 
-use divan::{black_box, Bencher};
+use divan::{Bencher, black_box};
 
 use shapes::prelude::Parser;
 
@@ -17,7 +17,6 @@ fn bench_read_shapes() {
 
     let str_reader = BufReader::new(raw_str.as_bytes());
     let some_shapes = Parser::read_shapes(black_box(str_reader));
-
 }
 
 #[divan::bench(min_time = 1)]

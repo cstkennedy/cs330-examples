@@ -14,4 +14,7 @@ pub enum CreationError {
 
     #[error("{0}")]
     MalformedLineError(CompactString),
+
+    #[error("{0:?}")]
+    ParseFloatError(#[from] std::num::ParseFloatError)
 }

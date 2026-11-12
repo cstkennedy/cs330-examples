@@ -9,6 +9,8 @@ pub mod triangle;
 pub mod factory;
 pub mod parser;
 
+pub mod monoshape;
+
 pub mod prelude {
     pub use crate::factory::Factory;
     pub use crate::parser::Parser;

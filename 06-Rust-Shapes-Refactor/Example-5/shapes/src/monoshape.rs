@@ -117,21 +117,28 @@ impl FromStr for MonoShape {
     type Err = CreationError;
 
     fn from_str(line: &str) -> Result<Self, Self::Err> {
-        let split_line: Vec<&str> = line.trim().split(";").collect();
+        let mut tokens = line.trim().split(";");
 
-        if split_line.len() != 2 {
+        let Some(name) = tokens.next() else {
+            return Err(CreationError::MalformedLineError(
+                compact_str::format_compact!(
+                    "Line '{line}' did not include a name"
+                ),
+            ));
+        };
+
+        let Some(the_rest) = tokens.next() else {
             return Err(CreationError::MalformedLineError(
                 compact_str::format_compact!(
                     "Line '{line}' did not have exactly one (1) semicolon"
                 ),
             ));
-        }
+        };
 
-        let name = split_line[0];
-        let values: Vec<f64> = split_line[1]
+        let values: Vec<f64> = the_rest
             .split_whitespace()
-            .flat_map(|token| token.parse())
-            .collect();
+            .map(|token| token.parse())
+            .try_collect()?;
 
         let shape = MonoFactory::create_with(name, &values)?;
 

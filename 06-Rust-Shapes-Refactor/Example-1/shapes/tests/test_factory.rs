@@ -9,22 +9,61 @@ use shapes::right_triangle::RightTriangle;
 use shapes::square::Square;
 use shapes::triangle::Triangle;
 
-#[test]
-fn test_is_known() {
-    assert!(Factory::is_known("Circle"));
-    assert!(Factory::is_known("Square"));
-    assert!(Factory::is_known("Triangle"));
-    assert!(Factory::is_known("Right Triangle"));
-    assert!(Factory::is_known("Equilateral Triangle"));
+use rstest::rstest;
+
+#[rstest]
+fn test_create_default_success() {
+    // I need to write this test...
 }
 
-#[test]
-fn test_number_known() {
-    assert_that!(Factory::number_known(), is(equal_to(5)));
+#[rstest]
+fn test_create_default_failure() {
+    assert_that!(Factory::create("UnknownShape"), is(err()));
 }
 
-#[test]
-fn test_str() {
+#[rstest]
+fn test_create_with_circle() {
+    let a_shape = Factory::create_with("Circle", &[5.0]).unwrap();
+    let ref_shape = Circle::new(5.0);
+    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
+}
+
+fn test_create_with_square() {
+    let a_shape = Factory::create_with("Square", &[5.0]).unwrap();
+    let ref_shape = Square::new(5.0);
+    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
+}
+
+fn test_create_with_triangle() {
+    let a_shape = Factory::create_with("Triangle", &[3.0, 4.0, 5.0]).unwrap();
+    let ref_shape = Triangle::new(3.0, 4.0, 5.0);
+    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
+}
+
+fn test_create_with_right_triangle() {
+    let a_shape = Factory::create_with("Right Triangle", &[3.0, 4.0]).unwrap();
+    let ref_shape = RightTriangle::new(3.0, 4.0);
+    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
+}
+
+fn test_create_with_equilateral_triangle() {
+    let a_shape = Factory::create_with("Equilateral Triangle", &[5.0]).unwrap();
+    let ref_shape = EquilateralTriangle::new(5.0);
+    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
+}
+
+#[rstest]
+#[case::Circle("Circle")]
+#[case::Square("Square")]
+#[case::Triangle("Triangle")]
+#[case::RightTriangle("Right Triangle")]
+#[case::EquilateralTriangle("Equilateral Triangle")]
+fn test_is_known(#[case] shape_name: &str) {
+    assert!(Factory::is_known(shape_name));
+}
+
+#[rstest]
+fn test_list_known_contains() {
     let f_str = Factory::list_known();
 
     assert!(f_str.contains("  Circle"));
@@ -34,30 +73,7 @@ fn test_str() {
     assert!(f_str.contains("  Equilateral Triangle"));
 }
 
-#[test]
-fn test_create() {
-    // I need to write this test...
-}
-
-#[test]
-fn test_create_with() {
-    let a_shape = Factory::create_with("Triangle", &[3.0, 4.0, 5.0]).unwrap();
-    let ref_shape = Triangle::new(3.0, 4.0, 5.0);
-    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
-
-    let a_shape = Factory::create_with("Right Triangle", &[3.0, 4.0]).unwrap();
-    let ref_shape = RightTriangle::new(3.0, 4.0);
-    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
-
-    let a_shape = Factory::create_with("Equilateral Triangle", &[5.0]).unwrap();
-    let ref_shape = EquilateralTriangle::new(5.0);
-    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
-
-    let a_shape = Factory::create_with("Circle", &[5.0]).unwrap();
-    let ref_shape = Circle::new(5.0);
-    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
-
-    let a_shape = Factory::create_with("Square", &[5.0]).unwrap();
-    let ref_shape = Square::new(5.0);
-    assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
+#[rstest]
+fn test_number_known() {
+    assert_that!(Factory::number_known(), is(equal_to(5)));
 }

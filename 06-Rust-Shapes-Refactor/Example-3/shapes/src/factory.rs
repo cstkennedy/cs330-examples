@@ -8,6 +8,8 @@ use crate::triangle::Triangle;
 
 use std::cell::LazyCell;
 
+use itertools::Itertools;
+
 impl From<Circle> for Box<dyn Shape> {
     fn from(shape: Circle) -> Self {
         Box::new(shape)
@@ -116,6 +118,53 @@ impl TryFrom<&[f64]> for Square {
     }
 }
 
+impl std::str::FromStr for Box<dyn Shape> {
+    type Err = CreationError;
+
+    fn from_str(line: &str) -> Result<Self, Self::Err> {
+        let split_line: Vec<&str> = line.trim().split(";").collect();
+
+        if split_line.len() != 2 {
+            return Err(CreationError::MalformedLineError(format!(
+                "Line '{line}' did not have exactly one (1) semicolon"
+            )));
+        }
+
+        let name = split_line[0];
+        let values: Vec<f64> = split_line[1]
+            .split_whitespace()
+            .flat_map(|token| token.parse())
+            .collect();
+
+        let shape = Factory::create_with(name, &values)?;
+
+        Ok(shape)
+    }
+}
+
+//------------------------------------------------------------------------------
+// Factory Traits
+//------------------------------------------------------------------------------
+pub trait CreationFactory {
+    type Item;
+    type Error;
+
+    fn create_default(name: &str) -> Result<Self::Item, Self::Error>;
+
+    fn create_with(name: &str, dims: &[f64]) -> Result<Self::Item, Self::Error>;
+}
+
+pub trait FactoryDirectory {
+    fn is_known(name: &str) -> bool;
+
+    fn number_known() -> usize;
+
+    fn list_known() -> String;
+}
+
+//------------------------------------------------------------------------------
+// Factory Implementation
+//------------------------------------------------------------------------------
 type DefaultFunction = dyn Fn() -> Box<dyn Shape>;
 type DimFunction = dyn Fn(&[f64]) -> Result<Box<dyn Shape>, CreationError>;
 type ShapeTuple<'a> = (&'a str, Box<DefaultFunction>, Box<DimFunction>);
@@ -153,71 +202,22 @@ const CREATE_SHAPE: LazyCell<Vec<ShapeTuple>> = LazyCell::new(|| {
 
 pub struct Factory;
 
-//------------------------------------------------------------------------------
-// Start thinking about this...
-//------------------------------------------------------------------------------
-/*
-pub trait CreationFactory {
-    type Item;
-    type CreationArgs<'a>;
-    type Error;
-
-    fn create_default(name: &str) -> Result<Self::Item, Self::Error>;
-
-    fn create_with<'a>(name: &str, dims: Self::CreationArgs<'a>) -> Result<Self::Item, Self::Error>;
-}
-
 impl CreationFactory for Factory {
     type Item = Box<dyn Shape>;
-    type CreationArgs<'a> = &'a[f64];
     type Error = CreationError;
 
-    fn create_default(name: &str) -> Result<Self::Item, Self::Error>
-    {
-        match CREATE_SHAPE
-            .iter()
-            .find(|(shape_name, _, _, _)| shape_name == &name)
-        {
-            Some((_, creation_op, _, _)) => Ok(creation_op().into()),
-            None => Err(CreationError::UnknownShapeError(name.to_owned())),
-        }
-    }
-
-    fn create_with<'a>(name: &str, dims: Self::CreationArgs<'a>) -> Result<Self::Item, Self::Error>
-    {
-        match CREATE_SHAPE
-            .iter()
-            .find(|(shape_name, _, _, _)| shape_name == &name)
-        {
-            None => Err(CreationError::UnknownShapeError(name.to_owned())),
-            Some((_, _, creation_op, required_len)) => match *required_len == dims.len() {
-                false => Err(CreationError::DimensionCountError {
-                    name: name.to_owned(),
-                    num_required: *required_len,
-                }),
-                true => Ok(creation_op(&dims)),
-            },
-        }
-    }
-}
-*/
-//------------------------------------------------------------------------------
-// Stop thinking about this...
-//------------------------------------------------------------------------------
-
-impl Factory {
     /// Create a Shape
     ///
     /// # Arguments
     ///
     ///   * `name` shape to be created
     ///
-    pub fn create(name: &str) -> Result<Box<dyn Shape>, CreationError> {
+    fn create_default(name: &str) -> Result<Self::Item, Self::Error> {
         match CREATE_SHAPE
             .iter()
             .find(|(shape_name, _, _)| shape_name == &name)
         {
-            Some((_, creation_op, _,)) => Ok(creation_op().into()),
+            Some((_, creation_op, _)) => Ok(creation_op().into()),
             None => Err(CreationError::UnknownShapeError(name.to_owned())),
         }
     }
@@ -229,7 +229,7 @@ impl Factory {
     ///   * `name` shape to be created
     ///   * `dims` input dimensions
     ///
-    pub fn create_with(name: &str, dims: &[f64]) -> Result<Box<dyn Shape>, CreationError> {
+    fn create_with(name: &str, dims: &[f64]) -> Result<Self::Item, Self::Error> {
         match CREATE_SHAPE
             .iter()
             .find(|(shape_name, _, _)| shape_name == &name)
@@ -238,31 +238,32 @@ impl Factory {
             Some((_, _, creation_op)) => creation_op(&dims),
         }
     }
+}
 
+impl FactoryDirectory for Factory {
     /// Determine whether a given shape is known
     ///
     /// # Arguments
     ///
     ///  * `name` the shape for which to query
     ///
-    pub fn is_known(name: &str) -> bool {
+    fn is_known(name: &str) -> bool {
         CREATE_SHAPE
             .iter()
             .find(|(shape_name, _, _)| shape_name == &name)
             .is_some()
     }
 
-    pub fn number_known() -> usize {
+    fn number_known() -> usize {
         CREATE_SHAPE.len()
     }
 
     /// List the known shapes, one per line
     ///
-    pub fn list_known() -> String {
+    fn list_known() -> String {
         CREATE_SHAPE
             .iter()
             .map(|(name, _, _)| format!("  {}", name))
-            .collect::<Vec<String>>()
             .join("\n")
             + "\n"
     }

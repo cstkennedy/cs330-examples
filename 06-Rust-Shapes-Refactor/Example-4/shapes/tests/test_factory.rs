@@ -4,6 +4,8 @@ use hamcrest2::prelude::*;
 use shapes::factory::{CreationFactory, FactoryDirectory};
 use shapes::prelude::Factory;
 
+use shapes::monoshape::MonoFactory;
+
 use shapes::circle::Circle;
 use shapes::equilateral_triangle::EquilateralTriangle;
 use shapes::right_triangle::RightTriangle;
@@ -19,6 +21,7 @@ fn test_create_default_success() {
 
 #[rstest]
 #[case::Factory(Factory)]
+#[case::MonoFactory(MonoFactory)]
 fn test_create_default_failure<F>(#[case] _case: F)
 where
     F: CreationFactory,
@@ -30,6 +33,7 @@ where
 
 #[rstest]
 #[case::Factory(Factory)]
+#[case::MonoFactory(MonoFactory)]
 fn test_create_with_circle<F>(#[case] _case: F)
 where
     F: CreationFactory,
@@ -42,8 +46,15 @@ where
 }
 
 #[rstest]
-fn test_create_with_square() {
-    let a_shape = Factory::create_with("Square", &[5.0]).unwrap();
+#[case::Factory(Factory)]
+#[case::MonoFactory(MonoFactory)]
+fn test_create_with_square<F>(#[case] _case: F)
+where
+    F: CreationFactory,
+    F::Item: std::fmt::Debug + std::fmt::Display,
+    F::Error: std::fmt::Debug,
+{
+    let a_shape = F::create_with("Square", &[5.0]).unwrap();
     let ref_shape = Square::new(5.0);
     assert_that!(a_shape.to_string(), equal_to(ref_shape.to_string()));
 }
@@ -75,7 +86,7 @@ fn test_create_with_equilateral_triangle() {
 #[case::Triangle("Triangle")]
 #[case::RightTriangle("Right Triangle")]
 #[case::EquilateralTriangle("Equilateral Triangle")]
-fn test_is_known<F>(#[case] shape_name: &str, #[values(Factory)] _case: F)
+fn test_is_known<F>(#[case] shape_name: &str, #[values(Factory, MonoFactory)] _case: F)
 where
     F: FactoryDirectory,
 {
@@ -84,6 +95,7 @@ where
 
 #[rstest]
 #[case::Factory(Factory)]
+#[case::MonoFactory(MonoFactory)]
 fn test_list_known_contains<F>(#[case] _case: F)
 where
     F: FactoryDirectory,

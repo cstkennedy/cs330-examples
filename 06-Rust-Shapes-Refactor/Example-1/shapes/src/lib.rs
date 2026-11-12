@@ -1,5 +1,6 @@
 pub mod circle;
 pub mod equilateral_triangle;
+pub mod error;
 pub mod right_triangle;
 pub mod shape;
 pub mod square;

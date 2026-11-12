@@ -172,8 +172,8 @@ type DimFunction = dyn Fn(&[f64]) -> Result<Box<dyn Shape>, CreationError>;
 type ShapeTuple<'a> = (&'a str, Box<DefaultFunction>, Box<DimFunction>);
 
 #[rustfmt::skip]
-const CREATE_SHAPE: LazyCell<Vec<ShapeTuple>> = LazyCell::new(|| {
-    vec![
+const CREATE_SHAPE: LazyCell<[ShapeTuple; 5]> = LazyCell::new(|| {
+    [
         (
             "Triangle",
             Box::new(|| Triangle::default().into()),

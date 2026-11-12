@@ -46,7 +46,7 @@ impl TryFrom<&[f64]> for Triangle {
     fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
         if dims.len() != 3 {
             return Err(CreationError::DimensionCountError {
-                name: "Triangle".to_owned(),
+                name: "Triangle",
                 num_required: 3,
             });
         }
@@ -64,7 +64,7 @@ impl TryFrom<&[f64]> for EquilateralTriangle {
     fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
         if dims.len() != 1 {
             return Err(CreationError::DimensionCountError {
-                name: "Equilateral Triangle".to_owned(),
+                name: "Equilateral Triangle",
                 num_required: 1,
             });
         }
@@ -78,7 +78,7 @@ impl TryFrom<&[f64]> for RightTriangle {
     fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
         if dims.len() != 2 {
             return Err(CreationError::DimensionCountError {
-                name: "Right Triangle".to_owned(),
+                name: "Right Triangle",
                 num_required: 2,
             });
         }
@@ -95,7 +95,7 @@ impl TryFrom<&[f64]> for Circle {
     fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
         if dims.len() != 1 {
             return Err(CreationError::DimensionCountError {
-                name: "Circle".to_owned(),
+                name: "Circle",
                 num_required: 1,
             });
         }
@@ -109,7 +109,7 @@ impl TryFrom<&[f64]> for Square {
     fn try_from(dims: &[f64]) -> Result<Self, Self::Error> {
         if dims.len() != 1 {
             return Err(CreationError::DimensionCountError {
-                name: "Square".to_owned(),
+                name: "Square",
                 num_required: 1,
             });
         }
@@ -125,9 +125,11 @@ impl std::str::FromStr for Box<dyn Shape> {
         let split_line: Vec<&str> = line.trim().split(";").collect();
 
         if split_line.len() != 2 {
-            return Err(CreationError::MalformedLineError(format!(
-                "Line '{line}' did not have exactly one (1) semicolon"
-            )));
+            return Err(CreationError::MalformedLineError(
+                compact_str::format_compact!(
+                    "Line '{line}' did not have exactly one (1) semicolon"
+                ),
+            ));
         }
 
         let name = split_line[0];
@@ -218,7 +220,7 @@ impl CreationFactory for Factory {
             .find(|(shape_name, _, _)| shape_name == &name)
         {
             Some((_, creation_op, _)) => Ok(creation_op().into()),
-            None => Err(CreationError::UnknownShapeError(name.to_owned())),
+            None => Err(CreationError::UnknownShapeError(name.into())),
         }
     }
 
@@ -234,7 +236,7 @@ impl CreationFactory for Factory {
             .iter()
             .find(|(shape_name, _, _)| shape_name == &name)
         {
-            None => Err(CreationError::UnknownShapeError(name.to_owned())),
+            None => Err(CreationError::UnknownShapeError(name.into())),
             Some((_, _, creation_op)) => creation_op(&dims),
         }
     }
