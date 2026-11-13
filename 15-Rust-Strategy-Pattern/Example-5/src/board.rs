@@ -62,6 +62,23 @@ impl Default for Board {
     }
 }
 
+impl std::ops::Index<Position> for Board {
+    type Output = char;
+
+    fn index(&self, index: Position) -> &Self::Output {
+        &self.the_board[*index - 1]
+    }
+}
+
+// Should be removed (Invariant) - Board controls updates. Do not mut borrow cells
+/*
+impl std::ops::IndexMut<Position> for Board {
+    fn index_mut(&mut self, index: Position) -> &mut Self::Output {
+        &mut self.the_board[*index - 1]
+    }
+}
+*/
+
 impl Board {
     pub fn new() -> Self {
         Board::default()
@@ -138,6 +155,10 @@ impl Board {
 
         // !VALID_SYMBOLS.iter().contains(&symbol)
         symbol.is_numeric()
+    }
+
+    pub fn cell_is_not_empty(&self, position: Position) -> bool {
+        !self.cell_is_empty(position)
     }
 }
 

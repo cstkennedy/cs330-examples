@@ -3,7 +3,7 @@ use std::fmt;
 use crate::board::{Board, Symbol};
 use crate::error::StrategyError;
 use crate::player::Player;
-use crate::referee::Referee;
+use crate::referee::{Referee, TurnResult};
 
 pub trait GameIsOver {
     fn is_over(&self) -> bool;
@@ -20,76 +20,46 @@ pub struct Player1NotSet;
 pub struct Player2NotSet;
 
 #[derive(Clone, Debug, Default)]
-pub struct NotReady;
-
-#[derive(Clone, Debug, Default)]
-pub struct InProgress;
-
-#[derive(Debug, PartialEq)]
-enum TurnResult {
-    Win,
-    Stalemate,
-    NotOverYet,
-    Forfeit,
-}
-
-#[derive(Clone, Debug, Default)]
-pub struct Game<P1, P2, S> {
+pub struct Game<P1, P2> {
     player_1: P1,
     player_2: P2,
     board: Board,
-    state: S,
 }
 
-impl Game<Player1NotSet, Player2NotSet, NotReady> {
+impl Game<Player1NotSet, Player2NotSet> {
     pub fn new() -> Self {
         Game::default()
     }
 
-    pub fn add_player(self, player: Player<'_>) -> Game<Player<'_>, Player2NotSet, NotReady> {
+    pub fn add_player(self, player: Player<'_>) -> Game<Player<'_>, Player2NotSet> {
         Game {
             player_1: player,
             player_2: self.player_2,
             board: self.board,
-            state: self.state,
         }
     }
 }
 
-impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
+impl<'game> Game<Player<'game>, Player2NotSet> {
     pub fn add_player(
         self,
         player: Player<'game>,
-    ) -> Game<Player<'game>, Player<'game>, InProgress> {
+    ) -> Game<Player<'game>, Player<'game>> {
         Game {
             player_1: self.player_1,
             player_2: player,
             board: self.board,
-            state: InProgress,
         }
     }
 }
 
-impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
-    // TODO: move to referee?
-    fn determine_turn_result(board: &Board) -> TurnResult {
-        if Referee::check_for_win(board) {
-            return TurnResult::Win;
-        }
-
-        if board.is_full() {
-            return TurnResult::Stalemate;
-        }
-
-        TurnResult::NotOverYet
-    }
-
+impl<'game> Game<Player<'game>, Player<'game>> {
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: Symbol) -> TurnResult {
         loop {
             match player.next_move() {
                 Ok(selected_move) => {
-                    if Referee::selected_cell_is_empty(selected_move, board) {
-                        // let _ = board.set_cell(selected_move, symbol);
+                    // if Referee::selected_cell_is_empty(selected_move, board) {
+                    if board.cell_is_empty(selected_move) {
                         board.set_cell(selected_move, symbol);
                         break;
                     }
@@ -101,7 +71,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
             }
         }
 
-        Self::determine_turn_result(&board)
+        Referee::determine_turn_result(&board)
     }
 
     pub fn play_match(mut self) -> CompletedGame<'game> {
@@ -156,7 +126,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
     }
 }
 
-impl GameIsOver for Game<Player<'_>, Player<'_>, InProgress> {
+impl GameIsOver for Game<Player<'_>, Player<'_>> {
     fn is_over(&self) -> bool {
         false
     }
