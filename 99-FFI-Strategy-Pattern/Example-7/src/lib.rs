@@ -19,7 +19,6 @@ use crate::game::{CompletedGame, Game};
 use crate::player::Player;
 use crate::py_strategy::*;
 use crate::strategy::*;
-use mono_strategy::MonoStrategy;
 
 #[pyclass(name = "Player")]
 pub struct PyPlayer {
@@ -226,7 +225,9 @@ mod tictactoe {
     use PyCompletedGame;
 
     #[pymodule]
-    mod exception {}
+    mod exception {
+
+    }
 
     #[pymodule_init]
     pub fn init(m: &Bound<'_, PyModule>) -> PyResult<()> {

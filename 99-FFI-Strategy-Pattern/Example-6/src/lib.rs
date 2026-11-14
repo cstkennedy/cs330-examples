@@ -16,7 +16,6 @@ pub mod prelude {
 
 use crate::game::{CompletedGame, Game};
 use crate::player::Player;
-use crate::game::{Game, CompletedGame};
 use crate::strategy::*;
 
 #[pyclass(name = "Player")]
@@ -128,18 +127,47 @@ impl From<CompletedGame> for PyCompletedGame {
     }
 }
 
+// Implement __repr__ from scratch for...
+// CompletedGame
+//   - Player
+//     - MonoStrategy
+//       - KeyboardStrategy
+//       - PredefinedMovesStrategy
+fn repr_helper_game(game: &CompletedGame) -> String {
+    match game {
+        CompletedGame::Win{winner, loser} => format!(
+            "CompletedGame::Win(\n  winner={},\n  loser={}\n)",
+             repr_helper_player(winner),
+             repr_helper_player(loser)
+        ),
+        _ => "...".to_owned(),
+    }
+}
+
+fn repr_helper_player(player: &Player) -> String {
+    match player.is_human() {
+        true => format!("Player.create_human(name=\"{}\")", player.get_name()),
+        false => match player.get_strategy() {
+            MonoStrategy::Keyboard{..} => todo!(),
+            MonoStrategy::PredefinedMoves{..} =>
+                format!(
+                    "Player.create_computer(name=\"{}\",...)",
+                    player.get_name()
+                ),
+            }
+        }
+    }
+}
+
+// Better approach
+trait DunderRepr {
+    fn repr_helper(&self) -> String;
+}
+
 #[pymethods]
 impl PyCompletedGame {
     pub fn __repr__(&self) -> String {
-        // format!("{:?}", self.game)
-        format!("{:#?}", self.game)
-
-        // Implement __repr__ from scratch for...
-        // CompletedGame
-        //   - Player
-        //     - MonoStrategy
-        //       - KeyboardStrategy
-        //       - PredefinedMovesStrategy
+        repr_helper_game(&self.game)
     }
 
     pub fn __str__(&self) -> String {
