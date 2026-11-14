@@ -20,58 +20,50 @@ pub struct Player1NotSet;
 pub struct Player2NotSet;
 
 #[derive(Clone, Debug, Default)]
-pub struct NotReady;
-
-#[derive(Clone, Debug, Default)]
-pub struct InProgress;
-
-// TODO: Remove third generic since Player state encodes the same state information.
-#[derive(Clone, Debug, Default)]
-pub struct Game<P1, P2, S> {
+pub struct Game<P1, P2> {
     player_1: P1,
     player_2: P2,
     board: Board,
-    state: S,
 }
 
-impl Game<Player1NotSet, Player2NotSet, NotReady> {
+impl Game<Player1NotSet, Player2NotSet> {
     pub fn new() -> Self {
         Game::default()
+    }
+
+    pub fn add_player(self, player: Player<'_>) -> Game<Player<'_>, Player2NotSet> {
+        Game {
+            player_1: player,
+            player_2: self.player_2,
+            board: self.board,
+        }
     }
 
     // TODO: Move to PyGame
     pub fn new_with_players<'game>(
         player_1: Player<'game>,
         player_2: Player<'game>,
-    ) -> Game<Player<'game>, Player<'game>, InProgress> {
-        Game::new().add_player(player_1).add_player(player_2)
-    }
-
-    pub fn add_player(self, player: Player<'_>) -> Game<Player<'_>, Player2NotSet, NotReady> {
-        Game {
-            player_1: player,
-            player_2: self.player_2,
-            board: self.board,
-            state: self.state,
-        }
+    ) -> Game<Player<'game>, Player<'game>> {
+        Self::new()
+            .add_player(player_1)
+            .add_player(player_2)
     }
 }
 
-impl<'game> Game<Player<'game>, Player2NotSet, NotReady> {
+impl<'game> Game<Player<'game>, Player2NotSet> {
     pub fn add_player(
         self,
         player: Player<'game>,
-    ) -> Game<Player<'game>, Player<'game>, InProgress> {
+    ) -> Game<Player<'game>, Player<'game>> {
         Game {
             player_1: self.player_1,
             player_2: player,
             board: self.board,
-            state: InProgress,
         }
     }
 }
 
-impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
+impl<'game> Game<Player<'game>, Player<'game>> {
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: Symbol) -> TurnResult {
         loop {
             match player.next_move() {
@@ -82,7 +74,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
                         break;
                     }
                 }
-                Err(StrategyError::OutOfMovesError(_)) => {
+                Err(StrategyError::OutOfMovesError { .. }) => {
                     return TurnResult::Forfeit;
                 }
                 Err(_) => {}
@@ -144,7 +136,7 @@ impl<'game> Game<Player<'game>, Player<'game>, InProgress> {
     }
 }
 
-impl GameIsOver for Game<Player<'_>, Player<'_>, InProgress> {
+impl GameIsOver for Game<Player<'_>, Player<'_>> {
     fn is_over(&self) -> bool {
         false
     }

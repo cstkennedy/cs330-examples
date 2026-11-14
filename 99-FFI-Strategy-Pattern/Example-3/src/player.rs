@@ -5,13 +5,13 @@ use crate::strategy::KeyboardStrategy;
 use crate::strategy::Strategy;
 
 #[derive(Debug)]
-pub struct Player<'a> {
-    name: &'a str, // Change to String or &'static str
-    strategy: MonoStrategy<'a>,
+pub struct Player {
+    name: String,
+    strategy: MonoStrategy,
     humanity: bool,
 }
 
-impl<'a> Player<'a> {
+impl Player {
     pub const DEFAULT_NAME: &'static str = "I. C. Generic";
 
     /// Retrieve the next move.
@@ -30,10 +30,10 @@ impl<'a> Player<'a> {
     }
 
     pub fn get_name(&self) -> &str {
-        self.name
+        &self.name
     }
 
-    pub fn get_strategy(&self) -> &MonoStrategy<'a> {
+    pub fn get_strategy(&self) -> &MonoStrategy {
         &self.strategy
     }
 
@@ -45,7 +45,7 @@ impl<'a> Player<'a> {
     ///
     /// # Returns
     ///     True if the player is a Cylon
-    pub fn is_generic(possible_cylon: &Player<'a>) -> bool {
+    pub fn is_generic(possible_cylon: &Player) -> bool {
         possible_cylon.name == Self::DEFAULT_NAME
     }
 
@@ -54,14 +54,18 @@ impl<'a> Player<'a> {
     }
 
     // TODO: Move to PyPlayer
-    pub fn create_human(name: &str) -> Player<'a> {
-        Player::builder().human().with_name("Thomas").build()
+    #[rustfmt::skip]
+    pub fn create_human(name: &str) -> Player {
+        Player::builder()
+            .human()
+            .with_name(name)
+            .build()
     }
 
     // TODO: Move to PyPlayer
-    pub fn create_computer<S>(name: &'a str, strategy: S) -> Player<'a>
+    pub fn create_computer<S>(name: &str, strategy: S) -> Player
     where
-        S: 'a + Strategy + Into<MonoStrategy<'a>>,
+        S: Strategy + Into<MonoStrategy>,
     {
         Player::builder()
             .with_name(name)
@@ -70,7 +74,7 @@ impl<'a> Player<'a> {
     }
 }
 
-impl<'a> PartialEq for Player<'a> {
+impl PartialEq for Player {
     fn eq(&self, rhs: &Self) -> bool {
         self.name == rhs.name
     }
@@ -116,7 +120,9 @@ impl PlayerBuilder<NoName, NoStrategy, NoType> {
         }
     }
 
-    pub fn with_name(self, name: &str) -> PlayerBuilder<&str, NoStrategy, NoType> {
+    pub fn with_name(self, name: &str) -> PlayerBuilder<String, NoStrategy, NoType> {
+        let name = name.to_owned();
+
         PlayerBuilder {
             name,
             strategy: NoStrategy,
@@ -131,24 +137,27 @@ impl Default for PlayerBuilder<NoName, NoStrategy, NoType> {
     }
 }
 
-impl<'a> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
+impl PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
     pub fn with_name(
         self,
-        name: &'a str,
-    ) -> PlayerBuilder<&'a str, MonoStrategy<'a>, HumanPlayer> {
+        name: &str,
+    ) -> PlayerBuilder<String, MonoStrategy, HumanPlayer> {
+        let strategy = KeyboardStrategy::new(&name).into();
+        let name = name.to_owned();
+
         PlayerBuilder {
             name,
-            strategy: KeyboardStrategy::new(name).into(),
+            strategy,
             player_type: self.player_type,
         }
     }
 }
 
-impl<'a> PlayerBuilder<&'a str, NoStrategy, NoType> {
+impl PlayerBuilder<String, NoStrategy, NoType> {
     pub fn with_strategy(
         self,
-        strategy: impl Strategy + Into<MonoStrategy<'a>>,
-    ) -> PlayerBuilder<&'a str, MonoStrategy<'a>, NoType> {
+        strategy: impl Strategy + Into<MonoStrategy>,
+    ) -> PlayerBuilder<String, MonoStrategy, NoType> {
         PlayerBuilder {
             name: self.name,
             strategy: strategy.into(),
@@ -157,8 +166,8 @@ impl<'a> PlayerBuilder<&'a str, NoStrategy, NoType> {
     }
 }
 
-impl<'a> PlayerBuilder<&'a str, MonoStrategy<'a>, NoType> {
-    pub fn build(self) -> Player<'a> {
+impl PlayerBuilder<String, MonoStrategy, NoType> {
+    pub fn build(self) -> Player {
         Player {
             name: self.name,
             strategy: self.strategy,
@@ -167,8 +176,8 @@ impl<'a> PlayerBuilder<&'a str, MonoStrategy<'a>, NoType> {
     }
 }
 
-impl<'a> PlayerBuilder<&'a str, MonoStrategy<'a>, HumanPlayer> {
-    pub fn build(self) -> Player<'a> {
+impl PlayerBuilder<String, MonoStrategy, HumanPlayer> {
+    pub fn build(self) -> Player {
         Player {
             name: self.name,
             strategy: self.strategy,

@@ -3,9 +3,6 @@ use std::fmt;
 
 use crate::error::PositionError;
 
-#[deprecated]
-pub const VALID_SYMBOLS: [char; 2] = ['X', 'O'];
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Symbol {
     X,
@@ -71,12 +68,14 @@ impl std::ops::Index<Position> for Board {
     }
 }
 
-// Should be removed (Invariant)
+// Should be removed (Invariant) - Board controls updates. Do not mut borrow cells
+/*
 impl std::ops::IndexMut<Position> for Board {
     fn index_mut(&mut self, index: Position) -> &mut Self::Output {
         &mut self.the_board[*index - 1]
     }
 }
+*/
 
 impl Board {
     pub fn new() -> Self {
@@ -91,7 +90,8 @@ impl Board {
     /// Returns:
     ///     value stored in the Cell
     ///
-    pub(crate) fn get_cell(&self, cell_id: Position) -> char {
+    // pub fn get_cell(&self, cell_id: Position) -> Result<char, BoardError> {
+    pub fn get_cell(&self, cell_id: Position) -> char {
         self.the_board[*cell_id - 1]
     }
 

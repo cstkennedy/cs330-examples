@@ -10,15 +10,15 @@ pub trait Strategy: Debug {
 }
 
 #[derive(Debug)]
-pub struct KeyboardStrategy<'a> {
-    name: &'a str,
+pub struct KeyboardStrategy {
+    name: String,
 }
 
-impl<'a> KeyboardStrategy<'a> {
+impl KeyboardStrategy {
     const PROMPT_MSG: &'static str = "Enter your desired move (1-9): ";
 
-    pub fn new(player_name: &'a str) -> Self {
-        KeyboardStrategy { name: player_name }
+    pub fn new(player_name: &str) -> Self {
+        KeyboardStrategy { name: player_name.to_owned() }
     }
 
     /// Read a line from std in and trim the trailing newline.
@@ -31,7 +31,7 @@ impl<'a> KeyboardStrategy<'a> {
     }
 }
 
-impl<'a> Strategy for KeyboardStrategy<'a> {
+impl Strategy for KeyboardStrategy {
     fn next_move(&mut self) -> Result<Position, StrategyError> {
         print!("{}, {}", &self.name, Self::PROMPT_MSG);
         let _ = stdout().flush();

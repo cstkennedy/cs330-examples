@@ -4,12 +4,12 @@ use crate::error::StrategyError;
 use crate::strategy::{KeyboardStrategy, PredefinedMoves, Strategy};
 
 #[derive(Debug)]
-pub enum MonoStrategy<'a> {
-    Keyboard { wrapped: KeyboardStrategy<'a> },
+pub enum MonoStrategy {
+    Keyboard { wrapped: KeyboardStrategy },
     PredefinedMoves { wrapped: PredefinedMoves },
 }
 
-impl<'a> Strategy for MonoStrategy<'a> {
+impl<'a> Strategy for MonoStrategy {
     fn next_move(&mut self) -> Result<Position, StrategyError> {
         match self {
             MonoStrategy::Keyboard { wrapped } => wrapped.next_move(),
@@ -18,13 +18,13 @@ impl<'a> Strategy for MonoStrategy<'a> {
     }
 }
 
-impl<'a> From<KeyboardStrategy<'a>> for MonoStrategy<'a> {
-    fn from(wrapped: KeyboardStrategy<'a>) -> Self {
+impl From<KeyboardStrategy> for MonoStrategy {
+    fn from(wrapped: KeyboardStrategy) -> Self {
         MonoStrategy::Keyboard { wrapped }
     }
 }
 
-impl<'a> From<PredefinedMoves> for MonoStrategy<'a> {
+impl From<PredefinedMoves> for MonoStrategy {
     fn from(wrapped: PredefinedMoves) -> Self {
         MonoStrategy::PredefinedMoves { wrapped }
     }

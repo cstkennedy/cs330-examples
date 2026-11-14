@@ -1,12 +1,13 @@
 use crate::board::Position;
 use crate::error::StrategyError;
+use crate::mono_strategy::MonoStrategy;
 use crate::strategy::KeyboardStrategy;
 use crate::strategy::Strategy;
 
 #[derive(Debug)]
 pub struct Player<'a> {
-    name: String,
-    strategy: Box<dyn Strategy + 'a>, // Change to Enum Wrapper
+    name: &'a str, // Change to String or &'static str
+    strategy: MonoStrategy<'a>,
     humanity: bool,
 }
 
@@ -29,7 +30,11 @@ impl<'a> Player<'a> {
     }
 
     pub fn get_name(&self) -> &str {
-        &self.name
+        self.name
+    }
+
+    pub fn get_strategy(&self) -> &MonoStrategy<'a> {
+        &self.strategy
     }
 
     /// Checks whether a player is a placeholder or
@@ -58,9 +63,9 @@ impl<'a> Player<'a> {
     }
 
     // TODO: Move to PyPlayer
-    pub fn create_computer<S>(name: &str, strategy: S) -> Player<'a>
+    pub fn create_computer<S>(name: &'a str, strategy: S) -> Player<'a>
     where
-        S: 'a + Strategy,
+        S: 'a + Strategy + Into<MonoStrategy<'a>>,
     {
         Player::builder()
             .with_name(name)
@@ -77,8 +82,6 @@ impl<'a> PartialEq for Player<'a> {
 
 #[derive(Debug, Default)]
 pub struct NoStrategy;
-
-pub type BoxedStrategy<'a> = Box<dyn Strategy + 'a>;
 
 #[derive(Debug, Default)]
 pub struct HumanPlayer;
@@ -112,14 +115,12 @@ impl PlayerBuilder<NoName, NoStrategy, NoType> {
     pub fn human(self) -> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
         PlayerBuilder {
             name: NoName,
-            strategy: NoStrategy,
+            strategy: NoStrategy, // TODO: Set strategy here
             player_type: HumanPlayer,
         }
     }
 
-    pub fn with_name(self, name: &str) -> PlayerBuilder<String, NoStrategy, NoType> {
-        let name = name.to_owned();
-
+    pub fn with_name(self, name: &str) -> PlayerBuilder<&str, NoStrategy, NoType> {
         PlayerBuilder {
             name,
             strategy: NoStrategy,
@@ -137,32 +138,30 @@ impl Default for PlayerBuilder<NoName, NoStrategy, NoType> {
 impl<'a> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
     pub fn with_name(
         self,
-        name: &str,
-    ) -> PlayerBuilder<String, NoStrategy, HumanPlayer> {
-        let name = name.to_owned();
-
+        name: &'a str,
+    ) -> PlayerBuilder<&'a str, MonoStrategy<'a>, HumanPlayer> {
         PlayerBuilder {
             name,
-            strategy: self.strategy,
+            strategy: KeyboardStrategy::new(name).into(),
             player_type: self.player_type,
         }
     }
 }
 
-impl<'a> PlayerBuilder<String, NoStrategy, NoType> {
+impl<'a> PlayerBuilder<&'a str, NoStrategy, NoType> {
     pub fn with_strategy(
         self,
-        strategy: impl Strategy + 'a,
-    ) -> PlayerBuilder<String, BoxedStrategy<'a>, NoType> {
+        strategy: impl Strategy + Into<MonoStrategy<'a>>,
+    ) -> PlayerBuilder<&'a str, MonoStrategy<'a>, NoType> {
         PlayerBuilder {
             name: self.name,
-            strategy: Box::new(strategy),
+            strategy: strategy.into(),
             player_type: self.player_type,
         }
     }
 }
 
-impl<'a> PlayerBuilder<String, BoxedStrategy<'a>, NoType> {
+impl<'a> PlayerBuilder<&'a str, MonoStrategy<'a>, NoType> {
     pub fn build(self) -> Player<'a> {
         Player {
             name: self.name,
@@ -172,20 +171,11 @@ impl<'a> PlayerBuilder<String, BoxedStrategy<'a>, NoType> {
     }
 }
 
-impl<'a> PlayerBuilder<String, NoStrategy, HumanPlayer> {
+impl<'a> PlayerBuilder<&'a str, MonoStrategy<'a>, HumanPlayer> {
     pub fn build(self) -> Player<'a> {
-        /*
         Player {
             name: self.name,
-            strategy: Box::new(KeyboardStrategy::new(&self.name)),
-            humanity: true,
-        }
-        */
-        let strategy = Box::new(KeyboardStrategy::new(&self.name));
-
-        Player {
-            name: self.name,
-            strategy,
+            strategy: self.strategy,
             humanity: true,
         }
     }

@@ -10,15 +10,15 @@ pub trait Strategy: Debug {
 }
 
 #[derive(Debug)]
-pub struct KeyboardStrategy {
-    name: String,
+pub struct KeyboardStrategy<'a> {
+    name: &'a str,
 }
 
-impl KeyboardStrategy {
+impl<'a> KeyboardStrategy<'a> {
     const PROMPT_MSG: &'static str = "Enter your desired move (1-9): ";
 
-    pub fn new(player_name: &str) -> Self {
-        KeyboardStrategy { name: player_name.to_owned() }
+    pub fn new(player_name: &'a str) -> Self {
+        KeyboardStrategy { name: player_name }
     }
 
     /// Read a line from std in and trim the trailing newline.
@@ -31,7 +31,7 @@ impl KeyboardStrategy {
     }
 }
 
-impl Strategy for KeyboardStrategy {
+impl<'a> Strategy for KeyboardStrategy<'a> {
     fn next_move(&mut self) -> Result<Position, StrategyError> {
         print!("{}, {}", &self.name, Self::PROMPT_MSG);
         let _ = stdout().flush();
@@ -67,7 +67,7 @@ impl PredefinedMoves {
             return Err(StrategyCreationError::NoValidPositions(some_moves.into()));
         }
 
-        Ok(PredefinedMoves {
+        Ok(Self {
             my_moves: validated_moves,
             move_idx: 0,
         })
@@ -95,7 +95,7 @@ impl PredefinedMoves {
             return Err(StrategyCreationError::BatchValueError(some_moves.into()));
         }
 
-        Ok(PredefinedMoves {
+        Ok(Self {
             my_moves: validated_moves,
             move_idx: 0,
         })
@@ -105,10 +105,9 @@ impl PredefinedMoves {
 impl Strategy for PredefinedMoves {
     fn next_move(&mut self) -> Result<Position, StrategyError> {
         if self.move_idx == self.my_moves.len() {
-            return Err(StrategyError::OutOfMovesError(format!(
-                "Exhausted all {} prepared moves",
-                self.my_moves.len()
-            )));
+            return Err(StrategyError::OutOfMovesError {
+                num_moves: self.my_moves.len(),
+            });
         }
 
         let my_next_move = self.my_moves[self.move_idx];

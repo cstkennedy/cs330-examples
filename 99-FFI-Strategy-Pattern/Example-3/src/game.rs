@@ -31,7 +31,7 @@ impl Game<Player1NotSet, Player2NotSet> {
         Game::default()
     }
 
-    pub fn add_player(self, player: Player<'_>) -> Game<Player<'_>, Player2NotSet> {
+    pub fn add_player(self, player: Player) -> Game<Player, Player2NotSet> {
         Game {
             player_1: player,
             player_2: self.player_2,
@@ -39,21 +39,22 @@ impl Game<Player1NotSet, Player2NotSet> {
         }
     }
 
-    pub fn new_with_players<'game>(
-        player_1: Player<'game>,
-        player_2: Player<'game>,
-    ) -> Game<Player<'game>, Player<'game>> {
+    // TODO: Move to PyGame
+    pub fn new_with_players(
+        player_1: Player,
+        player_2: Player,
+    ) -> Game<Player, Player> {
         Self::new()
             .add_player(player_1)
             .add_player(player_2)
     }
 }
 
-impl<'game> Game<Player<'game>, Player2NotSet> {
+impl Game<Player, Player2NotSet> {
     pub fn add_player(
         self,
-        player: Player<'game>,
-    ) -> Game<Player<'game>, Player<'game>> {
+        player: Player,
+    ) -> Game<Player, Player> {
         Game {
             player_1: self.player_1,
             player_2: player,
@@ -62,7 +63,7 @@ impl<'game> Game<Player<'game>, Player2NotSet> {
     }
 }
 
-impl<'game> Game<Player<'game>, Player<'game>> {
+impl Game<Player, Player> {
     fn do_one_turn(board: &mut Board, player: &mut Player, symbol: Symbol) -> TurnResult {
         loop {
             match player.next_move() {
@@ -83,7 +84,7 @@ impl<'game> Game<Player<'game>, Player<'game>> {
         Referee::determine_turn_result(&board)
     }
 
-    pub fn play_match(mut self) -> CompletedGame<'game> {
+    pub fn play_match(mut self) -> CompletedGame {
         loop {
             let players = vec![
                 (&mut self.player_1, Symbol::X),
@@ -135,35 +136,35 @@ impl<'game> Game<Player<'game>, Player<'game>> {
     }
 }
 
-impl GameIsOver for Game<Player<'_>, Player<'_>> {
+impl GameIsOver for Game<Player, Player> {
     fn is_over(&self) -> bool {
         false
     }
 }
 
 #[derive(Debug)]
-pub enum CompletedGame<'game> {
+pub enum CompletedGame {
     Win {
-        winner: Player<'game>,
-        loser: Player<'game>,
+        winner: Player,
+        loser: Player,
     },
     Stalemate {
-        player_1: Player<'game>,
-        player_2: Player<'game>,
+        player_1: Player,
+        player_2: Player,
     },
     Forfeit {
-        winner: Player<'game>,
-        loser: Player<'game>,
+        winner: Player,
+        loser: Player,
     },
 }
 
-impl GameIsOver for CompletedGame<'_> {
+impl GameIsOver for CompletedGame {
     fn is_over(&self) -> bool {
         true
     }
 }
 
-impl<'game> fmt::Display for CompletedGame<'game> {
+impl fmt::Display for CompletedGame {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
             Self::Win { ref winner, .. } => {
