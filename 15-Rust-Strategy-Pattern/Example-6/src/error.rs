@@ -30,6 +30,7 @@ pub enum StrategyError {
     OutOfMovesError { num_moves: usize },
 }
 
+#[deprecated]
 #[derive(Debug, Error, PartialEq)]
 pub struct ErrorWithValue<E: std::error::Error, V> {
     #[source]

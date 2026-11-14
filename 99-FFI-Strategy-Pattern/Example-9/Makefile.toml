@@ -1,0 +1,41 @@
+[config]
+default_to_workspace = false
+
+[env]
+PYTHON = "python3.11"
+PYO3_PYTHON="python3.11"
+
+[tasks.build-ffi-flow]
+condition = { files_modified = { input = ["Cargo.toml", "src/*.rs"], output = ["./target/**/*tictactoe*"] }, platforms = ["linux"]}
+dependencies = [ "build", "copy-lib" ]
+
+[tasks.build]
+condition = { files_modified = { input = ["Cargo.toml", "src/*.rs"], output = ["./target/**/*tictactoe*"] } }
+private = true
+command = "cargo"
+args = ["build", "--release"]
+
+[tasks.copy-lib]
+condition = { files_modified = { input = ["./target/release/libtictactoe.so"], output = ["tictactoe.so"] }, platforms = ["linux"] }
+private = true
+command = "cp"
+args = [ "./target/release/libtictactoe.so", "tictactoe.so" ]
+
+[tasks.clean-ffi-flow]
+condition = { platforms = ["linux"] }
+dependencies = [ "clean", "clean-lib" ]
+
+[tasks.clean]
+command = "cargo"
+args = [ "clean" ]
+
+[tasks.clean-lib]
+condition = { platforms = ["linux"] }
+command = "rm"
+args = [ "./tictactoe.so" ]
+
+[tasks.run-python]
+dependencies = [ "build", "copy-lib" ]
+command = "uv"
+args = ["run", "play_tictactoe.py", "${@}"]
+

@@ -1,7 +1,6 @@
 pub mod board;
 pub mod error;
 pub mod game;
-pub mod r#move;
 pub mod player;
 pub mod referee;
 pub mod strategy;

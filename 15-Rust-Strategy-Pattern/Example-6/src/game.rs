@@ -119,7 +119,7 @@ impl<'game> Game<Player<'game>, Player<'game>> {
                             },
                         };
                     }
-                    _ => {}
+                    TurnResult::NotOverYet => {}
                 }
             }
         }

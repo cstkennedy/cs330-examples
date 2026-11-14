@@ -1,0 +1,37 @@
+[project]
+name = "play-tic-tac-toe"
+version = "1.0"
+description = "Python Tic-Tac-Toe Example"
+authors = {name = "Thomas J. Kennedy", email="tkennedy@cs.odu.edu"}
+requires-python=">=3.11"
+
+[dependency-groups]
+dev = [
+    "pyhamcrest>=2.1.0",
+    "pytest>=8.4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+# Thank you... <https://github.com/astral-sh/uv/issues/7260#issuecomment-2341586054>
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 80
+indent-width = 4
+
+[tool.ruff.lint]
+select = ["D101", "E", "W", "F", "B", "Q", "I001"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.black]
+line-length = 80
+
+[tool.isort]
+profile = "black"
+
+
