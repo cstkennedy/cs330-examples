@@ -33,6 +33,10 @@ impl Player {
         &self.name
     }
 
+    pub fn get_strategy(&self) -> &MonoStrategy {
+        &self.strategy
+    }
+
     /// Checks whether a player is a placeholder or
     /// an actual player.
     ///

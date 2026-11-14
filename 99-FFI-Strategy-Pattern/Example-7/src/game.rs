@@ -64,7 +64,12 @@ impl Game<Player, Player> {
                 Err(StrategyError::OutOfMovesError(_)) => {
                     return TurnResult::Forfeit;
                 }
-                Err(_) => {}
+                Err(StrategyError::PyErrCatchAll(_)) => {
+                    panic!()
+                }
+                //TODO: This fall through is bad... remove it.
+                // Err(_) => {}
+                Err(StrategyError::ParseError(_) | StrategyError::MoveError(_)) => {}
             }
         }
 

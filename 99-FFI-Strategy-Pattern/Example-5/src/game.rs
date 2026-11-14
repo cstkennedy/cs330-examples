@@ -31,11 +31,6 @@ impl Game<Player1NotSet, Player2NotSet> {
         Game::default()
     }
 
-    // TODO: Move to PyGame
-    pub fn new_with_players(player_1: Player, player_2: Player) -> Game<Player, Player> {
-        Game::new().add_player(player_1).add_player(player_2)
-    }
-
     pub fn add_player(self, player: Player) -> Game<Player, Player2NotSet> {
         Game {
             player_1: player,

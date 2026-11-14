@@ -31,6 +31,11 @@ impl Game<Player1NotSet, Player2NotSet> {
         Game::default()
     }
 
+    // TODO: Move to PyGame
+    pub fn new_with_players(player_1: Player, player_2: Player) -> Game<Player, Player> {
+        Game::new().add_player(player_1).add_player(player_2)
+    }
+
     pub fn add_player(self, player: Player) -> Game<Player, Player2NotSet> {
         Game {
             player_1: player,
@@ -64,12 +69,7 @@ impl Game<Player, Player> {
                 Err(StrategyError::OutOfMovesError(_)) => {
                     return TurnResult::Forfeit;
                 }
-                Err(StrategyError::PyErrCatchAll(_)) => {
-                    panic!()
-                }
-                //TODO: This fall through is bad... remove it.
-                // Err(_) => {}
-                Err(StrategyError::ParseError(_) | StrategyError::MoveError(_)) => {}
+                Err(_) => {}
             }
         }
 

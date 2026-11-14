@@ -1,4 +1,3 @@
-use pyo3::prelude::PyErr;
 use thiserror::Error;
 
 #[derive(Debug, Error, PartialEq)]
@@ -22,9 +21,6 @@ pub enum StrategyCreationError {
 #[derive(Debug, Error, PartialEq)]
 pub enum StrategyError {
     #[error("{:?}", .0)]
-    PyErrCatchAll(String), // TODO: Fix with something better
-
-    #[error("{:?}", .0)]
     ParseError(#[from] std::num::ParseIntError),
 
     #[error("{:?}", .0)]
@@ -32,10 +28,4 @@ pub enum StrategyError {
 
     #[error("{:?}", .0)]
     OutOfMovesError(String),
-}
-
-impl From<PyErr> for StrategyError {
-    fn from(py_err: PyErr) -> Self {
-        StrategyError::PyErrCatchAll(py_err.to_string())
-    }
 }

@@ -14,14 +14,59 @@ pub mod prelude {
     pub use crate::strategy::*;
 }
 
+use crate::game::{CompletedGame, Game};
 use crate::player::Player;
 use crate::game::{Game, CompletedGame};
 use crate::strategy::*;
 
-#[pyclass(name="Game")]
+#[pyclass(name = "Player")]
+pub struct PyPlayer {
+    player: Option<Player>,
+}
+
+impl From<Player> for PyPlayer {
+    fn from(player: Player) -> PyPlayer {
+        PyPlayer {
+            player: Some(player),
+        }
+    }
+}
+
+#[pymethods]
+impl PyPlayer {
+    #[rustfmt::skip]
+    #[staticmethod]
+    pub fn create_human(name: &str) -> Self {
+        Player::builder()
+            .human()
+            .with_name(name)
+            .build()
+            .into()
+    }
+
+    /*
+    pub fn create_computer<S>(name: &str, strategy: S) -> Player
+    where
+        S: Strategy + Into<MonoStrategy>,
+    */
+    #[rustfmt::skip]
+    #[staticmethod]
+    pub fn create_computer(name: &str, moves: Vec<usize>) -> Self
+    {
+        Player::builder()
+            .with_name(name)
+            .with_strategy(
+                PredefinedMoves::from_iterable_nondiscarding(moves).unwrap()
+            )
+            .build()
+            .into()
+    }
+}
+
+
+#[pyclass(name = "Game")]
 pub struct PyGame {
-    // game: Game<Player, Player>
-    game: Option<Game<Player, Player>>
+    game: Option<Game<Player, Player>>,
 }
 
 impl From<Game<Player, Player>> for PyGame {
@@ -33,16 +78,14 @@ impl From<Game<Player, Player>> for PyGame {
 
 #[pymethods]
 impl PyGame {
-    /*
     #[rustfmt::skip]
-    #[staticmethod]
-    pub fn new_with_players(player_1: Player, player_2: Player) -> PyGame {
+    #[new]
+    pub fn new_with_players(player1: &mut PyPlayer, player2: &mut PyPlayer) -> PyGame {
         Game::new()
-            .add_player(player_1)
-            .add_player(player_2)
+            .add_player(player1.player.take().unwrap())
+            .add_player(player2.player.take().unwrap())
             .into()
     }
-    */
 
     #[deprecated]
     #[rustfmt::skip]
@@ -66,29 +109,21 @@ impl PyGame {
         .into()
     }
 
-    // pub fn play_match(self) -> String {
-    // pub fn play_match(&mut self) -> String {
     pub fn play_match(&mut self) -> PyCompletedGame {
-        // self.game.play_match().to_string()
-
         let game = self.game.take().unwrap();
         let completed_game = game.play_match();
 
-        // completed_game.to_string()
         completed_game.into()
     }
-
 }
 
-#[pyclass(name="CompletedGame")]
+#[pyclass(name = "CompletedGame")]
 pub struct PyCompletedGame {
-    // game: Game<Player, Player>
-    game: CompletedGame
+    game: CompletedGame,
 }
 
 impl From<CompletedGame> for PyCompletedGame {
     fn from(game: CompletedGame) -> Self {
-        // PyGame { game }
         PyCompletedGame { game }
     }
 }
@@ -117,11 +152,13 @@ mod tictactoe {
     use super::*;
 
     #[pymodule_export]
+    use PyPlayer;
+
+    #[pymodule_export]
     use PyGame;
 
     #[pymodule_export]
     use PyCompletedGame;
-
 
     #[pymodule]
     mod exception {
