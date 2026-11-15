@@ -63,7 +63,6 @@ impl PyPlayer {
     }
 }
 
-
 #[pyclass(name = "Game")]
 pub struct PyGame {
     game: Option<Game<Player, Player>>,
@@ -136,10 +135,10 @@ impl From<CompletedGame> for PyCompletedGame {
 //       - PredefinedMovesStrategy
 fn repr_helper_game(game: &CompletedGame) -> String {
     match game {
-        CompletedGame::Win{winner, loser} => format!(
+        CompletedGame::Win { winner, loser } => format!(
             "CompletedGame::Win(\n  winner={},\n  loser={}\n)",
-             repr_helper_player(winner),
-             repr_helper_player(loser)
+            repr_helper_player(winner),
+            repr_helper_player(loser)
         ),
         _ => "...".to_owned(),
     }
@@ -149,14 +148,11 @@ fn repr_helper_player(player: &Player) -> String {
     match player.is_human() {
         true => format!("Player.create_human(name=\"{}\")", player.get_name()),
         false => match player.get_strategy() {
-            MonoStrategy::Keyboard{..} => todo!(),
-            MonoStrategy::PredefinedMoves{..} =>
-                format!(
-                    "Player.create_computer(name=\"{}\",...)",
-                    player.get_name()
-                ),
+            MonoStrategy::Keyboard { .. } => todo!(),
+            MonoStrategy::PredefinedMoves { .. } => {
+                format!("Player.create_computer(name=\"{}\",...)", player.get_name())
             }
-        }
+        },
     }
 }
 
@@ -190,9 +186,7 @@ mod tictactoe {
     use PyCompletedGame;
 
     #[pymodule]
-    mod exception {
-
-    }
+    mod exception {}
 
     #[pymodule_init]
     pub fn init(m: &Bound<'_, PyModule>) -> PyResult<()> {

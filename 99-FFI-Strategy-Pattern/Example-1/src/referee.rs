@@ -25,14 +25,6 @@ impl Referee {
             != 0
     }
 
-    /// Determine whether a cell in the board has been selected
-    /// by a player.
-    ///
-    #[deprecated]
-    pub fn selected_cell_is_empty(candidate_move: Position, board: &Board) -> bool {
-        board.cell_is_empty(candidate_move)
-    }
-
     // TODO: add a test
     pub fn determine_turn_result(board: &Board) -> TurnResult {
         if Self::check_for_win(board) {

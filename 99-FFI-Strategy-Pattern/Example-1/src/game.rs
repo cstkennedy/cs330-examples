@@ -38,6 +38,16 @@ impl Game<Player1NotSet, Player2NotSet> {
             board: self.board,
         }
     }
+
+    // TODO: Move to PyGame
+    pub fn new_with_players<'game>(
+        player_1: Player<'game>,
+        player_2: Player<'game>,
+    ) -> Game<Player<'game>, Player<'game>> {
+        Self::new()
+            .add_player(player_1)
+            .add_player(player_2)
+    }
 }
 
 impl<'game> Game<Player<'game>, Player2NotSet> {

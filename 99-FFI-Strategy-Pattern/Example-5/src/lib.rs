@@ -15,14 +15,14 @@ pub mod prelude {
     pub use crate::strategy::*;
 }
 
+use crate::game::{CompletedGame, Game};
 use crate::player::Player;
-use crate::game::{Game, CompletedGame};
 use crate::strategy::*;
 
-#[pyclass(name="Game")]
+#[pyclass(name = "Game")]
 pub struct PyGame {
     // game: Game<Player, Player>
-    game: Option<Game<Player, Player>>
+    game: Option<Game<Player, Player>>,
 }
 
 impl From<Game<Player, Player>> for PyGame {
@@ -78,13 +78,12 @@ impl PyGame {
         // completed_game.to_string()
         completed_game.into()
     }
-
 }
 
-#[pyclass(name="CompletedGame")]
+#[pyclass(name = "CompletedGame")]
 pub struct PyCompletedGame {
     // game: Game<Player, Player>
-    game: CompletedGame
+    game: CompletedGame,
 }
 
 impl From<CompletedGame> for PyCompletedGame {
@@ -123,11 +122,8 @@ mod tictactoe {
     #[pymodule_export]
     use PyCompletedGame;
 
-
     #[pymodule]
-    mod exception {
-
-    }
+    mod exception {}
 
     #[pymodule_init]
     pub fn init(m: &Bound<'_, PyModule>) -> PyResult<()> {

@@ -138,10 +138,7 @@ impl Default for PlayerBuilder<NoName, NoStrategy, NoType> {
 }
 
 impl PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
-    pub fn with_name(
-        self,
-        name: &str,
-    ) -> PlayerBuilder<String, MonoStrategy, HumanPlayer> {
+    pub fn with_name(self, name: &str) -> PlayerBuilder<String, MonoStrategy, HumanPlayer> {
         let strategy = KeyboardStrategy::new(&name).into();
         let name = name.to_owned();
 

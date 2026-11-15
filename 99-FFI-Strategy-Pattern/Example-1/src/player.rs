@@ -52,6 +52,26 @@ impl<'a> Player<'a> {
     pub fn builder() -> PlayerBuilder<NoName, NoStrategy, NoType> {
         PlayerBuilder::new()
     }
+
+    // TODO: Move to PyPlayer
+    #[rustfmt::skip]
+    pub fn create_human(name: &str) -> Player<'a> {
+        Player::builder()
+            .human()
+            .with_name(name)
+            .build()
+    }
+
+    // TODO: Move to PyPlayer
+    pub fn create_computer<S>(name: &'a str, strategy: S) -> Player<'a>
+    where
+        S: 'a + Strategy + Into<MonoStrategy<'a>>,
+    {
+        Player::builder()
+            .with_name(name)
+            .with_strategy(strategy)
+            .build()
+    }
 }
 
 impl<'a> PartialEq for Player<'a> {

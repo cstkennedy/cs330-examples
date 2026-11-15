@@ -26,11 +26,3 @@ pub enum StrategyError {
     #[error("Exhausted all {num_moves} prepared moves")]
     OutOfMovesError { num_moves: usize },
 }
-
-#[deprecated]
-#[derive(Debug, Error, PartialEq)]
-pub struct ErrorWithValue<E: std::error::Error, V> {
-    #[source]
-    pub the_error: E,
-    pub the_value: V,
-}
