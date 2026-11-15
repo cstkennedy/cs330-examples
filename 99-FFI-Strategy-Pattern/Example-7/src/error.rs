@@ -9,9 +9,6 @@ pub enum PositionError {
 
 #[derive(Debug, Error, PartialEq)]
 pub enum StrategyCreationError {
-    // #[deprecated]
-    // #[error("{0}")]
-    // PositionError(#[from] PositionError),
     #[error("None of '{0:?}' are between 0 and 10, exclusive")]
     NoValidPositions(Vec<usize>),
 
@@ -28,10 +25,10 @@ pub enum StrategyError {
     ParseError(#[from] std::num::ParseIntError),
 
     #[error("{:?}", .0)]
-    MoveError(#[from] PositionError),
+    PositionError(#[from] PositionError),
 
-    #[error("{:?}", .0)]
-    OutOfMovesError(String),
+    #[error("Exhausted all {num_moves} prepared moves")]
+    OutOfMovesError { num_moves: usize },
 }
 
 impl From<PyErr> for StrategyError {

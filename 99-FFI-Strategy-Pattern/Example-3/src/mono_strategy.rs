@@ -9,7 +9,7 @@ pub enum MonoStrategy {
     PredefinedMoves { wrapped: PredefinedMoves },
 }
 
-impl<'a> Strategy for MonoStrategy {
+impl Strategy for MonoStrategy {
     fn next_move(&mut self) -> Result<Position, StrategyError> {
         match self {
             MonoStrategy::Keyboard { wrapped } => wrapped.next_move(),

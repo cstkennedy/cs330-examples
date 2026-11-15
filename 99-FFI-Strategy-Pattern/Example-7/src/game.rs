@@ -61,7 +61,7 @@ impl Game<Player, Player> {
                         break;
                     }
                 }
-                Err(StrategyError::OutOfMovesError(_)) => {
+                Err(StrategyError::OutOfMovesError { .. }) => {
                     return TurnResult::Forfeit;
                 }
                 Err(StrategyError::PyErrCatchAll(_)) => {

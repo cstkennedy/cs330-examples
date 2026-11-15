@@ -31,17 +31,22 @@ impl Game<Player1NotSet, Player2NotSet> {
         Game::default()
     }
 
-    // TODO: Move to PyGame
-    pub fn new_with_players(player_1: Player, player_2: Player) -> Game<Player, Player> {
-        Game::new().add_player(player_1).add_player(player_2)
-    }
-
     pub fn add_player(self, player: Player) -> Game<Player, Player2NotSet> {
         Game {
             player_1: player,
             player_2: self.player_2,
             board: self.board,
         }
+    }
+
+    // TODO: Move to PyGame
+    pub fn new_with_players(
+        player_1: Player,
+        player_2: Player,
+    ) -> Game<Player, Player> {
+        Self::new()
+            .add_player(player_1)
+            .add_player(player_2)
     }
 }
 
@@ -66,7 +71,7 @@ impl Game<Player, Player> {
                         break;
                     }
                 }
-                Err(StrategyError::OutOfMovesError(_)) => {
+                Err(StrategyError::OutOfMovesError { .. }) => {
                     return TurnResult::Forfeit;
                 }
                 Err(_) => {}

@@ -10,6 +10,7 @@ pub mod referee;
 pub mod strategy;
 
 pub mod prelude {
+    pub use crate::board::Position;
     pub use crate::game::Game;
     pub use crate::player::Player;
     pub use crate::strategy::*;

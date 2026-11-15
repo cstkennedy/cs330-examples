@@ -95,7 +95,7 @@ impl PlayerBuilder<NoName, NoStrategy, NoType> {
     pub fn human(self) -> PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
         PlayerBuilder {
             name: NoName,
-            strategy: NoStrategy,
+            strategy: NoStrategy, // TODO: Set strategy here
             player_type: HumanPlayer,
         }
     }
@@ -118,12 +118,16 @@ impl Default for PlayerBuilder<NoName, NoStrategy, NoType> {
 }
 
 impl PlayerBuilder<NoName, NoStrategy, HumanPlayer> {
-    pub fn with_name(self, name: &str) -> PlayerBuilder<String, NoStrategy, HumanPlayer> {
+    pub fn with_name(
+        self,
+        name: &str,
+    ) -> PlayerBuilder<String, MonoStrategy, HumanPlayer> {
+        let strategy = KeyboardStrategy::new(&name).into();
         let name = name.to_owned();
 
         PlayerBuilder {
             name,
-            strategy: self.strategy,
+            strategy,
             player_type: self.player_type,
         }
     }
@@ -152,13 +156,11 @@ impl PlayerBuilder<String, MonoStrategy, NoType> {
     }
 }
 
-impl<'a> PlayerBuilder<String, NoStrategy, HumanPlayer> {
+impl PlayerBuilder<String, MonoStrategy, HumanPlayer> {
     pub fn build(self) -> Player {
-        let strategy = KeyboardStrategy::new(&self.name).into();
-
         Player {
             name: self.name,
-            strategy,
+            strategy: self.strategy,
             humanity: true,
         }
     }
