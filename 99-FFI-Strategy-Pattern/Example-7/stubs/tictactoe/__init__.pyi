@@ -1,3 +1,4 @@
+from . import exception as exception
 from _typeshed import Incomplete
 from collections.abc import Sequence
 from typing import Any, final
