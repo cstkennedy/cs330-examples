@@ -2,8 +2,15 @@
 name = "play-tic-tac-toe"
 version = "1.0"
 description = "Python Tic-Tac-Toe Example"
-authors = {name = "Thomas J. Kennedy", email="tkennedy@cs.odu.edu"}
+authors = [{name = "Thomas J. Kennedy", email="tkennedy@cs.odu.edu"}]
 requires-python=">=3.11"
+
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+
 
 [dependency-groups]
 dev = [

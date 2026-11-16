@@ -20,6 +20,7 @@ use crate::game::{CompletedGame, Game};
 use crate::player::Player;
 use crate::py_strategy::*;
 use crate::strategy::*;
+use crate::mono_strategy::MonoStrategy;
 
 #[pyclass(name = "Player")]
 pub struct PyPlayer {
@@ -150,10 +151,10 @@ impl From<CompletedGame> for PyCompletedGame {
 //       - PredefinedMovesStrategy
 fn repr_helper_game(game: &CompletedGame) -> String {
     match game {
-        CompletedGame::Win{winner, loser} => format!(
+        CompletedGame::Win { winner, loser } => format!(
             "CompletedGame::Win(\n  winner={},\n  loser={}\n)",
-             repr_helper_player(winner),
-             repr_helper_player(loser)
+            repr_helper_player(winner),
+            repr_helper_player(loser)
         ),
         _ => "...".to_owned(),
     }
@@ -163,8 +164,8 @@ fn repr_helper_player(player: &Player) -> String {
     match player.is_human() {
         true => format!("Player.create_human(name=\"{}\")", player.get_name()),
         false => match player.get_strategy() {
-            MonoStrategy::Keyboard{..} => todo!(),
-            MonoStrategy::PredefinedMoves{..} => 
+            MonoStrategy::Keyboard { .. } => todo!(),
+            MonoStrategy::PredefinedMoves { .. } => 
                 format!(
                     "Player.create_computer(name=\"{}\",...)",
                     player.get_name()
@@ -175,7 +176,7 @@ fn repr_helper_player(player: &Player) -> String {
                     repr_helper_py_strategy(&wrapped)
                 )
             }
-        }
+        },
     }
 }
 

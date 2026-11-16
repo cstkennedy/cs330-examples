@@ -18,6 +18,7 @@ pub mod prelude {
 use crate::game::{CompletedGame, Game};
 use crate::player::Player;
 use crate::strategy::*;
+use crate::mono_strategy::MonoStrategy;
 
 #[pyclass(name = "Player")]
 pub struct PyPlayer {

@@ -69,7 +69,7 @@ impl Game<Player, Player> {
                 }
                 //TODO: This fall through is bad... remove it.
                 // Err(_) => {}
-                Err(StrategyError::ParseError(_) | StrategyError::MoveError(_)) => {}
+                Err(StrategyError::ParseError(_) | StrategyError::PositionError(_)) => {}
             }
         }
 

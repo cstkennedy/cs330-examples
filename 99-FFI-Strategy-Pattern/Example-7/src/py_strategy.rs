@@ -39,7 +39,8 @@ impl Strategy for PyStrategy {
                 }
                 Err(the_err) => {
                     // Method does not exist?
-                    Err(StrategyError::OutOfMovesError(the_err.to_string()))
+                    Err(StrategyError::OutOfMovesError { num_moves: 0 } )
+                    // TODO: This is nbot due to a fixed number of moces
                 }
             }
         })
