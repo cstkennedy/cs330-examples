@@ -4,6 +4,21 @@ use crate::board::Position;
 use crate::error::{StrategyCreationError, StrategyError};
 use crate::strategy::Strategy;
 
+pub(crate) fn repr_helper_py_strategy(strategy: &PyStrategy) -> String {
+    Python::attach(|py| {
+        let obj = strategy.wrapped.bind(py);
+
+        match obj.call_method0(pyo3::intern!(py, "__repr__")) {
+            Ok(raw_value) => {
+                let repr_string = raw_value.extract::<String>().unwrap();
+
+                repr_string
+            }
+            Err(the_err) => "No __repr__".to_owned(),
+        }
+    })
+}
+
 #[derive(Debug)]
 pub struct PyStrategy {
     pub wrapped: Py<PyAny>, // TODO: this should not be public
@@ -39,8 +54,8 @@ impl Strategy for PyStrategy {
                 }
                 Err(the_err) => {
                     // Method does not exist?
-                    Err(StrategyError::OutOfMovesError { num_moves: 0 } )
-                    // TODO: This is nbot due to a fixed number of moces
+                    Err(StrategyError::OutOfMovesError { num_moves: 0 })
+                    // TODO: This is not due to a fixed number of moves
                 }
             }
         })
