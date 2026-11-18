@@ -18,9 +18,7 @@ impl KeyboardStrategy {
     const PROMPT_MSG: &'static str = "Enter your desired move (1-9): ";
 
     pub fn new(player_name: &str) -> Self {
-        KeyboardStrategy {
-            name: player_name.to_owned(),
-        }
+        KeyboardStrategy { name: player_name.to_owned() }
     }
 
     /// Read a line from std in and trim the trailing newline.

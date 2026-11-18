@@ -14,7 +14,6 @@ build-backend = "maturin"
 
 [dependency-groups]
 dev = [
-    "maturin>=1.16.0",
     "pyhamcrest>=2.1.0",
     "pytest>=8.4.0",
 ]

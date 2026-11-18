@@ -55,7 +55,7 @@ impl<'a> Player<'a> {
 
     // TODO: Move to PyPlayer
     #[rustfmt::skip]
-    pub fn create_human(name: &str) -> Player<'a> {
+    pub fn create_human(name: &'a str) -> Player<'a> {
         Player::builder()
             .human()
             .with_name(name)
