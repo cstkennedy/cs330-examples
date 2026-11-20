@@ -1,7 +1,7 @@
 use crate::board::Position;
 use crate::error::StrategyError;
 
-use crate::py_strategy::PyStrategy;
+use crate::py_wrapper::py_strategy::PyStrategy;
 use crate::strategy::{KeyboardStrategy, PredefinedMoves, Strategy};
 
 #[derive(Debug)]

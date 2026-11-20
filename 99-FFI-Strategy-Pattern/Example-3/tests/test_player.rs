@@ -7,7 +7,7 @@ use tictactoe::player::Player;
 use tictactoe::strategy::*;
 
 #[fixture]
-fn a_player<'a>() -> Player<'a> {
+fn a_player() -> Player {
     Player::builder()
         .with_name("Jay")
         .with_strategy(

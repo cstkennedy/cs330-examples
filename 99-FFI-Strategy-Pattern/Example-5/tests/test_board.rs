@@ -3,6 +3,7 @@ use hamcrest2::prelude::*;
 use rstest::*;
 
 use tictactoe::board::{Board, Position, Symbol};
+use tictactoe::error::PositionError;
 
 const EXPECTED_EMPTY_STR: &str = "1|2|3\n4|5|6\n7|8|9";
 
@@ -12,9 +13,9 @@ fn a_board() -> Board {
 }
 
 #[rstest]
-pub fn test_default_constructor(a_board: Board) {
+pub fn test_default_constructor(a_board: Board) -> Result<(), PositionError> {
     for position in 1..=9 {
-        let position = Position::try_from(position).unwrap();
+        let position = Position::try_from(position)?;
 
         let expected_char = char::from_digit(*position as u32, 10).unwrap();
         assert_that!(a_board[position], is(equal_to(expected_char)));
@@ -40,15 +41,17 @@ pub fn test_default_constructor(a_board: Board) {
         &diagonals,
         contains(vec![['1', '5', '9'], ['3', '5', '7'],])
     );
+
+    Ok(())
 }
 
 #[rstest]
-pub fn test_set_cell(mut a_board: Board) {
-    a_board.set_cell(Position::try_from(1).unwrap(), Symbol::X);
-    a_board.set_cell(Position::try_from(9).unwrap(), Symbol::O);
+pub fn test_set_cell(mut a_board: Board) -> Result<(), PositionError> {
+    a_board.set_cell(Position::try_from(1)?, Symbol::X);
+    a_board.set_cell(Position::try_from(9)?, Symbol::O);
 
-    assert_that!(a_board[Position::try_from(1).unwrap()], is(equal_to('X')));
-    assert_that!(a_board[Position::try_from(9).unwrap()], is(equal_to('O')));
+    assert_that!(a_board[Position::try_from(1)?], is(equal_to('X')));
+    assert_that!(a_board[Position::try_from(9)?], is(equal_to('O')));
 
     assert_that!(a_board.to_string(), is_not(equal_to(EXPECTED_EMPTY_STR)));
     assert_that!(a_board.to_string(), is(equal_to("X|2|3\n4|5|6\n7|8|O")));
@@ -72,22 +75,26 @@ pub fn test_set_cell(mut a_board: Board) {
     );
 
     assert_that!(a_board.is_full(), is(not(true)));
+
+    Ok(())
 }
 
 // Added when debuging test_game::test_stalemate
 #[rstest]
-pub fn test_is_full(mut a_board: Board) {
-    a_board.set_cell(Position::try_from(1).unwrap(), Symbol::X);
-    a_board.set_cell(Position::try_from(2).unwrap(), Symbol::O);
-    a_board.set_cell(Position::try_from(3).unwrap(), Symbol::X);
-    a_board.set_cell(Position::try_from(4).unwrap(), Symbol::O);
-    a_board.set_cell(Position::try_from(5).unwrap(), Symbol::X);
-    a_board.set_cell(Position::try_from(6).unwrap(), Symbol::O);
-    a_board.set_cell(Position::try_from(7).unwrap(), Symbol::X);
-    a_board.set_cell(Position::try_from(8).unwrap(), Symbol::O);
-    a_board.set_cell(Position::try_from(9).unwrap(), Symbol::X);
+pub fn test_is_full(mut a_board: Board) -> Result<(), PositionError> {
+    a_board.set_cell(Position::try_from(1)?, Symbol::X);
+    a_board.set_cell(Position::try_from(2)?, Symbol::O);
+    a_board.set_cell(Position::try_from(3)?, Symbol::X);
+    a_board.set_cell(Position::try_from(4)?, Symbol::O);
+    a_board.set_cell(Position::try_from(5)?, Symbol::X);
+    a_board.set_cell(Position::try_from(6)?, Symbol::O);
+    a_board.set_cell(Position::try_from(7)?, Symbol::X);
+    a_board.set_cell(Position::try_from(8)?, Symbol::O);
+    a_board.set_cell(Position::try_from(9)?, Symbol::X);
 
     assert_that!(a_board.is_full(), is(true));
+
+    Ok(())
 }
 
 #[rstest]

@@ -3,7 +3,7 @@ use pyo3::prelude::*;
 use crate::mono_strategy::MonoStrategy;
 use crate::player::Player;
 use crate::py_wrapper::py_strategy::*;
-use crate::strategy::PredefinedMoves;
+use crate::strategy::{PredefinedMoves, Strategy};
 
 pub(crate) fn repr_helper_player(player: &Player) -> String {
     match player.is_human() {
@@ -37,6 +37,19 @@ impl From<Player> for PyPlayer {
     }
 }
 
+impl PyPlayer {
+    #[rustfmt::skip]
+    fn impl_create_computer<S>(name: &str, strategy: S) -> Player
+    where
+        S: Strategy + Into<MonoStrategy>,
+    {
+        Player::builder()
+            .with_name(name)
+            .with_strategy(strategy)
+            .build()
+    }
+}
+
 #[pymethods]
 impl PyPlayer {
     #[rustfmt::skip]
@@ -49,22 +62,13 @@ impl PyPlayer {
             .into()
     }
 
-    /*
-    pub fn create_computer<S>(name: &str, strategy: S) -> Player
-    where
-        S: Strategy + Into<MonoStrategy>,
-    */
-    #[rustfmt::skip]
     #[staticmethod]
-    pub fn create_computer(name: &str, moves: Vec<usize>) -> Self
-    {
-        Player::builder()
-            .with_name(name)
-            .with_strategy(
-                PredefinedMoves::from_iterable_nondiscarding(moves).unwrap()
-            )
-            .build()
-            .into()
+    pub fn create_computer(name: &str, moves: Vec<usize>) -> Self {
+        Self::impl_create_computer(
+            name,
+            PredefinedMoves::from_iterable_nondiscarding(moves).unwrap(),
+        )
+        .into()
     }
 
     #[rustfmt::skip]

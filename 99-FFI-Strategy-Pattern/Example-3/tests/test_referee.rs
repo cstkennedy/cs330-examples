@@ -13,7 +13,7 @@ pub fn test_check_for_win_empty_board() {
 
     for idx in 1..10 {
         let idx = Position::try_from(idx).unwrap();
-        assert_that!(Referee::selected_cell_is_empty(idx, &board), is(true));
+        assert_that!(board.cell_is_empty(idx), is(true));
     }
 
     assert_that!(Referee::check_for_win(&board), is(false));
@@ -27,15 +27,15 @@ pub fn test_check_for_horizontal_win() {
     h_board.set_cell(Position::try_from(6).unwrap(), Symbol::X);
 
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(4).unwrap(), &h_board),
+        h_board.cell_is_empty(Position::try_from(4).unwrap()),
         is(false)
     );
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(5).unwrap(), &h_board),
+        h_board.cell_is_empty(Position::try_from(5).unwrap()),
         is(false)
     );
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(6).unwrap(), &h_board),
+        h_board.cell_is_empty(Position::try_from(6).unwrap()),
         is(false)
     );
 
@@ -50,15 +50,15 @@ pub fn test_check_for_vertical_win() {
     let _ = v_board.set_cell(Position::try_from(8).unwrap(), Symbol::O);
 
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(2).unwrap(), &v_board),
+        v_board.cell_is_empty(Position::try_from(2).unwrap()),
         is(false)
     );
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(5).unwrap(), &v_board),
+        v_board.cell_is_empty(Position::try_from(5).unwrap()),
         is(false)
     );
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(8).unwrap(), &v_board),
+        v_board.cell_is_empty(Position::try_from(8).unwrap()),
         is(false)
     );
 
@@ -73,15 +73,15 @@ pub fn test_check_for_diagonal_win() {
     let _ = d_board.set_cell(Position::try_from(7).unwrap(), Symbol::O);
 
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(3).unwrap(), &d_board),
+        d_board.cell_is_empty(Position::try_from(3).unwrap()),
         is(false)
     );
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(5).unwrap(), &d_board),
+        d_board.cell_is_empty(Position::try_from(5).unwrap()),
         is(false)
     );
     assert_that!(
-        Referee::selected_cell_is_empty(Position::try_from(7).unwrap(), &d_board),
+        d_board.cell_is_empty(Position::try_from(7).unwrap()),
         is(false)
     );
 

@@ -5,9 +5,10 @@ use rstest::*;
 use tictactoe::board::Position;
 use tictactoe::player::Player;
 use tictactoe::strategy::*;
+use tictactoe::error::PositionError;
 
 #[fixture]
-fn a_player<'a>() -> Player<'a> {
+fn a_player() -> Player {
     Player::builder()
         .with_name("Jay")
         .with_strategy(
@@ -40,21 +41,23 @@ pub fn test_builder_computer(a_player: Player) {
 }
 
 #[rstest]
-pub fn test_next_move(a_player: Player) {
+pub fn test_next_move(a_player: Player) -> Result<(), PositionError> {
     let mut player = a_player;
 
     assert_that!(
         player.next_move(),
-        is(equal_to(Ok(Position::try_from(5 as usize).unwrap())))
+        is(equal_to(Ok(Position::try_from(5 as usize)?)))
     );
     assert_that!(
         player.next_move(),
-        is(equal_to(Ok(Position::try_from(1 as usize).unwrap())))
+        is(equal_to(Ok(Position::try_from(1 as usize)?)))
     );
     assert_that!(
         player.next_move(),
-        is(equal_to(Ok(Position::try_from(3 as usize).unwrap())))
+        is(equal_to(Ok(Position::try_from(3 as usize)?)))
     );
+
+    Ok(())
 }
 
 #[rstest]

@@ -4,9 +4,10 @@ use rstest::*;
 
 use tictactoe::game::CompletedGame;
 use tictactoe::prelude::*;
+use tictactoe::error::StrategyCreationError;
 
 #[rstest]
-fn test_out_of_moves_player_1() {
+fn test_out_of_moves_player_1() -> Result<(), StrategyCreationError> {
     let moves_for_tom: [usize; 2] = [5, 1];
     let moves_for_jay: [usize; 9] = [5, 1, 3, 7, 9, 2, 4, 6, 8];
 
@@ -16,7 +17,7 @@ fn test_out_of_moves_player_1() {
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding(moves_for_tom).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding(moves_for_tom)?
                 )
                 .build()
         )
@@ -24,18 +25,13 @@ fn test_out_of_moves_player_1() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding(moves_for_jay).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding(moves_for_jay)?
                 )
                 .build(),
         )
         .play_match();
 
     assert!(matches!(game, CompletedGame::Forfeit { .. }));
-
-    /*
-    assert_that!(&game.winner, is(some()));
-    assert_that!(&game.loser, is(some()));
-    */
 
     if let CompletedGame::Forfeit {
         ref winner,
@@ -45,17 +41,19 @@ fn test_out_of_moves_player_1() {
         assert_that!(winner.get_name(), is(equal_to("Jay")));
         assert_that!(loser.get_name(), is(equal_to("Thomas")));
     }
+
+    Ok(())
 }
 
 #[rstest]
-fn test_out_of_moves_player_2() {
+fn test_out_of_moves_player_2() -> Result<(), StrategyCreationError> {
     #[rustfmt::skip]
     let game = Game::new()
         .add_player(
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8])?
                 )
                 .build()
         )
@@ -63,7 +61,7 @@ fn test_out_of_moves_player_2() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([5, 1]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1])?
                 )
                 .build(),
         )
@@ -79,17 +77,19 @@ fn test_out_of_moves_player_2() {
         assert_that!(winner.get_name(), is(equal_to("Thomas")));
         assert_that!(loser.get_name(), is(equal_to("Jay")));
     }
+
+    Ok(())
 }
 
 #[rstest]
-fn test_stalemate() {
+fn test_stalemate() -> Result<(), StrategyCreationError> {
     #[rustfmt::skip]
     let game = Game::new()
         .add_player(
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8])?
                 )
                 .build()
         )
@@ -97,7 +97,7 @@ fn test_stalemate() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 3, 7, 9, 2, 4, 6, 8])?
                 )
                 .build(),
         )
@@ -113,17 +113,19 @@ fn test_stalemate() {
         assert_that!(player_1.get_name(), is(equal_to("Thomas")));
         assert_that!(player_2.get_name(), is(equal_to("Jay")));
     }
+
+    Ok(())
 }
 
 #[rstest]
-fn test_win_player_1() {
+fn test_win_player_1() -> Result<(), StrategyCreationError> {
     #[rustfmt::skip]
     let game = Game::new()
         .add_player(
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 9]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 9])?
                 )
                 .build()
         )
@@ -131,7 +133,7 @@ fn test_win_player_1() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([5, 3, 7, 9, 2, 4, 6, 8]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 3, 7, 9, 2, 4, 6, 8])?
                 )
                 .build(),
         )
@@ -147,17 +149,19 @@ fn test_win_player_1() {
         assert_that!(winner.get_name(), is(equal_to("Thomas")));
         assert_that!(loser.get_name(), is(equal_to("Jay")));
     }
+
+    Ok(())
 }
 
 #[rstest]
-fn test_win_player_2() {
+fn test_win_player_2() -> Result<(), StrategyCreationError> {
     #[rustfmt::skip]
     let game = Game::new()
         .add_player(
             Player::builder()
                 .with_name("Thomas")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 2, 4]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([5, 1, 2, 4])?
                 )
                 .build()
         )
@@ -165,7 +169,7 @@ fn test_win_player_2() {
             Player::builder()
                 .with_name("Jay")
                 .with_strategy(
-                    PredefinedMoves::from_iterable_nondiscarding([3, 6, 9]).unwrap()
+                    PredefinedMoves::from_iterable_nondiscarding([3, 6, 9])?
                 )
                 .build(),
         )
@@ -181,4 +185,6 @@ fn test_win_player_2() {
         assert_that!(winner.get_name(), is(equal_to("Jay")));
         assert_that!(loser.get_name(), is(equal_to("Thomas")));
     }
+
+    Ok(())
 }
