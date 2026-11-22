@@ -4,7 +4,7 @@ use crate::game::{CompletedGame, Game};
 use crate::player::Player;
 use crate::py_wrapper::py_player::*;
 use crate::strategy::*;
-use crate::py_wrapper::traits::DunderRepr;
+use crate::py_wrapper::traits::{self, DunderRepr};
 
 #[pyclass(name = "Game")]
 pub struct PyGame {
@@ -57,6 +57,20 @@ impl PyGame {
 
         completed_game.into()
     }
+
+    pub fn __repr__(&self) -> String {
+        todo!()
+    }
+}
+
+impl DunderRepr for Game<Player, Player> {
+    type Error = std::convert::Infallible; // Switch to '!' (Never type)
+
+    type WrappedLanguage = traits::language::RustForPython;
+
+    fn repr_helper(&self) -> Result<String, Self::Error> {
+        todo!()
+    }
 }
 
 #[pyclass(name = "CompletedGame")]
@@ -81,14 +95,10 @@ impl PyCompletedGame {
     }
 }
 
-// Implement __repr__ from scratch for...
-// CompletedGame
-//   - Player
-//     - MonoStrategy
-//       - KeyboardStrategy
-//       - PredefinedMovesStrategy
 impl DunderRepr for CompletedGame {
     type Error = std::convert::Infallible; // Switch to '!' (Never type)
+
+    type WrappedLanguage = traits::language::RustForPython;
 
     fn repr_helper(&self) -> Result<String, Self::Error> {
         match self {

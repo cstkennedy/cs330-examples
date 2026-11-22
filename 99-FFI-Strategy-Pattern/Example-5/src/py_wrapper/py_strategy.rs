@@ -8,6 +8,8 @@ use crate::strategy::Strategy;
 impl super::traits::DunderRepr for PyStrategy {
     type Error = std::convert::Infallible;
 
+    type WrappedLanguage = super::traits::language::PythonForRust;
+
     fn repr_helper(&self) -> Result<String, Self::Error> {
         Python::attach(|py| {
             let obj = self.wrapped.bind(py);

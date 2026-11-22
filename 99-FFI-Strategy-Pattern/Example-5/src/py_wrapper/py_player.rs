@@ -8,6 +8,8 @@ use crate::strategy::{PredefinedMoves, Strategy};
 impl super::traits::DunderRepr for Player {
     type Error = std::convert::Infallible;
 
+    type WrappedLanguage = super::traits::language::RustForPython;
+
     fn repr_helper(&self) -> Result<String, Self::Error> {
         let repr_str = match self.is_human() {
             true => format!("Player.create_human(name=\"{}\")", self.get_name()),
@@ -29,6 +31,22 @@ impl super::traits::DunderRepr for Player {
         Ok(repr_str)
     }
 }
+
+// Handled by Option<T> implementation
+/*
+impl super::traits::DunderRepr for Option<Player> {
+    type Error = std::convert::Infallible;
+
+    type WrappedLanguage = super::traits::language::RustForPython;
+
+    fn repr_helper(&self) -> Result<String, Self::Error> {
+        match self {
+            Some(player) => player.repr_helper(),
+            None => Ok("...".to_string())
+        }
+    }
+}
+*/
 
 #[pyclass(name = "Player")]
 pub struct PyPlayer {
