@@ -5,22 +5,28 @@ use crate::player::Player;
 use crate::py_wrapper::py_strategy::*;
 use crate::strategy::{PredefinedMoves, Strategy};
 
-pub(crate) fn repr_helper_player(player: &Player) -> String {
-    match player.is_human() {
-        true => format!("Player.create_human(name=\"{}\")", player.get_name()),
-        false => match player.get_strategy() {
-            MonoStrategy::Keyboard { .. } => todo!(),
-            MonoStrategy::PredefinedMoves { .. } => {
-                format!("Player.create_computer(name=\"{}\",...)", player.get_name())
-            }
-            MonoStrategy::PyStrategy { wrapped } => {
-                format!(
-                    "Player.create_custom_computer(name=\"{}\", strategy={})",
-                    player.get_name(),
-                    repr_helper_py_strategy(&wrapped)
-                )
-            }
-        },
+impl super::traits::DunderRepr for Player {
+    type Error = std::convert::Infallible;
+
+    fn repr_helper(&self) -> Result<String, Self::Error> {
+        let repr_str = match self.is_human() {
+            true => format!("Player.create_human(name=\"{}\")", self.get_name()),
+            false => match self.get_strategy() {
+                MonoStrategy::Keyboard { .. } => todo!(),
+                MonoStrategy::PredefinedMoves { .. } => {
+                    format!("Player.create_computer(name=\"{}\",...)", self.get_name())
+                }
+                MonoStrategy::PyStrategy { wrapped } => {
+                    format!(
+                        "Player.create_custom_computer(name=\"{}\", strategy={})",
+                        self.get_name(),
+                        wrapped.repr_helper()?
+                    )
+                }
+            },
+        };
+
+        Ok(repr_str)
     }
 }
 

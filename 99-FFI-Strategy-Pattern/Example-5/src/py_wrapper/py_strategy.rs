@@ -4,19 +4,26 @@ use crate::board::Position;
 use crate::error::{StrategyCreationError, StrategyError};
 use crate::strategy::Strategy;
 
-pub(crate) fn repr_helper_py_strategy(strategy: &PyStrategy) -> String {
-    Python::attach(|py| {
-        let obj = strategy.wrapped.bind(py);
 
-        match obj.call_method0(pyo3::intern!(py, "__repr__")) {
-            Ok(raw_value) => {
-                let repr_string = raw_value.extract::<String>().unwrap();
+impl super::traits::DunderRepr for PyStrategy {
+    type Error = std::convert::Infallible;
 
-                repr_string
-            }
-            Err(the_err) => "No __repr__".to_owned(),
-        }
-    })
+    fn repr_helper(&self) -> Result<String, Self::Error> {
+        Python::attach(|py| {
+            let obj = self.wrapped.bind(py);
+
+            let repr_str = match obj.call_method0(pyo3::intern!(py, "__repr__")) {
+                Ok(raw_value) => {
+                    let repr_string = raw_value.extract::<String>().unwrap();
+
+                    repr_string
+                }
+                Err(the_err) => "No __repr__".to_owned(),
+            };
+
+            Ok(repr_str)
+        })
+    }
 }
 
 #[derive(Debug)]

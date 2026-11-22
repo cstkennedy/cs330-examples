@@ -4,6 +4,7 @@ use crate::game::{CompletedGame, Game};
 use crate::player::Player;
 use crate::py_wrapper::py_player::*;
 use crate::strategy::*;
+use crate::py_wrapper::traits::DunderRepr;
 
 #[pyclass(name = "Game")]
 pub struct PyGame {
@@ -72,11 +73,11 @@ impl From<CompletedGame> for PyCompletedGame {
 #[pymethods]
 impl PyCompletedGame {
     pub fn __repr__(&self) -> String {
-        repr_helper_game(&self.game)
+        self.game.repr_helper().unwrap()
     }
 
     pub fn __str__(&self) -> String {
-        format!("{:}", self.game)
+        self.game.to_string()
     }
 }
 
@@ -86,13 +87,17 @@ impl PyCompletedGame {
 //     - MonoStrategy
 //       - KeyboardStrategy
 //       - PredefinedMovesStrategy
-fn repr_helper_game(game: &CompletedGame) -> String {
-    match game {
-        CompletedGame::Win { winner, loser } => format!(
-            "CompletedGame::Win(\n  winner={},\n  loser={}\n)",
-            repr_helper_player(winner),
-            repr_helper_player(loser)
-        ),
-        _ => "...".to_owned(),
+impl DunderRepr for CompletedGame {
+    type Error = std::convert::Infallible; // Switch to '!' (Never type)
+
+    fn repr_helper(&self) -> Result<String, Self::Error> {
+        match self {
+            CompletedGame::Win { winner, loser } => Ok(format!(
+                "CompletedGame::Win(\n  winner={},\n  loser={}\n)",
+                winner.repr_helper()?,
+                loser.repr_helper()?
+            )),
+            _ => Ok("...".to_owned()),
+        }
     }
 }
