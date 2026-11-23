@@ -4,12 +4,10 @@ use crate::board::Position;
 use crate::error::{StrategyCreationError, StrategyError};
 use crate::strategy::Strategy;
 
-/*
 impl super::traits::PyWrapped for Py<PyAny> {
     type Language = super::traits::language::PythonForRust;
-    type WrappedBy = Self;
+    type WrappedBy = PyStrategy;
 }
-*/
 
 
 impl super::traits::DunderRepr for PyStrategy {
