@@ -4,7 +4,7 @@ use crate::game::{CompletedGame, Game};
 use crate::player::Player;
 use crate::py_wrapper::py_player::*;
 use crate::strategy::*;
-use crate::py_wrapper::traits::{self, DunderRepr};
+use crate::py_wrapper::traits::{self, DunderRepr, PyWrapper, PyWrapped};
 
 #[pyclass(name = "Game")]
 pub struct PyGame {
@@ -63,10 +63,13 @@ impl PyGame {
     }
 }
 
+impl PyWrapped for Game<Player, Player> {
+    type Language = traits::language::RustForPython;
+    type WrappedBy = PyGame;
+}
+
 impl DunderRepr for Game<Player, Player> {
     type Error = std::convert::Infallible; // Switch to '!' (Never type)
-
-    type WrappedLanguage = traits::language::RustForPython;
 
     fn repr_helper(&self) -> Result<String, Self::Error> {
         todo!()
@@ -84,21 +87,21 @@ impl From<CompletedGame> for PyCompletedGame {
     }
 }
 
-#[pymethods]
-impl PyCompletedGame {
-    pub fn __repr__(&self) -> String {
-        self.game.repr_helper().unwrap()
-    }
+impl PyWrapper for PyCompletedGame {
+    type WrappedType = CompletedGame;
 
-    pub fn __str__(&self) -> String {
-        self.game.to_string()
+    fn get_wrapped(&self) -> &Self::WrappedType {
+        &self.game
     }
+}
+
+impl PyWrapped for CompletedGame {
+    type Language = traits::language::RustForPython;
+    type WrappedBy = PyCompletedGame;
 }
 
 impl DunderRepr for CompletedGame {
     type Error = std::convert::Infallible; // Switch to '!' (Never type)
-
-    type WrappedLanguage = traits::language::RustForPython;
 
     fn repr_helper(&self) -> Result<String, Self::Error> {
         match self {
@@ -109,5 +112,17 @@ impl DunderRepr for CompletedGame {
             )),
             _ => Ok("...".to_owned()),
         }
+    }
+}
+
+#[pymethods]
+impl PyCompletedGame {
+    pub fn __repr__(&self) -> String {
+        // self.game.repr_helper().unwrap()
+        self.repr_helper().unwrap()
+    }
+
+    pub fn __str__(&self) -> String {
+        self.game.to_string()
     }
 }

@@ -5,6 +5,9 @@ description = "Python Tic-Tac-Toe Example"
 authors = [{name = "Thomas J. Kennedy", email="tkennedy@cs.odu.edu"}]
 requires-python=">=3.11"
 
+[tool.uv]
+cache-keys = [{file = "pyproject.toml"}, {file = "Cargo.toml"}, {file = "**/*.rs"}]
+
 [build-system]
 requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"

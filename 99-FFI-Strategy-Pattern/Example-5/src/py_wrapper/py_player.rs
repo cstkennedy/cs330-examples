@@ -5,12 +5,16 @@ use crate::player::Player;
 use crate::py_wrapper::py_strategy::*;
 use crate::strategy::{PredefinedMoves, Strategy};
 
+impl super::traits::PyWrapped for Player {
+    type Language = super::traits::language::RustForPython;
+    type WrappedBy = PyPlayer;
+}
+
 impl super::traits::DunderRepr for Player {
     type Error = std::convert::Infallible;
 
-    type WrappedLanguage = super::traits::language::RustForPython;
-
     fn repr_helper(&self) -> Result<String, Self::Error> {
+        // Zen of Python... Flat is better than nested
         let repr_str = match self.is_human() {
             true => format!("Player.create_human(name=\"{}\")", self.get_name()),
             false => match self.get_strategy() {

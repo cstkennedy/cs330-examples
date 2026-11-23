@@ -1,7 +1,6 @@
 from . import exception as exception
-from _typeshed import Incomplete
-from collections.abc import Sequence
-from typing import Any, final
+from _typeshed import Incomplete, SupportsGetItem
+from typing import Any, SupportsIndex, final
 
 @final
 class CompletedGame:
@@ -18,7 +17,7 @@ class Game:
 @final
 class Player:
     @staticmethod
-    def create_computer(name: str, moves: Sequence[int]) -> Player: ...
+    def create_computer(name: str, moves: SupportsGetItem[int, SupportsIndex]) -> Player: ...
     @staticmethod
     def create_custom_computer(name: str, strategy: Any) -> Player: ...
     @staticmethod

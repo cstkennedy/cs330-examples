@@ -3,10 +3,19 @@ pub mod language {
     pub struct RustForPython;
 }
 
+pub trait PyWrapped {
+    type Language;
+    type WrappedBy;
+}
+
+pub trait PyWrapper {
+    type WrappedType;
+
+    fn get_wrapped(&self) -> &Self::WrappedType;
+}
+
 pub trait DunderRepr {
     type Error;
-
-    type WrappedLanguage;
 
     fn repr_helper(&self) -> Result<String, Self::Error>;
 }
@@ -16,12 +25,36 @@ where T: DunderRepr
 {
     type Error = <T as DunderRepr>::Error;
 
-    type WrappedLanguage = <T as DunderRepr>::WrappedLanguage;
-
     fn repr_helper(&self) -> Result<String, Self::Error> {
         match self {
             Some(thing) => thing.repr_helper(),
             None => Ok("...".to_string())
         }
+    }
+}
+
+// Pre PyWrapper/PyWrapped split/refactoring
+/*
+impl<T> DunderRepr for T
+where T: PyWrapper,
+      T::WrappedType: DunderRepr
+{
+    type Error = <T as DunderRepr>::Error;
+
+    fn repr_helper(&self) -> Result<String, Self::Error> {
+        todo!()
+    }
+}
+*/
+
+// Mistake... PythonForRust instead of RustForPython
+impl<T> DunderRepr for T
+where T: PyWrapper,
+      T::WrappedType: DunderRepr + PyWrapped<Language=language::RustForPython>
+{
+    type Error = <T::WrappedType as DunderRepr>::Error;
+
+    fn repr_helper(&self) -> Result<String, Self::Error> {
+        self.get_wrapped().repr_helper()
     }
 }
