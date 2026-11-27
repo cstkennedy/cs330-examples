@@ -4,13 +4,15 @@ use crate::mono_strategy::MonoStrategy;
 use crate::player::Player;
 use crate::py_wrapper::py_strategy::*;
 use crate::strategy::{PredefinedMoves, Strategy};
+use crate::py_wrapper::traits::{DunderRepr, PyWrapper, PyWrapped};
 
-impl super::traits::PyWrapped for Player {
+
+impl PyWrapped for Option<Player> {
     type Language = super::traits::language::RustForPython;
     type WrappedBy = PyPlayer;
 }
 
-impl super::traits::DunderRepr for Player {
+impl DunderRepr for Player {
     type Error = std::convert::Infallible;
 
     fn repr_helper(&self) -> Result<String, Self::Error> {
@@ -65,6 +67,14 @@ impl From<Player> for PyPlayer {
     }
 }
 
+impl PyWrapper for PyPlayer {
+    type WrappedType = Option<Player>;
+
+    fn get_wrapped(&self) -> &Self::WrappedType {
+        &self.player
+    }
+}
+
 impl PyPlayer {
     #[rustfmt::skip]
     fn impl_create_computer<S>(name: &str, strategy: S) -> Player
@@ -110,5 +120,9 @@ impl PyPlayer {
             )
             .build()
             .into()
+    }
+
+    fn __repr__(&self) -> String {
+        self.repr_helper().unwrap()
     }
 }
